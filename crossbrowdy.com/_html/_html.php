@@ -33,9 +33,19 @@
 		<meta name="DC.Publisher" content="Juan Alba Maldonado" />
 		<meta name="DC.Source" content="Juan Alba Maldonado" />
 		
-		<meta http-equiv="title" content="<?php echo $projectName; ?>" />
-		<meta name="title" content="<?php echo $projectName; ?>" />
-		<meta name="DC.Title" lang="en" content="<?php echo $projectName; ?>" />
+		<title><?php
+			if (!isset($projectTitleHeader) || !is_string($projectTitleHeader) || $projectTitleHeader === "")
+			{
+				$projectTitleHeader = $projectTitle[$language][$category];
+				if (isset($projectTitle[$language][$category . "_" . $subcategory . "_" . $topic])) { $projectTitleHeader = $projectTitle[$language][$category . "_" . $subcategory . "_" . $topic]; }
+				else if (isset($projectTitle[$language][$category . "_" . $subcategory])) { $projectTitleHeader = $projectTitle[$language][$category . "_" . $subcategory]; }
+			}
+			echo $projectTitleHeader;
+		?></title>
+		
+		<meta http-equiv="title" content="<?php echo $projectTitleHeader; ?>" />
+		<meta name="title" content="<?php echo $projectTitleHeader; ?>" />
+		<meta name="DC.Title" lang="en" content="<?php echo $projectTitleHeader; ?>" />
 
 		<meta name="description" content="<?php echo $projectDescription[$language]; ?>" />
 		<meta name="DC.Description" lang="en" content="<?php echo $projectDescription[$language]; ?>" />
@@ -49,9 +59,9 @@
 		<meta name="htdig-keywords" content="<?php echo $projectKeywords[$language]; ?>" />
 		<meta http-equiv="keywords" content="<?php echo $projectKeywords[$language]; ?>" />
 
-		<meta name="DC.Identifier" content="<?php echo $projectURL; ?>" />
-		<meta name="URL" content="<?php echo $projectURL; ?>" />
-		<meta http-equiv="URL" content="<?php echo $projectURL; ?>" />
+		<meta name="DC.Identifier" content="<?php echo $projectURLCurrent; ?>" />
+		<meta name="URL" content="<?php echo $projectURLCurrent; ?>" />
+		<meta http-equiv="URL" content="<?php echo $projectURLCurrent; ?>" />
 
 		<meta name="distribution" content="global" />
 		<meta http-equiv="distribution" content="global" />
@@ -64,12 +74,6 @@
 
 		<meta http-equiv="Reply-To" content="joanalbamaldonado@NO_SPAM_PLEASEgmail.com" />
 		<meta name="htdig-email" content="joanalbamaldonado@NO_SPAM_PLEASEgmail.com" />
-
-		<title><?php
-			if (isset($projectTitle[$language][$category . "_" . $subcategory . "_" . $topic])) { echo $projectTitle[$language][$category . "_" . $subcategory . "_" . $topic]; }
-			else if (isset($projectTitle[$language][$category . "_" . $subcategory])) { echo $projectTitle[$language][$category . "_" . $subcategory]; }
-			else { echo $projectTitle[$language][$category]; }
-		?></title>
 
 		<style type="text/css">
 		<!--
@@ -90,8 +94,8 @@
 		
 		<meta name="msapplication-tap-highlight" content="no" />
 		
-		<meta property="og:url" content="<?php echo $projectURL; ?>" />
-		<meta property="og:title" content="<?php echo $projectName; ?>" />
+		<meta property="og:url" content="<?php echo $projectURLCurrent; ?>" />
+		<meta property="og:title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta property="og:site_name" content="<?php echo $projectName; ?>" />
 		<meta property="og:image" content="favicon128.png" />
 		<meta property="og:image:type" content="image/png"/>
@@ -103,10 +107,10 @@
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:site" content="@jalbam1984" />
 		<meta name="twitter:creator" content="@jalbam1984" />
-		<meta name="twitter:title" content="<?php echo $projectName; ?>" />
+		<meta name="twitter:title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta name="twitter:description" content="<?php echo $projectDescription[$language]; ?>" />
 		<meta name="twitter:image" content="<?php echo $projectURL; ?>favicon128.png" />
-		<meta name="twitter:url" content="<?php echo $projectURL; ?>" />
+		<meta name="twitter:url" content="<?php echo $projectURLCurrent; ?>" />
 
 		<meta itemprop="name" content="<?php echo $projectName; ?>" />
 		<meta itemprop="description" content="<?php echo $projectDescription[$language]; ?>" />
@@ -114,6 +118,13 @@
 		
 		<link rel="author" href="https://plus.google.com/101309215015488397249" />
 		<link rel="publisher" href="https://plus.google.com/101309215015488397249" />
+
+		<?php
+			$baseName = dirname(trim($_SERVER["SCRIPT_NAME"]));
+			$baseName = rtrim($baseName, "/") . "/";
+			if (!is_string($baseName) || $baseName === "") { $baseName = $projectURL; }
+		?>
+		<base href="<?php echo $baseName; ?>">
 		
 		<script language="javascript" type="text/javascript">
 		<!--
@@ -141,7 +152,7 @@
 		// -->
 		</script>
 	</head>
-	<body class="one" leftmargin="0" topmargin="0" onKeyDown="keyDown(event);" onselectstart="return false;">
+	<body leftmargin="0" topmargin="0" onKeyDown="keyDown(event);">
 		<div id="menu_background" onClick="toggleMenu();"></div>
 		<div id="menu">
 			<div id="menu_button" onClick="toggleMenu();"><?php echo $menuButton[$language]; ?></div>
@@ -154,7 +165,7 @@
 						$target = in_array($menuOptionLink, $menuOptionsExternalWindow) ? ' target="_blank"' : '';
 						$disabled = $category == $menuOptionLink ? " disabled" : "";
 						if (isset($menuOptionsLink[$language]) && isset($menuOptionsLink[$language][$menuOptionLink])) { $menuOptionLink = $menuOptionsLink[$language][$menuOptionLink]; }
-						else { $menuOptionLink = $menuOptionLink . ".php"; }
+						else { $menuOptionLink = $menuOptionLink . $PHPExtension; }
 						echo '<div class="menu_item"><a href="' . $menuOptionLink . '" class="menu_item_link' . $disabled . '"' . $target . '>' . $menuOptionText . '</a></div>';
 					}
 				?>

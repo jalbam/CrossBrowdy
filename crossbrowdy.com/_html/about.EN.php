@@ -12,7 +12,7 @@
 		This framework allows any developer to manage easier many different things, such as audio (with Flash fallback, audio pool, etc.), canvas (with DHTML, VML, Flash or Silverlight fallbacks), screen, mouse, keyboard, gamepads, sockets (including PHP proxy fallback), XHR / AJAX (with PHP proxy for cross-domain requests) and many more.
 	</p>
 	<p>
-		It also includes many basic DOM element manipulations, fallbacks and polyfills as well as integration with Apache Cordova (including PhoneGap, Ionic...), desktop apps (PWA, NW.js, Atom...), video game consoles, TV sets and so on.
+		It also includes many basic DOM element manipulations, fallbacks and polyfills as well as integration with Apache Cordova (including PhoneGap, Ionic...), desktop apps (PWA, UWP, NW.js, Atom...), video game consoles, TV sets and so on.
 	</p>
 	<p>
 		CrossBrowdy focuses on cross-browser (including legacy browsers) and cross-platform compatibility. The main target is to allow any app to run in any web client with or without HTML5 compatibility.
@@ -67,7 +67,7 @@
 		This software can also be ported to iOS (iPhone, iPad), Android (including phones, tablets, Android TV, Nokia X, Amazon Fire OS...) or others and run as a mobile app (using Apache Cordova, PhoneGap, Ionic, etc.).
 	</p>
 	<p>
-		Apart from that, CrossBrowdy software will also run on many video game consoles, TV sets and so on. This will also include other devices and platforms, some legacy ones, such as Facebook app, BlackBerry 10, BlackBerry Tablet OS (BlackBerry PlayBook), Nokia Series 40 (Nokia S40) / WRT Widget, W3C Packaged Web App (W3C Widget) / Nokia Asha widget, WebOS, Windows Phone (from 7.1 to 8.1), Chrome OS / Chromium OS (Google Chrome App), Firefox OS (Mozilla Firefox App)...
+		Apart from that, CrossBrowdy software will also run on many video game consoles, TV sets and so on. This will also include other devices, platforms and technologies, some legacy ones, such as PWA (Progressive Web App), UWP (Universal Windows Platform), Facebook app, BlackBerry 10, BlackBerry Tablet OS (BlackBerry PlayBook), Nokia Series 40 (Nokia S40) / WRT Widget, W3C Packaged Web App (W3C Widget) / Nokia Asha widget, WebOS, Windows Phone (from 7.1 to 8.1), Chrome OS / Chromium OS (Google Chrome App), Firefox OS (Mozilla Firefox App) / KaiOS, Sailfish OS...
 	</p>
 	<p>
 		Finally, CrossBrowdy can also be used to develop web browser extensions although it is important to pay attention to possible safety restrictions that some web browsers may have. To comply with them, some code modifications may be needed.
@@ -90,6 +90,15 @@
 	</p>
 	<p>
 		CrossBrowdy also provides a splash screen that can be disabled by the developers. When it is enabled, this splash screen is shown when CrossBrowdy is loading. Keeping it enable can be a good idea because it will be enough to show the credits and respect these rules.
+	</p>
+	<p>
+		Apart from all of this, it is important to have into account that CrossBrowdy uses some external libraries and some code which may have their own license each. It is important to respect each license properly as the responsibility will always lie with you.
+	</p>
+
+
+	<h2 class="category_subtitle">Where can I find the credits and contact the authors?</h2>
+	<p>
+		CrossBrowdy project was created by <a href="http://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado</a>. It also uses some external libraries and &quot;third-party&quot; code. The name of these libraries and the name of the authors of these libraries and other code can be found in the source code as well as in the splash screen and in the <i>console</i> when CrossBrowdy is loading. As this information may vary with each version, it is not included here.
 	</p>
 	
 	

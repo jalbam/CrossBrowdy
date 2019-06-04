@@ -13,7 +13,15 @@
 	}
 ?>
 </div>
-<h3 class="description_long"><?php echo str_replace("\n", "<br />", $projectDescriptionLong[$language]); ?></h3>
+
+<?php
+	$projectDescriptionLongArray = explode("\n", $projectDescriptionLong[$language]);
+	foreach ($projectDescriptionLongArray as $projectDescriptionLongSentence)
+	{
+		echo '<h3 class="description_long">' . $projectDescriptionLongSentence . '</h3>';
+	}
+?>
+
 <div class="features">
 	<?php
 		function featuresDisplay($featuresArray, $callLevel = 1)

@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 body
 {
-	background-color:#ffffff;
+	background-color:#dddddd;
 	font-family:times, serif;
 	
 	margin-top:50px;
@@ -257,10 +257,10 @@ a:hover
 	text-align:center;
 	
 	padding-top:10px;
-	margin-top:20px;
+	margin-top:6px;
 
-	padding-bottom:10px;
-	margin-bottom:10px;
+	padding-bottom:2px;
+	margin-bottom:2px;
 	
 	text-shadow:2px 2px 2px #cccccc;
 }
@@ -354,7 +354,9 @@ a:hover
 	font-weight:normal;
 	color:#bbbbbb;
 	
-	padding:20px;
+	padding-right:20px;
+	padding-top:20px;
+	padding-bottom:50px;
 }
 
 
@@ -427,6 +429,8 @@ h2.category_title
 	font-size:180%;
 	font-size:3vmin;
 	margin:35px;
+
+	word-wrap:break-word;
 }
 @media (orientation: portrait)
 {
@@ -465,25 +469,33 @@ h2.category_title
 }
 
 
+li
+{
+	padding-top:20px;
+}
+
+ol li
+{
+	padding-top:4px;
+}
+
 ol
 {
 	counter-reset:item;
 	padding-left:12px;
 }
 
-
-li
+ol li
 {
 	display:table;
 }
 
-li:before
+ol li:before
 {
 	content:counters(item, ".") ". ";
 	counter-increment:item;
 	display:table-cell;
 }
-
 
 .li_link
 {
@@ -498,6 +510,13 @@ li:before
 }
 
 
+code
+{
+	font-size:20px !important;
+	font-size:0.7em !important;
+	font-size:70% !important;
+	font-size:2.1vmin !important;
+}
 @media (orientation: portrait)
 {
 	code
@@ -506,5 +525,72 @@ li:before
 		font-size:0.6em !important;
 		font-size:60% !important;
 		font-size:3vmin !important;
+	}
+}
+
+
+#basic_tutorial_navbar
+{
+	position:fixed;
+	bottom:0px;
+	width:100%;
+	background-color:#000000;
+	color:#ffffff;
+	
+	min-height:40px;
+	text-align:center;
+	line-height:40px;
+	
+	font-family:courier, monospace;
+	color:#ffffff;
+	text-align:center;
+	font-size:16px;
+	font-size:1em;
+	font-size:100%;
+	font-size:5vmin;
+	
+	display:table;
+}
+
+#basic_tutorial_navbar .item
+{
+	display:table-cell;
+	text-align:center;
+	width:33%;
+}
+
+#basic_tutorial_navbar .item a
+{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+#basic_tutorial_navbar .item a:hover
+{
+	color:#2345fd;
+}
+
+
+.basic_tutorial_text
+{
+	font-family:courier, monospace;
+	color:#000000;
+	text-align:left;
+	font-size:29px;
+	font-size:1.8em;
+	font-size:180%;
+	font-size:3vmin;
+	margin:35px;
+
+	word-wrap:break-word;
+}
+@media (orientation: portrait)
+{
+	.basic_tutorial_text
+	{
+		font-size:18px;
+		font-size:1.1em;
+		font-size:111%;
+		font-size:4.2vmin;
 	}
 }

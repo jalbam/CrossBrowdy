@@ -1,4 +1,3 @@
-
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
@@ -32,6 +31,8 @@
 		&lt;span style="font-weight:bold;"&gt;Console:&lt;/span&gt;&lt;br /&gt;
 	&lt;/div>
 </code></pre>
+
+Note that CrossBrowdy will modify the CSS &quot;<i>style</i>&quot; attribute of this DOM element if needed, setting the &quot;<i>display</i>&quot; property to &quot;<i>block</i>&quot; if it is &quot;<i>none</i>&quot; and its &quot;<i>visibility</i>&quot; property to &quot;<i>visible</i>&quot; regardless its previous value.
 
 <p>
 	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/global.html#CB_init" target="_blank">CB_init</a> and <a href="_html/_doc/api/global.html#CB_console" target="_blank">CB_console</a> functions.

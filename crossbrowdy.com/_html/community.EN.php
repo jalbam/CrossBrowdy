@@ -11,7 +11,8 @@
 <h1 class="category_title">Get involved</h1>
 <div class="category_text">
 	<p>
-		Coming soon
+		Feel free to contribute to the open-source CrossBrowdy project through GitHub:
+		<br />
+		<a href="https://github.com/jalbam/CrossBrowdy" target="_blank">https://github.com/jalbam/CrossBrowdy</a>
 	</p>
-
 </div>

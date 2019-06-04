@@ -1,6 +1,8 @@
 <?php
 	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
 
+	$PHPExtension = ""; // ".php"
+	
 	//Language:
 	define("LANGUAGES", Array("EN"));
 	define("LANGUAGE_DEFAULT", "EN");
@@ -18,15 +20,22 @@
 		(
 			"index" => $projectName . " - Multimedia JavaScript framework",
 			"about" => "About " . $projectName . " &amp; FAQ",
+			"news" => $projectName . " News",
 			"api" => $projectName . " - API",
 			"guides" => $projectName . " - Guides &amp; Tutorials",
 				"basic_tutorial" => $projectName . " - Basic tutorial",
-					//"basic_tutorial_general_getting_started" => $projectName . " - Basic tutorial - General - Getting started",
+				//"basic_tutorial_general_getting_started" => $projectName . " - Basic tutorial - General - Getting started",
 			"community" => $projectName . " - Community &amp; Get Involved",
 			"download" => "Download " . $projectName
 		)
-
 	);
+	$projectTitleHeader = "";
+	if (isset($subcategory) && $subcategory !== "")
+	{
+		$projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . ": " . $basicTutorial[$subcategory]["subcategory"][$language];
+		if (isset($topic) && $topic !== "") { $projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . " - " . $basicTutorial[$subcategory]["subcategory"][$language] . ": " . $basicTutorial[$subcategory]["topics"][$topic][$language]; }
+	}
+
 	$projectDescriptionShort = Array
 	(
 		"EN" => "Multimedia JavaScript framework"
@@ -37,13 +46,13 @@
 	);
     $projectDescriptionLong = Array
 	(
-		"EN" => "Create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.\nCompatible with web browsers, desktop computers, mobile devices (phones, tablets), video game consoles, TV sets and many others."
+		"EN" => "Create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.\nCompatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets and many others."
 	);
 	$projectKeywords = Array
 	(
 		"EN" => "multimedia,games,engine,emulators,hybrid,PWA,apps,gamedev,game development,js,JavaScript,HTML5,DHTML,cross-device,cross-platform,cross-browser"
 	);
-	$projectURLDefault = "http://www.joanalbamaldonado.com/portfolio/";
+	$projectURLDefault = "http://www.crossbrowdy.com/";
 	$projectURL = "";
 	if (isset($HTTP_SERVER_VARS['HTTP_HOST']) && isset($HTTP_SERVER_VARS['PHP_SELF']))
 	{
@@ -54,6 +63,8 @@
 	$projectURL = trim($projectURL, "/");
 	if (trim($projectURL) === "" || trim($HTTP_SERVER_VARS['PHP_SELF']) === "") { $projectURL = trim($projectURLDefault, "/"); }
 	$projectURL .= "/";
+	$projectURLCurrent = $projectURL;
+	if (isset($_SERVER) && isset($_SERVER["REQUEST_URI"])) { $projectURLCurrent = rtrim($projectURL, "/") . "/" . ltrim($_SERVER["REQUEST_URI"], "/"); }
 
 	$projectKeyPoints = Array
 	(
@@ -67,7 +78,7 @@
 		),
 		Array
 		(
-			"EN" => "Code once, deploy everywhere",
+			"EN" => "WORA (Write Once, Run Anywhere)",
 		),
 		Array
 		(
@@ -95,11 +106,11 @@
 		),
 		Array
 		(
-			"EN" => "Supports Apache Cordova",
+			"EN" => "Supports Apache Cordova and more",
 		),
 		Array
 		(
-			"EN" => "Supports other libraries and frameworks"
+			"EN" => "Supports other frameworks and libraries"
 		)
 	);
 
@@ -107,14 +118,14 @@
 	(
 		"EN" => Array
 		(
-			"Audio" => Array("music", "FX", "filters", "files", "sprites", "cache", "pool", "speakers"),
-			"Image" => Array("canvas", "viewport", "screens"),
+			"Input" => Array("keyboard", "mouse", "pointer", "touch", "pressure", "gestures", "gamepads", "remote control (TV and others)", "sensors"),
 			"Device" => Array("geolocation", "orientation", "compass", "motion", "battery", "vibration", "light sensor", "proximity sensor"),
+			"Networking" => Array("Fetch", "XHR (Ajax)", "XDR", "proxy", "REST", "WebSockets"),
 			"Client" => Array("client detection",  "language detection", "native canvas detection", "CSS3 support detection", "PHP detection", "Node.js detection", "NW.js detection", "Electron detection", "Silverlight detection", "Flash detection", "redirections", "exiting the app"),
-			"Networking" => Array("XHR (Ajax)", "XDR", "proxy", "REST", "WebSockets"),
-			"Input" => Array("keyboard", "mouse", "pointer", "touch", "pressure", "gestures", "gamepads", "remote control (TV and other devices)", "sensors"),
-			"Others" => Array("elements", "arrays", "events", "data", "lazy load", "basic collisions"),
-			"Future" => Array("speech", "text to speech", "RTC", "webcam", "microphone", "MIDI", "VR", "leap motion")
+			"Audio" => Array("music", "FX", "filters", "synth", "music composition", "processing", "files", "sprites", "cache", "pool", "speakers"),
+			"Image" => Array("canvas", "viewport", "screens"),
+			"Others" => Array("modules", "JSON", "DOM elements", "arrays", "events", "data storage", "data compression", "base conversion", "template rendering", "lazy load", "collisions"),
+			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "MIDI", "VR", "leap motion", "GraphQL", "databases", "many more")
 		)
 	);
 	
@@ -131,6 +142,7 @@
 		(
 			"index" => "Home",
 			"about" => "About &amp; FAQ",
+			"news" => "News",
 			"api" => "API",
 			"guides" => "Guides &amp; Tutorials",
 				"basic_tutorial" => "Basic tutorial",

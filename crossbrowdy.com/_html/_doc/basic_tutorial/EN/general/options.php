@@ -5,6 +5,7 @@
 </p>
 	
 <pre><code class="language-javascript">
+	//Sets desired options before starting:
 	var CB_OPTIONS =
 	{
 		//Options for CrossBrowdy (general options):
@@ -19,11 +20,12 @@
 		}
 	};
 	
+	//Starts CrossBrowdy:
 	CB_init(main); //It will call the "main" function when ready.
 </code></pre>
 
 <p>
-	Note that some options belong to the CrossBrowdy framework and others belong to CrossBase which is its main module.
+	Note that some options belong to the CrossBrowdy framework and others belong to CrossBase which is its main module (base module). It is also possible to use the <a href="_html/_doc/api/global.html#CB_NAME" target="_blank">CB_NAME</a> constant for "CrossBrowdy" and the <a href="_html/_doc/api/global.html#CB_NAME" target="_blank">CB_BASE_NAME</a> constant for "CrossBase".
 </p>
 
 <p>

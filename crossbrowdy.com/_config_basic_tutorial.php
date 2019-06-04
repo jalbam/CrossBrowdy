@@ -27,66 +27,6 @@
 				)
 			)
 		),
-		"input" => Array
-		(
-			"subcategory" => Array
-			(
-				"EN" => "Input"
-			),
-			"topics" => Array
-			(
-				"keyboard" => Array
-				(
-					"EN" => "Keyboard"
-				),
-				"tv_remotes_and_others" => Array
-				(
-					"EN" => "TV remotes and others"
-				),
-				"controllers_and_gamepads" => Array
-				(
-					"EN" => "Controllers and Gamepads"
-				),
-				"mouse" => Array
-				(
-					"EN" => "Mouse"
-				),
-				"pointer" => Array
-				(
-					"EN" => "Pointer"
-				),
-				"touch_and_gestures" => Array
-				(
-					"EN" => "Touch and gestures"
-				)
-			)
-		),
-		"networking" => Array
-		(
-			"subcategory" => Array
-			(
-				"EN" => "Networking"
-			),
-			"topics" => Array
-			(
-				"http_parameters_and_hash" => Array
-				(
-					"EN" => "HTTP parameters and hash"
-				),
-				"xhr_and_xdr" => Array
-				(
-					"EN" => "XHR (AJAX) and XDR (Cross-domain requests)"
-				),
-				"rest" => Array
-				(
-					"EN" => "REST"
-				),
-				"websockets" => Array
-				(
-					"EN" => "WebSockets"
-				)
-			)
-		),
 		"client" => Array
 		(
 			"subcategory" => Array
@@ -111,13 +51,47 @@
 				(
 					"EN" => "Platform and back-end detection (PHP, Node.js, NW.js, Electron...)"
 				),
-				"exiting_app" => Array
+				"exiting_app_and_address_management" => Array
 				(
-					"EN" => "Exiting the app"
+					"EN" => "Exiting the app and address management"
 				),
 				"others" => Array
 				(
 					"EN" => "Others"
+				)
+			)
+		),
+		"input" => Array
+		(
+			"subcategory" => Array
+			(
+				"EN" => "Input"
+			),
+			"topics" => Array
+			(
+				"keyboard" => Array
+				(
+					"EN" => "Keyboard"
+				),
+				"tv_remotes_gamepads_and_others_with_keyboard_events" => Array
+				(
+					"EN" => "TV remotes, gamepads and others with keyboard events"
+				),
+				"controllers_and_gamepads" => Array
+				(
+					"EN" => "Controllers and Gamepads"
+				),
+				"mouse" => Array
+				(
+					"EN" => "Mouse"
+				),
+				"touch_and_gestures" => Array
+				(
+					"EN" => "Touch and gestures"
+				),
+				"pointer" => Array
+				(
+					"EN" => "Pointer"
 				)
 			)
 		),
@@ -131,23 +105,15 @@
 			(
 				"geolocation" => Array
 				(
-					"EN" => "Geolocation (GPS, wifi)"
+					"EN" => "Geolocation (GPS, wifi and others)"
 				),
 				"orientation" => Array
 				(
-					"EN" => "Orientation (compass)"
+					"EN" => "Orientation and inclination (compass / magnetometer, gyroscope)"
 				),
 				"motion" => Array
 				(
-					"EN" => "Motion (gyroscope, accelerometer)"
-				),
-				"battery" => Array
-				(
-					"EN" => "Battery"
-				),
-				"vibration" => Array
-				(
-					"EN" => "Vibration"
+					"EN" => "Motion (accelerometer)"
 				),
 				"light_sensor" => Array
 				(
@@ -157,11 +123,86 @@
 				(
 					"EN" => "Proximity sensor"
 				),
+				"battery" => Array
+				(
+					"EN" => "Battery"
+				),
+				"vibration" => Array
+				(
+					"EN" => "Vibration"
+				),
 				"others" => Array
 				(
 					"EN" => "Others"
 				)
-
+			)
+		),
+		"networking" => Array
+		(
+			"subcategory" => Array
+			(
+				"EN" => "Networking"
+			),
+			"topics" => Array
+			(
+				"http_parameters_and_hash" => Array
+				(
+					"EN" => "HTTP parameters and hash"
+				),
+				"fetch" => Array
+				(
+					"EN" => "Fetch"
+				),
+				"xhr_and_xdr" => Array
+				(
+					"EN" => "XHR (AJAX) and XDR (Cross-domain requests)"
+				),
+				"rest" => Array
+				(
+					"EN" => "REST"
+				),
+				"websockets" => Array
+				(
+					"EN" => "WebSockets"
+				)
+			)
+		),
+		"data" => Array
+		(
+			"subcategory" => Array
+			(
+				"EN" => "Data"
+			),
+			"topics" => Array
+			(
+				"numbers_formatting_and_base_conversion" => Array
+				(
+					"EN" => "Numbers, Formatting and Base conversion"
+				),
+				"strings_and_template_rendering" => Array
+				(
+					"EN" => "Strings and Template rendering"
+				),
+				"arrays" => Array
+				(
+					"EN" => "Arrays"
+				),
+				"objects_and_json" => Array
+				(
+					"EN" => "Objects and JSON"
+				),
+				"cookies_and_local_storage" => Array
+				(
+					"EN" => "Cookies and local storage"
+				),
+				"compression" => Array
+				(
+					"EN" => "Compression"
+				),
+				"others" => Array
+				(
+					"EN" => "Others"
+				)
 			)
 		),
 		"image" => Array
@@ -178,7 +219,7 @@
 				),
 				"canvas" => Array
 				(
-					"EN" => "Canvas"
+					"EN" => "Canvas and emulation"
 				)
 			)
 		),
@@ -190,6 +231,10 @@
 			),
 			"topics" => Array
 			(
+				"web_audio_api" => Array
+				(
+					"EN" => "Web Audio API and emulation"
+				),
 				"support_detection" => Array
 				(
 					"EN" => "Support detection"
@@ -210,6 +255,10 @@
 				(
 					"EN" => "Audio sprites pool"
 				),
+				"speaker" => Array
+				(
+					"EN" => "Speaker"
+				),
 				"sound_fx" => Array
 				(
 					"EN" => "Sound FX"
@@ -221,10 +270,6 @@
 				"processing_and_synthesizing" => Array
 				(
 					"EN" => "Processing and synthesizing"
-				),
-				"speaker" => Array
-				(
-					"EN" => "Speaker"
 				)
 			)
 		),
@@ -236,17 +281,9 @@
 			),
 			"topics" => Array
 			(
-				"arrays" => Array
-				(
-					"EN" => "Arrays"
-				),
 				"dom_elements" => Array
 				(
 					"EN" => "DOM elements"
-				),
-				"data" => Array
-				(
-					"EN" => "Data"
 				),
 				"events" => Array
 				(
@@ -256,10 +293,20 @@
 				(
 					"EN" => "Collisions"
 				),
-				"others" => Array
+				"more" => Array
 				(
-					"EN" => "Others"
+					"EN" => "More"
 				)
 			)
 		)
 	);
+	
+
+	//Returns the link to a subcategory/topic of the basic tutorial:
+	function basicTutorialLink($subcategory = "", $topic = "")
+	{
+		global $PHPExtension;
+		$subcategory = trim($subcategory);
+		$topic = trim($topic);
+		return rtrim("basic_tutorial" . $PHPExtension . "/" . $subcategory . "/" . $topic . "/", "/") . "/";
+	}

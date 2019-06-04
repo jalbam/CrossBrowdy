@@ -1,0 +1,12 @@
+RewriteEngine  on
+
+RewriteRule ^basic_tutorial\/([^\/]+)\/([^\/]+)\/? basic_tutorial.php?subcategory=$1&topic=$2 [L,END]
+RewriteRule ^basic_tutorial\/([^\/]+)\/? basic_tutorial.php?subcategory=$1&topic=$2 [L,END]
+RewriteRule ^basic_tutorial\/? basic_tutorial.php?subcategory=$1&topic=$2 [L,END]
+
+RewriteCond %{REQUEST_URI} [^/]$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L,END]
+
+DefaultType application/x-httpd-php
+DirectoryIndex index.php index.html
