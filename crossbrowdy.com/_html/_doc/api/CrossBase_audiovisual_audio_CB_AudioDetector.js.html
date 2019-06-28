@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>CrossBrowdy documentation Source: CrossBase/audiovisual/audio/CB_AudioDetector.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body style="min-width:800px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">CrossBrowdy documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="CB_Arrays.html">CB_Arrays</a></li><li><a href="CB_AudioDetector.html">CB_AudioDetector</a></li><li><a href="CB_baseSymbols.html">CB_baseSymbols</a></li><li><a href="CB_Client.html">CB_Client</a></li><li><a href="CB_Collisions.html">CB_Collisions</a></li><li><a href="CB_Configuration.html">CB_Configuration</a></li><li><a href="CB_Configuration.CrossBase.html">CB_Configuration.CrossBase</a></li><li><a href="CB_Configuration.CrossBrowdy.html">CB_Configuration.CrossBrowdy</a></li><li><a href="CB_Controllers.html">CB_Controllers</a></li><li><a href="CB_Controllers_Proprietary.html">CB_Controllers_Proprietary</a></li><li><a href="CB_Controllers_Proprietary.WII.html">CB_Controllers_Proprietary.WII</a></li><li><a href="CB_Controllers_Proprietary.WII_U.html">CB_Controllers_Proprietary.WII_U</a></li><li><a href="CB_Device.html">CB_Device</a></li><li><a href="CB_Device.AmbientLight.html">CB_Device.AmbientLight</a></li><li><a href="CB_Device.Battery.html">CB_Device.Battery</a></li><li><a href="CB_Device.Location.html">CB_Device.Location</a></li><li><a href="CB_Device.Motion.html">CB_Device.Motion</a></li><li><a href="CB_Device.Orientation.html">CB_Device.Orientation</a></li><li><a href="CB_Device.Proximity.html">CB_Device.Proximity</a></li><li><a href="CB_Device.Vibration.html">CB_Device.Vibration</a></li><li><a href="CB_Elements.html">CB_Elements</a></li><li><a href="CB_Events.html">CB_Events</a></li><li><a href="CB_Keyboard.html">CB_Keyboard</a></li><li><a href="CB_Keyboard.chars.html">CB_Keyboard.chars</a></li><li><a href="CB_Keyboard.extended.html">CB_Keyboard.extended</a></li><li><a href="CB_Keyboard.keys.html">CB_Keyboard.keys</a></li><li><a href="CB_Modules.html">CB_Modules</a></li><li><a href="CB_Mouse.html">CB_Mouse</a></li><li><a href="CB_Mouse.CursorImage.html">CB_Mouse.CursorImage</a></li><li><a href="CB_Net.html">CB_Net</a></li><li><a href="CB_Net.Fetch.html">CB_Net.Fetch</a></li><li><a href="CB_Net.REST.html">CB_Net.REST</a></li><li><a href="CB_Net.Sockets.html">CB_Net.Sockets</a></li><li><a href="CB_Net.Sockets.SockJS.html">CB_Net.Sockets.SockJS</a></li><li><a href="CB_Net.XHR.html">CB_Net.XHR</a></li><li><a href="CB_Pointer.html">CB_Pointer</a></li><li><a href="CB_Screen.html">CB_Screen</a></li><li><a href="CB_Speaker.html">CB_Speaker</a></li><li><a href="CB_Touch.html">CB_Touch</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="CB_AudioFile.html">CB_AudioFile</a></li><li><a href="CB_AudioFile_API.AAPI.html">CB_AudioFile_API.AAPI</a></li><li><a href="CB_AudioFile_API.ACMP.html">CB_AudioFile_API.ACMP</a></li><li><a href="CB_AudioFile_API.SM2.html">CB_AudioFile_API.SM2</a></li><li><a href="CB_AudioFile_API.WAAPI.html">CB_AudioFile_API.WAAPI</a></li><li><a href="CB_AudioFileCache.html">CB_AudioFileCache</a></li><li><a href="CB_AudioFileSprites.html">CB_AudioFileSprites</a></li><li><a href="CB_AudioFileSpritesPool.html">CB_AudioFileSpritesPool</a></li><li><a href="CB_Canvas.html">CB_Canvas</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="global.html#CB_addCredits">CB_addCredits</a></li><li><a href="global.html#CB_BASE_NAME">CB_BASE_NAME</a></li><li><a href="global.html#CB_baseToBase">CB_baseToBase</a></li><li><a href="global.html#CB_baseToInt">CB_baseToInt</a></li><li><a href="global.html#CB_br2nl">CB_br2nl</a></li><li><a href="global.html#CB_brToNl">CB_brToNl</a></li><li><a href="global.html#CB_combineArraysOrObjects">CB_combineArraysOrObjects</a></li><li><a href="global.html#CB_combineAutomatically">CB_combineAutomatically</a></li><li><a href="global.html#CB_combineJSON">CB_combineJSON</a></li><li><a href="global.html#CB_combineURIParameters">CB_combineURIParameters</a></li><li><a href="global.html#CB_combineURLParameters">CB_combineURLParameters</a></li><li><a href="global.html#CB_console">CB_console</a></li><li><a href="global.html#CB_credits">CB_credits</a></li><li><a href="global.html#CB_CREDITS_DEFAULT">CB_CREDITS_DEFAULT</a></li><li><a href="global.html#CB_forceString">CB_forceString</a></li><li><a href="global.html#CB_forEach">CB_forEach</a></li><li><a href="global.html#CB_getBase64StringObject">CB_getBase64StringObject</a></li><li><a href="global.html#CB_getCookie">CB_getCookie</a></li><li><a href="global.html#CB_getDatum">CB_getDatum</a></li><li><a href="global.html#CB_getJSONPropertyValue">CB_getJSONPropertyValue</a></li><li><a href="global.html#CB_getLZStringObject">CB_getLZStringObject</a></li><li><a href="global.html#CB_getValueIndex">CB_getValueIndex</a></li><li><a href="global.html#CB_getValuePath">CB_getValuePath</a></li><li><a href="global.html#CB_includeJSFile">CB_includeJSFile</a></li><li><a href="global.html#CB_indexOf">CB_indexOf</a></li><li><a href="global.html#CB_init">CB_init</a></li><li><a href="global.html#CB_intToBase">CB_intToBase</a></li><li><a href="global.html#CB_isArray">CB_isArray</a></li><li><a href="global.html#CB_isEmail">CB_isEmail</a></li><li><a href="global.html#CB_isFileLocal">CB_isFileLocal</a></li><li><a href="global.html#CB_isString">CB_isString</a></li><li><a href="global.html#CB_lastIndexOf">CB_lastIndexOf</a></li><li><a href="global.html#CB_ltrim">CB_ltrim</a></li><li><a href="global.html#CB_NAME">CB_NAME</a></li><li><a href="global.html#CB_nl2br">CB_nl2br</a></li><li><a href="global.html#CB_nlToBr">CB_nlToBr</a></li><li><a href="global.html#CB_numberFormat">CB_numberFormat</a></li><li><a href="global.html#CB_OPTIONS">CB_OPTIONS</a></li><li><a href="global.html#CB_parseJSON">CB_parseJSON</a></li><li><a href="global.html#CB_parseString">CB_parseString</a></li><li><a href="global.html#CB_regularExpressionString">CB_regularExpressionString</a></li><li><a href="global.html#CB_renderString">CB_renderString</a></li><li><a href="global.html#CB_rtrim">CB_rtrim</a></li><li><a href="global.html#CB_scriptPath">CB_scriptPath</a></li><li><a href="global.html#CB_setCookie">CB_setCookie</a></li><li><a href="global.html#CB_setDatum">CB_setDatum</a></li><li><a href="global.html#CB_sizeOf">CB_sizeOf</a></li><li><a href="global.html#CB_sizeof">CB_sizeof</a></li><li><a href="global.html#CB_stringifyJSON">CB_stringifyJSON</a></li><li><a href="global.html#CB_symmetricCall">CB_symmetricCall</a></li><li><a href="global.html#CB_symmetricCallClear">CB_symmetricCallClear</a></li><li><a href="global.html#CB_this">CB_this</a></li><li><a href="global.html#CB_trim">CB_trim</a></li><li><a href="global.html#CB_VERSION">CB_VERSION</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content" style="width:100%;">
+<div class="row" style="width:100%;">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: CrossBase/audiovisual/audio/CB_AudioDetector.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/**
+ * @file Audio formats and audio APIs support detection. Contains the {@link CB_AudioDetector} static class.
+ *  @author Joan Alba Maldonado &lt;workindalian@gmail.com>
+ */
+ 
+
+/**
+ * Static class to detect audio API and formats supported. Possible audio APIs are "WAAPI" ([HTML5 Web Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API}), "SM2" ([SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/}), "ACMP" ([Apache Cordova Media Plugin]{@link https://github.com/apache/cordova-plugin-media}) or "AAPI" ([HTML5 Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio}). It will return itself if it is tried to be instantiated.
+ * @namespace
+ */
+var CB_AudioDetector = function() { return CB_AudioDetector; };
+{
+	CB_AudioDetector.initialized = false; //It will tells whether the object has been initialized or not.
+
+
+	//Initializes all values:
+	CB_AudioDetector.init = function()
+	{
+		if (CB_AudioDetector.initialized) { return CB_AudioDetector; }
+
+		//Sets that the object has already been initialized:
+		CB_AudioDetector.initialized = true;
+		
+		//TODO.
+		
+		return CB_AudioDetector;
+	}
+
+
+	CB_AudioDetector._getSupportedAudioFormatsReturnCache = {};
+	/**
+	 * Returns an array of strings with the audio formats that are supported (from an array if it is given) by the current client and ordered by support level. Uses the {@link CB_AudioDetector.isAudioFormatSupported} function internally.
+	 *  @function
+	 *  @param {array} [audioFormats=CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_FORMATS] - An array of strings with the audio format or audio formats (they can include just the format as 'audio/ogg' or also the codec as for example 'audio/ogg; codecs="vorbis"') that we want to check.
+	 *  @param {array} [supportLevels=['probably', 'maybe']] - An array with the support level or support levels allowed. Two possible levels: "probably" and "maybe". The "probably" audio formats are more likely to be supported than the "maybe" ones.
+	 *  @param {boolean} [dataURI=false] - Specifies whether we want to check the support for data URI audios or just for normal audio files.
+	 *  @returns {array} Returns an array of strings with the audio formats that are supported (from an array if it is given) and ordered by support level.
+	 */
+	CB_AudioDetector.getSupportedAudioFormats = function(audioFormats, supportLevels, dataURI)
+	{
+		//If not given any APIs, uses the default ones with the default order:
+		if (typeof(audioFormats) === "undefined" || audioFormats === null || !CB_isArray(audioFormats)) { audioFormats = CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_FORMATS; }
+
+		//If not given, it will return "probably" and "maybe" ones and in that order ("probably" are more likely to be supported than "maybe" ones):
+		if (!CB_isArray(supportLevels)) { supportLevels = ["probably", "maybe"]; }
+		
+		//If it is not the first time, returns the same as the first time (from the cache):
+		if (typeof(CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats]) !== "undefined" &amp;&amp; CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats] !== null)
+		{
+			if (typeof(CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels]) !== "undefined" &amp;&amp; CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels] !== null)
+			{
+				if (typeof(CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels][dataURI]) !== "undefined" &amp;&amp; CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels][dataURI] !== null)
+				{
+					return CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels][dataURI];
+				}
+			}
+		}
+
+		var supportedAudioFormats = [];
+
+		var audioFormatsLength = audioFormats.length;
+		
+		//Checks the different support levels by order of preference ("probably" are more likely to be supported than "maybe" ones):
+		var supportLevelsLength = supportLevels.length;
+		var y;
+		for (var x = 0; x &lt; supportLevelsLength; x++)
+		{
+			for (y = 0; y &lt; audioFormatsLength; y++)
+			{
+				if (CB_AudioDetector.isAudioFormatSupported(audioFormats[y], dataURI) === supportLevels[x])
+				{
+					if (CB_indexOf(supportedAudioFormats, audioFormats[y]) === -1)
+					{
+						supportedAudioFormats[supportedAudioFormats.length] = audioFormats[y];
+					}
+				}
+			}
+		}
+		
+		//Stores the result in the cache for the next time:
+		if (typeof(CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats]) === "undefined")
+		{
+			CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats] = {};
+		}
+		if (typeof(CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels]) === "undefined")
+		{
+			CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels] = {};
+		}
+		CB_AudioDetector._getSupportedAudioFormatsReturnCache[audioFormats][supportLevels][dataURI] = supportedAudioFormats;
+		
+		return supportedAudioFormats;
+	}
+	
+	
+	CB_AudioDetector._isAudioFormatSupportedReturnCache = {};
+	CB_AudioDetector._audioObject = null;
+	/**
+	 * Returns the support level of a given audio format by the current client.
+	 *  @function
+	 *  @param {string} audioFormat - The audio format (it can include just the format as 'audio/ogg' or also the codec as for example 'audio/ogg; codecs="vorbis"') that we want to check.
+	 *  @param {boolean} [dataURI=false] - Specifies whether we want to check the support for data URI audios or just for normal audio files.
+	 *  @returns {string} Returns the support level of the given audio format (it will return "probably", "maybe" or an empty string which means not supported). The "probably" audio formats are more likely to be supported than the "maybe" ones.
+	 *  @todo Think about using MediaSource.isTypeSupported().
+	 *  @todo Some web clients does not support data URIs for Audio element so we should take this into account.
+	 *  @todo Take into account that data URIs may not be supported when WAAPI is being emulated.
+	 */
+	CB_AudioDetector.isAudioFormatSupported = function(audioFormat, dataURI)
+	{
+		audioFormat = CB_trim(audioFormat).toLowerCase();
+		
+		//If it is not the first time, returns the same as the first time (from the cache):
+		if (typeof(CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat]) !== "undefined" &amp;&amp; CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat] !== null)
+		{
+			if (typeof(CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat][dataURI]) !== "undefined" &amp;&amp; CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat][dataURI] !== null)
+			{
+				return CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat][dataURI];
+			}
+		}
+
+		var isSupported = "";
+
+		//TODO: think about using MediaSource.isTypeSupported().
+		
+		if (CB_AudioDetector.isAPISupported("AAPI", false))
+		{
+			if (CB_AudioDetector._audioObject === null)
+			{
+				CB_AudioDetector._audioObject = new Audio();
+			}
+			
+			//TODO: some web clients does not support data URIs for Audio element so we should take this into account.
+			
+			if (CB_AudioDetector._audioObject !== null &amp;&amp; typeof(CB_AudioDetector._audioObject.canPlayType) === "function")
+			{
+				isSupported = CB_AudioDetector._audioObject.canPlayType(audioFormat);
+			}
+		}
+		//...otherwise, if SoundManager 2 is loaded and it is using Flash:
+		else if (CB_AudioDetector.isAPISupported("SM2", false) &amp;&amp; CB_AudioDetector.isSM2UsingFlash())
+		{
+			//SoundManager 2 using Flash supports MP3 only and does not support data URIs:
+			if (!dataURI &amp;&amp; audioFormat.substring(0, 10) === "audio/mpeg") { isSupported = "maybe"; }
+		}
+		
+		//Stores the result in the cache for the next time:
+		if (typeof(CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat]) === "undefined")
+		{
+			CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat] = {};
+		}
+		CB_AudioDetector._isAudioFormatSupportedReturnCache[audioFormat][dataURI] = isSupported;
+		
+		return ("" + isSupported).toLowerCase();
+	}
+	
+	
+	/**
+	 * Returns whether a given audio API exists or not (without keeping into account whether it is supported or not). All existing ones are defined in {@link CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_APIS}.
+	 *  @function
+	 *  @param {string} audioAPI - The audio API that we want to check. All existing ones are defined in {@link CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_APIS}. For example: "WAAPI" ([HTML5 Web Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API}), "SM2" ([SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/}), "ACMP" ([Apache Cordova Media Plugin]{@link https://github.com/apache/cordova-plugin-media}) or "AAPI" ([HTML5 Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio}).
+	 *  @param {boolean} [sanitize=true] - If set to true, the "audioAPI" given will be trimmed and converted to upper case.
+	 *  @returns {boolean} Returns whether the given audio API exists or not (without keeping into account whether it is supported or not).
+	 */
+	CB_AudioDetector.APIExists = function(audioAPI, sanitize)
+	{
+		if (typeof(sanitize) === "undefined" || sanitize === null) { sanitize = true; }
+		if (sanitize) { audioAPI = CB_trim(audioAPI).toUpperCase(); }
+		return (CB_indexOf(CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_APIS, audioAPI) !== -1);
+	}
+	
+	
+	CB_AudioDetector._getPreferredAPIReturnCache = {};
+	/**
+	 * Calculates and returns the preferred audio API (from an array if it is given) for the current client, if any.
+	 *  @function
+	 *  @param {array} [audioAPIs=CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_APIS] - An array of strings with the audio APIs that we want to check, in order of preference. All existing ones are defined in {@link CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_APIS}. For example: "WAAPI" ([HTML5 Web Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API}), "SM2" ([SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/}), "ACMP" ([Apache Cordova Media Plugin]{@link https://github.com/apache/cordova-plugin-media}) or "AAPI" ([HTML5 Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio}).
+	 *  @param {boolean} [allowEmulation=false] - If set to true, it will also detect as supported emulated audio APIs (as "WAAPI" using [waapisim.js]{@link https://github.com/g200kg/WAAPISim} instead of supported natively).
+	 *  @param {boolean} [returnOnEmpty=false] - If set to true and no audio API is supported, it will return the value of this parameter instead of null.
+	 *  @returns {string|*} Returns a string with the preferred audio API (from an array if it is given) for the current client, if any. If no audio API is supported, it will return the value set in the "returnOnEmpty" parameter.
+	 */
+	CB_AudioDetector.getPreferredAPI = function(audioAPIs, allowEmulation, returnOnEmpty)
+	{
+		//If not given any APIs, uses the default ones with the default order:
+		if (typeof(audioAPIs) === "undefined" || audioAPIs === null || !CB_isArray(audioAPIs)) { audioAPIs = CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_APIS; }
+
+		//If it is not the first time, returns the same as the first time (from the cache):
+		if (typeof(CB_AudioDetector._getPreferredAPIReturnCache[audioAPIs]) !== "undefined")
+		{
+			if (CB_AudioDetector._getPreferredAPIReturnCache[audioAPIs] === null) { return returnOnEmpty; }
+			else { return CB_AudioDetector._getPreferredAPIReturnCache[audioAPIs]; }
+		}
+
+		var audioAPIs = CB_AudioDetector.getSupportedAPIs(audioAPIs, allowEmulation);
+		
+		var preferredAPI = null;
+		
+		if (audioAPIs.length > 0) { preferredAPI = audioAPIs[0]; }
+
+		//Stores the result in the cache for the next time:
+		CB_AudioDetector._getPreferredAPIReturnCache[audioAPIs] = preferredAPI;
+		
+		if (preferredAPI === null) { preferredAPI = returnOnEmpty; }
+		
+		return preferredAPI;
+	}
+	
+	
+	CB_AudioDetector._getSupportedAPIsReturnCache = {};
+	/**
+	 * Calculates and returns an array with the audio APIs supported (from an array if it is given) for the current client, if any.
+	 *  @function
+	 *  @param {array} [audioAPIs=CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_APIS] - An array of strings with the audio APIs that we want to check. All existing ones are defined in {@link CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_APIS}. For example: "WAAPI" ([HTML5 Web Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API}), "SM2" ([SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/}), "ACMP" ([Apache Cordova Media Plugin]{@link https://github.com/apache/cordova-plugin-media}) or "AAPI" ([HTML5 Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio}).
+	 *  @param {boolean} [allowEmulation=false] - If set to true, it will also detect as supported emulated audio APIs (as "WAAPI" using [waapisim.js]{@link https://github.com/g200kg/WAAPISim} instead of supported natively).
+	 *  @returns {array} Returns an array with the audio APIs supported (from an array if it is given) for the current client, if any. If no audio API is supported, an empty array will be returned.
+	 */
+	CB_AudioDetector.getSupportedAPIs = function(audioAPIs, allowEmulation)
+	{
+		//If not given any APIs, uses the default ones with the default order:
+		if (typeof(audioAPIs) === "undefined" || audioAPIs === null || !CB_isArray(audioAPIs)) { audioAPIs = CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_APIS; }
+
+		//If it is not the first time, returns the same as the first time (from the cache):
+		if (typeof(CB_AudioDetector._getSupportedAPIsReturnCache[audioAPIs]) !== "undefined" &amp;&amp; CB_AudioDetector._getSupportedAPIsReturnCache[audioAPIs] !== null)
+		{
+			return CB_AudioDetector._getSupportedAPIsReturnCache[audioAPIs];
+		}
+		
+		var supportedAudioAPIs = [];
+		
+		var audioAPIsLength = audioAPIs.length;
+		for (var x = 0; x &lt; audioAPIsLength; x++)
+		{
+			if (CB_AudioDetector.isAPISupported(audioAPIs[x], allowEmulation))
+			{
+				if (CB_indexOf(supportedAudioAPIs, audioAPIs[x]) === -1)
+				{
+					supportedAudioAPIs[supportedAudioAPIs.length] = audioAPIs[x];
+				}
+			}
+		}
+		
+		//Stores the result in the cache for the next time:
+		CB_AudioDetector._getSupportedAPIsReturnCache[audioAPIs] = supportedAudioAPIs;
+		
+		return supportedAudioAPIs;
+	}
+	
+	
+	CB_AudioDetector._isAPISupportedReturnCache = {};
+	/**
+	 * Tells whether a given audio API is supported or not by the current client.
+	 *  @function
+	 *  @param {string} audioAPI - The audio API that we want to check. All existing ones are defined in {@link CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_APIS}. For example: "WAAPI" ([HTML5 Web Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API}), "SM2" ([SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/}), "ACMP" ([Apache Cordova Media Plugin]{@link https://github.com/apache/cordova-plugin-media}) or "AAPI" ([HTML5 Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio}).
+	 *  @param {boolean} [allowEmulation=false] - If set to true, it will detect as supported also emulated audio APIs (as "WAAPI" using [waapisim.js]{@link https://github.com/g200kg/WAAPISim} instead of supported natively).
+	 *  @returns {boolean} Returns whether the given audio API is supported or not.
+	 *  @todo Have into account allowEmulation and detect whether emulation is being used if so (for example, detect whether [waapisim.js]{@link https://github.com/g200kg/WAAPISim} is being used).
+	 */
+	CB_AudioDetector.isAPISupported = function(audioAPI, allowEmulation)
+	{
+		audioAPI = CB_trim(audioAPI).toUpperCase();
+		
+		//If it is not the first time, returns the same as the first time (from the cache):
+		if (typeof(CB_AudioDetector._isAPISupportedReturnCache[audioAPI]) !== "undefined" &amp;&amp; CB_AudioDetector._isAPISupportedReturnCache[audioAPI] !== null)
+		{
+			if (typeof(CB_AudioDetector._isAPISupportedReturnCache[audioAPI][allowEmulation]) !== "undefined" &amp;&amp; CB_AudioDetector._isAPISupportedReturnCache[audioAPI][allowEmulation] !== null)
+			{
+				return CB_AudioDetector._isAPISupportedReturnCache[audioAPI][allowEmulation];
+			}
+		}
+		else
+		{
+			CB_AudioDetector._isAPISupportedReturnCache[audioAPI] = {};
+		}
+
+		var isSupported = false;
+
+		//TODO: Have into account allowEmulation and detect whether emulation is being used if so (for example, detect whether waapisim.js is being used).
+		
+		//Detects whether it is supported or not:
+		if (audioAPI === "WAAPI") //Web Audio API.
+		{
+			isSupported = (allowEmulation || !CB_AudioDetector.isWAAPIUsingEmulation()) &amp;&amp; (typeof(window.AudioContext) !== "undefined" || typeof(window.webkitAudioContext) !== "undefined");
+		}
+		else if (audioAPI === "ACMP") //Apache Cordova Media Plugin.
+		{
+			isSupported = (typeof(Media) !== "undefined");
+		}
+		else if (audioAPI === "AAPI") //Audio API.
+		{
+			isSupported = (typeof(window.Audio) !== "undefined");
+		}
+		else if (audioAPI === "SM2") //SoundManager 2.
+		{
+			//SM2 needs either Audio API or Flash:
+			isSupported = CB_soundManager2Supported &amp;&amp; (CB_AudioDetector.isAPISupported("AAPI", false) || CB_AudioDetector.isSM2UsingFlash() &amp;&amp; CB_Client.supportsFlash());
+		}
+		
+		//Stores the result in the cache for the next time:
+		CB_AudioDetector._isAPISupportedReturnCache[audioAPI][allowEmulation] = isSupported;
+		
+		return isSupported;
+	}
+
+	
+	/**
+	 * Tells whether "WAAPI" ([HTML5 Web Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API}) is using emulation (through [WAAPISim]{@link https://github.com/g200kg/WAAPISim}) or not.
+	 *  @function
+	 *  @returns {boolean} Returns whether "WAAPI" ([HTML5 Web Audio API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API}) is using emulation (through [WAAPISim]{@link https://github.com/g200kg/WAAPISim}) or not.
+	 */
+	CB_AudioDetector.isWAAPIUsingEmulation = function()
+	{
+		return CB_Configuration[CB_BASE_NAME].WAAPISIM_LOAD;
+	}
+	
+	
+	/**
+	 * Tells whether [SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/} is using [Adobe Flash (formerly Macromedia Flash)]{@link https://en.wikipedia.org/wiki/Adobe_Flash_Player} to emulate sound or not.
+	 *  @function
+	 *  @returns {boolean} Returns whether [SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/} is using [Adobe Flash (formerly Macromedia Flash)]{@link https://en.wikipedia.org/wiki/Adobe_Flash_Player} to emulate sound or not.
+	 */
+	CB_AudioDetector.isSM2UsingFlash = function()
+	{
+		return (typeof(soundManager) !== "undefined" &amp;&amp; soundManager !== null &amp;&amp; typeof(soundManager.html5) !== "undefined" &amp;&amp; soundManager.html5 !== null &amp;&amp; soundManager.html5.usingFlash);
+	}
+	
+	
+} //End of the static class CB_AudioDetector.</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+
+<footer>
+
+
+	<span class="copyright">
+	© CrossBrowdy by Joan Alba Maldonado<br />DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Wed Jun 26th 2019
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
+
+
+<!--Google Analytics-->
+
+
+
+
+</body>
+</html>

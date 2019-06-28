@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	Here are some more interesting functions:
+	Here are some other interesting functions:
 </p>
 <pre><code class="language-javascript">
 	//Calls a function once as it was one of the calls of a "symmetric" interval of a series of calls, having in mind the time taken by previous calls:
@@ -14,8 +14,10 @@
 <p>
 	Note that many other features
 	(such as
-	<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promise</a> and
-	<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank">requestAnimationFrame</a>)
+	<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now" target="_blank">Date.now</a>,
+	<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promise</a>,
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank">requestAnimationFrame</a>,
+	etc.)
 	will be present even when they are not natively supported, using polyfills automatically when needed.
 </p>
 

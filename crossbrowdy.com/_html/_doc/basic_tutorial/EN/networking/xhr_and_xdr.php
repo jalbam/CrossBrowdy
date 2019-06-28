@@ -166,7 +166,7 @@
 	);
 </code></pre>
 <p>
-	Have into account that it is recommended to use the <a href="_html/_doc/api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static class instead to perform REST calls easier and in a much more powerful way. To get more information, read the <a href="<?php echo basicTutorialLink("networking", "rest"); ?>"><?php echo $basicTutorial["networking"]["topics"]["rest"][$language]; ?></a> topic of the basic tutorial.
+	Have into account that it is recommended to use the <a href="_html/_doc/api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static class instead to perform REST calls easier and in a much more powerful way. To get more information, read the <a href="<?php echo basicTutorialLink("networking", "rest"); ?>" target="_blank"><?php echo $basicTutorial["networking"]["topics"]["rest"][$language]; ?></a> topic of the basic tutorial.
 </p>
 
 <p>

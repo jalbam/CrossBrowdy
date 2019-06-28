@@ -594,3 +594,90 @@ code
 		font-size:4.2vmin;
 	}
 }
+
+
+#examples_navbar
+{
+	position:fixed;
+	bottom:0px;
+	width:100%;
+	background-color:#000000;
+	color:#ffffff;
+	
+	min-height:40px;
+	text-align:center;
+	line-height:40px;
+	
+	font-family:courier, monospace;
+	color:#ffffff;
+	text-align:center;
+	font-size:16px;
+	font-size:1em;
+	font-size:100%;
+	font-size:5vmin;
+	
+	display:table;
+}
+
+#examples_navbar .item
+{
+	display:table-cell;
+	text-align:center;
+	width:33%;
+}
+
+#examples_navbar .item a
+{
+	color:#ffffff;
+	text-decoration:none;
+}
+
+#examples_navbar .item a:hover
+{
+	color:#2345fd;
+}
+
+
+.examples_text
+{
+	font-family:courier, monospace;
+	color:#000000;
+	text-align:left;
+	font-size:29px;
+	font-size:1.8em;
+	font-size:180%;
+	font-size:3vmin;
+	margin:35px;
+
+	word-wrap:break-word;
+}
+@media (orientation: portrait)
+{
+	.examples_text
+	{
+		font-size:18px;
+		font-size:1.1em;
+		font-size:111%;
+		font-size:4.2vmin;
+	}
+}
+
+
+.try_example
+{
+	text-align:center;
+	font-size:48px;
+	font-size:3em;
+	font-size:300%;
+	font-size:5vmin;
+}
+@media (orientation: portrait)
+{
+	.try_example
+	{
+		font-size:76px;
+		font-size:4.8em;
+		font-size:480%;
+		font-size:8vmin;
+	}
+}

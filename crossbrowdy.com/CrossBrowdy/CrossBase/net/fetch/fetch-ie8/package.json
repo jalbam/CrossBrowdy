@@ -1,0 +1,52 @@
+{
+  "_from": "fetch-ie8",
+  "_id": "fetch-ie8@1.5.0",
+  "_inBundle": false,
+  "_integrity": "sha1-8RQcP5bLyJN6oxsPvBp3AiD7wVs=",
+  "_location": "/fetch-ie8",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "fetch-ie8",
+    "name": "fetch-ie8",
+    "escapedName": "fetch-ie8",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/fetch-ie8/-/fetch-ie8-1.5.0.tgz",
+  "_shasum": "f1141c3f96cbc8937aa31b0fbc1a770220fbc15b",
+  "_spec": "fetch-ie8",
+  "_where": "C:\\kk",
+  "bugs": {
+    "url": "https://github.com/camsong/fetch/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "**This fork supports IE8 with es5-shim, es5-sham and es6-promise.**",
+  "devDependencies": {
+    "browserify": "^9.0.8",
+    "es6-promise": "^2.1.1",
+    "isarray": "0.0.1",
+    "jshint": "2.5.2",
+    "mocha": "2.1.0"
+  },
+  "files": [
+    "LICENSE",
+    "fetch.js"
+  ],
+  "homepage": "https://github.com/camsong/fetch#readme",
+  "license": "MIT",
+  "main": "fetch.js",
+  "name": "fetch-ie8",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camsong/fetch.git"
+  },
+  "version": "1.5.0"
+}

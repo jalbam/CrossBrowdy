@@ -1,0 +1,3385 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>CrossBrowdy documentation Namespace: CB_Touch</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.yeti.css">
+
+</head>
+
+<body style="min-width:800px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">CrossBrowdy documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="CB_Arrays.html">CB_Arrays</a></li><li><a href="CB_AudioDetector.html">CB_AudioDetector</a></li><li><a href="CB_baseSymbols.html">CB_baseSymbols</a></li><li><a href="CB_Client.html">CB_Client</a></li><li><a href="CB_Collisions.html">CB_Collisions</a></li><li><a href="CB_Configuration.html">CB_Configuration</a></li><li><a href="CB_Configuration.CrossBase.html">CB_Configuration.CrossBase</a></li><li><a href="CB_Configuration.CrossBrowdy.html">CB_Configuration.CrossBrowdy</a></li><li><a href="CB_Controllers.html">CB_Controllers</a></li><li><a href="CB_Controllers_Proprietary.html">CB_Controllers_Proprietary</a></li><li><a href="CB_Controllers_Proprietary.WII.html">CB_Controllers_Proprietary.WII</a></li><li><a href="CB_Controllers_Proprietary.WII_U.html">CB_Controllers_Proprietary.WII_U</a></li><li><a href="CB_Device.html">CB_Device</a></li><li><a href="CB_Device.AmbientLight.html">CB_Device.AmbientLight</a></li><li><a href="CB_Device.Battery.html">CB_Device.Battery</a></li><li><a href="CB_Device.Location.html">CB_Device.Location</a></li><li><a href="CB_Device.Motion.html">CB_Device.Motion</a></li><li><a href="CB_Device.Orientation.html">CB_Device.Orientation</a></li><li><a href="CB_Device.Proximity.html">CB_Device.Proximity</a></li><li><a href="CB_Device.Vibration.html">CB_Device.Vibration</a></li><li><a href="CB_Elements.html">CB_Elements</a></li><li><a href="CB_Events.html">CB_Events</a></li><li><a href="CB_Keyboard.html">CB_Keyboard</a></li><li><a href="CB_Keyboard.chars.html">CB_Keyboard.chars</a></li><li><a href="CB_Keyboard.extended.html">CB_Keyboard.extended</a></li><li><a href="CB_Keyboard.keys.html">CB_Keyboard.keys</a></li><li><a href="CB_Modules.html">CB_Modules</a></li><li><a href="CB_Mouse.html">CB_Mouse</a></li><li><a href="CB_Mouse.CursorImage.html">CB_Mouse.CursorImage</a></li><li><a href="CB_Net.html">CB_Net</a></li><li><a href="CB_Net.Fetch.html">CB_Net.Fetch</a></li><li><a href="CB_Net.REST.html">CB_Net.REST</a></li><li><a href="CB_Net.Sockets.html">CB_Net.Sockets</a></li><li><a href="CB_Net.Sockets.SockJS.html">CB_Net.Sockets.SockJS</a></li><li><a href="CB_Net.XHR.html">CB_Net.XHR</a></li><li><a href="CB_Pointer.html">CB_Pointer</a></li><li><a href="CB_Screen.html">CB_Screen</a></li><li><a href="CB_Speaker.html">CB_Speaker</a></li><li><a href="CB_Touch.html">CB_Touch</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="CB_AudioFile.html">CB_AudioFile</a></li><li><a href="CB_AudioFile_API.AAPI.html">CB_AudioFile_API.AAPI</a></li><li><a href="CB_AudioFile_API.ACMP.html">CB_AudioFile_API.ACMP</a></li><li><a href="CB_AudioFile_API.SM2.html">CB_AudioFile_API.SM2</a></li><li><a href="CB_AudioFile_API.WAAPI.html">CB_AudioFile_API.WAAPI</a></li><li><a href="CB_AudioFileCache.html">CB_AudioFileCache</a></li><li><a href="CB_AudioFileSprites.html">CB_AudioFileSprites</a></li><li><a href="CB_AudioFileSpritesPool.html">CB_AudioFileSpritesPool</a></li><li><a href="CB_Canvas.html">CB_Canvas</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="global.html#CB_addCredits">CB_addCredits</a></li><li><a href="global.html#CB_BASE_NAME">CB_BASE_NAME</a></li><li><a href="global.html#CB_baseToBase">CB_baseToBase</a></li><li><a href="global.html#CB_baseToInt">CB_baseToInt</a></li><li><a href="global.html#CB_br2nl">CB_br2nl</a></li><li><a href="global.html#CB_brToNl">CB_brToNl</a></li><li><a href="global.html#CB_combineArraysOrObjects">CB_combineArraysOrObjects</a></li><li><a href="global.html#CB_combineAutomatically">CB_combineAutomatically</a></li><li><a href="global.html#CB_combineJSON">CB_combineJSON</a></li><li><a href="global.html#CB_combineURIParameters">CB_combineURIParameters</a></li><li><a href="global.html#CB_combineURLParameters">CB_combineURLParameters</a></li><li><a href="global.html#CB_console">CB_console</a></li><li><a href="global.html#CB_credits">CB_credits</a></li><li><a href="global.html#CB_CREDITS_DEFAULT">CB_CREDITS_DEFAULT</a></li><li><a href="global.html#CB_forceString">CB_forceString</a></li><li><a href="global.html#CB_forEach">CB_forEach</a></li><li><a href="global.html#CB_getBase64StringObject">CB_getBase64StringObject</a></li><li><a href="global.html#CB_getCookie">CB_getCookie</a></li><li><a href="global.html#CB_getDatum">CB_getDatum</a></li><li><a href="global.html#CB_getJSONPropertyValue">CB_getJSONPropertyValue</a></li><li><a href="global.html#CB_getLZStringObject">CB_getLZStringObject</a></li><li><a href="global.html#CB_getValueIndex">CB_getValueIndex</a></li><li><a href="global.html#CB_getValuePath">CB_getValuePath</a></li><li><a href="global.html#CB_includeJSFile">CB_includeJSFile</a></li><li><a href="global.html#CB_indexOf">CB_indexOf</a></li><li><a href="global.html#CB_init">CB_init</a></li><li><a href="global.html#CB_intToBase">CB_intToBase</a></li><li><a href="global.html#CB_isArray">CB_isArray</a></li><li><a href="global.html#CB_isEmail">CB_isEmail</a></li><li><a href="global.html#CB_isFileLocal">CB_isFileLocal</a></li><li><a href="global.html#CB_isString">CB_isString</a></li><li><a href="global.html#CB_lastIndexOf">CB_lastIndexOf</a></li><li><a href="global.html#CB_ltrim">CB_ltrim</a></li><li><a href="global.html#CB_NAME">CB_NAME</a></li><li><a href="global.html#CB_nl2br">CB_nl2br</a></li><li><a href="global.html#CB_nlToBr">CB_nlToBr</a></li><li><a href="global.html#CB_numberFormat">CB_numberFormat</a></li><li><a href="global.html#CB_OPTIONS">CB_OPTIONS</a></li><li><a href="global.html#CB_parseJSON">CB_parseJSON</a></li><li><a href="global.html#CB_parseString">CB_parseString</a></li><li><a href="global.html#CB_regularExpressionString">CB_regularExpressionString</a></li><li><a href="global.html#CB_renderString">CB_renderString</a></li><li><a href="global.html#CB_rtrim">CB_rtrim</a></li><li><a href="global.html#CB_scriptPath">CB_scriptPath</a></li><li><a href="global.html#CB_setCookie">CB_setCookie</a></li><li><a href="global.html#CB_setDatum">CB_setDatum</a></li><li><a href="global.html#CB_sizeOf">CB_sizeOf</a></li><li><a href="global.html#CB_sizeof">CB_sizeof</a></li><li><a href="global.html#CB_stringifyJSON">CB_stringifyJSON</a></li><li><a href="global.html#CB_symmetricCall">CB_symmetricCall</a></li><li><a href="global.html#CB_symmetricCallClear">CB_symmetricCallClear</a></li><li><a href="global.html#CB_this">CB_this</a></li><li><a href="global.html#CB_trim">CB_trim</a></li><li><a href="global.html#CB_VERSION">CB_VERSION</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content" style="width:100%;">
+<div class="row" style="width:100%;">
+
+	
+	<div class="col-md-8" style="width:85%;">
+	
+		<div id="main">
+			
+
+	
+		<h1 class="page-title">Namespace: CB_Touch</h1>
+	
+<section>
+
+<header>
+    
+        <h2>
+        CB_Touch
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Static class to manage the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Touch_events">touch events</a>. It will return itself if it is tried to be instantiated. It can also use <a href="https://pressurejs.com/">Pressure.js</a> and <a href="https://hammerjs.github.io/">Hammer.js</a>.</p></div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-11">line 11</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<hr>
+<dt class="name" id=".DEFAULT_FORCE">
+    <h4 id=".DEFAULT_FORCE"><span class="type-signature">&lt;static, readonly> </span>DEFAULT_FORCE<span class="type-signature"> :number</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Default value for the force attribute if no one is detected.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+	<dt class="tag-default method-doc-label method-doc-details-label">Default Value:</dt>
+	<dd class="tag-default">
+		<ul class="dummy">
+			<li>1</li>
+		</ul>
+	</dd>
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-23">line 23</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id=".delay"><span class="type-signature">&lt;static> </span>delay<span class="signature">( [delayMs] [, index])</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>First time, this function will return true. Next calls, with same index, returns false during the previously-defined time set in the previous call and true after that delay. After the first call, next calls of this function with same index will be ignored (returning always false) until the delay provided expires. If it is called after a previous call with the same index and the delay of the previous call already expired, it will act as it was the first call again. Useful, for example, to prevent the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event">onTouchStart</a> event to fire twice or more when a layer (container) is closed and behind there is another one with also the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event">onTouchStart</a> event.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>delayMs</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">integer</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    CB_Touch._delayMsDefault
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Delay desired in milliseconds. For same indexes, this parameter will be ignored if there was a previous call to this function whose delay did not expire yet.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>index</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Desired index to identify the process.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-338">line 338</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>First time, this function will return true. Next calls with the same index, returns false during the given time and true after that delay. After the first call, next calls with same index of this function will be ignored (returning always false) until the delay provided expires. If it is called after a previous call with the same index and the delay of the previous call already expired, it will act as it was the first call again.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getData"><span class="type-signature">&lt;static> </span>getData<span class="signature">()</span><span class="type-signature"> &rarr; {Event|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns the last <a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent">touch event</a> object (if any), processed by <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> internally, which was used in the last touch event fired, if that touch event was <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event">touchstart</a>, <a href="https://w3.org/TR/2011/WD-touch-events-20110505/#the-touchenter-event">touchenter</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchmove_event">touchmove</a>. The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchend_event">touchend</a> and <a href="https://w3.org/TR/2011/WD-touch-events-20110505/#the-touchleave-event">touchleave</a> events set it to &quot;null&quot;.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-163">line 163</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the last <a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent">touch event</a> affected, if any.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Event</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getHammerJSObject"><span class="type-signature">&lt;static> </span>getHammerJSObject<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns the <a href="https://hammerjs.github.io/">Hammer.js</a> object (if any). Useful for managing touch gestures.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-311">line 311</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the <a href="https://hammerjs.github.io/">Hammer.js</a> object (if any).</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getMaxTouchPoints"><span class="type-signature">&lt;static> </span>getMaxTouchPoints<span class="signature">()</span><span class="type-signature"> &rarr; {integer|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns the maximum of touch points supported by the device (if possible).</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-174">line 174</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Maximum touch points supported by the device (if possible). If it cannot be detected, returns null.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getPressureJSObject"><span class="type-signature">&lt;static> </span>getPressureJSObject<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns the <a href="https://pressurejs.com/">Pressure.js</a> object (if any). Useful for managing <a href="https://en.wikipedia.org/wiki/Force_Touch">Force Touch/3D Touch</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure">Pointer Pressure</a> features.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-322">line 322</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the <a href="https://pressurejs.com/">Pressure.js</a> object (if any).</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".normalizeEvent"><span class="type-signature">&lt;static> </span>normalizeEvent<span class="signature">(e)</span><span class="type-signature"> &rarr; {Event}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Tries to return the <a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent">touch event</a> object with some properties normalized (since different clients can use different values), when possible. It also calls the <a href="CB_Events.html#.normalize"><code>CB_Events.normalize</code></a> and <a href="CB_Touch.html#.normalizePoints"><code>CB_Touch.normalizePoints</code></a> functions internally. Some properties affected could be <a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/targetTouches">targetTouches</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/touches">touches</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent/changedTouches">changedTouches</a>, etc.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>e</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Event</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent">Touch event</a> object. If not provided, it will use the value of &quot;event&quot;, &quot;window.event&quot;, &quot;Event&quot; or an empty object (&quot;{}&quot;).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-104">line 104</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+	<dt class="tag-todo method-doc-label method-doc-details-label">To Do:</dt>
+	<dd class="tag-todo">
+		<ul>
+			<li>Add more properties and methods to normalize (if needed)</li>
+			</ul>
+	</dd>
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the <a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent">touch event</a> object normalized.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Event</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".normalizeForce"><span class="type-signature">&lt;static> </span>normalizeForce<span class="signature">(force)</span><span class="type-signature"> &rarr; {Event}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Normalizes the given &quot;force&quot; property value across different clients. The new attached methods and properties may include polyfills, etc. This function is called by <a href="CB_Touch.html#.normalizePoint"><code>CB_Touch.normalizePoint</code></a> automatically.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>force</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Force value to be normalized.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-86">line 86</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+	<dt class="tag-todo method-doc-label method-doc-details-label">To Do:</dt>
+	<dd class="tag-todo">
+		<ul>
+			<li>Not all web clients are the same, so not all should be normalized.</li>
+			</ul>
+	</dd>
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the force value normalized.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Event</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".normalizePoint"><span class="type-signature">&lt;static> </span>normalizePoint<span class="signature">(point)</span><span class="type-signature"> &rarr; {Touch}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Normalizes a given point. Calls <a href="CB_Touch.html#.normalizeForce"><code>CB_Touch.normalizeForce</code></a> internally. This function is called by <a href="CB_Touch.html#.normalizePoints"><code>CB_Touch.normalizePoints</code></a> automatically.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>point</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Touch</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Touch">Touch object</a> to be normalized.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-142">line 142</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the given point normalized.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Touch</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".normalizePoints"><span class="type-signature">&lt;static> </span>normalizePoints<span class="signature">(points)</span><span class="type-signature"> &rarr; {TouchList|array}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Normalizes a given list of points. Calls <a href="CB_Touch.html#.normalizePoint"><code>CB_Touch.normalizePoint</code></a> internally. This function is called by <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> automatically.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>points</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">TouchList</span>
+|
+
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/TouchList">TouchList</a> or array with the points (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Touch">Touch objects</a>) to be normalized.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-125">line 125</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the given points normalized.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">TouchList</span>
+|
+
+<span class="param-type">array</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onCancel"><span class="type-signature">&lt;static> </span>onCancel<span class="signature">(callbackFunction [, keepOldFunction] [, useCapture] [, target])</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sets a function to execute when the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchcancel_event">onTouchCancel</a> event is fired or removes it. More information: <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">Touch events</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function (event listener) that we want to execute when the event is fired. The first and unique parameter received for this function will be the event object (already normalized by the <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> function). If a null value is used, the event will be removed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener for the same target and event name or not.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>target</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    document
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The target where we want to attach the event listener.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-221">line 221</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onEnd"><span class="type-signature">&lt;static> </span>onEnd<span class="signature">(callbackFunction [, keepOldFunction] [, useCapture] [, target])</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sets a function to execute when the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchend_event">onTouchEnd</a> event is fired or removes it. More information: <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">Touch events</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function (event listener) that we want to execute when the event is fired. The first and unique parameter received for this function will be the event object (already normalized by the <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> function). If a null value is used, the event will be removed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener for the same target and event name or not.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>target</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    document
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The target where we want to attach the event listener.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-207">line 207</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onEnter"><span class="type-signature">&lt;static> </span>onEnter<span class="signature">(callbackFunction [, keepOldFunction] [, useCapture] [, target])</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sets a function to execute when the <a href="https://w3.org/TR/2011/WD-touch-events-20110505/#the-touchenter-event">onTouchEnter</a> event is fired or removes it. More information: <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">Touch events</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function (event listener) that we want to execute when the event is fired. The first and unique parameter received for this function will be the event object (already normalized by the <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> function). If a null value is used, the event will be removed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener for the same target and event name or not.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>target</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    document
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The target where we want to attach the event listener.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-235">line 235</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onLeave"><span class="type-signature">&lt;static> </span>onLeave<span class="signature">(callbackFunction [, keepOldFunction] [, useCapture] [, target])</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sets a function to execute when the <a href="https://w3.org/TR/2011/WD-touch-events-20110505/#the-touchleave-event">onTouchLeave</a> event is fired or removes it. More information: <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">Touch events</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function (event listener) that we want to execute when the event is fired. The first and unique parameter received for this function will be the event object (already normalized by the <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> function). If a null value is used, the event will be removed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener for the same target and event name or not.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>target</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    document
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The target where we want to attach the event listener.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-249">line 249</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onMove"><span class="type-signature">&lt;static> </span>onMove<span class="signature">(callbackFunction [, keepOldFunction] [, useCapture] [, target])</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sets a function to execute when the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchmove_event">onTouchMove</a> event is fired or removes it. More information: <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">Touch events</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function (event listener) that we want to execute when the event is fired. The first and unique parameter received for this function will be the event object (already normalized by the <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> function). If a null value is used, the event will be removed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener for the same target and event name or not.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>target</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    document
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The target where we want to attach the event listener.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-263">line 263</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onStart"><span class="type-signature">&lt;static> </span>onStart<span class="signature">(callbackFunction [, keepOldFunction] [, useCapture] [, target])</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sets a function to execute when the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event">onTouchStart</a> event is fired or removes it. More information: <a href="https://developer.mozilla.org/en-US/docs/DOM/Touch_events">Touch events</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function (event listener) that we want to execute when the event is fired. The first and unique parameter received for this function will be the event object (already normalized by the <a href="CB_Touch.html#.normalizeEvent"><code>CB_Touch.normalizeEvent</code></a> function). If a null value is used, the event will be removed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener for the same target and event name or not.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>target</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    document
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The target where we want to attach the event listener.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_input_CB_Touch.js.html">CrossBase/input/CB_Touch.js</a>,
+				 <a href="CrossBase_input_CB_Touch.js.html#sunlight-1-line-193">line 193</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md" style="display:none; visibility:hidden;"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+
+<footer>
+
+
+	<span class="copyright">
+	© CrossBrowdy by Joan Alba Maldonado<br />DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Wed Jun 26th 2019
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+
+</body>
+</html>

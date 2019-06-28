@@ -1,4 +1,5 @@
 <?php
+	//Basic tutorial structure:
 	$basicTutorial = Array
 	(
 		"general" => Array
@@ -300,13 +301,3 @@
 			)
 		)
 	);
-	
-
-	//Returns the link to a subcategory/topic of the basic tutorial:
-	function basicTutorialLink($subcategory = "", $topic = "")
-	{
-		global $PHPExtension;
-		$subcategory = trim($subcategory);
-		$topic = trim($topic);
-		return rtrim("basic_tutorial" . $PHPExtension . "/" . $subcategory . "/" . $topic . "/", "/") . "/";
-	}

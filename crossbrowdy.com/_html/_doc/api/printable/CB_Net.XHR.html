@@ -1,0 +1,4675 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>CrossBrowdy documentation Namespace: XHR</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.yeti.css">
+
+</head>
+
+<body style="min-width:800px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">CrossBrowdy documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="CB_Arrays.html">CB_Arrays</a></li><li><a href="CB_AudioDetector.html">CB_AudioDetector</a></li><li><a href="CB_baseSymbols.html">CB_baseSymbols</a></li><li><a href="CB_Client.html">CB_Client</a></li><li><a href="CB_Collisions.html">CB_Collisions</a></li><li><a href="CB_Configuration.html">CB_Configuration</a></li><li><a href="CB_Configuration.CrossBase.html">CB_Configuration.CrossBase</a></li><li><a href="CB_Configuration.CrossBrowdy.html">CB_Configuration.CrossBrowdy</a></li><li><a href="CB_Controllers.html">CB_Controllers</a></li><li><a href="CB_Controllers_Proprietary.html">CB_Controllers_Proprietary</a></li><li><a href="CB_Controllers_Proprietary.WII.html">CB_Controllers_Proprietary.WII</a></li><li><a href="CB_Controllers_Proprietary.WII_U.html">CB_Controllers_Proprietary.WII_U</a></li><li><a href="CB_Device.html">CB_Device</a></li><li><a href="CB_Device.AmbientLight.html">CB_Device.AmbientLight</a></li><li><a href="CB_Device.Battery.html">CB_Device.Battery</a></li><li><a href="CB_Device.Location.html">CB_Device.Location</a></li><li><a href="CB_Device.Motion.html">CB_Device.Motion</a></li><li><a href="CB_Device.Orientation.html">CB_Device.Orientation</a></li><li><a href="CB_Device.Proximity.html">CB_Device.Proximity</a></li><li><a href="CB_Device.Vibration.html">CB_Device.Vibration</a></li><li><a href="CB_Elements.html">CB_Elements</a></li><li><a href="CB_Events.html">CB_Events</a></li><li><a href="CB_Keyboard.html">CB_Keyboard</a></li><li><a href="CB_Keyboard.chars.html">CB_Keyboard.chars</a></li><li><a href="CB_Keyboard.extended.html">CB_Keyboard.extended</a></li><li><a href="CB_Keyboard.keys.html">CB_Keyboard.keys</a></li><li><a href="CB_Modules.html">CB_Modules</a></li><li><a href="CB_Mouse.html">CB_Mouse</a></li><li><a href="CB_Mouse.CursorImage.html">CB_Mouse.CursorImage</a></li><li><a href="CB_Net.html">CB_Net</a></li><li><a href="CB_Net.Fetch.html">CB_Net.Fetch</a></li><li><a href="CB_Net.REST.html">CB_Net.REST</a></li><li><a href="CB_Net.Sockets.html">CB_Net.Sockets</a></li><li><a href="CB_Net.Sockets.SockJS.html">CB_Net.Sockets.SockJS</a></li><li><a href="CB_Net.XHR.html">CB_Net.XHR</a></li><li><a href="CB_Pointer.html">CB_Pointer</a></li><li><a href="CB_Screen.html">CB_Screen</a></li><li><a href="CB_Speaker.html">CB_Speaker</a></li><li><a href="CB_Touch.html">CB_Touch</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="CB_AudioFile.html">CB_AudioFile</a></li><li><a href="CB_AudioFile_API.AAPI.html">CB_AudioFile_API.AAPI</a></li><li><a href="CB_AudioFile_API.ACMP.html">CB_AudioFile_API.ACMP</a></li><li><a href="CB_AudioFile_API.SM2.html">CB_AudioFile_API.SM2</a></li><li><a href="CB_AudioFile_API.WAAPI.html">CB_AudioFile_API.WAAPI</a></li><li><a href="CB_AudioFileCache.html">CB_AudioFileCache</a></li><li><a href="CB_AudioFileSprites.html">CB_AudioFileSprites</a></li><li><a href="CB_AudioFileSpritesPool.html">CB_AudioFileSpritesPool</a></li><li><a href="CB_Canvas.html">CB_Canvas</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu inline">
+					<li><a href="global.html#CB_addCredits">CB_addCredits</a></li><li><a href="global.html#CB_BASE_NAME">CB_BASE_NAME</a></li><li><a href="global.html#CB_baseToBase">CB_baseToBase</a></li><li><a href="global.html#CB_baseToInt">CB_baseToInt</a></li><li><a href="global.html#CB_br2nl">CB_br2nl</a></li><li><a href="global.html#CB_brToNl">CB_brToNl</a></li><li><a href="global.html#CB_combineArraysOrObjects">CB_combineArraysOrObjects</a></li><li><a href="global.html#CB_combineAutomatically">CB_combineAutomatically</a></li><li><a href="global.html#CB_combineJSON">CB_combineJSON</a></li><li><a href="global.html#CB_combineURIParameters">CB_combineURIParameters</a></li><li><a href="global.html#CB_combineURLParameters">CB_combineURLParameters</a></li><li><a href="global.html#CB_console">CB_console</a></li><li><a href="global.html#CB_credits">CB_credits</a></li><li><a href="global.html#CB_CREDITS_DEFAULT">CB_CREDITS_DEFAULT</a></li><li><a href="global.html#CB_forceString">CB_forceString</a></li><li><a href="global.html#CB_forEach">CB_forEach</a></li><li><a href="global.html#CB_getBase64StringObject">CB_getBase64StringObject</a></li><li><a href="global.html#CB_getCookie">CB_getCookie</a></li><li><a href="global.html#CB_getDatum">CB_getDatum</a></li><li><a href="global.html#CB_getJSONPropertyValue">CB_getJSONPropertyValue</a></li><li><a href="global.html#CB_getLZStringObject">CB_getLZStringObject</a></li><li><a href="global.html#CB_getValueIndex">CB_getValueIndex</a></li><li><a href="global.html#CB_getValuePath">CB_getValuePath</a></li><li><a href="global.html#CB_includeJSFile">CB_includeJSFile</a></li><li><a href="global.html#CB_indexOf">CB_indexOf</a></li><li><a href="global.html#CB_init">CB_init</a></li><li><a href="global.html#CB_intToBase">CB_intToBase</a></li><li><a href="global.html#CB_isArray">CB_isArray</a></li><li><a href="global.html#CB_isEmail">CB_isEmail</a></li><li><a href="global.html#CB_isFileLocal">CB_isFileLocal</a></li><li><a href="global.html#CB_isString">CB_isString</a></li><li><a href="global.html#CB_lastIndexOf">CB_lastIndexOf</a></li><li><a href="global.html#CB_ltrim">CB_ltrim</a></li><li><a href="global.html#CB_NAME">CB_NAME</a></li><li><a href="global.html#CB_nl2br">CB_nl2br</a></li><li><a href="global.html#CB_nlToBr">CB_nlToBr</a></li><li><a href="global.html#CB_numberFormat">CB_numberFormat</a></li><li><a href="global.html#CB_OPTIONS">CB_OPTIONS</a></li><li><a href="global.html#CB_parseJSON">CB_parseJSON</a></li><li><a href="global.html#CB_parseString">CB_parseString</a></li><li><a href="global.html#CB_regularExpressionString">CB_regularExpressionString</a></li><li><a href="global.html#CB_renderString">CB_renderString</a></li><li><a href="global.html#CB_rtrim">CB_rtrim</a></li><li><a href="global.html#CB_scriptPath">CB_scriptPath</a></li><li><a href="global.html#CB_setCookie">CB_setCookie</a></li><li><a href="global.html#CB_setDatum">CB_setDatum</a></li><li><a href="global.html#CB_sizeOf">CB_sizeOf</a></li><li><a href="global.html#CB_sizeof">CB_sizeof</a></li><li><a href="global.html#CB_stringifyJSON">CB_stringifyJSON</a></li><li><a href="global.html#CB_symmetricCall">CB_symmetricCall</a></li><li><a href="global.html#CB_symmetricCallClear">CB_symmetricCallClear</a></li><li><a href="global.html#CB_this">CB_this</a></li><li><a href="global.html#CB_trim">CB_trim</a></li><li><a href="global.html#CB_VERSION">CB_VERSION</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content" style="width:100%;">
+<div class="row" style="width:100%;">
+
+	
+	<div class="col-md-8" style="width:85%;">
+	
+		<div id="main">
+			
+
+	
+		<h1 class="page-title">Namespace: XHR</h1>
+	
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="CB_Net.html">CB_Net</a>.</span>
+        
+        XHR
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Static class to manage <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XMLHttpRequest</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>, <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a>) and related. It will return itself if it is tried to be instantiated.</p></div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-14">line 14</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+	<dt class="tag-todo method-doc-label method-doc-details-label">To Do:</dt>
+	<dd class="tag-todo">
+		<ul>
+			<li>Think about providing an easy way to abort XHR (AJAX) calls.</li>
+			</ul>
+	</dd>
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id=".call"><span class="type-signature">&lt;static> </span>call<span class="signature">(URL [, method] [, data] [, headers] [, responseType] [, mimeType] [, callbackFunction] [, callbackFunctionOK] [, callbackFunctionError] [, allowedSuccessStatuses] [, asynchronous] [, XHR])</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Performs an <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>) call.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>URL</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The URL that we want to call. It can also contain URL (GET) parameters.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>method</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    'POST'
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP method</a> that will be used to perform the call (GET, POST, PUT, DELETE, etc.).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>data</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The data that we want to send. If a string is given and &quot;GET&quot; method is being used, it will assume they are GET (URL) parameters and will be attached at the end of the URL given. If something which is not a string is given, it will assume it is a <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> object and will try to convert it into a string (using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a> function internally) before sending it.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headers</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type"><a href="CB_Net.XHR.html#.HEADERS">CB_Net.XHR.HEADERS</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Object containing the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> names and their values that we want to send (used internally by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/setRequestHeader">setRequestHeader</a> method of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a>).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>responseType</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If provided, it will be used for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType">responseType</a> property of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> (if available).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>mimeType</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">MIME type</a> that will be used to override the default one returned by the server. Only used when the client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/overrideMimeType">overrideMimeType</a> method of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a>.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Function that will be used for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange">onreadystatechange</a> property of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a>. The unique parameter that it will receive is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> used by the request. If provided, the &quot;callbackFunctionOK&quot; and &quot;callbackFunctionError&quot; parameters will not be used even they were also provided.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionOK</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Function that will be called by an internally-created function used in the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange">onreadystatechange</a> property of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> when the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState">readyState</a> property is 4 and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> property is included in the &quot;allowedSuccessStatuses&quot; desired. The first parameter it will receive is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> used by the request and the second one will be the &quot;callbackFunctionError&quot; function provided (if any). It will not be used if the parameter &quot;callbackFunction&quot; is provided.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionError</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Function that will be called by an internally-created function used in the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/onreadystatechange">onreadystatechange</a> property of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> when the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState">readyState</a> property is 4 and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> property is not included in the &quot;allowedSuccessStatuses&quot; desired. The first parameter it will receive is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> used by the request and the second one will be the &quot;callbackFunctionOk&quot; function provided (if any). It will not be used if the parameter &quot;callbackFunction&quot; is provided.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>allowedSuccessStatuses</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    200
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>An integer or a numeric array with a list of integers with the status or statuses that will be considered as a success call by the &quot;callbackFunctionOK&quot; function (only when it is used) when the response comes.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>asynchronous</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether to make a request asynchronously or not. It will be used for the third parameter of the method <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/open">open</a> of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a>.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>XHR</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> that we want to use for the call. If not provided, it will try to create a new one internally.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-119">line 119</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+	<dt class="tag-todo method-doc-label method-doc-details-label">To Do:</dt>
+	<dd class="tag-todo">
+		<ul>
+			<li>Think about providing a way to choose whether we want the "data" provided to be added to the URL when the "GET" method is used or not.</li>
+			
+			<li>Describe better what kind of <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> will the different callbacks receive, as in some cases (as when using <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>) they can contain some special properties with <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a>, etc.</li>
+			</ul>
+	</dd>
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns null if the URL provided was empty or the <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>) object provided is not a valid object or it could not be created a new one internally. Otherwise, it returns the <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>) object used to try to perform the call (even that maybe it failed or will fail later).</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".callBinary"><span class="type-signature">&lt;static> </span>callBinary<span class="signature">(URL [, data] [, headers] [, blobOrArrayBuffer] [, callbackFunction] [, callbackFunctionOK] [, callbackFunctionError] [, allowedSuccessStatuses] [, XHR])</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Performs a standard <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a> request for a binary file. Uses the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function internally with &quot;GET&quot; method, using &quot;text/plain; charset=x-user-defined&quot; for the &quot;mimeType&quot; parameter and asynchronously.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>URL</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;URL&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>data</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;data&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headers</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type"><a href="CB_Net.XHR.html#.HEADERS">CB_Net.XHR.HEADERS</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    { "Content-Type" : "text/plain; charset=x-user-defined", "Cache-Control" : "no-cache", "Pragma" : "no-cache" }
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Object containing the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> names and their values that we want to send. If not provided, it will use the default one. An empty object ({}) can be used if we do not want to send any <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> at all. Used for the &quot;headers&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>blobOrArrayBuffer</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">'arraybuffer'</span>
+|
+
+<span class="param-type">'blob'</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    'arraybuffer'
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType">responseType</a> parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunction&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionOK</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionOK&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionError</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionError&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>allowedSuccessStatuses</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    200
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;allowedSuccessStatuses&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>XHR</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;XHR&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-340">line 340</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the same that the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function returns (called internally).</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".callForm"><span class="type-signature">&lt;static> </span>callForm<span class="signature">(URL [, data] [, headers] [, responseType] [, charset] [, callbackFunction] [, callbackFunctionOK] [, callbackFunctionError] [, allowedSuccessStatuses] [, XHR])</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Performs a standard <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a> request to send form data by POST (no files). Uses the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function internally with &quot;POST&quot; method, asynchronously and &quot;mimeType&quot; parameter not provided.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>URL</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;URL&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>data</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;data&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headers</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type"><a href="CB_Net.XHR.html#.HEADERS">CB_Net.XHR.HEADERS</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    { "Content-Type" : "application/x-www-form-urlencoded; charset=" + charset, "Cache-Control" : "no-cache", "Pragma" : "no-cache" }
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Object containing the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> names and their values that we want to send. If not provided, it will use the default one that will include the charset defined by the &quot;charset&quot; parameter. An empty object ({}) can be used if we do not want to send any <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> at all. Used for the &quot;headers&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>responseType</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType">responseType</a> parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>charset</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    'UTF-8'
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The charset for the &quot;Content-Type&quot; <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> that will be sent by default only when no &quot;headers&quot; parameter is provided.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunction&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionOK</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionOK&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionError</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionError&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>allowedSuccessStatuses</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    200
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;allowedSuccessStatuses&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>XHR</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;XHR&quot; parameter of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-292">line 292</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the same that the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function returns (called internally).</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".callProxy"><span class="type-signature">&lt;static> </span>callProxy<span class="signature">(URL [, method] [, data] [, headers] [, responseType] [, forceJSON] [, getHeaders] [, headersForceOneDimension] [, headersForceOneDimensionValues] [, transparentStatus] [, transparentHeaders] [, callbackFunction] [, callbackFunctionOK] [, callbackFunctionError] [, allowedSuccessStatuses] [, XHR])</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Performs an <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>) call through the proxy (made with <a href="https://en.wikipedia.org/wiki/PHP">PHP</a> language and using <a href="https://en.wikipedia.org/wiki/CURL">cURL</a>, so it will need a server which supports that) to avoid <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-domain request</a> limitations of <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a>. Uses the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function (with &quot;headers&quot; and &quot;charset&quot; parameters not provided) internally to call the proxy.<br>     <br /><br>     Note: Edit the &quot;CB_proxy.config.php&quot; file to configure the proxy. Apart from configuring it, adding some security measures is highly recommended.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>URL</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The URL that we want the proxy to call for us. It can also contain URL (GET) parameters.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>method</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    'POST'
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods">HTTP method</a> (GET, POST, PUT, DELETE, etc.) that we want the proxy to use for us when performing the call.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>data</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The data that we want to send through the proxy to the final server. If something which is not a string is given, it will assume it is a <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> object and will try to convert it into a string (using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a> function internally) before sending it.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headers</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type"><a href="CB_Net.XHR.html#.HEADERS">CB_Net.XHR.HEADERS</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Object (<a href="https://en.wikipedia.org/wiki/JSON">JSON</a> format) containing the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> names and their values that we want the proxy to send to the final server. Even if not provided, the proxy could end sending some <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> depending on the <a href="https://en.wikipedia.org/wiki/CURL">cURL</a> configuration used.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>responseType</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType">responseType</a> parameter of the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>forceJSON</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true, the response from the proxy will be a <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> object with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> property containing the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP status</a> of the reply, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response">response</a> property with the response content itself and the &quot;headers&quot; property (only when &quot;getHeaders&quot; parameters is set to true) with the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> of the reply, all belonging to the response from the final server.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>getHeaders</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true, the proxy will answer including the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> from the final server. The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> will be included in the final response string at the beginning (before the response content) if the &quot;forceJSON&quot; parameter is not set to true or in the &quot;headers&quot; property of the <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> object that belongs to the response otherwise.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headersForceOneDimension</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true, the proxy will consider that the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> of the response from the final server are not multidimensional which means that the final server would never reply the same <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> repeated multiple times (with different values, normally) in different chunks separated by double new lines (&quot;\r\n\r\n&quot;). Default value (false) is recommended. Needs &quot;getHeaders&quot; set to true.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headersForceOneDimensionValues</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true, the proxy will only consider one value per <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> from the response from the final server. Default value (false) is recommended. Needs &quot;getHeaders&quot; set to true.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>transparentStatus</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true, the proxy will reply us with the same status as the final server in its HTTP response.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>transparentHeaders</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true, the proxy will reply us with the same <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> as the final server in its HTTP response.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunction&quot; parameter of the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionOK</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionOK&quot; parameter of the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionError</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionError&quot; parameter of the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>allowedSuccessStatuses</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    200
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;allowedSuccessStatuses&quot; parameter of the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>XHR</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;XHR&quot; parameter of the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function when it is called internally.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-401">line 401</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+	<dt class="tag-todo method-doc-label method-doc-details-label">To Do:</dt>
+	<dd class="tag-todo">
+		<ul>
+			<li>Document PHP proxy more.</li>
+			</ul>
+	</dd>
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the same that the <a href="CB_Net.XHR.html#.callForm"><code>CB_Net.XHR.callForm</code></a> function returns (called internally).</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".callREST"><span class="type-signature">&lt;static> </span>callREST<span class="signature">( [serverURL] [, route] [, dataURL] [, method] [, data] [, headers] [, responseType] [, avoidProxy] [, forceJSON] [, getHeaders] [, headersForceOneDimension] [, headersForceOneDimensionValues] [, transparentStatus] [, transparentHeaders] [, callbackFunctionOK] [, callbackFunctionError] [, allowedSuccessStatuses] [, XHR])</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Performs a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> call to a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> server. Uses the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function (without &quot;callbackFunction&quot; parameter provided) internally if we do not want to avoid the proxy or uses the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (asynchronously, with &quot;mimeType&quot; and &quot;callbackFunction&quot; parameters not provided) otherwise.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>serverURL</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    <a href="CB_Net.REST.html#.SERVER_URL_DEFAULT"><code>CB_Net.REST.SERVER_URL_DEFAULT</code></a>
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The URL of the <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> server that we want to call. It should not contain URL (GET) parameters. It can also contain the <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> path (route), although it is recommended to set it in the &quot;route&quot; parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>route</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> path (route) we want to request. It can also contain URL (GET) parameters, although it is recommended to set them in the &quot;dataURL&quot; parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>dataURL</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The URL (GET) data that we want to send.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>method</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    'POST'
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;method&quot; parameter for the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or for the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>data</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;data&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headers</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type"><a href="CB_Net.XHR.html#.HEADERS">CB_Net.XHR.HEADERS</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    undefined|{ "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8", "Cache-Control" : "no-cache", "Pragma" : "no-cache" }
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;headers&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally. If not provided and the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function is used (if no proxy is allowed), the default value will be: { &quot;Content-Type&quot; : &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;, &quot;Cache-Control&quot; : &quot;no-cache&quot;, &quot;Pragma&quot; : &quot;no-cache&quot; }</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>responseType</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType">responseType</a> parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>avoidProxy</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true, it will call the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> internally. Otherwise, it will use the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>forceJSON</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;forceJSON&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function (if the proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>getHeaders</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;getHeaders&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function (if the proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headersForceOneDimension</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;headersForceOneDimension&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function (if the proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>headersForceOneDimensionValues</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;headersForceOneDimensionValues&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function (if the proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>transparentStatus</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;transparentStatus&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function (if the proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>transparentHeaders</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;transparentHeaders&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function (if the proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionOK</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionOK&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackFunctionError</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;callbackFunctionError&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>allowedSuccessStatuses</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">array</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    200
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;allowedSuccessStatuses&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>XHR</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Used for the &quot;XHR&quot; parameter of the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function or of the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function (if no proxy is allowed) when it is called internally.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-467">line 467</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>When using the proxy is allowed, returns the same that the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function returns (called internally). Otherwise, it returns the same that the <a href="CB_Net.XHR.html#.call"><code>CB_Net.XHR.call</code></a> function returns (called internally).</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".get"><span class="type-signature">&lt;static> </span>get<span class="signature">()</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns a new <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>) object, if possible.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-59">line 59</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns a new <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>) object if it has been possible to create it or null otherwise.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getResponseContent"><span class="type-signature">&lt;static> </span>getResponseContent<span class="signature">(response [, sanitize])</span><span class="type-signature"> &rarr; {string|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns the response content from an <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> (from its <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> property) or from the <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> response generated by the &quot;getSslPage&quot; function used by the <a href="https://en.wikipedia.org/wiki/PHP">PHP</a> proxy (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response">response</a> property). Useful to parse the response from the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> (or <a href="CB_Net.XHR.html#.callREST"><code>CB_Net.XHR.callREST</code></a> and related) function when it has been called with the &quot;forceJSON&quot; parameter set to true.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>response</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> which contains the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> property or the value of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> property (string) itself which should contain the <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> response generated by the &quot;getSslPage&quot; function used by the <a href="https://en.wikipedia.org/wiki/PHP">PHP</a> proxy. If a string is provided, tries to parse it as a <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> object. The <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> property (or the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response">response</a> property as a fallback) will be tried to be returned from it.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>sanitize</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true and neither the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> nor the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response">response</a> properties are found, it will return an empty string (&quot;&quot;) instead of returning null.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-579">line 579</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the content of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> (or <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/response">response</a>) property if possible (it should be a string). If it is not possible, it will return null if the parameter &quot;sanitize&quot; is set to false or an empty string (&quot;&quot;) otherwise.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getResponseHeaders"><span class="type-signature">&lt;static> </span>getResponseHeaders<span class="signature">(response [, sanitize])</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> (it should be an object) from the <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> response generated by the &quot;getSslPage&quot; function used by the <a href="https://en.wikipedia.org/wiki/PHP">PHP</a> proxy (&quot;headers&quot; property). Useful to parse the response from the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> (or <a href="CB_Net.XHR.html#.callREST"><code>CB_Net.XHR.callREST</code></a> and related) function when it has been called with the &quot;forceJSON&quot; parameter set to true.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>response</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> which contains the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> property or the value of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> property (string) itself which should contain the <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> response generated by the &quot;getSslPage&quot; function used by the <a href="https://en.wikipedia.org/wiki/PHP">PHP</a> proxy. If a string is provided, tries to parse it as a <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> object. The &quot;headers&quot; property will be tried to be returned from it.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>sanitize</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true and the &quot;headers&quot; property is not found, it will return an empty object ({}) instead of returning null.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-544">line 544</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+	<dt class="tag-todo method-doc-label method-doc-details-label">To Do:</dt>
+	<dd class="tag-todo">
+		<ul>
+			<li>Consider adding the parameter "headerNameFirst".</li>
+			</ul>
+	</dd>
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the content of the &quot;headers&quot; property if possible (it should be a <a href="CB_Net.XHR.html#.HEADERS"><code>CB_Net.XHR.HEADERS</code></a> object). If it is not possible, it will return null if the parameter &quot;sanitize&quot; is set to false or an empty object ({}) otherwise.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".getStatusCode"><span class="type-signature">&lt;static> </span>getStatusCode<span class="signature">(response [, sanitize] [, statusDefault])</span><span class="type-signature"> &rarr; {integer|*}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP status</a> code from an <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> property) or from the info array generated by the <a href="https://en.wikipedia.org/wiki/PHP">PHP</a>'s <a href="http://php.net/manual/function.curl-getinfo.php">curl_getinfo</a> function (&quot;http_code&quot; index) or from the <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> response generated by the &quot;getSslPage&quot; function used by the <a href="https://en.wikipedia.org/wiki/PHP">PHP</a> proxy (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> property). Useful to parse the response from the <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> (or <a href="CB_Net.XHR.html#.callREST"><code>CB_Net.XHR.callREST</code></a> and related) function when it has been called with the &quot;forceJSON&quot; parameter set to true.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>response</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR object</a> which contains the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> property or the value of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText">responseText</a> property (string) itself which should contain the <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> response generated by the &quot;getSslPage&quot; function used by the <a href="https://en.wikipedia.org/wiki/PHP">PHP</a> proxy. If a string is provided, tries to parse it as a <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> object. The <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> property will be tried to be returned from it (or the &quot;http_code&quot; property as a fallback).</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>sanitize</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>If it is set to true and neither the &quot;status&quot; nor the &quot;http_code&quot; property are found (or is not a number), it will return the value of &quot;statusDefault&quot; instead of returning null.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>statusDefault</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    -1
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Default value to return when the status cannot be found (or is not a number). Only used when the &quot;sanitize&quot; parameter is set to true.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-561">line 561</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns the content of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/status">status</a> (or &quot;http_code&quot;) property if possible (it should be an integer). If it is not possible, it will return null if the parameter &quot;sanitize&quot; is set to false or the value of &quot;statusDefault&quot; otherwise.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">integer</span>
+|
+
+<span class="param-type">*</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".supported"><span class="type-signature">&lt;static> </span>supported<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns whether <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a> (<a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a>) is available or not.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-39">line 39</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns true if <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest">XHR</a> (<a href="https://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a>) objects can be used.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        <dl>
+                
+<hr>
+<dt class="name" id=".HEADERS">
+    <h4 id=".HEADERS">HEADERS</h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Object containing the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a> and their values.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>HTTPHeaderName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Each property name is an <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP header</a> and its value is the desired one for this header.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_net_XHR_CB_Net_XHR.js.html">CrossBase/net/XHR/CB_Net_XHR.js</a>,
+				 <a href="CrossBase_net_XHR_CB_Net_XHR.js.html#sunlight-1-line-91">line 91</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">{ &quot;Content-Type&quot; : &quot;text/plain; charset=x-user-defined&quot;, &quot;Cache-Control&quot; : &quot;no-cache&quot;, &quot;Pragma&quot; : &quot;no-cache&quot; }</pre>
+
+
+    
+</dd>
+
+            </dl>
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md" style="display:none; visibility:hidden;"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+
+<footer>
+
+
+	<span class="copyright">
+	© CrossBrowdy by Joan Alba Maldonado<br />DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Wed Jun 26th 2019
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+
+</body>
+</html>

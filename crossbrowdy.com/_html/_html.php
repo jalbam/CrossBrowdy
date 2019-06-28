@@ -79,7 +79,10 @@
 		<!--
 			<?php
 				require_once "_css.php";
-				if ($category === "basic_tutorial" && file_exists("_html/_doc/basic_tutorial/_lib/prism.css")) { readfile("_html/_doc/basic_tutorial/_lib/prism.css"); }
+				if ($category === "basic_tutorial" || $category === "examples")
+				{
+					if (file_exists("_html/_doc/_lib/prism.css")) { readfile("_html/_doc/_lib/prism.css"); }
+				}
 			?>
 		-->
 		</style>
@@ -148,7 +151,12 @@
 				if (keyCode === 27) { toggleMenu() }
 			}
 			
-			<?php if ($category === "basic_tutorial" && file_exists("_html/_doc/basic_tutorial/_lib/prism.js")) { readfile("_html/_doc/basic_tutorial/_lib/prism.js"); } ?>
+			<?php
+				if ($category === "basic_tutorial" || $category === "examples")
+				{
+					if (file_exists("_html/_doc/_lib/prism.js")) { readfile("_html/_doc/_lib/prism.js"); }
+				}
+			?>
 		// -->
 		</script>
 	</head>

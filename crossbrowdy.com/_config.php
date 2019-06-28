@@ -1,6 +1,10 @@
 <?php
 	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
 
+	if (!isset($HTTP_GET_VARS) || isset($_GET)) { $HTTP_GET_VARS = &$_GET; }
+	if (!isset($HTTP_SESSION_VARS) || isset($_SESSION)) { $HTTP_SESSION_VARS = &$_SESSION; }
+	if (!isset($HTTP_SERVER_VARS) || isset($_SERVER)) { $HTTP_SERVER_VARS = &$_SERVER; }
+	
 	$PHPExtension = ""; // ".php"
 	
 	//Language:
@@ -24,6 +28,7 @@
 			"api" => $projectName . " - API",
 			"guides" => $projectName . " - Guides &amp; Tutorials",
 				"basic_tutorial" => $projectName . " - Basic tutorial",
+				"examples" => $projectName . " - Examples",
 				//"basic_tutorial_general_getting_started" => $projectName . " - Basic tutorial - General - Getting started",
 			"community" => $projectName . " - Community &amp; Get Involved",
 			"download" => "Download " . $projectName
@@ -32,8 +37,16 @@
 	$projectTitleHeader = "";
 	if (isset($subcategory) && $subcategory !== "")
 	{
-		$projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . ": " . $basicTutorial[$subcategory]["subcategory"][$language];
-		if (isset($topic) && $topic !== "") { $projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . " - " . $basicTutorial[$subcategory]["subcategory"][$language] . ": " . $basicTutorial[$subcategory]["topics"][$topic][$language]; }
+		if (isset($basicTutorial[$subcategory])) { $categoryMainArray = $basicTutorial; }
+		else if (isset($examples[$subcategory])) { $categoryMainArray = $examples; }
+		if (isset($categoryMainArray))
+		{
+			$projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . ": " . $categoryMainArray[$subcategory]["subcategory"][$language];
+			if (isset($topic) && $topic !== "" && isset($categoryMainArray[$subcategory]["topics"][$topic]))
+			{
+				$projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . " - " . $categoryMainArray[$subcategory]["subcategory"][$language] . ": " . $categoryMainArray[$subcategory]["topics"][$topic][$language];
+			}
+		}
 	}
 
 	$projectDescriptionShort = Array
@@ -125,7 +138,7 @@
 			"Audio" => Array("music", "FX", "filters", "synth", "music composition", "processing", "files", "sprites", "cache", "pool", "speakers"),
 			"Image" => Array("canvas", "viewport", "screens"),
 			"Others" => Array("modules", "JSON", "DOM elements", "arrays", "events", "data storage", "data compression", "base conversion", "template rendering", "lazy load", "collisions"),
-			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "MIDI", "VR", "leap motion", "GraphQL", "databases", "many more")
+			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "video", "MIDI", "VR", "leap motion", "GraphQL", "databases", "many more")
 		)
 	);
 	
@@ -146,6 +159,7 @@
 			"api" => "API",
 			"guides" => "Guides &amp; Tutorials",
 				"basic_tutorial" => "Basic tutorial",
+				"examples" => "Examples",
 			"community" => "Community &amp; Get Involved",
 			"download" => "Download"
 		)
@@ -161,7 +175,7 @@
 		)
 	);
 	
-	$menuOptionsHidden = Array("basic_tutorial");
+	$menuOptionsHidden = Array("basic_tutorial", "examples");
 	
 	
 	//Others:

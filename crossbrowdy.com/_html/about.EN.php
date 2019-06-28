@@ -64,10 +64,10 @@
 		The software developed with CrossBrowdy can be ported to Microsoft Windows (from Windows XP to Windows 10 or even newer), Linux (including x86 and also Raspberry Pi or compatible), Apple macOS (formerly Mac OS X), etc. and run as a desktop app (using NW.js, Atom, etc.).
 	</p>
 	<p>
-		This software can also be ported to iOS (iPhone, iPad), Android (including phones, tablets, Android TV, Nokia X, Amazon Fire OS...) or others and run as a mobile app (using Apache Cordova, PhoneGap, Ionic, etc.).
+		This software can also be ported to iOS / iPadOS (iPhone, iPad), Android (including phones, tablets, Android TV, Nokia X, Amazon Fire OS...) or others and run as a mobile app (using Apache Cordova, PhoneGap, Ionic, etc.).
 	</p>
 	<p>
-		Apart from that, CrossBrowdy software will also run on many video game consoles, TV sets and so on. This will also include other devices, platforms and technologies, some legacy ones, such as PWA (Progressive Web App), UWP (Universal Windows Platform), Facebook app, BlackBerry 10, BlackBerry Tablet OS (BlackBerry PlayBook), Nokia Series 40 (Nokia S40) / WRT Widget, W3C Packaged Web App (W3C Widget) / Nokia Asha widget, WebOS, Windows Phone (from 7.1 to 8.1), Chrome OS / Chromium OS (Google Chrome App), Firefox OS (Mozilla Firefox App) / KaiOS, Sailfish OS...
+		Apart from that, CrossBrowdy software will also run on many video game consoles, TV sets and so on. This will also include other devices, platforms and technologies, some legacy ones, such as PWA (Progressive Web App), UWP (Universal Windows Platform), Apple TV (tvOS), Facebook app, BlackBerry 10, BlackBerry Tablet OS (BlackBerry PlayBook), Nokia Series 40 (Nokia S40) / WRT Widget, W3C Packaged Web App (W3C Widget) / Nokia Asha widget, WebOS, Windows Phone (from 7.1 to 8.1), Chrome OS / Chromium OS (Google Chrome App), Firefox OS (Mozilla Firefox App) / KaiOS, Sailfish OS...
 	</p>
 	<p>
 		Finally, CrossBrowdy can also be used to develop web browser extensions although it is important to pay attention to possible safety restrictions that some web browsers may have. To comply with them, some code modifications may be needed.

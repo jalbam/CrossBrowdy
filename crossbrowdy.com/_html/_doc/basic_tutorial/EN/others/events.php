@@ -56,7 +56,7 @@
 		returnOnNothingExecuted //Optional. Default: undefined. Defines the value returned when no handler is executed.
 	);
 	
-	//Returns the given event object normalized, attaching to it some events and properties if they were not present (as preventDefault, stopPropagation, target, etc.):
+	//Returns the given event object normalized, attaching to it some events and properties if they were not present (as 'preventDefault', 'stopPropagation', 'target', etc.):
 	var e = CB_Events.normalize(e); //The new attached methods and properties may include polyfills, etc.
 	
 	//Gets the type of a given event object (returns an empty string if it was not possible to determine):
