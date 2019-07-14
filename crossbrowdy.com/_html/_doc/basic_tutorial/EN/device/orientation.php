@@ -25,7 +25,7 @@
 	To set an event handler called each time that the orientation changes (normally, detected by a gyroscope):
 </p>
 <pre><code class="language-javascript">
-	//Checks when the orientation changes:
+	//Checks when the orientation changes (use "null" as the first parameter to remove them):
 	CB_Device.Orientation.onChange
 	(
 		//Orientation is obtained successfully:
@@ -34,9 +34,9 @@
 			CB_console
 			(
 				"Orientation obtained successfully:\n" +
-				"Alpha: " + data.alpha + "\n"
-				"Beta: " + data.beta + "\n"
-				"Gamma: " + data.gamma + "\n"
+				"Alpha: " + data.alpha + "\n" +
+				"Beta: " + data.beta + "\n" +
+				"Gamma: " + data.gamma + "\n" +
 				"Absolute: " + (data.absolute ? "yes" : "no")
 			);
 		}
@@ -50,7 +50,7 @@
 	Finally, some devices will also allow you to detect whether the compass / magnetometer (not gyroscope) needs calibration:
 </p>
 <pre><code class="language-javascript">
-	//Checks whether the compass / magnetometer needs calibration:
+	//Checks whether the compass / magnetometer needs calibration (use "null" as the first parameter to remove them):
 	if (CB_Device.Orientation.isCompassNeedsCalibrationSupported())
 	{
 		CB_Device.Orientation.onCompassNeedsCalibration(function() { CB_console("Compass needs calibration!"); });

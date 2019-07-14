@@ -25,7 +25,7 @@
 	To set an event handler to manage physical movements and their speed (normally, detected by an accelerometer):
 </p>
 <pre><code class="language-javascript">
-	//Checks physical movements and their speed:
+	//Checks physical movements and their speed (use "null" as the first parameter to remove them):
 	CB_Device.Motion.onChange
 	(
 		//Motion is obtained successfully:
@@ -34,15 +34,15 @@
 			CB_console
 			(
 				"Motion obtained successfully:\n" +
-				"Acceleration in x: "  + data.acceleration.x + "\n"
-				"Acceleration in y: "  + data.acceleration.y + "\n"
-				"Acceleration in z: "  + data.acceleration.z + "\n"
-				"Acceleration in x (with gravity): "  + data.accelerationIncludingGravity.x + "\n"
-				"Acceleration in y (with gravity): "  + data.accelerationIncludingGravity.y + "\n"
-				"Acceleration in z (with gravity): "  + data.accelerationIncludingGravity.z + "\n"
-				"Interval: "  + data.interval + "\n"
-				"Rotation Rate Alpha: "  + data.rotationRate.alpha + "\n"
-				"Rotation Rate Beta: "  + data.rotationRate.beta + "\n"
+				"Acceleration in x: "  + data.acceleration.x + "\n" +
+				"Acceleration in y: "  + data.acceleration.y + "\n" +
+				"Acceleration in z: "  + data.acceleration.z + "\n" +
+				"Acceleration in x (with gravity): "  + data.accelerationIncludingGravity.x + "\n" +
+				"Acceleration in y (with gravity): "  + data.accelerationIncludingGravity.y + "\n" +
+				"Acceleration in z (with gravity): "  + data.accelerationIncludingGravity.z + "\n" +
+				"Interval: "  + data.interval + "\n" +
+				"Rotation Rate Alpha: "  + data.rotationRate.alpha + "\n" +
+				"Rotation Rate Beta: "  + data.rotationRate.beta + "\n" +
 				"Rotation Rate Gamma: "  + data.rotationRate.gamma
 			);
 		}

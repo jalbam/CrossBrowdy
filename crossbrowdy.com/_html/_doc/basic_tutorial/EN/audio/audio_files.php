@@ -255,7 +255,7 @@
 		function(error) { CB_console("Audio could not be played (resumed)! Error: " + error); } //onLoadError. Optional.
 	);
 
-	//Sets a function to call when the audio is stopped:
+	//Sets a function to call when the audio is stopped (use "null" as the first parameter to remove them):
 	audioFile.onStop(function() { CB_console("Audio stopped! ('onStop' event called)"); });
 	
 	//Stops the audio (similar to pausing it, but without keeping its current time):

@@ -5,7 +5,7 @@
 </p>
 <pre><code class="language-javascript">
 	//Checks whether XHR (AJAX) is supported:
-	CB_Net.XHR.supported()
+	if (CB_Net.XHR.supported())
 	{
 		CB_console("XHR (AJAX) is supported.");
 		
@@ -13,14 +13,14 @@
 		var successFunction = function(XHR, callbackFunctionError)
 		{
 			CB_console("AJAX call succeeded! Status code is: " + CB_Net.XHR.getStatusCode(XHR));
-			CB_console("Content:" + CB_Net.XHR.getResponseContent(XHR));
+			CB_console("Content: " + CB_Net.XHR.getResponseContent(XHR));
 		};
 		
 		//Defines the function called when the request does not succeed (the status is not in the "allowedSuccessStatuses" provided, which is 200 by default):
 		var errorFunction = function(XHR, callbackFunctionOK)
 		{
 			CB_console("AJAX call failed! Status code is: " + CB_Net.XHR.getStatusCode(XHR));
-			CB_console("Content:" + CB_Net.XHR.getResponseContent(XHR));
+			CB_console("Content: " + CB_Net.XHR.getResponseContent(XHR));
 		};
 		
 		//Performs an AJAX call:

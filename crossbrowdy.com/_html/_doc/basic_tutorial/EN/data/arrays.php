@@ -29,6 +29,9 @@
 	CB_Arrays.forEach(fruitsArray, function(element, index, array) { CB_console(element + " in index #" + index); CB_console(array); });
 	CB_Arrays.forEach(fruitsArray, function(element, index, array) { CB_console(element + " in index #" + index); CB_console(array); CB_console(this); }, window); //Overriding "this" to use 'window'.
 
+	//Creates an array identical from an original one:
+	var arrayCopy = CB_Arrays.copy([1, 2, 3]); //Returns another array with the same elements (copies it).
+
 	//Trims undesired strings from the strings of an array, case sensitive (using 'slice' method to keep original array without modifying):
 	//NOTE: functions below are equivalent to 'CB_trim', 'CB_ltrim' and 'CB_rtrim'.
 	var fruitsArray_2 = [ "  watermelon    ", "    lemon    ", "strawberry", "durian", "mango" ];
@@ -55,6 +58,15 @@
 	var numbersArray_purged_2 = CB_Arrays.removeDuplicated(numbersArray.slice(0), function(element, index, array) { return (element >= 5); }); //Removes duplicated values and also values greater or equal to 5 (by the defined purging function). Returns: [ 3, 1, 2 ].
 	var numbersArray_purged_3 = CB_Arrays.removeDuplicated(numbersArray.slice(0), function(element, index, array) { return (element >= 5); }, true); //Removes values greater or equal to 5 (by the defined purging function) but keeps duplicated values. Returns: [ 3, 1, 2 ]. [ 3, 2, 1, 3, 1, 1, 1, 2 ].
 	
+	//Deletes an element from an array which is placed in the desired position (elements which were after it will be moved a position to the left):
+	var arrayElementRemoved = CB_Arrays.removeElementByPosition([1, 2, 3, 4, 5, "hello"], 1); //Returns: [ 1, 3, 4, 5, "hello" ]. The same as 'CB_Arrays.removeElementByIndex'.
+
+	//Deletes a given element from an array. All occurrences will be deleted (elements which were after a removed element will be moved a position to the left).
+	var arrayElementRemoved_2 = CB_Arrays.removeElement([1, 2, 3, 4, 5, "hello", 6], "hello"); //Returns: [ 1, 2, 3, 4, 5, 6 ]. Note that it is type sensitive.
+
+	//Deletes the given elements from an array. All occurrences will be deleted (elements which were after a removed element will be moved a position to the left).
+	var arrayElementRemoved_3 = CB_Arrays.removeElements([1, 2, 3, 4, 5, "hello", 6], ["hello", 2, "3"]); //Returns: [ 1, 3, 4, 5, 6 ]. Note that it is type sensitive.
+
 	//Combines two arrays (equivalent to 'CB_combineArraysOrObjects' and 'CB_combineJSON'):
 	var arraysCombined = CB_Arrays.combine([1, 2, 3], [3, 4, 5, 6]); //Returns the array: [ 1, 2, 3, 3, 4, 5, 6 ].
 	var arraysCombined_2 = CB_Arrays.combine([3, 4, 5, 6], [1, 2, 3]); //Returns the array: [ 3, 4, 5, 6, 1, 2, 3 ].

@@ -9,7 +9,7 @@
 	var myBoolean = CB_Touch.delay(250); //First time, it will return true.
 	var myBoolean_2 = CB_Touch.delay(); //Next calls, returns false if the defined time (250 milliseconds) did not expire yet (and first parameter would be ignored) or true otherwise (and will act as the first time again).
 	
-	//Managing touch events:
+	//Managing touch events (use "null" as the first parameter to remove them):
 	//Note: the pressure will be tried to be calculated automatically and added to the "force" property of the touch event object received by all the touch events.
 	CB_Touch.onCancel(function(e) { CB_console("The 'onCancel' event was fired!"); });
 	CB_Touch.onEnd(function(e) { CB_console("The 'onEnd' event was fired!"); });

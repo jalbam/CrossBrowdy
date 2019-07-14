@@ -51,7 +51,7 @@
 		websocket, //If not provided, it will use the last one created (stored in 'CB_Net.Sockets.SockJS.websocketLast').
 		
 		//Defines a handler for the "onError" event (optional):
-		function(evt) { CB_console("Failed to close the connection!"); CB_console(evt); } //Prints the event object.
+		function(evt) { CB_console("Failed to send the message!"); CB_console(evt); } //Prints the event object.
 	);
 	
 	//Tries to close the connection:

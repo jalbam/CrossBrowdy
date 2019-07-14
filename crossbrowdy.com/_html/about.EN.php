@@ -113,4 +113,10 @@
 		For present and future platforms, no restrictions should be present. If there were any, it should be fixed in future CrossBrowdy releases.
 	</p>
 	
+	
+	<h2 class="category_subtitle">Can the performance be improved?</h2>
+	<p>
+		One of the main objectives for next versions is to optimize CrossBrowdy, improving its performance and reducing the loading time (perhaps packing it in a single file).
+	</p>
+	
 </div>

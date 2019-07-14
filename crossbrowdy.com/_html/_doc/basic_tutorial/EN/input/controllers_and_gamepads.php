@@ -11,9 +11,9 @@
 	//Using the HTML5 Gamepad API (it will emulate it internally automatically, if needed):
 	var controllersStandard = CB_Controllers.getGamePads(true); //Object whose indexes are the identifier of each gamepad and the value a GamePad object (respecting HTML5 GamePad API).
 	var controllersAll = CB_Controllers.getGamePads(); //Object with two properties ("standard", containing gamepads that use the HTML5 GamePad API, and "proprietary" the gamepad objects for each proprietary system).
-	var controllersStandard_2 = controllersAll.standard; //Contains the same as controllersStandard.
-	var controllersWii = controllersAll.proprietary.WII; //The same as calling CB_Controllers_Proprietary["WII"].getGamePads().
-	var controllersWiiU = controllersAll.proprietary.WII_U; //The same as calling CB_Controllers_Proprietary["WII_U"].getGamePads().
+	var controllersStandard_2 = controllersAll.standard.gamepads; //Contains the same as controllersStandard.
+	var controllersWii = controllersAll.WII; //The same as calling CB_Controllers_Proprietary["WII"].getGamePads().
+	var controllersWiiU = controllersAll.WII_U; //The same as calling CB_Controllers_Proprietary["WII_U"].getGamePads().
 	
 	//Using some proprietary controllers API:
 	var controllersWii_2 = CB_Controllers_Proprietary.WII.getGamePads(); //Same as controllersWii.
@@ -48,7 +48,7 @@
 
 Finally, some events can be managed:
 <pre><code class="language-javascript">
-	//Managing gamepad events:
+	//Managing gamepad events (use "null" as the first parameter to remove them):
 	CB_Controllers.onConnect(function(gamepad) { CB_console("Gamepad #" + gamepad.index + " (" + gamepad.id + ") connected!"); });
 	CB_Controllers.onDisconnect(function(gamepad) { CB_console("Gamepad #" + gamepad.index + " (" + gamepad.id + ") disconnected!"); });
 </code></pre>

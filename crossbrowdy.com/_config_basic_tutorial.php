@@ -221,6 +221,14 @@
 				"canvas" => Array
 				(
 					"EN" => "Canvas and emulation"
+				),
+				"graphic_sprites" => Array
+				(
+					"EN" => "Graphic sprites"
+				),
+				"graphic_sprites_scene" => Array
+				(
+					"EN" => "Graphic sprites scene"
 				)
 			)
 		),

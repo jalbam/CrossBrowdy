@@ -5,7 +5,7 @@
 	Here is an example of REST management:
 </p>
 <pre><code class="language-javascript">
-	//Defines a REST action:
+	//Defines a REST action called "my_action":
 	CB_Net.REST.actions["my_action"] = 
 	{
 		//URL of the REST server:
@@ -63,13 +63,14 @@
 		//Tries to cancel the REST action abortion (if it is not too late):
 		CB_Net.REST.actionAbortCancel(XHR);
 	}
-	else (CB_Net.REST.actionIsAborted(XHR)) { CB_console("Action was not marked as aborted!"); }
+	else { CB_console("Action was not marked as aborted!"); }
 </code></pre>
 
 <p>
 	REST actions are highly configurable. This is an example:
 </p>
 <pre><code class="language-javascript">
+	//Defines a REST action called "my_action_2":
 	CB_Net.REST.actions["my_action_2"] = 
 	{
 		//URL of the REST server:
@@ -123,7 +124,7 @@
 		"avoidProxy" : false, //If not provided, it will use 'CB_Net.REST.avoidProxy_DEFAULT'.
 	
 		//Defines whether to force JSON in the response from the proxy or not:
-		"forceJSON" : false, //If not provided, it will use 'CB_Net.REST.forceJSON_DEFAULT' (unless it is set to null).
+		"forceJSON" : true, //If not provided, it will use 'CB_Net.REST.forceJSON_DEFAULT' (unless it is set to null).
 		
 		//Defines whether to get headers from the proxy in the response or not:
 		"getHeaders" : false, //If not provided, it will use 'CB_Net.REST.getHeaders_DEFAULT' (unless it is set to null).

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Input: Keyboard, TV remotes, gamepads and other controllers - Example</title>
+		<!-- Loads the needed CSS files: -->
+		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads CrossBrowdy.js (main file): -->
+		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+		<!-- Loads the other needed script files: -->
+		<script src="main.js" type="text/javascript" language="javascript"></script>
+	</head>
+	<body>
+		<h3>Keyboard and compatible (TV remotes and some gamepads and controllers which fire keycodes):</h3>
+		Keys down: <span id="keys_down"></span><br />
+		'UP' down: <span id="key_up"></span><br />
+		'DOWN' down: <span id="key_down"></span><br />
+		'LEFT' down: <span id="key_left"></span><br />
+		'RIGHT' down: <span id="key_right"></span><br />
+		'LEFT' or 'RIGHT' down (any): <span id="left_or_right"></span><br />
+		'LEFT' and 'RIGHT' down (simultaneously): <span id="left_and_right"></span><br />
+		Last key down: <span id="last_key_down"></span><br />
+		Last key up: <span id="last_key_up"></span><br />
+		Last keys pressed (expires automatically after a desired time without pressing anything): <span id="last_keys_pressed"></span><br />
+		Last typed string (expires automatically after a desired time without pressing anything): <span id="last_typed_string"></span><br />
+		<h3>Gamepads and other controllers (which use HTML5 Gamepad API or proprietary API):</h3>
+		Standard gamepads (compatible with HTML5 Gamepad API): <span id="gamepads_standard"></span><br />
+		Proprietary gamepads (compatible with proprietary API): <span id="gamepads_proprietary"></span><br />
+		Last gamepad connected: <span id="last_gamepad_connected"></span><br />
+		Last gamepad disconnected: <span id="last_gamepad_disconnected"></span><br />
+		"1" or "2" buttons down (any) in any gamepad: <span id="one_or_two_any"></span><br />
+		"1" and "2" buttons down (simultaneously) in any gamepad: <span id="one_and_two_any"></span><br />
+		"1" or "2" buttons down (any) in gamepad #1: <span id="one_or_two_gamepad0"></span><br />
+		"1" and "2" buttons down (simultaneously) in gamepad #1: <span id="one_and_two_gamepad0"></span><br />
+		Buttons available in any gamepad: <span id="buttons_all_any"></span><br />
+		Buttons available in gamepad #1: <span id="buttons_all_gamepad0"></span><br />
+		Buttons down:<br />
+		<span id="buttons_down"></span><br />
+		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
+		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
+			<span style="font-weight:bold;">Console:</span><br />
+		</div>
+		<div id="crossbrowdy_info"><a href="../../../../../../guides#examples" target="_blank">CrossBrowdy.com</a> example</div>
+	</body>
+</html>

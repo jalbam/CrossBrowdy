@@ -22,6 +22,8 @@
 ?>
 
 <h1 class="category_title">Guides &amp; Tutorials</h1>
+
+<a name="basic_tutorial"></a>
 <div class="category_text">
 	<h2 class="category_subtitle">Basic tutorial</h2>
 	<ol>
@@ -29,7 +31,7 @@
 	</ol>
 </div>
 
-
+<a name="examples"></a>
 <div class="category_text">
 	<h1 class="category_subtitle">Examples</h1>
 	<ol>
@@ -40,5 +42,7 @@
 
 <div class="category_text">
 	<h1 class="category_subtitle">More</h1>
-	Coming soon
+	<p>
+		You can check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> in the case you need more information.
+	</p>
 </div>

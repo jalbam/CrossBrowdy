@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Networking: REST - Example</title>
+		<!-- Loads the needed CSS files: -->
+		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads CrossBrowdy.js (main file): -->
+		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+		<!-- Loads the other needed script files: -->
+		<script src="main.js" type="text/javascript" language="javascript"></script>
+	</head>
+	<body>
+		Content got for 'my_action':
+		<br />
+		<span id="my_action_response"></span>
+		<br />
+		<button onClick="call('my_action');">Perform 'my_action'</button><br />
+		<br />
+		<button onClick="abort('my_action');">Abort 'my_action'</button><br />
+		<br />
+		<br />
+		Content got for 'my_action_2':
+		<br />
+		<span id="my_action_2_response"></span>
+		<br />
+		<button onClick="call('my_action_2');">Perform 'my_action_2'</button><br />
+		<br />
+		<button onClick="abort('my_action_2');">Abort 'my_action_2'</button><br />
+		<br />
+		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
+		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
+			<span style="font-weight:bold;">Console:</span><br />
+		</div>
+		<div id="crossbrowdy_info"><a href="../../../../../../guides#examples" target="_blank">CrossBrowdy.com</a> example</div>
+	</body>
+</html>

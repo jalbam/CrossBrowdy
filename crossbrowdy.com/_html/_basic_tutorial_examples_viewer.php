@@ -46,6 +46,7 @@
 		echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["topics"][$topic][$language] . '</h2>';
 	}
 
+
 	//Displays the content:
 	echo '<div class="' . CATEGORY_MAIN_NAME . '_text">';
 		if (!$subcategoryFound)
@@ -65,7 +66,7 @@
 		
 		//Displays the option to go back:
 		$optionBack = "guides";
-		$menuOptionLink = $optionBack . $PHPExtension;
+		$menuOptionLink = $optionBack . $PHPExtension . "#" . $category;
 		if (isset($menuOptionsLink[$language]) && isset($menuOptionsLink[$language][$optionBack])) { $menuOptionLink = $menuOptionsLink[$language][$optionBack]; }
 		echo '<p style="text-align:center; padding-top:20px;"><a href="' . $menuOptionLink . '">Go back to ' . $menuOptions[$language][$optionBack] . '</a></p>';
 	echo '</div>';

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Device: Battery - Example</title>
+		<!-- Loads the needed CSS files: -->
+		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads CrossBrowdy.js (main file): -->
+		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+		<!-- Loads the other needed script files: -->
+		<script src="main.js" type="text/javascript" language="javascript"></script>
+	</head>
+	<body>
+		Battery Status API support: <span id="battery_api"></span><br />
+		Battery Status API object: <span id="battery_api_object">No data</span><br />
+		Level: <span id="battery_level">Unknown</span><br />
+		Charging: <span id="battery_charging">Unknown</span><br />
+		Charging time: <span id="battery_charging_time">Unknown</span><br />
+		Discharging time: <span id="battery_discharging_time">Unknown</span><br />
+		Penultimate event: <span id="battery_penultimate_event">No data</span><br />
+		Last event: <span id="battery_last_event">No data</span><br />
+		<br />
+		Cordova's Battery Status plugin - Penultimate event: <span id="cordova_battery_penultimate_event">No data</span><br />
+		Cordova's Battery Status plugin - Last event: <span id="cordova_battery_last_event">No data</span><br />
+		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
+		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
+			<span style="font-weight:bold;">Console:</span><br />
+		</div>
+		<div id="crossbrowdy_info"><a href="../../../../../../guides#examples" target="_blank">CrossBrowdy.com</a> example</div>
+	</body>
+</html>

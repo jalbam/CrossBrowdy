@@ -37,14 +37,14 @@
 	$projectTitleHeader = "";
 	if (isset($subcategory) && $subcategory !== "")
 	{
-		if (isset($basicTutorial[$subcategory])) { $categoryMainArray = $basicTutorial; }
-		else if (isset($examples[$subcategory])) { $categoryMainArray = $examples; }
-		if (isset($categoryMainArray))
+		if (isset($basicTutorial[$subcategory])) { $categoryMainArray = $basicTutorial; $category = "basic_tutorial"; }
+		else if (isset($examples[$subcategory])) { $categoryMainArray = $examples; $category = "examples"; }
+		if (isset($categoryMainArray) && isset($category))
 		{
-			$projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . ": " . $categoryMainArray[$subcategory]["subcategory"][$language];
+			$projectTitleHeader = $projectTitle[$language][$category] . ": " . $categoryMainArray[$subcategory]["subcategory"][$language];
 			if (isset($topic) && $topic !== "" && isset($categoryMainArray[$subcategory]["topics"][$topic]))
 			{
-				$projectTitleHeader = $projectTitle[$language]["basic_tutorial"] . " - " . $categoryMainArray[$subcategory]["subcategory"][$language] . ": " . $categoryMainArray[$subcategory]["topics"][$topic][$language];
+				$projectTitleHeader = $projectTitle[$language][$category] . " - " . $categoryMainArray[$subcategory]["subcategory"][$language] . ": " . $categoryMainArray[$subcategory]["topics"][$topic][$language];
 			}
 		}
 	}

@@ -32,19 +32,19 @@
 		CB_Device.Battery.getDischargingTime(function(dischargingTime) { CB_console("Battery discharging time: " + dischargingTime); });
 		
 		//Managing battery events (the first parameter received, 'batteryObject', can be used to get the battery information):
-		CB_Device.Battery.onChargingChange
+		CB_Device.Battery.onChargingChange //Use "null" as the first parameter to remove them.
 		(
 			function(batteryObject, eventName, e) { CB_console("Charging status changed (probably charger was plugged/unplugged)!"); }
 		);
-		CB_Device.Battery.onLevelChange
+		CB_Device.Battery.onLevelChange //Use "null" as the first parameter to remove them.
 		(
 			function(batteryObject, eventName, e) { CB_console("Level changed!"); }
 		);
-		CB_Device.Battery.onChargingTimeChange
+		CB_Device.Battery.onChargingTimeChange //Use "null" as the first parameter to remove them.
 		(
 			function(batteryObject, eventName, e) { CB_console("Charging time changed!"); }
 		);
-		CB_Device.Battery.onDischargingTimeChange
+		CB_Device.Battery.onDischargingTimeChange //Use "null" as the first parameter to remove them.
 		(
 			function(batteryObject, eventName, e) { CB_console("Discharging time changed!"); }
 		);
@@ -64,10 +64,11 @@
 	(
 		function(cordova_batteryObject)
 		{
-			CB_console("Battery status changed!"); }
+			CB_console("Battery status changed!");
 			if (cordova_batteryObject.isPlugged) { CB_console("The battery is charging"); }
 			else { CB_console("The battery is not charging"); }
-		);
+		}
+	);
 	CB_Device.Battery.cordova_onLow
 	(
 		function(cordova_batteryObject) { CB_console("Battery level is low! Level: " + cordova_batteryObject.level); }

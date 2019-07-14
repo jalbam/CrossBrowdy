@@ -50,9 +50,9 @@
 				(
 					"EN" => "Mouse, Touch and Pointer"
 				),
-				"gestures" => Array
+				"touch_gestures" => Array
 				(
-					"EN" => "Gestures"
+					"EN" => "Touch gestures"
 				)
 			)
 		),
@@ -64,23 +64,23 @@
 			),
 			"topics" => Array
 			(
-				"device_geolocation" => Array
+				"geolocation" => Array
 				(
 					"EN" => "Geolocation"
 				),
-				"device_orientation_inclination_and_motion" => Array
+				"orientation_inclination_and_motion" => Array
 				(
 					"EN" => "Orientation, inclination and motion"
 				),
-				"device_sensors" => Array
+				"sensors" => Array
 				(
 					"EN" => "Light and proximity sensors"
 				),
-				"device_battery" => Array
+				"battery" => Array
 				(
 					"EN" => "Battery"
 				),
-				"device_vibration_and_others" => Array
+				"vibration_and_others" => Array
 				(
 					"EN" => "Vibration and others"
 				)
@@ -94,10 +94,6 @@
 			),
 			"topics" => Array
 			(
-				"http_parameters_and_hash" => Array
-				(
-					"EN" => "HTTP parameters and hash"
-				),
 				"fetch" => Array
 				(
 					"EN" => "Fetch"
@@ -154,13 +150,21 @@
 			),
 			"topics" => Array
 			(
-				"Screen" => Array
+				"screen" => Array
 				(
 					"EN" => "Screen"
 				),
 				"canvas" => Array
 				(
 					"EN" => "Canvas and emulation"
+				),
+				"graphic_sprites" => Array
+				(
+					"EN" => "Graphic sprites"
+				),
+				"graphic_sprites_scene" => Array
+				(
+					"EN" => "Graphic sprites scene"
 				)
 			)
 		),

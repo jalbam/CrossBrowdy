@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Networking: WebSockets - Example</title>
+		<!-- Loads the needed CSS files: -->
+		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads CrossBrowdy.js (main file): -->
+		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+		<!-- Loads the other needed script files: -->
+		<script src="main.js" type="text/javascript" language="javascript"></script>
+	</head>
+	<body>
+		Penultimate event: <span id="penultimate_event"></span><br />
+		Last event: <span id="last_event"></span><br />
+		Server: <input type="text" id="server" size="60" value="http://WebSockets_server_URL:port/example" /> <button onClick="start();">Start connection</button><br />
+		<br />
+		<button onClick="stop();">Close connection</button><br />
+		<br />
+		<input type="text" id="message" size="60" value="Hello, SockJS server!" /> <button onClick="send();">Send</button>
+		<br />
+		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
+		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
+			<span style="font-weight:bold;">Console:</span><br />
+		</div>
+		<div id="crossbrowdy_info"><a href="../../../../../../guides#examples" target="_blank">CrossBrowdy.com</a> example</div>
+	</body>
+</html>

@@ -95,7 +95,7 @@
 		"device-dpi" //'targetDensityDPI'. Optional.
 	);
 	
-	//Manages some screen events:
+	//Manages some screen events (use "null" as the first parameter to remove them):
 	CB_Screen.onResize(function(e) { CB_console("Screen resized (using 'onResize' event)!"); });
 	CB_Screen.onResizeOrZoom(function() { CB_console("Screen resized or zoom changed!"); });
 	CB_Screen.onFullScreenChange(function() { CB_console("Full screen mode changed!"); });

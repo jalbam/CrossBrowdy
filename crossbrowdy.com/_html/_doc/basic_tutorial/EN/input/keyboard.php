@@ -33,7 +33,7 @@
 	CB_Keyboard.getTypedStringExpiration(); //Returns the number of milliseconds that must elapse without pressing any key to clear the "CB_Keyboard.typedString" string and "CB_Keyboard.typedStringCodes" array automatically.
 	CB_Keyboard.setTypedStringExpiration(500); //Sets the number of milliseconds that must elapse without pressing any key to clear "CB_Keyboard.typedString" string and "CB_Keyboard.typedStringCodes" array automatically.
 	 
-	//Keyboard events management:
+	//Keyboard events management (use "null" as the first parameter to remove them):
 	CB_Keyboard.onKeyDown(function(e, keyCode) { CB_console("Key down ('onKeyDown' event)! Key code: " + keyCode); });
 	CB_Keyboard.onKeyUp(function(e, keyCode) { CB_console("Key up ('onKeyUp' event)! Key code: " + keyCode); });
 	CB_Keyboard.onKeyPress(function(e, keyCode) { CB_console("Key pressed ('onKeyPress' event)!"); })

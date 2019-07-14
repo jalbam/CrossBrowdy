@@ -48,8 +48,12 @@
 		function(data) { CB_console(data); }, //Shows the object with the location information. Data will be normalized automatically.
 		//Position cannot be obtained successfully:
 		function(error) { CB_console(error); }, //Shows the error object.
-		//Options:
-		{ enableHighAccuracy: true } //Requests high accuracy.
+		//Options (optional):
+		{
+			enableHighAccuracy: true, //Optional. Requests high accuracy.
+			timeout: 99999, //Optional. Default: Infinity.
+			maximumAge: 0 //Optional.
+		} 
 	);
 	
 	//Stops getting the position constantly:

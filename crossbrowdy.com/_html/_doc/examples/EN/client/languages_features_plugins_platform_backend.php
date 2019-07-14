@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	This can be your first app using CrossBrowdy:
+	This is an example regarding client management:
 </p>
 
 <?php
@@ -9,7 +9,7 @@
 	echo getFilesCodeAll();
 	
 	//Let's try the example:
-	echo '<div class="try_example">' . getTryExampleLink() . '</div>';
+	echo '<p class="try_example">' . getTryExampleLink() . '</p>';
 ?>
 
 <p>

@@ -5,7 +5,7 @@
 </p>
 <pre><code class="language-javascript">
 	//Managing buttons pressed currently (this should normally be in a loop, checking constantly):
-	var buttonsDown = CB_Mouse.getButtonsDown();
+	var buttonsDown = CB_Mouse.getButtons(); //Same as 'CB_Mouse.getButtonsDown'.
 	if (buttonsDown.LEFT) { CB_console("LEFT button is being pressed"); }
 	if (buttonsDown.MIDDLE) { CB_console("MIDDLE button is being pressed"); }
 	if (buttonsDown.RIGHT) { CB_console("RIGHT button is being pressed"); }
@@ -16,7 +16,7 @@
 	var mouseY = CB_Mouse.getY();//Current vertical coordinates of the mouse.
 	var mouseYRelative = CB_Mouse.getYRelative(30); //Current vertical coordinates of the mouse, relative to the given y-axis coordinates (30).
 
-	//Managing mouse events:
+	//Managing mouse events (use "null" as the first parameter to remove them):
 	CB_Mouse.onMove(function(e) { CB_console("Mouse moved!"); });
 	CB_Mouse.onWheel(function(e) { CB_console("Mouse wheel used!"); });
 	CB_Mouse.onButtonDown(function(e) { CB_console("Button down!"); });

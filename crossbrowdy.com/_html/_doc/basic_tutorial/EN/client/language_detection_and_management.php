@@ -12,16 +12,22 @@
 	//String with the first preferred language detected, with the default options:
 	var language = CB_Client.getLanguage();
 	
+	//String with the first preferred language detected, without allowing to use "window.navigator.languages" for the detection and without giving priority to the language calculation in the back-end (not recommended):
+	var language_2 = CB_Client.getLanguage(false, false);
+	
 	//String with the first preferred language detected, allowing to use "window.navigator.languages" for the detection (not recommended) and without giving priority to the language calculation in the back-end (not recommended):
-	var language_2 = CB_Client.getLanguage(true, true, false); //Second parameter set to "true" will force recalculation instead of using an internal cache with the last value returned.
+	var language_3 = CB_Client.getLanguage(true, false);
 
 	//Array of strings with the supported languages detected, with the default options:
 	var languagesArray = CB_Client.getLanguages();
+
+	//Array of strings with the supported languages detected, without allowing to use "window.navigator.languages" for the detection and without giving priority to the language calculation in the back-end (not recommended):
+	var languagesArray_2 = CB_Client.getLanguages(false, false);
 	
 	//Array of strings with the supported languages detected, allowing to use "window.navigator.languages" for the detection (not recommended) and without giving priority to the language calculation in the back-end (not recommended):
-	var languagesArray_2 = CB_Client.getLanguages(true, true, false); //Second parameter set to "true" will force recalculation instead of using an internal cache with the last value returned.
+	var languagesArray_3 = CB_Client.getLanguages(true, false);
 	
-	//Setting a function to call whenever the client language is changed:
+	//Setting a function to call whenever the client language is changed (use "null" as the first parameter to remove them):
 	CB_Client.onLanguageChanges(function(e) { CB_console("Language changed!"); });
 </code></pre>
 

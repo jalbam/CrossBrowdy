@@ -10,7 +10,7 @@
 
 		$output = "";
 		
-		$output .= '<p><b>' . $file . '</b>:</p>';
+		$output .= '<p><b><a href="' . $path . $file . '" target="_blank">' . $file . '</a></b>:</p>';
 		$output .= '<pre><code class="' . $codeClass . '">';
 			$output .= htmlspecialchars($fileContent);
 		$output .= '</code></pre>';
@@ -51,6 +51,8 @@
 	{
 		global $dirPath, $category, $subcategory, $topic, $language;
 		
+		$dirPath = "_html/_doc/" . $category . "/" . $language . "/" . $subcategory . "/" . $topic . "_files/";
+		
 		$output = "";
 		
 		if (file_exists($dirPath))
@@ -60,7 +62,9 @@
 			$indexHTMLPosition = array_search("index.html", $files);
 			if ($indexHTMLPosition !== FALSE)
 			{
-				$output .= getFileCode("index.html", $dirPath, "language-html");
+				$fileCode = getFileCode("index.html", $dirPath, "language-html");
+				$output .= str_replace("../../../../../../CrossBrowdy", "CrossBrowdy", $fileCode);
+				$output = str_replace("../../../../../../guides", "/guides", $output);
 			}
 
 			$output .= getFilesCode("html", $files, "language-html", Array("index.html"));

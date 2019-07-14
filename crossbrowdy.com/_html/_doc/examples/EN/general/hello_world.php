@@ -9,7 +9,7 @@
 	echo getFilesCodeAll();
 	
 	//Let's try the example:
-	echo '<div class="try_example">' . getTryExampleLink() . '</div>';
+	echo '<p class="try_example">' . getTryExampleLink() . '</p>';
 ?>
 
 <p>
