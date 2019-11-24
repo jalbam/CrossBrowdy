@@ -17,6 +17,7 @@
 	<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now" target="_blank">Date.now</a>,
 	<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promise</a>,
 	<a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank">requestAnimationFrame</a>,
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now" target="_blank">performance.now</a>,
 	etc.)
 	will be present even when they are not natively supported, using polyfills automatically when needed.
 </p>

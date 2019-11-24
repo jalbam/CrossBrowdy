@@ -158,10 +158,6 @@
 				(
 					"EN" => "Canvas and emulation"
 				),
-				"graphic_sprites" => Array
-				(
-					"EN" => "Graphic sprites"
-				),
 				"graphic_sprites_scene" => Array
 				(
 					"EN" => "Graphic sprites scene"
@@ -206,14 +202,6 @@
 			),
 			"topics" => Array
 			(
-				"dom_elements" => Array
-				(
-					"EN" => "DOM elements"
-				),
-				"events" => Array
-				(
-					"EN" => "Events"
-				),
 				"collisions" => Array
 				(
 					"EN" => "Collisions"
@@ -232,7 +220,15 @@
 			),
 			"topics" => Array
 			(
-				"balooon_popping_game" => Array
+				"graphic_rendering_engine" => Array
+				(
+					"EN" => "Graphic rendering engine"
+				),
+				"simple_game_engine" => Array
+				(
+					"EN" => "Simple game engine"
+				),
+				"balloon_popping_game" => Array
 				(
 					"EN" => "Balloon popping game"
 				),
@@ -240,21 +236,17 @@
 				(
 					"EN" => "Pong game"
 				),
-				"typing_and_maths_game" => Array
-				(
-					"EN" => "Typing and maths game"
-				),
 				"sokoban_game" => Array
 				(
 					"EN" => "Sokoban game"
 				),
-				"point_and_click_adventure" => Array
+				/*"point_and_click_adventure" => Array
 				(
 					"EN" => "Point-and-click adventure game"
-				),
+				),*/
 				"chip_8_emulator" => Array
 				(
-					"EN" => "CHIP-8 emulator"
+					"EN" => "CHIP-8 emulator (under construction)"
 				)
 			)
 		)

@@ -19,13 +19,13 @@
 	var myDataStringDecompressed_2 = lz.decompressFromUTF16(myDataStringCompressed_UTF16); //Decompressed from UTF-16 valid data. Returns 'myDataString' again.
 	
 	//Encoding and decoding in base 64:
-	var myDataStringCompressed_base64 = lz.compressToBase64(myDataString); //Compressed encoding in base 64. Length: 84.
-	var myDataStringDecompressed_3 = lz.decompressFromBase64(myDataStringCompressed_base64); //Decompressed data encoded in base 64. Returns 'myDataString' again.
+	var myDataStringEncoded_base64 = lz.compressToBase64(myDataString); //Compressed encoding in base 64. Length: 84.
+	var myDataStringDecoded_base64 = lz.decompressFromBase64(myDataStringEncoded_base64); //Decompressed data encoded in base 64. Returns 'myDataString' again.
 	
 	//Compressing and decompressing base 64 data (using the 'Base64String' object):
 	var lzBase64 = CB_getBase64StringObject(); //Gets the 'Base64String' object.
-	var myDataStringCompressed_UTF16_base64_2 = lzBase64.compress(myDataStringCompressed_base64); //Compresses data which is already in base 64. Length: 32.
-	var myDataString_base64 = lzBase64.decompress(myDataStringCompressed_UTF16_base64_2); //Decompressed the encoded base 64 data. Returns 'myDataStringCompressed_base64' again.
+	var myDataStringCompressed_UTF16_base64_2 = lzBase64.compress(myDataStringEncoded_base64); //Compresses data which is already in base 64. Length: 32.
+	var myDataString_base64 = lzBase64.decompress(myDataStringCompressed_UTF16_base64_2); //Decompressed the encoded base 64 data. Returns 'myDataStringEncoded_base64' again.
 	var myDataStringDecompressed_4 = lz.decompressFromBase64(myDataString_base64); //Decodes the base 64 data. Returns 'myDataString' again.
 	
 	//Compressing and decompressing using base 64 and valid for URI components:

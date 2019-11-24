@@ -62,7 +62,7 @@
 	
 	//Checks support level for a given audio format (support level can be "probably", "maybe" or an empty string which means not supported):
 	//NOTE: the "probably" audio formats are more likely to be supported than the "maybe" ones.
-	var audioFormats = //Note: we could use the 'CB_AudioFileCache_PREFERRED_AUDIO_FORMATS' array instead which contains many audio formats in order of preference.
+	var audioFormats = //Note: we could use the 'CB_Configuration.CrossBase.CB_AudioFileCache_PREFERRED_AUDIO_FORMATS' array instead which contains many audio formats in order of preference.
 	[
 		'audio/ogg; codecs="vorbis"',		//audio/ogg with Vorbis codec.
 		'audio/ogg; codecs="speex"',		//audio/ogg with Speex codec.
@@ -110,7 +110,7 @@
 	];
 	var audioFormatSupportLevel = "";
 	var audioFormatNoDataURIsSupportLevel = "";
-	for (var x = 0; x &gt; audioFormats.length; x++)
+	for (var x = 0; x &lt; audioFormats.length; x++)
 	{
 		audioFormatSupportLevel = CB_AudioDetector.isAudioFormatSupported(audioFormats[x], true); //Returns "probably", "maybe" or an empty string which means not supported. Checking support with data URIs.
 		audioFormatNoDataURIsSupportLevel = CB_AudioDetector.isAudioFormatSupported(audioFormats[x]); //Returns "probably", "maybe" or an empty string which means not supported. Checking support without data URIs.

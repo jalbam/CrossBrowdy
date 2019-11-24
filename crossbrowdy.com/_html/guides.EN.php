@@ -43,6 +43,6 @@
 <div class="category_text">
 	<h1 class="category_subtitle">More</h1>
 	<p>
-		You can check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> in the case you need more information.
+		Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to get more information.
 	</p>
 </div>

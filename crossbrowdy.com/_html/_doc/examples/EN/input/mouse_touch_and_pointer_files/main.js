@@ -80,7 +80,7 @@ function showMouseInformation()
 	//Changes the background colour of the desired element when the mouse is over it:
 	var backgroundColor = "#aa99dd";
 	var element = CB_Elements.id("mouse_lock_element");
-	if (CB_Mouse.isOverElement(element)) { backgroundColor = "#aa0000"; }
+	if (CB_Mouse.isOverElement(element)) { backgroundColor = "#aa0000"; } //For advanced collisions, the CB_Collisions static class can be used.
 	element.style.backgroundColor = backgroundColor;
 	
 	//Calls itself again:

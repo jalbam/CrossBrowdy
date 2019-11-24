@@ -3,6 +3,13 @@
 <html>
 	<head>
 		<!-- (c) CrossBrowdy by Joan Alba Maldonado (joanalbamaldonado@NO_SPAM_PLEASEgmail.com). Forbidden to publish, copy or modify without mentioning the author's name. -->
+		<?php
+			$baseName = dirname(trim($_SERVER["SCRIPT_NAME"]));
+			$baseName = rtrim($baseName, "/") . "/";
+			if (!is_string($baseName) || $baseName === "") { $baseName = $projectURL; }
+		?>
+		<base href="<?php echo $baseName; ?>" id="document_base">
+		
 		<meta http-equiv="window-target" content="_top" />
 		<meta http-equiv="imagetoolbar" content="no" />
 		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
@@ -122,15 +129,21 @@
 		<link rel="author" href="https://plus.google.com/101309215015488397249" />
 		<link rel="publisher" href="https://plus.google.com/101309215015488397249" />
 
-		<?php
-			$baseName = dirname(trim($_SERVER["SCRIPT_NAME"]));
-			$baseName = rtrim($baseName, "/") . "/";
-			if (!is_string($baseName) || $baseName === "") { $baseName = $projectURL; }
-		?>
-		<base href="<?php echo $baseName; ?>">
-		
 		<script language="javascript" type="text/javascript">
 		<!--
+			//If the base element does not have "http" or "https" in its "href" property, adds it (IE6 needs it, for example):
+			var documentBaseElement = document.getElementById("document_base");
+			if (documentBaseElement !== null)
+			{
+				var documentBase = documentBaseElement.href;
+				if (documentBase.substring(0, 5) !== "http:" && documentBase.substring(0, 6) !== "https://")
+				{
+					var projectURL = "<?php echo $projectURL; ?>";
+					documentBaseElement.href = projectURL.substring(0, projectURL.indexOf(documentBase) + documentBase.length);
+				}
+				else { documentBaseElement.href = documentBaseElement.href; } //IE8 fix (it does not support relative paths).
+			}
+			
 			function toggleMenu()
 			{
 				var menuOptions = document.getElementById("menu_options");
@@ -150,13 +163,19 @@
 				else if (window.Event && e.which) { keyCode = e.which; }
 				if (keyCode === 27) { toggleMenu() }
 			}
-			
-			<?php
-				if ($category === "basic_tutorial" || $category === "examples")
-				{
-					if (file_exists("_html/_doc/_lib/prism.js")) { readfile("_html/_doc/_lib/prism.js"); }
-				}
-			?>
+		// -->
+		</script>
+		<script language="javascript" type="text/javascript">
+		<!--
+			try //IE6 gives problems:
+			{
+				<?php
+					if ($category === "basic_tutorial" || $category === "examples")
+					{
+						if (file_exists("_html/_doc/_lib/prism.js")) { readfile("_html/_doc/_lib/prism.js"); }
+					}
+				?>
+			} catch (E) {}
 		// -->
 		</script>
 	</head>

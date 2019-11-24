@@ -6,20 +6,20 @@
 		<title>Image: Graphic sprites scene - Example</title>
 		<!-- Loads the needed CSS files: -->
 		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: -->
+		<script type="text/javascript" src="../../../../../../CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js"></script><!-- FlashCanvas/ExplorerCanvas do not support lazy load. -->
 		<!-- Loads CrossBrowdy.js (main file): -->
 		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
 		<!-- Loads the other needed script files: -->
 		<script src="main.js" type="text/javascript" language="javascript"></script>
 	</head>
 	<body>
-		Vibration API support: <span id="vibration_api"></span><br />
-		<br />
-		<button onClick="vibrateOnce();">Vibrate once</button>
-		<button onClick="vibrateMoreTimes();">Vibrate more times</button>
-		<button onClick="vibrateStop();">Stop vibration</button>
+		<canvas id="my_canvas">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
 		<br />
 		<br />
-		Timestamp: <span id="timestamp"></span><br />
+		Messages:
+		<div id="messages"></div>
+		<br />
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />

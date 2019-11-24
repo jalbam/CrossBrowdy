@@ -12,14 +12,41 @@
 		<script src="main.js" type="text/javascript" language="javascript"></script>
 	</head>
 	<body>
-		Vibration API support: <span id="vibration_api"></span><br />
+		Insert a number:
+		<input type="text" id="number" value="-12345678901.23" size="15" maxlength="15" />
 		<br />
-		<button onClick="vibrateOnce();">Vibrate once</button>
-		<button onClick="vibrateMoreTimes();">Vibrate more times</button>
-		<button onClick="vibrateStop();">Stop vibration</button>
+		Number: <span id="num"></span><br />
+		Number to integer: <span id="num_integer"></span><br />
+		Decimals: <span id="num_decimals"></span><br />
+		Total length: <span id="num_length"></span><br />
 		<br />
+		Two decimals (number): <span id="two_decimals"></span><br />
+		Two decimals (string): <span id="two_decimals_string"></span><br />
+		Six decimals (number): <span id="six_decimals"></span><br />
+		Six decimals (string): <span id="six_decimals_string"></span><br />
 		<br />
-		Timestamp: <span id="timestamp"></span><br />
+		Base 2 (binary): <span id="base_2"></span> - To decimal (integer): <span id="base_2_to_decimal"></span><br />
+		Base 2 (binary), with prefix: <span id="base_2_prefix"></span> - To decimal (integer): <span id="base_2_prefix_to_decimal"></span><br />
+		Base 8 (octal): <span id="base_8"></span> - To decimal (integer): <span id="base_8_to_decimal"></span><br />
+		Base 8 (octal), with prefix: <span id="base_8_prefix"></span> - To decimal (integer): <span id="base_8_prefix_to_decimal"></span><br />
+		Base 16 (hexadecimal): <span id="base_16"></span> - To decimal (integer): <span id="base_16_to_decimal"></span><br />
+		Base 16 (hexadecimal), with prefix: <span id="base_16_prefix"></span> - To decimal (integer): <span id="base_16_prefix_to_decimal"></span><br />
+		Base 64: <span id="base_64"></span> - To decimal (integer): <span id="base_64_to_decimal"></span><br />
+		Base 66: <span id="base_66"></span> - To decimal (integer): <span id="base_66_to_decimal"></span><br />
+		Base 71: <span id="base_71"></span> - To decimal (integer): <span id="base_71_to_decimal"></span><br />
+		Base 87: <span id="base_87"></span> - To decimal (integer): <span id="base_87_to_decimal"></span><br />
+		Base 88: <span id="base_88"></span> - To decimal (integer): <span id="base_88_to_decimal"></span><br />
+		Base 128: <span id="base_128"></span> - To decimal (integer): <span id="base_128_to_decimal"></span><br />
+		Base 256: <span id="base_256"></span> - To decimal (integer): <span id="base_256_to_decimal"></span><br />
+		Base 512: <span id="base_512"></span> - To decimal (integer): <span id="base_512_to_decimal"></span><br />
+		Base 1024: <span id="base_1024"></span> - To decimal (integer): <span id="base_1024_to_decimal"></span><br />
+		Base 2048: <span id="base_2048"></span> - To decimal (integer): <span id="base_2048_to_decimal"></span><br />
+		Base 4096: <span id="base_4096"></span> - To decimal (integer): <span id="base_4096_to_decimal"></span><br />
+		Base 4096, all digits but without decimals (<span id="num_no_decimals"></span>): <span id="base_4096_no_decimals"></span> - To decimal (float): <span id="base_4096_no_decimals_to_decimal"></span><br />
+		Base 'ABC': <span id="base_abc"></span> - To decimal (integer): <span id="base_abc_to_decimal"></span><br />
+		Base 'ABC', with own minus symbols: <span id="base_abc_minus"></span> - To decimal (integer): <span id="base_abc_minus_to_decimal"></span><br />
+		Base 'ABC', with own minus symbols and own prefix: <span id="base_abc_minus_prefix"></span> - To decimal (integer): <span id="base_abc_minus_prefix_to_decimal"></span>
+		<br />
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />

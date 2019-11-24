@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+
+<head>
+    <title>SLCanvas Test Page</title>
+    <script type="text/javascript" src="slcanvas.js"></script>
+    <style type="text/css">
+        body { font-family:Arial,Helvetica }
+        pre { font-size:10px; background-color:#eeeeee }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        
+    
+        // Runs a demo by finding its canvas and running the code
+        function runDemo(canvasId, func) {
+            var canvas = document.getElementById(canvasId);
+            if (canvas && canvas.getContext) {
+                var context = canvas.getContext("2d");
+                func(context);
+            }
+        }
+
+        // Demo 1 code
+        function demo1(context) {
+            context.fillStyle = "rgb(0, 162, 232)";
+            context.fillRect(0, 0, 100, 100);
+            context.save();
+            context.fillStyle = "rgba(255, 127, 39, 0.8)";
+            context.fillRect(25, 25, 100, 100);
+            context.strokeStyle = "rgb(255, 174, 201)";
+            context.lineWidth = 15;
+            context.strokeRect(50, 50, 100, 100);
+            context.restore();
+            context.beginPath()
+            context.moveTo(75, 75);
+            context.lineTo(175, 75);
+            context.lineTo(75, 175);
+            context.fill();
+            var gradient = context
+                .createLinearGradient(150, 100, 150, 200);
+            gradient.addColorStop(0/5, "red");
+            gradient.addColorStop(1/5, "orange");
+            gradient.addColorStop(2/5, "yellow");
+            gradient.addColorStop(3/5, "green");
+            gradient.addColorStop(4/5, "blue");
+            gradient.addColorStop(5/5, "purple");
+            context.fillStyle = gradient;
+            context.fillRect(100, 100, 100, 100);
+        }
+
+        // Demo 2 code
+        function demo2(context) {
+            context.fillRect(0, 0, 200, 200);
+            context.translate(100, 100);
+            context.strokeStyle = "orange";
+            context.lineWidth = 2;
+            var R = 36;  var r = 8;  var d = 15;  var t = 0;
+            var lastx = R + d - r;   var lasty = 0;
+            var id = window.setInterval(function() {
+                context.beginPath();
+                context.moveTo(lastx, lasty);
+                var x = ((R - r) * Math.cos(t)) +
+                    (d * Math.cos(((R - r) / r) * t));
+                var y = ((R - r) * Math.sin(t)) -
+                    (d * Math.sin(((R - r) / r) * t));
+                context.lineTo(x, y);
+                context.stroke();
+                t += 0.1;  lastx = x;  lasty = y;
+                if ((2 * 2 * Math.PI) < (t - 0.1)) {
+                    window.clearInterval(id);
+                }
+            }, 50);
+            var sl = new Image();
+            sl.onload = function() {
+                for (i = 0; i < 8; i++) {
+                    context.save();
+                    context.rotate((i / 8) * (2 * Math.PI));
+                    context.globalAlpha = (8 - i) / 4;
+                    context.drawImage(sl, -25, -100, 50, 50);
+                    context.restore();
+                }
+            };
+            sl.src = "Silverlight.png";
+        }
+    </script>
+
+    <table border="1" cellpadding="5" style="margin-left:auto; margin-right:auto; text-align:center">
+        <thead>
+            <tr style="font-weight:bold">
+                <td style="width:200px">Browser &lt;canvas&gt;</td>
+                <td>Code</td>
+                <td style="width:200px">Silverlight &lt;canvas&gt;</td>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+                <canvas id="canvas1b" width="200" height="200" renderMethod="native" onload="runDemo('canvas1b', demo1);">[This browser does not<br />support &lt;canvas&gt;.]</canvas>
+            </td>
+            <td style="text-align:left; vertical-align:top">
+<pre>
+context.fillStyle = "rgb(0, 162, 232)";
+context.fillRect(0, 0, 100, 100);
+context.save();
+context.fillStyle = "rgba(255, 127, 39, 0.8)";
+context.fillRect(25, 25, 100, 100);
+context.strokeStyle = "rgb(255, 174, 201)";
+context.lineWidth = 15;
+context.strokeRect(50, 50, 100, 100);
+context.restore();
+context.beginPath()
+context.moveTo(75, 75);
+context.lineTo(175, 75);
+context.lineTo(75, 175);
+context.fill();
+var gradient = context
+    .createLinearGradient(150, 100, 150, 200);
+gradient.addColorStop(0/5, "red");
+gradient.addColorStop(1/5, "orange");
+gradient.addColorStop(2/5, "yellow");
+gradient.addColorStop(3/5, "green");
+gradient.addColorStop(4/5, "blue");
+gradient.addColorStop(5/5, "purple");
+context.fillStyle = gradient;
+context.fillRect(100, 100, 100, 100);
+</pre>
+            </td>
+            <td>
+                <script type="text/javascript">
+                    slcanvas.writeCanvasDiv("canvas1s", 200, 200, function() { runDemo("canvas1s", demo1) });
+                </script>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <canvas id="canvas2b" width="200" height="200" renderMethod="native" onload="runDemo('canvas2b', demo2);">[This browser does not<br />support &lt;canvas&gt;.]</canvas>
+            </td>
+            <td style="text-align:left; vertical-align:top">
+<pre>
+context.fillRect(0, 0, 200, 200);
+context.translate(100, 100);
+context.strokeStyle = "orange";
+context.lineWidth = 2;
+var R = 36;  var r = 8;  var d = 15;  var t = 0;
+var lastx = R + d - r;   var lasty = 0;
+var id = window.setInterval(function() {
+    context.beginPath();
+    context.moveTo(lastx, lasty);
+    var x = ((R - r) * Math.cos(t)) +
+        (d * Math.cos(((R - r) / r) * t));
+    var y = ((R - r) * Math.sin(t)) -
+        (d * Math.sin(((R - r) / r) * t));
+    context.lineTo(x, y);
+    context.stroke();
+    t += 0.1;  lastx = x;  lasty = y;
+    if ((2 * 2 * Math.PI) < (t - 0.1)) {
+        window.clearInterval(id);
+    }
+}, 50);
+var sl = new Image();
+sl.onload = function() {
+    for (i = 0; i < 8; i++) {
+        context.save();
+        context.rotate((i / 8) * (2 * Math.PI));
+        context.globalAlpha = (8 - i) / 4;
+        context.drawImage(sl, -25, -100, 50, 50);
+        context.restore();
+    }
+};
+sl.src = "Silverlight.png";
+</pre>
+            </td>
+            <td>
+               <!-- <script type="text/javascript">
+                    slcanvas.writeCanvas("canvas2s", 200, 200, function() { runDemo("canvas2s", demo2); });
+                </script>-->
+                <canvas id="canvas2s" renderMethod="silverlight" width="200" height="200" onload="runDemo('canvas2s', demo2)"></canvas>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

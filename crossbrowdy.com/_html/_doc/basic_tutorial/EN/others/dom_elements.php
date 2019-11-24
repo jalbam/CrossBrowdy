@@ -8,12 +8,12 @@
 	var element = CB_Elements.id("element_id"); //Gets the element, using the cache if 'CB_Configuration.CrossBase.CB_Elements_id_USE_CACHE' is true (which is the default value). Equivalent to 'CB_Elements.get'
 	var element_2 = CB_Elements.id("element_id", true); //Gets the element using the cache. Equivalent to 'CB_Elements.get'
 	var element_3 = CB_Elements.id("element_id", false); //Gets the element without using the cache (and updates the cache). Equivalent to 'CB_Elements.idCacheUpdate'.
-	var element_4 = CB_Elements.idCacheUpdate(id); //Gets the element without using the cache (and updates it). Equivalent to 'CB_Elements.id' with the second parameter 'false'.
+	var element_4 = CB_Elements.idCacheUpdate("element_id"); //Gets the element without using the cache (and updates it). Equivalent to 'CB_Elements.id' with the second parameter 'false'.
 
 	//Removing an element by its ID, equivalent to 'CB_Elements.removeById':
-	CB_Elements.idRemove(id) //Removes the element, using the cache if 'CB_Configuration.CrossBase.CB_Elements_id_USE_CACHE' is true (which is the default value).
-	CB_Elements.idRemove(id, true) //Removes the element using the cache.
-	CB_Elements.idRemove(id, false) //Removes the element without using the cache.
+	CB_Elements.idRemove("element_id") //Removes the element, using the cache if 'CB_Configuration.CrossBase.CB_Elements_id_USE_CACHE' is true (which is the default value).
+	CB_Elements.idRemove("element_id", true) //Removes the element using the cache.
+	CB_Elements.idRemove("element_id", false) //Removes the element without using the cache.
 	
 	//Clearing the cache used by 'CB_Elements.id' and 'CB_Elements.idRemove':
 	CB_Elements.idCacheClear("element_id"); //Clears the cache for the element whose ID is "element_id".
@@ -174,10 +174,10 @@
 	//Toggles the visibility of an element, showing/hiding it (when not given, uses "block" for the "display" property of its "style" when showing it):
 	CB_Elements.showHide(element);
 	CB_Elements.showHide(element, "table-cell"); //If shows the element, it will use "table-cell" for the "display" property of its "style".
-	CB_Elements.showHide(element, undefined, true, false, function(element, displayValue) { if (displayValue === "none") { CB_console("Element hidden!"); } else { CB_console("Element shown!"); }); //Calls the function after showing/hiding the element.
+	CB_Elements.showHide(element, undefined, true, false, function(element, displayValue) { if (displayValue === "none") { CB_console("Element hidden!"); } else { CB_console("Element shown!"); } }); //Calls the function after showing/hiding the element.
 	CB_Elements.showHideById("element_id");
 	CB_Elements.showHideById("element_id", "table-cell"); //If shows the element, it will use "table-cell" for the "display" property of its "style".
-	CB_Elements.showHideById("element_id", undefined, true, false, function(element, displayValue) { if (displayValue === "none") { CB_console("Element hidden!"); } else { CB_console("Element shown!"); }); //Calls the function after showing/hiding the element.
+	CB_Elements.showHideById("element_id", undefined, true, false, function(element, displayValue) { if (displayValue === "none") { CB_console("Element hidden!"); } else { CB_console("Element shown!"); } }); //Calls the function after showing/hiding the element.
 
 	//Inserts the desired content into a given container element (when a "displayValue" is given, calls the 'CB_Elements.show' internally with it):
 	CB_Elements.insertContent(myElement, "Content example");
@@ -186,6 +186,22 @@
 	CB_Elements.insertContentById("element_id", "Content example");
 	CB_Elements.insertContentById("element_id", "Content example", "block"); //It will make the element appear with 'CB_Elements.show' and using 'block' as the "displayValue" (useful when the element is hidden).
 	CB_Elements.insertContentById("element_id", "Content example", undefined, true, false, function(container) { CB_Console("Content inserted!"); }); //Calls the function after inserting the content.
+
+	//Appends the desired content at the end of a given container element (when a "displayValue" is given, calls the 'CB_Elements.show' internally with it), keeping the existing one:
+	CB_Elements.appendContent(myElement, "Content example");
+	CB_Elements.appendContent(myElement, "Content example", "block"); //It will make the element appear with 'CB_Elements.show' and using 'block' as the "displayValue" (useful when the element is hidden).
+	CB_Elements.appendContent(myElement, "Content example", undefined, true, false, function(container) { CB_Console("Content inserted!"); }); //Calls the function after inserting the content.
+	CB_Elements.appendContentById("element_id", "Content example");
+	CB_Elements.appendContentById("element_id", "Content example", "block"); //It will make the element appear with 'CB_Elements.show' and using 'block' as the "displayValue" (useful when the element is hidden).
+	CB_Elements.appendContentById("element_id", "Content example", undefined, true, false, function(container) { CB_Console("Content inserted!"); }); //Calls the function after inserting the content.
+
+	//Appends the desired content at the end of a given container element (when a "displayValue" is given, calls the 'CB_Elements.show' internally with it), keeping the existing one:
+	CB_Elements.appendContentBeginning(myElement, "Content example");
+	CB_Elements.appendContentBeginning(myElement, "Content example", "block"); //It will make the element appear with 'CB_Elements.show' and using 'block' as the "displayValue" (useful when the element is hidden).
+	CB_Elements.appendContentBeginning(myElement, "Content example", undefined, true, false, function(container) { CB_Console("Content inserted!"); }); //Calls the function after inserting the content.
+	CB_Elements.appendContentByIdBeginning("element_id", "Content example");
+	CB_Elements.appendContentByIdBeginning("element_id", "Content example", "block"); //It will make the element appear with 'CB_Elements.show' and using 'block' as the "displayValue" (useful when the element is hidden).
+	CB_Elements.appendContentByIdBeginning("element_id", "Content example", undefined, true, false, function(container) { CB_Console("Content inserted!"); }); //Calls the function after inserting the content.
 	
 	//Gets the scroll position (left and top) in pixels of a given element:
 	var elementScrollLeft = CB_Elements.getScrollLeftById("element_id");
@@ -208,9 +224,17 @@
 	CB_Elements.preventSelection(myElement);
 	CB_Elements.preventSelectionById("element_id");
 
-	//Disables the contex menu of a given element:
+	//Allows selecting the content of a given element:
+	CB_Elements.preventSelection(myElement, false);
+	CB_Elements.preventSelectionById("element_id", false);
+
+	//Disables the context menu of a given element:
 	CB_Elements.contextMenuDisable(myElement);
 	CB_Elements.contextMenuDisableById("element_id");
+	
+	//Enables the context menu of a given element:
+	CB_Elements.contextMenuDisable(myElement, false);
+	CB_Elements.contextMenuDisableById("element_id", false);
 </code></pre>
 
 <p>

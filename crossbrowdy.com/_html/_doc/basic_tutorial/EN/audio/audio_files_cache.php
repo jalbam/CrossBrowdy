@@ -14,7 +14,7 @@
 </p>
 
 <p>
-	Internally, each audio file cache object will normally manage multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally.
+	Internally, each audio file cache object will normally manage multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally. During this process, the audio file cache object (<a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a>) will have a 'LOADING' status again and after that the status will be 'LOADED' if all went well or 'FAILED' otherwise. When the 'LOAD' status is reached, the 'onLoad' event function (if any) will be called again (to prevent this, set the 'onLoad' property of the object to something which is not a function once it gets executed).
 </p>
 
 <p>
@@ -85,6 +85,7 @@
 		CB_console("Identifier: " + this.id); //Same as audioFileSprites.id.
 		CB_console("Status: " + this.getStatusString()); //Same as audioFileSprites.getStatusString().
 		if (audioFileObjectsToCheck > 0) { CB_console("You can call the 'audioFileCache.checkPlayingAll' method to check all the CB_AudioFile objects."); }
+		this.onLoad = null; //Prevents to execute this function again (otherwise, it could be executed again after the object grows automatically to create more 'CB_AudioFile' objects).
 	};
 	
 	//Defines the data for the audio file cache object with all possible options:
@@ -238,7 +239,7 @@
 		false, //loop. Optional. Default: CB_AudioFile#loop. Set to undefined or null to use the default one.
 		
 		//Volume desired when playing the audio (this can also be changed on the fly, during playing):
-		volume, //volume. Optional. Default: CB_Configuration.CrossBase.CB_AudioFile_AudioFileCache_USE_SPEAKER_VOLUME_AS_DEFAULT ? CB_Speaker.getVolume() : CB_Configuration.CrossBase.CB_Speaker_DEFAULT_VOLUME. Set to undefined or null to use the default one.
+		80, //volume. Optional. Default: CB_Configuration.CrossBase.CB_AudioFile_AudioFileCache_USE_SPEAKER_VOLUME_AS_DEFAULT ? CB_Speaker.getVolume() : CB_Configuration.CrossBase.CB_Speaker_DEFAULT_VOLUME. Set to undefined or null to use the default one.
 		
 		//The maximum amount of time (in milliseconds) of delay that we accept before start playing the audio. If the amount of time is overcome, the audio will not play at all. Used only when the audio is not able to play immediately:
 		125, //allowedRecursiveDelay. Optional. Default: CB_Configuration.CrossBase.CB_AudioFile_AudioFileCache_ALLOWED_RECURSIVE_DELAY_DEFAULT. Set to undefined or null to use the default one.
@@ -350,7 +351,7 @@
 	audioFileCache.setAudioAPIAll
 	(
 		//preferredAPIs. Unique mandatory parameter:
-		["AAPI", "SM2"], //In order of preference.
+		["AAPI", "SM2"], //Array of strings with order of preference or a single string with the unique desired API.
 		
 		//callbackOk. Optional but recommended:
 		function(objectsChangedAPI, performedActions, actionsNeeded)
@@ -386,9 +387,9 @@
 	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file cache object uses:
 </p>
 <pre><code class="language-javascript">
-	//Executes a function over all the internal CB_AudioFile objects (being "this" each CB_AudioFile itself):
-	audioFileCache.executeFunctionAll(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
-	audioFileCache.executeFunctionAll(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
+	//Executes a function over all the internal CB_AudioFile objects, being "this" each CB_AudioFile itself (same as 'audioFileCache.executeAll' and 'audioFileCache.executeFunctionAll'):
+	audioFileCache.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
+	audioFileCache.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
 
 	//Plays all the CB_AudioFile objects:
 	audioFileCache.playAll

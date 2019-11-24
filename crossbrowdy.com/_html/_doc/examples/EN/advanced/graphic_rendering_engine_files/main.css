@@ -1,0 +1,7 @@
+body { background-color:#aaddee; word-wrap:break-word; }
+#crossbrowdy_info { position:fixed; bottom:2px; right:2px; }
+#crossbrowdy_info a { color:#00aadd; }
+#crossbrowdy_info a:hover { color:#0033aa; }
+span { color:#aa0000; }
+#my_canvas { position:absolute; left:0px; top:0px; }
+#my_canvas_buffer { position:absolute; left:0px; top:0px; visibility:hidden; display:none; }

@@ -122,18 +122,47 @@ function showGamepadsButtonsInformation()
 	//Shows available buttons (all):
 	CB_Elements.insertContentById("buttons_all_any", JSON.stringify(CB_Controllers.getButtons()));
 	CB_Elements.insertContentById("buttons_all_gamepad0", JSON.stringify(CB_Controllers.getButtons(0)));
+
+	//Managing axes pressed currently:
+	if (CB_Controllers.isAxisDown([0, 1]))
+	{
+		CB_console("Axis 0 or 1 (maybe both) is being pressed in some or all gamepads");
+		CB_Elements.insertContentById("zero_or_one_any", "Yes");
+	}
+	else { CB_Elements.insertContentById("zero_or_one_any", "No"); }
+
+	if (CB_Controllers.isAxisDown([0, 1], 0))
+	{
+		CB_console("Axis 0 or 1 (maybe both) is being pressed in gamepad whose index is '0'");
+		CB_Elements.insertContentById("zero_or_one_gamepad0", "Yes");
+	}
+	else { CB_Elements.insertContentById("zero_or_one_gamepad0", "No"); }
+
+	if (CB_Controllers.isAxisDown([0, 1], 0, null, null, true))
+	{
+		CB_console("Axes 0 and 1 are both being pressed in gamepad whose index is '0'");
+		CB_Elements.insertContentById("zero_and_one_gamepad0", "Yes");
+	}
+	else { CB_Elements.insertContentById("zero_and_one_gamepad0", "No"); }
+	
+	if (CB_Controllers.isAxisDown([0, 1], "", null, null, true))
+	{
+		CB_console("Axes 0 and 1 are both being pressed, regardless they are being pressed in the same gamepad or in different ones");
+		CB_Elements.insertContentById("zero_and_one_any", "Yes");
+	}
+	else { CB_Elements.insertContentById("zero_and_one_any", "No"); }
 	
 	//Managing buttons pressed currently:
 	if (CB_Controllers.isButtonDown([1, 2]))
 	{
-		CB_console("Button 1 or 2 (maybe both) are being pressed in some or all gamepads");
+		CB_console("Button 1 or 2 (maybe both) is being pressed in some or all gamepads");
 		CB_Elements.insertContentById("one_or_two_any", "Yes");
 	}
 	else { CB_Elements.insertContentById("one_or_two_any", "No"); }
 
 	if (CB_Controllers.isButtonDown([1, 2], 0))
 	{
-		CB_console("Button 1 or 2 (maybe both) are being pressed in gamepad whose index is '0'");
+		CB_console("Button 1 or 2 (maybe both) is being pressed in gamepad whose index is '0'");
 		CB_Elements.insertContentById("one_or_two_gamepad0", "Yes");
 	}
 	else { CB_Elements.insertContentById("one_or_two_gamepad0", "No"); }

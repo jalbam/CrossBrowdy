@@ -14,7 +14,7 @@
 </p>
 
 <p>
-	Internally, each audio file sprites object will normally manage one audio file cache object (which use the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> class) that will typically contain multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally.
+	Internally, each audio file sprites object will normally manage one audio file cache object (which use the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> class) that will typically contain multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically (expanding itself) in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally. During this process, the audio file sprites object (<a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> object) will have a 'LOADING' status again and after that the status will be 'LOADED' if all went well or 'FAILED' otherwise. When the 'LOAD' status is reached, the 'onLoad' event function (if any) will be called again (to prevent this, set the 'onLoad' property of the object to something which is not a function once it gets executed).
 </p>
 
 <p>
@@ -148,13 +148,14 @@
 		}
 	};
 	
-	//Defines the function to call when the audio file sprites object is created:
+	//Defines the function to call when the audio file sprites object is created or expanding:
 	var onCreate = function(audioFileObjectsToCheck)
 	{
-		CB_console("Audio file sprites object created! CB_AudioFile objects that still need to be checked: " + audioFileObjectsToCheck);
+		CB_console("Audio file sprites object created or expanding! CB_AudioFile objects that still need to be checked: " + audioFileObjectsToCheck);
 		CB_console("Identifier: " + this.id); //Same as audioFileSprites.id.
 		CB_console("Status: " + this.getStatusString()); //Same as audioFileSprites.getStatusString().
 		if (audioFileObjectsToCheck > 0) { CB_console("You can call the 'audioFileSprites.checkPlayingAll' method to check all the CB_AudioFile objects."); }
+		this.onLoad = null; //Prevents to execute this function again (otherwise, it could be executed again after the object grows automatically to create more 'CB_AudioFile' objects).
 	};
 	
 	//Defines the data for the audio file sprites object with all possible options:
@@ -421,8 +422,19 @@
 	);
 	
 	//Tells whether a given sprite (by its ID) is playing:
+	//Note: there could be more than one sound instance (with a 'CB_AudioFile' object) by each sprite with different status (paused, stopped, etc.) and this method will return true if any of them is playing.
 	if (audioFileSprites.isPlayingSprite("cinco")) { CB_console("The sprite is playing."); }
 	else { CB_console("The sprite is not playing."); }
+
+	//Tells whether a given sprite (by its ID) is paused:
+	//Note: there could be more than one sound instance (with a 'CB_AudioFile' object) by each sprite with different status (paused, stopped, etc.) and this method will return true if any of them is paused.
+	if (audioFileSprites.isPausedSprite("cinco")) { CB_console("The sprite is paused."); }
+	else { CB_console("The sprite is not paused."); }
+
+	//Tells whether a given sprite (by its ID) is stopped:
+	//Note: there could be more than one sound instance (with a 'CB_AudioFile' object) by each sprite with different status (paused, stopped, etc.) and this method will only return true if all of them are stopped.
+	if (audioFileSprites.isStoppedSprite("cinco")) { CB_console("The sprite is stopped."); }
+	else { CB_console("The sprite is not stopped."); }
 
 	//Returns the ID of all the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used:
 	var soundInstanceIDs = audioFileSprites.getSoundInstancesId(); //Returns an object with the data.
@@ -538,7 +550,7 @@
 	audioFileSprites.setAudioAPIAll
 	(
 		//preferredAPIs. Unique mandatory parameter:
-		["AAPI", "SM2"], //In order of preference.
+		["AAPI", "SM2"], //Array of strings with order of preference or a single string with the unique desired API.
 		
 		//callbackOk. Optional but recommended:
 		function(objectsChangedAPI, performedActions, actionsNeeded)
@@ -572,10 +584,10 @@
 	//Tries to change the audio API used by all the internal CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used by a given sprite identifier:
 	audioFileSprites.setAudioAPISprite
 	(
-		"dos", //spriteId.
+		"dos", //spriteId. Mandatory.
 		
-		//preferredAPIs. Unique mandatory parameter:
-		["WAAPI", "AAPI"],
+		//preferredAPIs. Mandatory:
+		["WAAPI", "AAPI"], //In order of preference.
 		
 		//callbackOk. Optional but recommended:
 		function(objectsChangedAPI, performedActions, actionsNeeded)
@@ -609,16 +621,19 @@
 </p>
 <pre><code class="language-javascript">
 	//Executes a function over all the internal CB_AudioFile objects (being "this" each CB_AudioFile itself):
-	audioFileSprites.executeFunctionAll(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
-	audioFileSprites.executeFunctionAll(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
+	//Note: same as 'audioFileSprites.executeAll' and 'audioFileSprites.executeFunctionAll'.
+	audioFileSprites.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
+	audioFileSprites.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
 
 	//Executes a function over all the internal CB_AudioFile objects used by all the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) currently created (being "this" each CB_AudioFile itself):
-	audioFileSprites.executeFunctionAllSprites(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
-	audioFileSprites.executeFunctionAllSprites(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 150); //Adds a 150 milliseconds delay between each call.
+	//Note: same as 'audioFileSprites.executeAllSprites' and 'audioFileSprites.executeFunctionAllSprites'.
+	audioFileSprites.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
+	audioFileSprites.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 150); //Adds a 150 milliseconds delay between each call.
 	
 	//Executes a function over all the internal CB_AudioFile objects used by the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) that belong to a given sprite, by its ID (being "this" each CB_AudioFile itself):
-	audioFileSprites.executeFunctionAllSprite("tres", function(index) { CB_console("CB_AudioFile ID: " + this.id); });
-	audioFileSprites.executeFunctionAllSprite("tres", function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 200); //Adds a 200 milliseconds delay between each call.
+	//Note: same as 'audioFileSprites.executeAllSprite' and 'audioFileSprites.executeFunctionAllSprite'.
+	audioFileSprites.forEachSpriteById("tres", function(index) { CB_console("CB_AudioFile ID: " + this.id); });
+	audioFileSprites.forEachSpriteById("tres", function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 200); //Adds a 200 milliseconds delay between each call.
 
 	//Plays all the CB_AudioFile objects:
 	audioFileSprites.playAll

@@ -21,6 +21,15 @@
 	var num_5_a = CB_numberFormat(num_5, 10); //Returns 567.89 (number).
 	var num_5_b = CB_numberFormat(num_5, 2, true); //Returns '567.8900000000' (string).
 	
+	//Gets the number of decimals from a number (same as 'CB_countDecimalPart', 'CB_countDecimalDigits', 'CB_numberOfDecimals' and 'CB_numberOfDecimalDigits'):
+	var numberOfDecimals = CB_countDecimals(12345.678); //Returns 3.
+	var numberOfDecimals_2 = CB_countDecimals("1e-13"); //It also works for exponential notation (1e-13' would be 0.0000000000001). Returns: 13.
+	
+	//Gets the number of integer digits (the number of digits that belong to the integer part) from a number (same as 'CB_countIntegerDigits' and 'CB_numberOfIntegerDigits'):
+	var numberOfIntegerDigits = CB_countIntegerPart(12345.678); //Returns 5.
+	var numberOfIntegerDigits_2 = CB_countIntegerPart("1e-13"); //It also works for exponential notation (1e-13' would be 0.0000000000001). Returns: 0.
+	var numberOfIntegerDigits_3 = CB_countIntegerPart(999999999999999999999999999); //Returns: 27.
+	
 	//Converting an integer into a desired base (string result) with 'CB_intToBase':
 	var num = -1234567890123456; //Digits: 16.
 	var num_base2 = CB_intToBase(num, 2, false, '-', "0b"); //Returns the number in base 2 (binary), with '0b' prefix (string, length/digits: 54).
@@ -97,7 +106,7 @@
 	
 	//Converting a float number into a specific base and vice versa:
 	var numFloat = 123.45678;
-	var numFloatDecimals = (numFloat % 1) !== 0 ? (numFloat + "").split(".")[1].length : 0; //Returns the number of decimals (5).
+	var numFloatDecimals = CB_numberOfDecimals(numFloat); //Returns the number of decimals (5).
 	var num = numFloat * Math.pow(10, numFloatDecimals); //Returns the number without the decimal symbol (12345678).
 	var num_base4096 = CB_intToBase(num, CB_baseSymbols.get(4096)); //Returns 'num' in base 4096.
 	var num_fromBase4096 = CB_baseToInt(num_base4096, CB_baseSymbols.get(4096)); //Returns 'num' again.

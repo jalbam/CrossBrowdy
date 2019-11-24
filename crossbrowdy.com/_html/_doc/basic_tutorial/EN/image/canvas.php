@@ -13,10 +13,25 @@
 </p>
 
 <p>
+	To make the VML emulation work without errors (using
+	<a href="https://github.com/arv/explorercanvas" target="_blank">ExplorerCanvas</a>), it is recommended to always load
+	<a href="https://github.com/everlaat/flashcanvas" target="_blank">FlashCanvas</a> (which already includes
+	<a href="https://github.com/arv/explorercanvas" target="_blank">ExplorerCanvas</a>) in your HTML code (without using lazy-load, as
+	<a href="https://github.com/arv/explorercanvas" target="_blank">ExplorerCanvas</a> does not support it).
+	This is recommended even when we are not going to use
+	Adobe Flash emulation with <a href="https://github.com/everlaat/flashcanvas" target="_blank">FlashCanvas</a>.
+	This is an example (should be placed before loading the main "CrossBrowdy" script):
+</p>
+<pre><code class="language-html">
+	&lt;!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: --&gt;
+	&lt;script type="text/javascript" src="CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js"&gt;&lt;/script&gt;&lt;!-- FlashCanvas/ExplorerCanvas do not support lazy load. --&gt;
+</code></pre>
+
+<p>
 	For legacy clients not compatible with native <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank">canvas</a>, some emulation methods will require you to create the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas" target="_blank">canvas</a> element in HTML directly (instead of dynamically with JavaScript). Doing so will maximize compatibility with most clients:
 </p>
 <pre><code class="language-html">
-	&lt;canvas id="canvas_id"&gt;if you read this, canvas is not working&lt;/canvas&gt;
+	&lt;canvas id="canvas_id"&gt;if you read this, canvas is not working&lt;/canvas&gt;&lt;!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). --&gt;
 </code></pre>
 
 <p>
@@ -36,9 +51,9 @@
 	var myCanvas_4 = new CB_Canvas
 	(
 		"canvas_id_4", //canvasId. Unique required parameter.
-		"2d", //contextType.
-		CB_Screen.getWindowWidth(), //canvasWidth.
-		CB_Screen.getWindowHeight(), //canvasHeight.
+		"2d", //contextType. Default: "2d".
+		CB_Screen.getWindowWidth(), //canvasWidth. Default: CB_Canvas.WIDTH_DEFAULT.
+		CB_Screen.getWindowHeight(), //canvasHeight. Default: CB_Canvas.HEIGHT_DEFAULT.
 		function() { CB_console("Canvas loaded!"); }, //onLoad.
 		function(error) { CB_console("Canvas object problem! Error: " + error); } //onError.
 	);
@@ -47,16 +62,16 @@
 	var myCanvas_5 = new CB_Canvas
 	(
 		"canvas_id_5", //canvasId. Unique required parameter.
-		"2d", //contextType.
-		CB_Screen.getWindowWidth(), //canvasWidth.
-		CB_Screen.getWindowHeight(), //canvasHeight.
+		"2d", //contextType. Default: "2d".
+		CB_Screen.getWindowWidth(), //canvasWidth. Default: CB_Canvas.WIDTH_DEFAULT.
+		CB_Screen.getWindowHeight(), //canvasHeight. Default: CB_Canvas.HEIGHT_DEFAULT.
 		function() { CB_console("Canvas loaded!"); }, //onLoad.
-		function(error) { CB_console("Canvas object problem! Error: " + error); } //onError.
-		document.body, //canvasParent.
-		[ "FLASH", "VML", "DHTML", "SILVERLIGHT" ], //alternativeCanvasEmulationPreferredOrder.
-		false, //forceFirstEmulationMethod.
-		true, //addOtherMethods.
-		false //allowFlashCanvasLocally.
+		function(error) { CB_console("Canvas object problem! Error: " + error); }, //onError.
+		document.body, //canvasParent. Default: document.body.
+		[ "FLASH", "VML", "DHTML", "SILVERLIGHT" ], //alternativeCanvasEmulationPreferredOrder. Default: CB_Configuration.CrossBase.CB_Canvas_PREFERRED_EMULATION_METHODS.
+		false, //forceFirstEmulationMethod. Default: false.
+		true, //addOtherMethods. Default: true.
+		false //allowFlashCanvasLocally. Default: CB_Configuration.CrossBase.FLASHCANVAS_ALLOW_RUN_LOCALLY_DEFAULT.
 	);
 </code></pre>
 
@@ -70,7 +85,7 @@
 		CB_console("Canvas loaded!");
 		
 		//Shows the rendering method used to create the canvas:
-		var renderingMode = myCanvas.getMode()
+		var renderingMode = this.getMode()
 		if (renderingMode === "NORMAL") { CB_console("Using native canvas rendering"); }
 		else if (renderingMode === "FLASH") { CB_console("Using Flash emulation"); }
 		else if (renderingMode === "SILVERLIGHT") { CB_console("Using Silverlight emulation"); }
@@ -79,35 +94,38 @@
 		else { CB_console("Rendering method could not be found"); } //It could be "NONE" when no rendering method could be used, but then the "onLoad" function would have not been called.
 		
 		//Gets the current canvas width and height:
-		var canvasWidth = myCanvas.getWidth();
-		var canvasHeight = myCanvas.getHeight();
+		var canvasWidth = this.getWidth();
+		var canvasHeight = this.getHeight();
 		
 		//Sets the desired canvas width and height:
-		myCanvas.setWidth(canvasWidth - 10);
-		myCanvas.setHeight(canvasWidth + 20);
+		this.setWidth(canvasWidth - 10);
+		this.setHeight(canvasWidth + 20);
 
 		//Gets the canvas ID:
-		var canvasId = myCanvas.getId();
+		var canvasId = this.getId();
 		
 		//Sets the canvas ID (not recommended as some emulation methods could have problems):
-		myCanvas.setId(canvasId + "_123");
+		this.setId(canvasId + "_123");
 		
 		//Gets the canvas DOM element used (could be different types depending on the emulation method):
-		var canvasElement = myCanvas.get();
+		var canvasElement = this.get();
 		
 		//Gets the context type being used:
-		var canvasContextType = myCanvas.getContextType();
+		var canvasContextType = this.getContextType();
 		
 		//Changes the context type being used previously:
-		myCanvas.setContextType("webgl"); //NOTE: some emulation methods only support "2d".
+		this.setContextType("webgl"); //NOTE: some emulation methods only support "2d".
 		
 		//Gets the "context" object to start working with the canvas:
-		var canvasContext = myCanvas.getContext();
+		var canvasContext = this.getContext();
 	
 		//Clears the canvas (different ways):
-		myCanvas.clear();
-		myCanvas.clear(true); //Clears the canvas keeping the transform.
-		myCanvas.clear(false, "#000000"); //Clears the canvas using black colour background.
+		this.clear();
+		this.clear(true); //Clears the canvas keeping the transform.
+		this.clear(false, "#000000"); //Clears the canvas using black colour background.
+		
+		//Disables anti-aliasing to avoid problems with adjacent sprites:
+		this.disableAntiAliasing();
 	};
 	
 	//Creates a canvas object for the canvas whose id is "canvas_id_4" with the desired context type ("2d"), width and height and using callback functions (recommended):

@@ -72,6 +72,9 @@
 	<p>
 		Finally, CrossBrowdy can also be used to develop web browser extensions although it is important to pay attention to possible safety restrictions that some web browsers may have. To comply with them, some code modifications may be needed.
 	</p>
+	<p>
+		Nevertheless, it is important to point that not all CrossBrowdy features will always be compatible with all clients. Some may have restrictions. It is up to the developer to provide support for clients which do not support those features.
+	</p>
 	
 	
 	<h2 class="category_subtitle">What is the CrossBrowdy license?</h2>

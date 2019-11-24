@@ -7,7 +7,12 @@
 <?php
 	//Show all files:
 	echo getFilesCodeAll();
-	
+?>
+
+Additional file used (inside the &quot;img&quot; folder):
+<a href="<?php echo $dirPath; ?>img/bird_sprites.gif" target="_blank">bird_sprites.gif</a>.
+
+<?php
 	//Let's try the example:
 	echo '<p class="try_example">' . getTryExampleLink() . '</p>';
 ?>

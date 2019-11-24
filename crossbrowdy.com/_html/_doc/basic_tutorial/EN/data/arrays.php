@@ -29,8 +29,30 @@
 	CB_Arrays.forEach(fruitsArray, function(element, index, array) { CB_console(element + " in index #" + index); CB_console(array); });
 	CB_Arrays.forEach(fruitsArray, function(element, index, array) { CB_console(element + " in index #" + index); CB_console(array); CB_console(this); }, window); //Overriding "this" to use 'window'.
 
+	//Another way to perform an action (execute a function) for each element (being able to introduce a delay between each call):
+	CB_Arrays.forEachDelay
+	(
+		fruitsArray, //array.
+		function(element, index, array, delay) //functionEach. Being "this" the element itself.
+		{
+			CB_console(element + " in index #" + index);
+			CB_console(array);
+		},
+		1000, //delayBetweenEach. Optional. Default: 0. Can be either a positive number or a function returning a positive number.
+		true, //returnSetTimeoutsArray. Optional. Default: false.
+		false, //delayBetweenEachAffectsFirst. Optional. Default: false.
+		function(array, totalItemsLooped, delayMaximum) { CB_console("All iterations finished!"); } //functionFinish. Optional.
+	);
+
 	//Creates an array identical from an original one:
 	var arrayCopy = CB_Arrays.copy([1, 2, 3]); //Returns another array with the same elements (copies it).
+
+	//Replaces all the given occurrence from array of strings (with as many levels as we wish):
+	var arrayOfStrings = [ "Level0", ["Level1", ["LEVEL2", "Level2Again"], "Level1Again"], "Level0Again" ];
+	var myArrayReplaced = CB_replaceAll(arrayOfStrings, "e", "A"); //Replaces all occurrences of "e" by "A". Returns: [ "LAvAl0", ["LAvAl1", ["LEVEL2", "LAvAl2Again"], "LAvAl1Again"], "LAvAl0Again" ].
+	var myArrayReplaced_2 = CB_replaceAll(arrayOfStrings, "e", "A", true); //Replaces all occurrences of "e" by "A", case insensitive. Returns: [ "LAvAl0", ["LAvAl1", ["LAVAL2", "LAvAl2Again"], "LAvAl1Again"], "LAvAl0Again" ].
+	var myArrayReplaced_3 = CB_replaceAll(arrayOfStrings, ["e", "v", "i"], "A"); //Replaces all occurrences of "e", "v" and "h" by "A". Returns: [ "LAAAl0", ["LAAAl1", ["LEVEL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].
+	var myArrayReplaced_4 = CB_replaceAll(arrayOfStrings, ["e", "v", "i"], "A", true); //Replaces all occurrences of "e", "v" and "h" by "A", case insensitive. Returns: [ "LAAAl0", ["LAAAl1", ["LAAAL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].
 
 	//Trims undesired strings from the strings of an array, case sensitive (using 'slice' method to keep original array without modifying):
 	//NOTE: functions below are equivalent to 'CB_trim', 'CB_ltrim' and 'CB_rtrim'.
@@ -52,11 +74,21 @@
 	var numbersArray_sorted_4 = CB_Arrays.bsort(numbersArray.slice(0)); //Sorts the array (bubble method). Returns: [ -8, 3, 5, 11, 13, 1984 ].
 	var numbersArray_sorted_5 = CB_Arrays.bsort(numbersArray.slice(0), true); //Sorts the array (bubble method) in reversed order. Returns: [ 1984, 13, 11, 5, 3, -8 ].
 	
+	//Inserts an element in the desired position of a given an array:
+	var arrayNew = CB_Arrays.insertElement(["a", "b", "c"], 1, "Z"); //Returns: [ "a", "Z", "b", "c" ].
+	var arrayNew_2 = CB_Arrays.insertElement(["a", "b", "c"], 2, "Z"); //Returns: [ "a", "b", "Z", "c" ].
+	var arrayNew_3 = CB_Arrays.insertElement(["a", "b", "c"], 3, "Z"); //Returns: [ "a", "b", "c", "Z" ].
+	var arrayNew_4 = CB_Arrays.insertElement(["a", "b", "c"], 9999999, "Z"); //Returns: [ "a", "b", "c", "Z" ] (the maximum index is the length of the array).
+	var arrayNew_5 = CB_Arrays.insertElement(["a", "b", "c"], 0, "Z"); //Returns: [ "Z", "a", "b", "c" ].
+	var arrayNew_6 = CB_Arrays.insertElement(["a", "b", "c"], undefined, "Z"); //Returns: [ "Z", "a", "b", "c" ] (default index is 0).
+	var arrayNew_7 = CB_Arrays.insertElement(["a", "b", "c"], null, "Z"); //Returns: [ "Z", "a", "b", "c" ] (default index is 0).
+	var arrayNew_8 = CB_Arrays.insertElement(["a", "b", "c"], -123, "Z"); //Returns: [ "a", "b", "c", "Z" ] (any negative index will be converted to positive one and the maximum index is the length of the array).
+	
 	//Removes duplicated numbers from an array:
 	var numbersArray = [ 3, 2, 1, 3, 5, 6, 1, 1, 1, 2, 8, 8, 9, 9, 9, 11 ];
 	var numbersArray_purged = CB_Arrays.removeDuplicated(numbersArray.slice(0)); //Removes duplicated values, just leaving one of each. Returns: [ 3, 5, 6, 1, 2, 8, 9, 11 ].
 	var numbersArray_purged_2 = CB_Arrays.removeDuplicated(numbersArray.slice(0), function(element, index, array) { return (element >= 5); }); //Removes duplicated values and also values greater or equal to 5 (by the defined purging function). Returns: [ 3, 1, 2 ].
-	var numbersArray_purged_3 = CB_Arrays.removeDuplicated(numbersArray.slice(0), function(element, index, array) { return (element >= 5); }, true); //Removes values greater or equal to 5 (by the defined purging function) but keeps duplicated values. Returns: [ 3, 1, 2 ]. [ 3, 2, 1, 3, 1, 1, 1, 2 ].
+	var numbersArray_purged_3 = CB_Arrays.removeDuplicated(numbersArray.slice(0), function(element, index, array) { return (element >= 5); }, true); //Removes values greater or equal to 5 (by the defined purging function) but keeps duplicated values. Returns: [ 3, 2, 1, 3, 1, 1, 1, 2 ].
 	
 	//Deletes an element from an array which is placed in the desired position (elements which were after it will be moved a position to the left):
 	var arrayElementRemoved = CB_Arrays.removeElementByPosition([1, 2, 3, 4, 5, "hello"], 1); //Returns: [ 1, 3, 4, 5, "hello" ]. The same as 'CB_Arrays.removeElementByIndex'.

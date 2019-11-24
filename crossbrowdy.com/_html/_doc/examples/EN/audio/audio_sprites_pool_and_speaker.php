@@ -7,7 +7,19 @@
 <?php
 	//Show all files:
 	echo getFilesCodeAll();
-	
+?>
+
+Additional files used (inside the &quot;audio&quot; folder):
+<a href="<?php echo $dirPath; ?>audio/arriba_el_ritmo_valencia.m4a" target="_blank">arriba_el_ritmo_valencia.m4a</a>,
+<a href="<?php echo $dirPath; ?>audio/arriba_el_ritmo_valencia.mp3" target="_blank">arriba_el_ritmo_valencia.mp3</a>,
+<a href="<?php echo $dirPath; ?>audio/arriba_el_ritmo_valencia.ogg" target="_blank">arriba_el_ritmo_valencia.ogg</a>,
+<a href="<?php echo $dirPath; ?>audio/arriba_el_ritmo_valencia.wav" target="_blank">arriba_el_ritmo_valencia.wav</a>,
+<a href="<?php echo $dirPath; ?>audio/numeros.m4a" target="_blank">numeros.m4a</a>,
+<a href="<?php echo $dirPath; ?>audio/numeros.mp3" target="_blank">numeros.mp3</a>,
+<a href="<?php echo $dirPath; ?>audio/numeros.ogg" target="_blank">numeros.ogg</a> and
+<a href="<?php echo $dirPath; ?>audio/numeros.wav" target="_blank">numeros.wav</a>.
+
+<?php	
 	//Let's try the example:
 	echo '<p class="try_example">' . getTryExampleLink() . '</p>';
 ?>

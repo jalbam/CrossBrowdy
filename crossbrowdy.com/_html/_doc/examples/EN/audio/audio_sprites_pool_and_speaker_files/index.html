@@ -12,14 +12,55 @@
 		<script src="main.js" type="text/javascript" language="javascript"></script>
 	</head>
 	<body>
-		Vibration API support: <span id="vibration_api"></span><br />
+		Messages: <button id="clear_messages" onClick="printMessage('');">Clear messages</button>
+		<div id="messages"></div>
+		<h2>Speaker management</h2>
+		Volume (0 to 100): <input type="text" id="volume_speaker" size="5" maxlength="5" value="100"> <button onClick="setVolumeSpeaker();">Set volume speaker</button>
+		<button onClick="muteSpeaker();">Mute all</button>
+		<button onClick="unmuteSpeaker();">Unmute all</button>
 		<br />
-		<button onClick="vibrateOnce();">Vibrate once</button>
-		<button onClick="vibrateMoreTimes();">Vibrate more times</button>
-		<button onClick="vibrateStop();">Stop vibration</button>
 		<br />
+		<h2>Sprites pool management</h2>
+		<span id="loading">Loading...</span>
+		<span id="create">
+			<button onClick="createAudioSpritesPool();">Step 1: Create audio sprites pool object</button>
+		</span>
+		<span id="check">
+			<button onClick="checkPlayingAll();">Step 2: Check all audio file objects</button>
+		</span>
+		<span id="controls">
+			<button onClick="playAll();">Play all</button>
+			<button onClick="pauseAll();">Pause all</button>
+			<button onClick="resumeAll();">Resume all</button>
+			<button onClick="stopAll();">Stop all</button>
+			<button onClick="playAndStopAll();">Play and stop all</button>
+			Volume (0 to 100): <input type="text" id="volume_all" size="5" maxlength="5" value="100"> <button onClick="setVolumeAll();">Set volume all</button>
+			<button onClick="muteAll();">Mute all</button>
+			<button onClick="unmuteAll();">Unmute all</button>
+			<br />
+			<button onClick="setAudioAPIAll(['WAAPI', 'AAPI', 'ACMP', 'SM2']);">Change audio API with this order preference: 'WAAPI', 'AAPI', 'ACMP', 'SM2'</button>
+			<button onClick="setAudioAPIAll(['AAPI', 'WAAPI', 'ACMP', 'SM2']);">Change audio API with this order preference: 'AAPI', 'WAAPI', 'ACMP', 'SM2'</button>
+			<button onClick="setAudioAPIAll(['SM2', 'ACMP', 'AAPI', 'WAAPI']);">Change audio API with this order preference: 'SM2', 'ACMP', 'AAPI', 'WAAPI'</button>
+			<button onClick="setAudioAPIAll(['ACMP', 'WAAPI', 'AAPI', 'SM2']);">Change audio API with this order preference: 'ACMP', 'WAAPI', 'AAPI', 'SM2'</button>
+			<button onClick="setAudioAPIAll('WAAPI');">Change audio API to 'WAAPI'</button>
+			<button onClick="setAudioAPIAll('AAPI');">Change audio API to 'AAPI'</button>
+			<button onClick="setAudioAPIAll('ACMP');">Change audio API to 'ACMP'</button>
+			<button onClick="setAudioAPIAll('SM2');">Change audio API to 'SM2'</button>
+			<br />
+			<button id="destructor_pool" onClick="destructor();">Destructor</button>
+			<button id="reload_sprites_pool" onClick="createAudioSpritesPool();">Re-load data</button>
+			<br />
+			<br />
+			<h3>CB_AudioFileSpritesPool info</h3>
+			<div id="sprites_pool_info"></div>
+			<button onClick="clearSoundInstances();">Clear non-used sound instances</button>
+			<br />
+			<br />
+			<span id="sprites_controls">
+				<h2>Sprites management</h2>
+			</span>
+		</span>
 		<br />
-		Timestamp: <span id="timestamp"></span><br />
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />

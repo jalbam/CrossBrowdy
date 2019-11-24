@@ -54,13 +54,18 @@
 	else { CB_console("The screen is using portrait mode!"); }
 	
 	//Tries to force the screen to use an orientation (locking it):
-	CB_Screen.lockOrientation("landscape"); //Equivalent to 'CB_Screen.setOrientation'.
+	CB_Screen.lockOrientation //Equivalent to 'CB_Screen.setOrientation'.
+	(
+		"landscape", //orientationMode.
+		function() { CB_console("Orientation locked!"); }, //onSuccess. Optional.
+		function(error) { CB_console("Orientation could not be locked! Error: " + error); } //onError. Optional.
+	);
 	
 	//Shows the current screen orientation:
 	CB_console("Current screen orientation: " + CB_Screen.getOrientation());
 	
 	//Tries to unlock the previously-locked screen orientation:
-	CB_Screen.unlockOrientation(); //Equivalent to 'CB_Screen.unsetOrientation()'.
+	CB_Screen.unlockOrientation(function(error) { alert("Orientation could not be unlocked! Error: " + error); }); //Equivalent to 'CB_Screen.unsetOrientation()'.
 	
 	//Checks whether the current client is compatible with the FullScreen API:
 	if (CB_Screen.isFullScreenAPICompatible()) { CB_console("Compatible with FullScreen API!"); }
@@ -78,10 +83,10 @@
 	
 	//Tries to keeps the screen awake and prevents it from turning off:
 	//NOTE: it uses different methods internally as Apache Cordova's Insomnia plugin, Standby API, Mozilla's Wake Lock API, new W3C's Wake Lock API, old W3C's Wake Lock API, NoSleep.js library (it should be activated by an event fired by the user as 'onClick' or 'onTouchStart', etc.)...
-	CB_Screen.keepAwake(function() { console.log("Keep awake set successfully!"); }, function() { console.log("Keep awake could not be set successfully!"); });
+	CB_Screen.keepAwake(function() { CB_console("Keep awake set successfully!"); }, function() { CB_console("Keep awake could not be set successfully!"); });
 	
 	//Stops keeping the screen awake:
-	CB_Screen.keepAwakeDisable(function() { console.log("Keep awake disabled successfully!"); }, function() { console.log("Keep awake could not be disabled successfully!"); });
+	CB_Screen.keepAwakeDisable(function() { CB_console("Keep awake disabled successfully!"); }, function() { CB_console("Keep awake could not be disabled successfully!"); });
 	
 	//Sets the desired "viewport" meta tag dynamically:
 	CB_Screen.setViewport

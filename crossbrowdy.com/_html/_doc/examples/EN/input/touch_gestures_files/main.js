@@ -1,3 +1,6 @@
+//Using Hammer.js library internally: https://hammerjs.github.io/
+
+
 CB_init(main); //It will call the "main" function when ready.
 
 

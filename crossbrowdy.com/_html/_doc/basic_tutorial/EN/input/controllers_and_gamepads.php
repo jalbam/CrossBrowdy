@@ -21,18 +21,49 @@
 </code></pre>
 
 <p>
+	You can easily check if one or more axes are being pressed currently:
+</p>
+<pre><code class="language-javascript">
+	//Managing axes pressed currently (this should normally be in a loop, checking constantly):
+	if (CB_Controllers.isAxisDown([0, 1]))
+	{
+		CB_console("Axes 0 or 1 (maybe both) is being pressed in some or all gamepads");
+	}
+
+	if (CB_Controllers.isAxisDown([0, 1], 0.5, 1))
+	{
+		CB_console("Axes 0 or 1 (maybe both) is being pressed in some or all gamepads and their value is between 0.5 and 1 (both included).");
+	}
+	
+	if (CB_Controllers.isAxisDown([2, 3], 1))
+	{
+		CB_console("Axes 2 or 3 (maybe both) is being pressed in gamepad whose index is '1'");
+	}
+	
+	if (CB_Controllers.isAxisDown([2, 3], 2, -1, -0.5, true))
+	{
+		CB_console("Axes 2 and 3 are both being pressed in gamepad whose index is '2' and their value is between -1 and -0.5 (both included).");
+	}
+	
+	if (CB_Controllers.isAxisDown([2, 3], "", -1, -0.5, true))
+	{
+		CB_console("Axes 2 and 3 are both being pressed, regardless they are being pressed in the same gamepad or in different ones and their value is between -1 and -0.5 (both included).");
+	}
+</code></pre>
+
+<p>
 	You can easily check if one or more buttons are being pressed currently:
 </p>
 <pre><code class="language-javascript">
 	//Managing buttons pressed currently (this should normally be in a loop, checking constantly):
 	if (CB_Controllers.isButtonDown([2, 3]))
 	{
-		CB_console("Button 2 or 3 (maybe both) are being pressed in some or all gamepads");
+		CB_console("Button 2 or 3 (maybe both) is being pressed in some or all gamepads");
 	}
 	
 	if (CB_Controllers.isButtonDown([2, 3], 1))
 	{
-		CB_console("Button 2 or 3 (maybe both) are being pressed in gamepad whose index is '1'");
+		CB_console("Button 2 or 3 (maybe both) is being pressed in gamepad whose index is '1'");
 	}
 	
 	if (CB_Controllers.isButtonDown([2, 3], 2, true))

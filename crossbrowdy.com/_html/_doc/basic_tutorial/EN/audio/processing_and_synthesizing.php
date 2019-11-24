@@ -2,7 +2,7 @@
 
 <p>
 	With the <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class you can manage audio processing and synthesizing easily. This is done thanks to the
-	<a href="https://mohayonao.github.io/timbre.js/" target="_blank">timbre.js library</a> and the <a href="http://mohayonao.github.io/subcollider/" target="_blank">subcollider.js library</a>.
+	<a href="https://mohayonao.github.io/timbre.js/" target="_blank">timbre.js library</a> and the <a href="https://mohayonao.github.io/subcollider/" target="_blank">subcollider.js library</a>.
 </p>
 	
 <p>
@@ -62,7 +62,8 @@
 					timbreJSObject("pan", { pos: -0.6 }, L),
 					timbreJSObject("pan", { pos: +0.6 }, R)
 				).play();
-		});
+			}
+		);
 	}
 </code></pre>
 <p>
@@ -70,7 +71,7 @@
 </p>
 
 <p>
-	You can read more about it in the <a href="https://mohayonao.github.io/timbre.js/" target="_blank">timbre.js library</a> and the <a href="http://mohayonao.github.io/subcollider/" target="_blank">subcollider.js library</a> web sites.
+	You can read more about it in the <a href="https://mohayonao.github.io/timbre.js/" target="_blank">timbre.js library</a> and the <a href="https://mohayonao.github.io/subcollider/" target="_blank">subcollider.js library</a> web sites.
 </p>
 
 <p>

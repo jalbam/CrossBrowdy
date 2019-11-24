@@ -6,20 +6,92 @@
 		<title>Others: Collisions - Example</title>
 		<!-- Loads the needed CSS files: -->
 		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: -->
+		<script type="text/javascript" src="../../../../../../CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js"></script><!-- FlashCanvas/ExplorerCanvas do not support lazy load. -->
 		<!-- Loads CrossBrowdy.js (main file): -->
 		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
 		<!-- Loads the other needed script files: -->
 		<script src="main.js" type="text/javascript" language="javascript"></script>
 	</head>
 	<body>
-		Vibration API support: <span id="vibration_api"></span><br />
-		<br />
-		<button onClick="vibrateOnce();">Vibrate once</button>
-		<button onClick="vibrateMoreTimes();">Vibrate more times</button>
-		<button onClick="vibrateStop();">Stop vibration</button>
+		<canvas id="my_canvas">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
 		<br />
 		<br />
-		Timestamp: <span id="timestamp"></span><br />
+		Messages:
+		<div id="messages"></div>
+		<br />
+		<br />
+		Point A:
+		<span>
+			X: <input type="text" id="point_a_x" size="7" maxlength="7" value="70" />,
+			Y: <input type="text" id="point_a_y" size="7" maxlength="7" value="30" />
+		</span>
+		<br />
+		Point B:
+		<span>
+			X: <input type="text" id="point_b_x" size="7" maxlength="7" value="35" />,
+			Y: <input type="text" id="point_b_y" size="7" maxlength="7" value="60" />
+		</span>
+		<br />
+		<br />
+		Rectangle A:
+		<span>
+			X: <input type="text" id="rectangle_a_x" size="7" maxlength="7" value="2" />,
+			Y: <input type="text" id="rectangle_a_y" size="7" maxlength="7" value="10" />,
+			Width: <input type="text" id="rectangle_a_width" size="7" maxlength="7" value="30" />,
+			Height: <input type="text" id="rectangle_a_height" size="7" maxlength="7" value="60" />
+		</span>
+		<br />
+		Rectangle B:
+		<span>
+			X: <input type="text" id="rectangle_b_x" size="7" maxlength="7" value="8" />,
+			Y: <input type="text" id="rectangle_b_y" size="7" maxlength="7" value="20" />,
+			Width: <input type="text" id="rectangle_b_width" size="7" maxlength="7" value="50" />,
+			Height: <input type="text" id="rectangle_b_height" size="7" maxlength="7" value="10" />
+		</span>
+		<br />
+		<br />
+		Circle A:
+		<span>
+			X (centre): <input type="text" id="circle_a_x" size="7" maxlength="7" value="160" />,
+			Y (centre): <input type="text" id="circle_a_y" size="7" maxlength="7" value="70" />,
+			Radius: <input type="text" id="circle_a_radius" size="7" maxlength="7" value="30" />
+		</span>
+		<br />
+		Circle B:
+		<span>
+			X (centre): <input type="text" id="circle_b_x" size="7" maxlength="7" value="90" />,
+			Y (centre): <input type="text" id="circle_b_y" size="7" maxlength="7" value="130" />,
+			Radius: <input type="text" id="circle_b_radius" size="7" maxlength="7" value="80" />
+		</span>
+		<br />
+		<br />
+		Ellipse A:
+		<span>
+			X (centre): <input type="text" id="ellipse_a_x" size="7" maxlength="7" value="200" />,
+			Y (centre): <input type="text" id="ellipse_a_y" size="7" maxlength="7" value="170" />,
+			Radius vertical: <input type="text" id="ellipse_a_radius_x" size="7" maxlength="7" value="30" />
+			Radius horizontal: <input type="text" id="ellipse_a_radius_y" size="7" maxlength="7" value="50" />
+		</span>
+		<br />
+		<br />
+		Line A:
+		<span>
+			1st point X: <input type="text" id="line_x1" size="7" maxlength="7" value="10" />,
+			1st point Y: <input type="text" id="line_y1" size="7" maxlength="7" value="100" />,
+			2nd point X: <input type="text" id="line_x2" size="7" maxlength="7" value="0" />,
+			2nd point Y: <input type="text" id="line_y2" size="7" maxlength="7" value="0" />
+		</span>
+		<br />
+		<br />
+		Segment A:
+		<span>
+			first point X: <input type="text" id="segment_x1" size="7" maxlength="7" value="30" />,
+			first point Y: <input type="text" id="segment_y1" size="7" maxlength="7" value="60" />,
+			last point X: <input type="text" id="segment_x2" size="7" maxlength="7" value="210" />,
+			last point Y: <input type="text" id="segment_y2" size="7" maxlength="7" value="210" />
+		</span>
+		<br />
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />

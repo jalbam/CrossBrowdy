@@ -16,7 +16,7 @@
 	var myObjectSize_2 = CB_sizeOf(myObject, true); //Only counts own properties, not inherited from prototype. Returns: 2.
 
 	//Duplicating an object:
-	var objectCopy = CB_copyObject({"hello" : "world", "whatever" : 123}); //Returns another object with the same properties and their values (copies it).
+	var objectCopy = CB_copyObject({"hello" : "world", "whatever" : 123, "subObject" : { "subObject2" : "hello" } }); //Returns another object with the same properties and their values (copies it).
 
 	//Combines two objects, third parameter ignored when not using two arrays (equivalent to 'CB_combineJSON' and 'CB_Arrays.combine'):
 	var objectsCombined = CB_combineArraysOrObjects({ a : 1, b: 2, c: 3 }, { c : 4, d : 5 }); //Returns the object: { a: 1, b: 2, c: 4, d: 5 }.

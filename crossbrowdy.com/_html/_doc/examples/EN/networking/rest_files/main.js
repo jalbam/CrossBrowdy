@@ -194,7 +194,9 @@ function abort(actionName)
 	if (CB_Net.REST.actionIsAborted(XHR))
 	{
 		CB_console("Action was marked as aborted!");
-		CB_Elements.insertContentById(actionName + "_response", "[ABORTED] " + CB_Elements.id(actionName + "_response").innerHTML);
+		CB_Elements.appendContentByIdBeginning(actionName + "_response", "[ABORTED] "); //Appends the text at the beginning of its content.
+		//CB_Elements.insertContentById(actionName + "_response", "[ABORTED] " + CB_Elements.id(actionName + "_response").innerHTML);
+		
 	}
 	else { CB_console("Action was not marked as aborted!"); }
 }

@@ -82,7 +82,7 @@ function stop()
 
 		//Defines a handler for the "onError" event (optional):
 		function(evt) { showEventsInformation("Failed to close the connection! evt = " + JSON.stringify(evt)); } //Prints the event object.
-	);	
+	);
 }
 
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>Advanced: Balloon popping game - Example</title>
+		<!-- Loads the needed CSS files: -->
+		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: -->
+		<script type="text/javascript" src="../../../../../../CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js"></script><!-- FlashCanvas/ExplorerCanvas do not support lazy load. -->
+		<!-- Loads CrossBrowdy.js (main file): -->
+		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+		<!-- Loads the other needed script files: -->
+		<script src="main.js" type="text/javascript" language="javascript"></script>
+	</head>
+	<body>
+		<div id="loading">Loading...</div>
+		<canvas id="my_canvas">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
+		<canvas id="my_canvas_buffer">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
+		<button id="start_button" onClick="gameStart();">Start game!</button>
+		<br />
+		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
+		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
+			<span style="font-weight:bold;">Console:</span><br />
+		</div>
+		<div id="crossbrowdy_info"><a href="../../../../../../guides#examples" target="_blank">CrossBrowdy.com</a> example</div>
+	</body>
+</html>

@@ -223,7 +223,7 @@
 		//Otherwise, if set to true and the audio failed or was aborted (destroyed), the audio will not play at all and the "stop" method of the used audio API object will be called immediately.
 		false, //avoidDelayedPlay. Optional. Default: false. Set to undefined or null to use the default one.
 		
-		/The maximum amount of time (in milliseconds) of delay that we accept before start playing the audio:
+		//The maximum amount of time (in milliseconds) of delay that we accept before start playing the audio:
 		//If the amount of time is overcome, the audio will not play at all and the "stop" method of the used audio API object will be called immediately.
 		//Used only when the "avoidDelayedPlay" parameter is set to false and the audio needs to be loaded because it failed previously or was aborted (destroyed).
 		true, //allowedRecursiveDelay. Optional. Default: CB_Configuration.CrossBase.CB_AudioFile_AudioFileCache_ALLOWED_RECURSIVE_DELAY_DEFAULT. Set to undefined or null to use the default one.

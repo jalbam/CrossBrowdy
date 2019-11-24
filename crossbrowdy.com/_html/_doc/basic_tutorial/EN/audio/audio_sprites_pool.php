@@ -14,7 +14,7 @@
 </p>
 
 <p>
-	Internally, each audio file sprites pool object will normally manage one audio file sprites object (which use the <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> class) per each sprites group that will typically contain one <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> and each of them will have multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally.
+	Internally, each audio file sprites pool object will normally manage one audio file sprites object (which use the <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> class) per each sprites group that will typically contain one <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> and each of them will have multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically (expanding itself) in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally. During this process, the audio file sprites pool object (<a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object) will have a 'LOADING' status again and after that the status will be 'LOADED' if all went well or 'FAILED' otherwise. When the 'LOAD' status is reached, the 'onLoad' event function (if any) will be called again (to prevent this, set the 'onLoad' property of the object to something which is not a function once it gets executed).
 </p>
 
 <p>
@@ -242,7 +242,7 @@
 				"startAt" : 294200,
 				"stopAt" : 294980
 			},
-			"Que no pare la marcha" : 
+			"No pare la marcha" : 
 			{
 				"startAt" : 295040,
 				"stopAt" : 296420
@@ -250,13 +250,14 @@
 		}
 	};
 
-	//Defines the function to call when an audio file sprites object is created:
+	//Defines the function to call when an audio file sprites object is created or expanding:
 	var onCreateSpritesGroup = function(audioFileObjectsToCheck)
 	{
-		CB_console("Audio file sprites object (CB_AudioFileSprites) created! CB_AudioFile objects that still need to be checked: " + audioFileObjectsToCheck);
+		CB_console("Audio file sprites object (CB_AudioFileSprites) created or expanding! CB_AudioFile objects that still need to be checked: " + audioFileObjectsToCheck);
 		CB_console("CB_AudioFileSprites Identifier: " + this.id);
 		CB_console("CB_AudioFileSprites Status: " + this.getStatusString()); //Same as audioFileSpritesPool.audioFileSprites[this.id].getStatusString().
 		if (audioFileObjectsToCheck > 0) { CB_console("You can call the 'audioFileSpritesPool.audioFileSprites['" + this.id + "'].checkPlayingAll' method to check all the CB_AudioFile objects."); }
+		this.onLoad = null; //Prevents to execute this function again (otherwise, it could be executed again after the object grows automatically to create more 'CB_AudioFile' objects).
 	};
 	
 	//Defines the function to call when the audio file sprites pool object is created:
@@ -266,6 +267,7 @@
 		CB_console("Identifier: " + this.id); //Same as audioFileSpritesPool.id.
 		CB_console("Status: " + this.getStatusString()); //Same as audioFileSpritesPool.getStatusString().
 		if (audioFileObjectsToCheck > 0) { CB_console("You can call the 'audioFileSpritesPool.checkPlayingAll' method to check all the CB_AudioFile objects."); }
+		this.onLoad = null; //Prevents to execute this function again (otherwise, it could be executed again after the object grows automatically to create more 'CB_AudioFile' objects).
 	};
 	
 	//Defines the data for the audio file sprites pool object with all possible options:
@@ -395,7 +397,7 @@
 				//Defines whether to create the CB_AudioFile objects automatically by calling the 'audioFileSpritesPool.audioFileSprites["arriba_el_ritmo_valencia"].createAudioFiles' method internally (recommended) or not:
 				//NOTE: if the 'disableAutoLoad' option is enabled, it is always necessary to call the 'audioFileSpritesPool.audioFileSprites["arriba_el_ritmo_valencia"].createAudioFiles' manually.
 				disableAutoLoad: false //Optional. Default: false. Set to undefined or null to use the default one. Internal usage only recommended.
-			},
+			}
 		},
 
 		/* General options for the audio file sprites pool object (can be overridden when they are specified in the options of a sprites group): */
@@ -635,7 +637,7 @@
 	audioFileSpritesPool.setAudioAPIAll
 	(
 		//preferredAPIs. Unique mandatory parameter:
-		["AAPI", "SM2"], //In order of preference.
+		["AAPI", "SM2"], //Array of strings with order of preference or a single string with the unique desired API.
 		
 		//callbackOk. Optional but recommended:
 		function(objectsChangedAPI, performedActions, actionsNeeded)
@@ -679,13 +681,15 @@
 	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file sprites pool object uses:
 </p>
 <pre><code class="language-javascript">
-	//Executes a function over all the internal CB_AudioFile objects (being "this" each CB_AudioFile itself):
-	audioFileSpritesPool.executeFunctionAll(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
-	audioFileSpritesPool.executeFunctionAll(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
+	//Executes a function over all the internal CB_AudioFile objects, being "this" each CB_AudioFile itself:
+	//NOTE: same as 'audioFileSpritesPool.executeAll' and 'audioFileSpritesPool.executeFunctionAll'
+	audioFileSpritesPool.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
+	audioFileSpritesPool.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
 
 	//Executes a function over all the internal CB_AudioFile objects used by all the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object) currently created (being "this" each CB_AudioFile itself):
-	audioFileSpritesPool.executeFunctionAllSprites(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
-	audioFileSpritesPool.executeFunctionAllSprites(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 150); //Adds a 150 milliseconds delay between each call.
+	//NOTE: Same as 'audioFileSpritesPool.executeAllSprites' and 'audioFileSpritesPool.executeFunctionAllSprites'.
+	audioFileSpritesPool.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
+	audioFileSpritesPool.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 150); //Adds a 150 milliseconds delay between each call.
 	
 	//Plays all the CB_AudioFile objects:
 	audioFileSpritesPool.playAll

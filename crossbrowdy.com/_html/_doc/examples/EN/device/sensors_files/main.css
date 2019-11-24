@@ -1,5 +1,5 @@
-body { background-color:#aaddee; }
-#crossbrowdy_info { position:absolute; bottom:2px; right:2px; }
+body { background-color:#aaddee; word-wrap:break-word; }
+#crossbrowdy_info { position:fixed; bottom:2px; right:2px; }
 #crossbrowdy_info a { color:#00aadd; }
 #crossbrowdy_info a:hover { color:#0033aa; }
 span { color:#aa0000; }

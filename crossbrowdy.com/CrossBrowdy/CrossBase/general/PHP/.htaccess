@@ -1,0 +1,14 @@
+<Files "PHP_detector.php">
+	AddType application/javascript .php
+	
+	ForceType application/javascript
+	DefaultType application/javascript
+	
+	SetHandler application/x-httpd-php
+	
+	Allow from all
+	
+	<IfModule mod_headers.c>
+		Header set Content-Type "application/javascript"
+	</IfModule>
+</Files>

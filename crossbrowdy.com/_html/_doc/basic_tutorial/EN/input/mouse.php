@@ -43,6 +43,10 @@ Some simple collisions can be managed easily:
 	{
 		CB_console("The mouse is over a circle whose center is in (20, 30) pixel coordinates and its radius is 100 pixels.");
 	}
+	if (CB_Mouse.isOverEllipse(20, 30, 100, 200))
+	{
+		CB_console("The mouse is over a circle whose center is in (20, 30) pixel coordinates and its horizontal and vertical radii are 100 and 200 pixels respectively.");
+	}
 	if (CB_Mouse.isOverLine(0, 0, 100, 100)) //Note that a fifth parameter can also be given to specify desired "tolerance".
 	{
 		CB_console("The mouse is over an infinite line which cross both the (0, 0) and (100, 100) coordinates.");
@@ -52,6 +56,9 @@ Some simple collisions can be managed easily:
 		CB_console("The mouse is over a line segment which starts in the (200, 500) and ends in the (700, 600) coordinates.");
 	}
 </code></pre>
+<p>
+	For more advanced collisions, you can use the <a href="_html/_doc/api/CB_Collisions.html" target="_blank">CB_Collisions</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("others", "collisions"); ?>" target="_blank"><?php echo $basicTutorial["others"]["topics"]["collisions"][$language]; ?></a> topic of the basic tutorial.
+</p>
 
 <p>
 	The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a> is also supported:

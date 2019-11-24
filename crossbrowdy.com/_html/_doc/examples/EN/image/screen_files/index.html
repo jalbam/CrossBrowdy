@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<title>Image: Screen - Example</title>
 		<!-- Loads the needed CSS files: -->
 		<link rel="stylesheet" type="text/css" href="main.css" />
@@ -12,14 +11,38 @@
 		<script src="main.js" type="text/javascript" language="javascript"></script>
 	</head>
 	<body>
-		Vibration API support: <span id="vibration_api"></span><br />
+		<div id="force_scroll" style="position:absolute; left:0px; top:0px;">&nbsp;</div><!-- Element to force horizontal and vertical scroll so we can test scroll information. -->
+		<button onClick="lockOrientation('portrait');">Lock portrait orientation</button>
+		<button onClick="lockOrientation('landscape');">Lock landscape orientation</button>
+		<button onClick="unlockOrientation();">Unlock orientation</button>
 		<br />
-		<button onClick="vibrateOnce();">Vibrate once</button>
-		<button onClick="vibrateMoreTimes();">Vibrate more times</button>
-		<button onClick="vibrateStop();">Stop vibration</button>
+		<br />
+		<button onClick="setFullScreen();">Full screen</button>
+		<button onClick="setFullScreen(true);">Full screen (allows reloading window, for legacy clients)</button>
+		<button onClick="exitFullScreen();">Exit full screen</button>
 		<br />
 		<br />
-		Timestamp: <span id="timestamp"></span><br />
+		<button onClick="keepAwake(true);">Keep awake (screen will not turn off)</button>
+		<button onClick="keepAwake(false);">Stop keeping awake</button>
+		<br />
+		<br />
+		<button onClick="toggleViewport();">Toggle 'viewport' meta</button>
+		<br />
+		<br />
+		Penultimate event: <span id="screen_penultimate_event"></span><br />
+		Last event: <span id="screen_last_event"></span>
+		<br />
+		<br />
+		Lock information: <span id="lock_information"></span>
+		<br />
+		<br />
+		Keep awake information: <span id="keep_awake_information"></span>
+		<br />
+		<br />
+		Information:
+		<br />
+		<span id="container"></span>
+		<br />
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />

@@ -12,14 +12,44 @@
 		<script src="main.js" type="text/javascript" language="javascript"></script>
 	</head>
 	<body>
-		Vibration API support: <span id="vibration_api"></span><br />
-		<br />
-		<button onClick="vibrateOnce();">Vibrate once</button>
-		<button onClick="vibrateMoreTimes();">Vibrate more times</button>
-		<button onClick="vibrateStop();">Stop vibration</button>
+		Note that neither audio API support detection nor audio format detection are necessary when using classes like 'CB_AudioFile', 'CB_AudioFileCache', 'CB_AudioFileSprites', 'CB_AudioFileSpritesPool' or 'CB_Speaker' as they already detect all automatically for you.
 		<br />
 		<br />
-		Timestamp: <span id="timestamp"></span><br />
+		Existing audio APIs: <span id="existing_apis"></span><br />
+		Supported audio APIs: <span id="supported_apis"></span><br />
+		Supported audio APIs, with emulation: <span id="supported_apis_emulation"></span><br />
+		Supported audio APIs (array): <span id="supported_apis_array"></span><br />
+		Supported audio APIs, with emulation (array): <span id="supported_apis_emulation_array"></span><br />
+		Preferred audio API: <span id="preferred_api"></span><br />
+		Preferred audio API, with emulation: <span id="preferred_api_emulation"></span><br />
+		HTML5 Web Audio API is using emulation: <span id="waapi_emulated"></span><br />
+		SoundManager 2 is using Flash: <span id="sm2_using_flash"></span><br />
+		<br />
+		Audio formats support:
+			<ul>
+				All existing ones (maybe not supported): <span id="audio_formats_existing"></span>
+				<br />
+				<br />
+				Probably (quite sure):
+				<br />
+				<span id="audio_formats_support_probably"></span><br />
+				* From array (with data URIs): <span id="audio_formats_support_probably_data_uris_array"></span><br /><br />
+				* From array (no data URIs): <span id="audio_formats_support_probably_array"></span><br />
+				<br />
+				<br />
+				Maybe (not so sure):
+				<br />
+				<span id="audio_formats_support_maybe"></span><br />
+				* From array: <span id="audio_formats_support_maybe_data_uris_array"></span><br /><br />
+				* From array (no data URIs): <span id="audio_formats_support_maybe_array"></span><br />
+				<br />
+				<br />
+				Unsupported:
+				<br />
+				<span id="audio_formats_support_unsupported"></span><br />
+				* From array: <span id="audio_formats_support_unsupported_array"></span><br />
+			</ul>
+		<br />
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />
