@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 var CB_REM_DEBUG_MESSAGES = true; //Shows debug messages.
 
 //Adds the rendering engine module to CrossBrowdy:
@@ -42,9 +44,29 @@ function main()
 		//If both canvas (normal and buffer) have been created, proceeds with the rendering:
 		if (canvasLoaded >= 2)
 		{
-			//When the screen changes its size, both canvas will be re-adapted:
-			CB_Screen.onResize(function() { canvases["my_canvas"].setWidth(CB_Screen.getWindowWidth()); canvases["my_canvas"].setHeight(CB_Screen.getWindowHeight()); canvases["my_canvas"].clear(); canvases["my_canvas"].disableAntiAliasing(); });
-			CB_Screen.onResize(function() { canvases["my_canvas_buffer"].setWidth(CB_Screen.getWindowWidth()); canvases["my_canvas_buffer"].setHeight(CB_Screen.getWindowHeight()); canvases["my_canvas_buffer"].clear(); canvases["my_canvas_buffer"].disableAntiAliasing(); });
+			//When the screen changes its size or its orientation, both canvases will be re-adapted:
+			var onResizeOrChangeOrientationTimeout = null;
+			var onResizeOrChangeOrientation = function()
+			{
+				clearTimeout(onResizeOrChangeOrientationTimeout);
+				onResizeOrChangeOrientationTimeout = setTimeout //NOTE: needs a delay as some clients on iOS update the screen size information in two or more steps (last step is the correct value).
+				(
+					function()
+					{
+						//Resizes the canvas:
+						canvases["my_canvas"].setWidth(CB_Screen.getWindowWidth());
+						canvases["my_canvas"].setHeight(CB_Screen.getWindowHeight());
+						canvases["my_canvas"].clear(); canvases["my_canvas"].disableAntiAliasing();
+						
+						//Resizes the buffer canvas:
+						canvases["my_canvas_buffer"].setWidth(CB_Screen.getWindowWidth());
+						canvases["my_canvas_buffer"].setHeight(CB_Screen.getWindowHeight());
+						canvases["my_canvas_buffer"].clear();
+						canvases["my_canvas_buffer"].disableAntiAliasing();
+					}
+				);
+			};
+			CB_Screen.onResize(onResizeOrChangeOrientation);
 
 			//Clears both canvas:
 			canvases["my_canvas"].clear();
@@ -115,7 +137,7 @@ function createSpritesGroups()
 			2) We will use 'duration' in the 'data' property to disable a sprite or sub-sprite (if it is set to null, it will never be disabled). If used in a 'CB_GraphicSprites' object, it will affect its current sprite being pointed.
 			3) We will use the 'timeResetAndEnableAfter' in the 'data' property to enable again a sprite or sub-sprite (if it is set to null, it will never be enabled). It also resets the 'time' property of the sprite or sub-sprite. If used in a 'CB_GraphicSprites' object, it will affect its current sprite being pointed.
 			4) We will use 'skipAfter' in the 'data' property of a sprite to jump to the next one (if it is set to null, it will never jump automatically). * If used in a 'CB_GraphicSprites' object, it will affect its current sprite being pointed.
-			5) We can use 'beforeDrawing' and 'afterDrawing' callbacks defined in the 'data' object to be called before drawing an element or after doing it, respectively.
+			5) We can use 'beforeDrawing' and 'afterDrawing' callbacks defined in the 'data' object to be called before drawing an element or after doing it, respectively. For bitmaps, a 'beforeDrawingElement' callback can be used to call before drawing each map element.
 			6) We can set 'onlyUseInMap' to true in the 'data' object to just draw that element when it is being drawn as a part of a map (a map is an element whose 'srcType' equals to 'CB_GraphicSprites.SRC_TYPES.MAP').
 			7) We can set 'loop' to true in the 'data' object to loop sprites infinitely instead of stopping at the last one.
 			8) We can set a number (which belongs to the index of a sprite) or a function returning a number in the 'pointerNext' property of the 'data' object to indicate the desired next sprite.
@@ -482,7 +504,7 @@ function createSpritesGroups()
 						top: 25,
 						data:
 						{
-							style: "#ff00ff",
+							style: "#ff00ff"
 						},
 						subSprites:
 						[
@@ -782,6 +804,39 @@ function createSpritesGroups()
 					}
 				]
 			},
+			//'bitmap_group' ('CB_GraphicSprites.SPRITES_OBJECT' object). Some missing or non-valid properties will will be inherited from the parent ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object):
+			{
+				id: "bitmap_group",
+				srcType: CB_GraphicSprites.SRC_TYPES.BITMAP,
+				top: 340,
+				left: 300,
+				width: 10, //It will be updated when calling 'beforeDrawingElement'.
+				height: 10, //It will be updated when calling 'beforeDrawingElement'.
+				data:
+				{
+					beforeDrawingElement:
+						function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
+						{
+							this.width = 30;
+							this.height = 20;
+							return this; //Same as 'element'. Must return the element to draw.
+						}
+				},
+				sprites:
+				[
+					//Maps with string aliases:
+					//'bitmap_current' ('CB_GraphicSprites.SPRITE_OBJECT' object). Some missing or non-valid properties will be inherited from the sprites group:
+					{
+						id: "bitmap_current", //Current map which will be displayed (it will be modified according to the position of the player and the other elements).
+						src:
+						[
+							[	true,	true,	true,	true,	true	],
+							[	true,	false,	true,	false,	true	],
+							[	true,	false,	true,	false,	true	]
+						]
+					}
+				]
+			},
 			//'map_group' ('CB_GraphicSprites.SPRITES_OBJECT' object). Some missing or non-valid properties will will be inherited from the parent ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object):
 			{
 				id: "map_group",
@@ -836,7 +891,7 @@ function createSpritesGroups()
 							leftDependsOnPreviousElement: true, //Has in mind the left position of the last element to calculate its left.
 							topDependsOnPreviousElement: true, //Has in mind the top position of the last element to calculate its top.
  							//Renews the internal cache by creating a new copy of the cached element ('CB_GraphicSprites', 'CB_GraphicSprites.SPRITE_OBJECT' or 'CB_GraphicSprites.SUBSPRITE_OBJECT') every time it is rendered:
-							renewCache: true,
+							renewCache: true
 						}
 					},
 					elementsWidth: 40, //It can be either a number or a function returning a number. The function will be called before drawing the element (sprite or sub-sprite) in each loop.

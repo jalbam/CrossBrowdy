@@ -9,10 +9,11 @@
 	echo getFilesCodeAll();
 ?>
 
-Additional files used (inside the &quot;data&quot; folder):
-<a href="<?php echo $dirPath; ?>data/generic.txt" target="_blank">generic.txt</a> and
-<a href="<?php echo $dirPath; ?>data/binary.zip" target="_blank">binary.zip</a>.
-
+<p>
+	Additional files used (inside the &quot;data&quot; folder):
+	<a href="<?php echo $dirPath; ?>data/generic.txt" target="_blank">generic.txt</a> and
+	<a href="<?php echo $dirPath; ?>data/binary.zip" target="_blank">binary.zip</a>.
+</p>
 
 <?php	
 	//Let's try the example:

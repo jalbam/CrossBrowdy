@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 
@@ -319,8 +321,7 @@ function drawSprite(sprite, canvasContext)
 	if (sprite.data.duration !== null && sprite.getTimeElapsed() > sprite.data.duration)
 	{
 		//Disables the sprite and exits:
-		sprite.setDisabled(true);
-		canvasContext.clearRect(sprite.left, sprite.top, sprite.width, sprite.height);
+		disableElement(sprite, canvasContext);
 		return;
 	} 
 
@@ -361,8 +362,7 @@ function drawSubSprite(subSprite, canvasContext)
 	if (subSprite.data.duration !== null && subSprite.parent.getTimeElapsed() > subSprite.data.duration)
 	{
 		//Disables the sub-sprite and exits:
-		subSprite.setDisabled(true);
-		canvasContext.clearRect(subSprite.left, subSprite.top, subSprite.width, subSprite.height);
+		disableElement(subSprite, canvasContext);
 		return;
 	} 
 	
@@ -398,6 +398,40 @@ function drawElement(element, canvasContext)
 //Draws an image from an element (sprite or sub-sprite):
 function drawImage(image, element, canvasContext)
 {
-	if (element.data.clearRect) { canvasContext.clearRect(element.left, element.top, element.width, element.height); } //If desired, clears the space it will use before drawing it.
-	canvasContext.drawImage(image, element.srcLeft, element.srcTop, element.srcWidth, element.srcHeight, element.left, element.top, element.width, element.height);
+	//Calculates the left and top position of the element having in mind its parents:
+	var elementPosition = getPosition(element);
+	
+	//Clears the used space previously:
+	if (element.data.clearRect) { canvasContext.clearRect(elementPosition.left, elementPosition.top, element.width, element.height); } //If desired, clears the space it will use before drawing it.
+	
+	//Draws the image:
+	canvasContext.drawImage(image, element.srcLeft, element.srcTop, element.srcWidth, element.srcHeight, elementPosition.left, elementPosition.top, element.width, element.height);
+}
+
+
+//Returns the top and left of an element having in mind its parents:
+function getPosition(element)
+{
+	//Calculates the left and top position of the element having in mind its parents:
+	var elementParent = element.parent;
+	var elementPosition = { left: element.left, top: element.top };
+	while (elementParent)
+	{
+		elementPosition.left += elementParent.left ? elementParent.left : 0;
+		elementPosition.top += elementParent.top ? elementParent.top : 0;
+		elementParent = elementParent.parent;
+	}
+	return elementPosition;
+}
+
+
+//Disables a given element:
+function disableElement(element, canvasContext)
+{
+	//Calculates the left and top position of the element having in mind its parents:
+	var elementPosition = getPosition(element);
+
+	//Disables the sub-sprite and exits:
+	element.setDisabled(true);
+	canvasContext.clearRect(elementPosition.left, elementPosition.top, element.width, element.height);
 }

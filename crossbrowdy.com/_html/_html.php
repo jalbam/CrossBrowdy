@@ -184,6 +184,7 @@
 		<div id="menu">
 			<div id="menu_button" onClick="toggleMenu();"><?php echo $menuButton[$language]; ?></div>
 			<div id="menu_options">
+				<nav>
 				<?php
 					foreach ($menuOptions[$language] as $menuOptionLink => $menuOptionText)
 					{
@@ -196,12 +197,13 @@
 						echo '<div class="menu_item"><a href="' . $menuOptionLink . '" class="menu_item_link' . $disabled . '"' . $target . '>' . $menuOptionText . '</a></div>';
 					}
 				?>
+				</nav>
 			</div>
 		</div>
 		<?php
 			if (file_exists("_html/" . $category . "." . $language . ".php")) { require_once "_html/" . $category . "." . $language . ".php"; }
 			else if (file_exists("_html/" . $category . "." . CATEGORY_DEFAULT . ".php")) { require_once "_html/" . $category . "." . LANGUAGE_DEFAULT . ".php"; }
 		?>
-		<div class="author"><?php echo $projectCopyright[$language]; ?></div>
+		<footer><address><div class="author"><?php echo $projectCopyright[$language]; ?></div></address></footer>
 	</body>
 </html>

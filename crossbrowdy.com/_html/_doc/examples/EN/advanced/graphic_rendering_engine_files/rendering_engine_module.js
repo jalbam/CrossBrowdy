@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 //Constants and variables:
 var CB_REM = function() { if (this === window || !(this instanceof CB_REM)) { return new CB_REM(); } return this._init(); }; //Rendering Engine Module main object and constructor.
 CB_REM_PATH = CB_this.CB_REM_PATH || ""; //Path to the graphic rendering engine module.

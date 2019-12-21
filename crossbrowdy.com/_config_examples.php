@@ -246,7 +246,7 @@
 				),*/
 				"chip_8_emulator" => Array
 				(
-					"EN" => "CHIP-8 emulator (under construction)"
+					"EN" => "CHIP-8 emulator"
 				)
 			)
 		)

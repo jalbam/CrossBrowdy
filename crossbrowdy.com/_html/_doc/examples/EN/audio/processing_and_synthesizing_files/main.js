@@ -1,6 +1,6 @@
-//Using timbre.js library internally: https://mohayonao.github.io/timbre.js/
-//Using subcollider.js library internally: https://mohayonao.github.io/subcollider/
-
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* Using timbre.js library internally: https://mohayonao.github.io/timbre.js/ */
+/* Using subcollider.js library internally: https://mohayonao.github.io/subcollider/ */
 
 CB_init(main); //It will call the "main" function when ready.
 
@@ -51,6 +51,9 @@ function main()
 		(
 			function(result)
 			{
+				//Hides any messages:
+				CB_Elements.hideById("messages");
+				
 				//Shows the controls:
 				CB_Elements.showById("controls");
 				
@@ -58,15 +61,24 @@ function main()
 			}
 		);
 	}
-	
+	else
+	{
+		var message = "The 'T' object (used by the timbre.js library) is null. Probably not supported.";
+		CB_Elements.insertContentById("messages", message);
+		CB_console(message);
+	}
 }
 
 
 //Plays the audio:
 function play()
 {
-	var L = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
-	var R = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
+	try
+	{
+		var L = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
+		var R = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
+	}
+	catch(E) { CB_console("Cannot create buffer. Error: " + E); return; }
 
 	var num = 400;
 	var duration = L.duration;

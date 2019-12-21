@@ -1,13 +1,15 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 body { background-color:#aaddee; word-wrap:break-word; }
 #crossbrowdy_info { position:fixed; bottom:2px; right:2px; }
 #crossbrowdy_info a { color:#00aadd; }
 #crossbrowdy_info a:hover { color:#0033aa; }
 span { color:#aa0000; }
 button { color:#006600; }
-button:hover { color:#660000; cursor:pointer; }
+button:hover { color:#660000; cursor:pointer; cursor:hand; }
 #mouse_lock_element { position:absolute; top:50px; right:0px; width:20%; height:50%; background-color:#aa99dd; }
 #screen_selector { font-size:24px; }
 .screen_selector_option { color:#00aa00; }
-.screen_selector_option:hover { color:#00aacc; cursor:pointer; }
+.screen_selector_option:hover { color:#00aacc; cursor:pointer; cursor:hand; }
 #mouse_information, #touch_information, #pointer_information { visibility:hidden; display:none; }
 p.point_data { font-size:8px; color:#aa22aa; }

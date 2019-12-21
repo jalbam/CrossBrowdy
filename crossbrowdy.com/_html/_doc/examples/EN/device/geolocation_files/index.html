@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. -->
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>Device: Geolocation - Example</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -14,14 +15,16 @@
 	<body>
 		Geolocation supported: <span id="geolocation_supported">Unknown</span><br />
 		<br />
-		<button onClick="getLocationConstantly();">Get location constantly</button><br />
-		<br />
-		<button onClick="getLocationConstantlyStop();">Stop getting location constantly</button><br />
-		<br />
-		Location when loaded: <span id="location_once">No data</span><br />
-		<br />
-		Location constantly (high accuracy): <span id="location_constantly">No data</span>
-		<br />
+		<div id="controls">
+			<button onClick="getLocationConstantly();">Get location constantly</button><br />
+			<br />
+			<button onClick="getLocationConstantlyStop();">Stop getting location constantly</button><br />
+			<br />
+			Location when loaded: <span id="location_once">No data</span><br />
+			<br />
+			Location constantly (high accuracy): <span id="location_constantly">No data</span>
+			<br />
+		</div>
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />

@@ -1,5 +1,5 @@
-//Using Band.js library internally: https://github.com/meenie/band.js
-
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* Using Band.js library internally: https://github.com/meenie/band.js */
 
 CB_init(main); //It will call the "main" function when ready.
 
@@ -21,9 +21,18 @@ function main()
 		//Sets the tempo:
 		bandJSObject.setTempo(80);
 
+		//Hides any messages:
+		CB_Elements.hideById("messages");
+
 		//Shows the controls:
 		CB_Elements.showById("controls");
-	}	
+	}
+	else
+	{
+		var message = "The 'BandJS' (used by the Band.js library) object is null. Probably not supported.";
+		CB_Elements.insertContentById("messages", message);
+		CB_console(message);
+	}
 }
 
 

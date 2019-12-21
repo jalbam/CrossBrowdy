@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 //Constants and variables:
 var CB_GEM = CB_this.CB_GEM || {}; //Game Engine Module object.
 CB_GEM.PATH = CB_this.CB_GEM_PATH || ""; //Path to the game rendering engine module.
@@ -55,6 +57,11 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 					else
 					{
 						CB_GEM._init(); //Calls initialization function.
+						
+						//Applies the options set by the user (if any):
+						CB_applyOptions("CrossBrowdy");
+						CB_applyOptions("CrossBase");
+						
 						CB_Modules.setStatus("GAME_ENGINE_MODULE", CB_Modules.STATUSES.READY); //Sets the GAME_ENGINE_MODULE as ready.
 					}
 				};

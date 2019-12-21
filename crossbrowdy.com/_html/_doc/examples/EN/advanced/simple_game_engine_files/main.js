@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 var CB_GEM_DEBUG_MESSAGES = true; //Shows debug messages.
 
 //Adds the game engine module to CrossBrowdy:
@@ -170,7 +172,7 @@ function main()
 	};
 	var moving = false;
 	var panda = null;
-	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts (before rendering the graphics):
+	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts, before rendering the graphics (if it returns false, it will skip rendering in this loop):
 	{
 		//Moves the panda according to the input received through the keyboard (and controllers that fire keyboard events):
 		if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.UP)) { CB_GEM.data.pandaTop -= CB_GEM.data.pixelsMovement; }
@@ -196,7 +198,7 @@ function main()
 		else { CB_GEM.data.pixelsMovement = 5; } //Restores normal speed.
 	};
 	
-	CB_GEM.onLoopEnd = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop ends (after rendering the graphics):
+	CB_GEM.onLoopEnd = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop ends, after rendering the graphics (not executed if the 'CB_GEM.onLoopStart' function returned false):
 	{
 		//Changes the panda size according to whether it is moving or not:
 		if (moving)
@@ -255,5 +257,7 @@ function gameLoopStartStop()
 function getGameData(stringified)
 {
 	CB_console("Showing current data (" + (stringified ? "stringified" : "object") + "):");
-	CB_console(CB_GEM.getData(stringified));
+	var data = CB_GEM.getData(stringified);
+	CB_console(data);
+	alert(stringified ? data : JSON.stringify(data));
 }

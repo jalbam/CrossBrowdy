@@ -1,7 +1,9 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 body { background-color:#aaddee; word-wrap:break-word; }
 #crossbrowdy_info { position:fixed; bottom:2px; right:2px; }
 #crossbrowdy_info a { color:#00aadd; }
 #crossbrowdy_info a:hover { color:#0033aa; }
 span#my_action_response, span#my_action_2_response { display:block; color:#ffffff; background-color:#006600; overflow:scroll; height:200px; border:1px red dotted; }
 button { color:#006600; }
-button:hover { color:#660000; cursor:pointer; }
+button:hover { color:#660000; cursor:pointer; cursor:hand; }

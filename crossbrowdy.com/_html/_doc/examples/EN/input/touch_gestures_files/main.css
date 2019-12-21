@@ -1,7 +1,10 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 body { background-color:#aaddee; word-wrap:break-word; width:100%; height:100%; }
 #crossbrowdy_info { position:fixed; bottom:2px; right:2px; }
 #crossbrowdy_info a { color:#00aadd; }
 #crossbrowdy_info a:hover { color:#0033aa; }
 span { color:#aa0000; }
-#container { position:absolute; left:0px; top:0px; width:100%; height:100%; background-color:#ddaadd; }
+#container { position:absolute; left:0px; top:0px; width:100%; height:100%; background-color:#ddaadd; display:none; visibility:hidden; }
 #my_element { position:absolute; background-color:#aa0000; border:2px dotted #0000aa; color:#ccccff; }
+#messages { text-align:center; color:#00aa00; font-weight:bold; }

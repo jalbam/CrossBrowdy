@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 
@@ -8,6 +10,8 @@ function main()
 	if (CB_Device.Location.isSupported())
 	{
 		CB_console("The Geolocation API (or compatible ones as Apache Cordova's Geolocation plugin) is supported.");
+
+		CB_Elements.showById("controls");
 
 		CB_Elements.insertContentById("geolocation_supported", "Yes");
 		
@@ -62,7 +66,13 @@ function getLocationConstantly()
 //Stops getting the location constantly:
 function getLocationConstantlyStop()
 {
-	if (!watchID) { CB_console("Cannot be stopped if it is not enabled yet."); return; } //If it was enabled, exits.
+	//If it was enabled, exits:
+	if (!watchID)
+	{
+		CB_console("Cannot be stopped if it is not enabled yet.");
+		CB_Elements.insertContentById("location_constantly", "Cannot be stopped if it is not enabled yet.");
+		return;
+	} 
 	
 	CB_console("Stops getting the location constantly [watchID=" + watchID + "]...");
 	

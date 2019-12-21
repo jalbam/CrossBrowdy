@@ -9,8 +9,10 @@
 	echo getFilesCodeAll();
 ?>
 
-Additional file used (inside the &quot;data&quot; folder):
-<a href="<?php echo $dirPath; ?>data/test_fetch_text.txt" target="_blank">test_fetch_text.txt</a>.
+<p>
+	Additional file used (inside the &quot;data&quot; folder):
+	<a href="<?php echo $dirPath; ?>data/test_fetch_text.txt" target="_blank">test_fetch_text.txt</a>.
+</p>
 
 <?php
 	//Let's try the example:

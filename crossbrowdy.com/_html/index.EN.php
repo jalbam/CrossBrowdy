@@ -1,8 +1,10 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
-<div id="logo_container"><img src="img/logo.png" id="logo_image" /></div>
-<h1 class="title"> <?php echo $projectName; ?></h1>
-<h2 class="description_short"><?php echo $projectDescriptionShort[$language]; ?></h2>
+<header>
+	<div id="logo_container"><img src="img/logo.png" id="logo_image" /></div>
+	<h1 class="title"> <?php echo $projectName; ?></h1>
+	<h2 class="description_short"><?php echo $projectDescriptionShort[$language]; ?></h2>
+</header>
 
 <div class="keypoints">
 <?php

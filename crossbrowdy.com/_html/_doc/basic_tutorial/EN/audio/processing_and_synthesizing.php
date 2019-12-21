@@ -45,8 +45,12 @@
 		(
 			function(result)
 			{
-				var L = timbreJSObject("buffer", { buffer: result, loop: true });
-				var R = timbreJSObject("buffer", { buffer: result, loop: true });
+				try
+				{
+					var L = timbreJSObject("buffer", { buffer: result, loop: true });
+					var R = timbreJSObject("buffer", { buffer: result, loop: true });
+				}
+				catch(E) { CB_console("Cannot create buffer. Error: " + E); return; }
 
 				var num = 400;
 				var duration = L.duration;

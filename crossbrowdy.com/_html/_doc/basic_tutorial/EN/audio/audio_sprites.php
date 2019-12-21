@@ -343,18 +343,18 @@
 	if (audioFileSprites.isPlaying()) { CB_console("One or more of the internal CB_AudioFile objects are playing."); }
 	else { CB_console("None of the internal CB_AudioFile objects is playing."); }
 
-	//Cancels (to prevent it starts playing) a sound instance (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods), by its identifier:
+	//Cancels (to prevent it starts playing) a sound instance (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods), by its identifier:
 	audioFileSprites.cancelSoundInstance(soundInstanceId, true); //Use "false" as the second parameter to enable it again (if it is not too late).
 	
-	//Cancels (to prevent it starts playing) all sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods):
+	//Cancels (to prevent it starts playing) all sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods):
 	audioFileSprites.cancelSoundInstances(true); //Use "false" as the first parameter to enable them again (if it is not too late).
 
-	//Returns the CB_AudioFile objects used by all the sounds instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) currently created:
+	//Returns the CB_AudioFile objects used by all the sounds instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) currently created:
 	var audioFilesUsed = audioFileSprites.getAudioFilesUsed(); //Returns an object with the data.
 	var audioFilesUsed_2 = audioFileSprites.getAudioFilesUsed(true); //Returns an array with the data.
 	var audioFilesUsed_3 = audioFileSprites.getAudioFilesUsed(false, true); //Returns an object with the data and including the CB_AudioFile objects whose sound instance ID is not associated to any sprite.
 	
-	//Returns an array of the CB_AudioFile objects used by the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) that belong to a given sprite identifier:
+	//Returns an array of the CB_AudioFile objects used by the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) that belong to a given sprite identifier:
 	var audioFilesUsed_4 = audioFileSprites.getAudioFilesUsedBySpriteId("uno");
 	
 	//Gets the number of CB_AudioFile objects created (stored in 'audioFileSprites.audioFileCache.audioFiles'):
@@ -436,27 +436,27 @@
 	if (audioFileSprites.isStoppedSprite("cinco")) { CB_console("The sprite is stopped."); }
 	else { CB_console("The sprite is not stopped."); }
 
-	//Returns the ID of all the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used:
+	//Returns the ID of all the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) used:
 	var soundInstanceIDs = audioFileSprites.getSoundInstancesId(); //Returns an object with the data.
 	var soundInstanceIDs_2 = audioFileSprites.getSoundInstancesId(true); //Returns an array with the data.
 	var soundInstanceIDs_3 = audioFileSprites.getSoundInstancesId(true, true); //Returns an array with the data, including the sound instance identifiers which are not associated to any sprite.
 
-	//Returns an array of the sound instance identifiers (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used by the given sprite identifier:
+	//Returns an array of the sound instance identifiers (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) used by the given sprite identifier:
 	var soundInstanceIDs_4 = audioFileSprites.getSoundInstancesIdBySpriteId("cinco");
 
-	//Sets the desired volume to all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used by a given sprite identifier:
+	//Sets the desired volume to all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) used by a given sprite identifier:
 	audioFileSprites.setVolumeSprite("cinco", 80, false, function() { CB_console("Volume (80) set for the CB_AudioFile with ID " + this.id); });
 	
-	//Mutes all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used by a given sprite identifier:
+	//Mutes all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) used by a given sprite identifier:
 	audioFileSprites.muteSprite("cinco", function() { CB_console("CB_AudioFile with ID " + this.id + " muted!"); });
 	
-	//Unmutes all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used by a given sprite identifier:
+	//Unmutes all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) used by a given sprite identifier:
 	audioFileSprites.unmuteSprite("cinco", function() { CB_console("CB_AudioFile with ID " + this.id + " unmuted!"); });
 	
-	//Pauses all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) which are playing used by a given sprite identifier:
+	//Pauses all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) which are playing used by a given sprite identifier:
 	audioFileSprites.pauseSprite("cinco", function() { CB_console("CB_AudioFile with ID " + this.id + " paused!"); });
 	
-	//Resumes all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used by a given sprite identifier:
+	//Resumes all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) used by a given sprite identifier:
 	audioFileSprites.resumeSprite
 	(
 		"cinco", //spriteId. Unique mandatory parameter.
@@ -467,7 +467,7 @@
 		function(soundInstanceId) { CB_console("CB_AudioFile with ID " + this.id + " stopped!"); }, //onStop. Optional.
 	);
 	
-	//Stops all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) which are playing used by a given sprite identifier:
+	//Stops all the CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) which are playing used by a given sprite identifier:
 	audioFileSprites.stopSprite("cinco");
 </code></pre>
 
@@ -581,7 +581,7 @@
 		undefined
 	);
 	
-	//Tries to change the audio API used by all the internal CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) used by a given sprite identifier:
+	//Tries to change the audio API used by all the internal CB_AudioFile objects that belong to the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) used by a given sprite identifier:
 	audioFileSprites.setAudioAPISprite
 	(
 		"dos", //spriteId. Mandatory.
@@ -625,12 +625,12 @@
 	audioFileSprites.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
 	audioFileSprites.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
 
-	//Executes a function over all the internal CB_AudioFile objects used by all the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) currently created (being "this" each CB_AudioFile itself):
+	//Executes a function over all the internal CB_AudioFile objects used by all the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) currently created (being "this" each CB_AudioFile itself):
 	//Note: same as 'audioFileSprites.executeAllSprites' and 'audioFileSprites.executeFunctionAllSprites'.
 	audioFileSprites.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
 	audioFileSprites.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 150); //Adds a 150 milliseconds delay between each call.
 	
-	//Executes a function over all the internal CB_AudioFile objects used by the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) that belong to a given sprite, by its ID (being "this" each CB_AudioFile itself):
+	//Executes a function over all the internal CB_AudioFile objects used by the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) that belong to a given sprite, by its ID (being "this" each CB_AudioFile itself):
 	//Note: same as 'audioFileSprites.executeAllSprite' and 'audioFileSprites.executeFunctionAllSprite'.
 	audioFileSprites.forEachSpriteById("tres", function(index) { CB_console("CB_AudioFile ID: " + this.id); });
 	audioFileSprites.forEachSpriteById("tres", function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 200); //Adds a 200 milliseconds delay between each call.
@@ -690,7 +690,7 @@
 	Some other interesting methods that you might not need:
 </p>
 <pre><code class="language-javascript">
-	//Clears the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprites' methods) which have been cancelled:
+	//Clears the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) which have been cancelled:
 	audioFileSprites.clearSoundInstances();
 	
 	//Tries to purge the audio file sprites object until it reaches a desired number of CB_AudioFile objects (set in the 'audioFileSprites.audioFileCache.audioFiles' property), removing and destroying some of the current CB_AudioFile objects. For performance purposes:

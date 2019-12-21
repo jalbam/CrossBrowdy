@@ -5,7 +5,7 @@
 </p>
 
 <p>
-	This game is for two human players. You can use different parts of the keyboard or different parts of the screen (with the mouse or with a touching screen) to control each player. It is also possible to use up to two gamepads to control the players.
+	This game is for two human players. You can use different parts of the keyboard or different parts of the screen (with the mouse or with a touch screen) to control each player. It is also possible to use up to two gamepads to control the players.
 </p>
 
 <p>

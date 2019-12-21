@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
@@ -34,6 +36,8 @@ function main()
 	var balloonsAppearingMsInitial = 1500;
 	CB_GEM.data = //Data stored in the game engine module (can be exported to save the game status):
 	{
+		soundEnabled: true,
+		musicEnabled: true,
 		gameStarted: false,
 		balloonsAppearingMsInitial: balloonsAppearingMsInitial, //Milliseconds to wait before creating a new balloon.
 		balloonsAppearingMs: balloonsAppearingMsInitial, //Milliseconds to wait before creating a new balloon.
@@ -54,7 +58,13 @@ function main()
 	var balloonTopMin = balloonHeight;
 	var balloonTopMax = CB_Screen.getWindowHeight() - balloonHeight;
 	var balloonColor = null;
-	CB_Screen.onResize(function() { balloonLeftMax = CB_Screen.getWindowWidth() - balloonWidth; balloonTopMax = CB_Screen.getWindowHeight() - balloonHeight; }); //Updates the limits when the screen is resized.
+	
+	//Updates the limits when the screen is resized or changes its orientation:
+	CB_GEM.onResize = function(graphicSpritesSceneObject, CB_REM_dataObject, CB_CanvasObject, CB_CanvasObjectBuffer)
+	{
+		balloonLeftMax = CB_Screen.getWindowWidth() - balloonWidth;
+		balloonTopMax = CB_Screen.getWindowHeight() - balloonHeight;
+	};
 
 	//Sets the desired sprites scene data (can be modified dynamically):
 	CB_GEM.spritesGroupsData =
@@ -89,7 +99,7 @@ function main()
 	//Defines the callbacks for the game loop:
 	var timingLastTime = 0;
 	var timingNow = null;
-	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts (before rendering the graphics):
+	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts, before rendering the graphics (if it returns false, it will skip rendering in this loop):
 	{
 		if (!CB_GEM.data.gameStarted) { return; }
 		if (CB_GEM.data.balloonsCounter >= balloonsCounterMax)
@@ -163,7 +173,7 @@ function main()
 		}
 	};
 	
-	CB_GEM.onLoopEnd = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop ends (after rendering the graphics):
+	CB_GEM.onLoopEnd = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop ends, after rendering the graphics (not executed if the 'CB_GEM.onLoopStart' function returned false):
 	{
 		if (!CB_GEM.data.gameStarted) { return; }
 		
@@ -188,8 +198,8 @@ function main()
 						CB_GEM.data.balloonsCounter--;
 						CB_GEM.data.balloonsPopped++;
 						CB_GEM.data.score += balloonsAppearingMsInitial - CB_GEM.data.balloonsAppearingMs + 1; //The faster they appear, the higher is the score you get.
-						playSoundFx("balloon_explosion");
-						CB_Device.Vibration.start(100);
+						playSoundFx("balloon_explosion"); //Plays the explosion sound.
+						CB_Device.Vibration.start(100); //Makes the device vibrate.
 						updateInfo(graphicSpritesSceneObject, balloonsCounterMax); //Updates the information shown.
 					}
 				}
@@ -261,8 +271,18 @@ function gameStart()
 	CB_GEM.data.balloonsAppearingMs = CB_GEM.data.balloonsAppearingMsInitial;
 	
 	//Prepares the sound effects and plays one of them (recommended to do this through a user-driven event):
-	prepareSoundFx(); //Prepares sound effects to be used later.
-	playSoundFx("start");
+	try
+	{
+		prepareSoundFx(); //Prepares sound effects to be used later.
+		playSoundFx("start");
+	}
+	catch(E)
+	{
+		CB_console("Error preparing sounds or playing sound with 'start' ID: " + E);
+		CB_GEM.data.soundEnabled = false; //If it fails, disables the sound.
+	}
+	
+	CB_Device.Vibration.start(100); //Makes the device vibrate.
 
 	//Starts playing the background music (recommended to do this through a user-driven event):
 	playMusic(); //If it was playing already, it will not do anything.
@@ -325,6 +345,7 @@ function prepareSoundFx()
 function playSoundFx(id)
 {
 	if (!sfx || typeof(sfx[id]) !== "function") { return; }
+	else if (!CB_GEM.data.soundEnabled) { return; }
 
 	//Note: at least the first time, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
 	sfx[id]();
@@ -336,7 +357,7 @@ var timbreJSObject = null; //Global 'T' object to play the sounds.
 var bufferResult = null; //Global 'result'.
 function prepareMusic()
 {
-	//Audio processing and synthesizing example (taken from https://mohayonao.github.io/timbre.js/reich.html):
+	//Audio processing and synthesizing (taken from https://mohayonao.github.io/timbre.js/reich.html):
 	timbreJSObject = CB_Speaker.getTimbreJSObject(); //Gets the 'T' object.
 	if (timbreJSObject !== null)
 	{
@@ -381,11 +402,21 @@ var playingMusic = false;
 function playMusic()
 {
 	if (timbreJSObject === null || playingMusic) { return; }
+	else if (!CB_GEM.data.musicEnabled) { return; }
+
+	try
+	{
+		var L = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
+		var R = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
+	}
+	catch(E)
+	{
+		CB_GEM.data.musicEnabled = false;
+		CB_console("Cannot create buffer. Error: " + E);
+		return;
+	}
 
 	playingMusic = true;
-
-	var L = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
-	var R = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
 
 	var num = 400;
 	var duration = L.duration;

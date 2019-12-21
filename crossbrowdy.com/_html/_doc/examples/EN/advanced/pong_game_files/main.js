@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
@@ -188,7 +190,7 @@ function main()
 	//Defines the callbacks for the game loop:
 	var timingLastTime = 0;
 	var timingNow = null;
-	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts (before rendering the graphics):
+	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts, before rendering the graphics (if it returns false, it will skip rendering in this loop):
 	{
 		//Manages input:
 		manageInput();
@@ -227,6 +229,7 @@ function main()
 						graphicSpritesSceneObject.getById("ball_group").getById("ball").left = CB_GEM.data.ball.x = CB_GEM.data.player2.x - CB_GEM.data.ball.radius; //Sets the ball horizontally to the limit allowed.
 						graphicSpritesSceneObject.getById("ball_group").getById("ball").top = CB_GEM.data.ball.y = CB_GEM.data.player2.y + CB_GEM.data.player2.height / 2; //Sets the ball vertically in the middle of the paddle.
 						
+						CB_Device.Vibration.start(100); //Makes the device vibrate.
 						playSoundFx("goal"); //Plays the goal sound.
 					}
 					//...otherwise, calculates collision with the front part of the player 2's paddle:
@@ -291,6 +294,7 @@ function main()
 						graphicSpritesSceneObject.getById("ball_group").getById("ball").left = CB_GEM.data.ball.x = CB_GEM.data.player1.x + CB_GEM.data.player1.width + CB_GEM.data.ball.radius; //Sets the ball horizontally to the limit allowed.
 						graphicSpritesSceneObject.getById("ball_group").getById("ball").top = CB_GEM.data.ball.y = CB_GEM.data.player1.y + CB_GEM.data.player1.height / 2; //Sets the ball vertically in the middle of the paddle.
 
+						CB_Device.Vibration.start(100); //Makes the device vibrate.
 						playSoundFx("goal"); //Plays the goal sound.
 					}
 					//...otherwise, calculates collision with the front part of the  player 1's paddle:
@@ -359,7 +363,7 @@ function main()
 		}
 	};
 	
-	CB_GEM.onLoopEnd = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop ends (after rendering the graphics):
+	CB_GEM.onLoopEnd = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop ends, after rendering the graphics (not executed if the 'CB_GEM.onLoopStart' function returned false):
 	{
 		if (!CB_GEM.data.gameStarted) { return; }
 		
@@ -386,8 +390,12 @@ function main()
 
 			updateInfo(graphicSpritesSceneObject); //Shows the information for the first time.
 	
-			//Updates all when the screen is resized:
-			CB_Screen.onResize(function() {	resizeElements(graphicSpritesSceneObject); updateInfo(graphicSpritesSceneObject); });
+			//Updates all when the screen is resized or changes its orientation:
+			CB_GEM.onResize = function(graphicSpritesSceneObject, CB_REM_dataObject, CB_CanvasObject, CB_CanvasObjectBuffer)
+			{
+				resizeElements(graphicSpritesSceneObject);
+				updateInfo(graphicSpritesSceneObject);
+			};
 			
 			CB_Elements.hideById("loading"); //Hides the loading message.
 			CB_Elements.showById("start_button"); //Shows the start button.
@@ -427,8 +435,18 @@ function gameStart(graphicSpritesSceneObject)
 	updateInfo(graphicSpritesSceneObject);
 	
 	//Prepares the sound effects and plays one of them (recommended to do this through a user-driven event):
-	prepareSoundFx(); //Prepares sound effects to be used later.
-	playSoundFx("start");
+	try
+	{
+		prepareSoundFx(); //Prepares sound effects to be used later.
+		playSoundFx("start");
+	}
+	catch(E)
+	{
+		CB_console("Error preparing sounds or playing sound with 'start' ID: " + E);
+		CB_GEM.data.soundEnabled = false; //If it fails, disables the sound.
+	}
+	
+	CB_Device.Vibration.start(100); //Makes the device vibrate.
 	
 	//Starts playing the background music (recommended to do this through a user-driven event):
 	playMusic(); //If it was playing already, it will not do anything.
@@ -618,19 +636,27 @@ function setPointerEvents()
 	//Gets and stores or removes the pointer coordinates (only uses one touching point):
 	var pointerCoordinatesGet = function(e) //Gets the pointer coordinates:
 	{
-		pointerCoordinates.isMouse = e.type === "mousedown" || e.type === "mousemove";
+		pointerCoordinates.type = e.typeEmulated || e.type;
+		pointerCoordinates.isMouseOrPointer = pointerCoordinates.type === "mousedown" || pointerCoordinates.type === "mousemove" || pointerCoordinates.type === "pointerdown" || pointerCoordinates.type === "pointermove";
 		pointerCoordinates.xPrevious = pointerCoordinates.x;
 		pointerCoordinates.yPrevious = pointerCoordinates.y;
 		pointerCoordinates.x = e.clientX;
 		pointerCoordinates.y = e.clientY;
 		pointerCoordinates.processed = false;
+		if (pointerCoordinates.type !== "pointermove") //Only modifies (enables or disables it) the pressing flag ("down" property) when the pointer is not moving:
+		{
+			pointerCoordinates.down = (pointerCoordinates.type === "pointerdown" || pointerCoordinates.type === "pointerenter"); //Defines whether the pointer is being pressing or not (note that this way it will never be true when emulating Pointer events).
+		}
 		e.preventDefault(); //Prevents default behaviour (it will be polyfilled internally if needed).
 	}; 
+
 	CB_Pointer.onDown(pointerCoordinatesGet);
+	CB_Pointer.onEnter(pointerCoordinatesGet);
 	CB_Pointer.onMove(pointerCoordinatesGet); //Gets the pointer coordinates.
 	var pointerCoordinatesClear = function (e) //Clears the pointer coordinates:
 	{
 		pointerCoordinates.x = pointerCoordinates.y = null;
+		pointerCoordinates.down = null;
 	};
 	CB_Pointer.onUp(pointerCoordinatesClear);
 	CB_Pointer.onCancel(pointerCoordinatesClear);
@@ -642,7 +668,7 @@ function setPointerEvents()
 //Input management (some controllers can also fire keyboard events):
 function manageInput()
 {
-	if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.ESC)) { gameEnd("Game aborted"); } //After pressing the ESC key, ends the game.
+	if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.ESC) || CB_Controllers.isButtonDown([5, 6, 7, 8])) { gameEnd("Game aborted"); } //After pressing the ESC key, ends the game.
 	else
 	{
 		//If return, space or a button (button 1, 2 or 3) or axis from any gamepad is pressed, starts the game (if it has not stared already):
@@ -663,7 +689,7 @@ function manageInput()
 		if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.A) || CB_Controllers.isAxisDown(1, 0)) { movePaddle(2, 1, CB_GEM.graphicSpritesSceneObject); } //Moves down.
 		
 		//Mouse (if there is at least the coordinates of one point):
-		if (pointerCoordinates.isMouse && pointerCoordinates.y !== null && pointerCoordinates.x !== null && !pointerCoordinates.processed) //Only if the information has been updated but it has not been processed yet.
+		if (pointerCoordinates.isMouseOrPointer && pointerCoordinates.y !== null && pointerCoordinates.x !== null && !pointerCoordinates.processed) //Only if the information has been updated but it has not been processed yet.
 		{
 			var playerToMove = pointerCoordinates.x < CB_Screen.getWindowWidth() / 2 ? 1 : 2; //The player to move (1 or 2) will depend on the part of the screen touched.
 			
@@ -700,7 +726,7 @@ function manageInput()
 		if (CB_GEM.data.gameStarted && CB_GEM.data.ball.direction === 0) //0 = not moving (stuck to a paddle), 1 = left to right, 2 = right to left.
 		{
 			//Player 1 (uses gamepad #1):
-			if (CB_GEM.data.ball.firstPlayer === 1 && (touchingScreen || CB_Mouse.getButtons().LEFT || CB_Keyboard.isKeyDown(CB_Keyboard.keys.ENTER) || CB_Keyboard.isKeyDown(CB_Keyboard.keys.SPACEBAR) || CB_Controllers.isButtonDown([1, 2, 3], 1)))
+			if (CB_GEM.data.ball.firstPlayer === 1 && (touchingScreen || pointerCoordinates.down || CB_Mouse.getButtons().LEFT || CB_Keyboard.isKeyDown(CB_Keyboard.keys.ENTER) || CB_Keyboard.isKeyDown(CB_Keyboard.keys.SPACEBAR) || CB_Controllers.isButtonDown([1, 2, 3], 1)))
 			{
 				//Releases the ball:
 				CB_GEM.data.ball.direction = 1; //0 = not moving (stuck to a paddle), 1 = left to right, 2 = right to left.
@@ -708,7 +734,7 @@ function manageInput()
 				playSoundFx("release_ball"); //Plays the release sound.
 			}
 			//Player 2 (uses gamepad #0):
-			else if (CB_GEM.data.ball.firstPlayer === 2 && (touchingScreen || CB_Mouse.getButtons().RIGHT || CB_Keyboard.isKeyDown(CB_Keyboard.keys.SPACEBAR) || CB_Controllers.isButtonDown([1, 2, 3], 0)))
+			else if (CB_GEM.data.ball.firstPlayer === 2 && (touchingScreen || pointerCoordinates.down || CB_Mouse.getButtons().RIGHT || CB_Keyboard.isKeyDown(CB_Keyboard.keys.SPACEBAR) || CB_Controllers.isButtonDown([1, 2, 3], 0)))
 			{
 				//Releases the ball:
 				CB_GEM.data.ball.direction = 2; //0 = not moving (stuck to a paddle), 1 = left to right, 2 = right to left.

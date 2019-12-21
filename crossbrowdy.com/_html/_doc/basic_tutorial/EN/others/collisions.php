@@ -62,6 +62,8 @@
 	{
 		CB_console("The circle whose center is in (20, 30) pixel coordinates and its radius is 100 pixels is touching (maybe over) the circle whose center is in (50, 70) pixel coordinates and its radius is 200 pixels.");
 	}
+
+	//NOTE: for other types of collisions, check the API documentation.
 </code></pre>
 <p>
 	For collisions with the mouse cursor, you can use the <a href="_html/_doc/api/CB_Mouse.html" target="_blank">CB_Mouse</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("input", "mouse"); ?>" target="_blank"><?php echo $basicTutorial["input"]["topics"]["mouse"][$language]; ?></a> topic of the basic tutorial.

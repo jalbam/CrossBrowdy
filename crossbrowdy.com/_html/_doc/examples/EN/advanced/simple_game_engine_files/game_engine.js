@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 //Defines the needed properties:
 CB_GEM.REM = CB_GEM.REM || null; //It will store the CB_REM object (Graphic Rendering Engine Module object).
 CB_GEM.REM_renderGraphicScene_data = null; //It will store the "data" parameter when calling the 'CB_GEM.REM#renderGraphicScene' method internally.
@@ -16,11 +18,15 @@ CB_GEM.options.canvasId = CB_GEM.options.canvasId || "my_canvas";
 CB_GEM.options.canvasBufferId = CB_GEM.options.canvasBufferId || "my_canvas_buffer";
 CB_GEM.options.contextMenuDisable = CB_GEM.options.contextMenuDisable === true || CB_GEM.options.contextMenuDisable === false ? CB_GEM.options.contextMenuDisable : true; //Disables the context menu (when pressing mouse's right button) by default.
 
+//Sets some options:
+var CB_OPTIONS = CB_OPTIONS || { CrossBrowdy: {} };
+CB_OPTIONS.CrossBrowdy = CB_OPTIONS.CrossBrowdy || {};
+CB_OPTIONS.CrossBrowdy.CB_console_ALLOW_ALERTS = false; //It will not show alerts in the browsers that doesn't have console.
 
 //If desired, sets the needed options to force emulation:
 if (CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD) //Forces an emulation mode which can be 'SILVERLIGHT', 'FLASH', 'DHTML' or 'VML' (testing purposes). Use null or undefined to disable it.
 {
-	var CB_OPTIONS = { CrossBase: {} };
+	CB_OPTIONS.CrossBase = CB_OPTIONS.CrossBase || {};
 	CB_OPTIONS.CrossBase.CB_Canvas_PREFERRED_EMULATION_METHODS = [ CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD ];
 	if (CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD === "SILVERLIGHT") { CB_OPTIONS.CrossBase.SLCANVAS_LOAD = true; }
 	else if (CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD === "FLASH") { CB_OPTIONS.CrossBase.FLASHCANVAS_LOAD = true; } //Note: Flash emulation will not work if native canvas is supported.
@@ -32,10 +38,22 @@ if (CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD) //Forces an emulation mode wh
 //Main initialization function (internal usage only):
 CB_GEM._init = function()
 {
-	//If we want to, tries to keeps the screen awake and prevents it from turning off:
+	//If we want to, tries to keeps the screen awake and prevents it from turning off (must be executed through a user-driven event as onClick, etc.):
 	if (!CB_GEM.options.allowScreenSleep)
 	{
-		CB_Screen.keepAwake(function() { CB_console("Keep awake set successfully!"); }, function() { CB_console("Keep awake could not be set successfully!"); });
+		var keepAwakeEventExecuted = false;
+		var keepAwakeEvent = function()
+		{
+			if (!keepAwakeEventExecuted)
+			{
+				keepAwakeEventExecuted = true;
+				CB_Screen.keepAwake(function() { CB_console("Keep awake set successfully!"); }, function() { CB_console("Keep awake could not be set successfully!"); });
+				CB_Events.remove(document, "click", keepAwakeEvent, true);
+				CB_Events.remove(document, "touchstart", keepAwakeEvent, true);
+			}
+		};
+		CB_Events.add(document, "click", keepAwakeEvent, true, true, true);
+		CB_Events.add(document, "touchstart", keepAwakeEvent, true, true, true);
 	}
 };
 
@@ -56,7 +74,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 		if (!canvasContext)
 		{
 			CB_console("ERROR: canvas context could not be obtained! Drawing cannot be performed.");
-			if (typeof(onError) === "function") { onError.call(CB_REM, "No canvas context found"); }
+			if (typeof(onError) === "function") { onError.call(CB_GEM, "No canvas context found"); }
 			return;
 		}
 
@@ -73,13 +91,42 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 			//If desired, disables the context menu for both canvases:
 			if (CB_GEM.options.contextMenuDisable)
 			{
+				CB_Elements.contextMenuDisable(); //Affects 'document' (whole document).
 				CB_Elements.contextMenuDisable(canvases[CB_GEM.options.canvasId].get());
 				CB_Elements.contextMenuDisable(canvases[CB_GEM.options.canvasBufferId].get());
 			}
 			
-			//When the screen changes its size, both canvas will be re-adapted:
-			CB_Screen.onResize(function() { canvases[CB_GEM.options.canvasId].setWidth(CB_Screen.getWindowWidth()); canvases[CB_GEM.options.canvasId].setHeight(CB_Screen.getWindowHeight()); canvases[CB_GEM.options.canvasId].clear(); canvases[CB_GEM.options.canvasId].disableAntiAliasing(); });
-			CB_Screen.onResize(function() { canvases[CB_GEM.options.canvasBufferId].setWidth(CB_Screen.getWindowWidth()); canvases[CB_GEM.options.canvasBufferId].setHeight(CB_Screen.getWindowHeight()); canvases[CB_GEM.options.canvasBufferId].clear(); canvases[CB_GEM.options.canvasBufferId].disableAntiAliasing(); });
+			//When the screen changes its size or its orientation, both canvases will be re-adapted:
+			var onResizeOrChangeOrientationTimeout = null;
+			var onResizeOrChangeOrientation = function()
+			{
+				clearTimeout(onResizeOrChangeOrientationTimeout);
+				onResizeOrChangeOrientationTimeout = setTimeout //NOTE: needs a delay as some clients on iOS update the screen size information in two or more steps (last step is the correct value).
+				(
+					function()
+					{
+						//Resizes the canvas:
+						canvases[CB_GEM.options.canvasId].setWidth(CB_Screen.getWindowWidth());
+						canvases[CB_GEM.options.canvasId].setHeight(CB_Screen.getWindowHeight());
+						canvases[CB_GEM.options.canvasId].clear();
+						canvases[CB_GEM.options.canvasId].disableAntiAliasing();
+						
+						//Resizes the buffer canvas:
+						canvases[CB_GEM.options.canvasBufferId].setWidth(CB_Screen.getWindowWidth());
+						canvases[CB_GEM.options.canvasBufferId].setHeight(CB_Screen.getWindowHeight());
+						canvases[CB_GEM.options.canvasBufferId].clear();
+						canvases[CB_GEM.options.canvasBufferId].disableAntiAliasing();
+						
+						//Calls the 'onResize' event set, if any:
+						if (typeof(CB_GEM.onResize) === "function")
+						{
+							CB_GEM.onResize.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, canvases[CB_GEM.options.canvasId], canvases[CB_GEM.options.canvasBufferId]);
+						}
+					},
+					100
+				);
+			};
+			CB_Screen.onResize(onResizeOrChangeOrientation);
 
 			//Clears both canvas:
 			canvases[CB_GEM.options.canvasId].clear();
@@ -139,7 +186,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 		CB_Screen.getWindowWidth(), //canvasWidth. Use 'CB_Screen.getWindowWidth()' for complete width. Default: CB_Canvas.WIDTH_DEFAULT.
 		CB_Screen.getWindowHeight(), //canvasHeight. Use 'CB_Screen.getWindowHeight()' for complete height. Default: CB_Canvas.HEIGHT_DEFAULT.
 		onLoadCanvas, //onLoad.
-		function(error) { CB_console("Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_REM, error); } }, //onError.
+		function(error) { CB_console("Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_GEM, error); } }, //onError.
 		undefined, undefined, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD //Forces emulation method.
 	);
 	canvases[CB_GEM.options.canvasBufferId] = new CB_Canvas
@@ -149,7 +196,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 		CB_Screen.getWindowWidth(), //canvasWidth. Use 'CB_Screen.getWindowWidth()' for complete width. Default: CB_Canvas.WIDTH_DEFAULT.
 		CB_Screen.getWindowHeight(), //canvasHeight. Use 'CB_Screen.getWindowHeight()' for complete height. Default: CB_Canvas.HEIGHT_DEFAULT.
 		onLoadCanvas, //onLoad.
-		function(error) { CB_console("Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_REM, error); } }, //onError.
+		function(error) { CB_console("Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_GEM, error); } }, //onError.
 		undefined, undefined, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD //Forces emulation method.
 	);
 }
@@ -202,19 +249,22 @@ CB_GEM._processSpritesGroups = function(expectedCallingTime) //The "expectedCall
 	if (CB_GEM.stopped) { return; }
 	
 	//Executes the 'onLoopStart' callback (if any):
-	CB_GEM.onLoopStart.call(CB_REM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
+	var skipRendering = CB_GEM.onLoopStart.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
 	
-	//Renders the scene:
-	CB_GEM.REM.renderGraphicScene
-	(
-		CB_GEM.graphicSpritesSceneObject, //graphicSpritesSceneObject. Mandatory. The 'CB_GraphicSpritesScene' object to render.
-		CB_GEM.REM_renderGraphicScene_data, //data.
-		CB_GEM.REM_renderGraphicScene_useBuffer, //useBuffer. Optional. Default: false. Defines whether to use canvas buffer.
-		true //alternateBuffer. Optional. Default: false. Defines whether to alternate visibility between canvas or not (if not, it will copy the buffer canvas content to the visible canvas always).
-	);
+	if (skipRendering !== false)
+	{
+		//Renders the scene:
+		CB_GEM.REM.renderGraphicScene
+		(
+			CB_GEM.graphicSpritesSceneObject, //graphicSpritesSceneObject. Mandatory. The 'CB_GraphicSpritesScene' object to render.
+			CB_GEM.REM_renderGraphicScene_data, //data.
+			CB_GEM.REM_renderGraphicScene_useBuffer, //useBuffer. Optional. Default: false. Defines whether to use canvas buffer.
+			true //alternateBuffer. Optional. Default: false. Defines whether to alternate visibility between canvas or not (if not, it will copy the buffer canvas content to the visible canvas always).
+		);
 
-	//Executes the 'onLoopEnd' callback (if any):
-	CB_GEM.onLoopEnd.call(CB_REM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
+		//Executes the 'onLoopEnd' callback (if any):
+		CB_GEM.onLoopEnd.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
+	}
 
 	//Calls itself again:
 	CB_GEM._processSpritesGroups_timer = CB_symmetricCall //Note: we could also use 'requestAnimationFrame'.

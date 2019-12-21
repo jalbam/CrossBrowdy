@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 
@@ -13,7 +15,7 @@ function main()
 	CB_Elements.insertContentById("client_version", CB_Client.getVersion());
 	CB_Elements.insertContentById("client_version_main", CB_Client.getVersionMain()); //Just the first number.
 	
-	//Support of native "canvas" element:
+	//Support of native "canvas" element (with no emulation):
 	CB_Elements.insertContentById("canvas_support", CB_Client.supportsCanvas() ? "Yes" : "No");
 	
 	//Support of CSS3 transform:

@@ -579,7 +579,7 @@
 	if (audioFileSpritesPool.isPlaying()) { CB_console("One or more of the internal CB_AudioFile objects are playing."); }
 	else { CB_console("None of the internal CB_AudioFile objects is playing."); }
 	
-	//Returns the CB_AudioFile objects used by all the sounds instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object) currently created:
+	//Returns the CB_AudioFile objects used by all the sounds instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object) currently created:
 	var audioFilesUsed = audioFileSpritesPool.getAudioFilesUsed(); //Returns an object with the data.
 	var audioFilesUsed_2 = audioFileSpritesPool.getAudioFilesUsed(true); //Returns an array with the data.
 	var audioFilesUsed_3 = audioFileSpritesPool.getAudioFilesUsed(false, true); //Returns an object with the data and including the CB_AudioFile objects whose sound instance ID is not associated to any sprite.
@@ -602,7 +602,7 @@
 	var audioFilesFree = audioFileSpritesPool.getAudioFilesFree(); //Returns an object ordered by sprites groups whose values are arrays.
 	var audioFilesFree_2 = audioFileSpritesPool.getAudioFilesFree(true); //Returns an array.
 
-	//Gets the CB_AudioFile, through its sound instance identifier (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object):
+	//Gets the CB_AudioFile, through its sound instance identifier (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object):
 	var soundInstanceId = audioFileSpritesPool.getSpritesGroup("numeros").playSprite("cinco");
 	var audioFile = audioFileSpritesPool.getAudioFileBySoundInstanceId(soundInstanceId);
 	if (audioFile !== null)
@@ -612,15 +612,15 @@
 		//Do things with it...
 	}
 
-	//Returns the ID of all the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object) used:
+	//Returns the ID of all the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object) used:
 	var soundInstanceIDs = audioFileSpritesPool.getSoundInstancesId(); //Returns an object with the data, ordered by sprites groups.
 	var soundInstanceIDs_2 = audioFileSpritesPool.getSoundInstancesId(true); //Returns an array with the data.
 	var soundInstanceIDs_3 = audioFileSpritesPool.getSoundInstancesId(true, true); //Returns an array with the data, including the sound instance identifiers which are not associated to any sprite.
 
-	//Cancels (to prevent it starts playing) a sound instance (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object), by its identifier:
+	//Cancels (to prevent it starts playing) a sound instance (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object), by its identifier:
 	audioFileSpritesPool.cancelSoundInstance(soundInstanceId, true); //Use "false" as the second parameter to enable it again (if it is not too late).
 
-	//Cancels (to prevent it starts playing) all sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object):
+	//Cancels (to prevent it starts playing) all sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object):
 	audioFileSpritesPool.cancelSoundInstances(true); //Use "false" as the first parameter to enable them again (if it is not too late).
 	
 	//Checks whether a CB_AudioFile object is free (available and ready to use), by its id:
@@ -686,7 +686,7 @@
 	audioFileSpritesPool.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
 	audioFileSpritesPool.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
 
-	//Executes a function over all the internal CB_AudioFile objects used by all the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object) currently created (being "this" each CB_AudioFile itself):
+	//Executes a function over all the internal CB_AudioFile objects used by all the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object) currently created (being "this" each CB_AudioFile itself):
 	//NOTE: Same as 'audioFileSpritesPool.executeAllSprites' and 'audioFileSpritesPool.executeFunctionAllSprites'.
 	audioFileSpritesPool.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
 	audioFileSpritesPool.forEachSprite(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 150); //Adds a 150 milliseconds delay between each call.
@@ -746,7 +746,7 @@
 	Some other interesting methods that you might not need:
 </p>
 <pre><code class="language-javascript">	
-	//Clears the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprites' methods of any CB_AudioFileSprites object) which have been cancelled:
+	//Clears the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object) which have been cancelled:
 	audioFileSpritesPool.clearSoundInstances();
 	
 	//Tries to purge each internal CB_AudioFileSprites object until it reaches a desired number of CB_AudioFile objects (set in the 'CB_AudioFileSprites#audioFileCache.audioFiles' property), removing and destroying some of the current CB_AudioFile objects. For performance purposes:

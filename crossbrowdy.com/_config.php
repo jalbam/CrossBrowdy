@@ -123,7 +123,7 @@
 		),
 		Array
 		(
-			"EN" => "Supports other frameworks and libraries"
+			"EN" => "Accepts other frameworks and libraries"
 		)
 	);
 
@@ -131,11 +131,11 @@
 	(
 		"EN" => Array
 		(
-			"Input" => Array("keyboard", "mouse", "pointer", "touch", "pressure", "gestures", "gamepads", "remote control (TV and others)", "sensors"),
+			"Input" => Array("keyboard", "mouse", "pointer", "touch", "pressure", "gestures", "gamepads and other controllers", "remote controls (TV and others)", "sensors"),
 			"Device" => Array("geolocation", "orientation", "compass", "motion", "battery", "vibration", "light sensor", "proximity sensor"),
 			"Networking" => Array("Fetch", "XHR (Ajax)", "XDR", "proxy", "REST", "WebSockets"),
 			"Client" => Array("client detection",  "language detection", "native canvas detection", "CSS3 support detection", "PHP detection", "Node.js detection", "NW.js detection", "Electron detection", "Silverlight detection", "Flash detection", "redirections", "exiting the app"),
-			"Audio" => Array("music", "FX", "filters", "synth", "music composition", "processing", "files", "sprites", "cache", "pool", "speakers"),
+			"Audio" => Array("music", "FX", "filters", "synth", "music composition", "processing", "files", "sprites", "cache", "pool", "speakers", "supported formats detection", "supported APIs detection"),
 			"Image" => Array("canvas", "viewport", "screens"),
 			"Others" => Array("modules", "JSON", "DOM elements", "arrays", "events", "data storage", "data compression", "base conversion", "template rendering", "lazy load", "collisions"),
 			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "video", "MIDI", "VR", "leap motion", "GraphQL", "databases", "many more")

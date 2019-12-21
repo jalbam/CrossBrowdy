@@ -9,13 +9,15 @@
 	echo getFilesCodeAll();
 ?>
 
-Additional files used (inside the &quot;cursors&quot; folder):
-<a href="<?php echo $dirPath; ?>cursors/cursor.ani" target="_blank">cursor.ani</a>,
-<a href="<?php echo $dirPath; ?>cursors/cursor.cur" target="_blank">cursor.cur</a>,
-<a href="<?php echo $dirPath; ?>cursors/cursor.gif" target="_blank">cursor.gif</a>,
-<a href="<?php echo $dirPath; ?>cursors/cursor.png" target="_blank">cursor.png</a>,
-<a href="<?php echo $dirPath; ?>cursors/ranisima.gif" target="_blank">ranisima.gif</a> and
-<a href="<?php echo $dirPath; ?>cursors/bird_sprites.gif" target="_blank">bird_sprites.gif</a>.
+<p>
+	Additional files used (inside the &quot;cursors&quot; folder):
+	<a href="<?php echo $dirPath; ?>cursors/cursor.ani" target="_blank">cursor.ani</a>,
+	<a href="<?php echo $dirPath; ?>cursors/cursor.cur" target="_blank">cursor.cur</a>,
+	<a href="<?php echo $dirPath; ?>cursors/cursor.gif" target="_blank">cursor.gif</a>,
+	<a href="<?php echo $dirPath; ?>cursors/cursor.png" target="_blank">cursor.png</a>,
+	<a href="<?php echo $dirPath; ?>cursors/ranisima.gif" target="_blank">ranisima.gif</a> and
+	<a href="<?php echo $dirPath; ?>cursors/bird_sprites.gif" target="_blank">bird_sprites.gif</a>.
+</p>
 
 <?	
 	//Let's try the example:

@@ -1,12 +1,13 @@
 <?php
 	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
 	
-	function guideLinks($contentArray, $linkFunction)
+	function guideLinks($contentArray, $linkFunction, $basicTurorialOrExamples)
 	{
 		global $language;
 		$output = "";
 		foreach ($contentArray as $subcategory => $subcategoryArray)
 		{
+			$output .= '<a name="' . strtolower($basicTurorialOrExamples) . '_' . strtolower($subcategoryArray["subcategory"][$language]) . '"></a>';
 			$output .= "<li>";
 				$output .= '<b>' . $subcategoryArray["subcategory"][$language] . '</b>';
 				$output .= '<ol>';
@@ -21,13 +22,15 @@
 	}
 ?>
 
-<h1 class="category_title">Guides &amp; Tutorials</h1>
+<header><h1 class="category_title">Guides &amp; Tutorials</h1></header>
 
 <a name="basic_tutorial"></a>
 <div class="category_text">
 	<h2 class="category_subtitle">Basic tutorial</h2>
 	<ol>
-		<?php echo guideLinks($basicTutorial, "basicTutorialLink"); ?>
+		<nav>
+			<?php echo guideLinks($basicTutorial, "basicTutorialLink", "basic_tutorial"); ?>
+		</nav>
 	</ol>
 </div>
 
@@ -35,7 +38,9 @@
 <div class="category_text">
 	<h1 class="category_subtitle">Examples</h1>
 	<ol>
-		<?php echo guideLinks($examples, "examplesLink"); ?>
+		<nav>
+			<?php echo guideLinks($examples, "examplesLink", "examples"); ?>
+		</nav>
 	</ol>
 </div>
 

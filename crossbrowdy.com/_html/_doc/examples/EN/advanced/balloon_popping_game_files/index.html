@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. -->
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<title>Advanced: Balloon popping game - Example</title>
@@ -17,7 +18,13 @@
 		<div id="loading">Loading...</div>
 		<canvas id="my_canvas">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
 		<canvas id="my_canvas_buffer">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
-		<button id="start_button" onClick="gameStart();">Start game!</button>
+		<button id="start_button" onClick="gameStart();">
+			<span style="display:block; margin-bottom:10px;">
+				Balloons will appear constantly on the screen. Just press on each (click or tap) to explode them. The more you explode, the higher the score you will get and the faster the game will become.
+				If the number of balloons on the screen (not exploded yet) reaches the maximum allowed, you will lose.
+			</span>
+			<span style="display:block; margin-top:10px;">Start game!</span>
+		</button>
 		<br />
 		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
 		<div id="CB_console" style="visibility:hidden; overflow:scroll;">

@@ -61,10 +61,14 @@
 		
 		//Plays the sound effects:
 		//Note: at least the first time, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
-		sfx.select();
-		sfx.jump();
-		sfx.dynamic();
-		sfx.coin();
+		try
+		{
+			sfx.select();
+			sfx.jump();
+			sfx.dynamic();
+			sfx.coin();
+		}
+		catch(E) { CB_console("Error playing sound: " + E); }
 	}
 </code></pre>
 <p>

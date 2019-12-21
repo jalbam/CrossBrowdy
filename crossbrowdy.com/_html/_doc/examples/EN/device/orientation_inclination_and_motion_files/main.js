@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 

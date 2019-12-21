@@ -5,7 +5,7 @@
 </p>
 
 <p>
-	You can use a gamepad, the keyboard, the mouse or a touching screen to control the emulator and its software.
+	You can use one or more gamepads (depending on the ROM loaded), the keyboard, the mouse or a touch screen to control the emulator and its software.
 </p>
 
 <p>
@@ -19,12 +19,6 @@
 	//Let's try the example:
 	echo '<p class="try_example">' . getTryExampleLink() . '</p>';
 ?>
-
-<center>
-	<p>
-		<b>Under development. Coming soon!</b>
-	</p>
-</center>
 
 <p>
 	You can check the <a href="guides<?php echo $PHPExtension; ?>" target="_blank">Guides & Tutorials</a> category as well as the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> in the case you need more information.

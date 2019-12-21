@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 
@@ -13,7 +15,7 @@ function main()
 	{
 		CB_console("The device vibration is supported (through the Vibration API or compatible ones as Apache Cordova's Vibration plugin).");
 		CB_Elements.insertContentById("vibration_api", "Yes");
-		
+		CB_Elements.showById("vibration_controls");
 	}
 	else
 	{

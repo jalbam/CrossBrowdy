@@ -1,5 +1,5 @@
-//Using jsfx library internally: https://github.com/loov/jsfx
-
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* Using jsfx library internally: https://github.com/loov/jsfx */
 
 CB_init(main); //It will call the "main" function when ready.
 
@@ -77,8 +77,17 @@ function main()
 		//Loads the sound effects:
 		sfx = CB_AudioDetector.isAPISupported("WAAPI") ? jsfxObject.Live(library) : jsfxObject.Sounds(library); //Uses AudioContext (Web Audio API) if available.
 		
+		//Hides any messages:
+		CB_Elements.hideById("messages");
+		
 		//Shows the controls:
 		CB_Elements.showById("controls");
+	}
+	else
+	{
+		var message = "The 'jsfx' (used by the jsfx library) object is null. Probably not supported.";
+		CB_Elements.insertContentById("messages", message); //Hides any messages.
+		CB_console(message);
 	}
 }
 
@@ -87,5 +96,12 @@ function main()
 function play(id)
 {
 	//Note: at least the first time, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
-	sfx[id]();
+	try { sfx[id](); }
+	catch(E)
+	{
+		var message = "Error playing sound with '" + id + "' ID: " + E;
+		CB_Elements.insertContentById("messages", message);
+		CB_Elements.showById("messages");
+		CB_console(message);
+	}
 }

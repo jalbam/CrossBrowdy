@@ -12,7 +12,7 @@
 		
 		$output .= '<p><b><a href="' . $path . $file . '" target="_blank">' . $file . '</a></b>:</p>';
 		$output .= '<pre><code class="' . $codeClass . '">';
-			$output .= htmlspecialchars($fileContent);
+			$output .= $fileContent !== "" ? htmlspecialchars($fileContent) : "(empty file)";
 		$output .= '</code></pre>';
 		
 		return $output;
@@ -86,3 +86,14 @@
 			return '<a href="' . $dirPath . 'index.html" target="_blank">Try this example</a>';
 		}
 	}
+	
+	
+	function getTryExampleButton()
+	{
+		global $dirPath;
+		if (file_exists($dirPath . "index.html"))
+		{
+			return '<a href="' . $dirPath . 'index.html" target="_blank" class="try_example_floating">Try this example</a>';
+		}
+	}
+	

@@ -1,6 +1,6 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
-<h1 class="category_title">About <?php echo $projectName; ?></h1>
+<header><h1 class="category_title">About <?php echo $projectName; ?></h1></header>
 <div class="category_text">
 	<p>
 		CrossBrowdy is an open-source JavaScript framework that allows to create multimedia apps, emulators, game engines and games that will be compatible with any device.

@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 //Properties:
 CB_REM.IMAGES_CACHE_ENABLED = true; //Determines whether to use images cache or not.
 CB_REM.BUFFER_RECOMMENDED = true; //Determines whether using buffer is recommended or not. This value will be calculated and changed automatically when the module initializes (as it is only recommended when native canvas is supported or for some emulation methods).
@@ -239,7 +241,10 @@ CB_REM.prototype.getCurrentSprite = function(CB_GraphicSpritesObject, returnValu
 	if (spritesLength > 0)
 	{
 		var pointerCurrent = CB_GraphicSpritesObject.getPointer();
-		var pointerNext = typeof(sprite.data.pointerNext) === "function" ? sprite.data.pointerNext.call(sprite, sprite) : !isNaN(sprite.data.pointerNext) ? parseInt(sprite.data.pointerNext) : pointerCurrent + 1;
+		var pointerNext =
+			typeof(sprite.data.pointerNext) === "function" ? sprite.data.pointerNext.call(sprite, sprite, canvasContext, CB_GraphicSpritesObject, drawingMap) :
+			!isNaN(sprite.data.pointerNext) ? parseInt(sprite.data.pointerNext) :
+			pointerCurrent + 1;
 		if (sprite.data.loop) { pointerNext %= spritesLength; }
 		else if (pointerNext >= spritesLength) { pointerNext = spritesLength - 1; }
 		var pointersChecked = [];
@@ -402,6 +407,14 @@ CB_REM.prototype.clearElementSpace = function(element, canvasContext)
 	
 	//If the element is an image:
 	if (element.srcType === CB_GraphicSprites.SRC_TYPES.IMAGE) { canvasContext.clearRect(element._leftRelative, element._topRelative, element.width, element.height); }
+	//...otherwise, if it is a bitmap:
+	else if (element.srcType === CB_GraphicSprites.SRC_TYPES.BITMAP)
+	{
+		if (CB_REM._BITMAP_ELEMENTS_CACHE[element.id])
+		{
+			canvasContext.clearRect(CB_REM._BITMAP_ELEMENTS_CACHE[element.id].left, CB_REM._BITMAP_ELEMENTS_CACHE[element.id].top, CB_REM._BITMAP_ELEMENTS_CACHE[element.id].width, CB_REM._BITMAP_ELEMENTS_CACHE[element.id].height);
+		}
+	}	
 	//...otherwise, if it is text:
 	else if (element.srcType === CB_GraphicSprites.SRC_TYPES.TEXT)
 	{
@@ -423,7 +436,7 @@ CB_REM.prototype.clearPreviousElement = function(element, canvasContext, useBuff
 	if (useBuffer) { return; } //There is no need to clean previous things if we are using buffer.
 	if (typeof(element) === "undefined" || element === null) { return; }
 	else if (element._clearPreviousFirstPerformed) { return; }
-	this.clearElementSpace(typeof(element.getPrevious) === "function" ? element.getPrevious() : element, canvasContext);
+	this.clearElementSpace(typeof(element.getPrevious) === "function" && element.srcType !== CB_GraphicSprites.SRC_TYPES.BITMAP ? element.getPrevious() : element, canvasContext);
 	element._clearPreviousFirstPerformed = true;
 }
 
@@ -443,6 +456,7 @@ CB_REM._elementDrawn = function(element, canvasContext, canvasBufferContext, use
 
 
 //Draws an element (sprite or sub-sprite):
+CB_REM._BITMAP_ELEMENTS_CACHE = {}; //Stores a cache with data for the elements of each bitmap (read-only).
 CB_REM._ELEMENT_ATTRIBUTES_EMPTY = { left: 0, top: 0, width: 0, height: 0 }; //Empty element attributes, used to clean them (internal usage).
 CB_REM.prototype.drawElement_currentMap = null; //It will store a two-dimensional array representing map being drawn or the last one drawn, with the elements.
 CB_REM.prototype._onDrawMapElement = null; //It will store the 'onDrawn' callback for each map element (internal usage).
@@ -648,7 +662,16 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 				canvasContext.lineWidth = element.data.lineWidth || 1;
 				canvasContext.strokeStyle = style;
 				canvasContext.beginPath();
-				canvasContext.ellipse(element._leftRelative, element._topRelative, element.data.radiusX, element.data.radiusY, element.data.ellipseRotation || 0, element.data.startAngle, element.data.endAngle, element.data.anticlockwise);
+				try
+				{
+					canvasContext.ellipse(element._leftRelative, element._topRelative, element.data.radiusX, element.data.radiusY, element.data.ellipseRotation || 0, element.data.startAngle, element.data.endAngle, element.data.anticlockwise);
+				}
+				catch(ellipseError)
+				{
+					//The 'ellipse' function is not supported by Internet Explorer 11 and lower. Uses an alternative:
+					//Note: the 'CB_Canvas.prototype._context_drawEllipse' still cannot be considered a valid polyfill as it still does not mimic the native 'ellipse' function.
+					CB_Canvas.prototype._context_drawEllipse.call(canvasContext, element._leftRelative, element._topRelative, element.data.radiusX, element.data.radiusY, element.data.ellipseRotation || 0, element.data.startAngle, element.data.endAngle, element.data.anticlockwise);
+				}
 				canvasContext.closePath();
 				canvasContext.stroke();
 			}
@@ -656,7 +679,16 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 			{
 				canvasContext.fillStyle = style;
 				canvasContext.beginPath();
-				canvasContext.ellipse(element._leftRelative, element._topRelative, element.data.radiusX, element.data.radiusY, element.data.ellipseRotation || 0, element.data.startAngle, element.data.endAngle, element.data.anticlockwise);
+				try
+				{
+					canvasContext.ellipse(element._leftRelative, element._topRelative, element.data.radiusX, element.data.radiusY, element.data.ellipseRotation || 0, element.data.startAngle, element.data.endAngle, element.data.anticlockwise);
+				}
+				catch(ellipseError)
+				{
+					//The 'ellipse' function is not supported by Internet Explorer 11 and lower. Uses an alternative:
+					//Note: the 'CB_Canvas.prototype._context_drawEllipse' still cannot be considered a valid polyfill as it still does not mimic the native 'ellipse' function.
+					CB_Canvas.prototype._context_drawEllipse.call(canvasContext, element._leftRelative, element._topRelative, element.data.radiusX, element.data.radiusY, element.data.ellipseRotation || 0, element.data.startAngle, element.data.endAngle, element.data.anticlockwise);
+				}
 				canvasContext.closePath();
 				canvasContext.fill();
 			}
@@ -703,7 +735,54 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 			canvasContext.quadraticCurveTo(element._leftRelative + element.data.x1, element._topRelative + element.data.y1, element._leftRelative + element.data.x2, element._topRelative + element.data.y2);
 			canvasContext.stroke(); 
 			break;
-		//Map (bitmap, image map, etc.):
+		//Bitmap:
+		case CB_GraphicSprites.SRC_TYPES.BITMAP:
+			//Sets the necessary stuff to create either solid rectangles or hollow ones (to draw each element):
+			var drawRectangle = canvasContext.fillRect;
+			if (element.data.stroke)
+			{
+				canvasContext.lineWidth = element.data.lineWidth || 1;
+				canvasContext.strokeStyle = style;
+				drawRectangle = canvasContext.strokeRect;
+			}
+			else
+			{
+				canvasContext.fillStyle = style;
+			}
+
+			//Stores the data used by this bitmap (useful to clean it before drawing it in the next cycle):
+			CB_REM._BITMAP_ELEMENTS_CACHE[element.id] = CB_REM._BITMAP_ELEMENTS_CACHE[element.id] || {};
+			var bitmapDataObject = CB_REM._BITMAP_ELEMENTS_CACHE[element.id];
+			bitmapDataObject.left = element.left;
+			bitmapDataObject.top = element.top;
+			var beforeDrawingElementCallback = typeof(element.data.beforeDrawingElement) === "function" ? element.data.beforeDrawingElement : function() {}; //Defining a callback always for performance purposes.
+			var x = 0;
+			var elementLeft = 0;
+			var elementTop = element._topRelative;
+			var mapWidth = null;
+			var mapHeight = null;
+			for (var y = 0; y < element.src.length; y++)
+			{
+				elementLeft = element._leftRelative;
+				for (x = 0; x < element.src[y].length; x++)
+				{
+					if (element.src[y][x] === true)
+					{
+						element = beforeDrawingElementCallback.call(element, element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, false, x, y, element.src[y][x]);
+						drawRectangle.call(canvasContext, elementLeft, elementTop, element.width, element.height);
+						if (mapWidth === null || isNaN(mapWidth) || mapWidth < elementLeft + element.width) { mapWidth = elementLeft + element.width; }
+						if (mapHeight === null || isNaN(mapHeight) || mapHeight < elementTop + element.height) { mapHeight = elementTop + element.height; }
+					}
+					elementLeft += element.width;
+				}
+				elementTop += element.height;
+			}
+			//Stores the rest of the data used by this bitmap (useful to clean it before drawing it in the next cycle):
+			bitmapDataObject.width = mapWidth !== null && !isNaN(mapWidth) ? mapWidth : 0;
+			bitmapDataObject.height = mapHeight !== null && !isNaN(mapHeight) ? mapHeight : 0;
+			element._clearPreviousFirstPerformed = false; //Forces to clear before drawing next cycle (only if the 'clearPreviousFirst' option is enabled).
+			break;
+		//Map (sprites map):
 		case CB_GraphicSprites.SRC_TYPES.MAP:
 			if (element.src.length && element.data.elementsData && CB_GraphicSpritesSceneObject)
 			{

@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 
@@ -69,8 +71,9 @@ function processString()
 	try //Prevents IE6 error.
 	{
 		var myDataStringDecompressed_6 = lz.decompressFromUint8Array(myDataStringCompressed_Uint8Array); //Decompressed from a 'uint8Array'. Returns 'myDataString' again.	
-	} catch (E) { var myDataStringDecompressed_6 = ""; }
-	CB_Elements.appendContentById("content", "LZ compression (uint8Array): " + (myDataStringDecompressed_6 === myDataString ? "CORRECT" : "<b>FAILED</b>") + "<br />");
+	}
+	catch(E) { var myDataStringDecompressed_6 = ""; }
+	CB_Elements.appendContentById("content", "LZ compression (uint8Array): " + (myDataStringDecompressed_6 === myDataString ? "CORRECT" : "<b>FAILED</b>") + (myDataStringDecompressed_6 === "" ? " (decompressed string is empty)" : "") + "<br />");
 	CB_Elements.appendContentById("content", "LZ compression result (uint8Array): " + myDataStringCompressed_Uint8Array + "<br />");
 	CB_Elements.appendContentById("content", "LZ compression result length (uint8Array): " + myDataStringCompressed_Uint8Array.length + "<br />");
 	CB_Elements.appendContentById("content", "LZ compression ratio (uint8Array): " + CB_numberFormat((myDataStringCompressed_Uint8Array.length / myDataString.length - 1) * 100 * -1, 2, true) + "%<br /><br />");

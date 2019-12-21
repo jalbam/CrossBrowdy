@@ -9,8 +9,10 @@
 	echo getFilesCodeAll();
 ?>
 
-Additional file used (inside the &quot;img&quot; folder):
-<a href="<?php echo $dirPath; ?>img/bird_sprites.gif" target="_blank">bird_sprites.gif</a>.
+<p>
+	Additional file used (inside the &quot;img&quot; folder):
+	<a href="<?php echo $dirPath; ?>img/bird_sprites.gif" target="_blank">bird_sprites.gif</a>.
+</p>
 
 <?php
 	//Let's try the example:

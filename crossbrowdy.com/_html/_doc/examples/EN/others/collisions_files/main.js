@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 
@@ -165,7 +167,16 @@ function drawElements(elementsData, CB_CanvasObject)
 	canvasContext.fillStyle = "#ccbbaa";
 	canvasContext.beginPath();
 	canvasContext.arc(elementsData.circle_a_x, elementsData.circle_a_y, elementsData.circle_a_radius, 0, Math.PI * 2, true);
-	canvasContext.ellipse(elementsData.ellipse_a_x, elementsData.ellipse_a_y, elementsData.ellipse_a_radius_x, elementsData.ellipse_a_radius_y, 0, 2, 11, false);
+	try
+	{
+		canvasContext.ellipse(elementsData.ellipse_a_x, elementsData.ellipse_a_y, elementsData.ellipse_a_radius_x, elementsData.ellipse_a_radius_y, 0, 2, 11, false);
+	}
+	catch(ellipseError)
+	{
+		//The 'ellipse' function is not supported by Internet Explorer 11 and lower. Uses an alternative:
+		//Note: the 'CB_Canvas.prototype._context_drawEllipse' still cannot be considered a valid polyfill as it still does not mimic the native 'ellipse' function.
+		CB_Canvas.prototype._context_drawEllipse.call(canvasContext, elementsData.ellipse_a_x, elementsData.ellipse_a_y, elementsData.ellipse_a_radius_x, elementsData.ellipse_a_radius_y, 0, 2, 11, false);
+	}
 	canvasContext.closePath();
 	canvasContext.fill();
 	

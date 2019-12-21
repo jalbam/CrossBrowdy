@@ -20,7 +20,8 @@
 	the <a href="_html/_doc/api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a>
 	(using <a href="http://schillmania.com/projects/soundmanager2/" target="_blank">SoundManager 2</a>),
 	etc.
-	These classes which are not related with a specific audio API already provide automatic detection of the best audio API for the current client so we do not need to worry about it.
+	Among these classes, the ones which are not related with a specific audio API already provide automatic detection of the best audio API
+	for the current client so we do not need to worry about it when using them.
 </p>
 
 <p>

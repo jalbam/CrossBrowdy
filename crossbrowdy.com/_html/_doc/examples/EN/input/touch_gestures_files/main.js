@@ -1,5 +1,5 @@
-//Using Hammer.js library internally: https://hammerjs.github.io/
-
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* Using Hammer.js library internally: https://hammerjs.github.io/ */
 
 CB_init(main); //It will call the "main" function when ready.
 
@@ -12,10 +12,22 @@ function main()
 	//NOTE: Check Hammer.js documentation for more information.
 	
 	var HammerJS = CB_Touch.getHammerJSObject();
-	if (HammerJS === null) { CB_console("Hammer.js object could not be found!"); return; }
+	if (HammerJS === null)
+	{
+		var message = "The 'HammerJS' object (used by the Hammer.js library) could not be found. Probably not supported.";
+		CB_Elements.insertContentById("messages", message);
+		CB_console(message);
+		return;
+	}
 	
 	var element = CB_Elements.id("my_element");
-	if (element === null) { CB_console("The 'my_element' element could not be found!"); return; }
+	if (element === null)
+	{
+		var message = "The 'my_element' element could not be found!";
+		CB_Elements.insertContentById("messages", message);
+		CB_console(message);
+		return;
+	}
 	
 	CB_console("Setting touch gestures for 'my_element' using Hammer.js library...");
 	
@@ -66,4 +78,10 @@ function main()
 			}
 		}
 	);
+	
+	//Hides any messages:
+	CB_Elements.hideById("messages");
+
+	//Shows the container (with the element that can be managed with gestures):
+	CB_Elements.showById("container");
 }

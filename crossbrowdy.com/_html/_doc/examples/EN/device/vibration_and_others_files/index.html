@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. -->
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<title>Device: Vibration and others - Example</title>
@@ -14,11 +15,13 @@
 	<body>
 		Vibration API support: <span id="vibration_api"></span><br />
 		<br />
-		<button onClick="vibrateOnce();">Vibrate once</button>
-		<button onClick="vibrateMoreTimes();">Vibrate more times</button>
-		<button onClick="vibrateStop();">Stop vibration</button>
-		<br />
-		<br />
+		<div id="vibration_controls">
+			<button onClick="vibrateOnce();">Vibrate once</button>
+			<button onClick="vibrateMoreTimes();">Vibrate more times</button>
+			<button onClick="vibrateStop();">Stop vibration</button>
+			<br />
+			<br />
+		</div>
 		Timestamp: <span id="timestamp"></span>
 		<br />
 		Timing: <span id="timing"></span>

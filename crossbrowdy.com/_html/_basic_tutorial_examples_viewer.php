@@ -66,7 +66,7 @@
 		
 		//Displays the option to go back:
 		$optionBack = "guides";
-		$menuOptionLink = $optionBack . $PHPExtension . "#" . $category;
+		$menuOptionLink = $optionBack . $PHPExtension . "#" . $category . "_" . $subcategory;
 		if (isset($menuOptionsLink[$language]) && isset($menuOptionsLink[$language][$optionBack])) { $menuOptionLink = $menuOptionsLink[$language][$optionBack]; }
 		echo '<p style="text-align:center; padding-top:20px;"><a href="' . $menuOptionLink . '">Go back to ' . $menuOptions[$language][$optionBack] . '</a></p>';
 	echo '</div>';
@@ -91,7 +91,7 @@
 		if ($nextTopicLinkFound) { break; }
 	}
 
-	echo '<div id="' . CATEGORY_MAIN_NAME . '_navbar">';
+	echo '<nav><div id="' . CATEGORY_MAIN_NAME . '_navbar">';
 		echo '<span class="item">';
 			if (trim($previousTopicLink) !== "") { echo '<a href="' . $previousTopicLink . '">&#171; Prev</a>'; }
 		echo '</span>';
@@ -101,4 +101,7 @@
 		echo '<span class="item">';
 			if (trim($nextTopicLink) !== "") { echo '<a href="' . $nextTopicLink . '">Next &#187;</a>'; }
 		echo '</span>';
-	echo '</div>';
+	echo '</div></nav>';
+	
+	//If it is an example, shows the "try me" floating button:
+	if (CATEGORY_MAIN_NAME === "examples") { echo getTryExampleButton(); }

@@ -30,7 +30,7 @@
 		CB_console("Axes 0 or 1 (maybe both) is being pressed in some or all gamepads");
 	}
 
-	if (CB_Controllers.isAxisDown([0, 1], 0.5, 1))
+	if (CB_Controllers.isAxisDown([0, 1], "", 0.5, 1))
 	{
 		CB_console("Axes 0 or 1 (maybe both) is being pressed in some or all gamepads and their value is between 0.5 and 1 (both included).");
 	}

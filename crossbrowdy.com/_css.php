@@ -40,6 +40,8 @@ a:hover
 }
 
 
+address { font-style:normal; }
+
 
 #menu_button
 {
@@ -679,5 +681,59 @@ code
 		font-size:4.8em;
 		font-size:480%;
 		font-size:8vmin;
+	}
+}
+
+
+.try_example_floating
+{
+	position:fixed;
+	top:20px;
+	right:0px;
+	color:#ffffff;
+	padding:6px;
+	margin:0px;
+	text-decoration:none;
+	background-color:#aa1100;
+	text-align:center;
+	font-size:29px;
+	font-size:1.8em;
+	font-size:180%;
+	font-size:3vmin;
+
+	z-index:10;
+
+	border-bottom-left-radius:12px;
+	-moz-border-radius-bottomleft:12px;
+	-moz-border-bottom-left-radius:12px;
+	-webkit-border-bottom-left-radius:12px;
+	-khtml-border-bottom-left-radius:12px;
+
+	border-top-left-radius:12px;
+	-moz-border-radius-topleft:12px;
+	-moz-border-top-left-radius:12px;
+	-webkit-border-top-left-radius:12px;
+	-khtml-border-top-left-radius:12px;
+
+	filter:alpha(opacity=85);
+	opacity:0.85;
+	-moz-opacity:0.85;
+	-khtml-opacity:0.85;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+}
+.try_example_floating:hover
+{
+	color:#cccc00;
+	background-color:#aa0000;
+	text-decoration:none;
+}
+@media (orientation: portrait)
+{
+	.try_example_floating
+	{
+		font-size:18px;
+		font-size:1.1em;
+		font-size:111%;
+		font-size:4.2vmin;
 	}
 }

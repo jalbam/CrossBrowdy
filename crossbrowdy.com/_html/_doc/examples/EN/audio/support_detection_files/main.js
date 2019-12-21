@@ -1,3 +1,5 @@
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+
 CB_init(main); //It will call the "main" function when ready.
 
 
@@ -35,7 +37,7 @@ function main()
 	
 	//Gets an array with the audio APIs supported by the current client:
 	CB_Elements.insertContentById("supported_apis_array", CB_AudioDetector.getSupportedAPIs());
-	CB_Elements.insertContentById("supported_apis_emulation_array", CB_AudioDetector.getSupportedAPIs(true)); //Returns all supported audio APIs (from all possible ones), without allowing emulated ones.
+	CB_Elements.insertContentById("supported_apis_emulation_array", CB_AudioDetector.getSupportedAPIs(undefined, true)); //Returns all supported audio APIs (from all possible ones), allowing emulated ones.
 
 	//Gets the preferred audio API for the current client:
 	CB_Elements.insertContentById("preferred_api", CB_AudioDetector.getPreferredAPI()); //Returns the preferred API (from all possible ones), without allowing emulated ones.
