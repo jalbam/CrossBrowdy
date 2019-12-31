@@ -54,12 +54,28 @@
 		<meta name="title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta name="DC.Title" lang="en" content="<?php echo $projectTitleHeader; ?>" />
 
-		<meta name="description" content="<?php echo $projectDescription[$language]; ?>" />
-		<meta name="DC.Description" lang="en" content="<?php echo $projectDescription[$language]; ?>" />
-		<meta http-equiv="description" content="<?php echo $projectDescription[$language]; ?>" />
+		<?php
+			$pageDescription = $pagesDescription[$language]["_DEFAULT"];
+			if (isset($subcategory) && $subcategory !== "" && isset($topic) && $topic !== "" && isset($pagesDescription[$language][$category . "_" . $subcategory . "_" . $topic]))
+			{
+				$pageDescription = $pagesDescription[$language][$category . "_" . $subcategory . "_" . $topic];
+			}
+			else if (isset($subcategory) && $subcategory !== "" && isset($pagesDescription[$language][$category . "_" . $subcategory]))
+			{
+				$pageDescription = $pagesDescription[$language][$category . "_" . $subcategory];
+			}
+			else if (isset($pagesDescription[$language][$category]))
+			{
+				$pageDescription = $pagesDescription[$language][$category];
+			}
+		?>
 
-		<meta name="subject" content="<?php echo $projectDescription[$language]; ?>" />
-		<meta name="DC.Subject" lang="en" content="<?php echo $projectDescription[$language]; ?>" />
+		<meta name="description" content="<?php echo $pageDescription; ?>" />
+		<meta name="DC.Description" lang="en" content="<?php echo $pageDescription; ?>" />
+		<meta http-equiv="description" content="<?php echo $pageDescription; ?>" />
+
+		<meta name="subject" content="<?php echo $pageDescription; ?>" />
+		<meta name="DC.Subject" lang="en" content="<?php echo $pageDescription; ?>" />
 
 		<meta name="keywords" content="<?php echo $projectKeywords[$language]; ?>" />
 		<meta name="DC.Keywords" content="<?php echo $projectKeywords[$language]; ?>" />
@@ -93,6 +109,23 @@
 			?>
 		-->
 		</style>
+
+		<?php
+			$canonicalURL = $projectURLDefault;
+			if (isset($subcategory) && $subcategory !== "" && isset($topic) && $topic !== "")
+			{
+				$canonicalURL .= $category . "/" . $subcategory . "/" . $topic;
+			}
+			else if (isset($subcategory) && $subcategory !== "")
+			{
+				$canonicalURL .= $category . "/" . $subcategory;
+			}
+			else if ($category !== "index")
+			{
+				$canonicalURL .= $category;
+			}
+		?>
+		<link rel="canonical" href="<?php echo $canonicalURL; ?>" />
 		
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -112,18 +145,18 @@
 		<meta property="article:author" content="Juan Alba Maldonado" />
 		<meta property="article:publisher" content="Juan Alba Maldonado" />
 		<meta property="og:locale" content="en_US" />
-		<meta property="og:description" content="<?php echo $projectDescription[$language]; ?>"/>
+		<meta property="og:description" content="<?php echo $pageDescription; ?>"/>
 
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:site" content="@jalbam1984" />
 		<meta name="twitter:creator" content="@jalbam1984" />
 		<meta name="twitter:title" content="<?php echo $projectTitleHeader; ?>" />
-		<meta name="twitter:description" content="<?php echo $projectDescription[$language]; ?>" />
+		<meta name="twitter:description" content="<?php echo $pageDescription; ?>" />
 		<meta name="twitter:image" content="<?php echo $projectURL; ?>favicon128.png" />
 		<meta name="twitter:url" content="<?php echo $projectURLCurrent; ?>" />
 
 		<meta itemprop="name" content="<?php echo $projectName; ?>" />
-		<meta itemprop="description" content="<?php echo $projectDescription[$language]; ?>" />
+		<meta itemprop="description" content="<?php echo $pageDescription; ?>" />
 		<meta itemprop="image" content="favicon128.png" /> 
 		
 		<link rel="author" href="https://plus.google.com/101309215015488397249" />

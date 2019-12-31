@@ -234,7 +234,8 @@ function toggleViewport()
 			2, //'initialScale'. Optional.
 			0.1, //'minimumScale'. Optional.
 			10, //'maximumScale'. Optional.
-			"device-dpi" //'targetDensityDPI'. Optional.
+			"device-dpi", //'targetDensityDPI'. Optional.
+			"no" //'shrinkToFit'. Optional.
 		);
 	}
 	

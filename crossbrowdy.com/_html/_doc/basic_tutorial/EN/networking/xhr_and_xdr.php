@@ -3,7 +3,7 @@
 <p>
 	Here is an example of using XHR (AJAX):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks whether XHR (AJAX) is supported:
 	if (CB_Net.XHR.supported())
 	{
@@ -50,7 +50,7 @@
 <p>
 	A way to perform an XHR (AJAX) request for a binary file:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Requests a binary file asynchronously:
 	var successFunction = function(XHR, callbackFunctionError)
 	{
@@ -80,7 +80,7 @@
 <p>
 	Sending form data through XHR (AJAX) easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Performing a common call with form data asynchronously:
 	var XHR = CB_Net.XHR.callForm
 	(
@@ -100,7 +100,7 @@
 <p>
 	It is possible to perform XDR (Cross-domain requests) through a proxy (a default one is already provided by CrossBrowdy):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Performing a call through a proxy asynchronously:
 	var successFunction = function(XHR, callbackFunctionError)
 	{
@@ -141,7 +141,7 @@
 <p>
 	It is also possible to perform a REST request:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Performing a REST call asynchronously:
 	var XHR = CB_Net.XHR.callREST
 	(
@@ -172,7 +172,7 @@
 <p>
 	Finally, it may also be useful to get a new XHR object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets a new XHR object:
 	var XHR = CB_Net.XHR.get();
 </code></pre>

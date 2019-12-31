@@ -4,7 +4,7 @@
 	Some platforms and back-end features can be detected by CrossBrowdy. Here is an example:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Node.js detection:
 	if (CB_Client.supportsNodeJS())
 	{

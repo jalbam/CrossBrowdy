@@ -3,7 +3,7 @@
 <p>
 	You can manage HTTP parameters (URI parameters, also known as GET parameters or query parameters) easily with CrossBrowdy. Here is an example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the current URL without any hash parameters:
 	var parameters = CB_Net.getURIParameters();
 	
@@ -42,7 +42,7 @@
 <p>
 	Likewise, you can also manage hash parameters easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets all the hash parameters from the current URL:
 	var hashParameters = CB_Net.getHashParameters();
 	
@@ -76,7 +76,7 @@
 <p>
 	It is also possible to manage sets of parameters with your own format:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets all the desired parameters using the own format desired:
 	var URL = "https://www.crossbrowdy.com/guides.php?data=[key1-     value1    ,key2-   value2   ,key3-   value3   ]#whatever";
 	var values = CB_Net.getURIParameters(URL, null, null, null, null, "[", "]", ",", "-"); //Returns "key1-value1,key2-value2,key3-value3".
@@ -89,7 +89,7 @@
 <p>
 	Although previous functions already decode the values automatically, sometimes manual codification and decodification is also useful:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Encodes the given URI:
 	var URLEncoded = CB_Net.URIEncode(URL); //The 'URL' variable should contain an unencoded URI.
 

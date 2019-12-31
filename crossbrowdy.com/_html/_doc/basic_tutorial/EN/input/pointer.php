@@ -7,7 +7,7 @@
 <p>
 	Here is an example of pointer management with CrossBrowdy:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Managing pointer events (use "null" as the first parameter to remove them):
 	CB_Pointer.onDown(function(e) { CB_console("The 'onDown' event has been fired!"); });
 	CB_Pointer.onUp(function(e) { CB_console("The 'onUp' event has been fired!"); });

@@ -49,6 +49,10 @@
 		}
 	}
 
+	$projectKeywords = Array
+	(
+		"EN" => "multimedia,games,engine,emulators,hybrid,PWA,apps,gamedev,game development,js,JavaScript,HTML5,DHTML,cross-device,cross-platform,cross-browser"
+	);
 	$projectDescriptionShort = Array
 	(
 		"EN" => "Multimedia JavaScript framework"
@@ -59,31 +63,52 @@
 	);
     $projectDescriptionLong = Array
 	(
-		"EN" => "Create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.\nCompatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets and many others."
+		"EN" => "Create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.\nCompatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets, smart watches, embedded devices and many others."
 	);
-	$projectKeywords = Array
-	(
-		"EN" => "multimedia,games,engine,emulators,hybrid,PWA,apps,gamedev,game development,js,JavaScript,HTML5,DHTML,cross-device,cross-platform,cross-browser"
-	);
-	$projectURLDefault = "http://www.crossbrowdy.com/";
+	$projectURLDefault = "http://crossbrowdy.com/";
+
 	$projectURL = "";
+	$projectURLBase = "";
 	if (isset($HTTP_SERVER_VARS['HTTP_HOST']) && isset($HTTP_SERVER_VARS['PHP_SELF']))
 	{
 		$PHP_SELF_sanitized = htmlspecialchars($HTTP_SERVER_VARS['PHP_SELF']);
-		$projectURL = (isset($HTTP_SERVER_VARS['HTTPS']) ? "https" : "http") . "://" . $HTTP_SERVER_VARS['HTTP_HOST'] . $PHP_SELF_sanitized;
+		$projectURLBase = (isset($HTTP_SERVER_VARS['HTTPS']) ? "https" : "http") . "://" . $HTTP_SERVER_VARS['HTTP_HOST'];
+		$projectURL = $projectURLBase . $PHP_SELF_sanitized;
 	}
 	$projectURL = str_replace("index.php", "", $projectURL);
 	$projectURL = trim($projectURL, "/");
 	if (trim($projectURL) === "" || trim($HTTP_SERVER_VARS['PHP_SELF']) === "") { $projectURL = trim($projectURLDefault, "/"); }
 	$projectURL .= "/";
 	$projectURLCurrent = $projectURL;
-	if (isset($_SERVER) && isset($_SERVER["REQUEST_URI"])) { $projectURLCurrent = rtrim($projectURL, "/") . "/" . ltrim($_SERVER["REQUEST_URI"], "/"); }
+	if (isset($_SERVER) && isset($_SERVER["REQUEST_URI"]))
+	{
+		$projectURLCurrent = $projectURLBase . ltrim($_SERVER["REQUEST_URI"]);
+		//$projectURLCurrent = rtrim($projectURL, "/") . "/" . ltrim($_SERVER["REQUEST_URI"], "/");
+	}
+
+	$pagesDescription = Array
+	(
+		"EN" => Array
+		(
+			"_DEFAULT" => $projectDescription["EN"],
+			"index" => $projectDescription["EN"],
+			"about" => "About " . $projectName . " &amp; FAQ, the " . $projectDescription["EN"],
+			"news" => "News about " . $projectName . ", the " . lcfirst($projectDescription["EN"]),
+			"api" => $projectName . " API, the " . lcfirst($projectDescription["EN"]),
+			"guides" => $projectName . " - Guides &amp; Tutorials for the " . lcfirst($projectDescription["EN"]),
+				"basic_tutorial" => $projectName . " - Basic tutorial for the " . lcfirst($projectDescription["EN"]),
+				"examples" => $projectName . " - Examples for the " . lcfirst($projectDescription["EN"]),
+				//"basic_tutorial_general_getting_started" => $projectName . " - Basic tutorial - General - Getting started",
+			"community" => $projectName . " - Community &amp; Get Involved with the " . lcfirst($projectDescription["EN"]),
+			"download" => "Download " . $projectName . ", the " . lcfirst($projectDescription["EN"])
+		)
+	);
 
 	$projectKeyPoints = Array
 	(
 		Array
 		(
-			"EN" => "Open-source and free"
+			"EN" => "Open source and free"
 		),
 		Array
 		(
@@ -138,7 +163,7 @@
 			"Audio" => Array("music", "FX", "filters", "synth", "music composition", "processing", "files", "sprites", "cache", "pool", "speakers", "supported formats detection", "supported APIs detection"),
 			"Image" => Array("canvas", "viewport", "screens"),
 			"Others" => Array("modules", "JSON", "DOM elements", "arrays", "events", "data storage", "data compression", "base conversion", "template rendering", "lazy load", "collisions"),
-			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "video", "MIDI", "VR", "leap motion", "GraphQL", "databases", "many more")
+			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "video", "MIDI", "VR", "leap motion", "GraphQL", "databases", "Touch Bar", "many more")
 		)
 	);
 	
@@ -165,8 +190,18 @@
 		)
 	);
 	
-	$menuOptionsExternalWindow = Array("api");
+	if (file_exists("_html/_doc/api/"))
+	{
+		$menuOptionsExternalWindow = Array("api");
+	}
+	else
+	{
+		$menuOptionsExternalWindow = Array();
+	}
 	
+	$menuOptionsLink = Array("EN" => Array());
+
+	/*
 	$menuOptionsLink = Array
 	(
 		"EN" => Array
@@ -174,6 +209,7 @@
 			"api" => "_html/_doc/api/index.html"
 		)
 	);
+	*/
 	
 	$menuOptionsHidden = Array("basic_tutorial", "examples");
 	

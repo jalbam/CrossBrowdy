@@ -3,7 +3,7 @@
 <p>
 	CrossBrowdy can deal with local data, using internally the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank">Web Storage API</a> and falling back automatically to other methods (as <a href="https://github.com/mortzdk/localStorage" target="_blank">localStorage library</a> or cookies) when the first one is not available. Here is an example of cookies and local storage management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Sets data in local storage (uses Web Storage API or fallbacks automatically to localStorage or cookies otherwise):
 	CB_setDatum("my_index", "my_value"); //Stores data using the best storage method automatically.
 	CB_setDatum("my_index_2", "my_value_2", undefined, undefined, true); //Stores data forcing it to use cookies (without 'days' nor 'path set).

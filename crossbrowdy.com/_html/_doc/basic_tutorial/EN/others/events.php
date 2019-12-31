@@ -3,7 +3,7 @@
 <p>
 	Here are some examples of events management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Adds an event handler on a target element:
 	var eventHandler = function(e) { CB_console("Scrolling!"); };
 	CB_Events.on //Equivalent to 'CB_Events.add'.

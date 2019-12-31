@@ -4,7 +4,7 @@
 	CrossBrowdy helps you to manage TV remotes, gamepads and other devices which fire keyboard events. Here is an example:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Input management for some video game consoles and similar and virtual keyboard (or compatible ones) that fire keyboard events:
 	var UPKeys = //Note that this is just an example, as all of these key codes are already included in "CB_Keyboard.keys.UP".
 	[

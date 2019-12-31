@@ -3,7 +3,7 @@
 <p>
 	It is possible to get information about the battery of a device and manage some events.	Here is an example of device battery management (through the <a href="https://developer.mozilla.org/docs/Web/API/Battery_Status_API" target="_blank">Battery Status API</a> or compatible ones):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Battery management through the Battery Status API or compatible ones:
 	if (CB_Device.Battery.isSupported())
 	{
@@ -58,7 +58,7 @@
 <p>
 	When the <a href="https://developer.mozilla.org/docs/Web/API/Battery_Status_API" target="_blank">Battery Status API</a> or compatible ones are not available, it is still possible to manage the battery through the <a href="https://github.com/apache/cordova-plugin-battery-status" target="_blank">Apache Cordova's Battery Status plugin</a>:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Battery management through the Apache Cordova's Battery Status plugin:
 	CB_Device.Battery.cordova_onChange
 	(

@@ -1,10 +1,10 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	After <a href="download.php">downloading</a> CrossBrowdy and decompressing it in your working folder (inside a subfolder called &quot;<i>CrossBrowdy</i>&quot;), create an HTML file with the following content:
+	After <a href="download.php">downloading</a> CrossBrowdy and placing it in your working folder (for this example, inside a subfolder called &quot;<i>CrossBrowdy</i>&quot;), create an HTML file with the following content:
 </p>
 
-<pre><code class="language-html">
+<pre><code class="language-html line-numbers match-braces rainbow-braces">
 	&lt;script src="CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"&gt;&lt;/script&gt;&lt;!-- "type" and "language" parameters for legacy clients. --&gt;
 </code></pre>
 
@@ -12,9 +12,9 @@
 	Then just start the CrossBrowdy framework using JavaScript language, from the same file:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	CB_init(main); //It will call the "main" function when ready.
-		
+
 	//This function will be called when CrossBrowdy is ready:
 	function main()
 	{
@@ -26,8 +26,8 @@
 	You can create a DOM element with &quot;<i>CB_console</i>&quot; id which CrossBrowdy will use in the case that the client does not support <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console" target="_blank">console</a>:
 </p>
 
-<pre><code class="language-html">
-	&lt;div id="CB_console" style="visibility:hidden; overflow:scroll;"&gt;
+<pre><code class="language-html line-numbers match-braces rainbow-braces">
+	&lt;div id="CB_console" style="display:none; visibility:hidden; overflow:scroll;"&gt;
 		&lt;span style="font-weight:bold;"&gt;Console:&lt;/span&gt;&lt;br /&gt;
 	&lt;/div>
 </code></pre>

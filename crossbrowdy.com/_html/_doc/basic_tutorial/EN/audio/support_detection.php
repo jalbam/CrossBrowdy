@@ -27,7 +27,7 @@
 <p>
 	Here is an example of audio support detection and management with CrossBrowdy:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks whether a given audio API exists in CrossBrowdy (although the current client might not support it):
 	if (CB_AudioDetector.APIExists("WAAPI")) { CB_console("HTML5 Web Audio API exists!"); }
 	if (CB_AudioDetector.APIExists("AAPI")) { CB_console("HTML5 Audio API exists!"); }

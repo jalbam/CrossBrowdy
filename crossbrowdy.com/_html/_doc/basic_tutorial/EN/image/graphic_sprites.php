@@ -21,7 +21,7 @@
 <p>
 	Here is an example of graphic sprites group management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the sprites group information ('CB_GraphicSprites.SPRITES_OBJECT' object):
 	//Note: sprites and sub-sprites are always automatically ordered internally by their z-index, ascending order (remember to use the 'setZIndex' method of each if you want to modify it).
 	var spritesGroupData =
@@ -83,7 +83,7 @@
 <p>
 	Here is an extended example creating a graphic sprites object using more options:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the sprites group information ('CB_GraphicSprites.SPRITES_OBJECT' object):
 	//Note: sprites and sub-sprites are always automatically ordered internally by their z-index, ascending order (remember to use the 'setZIndex' method of each if you want to modify it).
 	var spritesGroupData =
@@ -256,7 +256,7 @@
 <p>
 	After creating the graphic sprites object (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object), we can start managing its sprites:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	CB_console(myGraphicSprites.isSprites); //Always returns true (since it is a 'CB_GraphicSprites' object).
 	
 	//Sets the desired value of a given property name to the 'CB_GraphicSprites.SPRITES_OBJECT' object as well to its children elements ('CB_GraphicSprites.SPRITE_OBJECT' and 'CB_GraphicSprites.SUBSPRITE_OBJECT' objects):
@@ -486,7 +486,7 @@
 <p>
 	We can also manage the sub-sprites of a sprite:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets an array with all the sub-sprites ('CB_GraphicSprites.SUBSPRITE_OBJECT' objects) of a given sprite ('CB_GraphicSprites.SPRITE_OBJECT' object):
 	var sprite = myGraphicSprites.get(1); //Gets the sprite object in the position 1.
 	var subSprites = myGraphicSprites.getSubSprites(sprite); //Returns undefined if not found.
@@ -673,7 +673,7 @@
 <p>
 	Each graphic sprites object (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) has an internal pointer that points to the current sprite. We can manage the current sprite, go to previous or next one or even modify this pointer to jump to the desired sprite:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the current position of the pointer (it belongs to an index of the 'myGraphicSprites.spritesGroup.sprites' array where a 'CB_GraphicSprites.SPRITE_OBJECT' object is placed, containing a sprite):
 	var pointerPosition = myGraphicSprites.getPointer(); //The same as 'myGraphicSprites.getCurrentPosition'. Similar to accessing the 'myGraphicSprites.pointer' property.
 
@@ -746,7 +746,7 @@
 <p>
 	It is possible to insert more sprites or sub-sprites as well as removing them. Here are some examples:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Adds the desired group of graphic sprites (same as 'myGraphicSprites.insertSpritesGroup'):
 	myGraphicSprites.insertSprites(spritesGroupData); //The 'spritesGroupData' parameter must be a 'CB_GraphicSprites.SPRITES_OBJECT' object (same parameter as the constructor of the 'CB_GraphicSprites' class).
 	
@@ -796,7 +796,7 @@
 <p>
 	It is also possible to get a copy of a graphic sprites object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets a copy of the 'CB_GraphicSprites' object:
 	//Note: to copy sprites and sub-sprites, you can also use the 'CB_copyObject' function.
 	var myGraphicSpritesCopy = myGraphicSprites.getCopy();
@@ -805,7 +805,7 @@
 <p>
 	In order to free memory and resources, it is possible to destroy the graphic sprites object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Destroys the graphic sprites object (removing all sprites and their sub-sprites, etc.) and frees memory:
 	myGraphicSprites.destructor();	
 </code></pre>

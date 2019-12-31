@@ -1,13 +1,17 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	CrossBrowdy helps you to manage controllers and gamepads which either have proprietary API or are compatible with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API" target="_blank">HTML5 Gamepad API</a>. It will try to use native support first but it will end trying to use internal fallbacks automatically to emulate the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API" target="_blank">HTML5 Gamepad API</a> if needed (including polyfilling methods that should be native).
+	CrossBrowdy helps you to manage controllers and gamepads which either have proprietary API or are compatible with the
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API" target="_blank">HTML5 Gamepad API</a>.
+	It will try to use native support first but it will end trying to use internal fallbacks automatically to emulate the
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API" target="_blank">HTML5 Gamepad API</a> if needed
+	(including polyfilled methods that should be native).
 </p>
 
 <p>
 	Here you will find some examples of controllers and gamepads management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Using the HTML5 Gamepad API (it will emulate it internally automatically, if needed):
 	var controllersStandard = CB_Controllers.getGamePads(true); //Object whose indexes are the identifier of each gamepad and the value a GamePad object (respecting HTML5 GamePad API).
 	var controllersAll = CB_Controllers.getGamePads(); //Object with two properties ("standard", containing gamepads that use the HTML5 GamePad API, and "proprietary" the gamepad objects for each proprietary system).
@@ -23,7 +27,7 @@
 <p>
 	You can easily check if one or more axes are being pressed currently:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Managing axes pressed currently (this should normally be in a loop, checking constantly):
 	if (CB_Controllers.isAxisDown([0, 1]))
 	{
@@ -54,7 +58,7 @@
 <p>
 	You can easily check if one or more buttons are being pressed currently:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Managing buttons pressed currently (this should normally be in a loop, checking constantly):
 	if (CB_Controllers.isButtonDown([2, 3]))
 	{
@@ -78,7 +82,7 @@
 </code></pre>
 
 Finally, some events can be managed:
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Managing gamepad events (use "null" as the first parameter to remove them):
 	CB_Controllers.onConnect(function(gamepad) { CB_console("Gamepad #" + gamepad.index + " (" + gamepad.id + ") connected!"); });
 	CB_Controllers.onDisconnect(function(gamepad) { CB_console("Gamepad #" + gamepad.index + " (" + gamepad.id + ") disconnected!"); });

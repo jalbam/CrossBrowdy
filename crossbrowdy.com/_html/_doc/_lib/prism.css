@@ -1,5 +1,5 @@
-/* PrismJS 1.16.0
-https://prismjs.com/download.html#themes=prism-coy&languages=markup+css+clike+javascript&plugins=line-numbers+normalize-whitespace */
+/* PrismJS 1.17.1
+https://prismjs.com/download.html#themes=prism-coy&languages=markup+css+clike+javascript&plugins=line-numbers+autolinker+normalize-whitespace+match-braces */
 /**
  * prism.js Coy theme for JavaScript, CoffeeScript, CSS and HTML
  * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
@@ -268,4 +268,37 @@ pre[class*="language-"].line-numbers > code {
 			padding-right: 0.8em;
 			text-align: right;
 		}
+
+.token a {
+	color: inherit;
+}
+.token.punctuation.brace-hover,
+.token.punctuation.brace-selected {
+	outline: solid 1px;
+}
+
+.rainbow-braces .token.punctuation.brace-level-1,
+.rainbow-braces .token.punctuation.brace-level-5,
+.rainbow-braces .token.punctuation.brace-level-9 {
+	color: #E50;
+	opacity: 1;
+}
+.rainbow-braces .token.punctuation.brace-level-2,
+.rainbow-braces .token.punctuation.brace-level-6,
+.rainbow-braces .token.punctuation.brace-level-10 {
+	color: #0B3;
+	opacity: 1;
+}
+.rainbow-braces .token.punctuation.brace-level-3,
+.rainbow-braces .token.punctuation.brace-level-7,
+.rainbow-braces .token.punctuation.brace-level-11 {
+	color: #26F;
+	opacity: 1;
+}
+.rainbow-braces .token.punctuation.brace-level-4,
+.rainbow-braces .token.punctuation.brace-level-8,
+.rainbow-braces .token.punctuation.brace-level-12 {
+	color: #E0E;
+	opacity: 1;
+}
 

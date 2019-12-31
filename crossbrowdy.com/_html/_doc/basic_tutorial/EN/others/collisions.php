@@ -3,7 +3,7 @@
 <p>
 	Here are some examples of collisions management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines two points with its coordinates:
 	var myPoint = { x: 20, y: 30 };
 	var myPoint2 = { x: 30, y: 50 };
@@ -66,7 +66,7 @@
 	//NOTE: for other types of collisions, check the API documentation.
 </code></pre>
 <p>
-	For collisions with the mouse cursor, you can use the <a href="_html/_doc/api/CB_Mouse.html" target="_blank">CB_Mouse</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("input", "mouse"); ?>" target="_blank"><?php echo $basicTutorial["input"]["topics"]["mouse"][$language]; ?></a> topic of the basic tutorial.
+	For some collisions with the mouse cursor, you can use the <a href="_html/_doc/api/CB_Mouse.html" target="_blank">CB_Mouse</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("input", "mouse"); ?>" target="_blank"><?php echo $basicTutorial["input"]["topics"]["mouse"][$language]; ?></a> topic of the basic tutorial.
 </p>
 
 

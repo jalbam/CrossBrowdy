@@ -8,7 +8,7 @@
 <p>
 	Here is an example managing sound effects:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Sound effects example:
 	var jsfxObject = CB_Speaker.getJsfxObject(); //Gets the 'jsfx' object.
 	if (jsfxObject !== null)

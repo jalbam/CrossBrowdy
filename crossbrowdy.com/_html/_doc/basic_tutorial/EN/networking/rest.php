@@ -4,7 +4,7 @@
 	Although it is possible to make REST calls through the <a href="_html/_doc/api/CB_Net.XHR.html#.callREST" target="_blank">CB_Net.XHR.callREST</a> function, it is recommended to use the powerful <a href="_html/_doc/api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static class instead to make things easier.
 	Here is an example of REST management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines a REST action called "my_action":
 	CB_Net.REST.actions["my_action"] = 
 	{
@@ -69,7 +69,7 @@
 <p>
 	REST actions are highly configurable. This is an example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines a REST action called "my_action_2":
 	CB_Net.REST.actions["my_action_2"] = 
 	{
@@ -172,7 +172,7 @@
 <p>
 	It is also possible to redefine default options for REST actions:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Modifies the default value to use when the 'serverURL' option is not provided:
 	CB_Net.REST.SERVER_URL_DEFAULT = "http://any_REST_server";
 
@@ -268,7 +268,7 @@
 <p>
 	Finally, it is also possible to redefine permanent options for REST actions. These permanent options will always be used in each action in combination with the options defined in the action, if any, or with the default ones:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Sets a permanent "routeWildcardData" that will be used always (used after the one from the action or the default one):
 	CB_Net.REST.routeWildcardData_PERMANENT =
 		function(actionName, additionalData)

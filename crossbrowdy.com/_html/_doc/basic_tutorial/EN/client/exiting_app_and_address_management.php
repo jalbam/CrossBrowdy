@@ -5,7 +5,7 @@
 	
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Exits the app:
 	CB_Client.exit(); //By default, it will use internal fallbacks and workarounds if standard methods fail.
 </code></pre>
@@ -18,7 +18,7 @@
 	Here are some examples of redirection and address management:
 </p>
 
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Redirect the app:
 	CB_Client.redirectTo("http://crossbrowdy.com/"); //Redirects to "http://crossbrowdy.com/".
 	CB_Client.redirectTo("http://crossbrowdy.com/?data1=value1", "data2=value2&data3=value3"); //Redirects to "http://crossbrowdy.com/?data1=value1&data2=value2&data3=value3".

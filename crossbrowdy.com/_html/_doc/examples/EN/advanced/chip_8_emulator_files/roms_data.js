@@ -50,6 +50,12 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.V, CB_Keyboard.keys.SPACE, CB_Keyboard.keys.ENTER ],
 					controllers: { gamepadIndex: "", buttons: [ 0, 1, 2, 3 ] }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//NOTE: theme not personalized for this game to keep the example simpler.
+				return null; //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
 			}
 		},
 		"Brix":
@@ -75,6 +81,26 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.E, CB_Keyboard.keys.RIGHT ],
 					controllers: { gamepadIndex: "", axis: { index: 0, min: 0.5, max: 1 } }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//Lives and score:
+				if (y >= 0 && y < 5)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#00aaaa";
+					CB_GEM.data._pixelsStyleTemp.last = "#aa00aa";
+				}
+				//Paddle (player):
+				else if (y === 31)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#aa0000";
+				}
+				//Others (bricks and ball):
+				else { return { stroke: true }; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST') but using stroke.
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"Pong":
@@ -85,7 +111,7 @@ function setROMsData()
 			cyclesPerLoop: 2,
 			contentMatches: function(ROMContent) //Returns true if the given ROM content matches this ROM. Used to identify ROMs.
 			{
-				return ROMContentToString(ROMContent).indexOf("iÿ¢ðÖq¢êÚ¶ÜÖ`") !== -1;
+				return ROMContentToString(ROMContent).indexOf("iÿ¢ðÖq¢êÚ¶ÜÖ") !== -1;
 			},
 			keysMapping:
 			{
@@ -109,6 +135,26 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.R, CB_Keyboard.keys.RIGHT ],
 					controllers: { gamepadIndex: 0, axis: { index: 1, min: 0.5, max: 1 } }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//Player 1's paddle:
+				if (x === 2)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#0000aa";
+				}
+				//Player 2's paddle:
+				else if (x === 63)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#aa0000";
+				}
+				//Others (scored goals and ball):
+				else { return { stroke: true }; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST') but using stroke.
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"Space Intercept":
@@ -138,6 +184,37 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.E, CB_Keyboard.keys.RIGHT ],
 					controllers: { gamepadIndex: "", axis: { index: 0, min: 0.5, max: 1 } }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				if (y > 26)
+				{
+					//Left numbers:
+					if (x >= 0 && x < 14)
+					{
+						CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+						CB_GEM.data._pixelsStyleTemp.last = "#0000aa";
+					}
+					//Right numbers:
+					else if (x > 49)
+					{
+						CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+						CB_GEM.data._pixelsStyleTemp.last = "#cc0000";
+					}
+					//Player:
+					else if (y === 31)
+					{
+						CB_GEM.data._pixelsStyleTemp.first = "#aaaa00";
+						CB_GEM.data._pixelsStyleTemp.last = "#00cccc";
+						CB_GEM.data._pixelsStyleTemp.stroke = true;
+					}
+					//Others:
+					else { return null; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
+				}
+				else { return null; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"Space Invaders":
@@ -167,6 +244,12 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.E, CB_Keyboard.keys.RIGHT ],
 					controllers: { gamepadIndex: "", axis: { index: 0, min: 0.5, max: 1 } }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//NOTE: theme not personalized for this game to keep the example simpler.
+				return null; //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
 			}
 		},
 		"Syzygy":
@@ -217,6 +300,12 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.V, CB_Keyboard.keys.SPACEBAR ],
 					controllers: { gamepadIndex: "", buttons: [ 2, 3 ] }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//NOTE: theme not personalized for this game to keep the example simpler.
+				return { stroke: true }; //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST') but using stroke.
 			}
 		},
 		"Tetris":
@@ -247,6 +336,20 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.E, CB_Keyboard.keys.RIGHT ],
 					controllers: { gamepadIndex: "", axis: { index: 0, min: 0.5, max: 1 } }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//Field border:
+				if (y === 31 || x === 26 || x === 37)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#0000aa";
+				}
+				//Others:
+				else { return { stroke: true }; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST') but using stroke.
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"Tic-Tac-Toe":
@@ -307,6 +410,54 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.C, CB_Keyboard.keys._3, CB_Keyboard.keys.TAB ],
 					controllers: { gamepadIndex: "", buttons: [ 4 ] }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//Left side:
+				if (x > 1 && x < 16)
+				{
+					//Left cross ('X'):
+					if (y > 9 && y < 15)
+					{
+						CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+						CB_GEM.data._pixelsStyleTemp.last = "#0000aa";
+					}
+					//Left score:
+					else
+					{
+						CB_GEM.data._pixelsStyleTemp.first = "#00aaaa";
+						CB_GEM.data._pixelsStyleTemp.last = "#00dddd";
+						CB_GEM.data._pixelsStyleTemp.stroke = true;
+					}
+				}
+				//Right side:
+				else if (x > 46 && x < 61)
+				{
+					//Left circle ('O'):
+					if (y > 9 && y < 15)
+					{
+						CB_GEM.data._pixelsStyleTemp.first = "#0000aa";
+						CB_GEM.data._pixelsStyleTemp.last = "#aa0000";
+					}
+					//Right score:
+					else
+					{
+						CB_GEM.data._pixelsStyleTemp.first = "#00aaaa";
+						CB_GEM.data._pixelsStyleTemp.last = "#00dddd";
+						CB_GEM.data._pixelsStyleTemp.stroke = true;
+					}
+				}
+				//Board:
+				else if (y === 3 || y === 11 || y === 19 || y === 27 || x === 19 || x === 27 || x === 35 || x === 43)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa00aa";
+					CB_GEM.data._pixelsStyleTemp.last = "#dd00dd";
+				}
+				//Others:
+				else { return null; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"Vertical Brix":
@@ -337,6 +488,26 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.A, CB_Keyboard.keys.UP, CB_Keyboard.keys.DOWN, CB_Keyboard.keys.SPACEBAR, CB_Keyboard.keys.ENTER ],
 					controllers: { gamepadIndex: "", buttons: [ 0, 1, 2, 3 ] }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//Border:
+				if (y === 0 || y === 31 || x === 63)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#00aaaa";
+					CB_GEM.data._pixelsStyleTemp.last = "#00dddd";
+				}
+				//Paddle (player):
+				else if (x === 2)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#dd0000";
+				}
+				//Others:
+				else { return null; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"Wipe Off":
@@ -362,6 +533,21 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.E, CB_Keyboard.keys.RIGHT ],
 					controllers: { gamepadIndex: "", axis: { index: 0, min: 0.5, max: 1 } }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//Paddle (player):
+				//NOTE: we could check 'screenBitMap' to prevent detecting the ball as the paddle when it is in the same horizontal line. Not done to keep the example simpler.
+				if (y === 30)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#dd0000";
+				}
+				//Others:
+				else { return null; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"Worm V4":
@@ -396,6 +582,26 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.S, CB_Keyboard.keys.DOWN ],
 					controllers: { gamepadIndex: "", axis: { index: 1, min: 0.5, max: 1 } }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//Score:
+				if (x > 59)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#00aaaa";
+					CB_GEM.data._pixelsStyleTemp.last = "#00dddd";
+				}
+				//Border:
+				else if (x === 0 || x === 58 || y === 0 || y === 31)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#dd0000";
+				}
+				//Others:
+				else { return null; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		},
 		"ZeroPong":
@@ -436,6 +642,28 @@ function setROMsData()
 					keys: [ CB_Keyboard.keys.V, CB_Keyboard.keys.SPACE, CB_Keyboard.keys.ENTER ],
 					controllers: { gamepadIndex: "", buttons: [ 0, 1, 2, 3 ] }
 				}
+			},
+			//Called for each pixel before drawing it, to colourize the screen according to the ROM (to use personalized theme):
+			pixelsColorizer: function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement)
+			{
+				//NOTE: we could check 'screenBitMap' to prevent detecting the ball as the paddles when it is in the same vertical line. Not done to keep the example simpler.
+				
+				//Player 1's paddle:
+				if (x === 2)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#0000aa";
+				}
+				//Player 2's paddle:
+				else if (x === 62)
+				{
+					CB_GEM.data._pixelsStyleTemp.first = "#aa0000";
+					CB_GEM.data._pixelsStyleTemp.last = "#aa0000";
+				}
+				//Others:
+				else { return null; } //It will use default style (set on 'CB_GEM.data.PIXELS_COLOR_FIRST' and 'CB_GEM.data.PIXELS_COLOR_LAST').
+				
+				return CB_GEM.data._pixelsStyleTemp;
 			}
 		}
 	};

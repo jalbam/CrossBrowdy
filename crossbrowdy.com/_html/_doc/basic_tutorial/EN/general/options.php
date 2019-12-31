@@ -4,14 +4,14 @@
 	Some options can be set before starting the CrossBrowdy framework (before calling the <a href="_html/_doc/api/global.html#CB_init" target="_blank">CB_init</a> function). This is an example:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Sets desired options before starting:
 	var CB_OPTIONS =
 	{
 		//Options for CrossBrowdy (general options):
 		CrossBrowdy:
 		{
-			CB_console_ALLOW_ALERTS: false //It will not show alerts in the browsers that doesn't have console.
+			CB_console_ALLOW_ALERTS: false //It will not use alert()'s as a fallback when using 'CB_console' and neither the 'console' object nor a DOM element with "CB_console" ID are found.
 		},
 		//Options for the CrossBase module (main module):
 		CrossBase:

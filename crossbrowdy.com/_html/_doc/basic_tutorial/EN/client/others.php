@@ -4,7 +4,7 @@
 	Here are some other interesting functions:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Managing the "document" object(s):
 	var doc = CB_Client.getDocument(false); //Gets the first "document" object found. Without parameters, it will use the value set on the "CB_Configuration.CrossBase.MIND_IFRAMES" constant.
 	var docBase = CB_Client.getDocumentBase(); //Gets the topmost "document" object (same as using "CB_Client.getDocument(true)"). Useful when it is running inside one or more IFRAME elements.

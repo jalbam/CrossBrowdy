@@ -1,9 +1,12 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	It is possible to get information from the ambient light sensor of a device (through the <a href="https://w3.org/TR/ambient-light/" target="_blank">Ambient Light Sensor API</a> or the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events" target="_blank">Ambient Light Sensor Events (&quot;ondevicelight&quot;)</a> or <a href="https://modernweb.com/introduction-to-the-ambient-light-api/" target="_blank">&quot;onlightlevel&quot; event</a> or compatible ones). Here is an example:
+	It is possible to get information from the ambient light sensor of a device (through the
+	<a href="https://w3.org/TR/ambient-light/" target="_blank">Ambient Light Sensor API</a> or the
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events" target="_blank">Ambient Light Sensor Event's &quot;ondevicelight&quot;</a> or
+	<a href="https://modernweb.com/introduction-to-the-ambient-light-api/" target="_blank">&quot;onlightlevel&quot; event</a> or compatible ones). Here is an example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Ambient light sensor management:
 	if (CB_Device.AmbientLight.isSupported())
 	{

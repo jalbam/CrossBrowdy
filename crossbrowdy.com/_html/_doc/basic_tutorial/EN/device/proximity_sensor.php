@@ -1,9 +1,12 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	It is possible to get information from the proximity sensor of a device (through the <a href="https://w3.org/TR/proximity/" target="_blank">Proximity Sensor API</a> or the Proximity Sensor Events as <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/ondeviceproximity" target="_blank">&quot;ondeviceproximity&quot;</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/UserProximityEvent" target="_blank">&quot;onuserproximity&quot;</a> or compatible ones). Here is an example:
+	It is possible to get information from the proximity sensor of a device (through the
+	<a href="https://w3.org/TR/proximity/" target="_blank">Proximity Sensor API</a> or the
+	Proximity Sensor Events as <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/ondeviceproximity" target="_blank">&quot;ondeviceproximity&quot;</a> or
+	<a href="https://developer.mozilla.org/en-US/docs/Web/API/UserProximityEvent" target="_blank">&quot;onuserproximity&quot;</a> or compatible ones). Here is an example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Proximity sensor management:
 	if (CB_Device.Proximity.isSupported())
 	{	

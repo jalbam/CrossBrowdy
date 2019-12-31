@@ -3,7 +3,7 @@
 <p>
 	Here is an example of numbers management (including formatting and base conversions):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Number formatting:
 	var num_1 = 123;
 	var num_1_a = CB_numberFormat(num_1, 2); //Returns 123 (number).

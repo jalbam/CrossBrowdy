@@ -7,7 +7,7 @@
 <p>
 	You can detect whether the device supports geolocation management (through <a href="https://developer.mozilla.org/docs/Web/API/Geolocation" target="_blank">Geolocation API</a> or compatible ones as <a href="https://github.com/apache/cordova-plugin-geolocation" target="_blank">Apache Cordova's Geolocation plugin</a>) easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Geolocation management support detection:
 	if (CB_Device.Location.isSupported())
 	{
@@ -24,7 +24,7 @@
 <p>
 	Here is an example of geolocation management, to get the position once:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the position once:
 	CB_Device.Location.get
 	(
@@ -40,7 +40,7 @@
 <p>
 	The position can also be gotten constantly, as soon as it changes:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the position constantly (as soon as it changes):
 	var watchID = CB_Device.Location.getConstantly
 	(
@@ -67,7 +67,7 @@
 <p>
 	Some devices will also allow to keep getting the position always, even when the app is invisible or screen is locked:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Sets an awake lock which tries to keep getting the position, even when the app is invisible or screen is locked:
 	var keepAwakeLock = CB_Device.Location.keepAwake();
 	if (keepAwakeLock)

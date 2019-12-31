@@ -3,7 +3,7 @@
 <p>
 	Here are some other functions to manage the device:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets a timestamp in milliseconds (elapsed since 1st of January 1970 00:00:00 UTC) representing the current time:
 	var currentTimestamp = CB_Device.getTime(); //If possible and the CB_Configuration.CrossBase.CB_Device_getTime_HIGH_PRECISION option is enabled, it will use high resolution time which is more precise.
 	

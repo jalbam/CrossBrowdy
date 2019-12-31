@@ -4,7 +4,7 @@
 	Current client and its version can be tried to be detected. Here is a simple example:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	CB_console("Client name: " + CB_Client.get());
 	CB_console("* version (full): " + CB_Client.getVersion());
 	CB_console("* version (main): " + CB_Client.getVersionMain()); //Just the first number.

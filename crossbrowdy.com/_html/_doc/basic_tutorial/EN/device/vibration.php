@@ -3,7 +3,7 @@
 <p>
 	It is possible to make a device vibrate (through the <a href="https://developer.mozilla.org/docs/Web/API/Vibration_API" target="_blank">Vibration API</a> or compatible ones as <a href="https://github.com/apache/cordova-plugin-vibration" target="_blank">Apache Cordova's Vibration plugin</a>). Here is an example of device vibration management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Device vibration management:
 	if (CB_Device.Vibration.isSupported())
 	{

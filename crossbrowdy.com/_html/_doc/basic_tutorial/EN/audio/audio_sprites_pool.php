@@ -42,7 +42,7 @@
 	When loading an audio file sprites pool object, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
 	Here is an example loading an audio file sprites pool object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the audios in different audio files (providing different formats, paths and data URIs):
 	//NOTE: CrossBrowdy will choose the best one(s) for the current client automatically.
 	var currentURL = location.href;
@@ -487,7 +487,7 @@
 <p>
 	In the case that the audio file sprites pool object or any of its sprites groups has the "checkManually" option enabled, we need to check each of its internally-used <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. We can do that easily by calling the "checkPlayingAll" manually after the audio file sprites pool object has been created. It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//If the "checkManually" option was set to true, we need to check all the CB_AudioFile objects manually (by calling their 'checkPlaying' method):
 	audioFileSpritesPool.checkPlayingAll
 	(
@@ -520,7 +520,7 @@
 	After the audio file sprites pool object has been loaded successfully (and after calling "checkPlayingAll" successfully, if it was necessary), we can start using the audio file sprites pool object freely.
 	The following way can be used to get the internal <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> object that belong to a desired sprites group to manage it:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the internal CB_AudioFileSprites object that belongs to the desired sprites group:
 	var audioFileSpritesGroup = audioFileSpritesPool.getSpritesGroup("numeros"); //Returns null if not found.
 	
@@ -534,7 +534,7 @@
 <p>
 	It is possible to manage the different sprites groups easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets an object with the sprites:
 	var audioFileSprites = audioFileSpritesPool.getSprites(); //All sprites together, not ordered by sprites group.
 	var audioFileSprites_2 = audioFileSpritesPool.getSprites(true); //All sprites together, not ordered by sprites group. Includes "_WITHOUT_SPRITE_ASSOCIATED".
@@ -574,7 +574,7 @@
 <p>
 	Some other useful examples:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tells whether any of the internal CB_AudioFile objects is playing:
 	if (audioFileSpritesPool.isPlaying()) { CB_console("One or more of the internal CB_AudioFile objects are playing."); }
 	else { CB_console("None of the internal CB_AudioFile objects is playing."); }
@@ -632,7 +632,7 @@
 <p>
 	One of the most interesting features when managing audio file sprites pool objects with CrossBrowdy is that you can change the audio API of all their internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects on the fly (even when they are currently playing!). This can be done easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to changes the audio API used by all the internal CB_AudioFile objects (this will work even on the fly, when they are currently playing):
 	audioFileSpritesPool.setAudioAPIAll
 	(
@@ -680,7 +680,7 @@
 <p>
 	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file sprites pool object uses:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Executes a function over all the internal CB_AudioFile objects, being "this" each CB_AudioFile itself:
 	//NOTE: same as 'audioFileSpritesPool.executeAll' and 'audioFileSpritesPool.executeFunctionAll'
 	audioFileSpritesPool.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
@@ -745,7 +745,7 @@
 <p>
 	Some other interesting methods that you might not need:
 </p>
-<pre><code class="language-javascript">	
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">	
 	//Clears the sound instances (created by the 'CB_AudioFileSprites#play' and 'CB_AudioFileSprites#playSprite' methods of any CB_AudioFileSprites object) which have been cancelled:
 	audioFileSpritesPool.clearSoundInstances();
 	
@@ -763,7 +763,7 @@
 <p>
 	In order to free memory and resources, it is possible to destroy the audio file sprites pool object and its internal <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> and <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects:
 </p>	
-<pre><code class="language-javascript">	
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">	
 	//Destroys all the internal CB_AudioFile objects (but not the internal audio file sprites objects) by calling 'CB_AudioFileSprites#audioFileCache.destroyAll' of each internal CB_AudioFileSprites object, and frees memory:
 	audioFileSpritesPool.destroyAll();
 	audioFileSpritesPool.destroyAll(true); //Also stops sounds.
@@ -776,7 +776,7 @@
 <p>
 	It is also possible to re-load again an audio file sprites pool object:
 </p>
-<pre><code class="language-javascript">	
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">	
 	//Loads the audio file sprites pool object again with the data given:
 	/*	NOTE:
 		It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).

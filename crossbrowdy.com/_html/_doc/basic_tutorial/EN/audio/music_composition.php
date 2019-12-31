@@ -9,7 +9,7 @@
 	Here is an example managing music composition:
 </p>
 
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Music composition example (taken from https://github.com/meenie/band.js):
 	var bandJSObject = CB_Speaker.getBandJSObject(); //Gets a new 'BandJS' object.
 	if (bandJSObject !== null)

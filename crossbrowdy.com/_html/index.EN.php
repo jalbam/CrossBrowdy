@@ -46,3 +46,7 @@
 		echo featuresDisplay($projectFeatures[$language]);
 	?>
 </div>
+
+<div id="features_unavailable">
+	* Some features might not be available on certain clients
+</div>

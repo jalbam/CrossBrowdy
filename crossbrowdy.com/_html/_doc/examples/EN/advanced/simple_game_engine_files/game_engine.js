@@ -10,13 +10,13 @@ CB_GEM.CB_CanvasObjectContext = null; //It will store the context of the CB_Canv
 CB_GEM.CB_CanvasObjectBuffer = null; //It will store the CB_Canvas element used as the buffer (the main canvas and the one for the buffer can be internally-alternated automatically if desired).
 CB_GEM.CB_CanvasObjectBufferContext = null; //It will store the context of the CB_Canvas element used as the buffer.
 
-
 //Sets the desired options:
 CB_GEM.options = CB_GEM.options || {};
 CB_GEM.options.REFRESH_RATE = CB_GEM.options.REFRESH_RATE || 16; //A refresh rate of 16 is about 60 FPS (Frames Per Second).
 CB_GEM.options.canvasId = CB_GEM.options.canvasId || "my_canvas";
 CB_GEM.options.canvasBufferId = CB_GEM.options.canvasBufferId || "my_canvas_buffer";
 CB_GEM.options.contextMenuDisable = CB_GEM.options.contextMenuDisable === true || CB_GEM.options.contextMenuDisable === false ? CB_GEM.options.contextMenuDisable : true; //Disables the context menu (when pressing mouse's right button) by default.
+CB_GEM.options.overwriteViewPort = CB_GEM.options.overwriteViewPort === true || CB_GEM.options.overwriteViewPort === false ? CB_GEM.options.overwriteViewPort : true; //Overwrites the view port ('viewport' meta-tag) by default.
 
 //Sets some options:
 var CB_OPTIONS = CB_OPTIONS || { CrossBrowdy: {} };
@@ -61,6 +61,24 @@ CB_GEM._init = function()
 //This function will be called when CrossBrowdy is ready:
 CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 {
+	//If desired, overwrites the view port ('viewport' meta-tag):
+	if (CB_GEM.options.overwriteViewPort)
+	{
+		CB_console("Overwring/creating 'viewport' meta-tag...");
+		//Changes the viewport:
+		CB_Screen.setViewport
+		(
+			"device-width", //'width'. Optional.
+			"device-height", //'height'. Optional.
+			false, //'userScalable'. Optional.
+			"1.0", //'initialScale'. Optional.
+			"1.0", //'minimumScale'. Optional.
+			"1.0", //'maximumScale'. Optional.
+			"device-dpi", //'targetDensityDPI'. Optional.
+			"no" //'shrinkToFit'. Optional.
+		);
+	}
+	
 	//Function to execute when a canvas is created:
 	var canvasLoaded = 0;
 	var onLoadCanvas = function()
@@ -91,9 +109,17 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 			//If desired, disables the context menu for both canvases:
 			if (CB_GEM.options.contextMenuDisable)
 			{
+				CB_console("Disabling context menu for different items...");
 				CB_Elements.contextMenuDisable(); //Affects 'document' (whole document).
 				CB_Elements.contextMenuDisable(canvases[CB_GEM.options.canvasId].get());
 				CB_Elements.contextMenuDisable(canvases[CB_GEM.options.canvasBufferId].get());
+			}
+			
+			//Disables some undesired effects/behaviour:
+			if (document.body && document.body.style)
+			{
+				document.body.style.zoom = 1; //Disables zoom under some circumstances for some web clients.
+				document.body.style.touchAction = document.body.style.msTouchAction = "none"; //Prevents default touch actions for some web clients.
 			}
 			
 			//When the screen changes its size or its orientation, both canvases will be re-adapted:
@@ -126,7 +152,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 					100
 				);
 			};
-			CB_Screen.onResize(onResizeOrChangeOrientation);
+			CB_Screen.onResize.call(CB_GEM, onResizeOrChangeOrientation);
 
 			//Clears both canvas:
 			canvases[CB_GEM.options.canvasId].clear();

@@ -3,7 +3,7 @@
 <p>
 	Here is an example of WebSockets management (through the <a href="https://github.com/sockjs/sockjs-client" target="_blank">SockJS client library</a>):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to starts a connection to the WebSockets (SockJS) server:
 	var websocket = CB_Net.Sockets.SockJS.listen
 	(

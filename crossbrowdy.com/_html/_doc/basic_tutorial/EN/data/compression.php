@@ -3,7 +3,7 @@
 <p>
 	CrossBrowdy includes the <a href="http://pieroxy.net/blog/pages/lz-string/index.html" target="_blank">lz-string library</a> for managing data compression and decompression. Here is an example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Example of data compression and decompression management:
 	var myDataString = "Hello, CrossBrowdy! This is my data to test compression."; //Length: 56.
 	

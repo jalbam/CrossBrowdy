@@ -8,7 +8,7 @@
 	Here is a simple example:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//String with the first preferred language detected, with the default options:
 	var language = CB_Client.getLanguage();
 	

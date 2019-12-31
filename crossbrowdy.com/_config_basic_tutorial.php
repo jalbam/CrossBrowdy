@@ -302,6 +302,10 @@
 				(
 					"EN" => "Collisions"
 				),
+				"statistics" => Array
+				(
+					"EN" => "Statistics"
+				),
 				"more" => Array
 				(
 					"EN" => "More"

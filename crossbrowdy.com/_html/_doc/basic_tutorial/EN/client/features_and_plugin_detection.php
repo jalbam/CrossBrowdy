@@ -4,7 +4,7 @@
 	Some features and plug-ins can be detected by CrossBrowdy. Here is an example:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Support of native "canvas" element (with no emulation):
 	if (CB_Client.supportsCanvas()) { CB_console("The canvas element is supported natively!"); }
 	else { CB_console("The canvas element is not supported natively, but it may be emulated with CrossBrowdy luckily"); }

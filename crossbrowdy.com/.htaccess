@@ -4,6 +4,11 @@ RewriteRule ^basic_tutorial\/([^\/]+)\/([^\/]+)\/? basic_tutorial.php?subcategor
 RewriteRule ^basic_tutorial\/([^\/]+)\/? basic_tutorial.php?subcategory=$1&%{QUERY_STRING} [L,END]
 RewriteRule ^basic_tutorial\/? basic_tutorial.php?%{QUERY_STRING} [L,END]
 
+#RewriteRule ^examples\/([^\/]+)\/([^\/]+)\/try\/([^\/]+)\/? _html/_doc/examples/EN/$1/$2_files/$3?%{QUERY_STRING} [L,END]
+#RewriteRule ^examples\/([^\/]+)\/([^\/]+)\/try\/? _html/_doc/examples/EN/$1/$2_files/index.html?%{QUERY_STRING} [L,END]
+
+RewriteRule ^examples\/([^\/]+)\/([^\/]+)\/try\/? try_example.php?subcategory=$1&topic=$2&%{QUERY_STRING} [L,END]
+
 RewriteRule ^examples\/([^\/]+)\/([^\/]+)\/? examples.php?subcategory=$1&topic=$2&%{QUERY_STRING} [L,END]
 RewriteRule ^examples\/([^\/]+)\/? examples.php?subcategory=$1&%{QUERY_STRING} [L,END]
 RewriteRule ^examples\/? examples.php?%{QUERY_STRING} [L,END]

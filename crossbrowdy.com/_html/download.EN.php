@@ -10,4 +10,8 @@
 		<br />
 		<a href="https://github.com/jalbam/CrossBrowdy" target="_blank">https://github.com/jalbam/CrossBrowdy</a>
 	</p>
+	<h3>Change Log</h3>
+	<p>
+		Coming soon
+	</p>
 </div>

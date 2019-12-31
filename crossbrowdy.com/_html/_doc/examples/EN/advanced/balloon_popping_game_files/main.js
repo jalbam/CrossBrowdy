@@ -33,21 +33,25 @@ function main()
 	CB_Pointer.onOut(pointerCoordinatesClear);
 
 	//Defines needed data:
-	var balloonsAppearingMsInitial = 1500;
+	var balloonsAppearingMsInitial = 1300;
+	var ballonsPerLoopInitial = 1;
 	CB_GEM.data = //Data stored in the game engine module (can be exported to save the game status):
 	{
 		soundEnabled: true,
 		musicEnabled: true,
 		gameStarted: false,
-		balloonsAppearingMsInitial: balloonsAppearingMsInitial, //Milliseconds to wait before creating a new balloon.
+		ballonsPerLoopInitial: ballonsPerLoopInitial, //Initial number of ballons appearing per loop.
+		balloonsPerLoop: ballonsPerLoopInitial, //Number of ballons appearing per loop.
+		balloonsAppearingMsInitial: balloonsAppearingMsInitial, //Initial milliseconds to wait before creating a new balloon.
 		balloonsAppearingMs: balloonsAppearingMsInitial, //Milliseconds to wait before creating a new balloon.
 		balloonsIdCounter: 0,
 		balloonsCounter: 0,
 		balloonsPopped: 0,
 		score: 0
 	};
+	var loopsToIncreaseBaloonsPerLoop = 50; //Number of loops necessary to increase (by one) the number of balloons per loop.
 	var balloonsAppearingMsMinimum = 150; //Minimum of milliseconds to wait to create another new balloon. The 'CB_GEM.data.balloonsAppearingMs' integer will never be lower than this value.
-	var balloonsAppearingMsDecreasingPerLoop = 1; //Number of milliseconds that will be decreased from the 'CB_GEM.data.balloonsAppearingMs' integer (to increase speed after a balloon appears).
+	var balloonsAppearingMsDecreasingPerLoop = 2; //Number of milliseconds that will be decreased from the 'CB_GEM.data.balloonsAppearingMs' integer (to increase speed after a balloon appears).
 	var balloonsCounterMax = 150;
 	var balloonWidth = 40;
 	var balloonHeight = 50;
@@ -99,12 +103,13 @@ function main()
 	//Defines the callbacks for the game loop:
 	var timingLastTime = 0;
 	var timingNow = null;
+	var loopsToIncreaseBaloonsPerLoopCounter = 0;
 	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts, before rendering the graphics (if it returns false, it will skip rendering in this loop):
 	{
 		if (!CB_GEM.data.gameStarted) { return; }
 		if (CB_GEM.data.balloonsCounter >= balloonsCounterMax)
 		{
-			gameEnd("Game over :(");
+			gameEnd("Game over :(<br />Score: " + CB_GEM.data.score);
 			return;
 		}
 		
@@ -114,58 +119,64 @@ function main()
 		//If enough time has elapsed, creates a new balloon:
 		if (timingNow - timingLastTime >= CB_GEM.data.balloonsAppearingMs)
 		{
-			//Inserts the new balloon:
-			balloonLeft = Math.floor(Math.random() * (balloonLeftMax - balloonLeftMin)) + balloonLeftMin;
-			balloonTop = Math.floor(Math.random() * (balloonTopMax - balloonTopMin)) + balloonTopMin;
-			balloonColor = //Random balloon colour (not too dark):
-				Math.floor(Math.random() * (255 - 80)) + ", " + //Red.
-				Math.floor(Math.random() * (255 - 80)) + ", " + //Green.
-				Math.floor(Math.random() * (255 - 80)); //Blue.
-			graphicSpritesSceneObject.insert
-			(
-				//'CB_GraphicSprites.SPRITES_OBJECT' object for the balloon (to create the internal 'CB_GraphicSprites' object with its internal sprite and sub-sprite):
-				{
-					id: "balloon_" + CB_GEM.data.balloonsIdCounter,
-					srcType: CB_GraphicSprites.SRC_TYPES.ELLIPSE,
-					data: { isBalloon: true, radiusX: balloonWidth, radiusY: balloonHeight, startAngle: 2, endAngle: 11, style: "rgba(" + balloonColor + ", 0.8)" },
-					left: balloonLeft,
-					top: balloonTop,
-					zIndex: CB_GEM.data.balloonsIdCounter + 1,
-					sprites:
-					[
-						//'CB_GraphicSprites.SPRITE_OBJECT' object with the ellipse representing the balloon (one single sprite):
-						{
-							id: "balloon_" + CB_GEM.data.balloonsIdCounter + "_sprite",
-							subSprites:
-							[
-								{
-									//'CB_GraphicSprites.SUBSPRITE_OBJECT' object for the text with the identifier of the balloon (one single sub-sprite):
-									id: "ballon_" + CB_GEM.data.balloonsIdCounter + "_identifier",
-									srcType: CB_GraphicSprites.SRC_TYPES.TEXT,
-									src: CB_GEM.data.balloonsIdCounter + 1,
-									left: -parseFloat(CB_REM_dataObject.CB_CanvasObjectContext.measureText(CB_GEM.data.balloonsIdCounter + "").width) || 0,
-									top: -9,
-									data:
+			for (var x = 0; x < CB_GEM.data.balloonsPerLoop; x++)
+			{
+				//Inserts the new balloon:
+				balloonLeft = Math.floor(Math.random() * (balloonLeftMax - balloonLeftMin)) + balloonLeftMin;
+				balloonTop = Math.floor(Math.random() * (balloonTopMax - balloonTopMin)) + balloonTopMin;
+				balloonColor = //Random balloon colour (not too dark):
+					Math.floor(Math.random() * (255 - 80)) + ", " + //Red.
+					Math.floor(Math.random() * (255 - 80)) + ", " + //Green.
+					Math.floor(Math.random() * (255 - 80)); //Blue.
+				graphicSpritesSceneObject.insert
+				(
+					//'CB_GraphicSprites.SPRITES_OBJECT' object for the balloon (to create the internal 'CB_GraphicSprites' object with its internal sprite and sub-sprite):
+					{
+						id: "balloon_" + CB_GEM.data.balloonsIdCounter,
+						srcType: CB_GraphicSprites.SRC_TYPES.ELLIPSE,
+						data: { isBalloon: true, radiusX: balloonWidth, radiusY: balloonHeight, startAngle: 2, endAngle: 11, style: "rgba(" + balloonColor + ", 0.8)" },
+						left: balloonLeft,
+						top: balloonTop,
+						zIndex: CB_GEM.data.balloonsIdCounter + 1,
+						sprites:
+						[
+							//'CB_GraphicSprites.SPRITE_OBJECT' object with the ellipse representing the balloon (one single sprite):
+							{
+								id: "balloon_" + CB_GEM.data.balloonsIdCounter + "_sprite",
+								subSprites:
+								[
 									{
-										fontSize: "18px",
-										fontFamily: "courier",
-										style: "#000000",
-										fontWeight: "bold"
+										//'CB_GraphicSprites.SUBSPRITE_OBJECT' object for the text with the identifier of the balloon (one single sub-sprite):
+										id: "ballon_" + CB_GEM.data.balloonsIdCounter + "_identifier",
+										srcType: CB_GraphicSprites.SRC_TYPES.TEXT,
+										src: CB_GEM.data.balloonsIdCounter + 1,
+										left: -parseFloat(CB_REM_dataObject.CB_CanvasObjectContext.measureText(CB_GEM.data.balloonsIdCounter + "").width) || 0,
+										top: -9,
+										data:
+										{
+											fontSize: "18px",
+											fontFamily: "courier",
+											style: "#000000",
+											fontWeight: "bold"
+										}
 									}
-								}
-							]
-						}
-					]
-				}
-			);
+								]
+							}
+						]
+					}
+				);
+				
+				CB_GEM.data.balloonsIdCounter++;
+				CB_GEM.data.balloonsCounter++;
+			}
 			
-			CB_GEM.data.balloonsIdCounter++;
-			CB_GEM.data.balloonsCounter++;
-
 			graphicSpritesSceneObject.getById("info").getById("info_sprite").zIndex = CB_GEM.data.balloonsIdCounter + 1; //Increments z-index of the information panel to keep it above all.
 			
 			CB_GEM.data.balloonsAppearingMs -= balloonsAppearingMsDecreasingPerLoop;
 			if (CB_GEM.data.balloonsAppearingMs < balloonsAppearingMsMinimum) { CB_GEM.data.balloonsAppearingMs = balloonsAppearingMsMinimum; }
+			
+			loopsToIncreaseBaloonsPerLoopCounter++;
+			if (loopsToIncreaseBaloonsPerLoopCounter > loopsToIncreaseBaloonsPerLoop) { CB_GEM.data.balloonsPerLoop++; loopsToIncreaseBaloonsPerLoopCounter = 0; }
 			
 			timingLastTime = timingNow; //Updates the last timing when the last balloon was created.
 			
@@ -216,7 +227,7 @@ function main()
 		function(e, keyCode)
 		{
 			//After pressing the ESC key, ends the game:
-			if (keyCode === CB_Keyboard.keys.ESC[0]) { gameEnd("Game aborted"); }
+			if (keyCode === CB_Keyboard.keys.ESC[0]) { gameEnd("Game aborted<br />Score: " + CB_GEM.data.score); }
 		}
 	);
 	
@@ -268,6 +279,7 @@ function gameStart()
 	CB_GEM.data.balloonsCounter = 0;
 	CB_GEM.data.balloonsPopped = 0;
 	CB_GEM.data.score = 0;
+	CB_GEM.data.balloonsPerLoop = CB_GEM.data.ballonsPerLoopInitial;
 	CB_GEM.data.balloonsAppearingMs = CB_GEM.data.balloonsAppearingMsInitial;
 	
 	//Prepares the sound effects and plays one of them (recommended to do this through a user-driven event):
@@ -399,10 +411,13 @@ function prepareMusic()
 
 //Plays the background music:
 var playingMusic = false;
+var playMusicTimeout = null;
 function playMusic()
 {
+	clearTimeout(playMusicTimeout);
 	if (timbreJSObject === null || playingMusic) { return; }
 	else if (!CB_GEM.data.musicEnabled) { return; }
+	else if (!bufferResult) { playMusicTimeout = setTimeout(playMusic, 1000); } //If the buffer is still not ready, calls itself again after some time.
 
 	try
 	{

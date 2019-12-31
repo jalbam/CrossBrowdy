@@ -3,7 +3,7 @@
 <p>
 	Here is an example of arrays management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines an array:
 	var fruitsArray = [ "watermelon", "lemon", "strawberry", "durian", "mango" ];
 	

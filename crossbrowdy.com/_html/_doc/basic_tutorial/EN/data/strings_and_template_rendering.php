@@ -2,7 +2,7 @@
 <p>
 	Here is an example of strings management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks whether it is a string or not:
 	var myString = "Hello, CrossBrowdy!";
 	if (CB_isString(myString)) { CB_console("It is a string!"); }
@@ -70,7 +70,7 @@
 <p>
 	CrossBrowdy can also manage templates. If available, it will use the <a href="https://handlebarsjs.com/" target="_blanl">Handlebars.js</a> library (not included by default) to render them. Otherwise, it will fallback automatically to a simple rendering method (just replacing variables with their value, without processing control structures, etc.). Here is an example of template rendering management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Places the template desired in a string:
 	var templateAsString = "Hello, {{name}}! Welcome to {{locations.first}}."; //Just an example, it could come from a file.
 	

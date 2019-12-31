@@ -4,7 +4,7 @@
 	You can create your own CrossBrowdy module easily. This is an example:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 //Module basic configuration:
 CB_Modules.modules["MY_MODULE"] =
 {
@@ -90,7 +90,7 @@ CB_Modules.addNeededModule(CB_NAME, "MY_MODULE", { "MY_MODULE/MY_MODULE.js" : { 
 <p>
 	Here are some other interesting examples regarding modules management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets a desired module object:
 	var myModule = CB_Modules.get("MY_MODULE");
 	

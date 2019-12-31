@@ -8,7 +8,7 @@
 <p>
 	Here is an example of audio processing and synthesizing:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Audio processing and synthesizing example (taken from https://mohayonao.github.io/timbre.js/reich.html):
 	var timbreJSObject = CB_Speaker.getTimbreJSObject(); //Gets the 'T' object.
 	if (timbreJSObject !== null)

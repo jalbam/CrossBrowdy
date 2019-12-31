@@ -3,7 +3,7 @@
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
-var CB_GEM_DEBUG_MESSAGES = true; //Shows debug messages.
+var CB_GEM_DEBUG_MESSAGES = false; //Shows debug messages.
 
 //Adds the game engine module to CrossBrowdy:
 var CB_GEM_MODULE_NEEDED_MODULES = {};
@@ -25,7 +25,7 @@ function main()
 		//General data:
 		soundEnabled: true, //Set to false to disable sound.
 		PIXELS_USE_GRADIENT: true,
-		PIXELS_COLOR_FIRST: "#ccffcc", //First colour for the gradient. If PIXELS_USE_GRADIENT is set to false, this will be the unique colour of the pixels.
+		PIXELS_COLOR_FIRST: "#aaddaa", //First colour for the gradient. If PIXELS_USE_GRADIENT is set to false, this will be the unique colour of the pixels.
 		PIXELS_COLOR_LAST: "#118811", //Last colour for the gradient. Ignored if PIXELS_USE_GRADIENT is set to false.
 		SCREEN_BORDER_COLOR: "#000000"
 	};
@@ -83,16 +83,30 @@ function main()
 					beforeDrawingElement:
 						function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
 						{
+							//If desired and possible, it will draw the pixel with a personalized style (for the current ROM):
+							CB_GEM.data._pixelsStyleTemp = CB_GEM.data._pixelsStyleTemp || {};
+							CB_GEM.data._pixelsStyleTemp.stroke = null;
+							CB_GEM.data._pixelsStyleTemp.first = null;
+							CB_GEM.data._pixelsStyleTemp.last = null;
+							if (lastROMIdLoaded && ROMs[lastROMIdLoaded] && typeof(ROMs[lastROMIdLoaded].pixelsColorizer) === "function")
+							{
+								CB_GEM.data._pixelsStyleTemp =
+									ROMs[lastROMIdLoaded].pixelsColorizer.call(this, element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) ||
+									CB_GEM.data._pixelsStyleTemp; //If the 'pixelsColorizer' returns null, keeps the pixels unaltered (null for 'first' and 'last').
+							}
+							
 							//If we want to use gradient, it will add a "blink" effect:
 							if (CB_GEM.data.PIXELS_USE_GRADIENT)
 							{
-								var gradient = canvasContext.createLinearGradient(element.data.gradientLeftOffset + x * element.width, y * element.height, element.left + element.width, element.top + element.height);
+								var gradient = canvasContext.createLinearGradient(element.data.gradientLeftOffset + x, y, element.width * 64, element.height * 32);
 								element.data.gradientLeftOffset++;
 								if (element.data.gradientLeftOffset > 100) { element.data.gradientLeftOffset = 0; }
-								gradient.addColorStop(0, CB_GEM.data.PIXELS_COLOR_LAST);
-								gradient.addColorStop(1, CB_GEM.data.PIXELS_COLOR_FIRST);
+								gradient.addColorStop(0, CB_GEM.data._pixelsStyleTemp.first || CB_GEM.data.PIXELS_COLOR_LAST);
+								gradient.addColorStop(1, CB_GEM.data._pixelsStyleTemp.last || CB_GEM.data.PIXELS_COLOR_FIRST);
 								this.data.style = gradient;
 							}
+							else { this.data.style = CB_GEM.data._pixelsStyleTemp.first || CB_GEM.data.PIXELS_COLOR_FIRST; }
+							this.data.stroke = !!CB_GEM.data._pixelsStyleTemp.stroke;
 							return this; //Same as 'element'. Must return the element to draw.
 						}
 				},
@@ -246,6 +260,12 @@ function main()
 				}
 			}
 			
+			//Prevents selection for the message elements:
+			CB_Elements.preventSelection(CB_Elements.id("loading"));
+			CB_Elements.preventSelection(CB_Elements.id("loading_rom"));
+			CB_Elements.preventSelection(CB_Elements.id("waiting_for_any_key"));
+			CB_Elements.preventSelection(CB_Elements.id("error"));
+			
 			FPSSprites.setDisabled(false); //Set to true to hide FPS counter.
 			FPSSprites.getCurrent().data.fontSize = "18px"; //Sets the font size for the FPS counter.
 			FPSSprites.getCurrent().data.style = "#dddddd"; //Sets the font colour for the FPS counter.
@@ -267,6 +287,14 @@ function main()
 			CB_Elements.hideById("loading"); //Hides the loading message.
 			
 			CB_Elements.showById("start_button"); //Shows the start button.
+			
+			//Sets the event for the debug checkbox:
+			var debugCheckbox = CB_Elements.id("debug_checkbox");
+			if (debugCheckbox !== null)
+			{
+				debugCheckbox.checked = !!CB_GEM_DEBUG_MESSAGES;
+				CB_Events.on(debugCheckbox, "change", function() { CB_GEM_DEBUG_MESSAGES = !!debugCheckbox.checked; updateInfo(); });
+			}
 		},
 		
 		//onError:
@@ -463,7 +491,7 @@ function resizeElements(graphicSpritesSceneObject)
 	var waitingForAnyKeyElement = CB_Elements.id("waiting_for_any_key");
 	if (waitingForAnyKeyElement !== null)
 	{
-		waitingForAnyKeyElement.style.fontSize = waitingForAnyKeyElement.style.lineHeight = parseInt(toolbarIconWidthAndHeight) * 2 + "px";
+		waitingForAnyKeyElement.style.fontSize = waitingForAnyKeyElement.style.lineHeight = parseInt(toolbarIconWidthAndHeight) * 1.8 + "px";
 		waitingForAnyKeyElement.style.left = (CB_Screen.getWindowWidth() / 2 - parseInt(waitingForAnyKeyElement.style.fontSize) * 8 / 2) + "px";
 		waitingForAnyKeyElement.style.top = (CB_Screen.getWindowHeight() / 2 - parseInt(waitingForAnyKeyElement.style.fontSize) / 2) + "px";
 	}
@@ -478,9 +506,22 @@ function resizeElements(graphicSpritesSceneObject)
 	}
 	
 	//Resizes the FPS and the information text:
-	CB_GEM.graphicSpritesSceneObject.getById("fps_group").getById("fps").data.fontSize = parseInt(toolbarIconWidthAndHeight) / 2 + "px";
-	CB_GEM.graphicSpritesSceneObject.getById("info").get(0).top = parseInt(toolbarIconWidthAndHeight) / 2;
-	CB_GEM.graphicSpritesSceneObject.getById("info").get(0).data.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px";
+	CB_GEM.graphicSpritesSceneObject.getById("fps_group").getById("fps").data.fontSize = parseInt(toolbarIconWidthAndHeight) / 2.5 + "px";
+	CB_GEM.graphicSpritesSceneObject.getById("info").get(0).data.fontSize = parseInt(toolbarIconWidthAndHeight) / 3 + "px";
+	if (CB_Screen.isLandscape())
+	{
+		CB_GEM.graphicSpritesSceneObject.getById("fps_group").getById("fps").top = 1;
+		CB_GEM.graphicSpritesSceneObject.getById("info").get(0).top = parseInt(toolbarIconWidthAndHeight) / 1.4;
+	}
+	else
+	{
+		CB_GEM.graphicSpritesSceneObject.getById("fps_group").getById("fps").top = parseInt(toolbarIconWidthAndHeight) + 2;
+		CB_GEM.graphicSpritesSceneObject.getById("info").get(0).top = parseInt(toolbarIconWidthAndHeight) * 1.5;
+	}
+	
+	//Resizes the font of the start button:
+	var startButton = CB_Elements.id("start_button");
+	if (startButton !== null) { startButton.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 3 + "px"; }
 	
 	//Forces screen rendering again (just in case):
 	screenRendered = false;

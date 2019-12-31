@@ -7,7 +7,7 @@
 <p>
 	You can detect whether the device supports orientation management easily (through the <a href="https://developer.mozilla.org/docs/Web/API/DeviceOrientationEvent" target="_blank">Device Orientation Event</a> used by the <a href="https://developer.mozilla.org/docs/Web/API/Detecting_device_orientation" target="_blank">Device Orientation API</a> or compatible ones):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Orientation management support detection:
 	if (CB_Device.Orientation.isSupported())
 	{
@@ -24,7 +24,7 @@
 <p>
 	To set an event handler called each time that the orientation changes (normally, detected by a gyroscope):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks when the orientation changes (use "null" as the first parameter to remove them):
 	CB_Device.Orientation.onChange
 	(
@@ -49,7 +49,7 @@
 <p>
 	Finally, some devices will also allow you to detect whether the compass / magnetometer (not gyroscope) needs calibration:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks whether the compass / magnetometer needs calibration (use "null" as the first parameter to remove them):
 	if (CB_Device.Orientation.isCompassNeedsCalibrationSupported())
 	{

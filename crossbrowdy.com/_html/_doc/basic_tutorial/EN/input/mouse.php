@@ -3,7 +3,7 @@
 <p>
 	Here is an example of mouse management with CrossBrowdy:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Managing buttons pressed currently (this should normally be in a loop, checking constantly):
 	var buttonsDown = CB_Mouse.getButtons(); //Same as 'CB_Mouse.getButtonsDown'.
 	if (buttonsDown.LEFT) { CB_console("LEFT button is being pressed"); }
@@ -29,7 +29,7 @@
 </code></pre>
 
 Some simple collisions can be managed easily:
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Collision with an element (considered a rectangle):
 	var element = CB_Elements.id("my_element"); //Equivalent to document.getElementById("my_element").
 	if (CB_Mouse.isOverElement(element)) { CB_console("The mouse is over the element whose ID is 'my_element'."); }
@@ -63,7 +63,7 @@ Some simple collisions can be managed easily:
 <p>
 	The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API" target="_blank">Pointer Lock API</a> is also supported:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Pointer Lock API management:
 	if (CB_Mouse.isLockSupported())
 	{
@@ -104,7 +104,7 @@ Some simple collisions can be managed easily:
 <p>
 	The mouse cursor can also be managed:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Showing and hiding the mouse cursor:
 	CB_Mouse.hide(); //Hides the cursor. Useful to simulate the Pointer Lock API.
 	CB_Mouse.restore(); //Shows the cursor again.

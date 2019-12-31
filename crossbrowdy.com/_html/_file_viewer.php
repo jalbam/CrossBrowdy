@@ -11,7 +11,7 @@
 		$output = "";
 		
 		$output .= '<p><b><a href="' . $path . $file . '" target="_blank">' . $file . '</a></b>:</p>';
-		$output .= '<pre><code class="' . $codeClass . '">';
+		$output .= '<pre><code class="' . $codeClass . ' line-numbers match-braces rainbow-braces">';
 			$output .= $fileContent !== "" ? htmlspecialchars($fileContent) : "(empty file)";
 		$output .= '</code></pre>';
 		
@@ -80,20 +80,24 @@
 	
 	function getTryExampleLink()
 	{
-		global $dirPath;
+		global $dirPath, $category, $subcategory, $topic;
 		if (file_exists($dirPath . "index.html"))
 		{
-			return '<a href="' . $dirPath . 'index.html" target="_blank">Try this example</a>';
+			//return '<a href="' . $dirPath . 'index.html" target="_blank">Try this example</a>';
+			return '<a href="' . $category . '/' . $subcategory . '/' . $topic . '/try" target="_blank">Try this example</a>';
 		}
+		return "File not found";
 	}
 	
 	
 	function getTryExampleButton()
 	{
-		global $dirPath;
+		global $dirPath, $category, $subcategory, $topic;
 		if (file_exists($dirPath . "index.html"))
 		{
-			return '<a href="' . $dirPath . 'index.html" target="_blank" class="try_example_floating">Try this example</a>';
+			//return '<a href="' . $dirPath . 'index.html" target="_blank" class="try_example_floating">Try this example</a>';
+			return '<a href="' . $category . '/' . $subcategory . '/' . $topic . '/try" target="_blank" class="try_example_floating">Try this example</a>';
 		}
+		return "File not found";
 	}
 	

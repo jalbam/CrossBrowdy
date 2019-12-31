@@ -737,18 +737,8 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 			break;
 		//Bitmap:
 		case CB_GraphicSprites.SRC_TYPES.BITMAP:
-			//Sets the necessary stuff to create either solid rectangles or hollow ones (to draw each element):
-			var drawRectangle = canvasContext.fillRect;
-			if (element.data.stroke)
-			{
-				canvasContext.lineWidth = element.data.lineWidth || 1;
-				canvasContext.strokeStyle = style;
-				drawRectangle = canvasContext.strokeRect;
-			}
-			else
-			{
-				canvasContext.fillStyle = style;
-			}
+			//Sets the necessary callbacks to create either solid rectangles or hollow ones (to draw each element):
+			var drawRectangle = null;
 
 			//Stores the data used by this bitmap (useful to clean it before drawing it in the next cycle):
 			CB_REM._BITMAP_ELEMENTS_CACHE[element.id] = CB_REM._BITMAP_ELEMENTS_CACHE[element.id] || {};
@@ -769,6 +759,18 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 					if (element.src[y][x] === true)
 					{
 						element = beforeDrawingElementCallback.call(element, element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, false, x, y, element.src[y][x]);
+						style = typeof(element.data.style) === "function" ? element.data.style.call(element, element, canvasContext, canvasBufferContext, useBuffer) : element.data.style;
+						if (element.data.stroke)
+						{
+							canvasContext.lineWidth = element.data.lineWidth || 1;
+							canvasContext.strokeStyle = style;
+							drawRectangle = canvasContext.strokeRect;
+						}
+						else
+						{
+							canvasContext.fillStyle = style;
+							drawRectangle = canvasContext.fillRect
+						}
 						drawRectangle.call(canvasContext, elementLeft, elementTop, element.width, element.height);
 						if (mapWidth === null || isNaN(mapWidth) || mapWidth < elementLeft + element.width) { mapWidth = elementLeft + element.width; }
 						if (mapHeight === null || isNaN(mapHeight) || mapHeight < elementTop + element.height) { mapHeight = elementTop + element.height; }

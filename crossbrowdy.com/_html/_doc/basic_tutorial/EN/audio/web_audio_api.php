@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	If the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a> is not supported natively, it will be tried to be polyfilled and emulated automatically if possible (depending on the client).
+	If the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank">Web Audio API</a> is not supported natively by the client being used, it will be tried to be polyfilled and emulated automatically if possible.
 </p>
 
 <p>

@@ -3,7 +3,7 @@
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
-var CB_GEM_DEBUG_MESSAGES = true; //Shows debug messages.
+var CB_GEM_DEBUG_MESSAGES = false; //Shows debug messages.
 
 
 //Adds the game engine module to CrossBrowdy:
@@ -286,6 +286,9 @@ function main()
 		//If the player has been moved:
 		if (CB_GEM.data.player.xPrevious !== CB_GEM.data.player.x || CB_GEM.data.player.yPrevious !== CB_GEM.data.player.y)
 		{
+			CB_GEM.data.player.xPrevious = CB_GEM.data.player.x;
+			CB_GEM.data.player.yPrevious = CB_GEM.data.player.y;
+
 			//Updates the information shown:
 			updateInfo(graphicSpritesSceneObject);
 			
@@ -296,12 +299,14 @@ function main()
 			{
 				for (var x = mapCurrent[y].length - 1; x >= 0; x--)
 				{
-					if (mapCurrent[y][x] === "-") { allHolesFilled = false; break; } //An unfilled hole has been found (note that some variants could consider the level done when all bottles has been put in place).
+					if (mapCurrent[y][x] === "-" || mapCurrent[y][x] === "*") { allHolesFilled = false; break; } //An unfilled hole has been found (note that some variants could consider the level done when all bottles has been put in place).
 				}
 				if (!allHolesFilled) { break; }
 			}
+
 			if (allHolesFilled)
 			{
+				
 				//Loads the next level (loops when final level is reached):
 				loadLevel(CB_GEM.data.level + 1);
 			}
@@ -420,6 +425,14 @@ function main()
 			else
 			{
 				CB_Elements.showById("start_button"); //Shows the start button.
+			}
+			
+			//Sets the event for the debug checkbox:
+			var debugCheckbox = CB_Elements.id("debug_checkbox");
+			if (debugCheckbox !== null)
+			{
+				debugCheckbox.checked = !!CB_GEM_DEBUG_MESSAGES;
+				CB_Events.on(debugCheckbox, "change", function() { CB_GEM_DEBUG_MESSAGES = !!debugCheckbox.checked; updateInfo(graphicSpritesSceneObject); });
 			}
 		},
 		
@@ -554,12 +567,12 @@ function updateInfo(graphicSpritesSceneObject)
 	graphicSpritesSceneObject.getById("info").get(0).src =
 		"Level: " + CB_GEM.data.level + "\n" +
 		"Movements:\n" +
-			"* Current level: " + CB_GEM.data.player.movementsLevel + "\n" +
-			"* Total: " + CB_GEM.data.player.movementsTotal +
-		(!CB_Screen.isLandscape() ? "\nLandscape screen recommended!" : "") +
+			" Current level: " + CB_GEM.data.player.movementsLevel + "\n" +
+			" Total: " + CB_GEM.data.player.movementsTotal +
+		(!CB_Screen.isLandscape() ? "\n\nLandscape screen recommended!" : "") +
 		(
 			CB_GEM_DEBUG_MESSAGES ?
-				"\nPlayer coordinates: " + CB_GEM.data.player.x + "," + CB_GEM.data.player.y + " (previous: " + CB_GEM.data.player.xPrevious + "," + CB_GEM.data.player.yPrevious + ")" +
+				"\n\nPlayer coordinates: " + CB_GEM.data.player.x + "," + CB_GEM.data.player.y + " (previous: " + CB_GEM.data.player.xPrevious + "," + CB_GEM.data.player.yPrevious + ")" +
 				"\nSteps stored (length): " + CB_GEM.data.steps.data.length + " (pointer: " + CB_GEM.data.steps.pointer + ")"
 			: ""
 		);
@@ -588,6 +601,12 @@ function resizeElements(graphicSpritesSceneObject)
 			graphicSpritesSceneObject.getById("map_group").getById("map_current").left = (CB_Screen.getWindowWidth() - ELEMENTS_WIDTH * maxWidthFound) / 2;
 			graphicSpritesSceneObject.getById("map_group").getById("map_current").top = (CB_Screen.getWindowHeight() - ELEMENTS_HEIGHT * mapCurrent.length) / 2;
 		}
+		
+		//Resizes the FPS and the information text:
+		var fontSize = parseInt(Math.min(CB_Screen.getWindowWidth(), CB_Screen.getWindowHeight()) * 0.07) + "px";
+		CB_GEM.graphicSpritesSceneObject.getById("fps_group").getById("fps").data.fontSize = parseInt(fontSize) / 1.5 + "px";
+		CB_GEM.graphicSpritesSceneObject.getById("info").get(0).top = parseInt(fontSize) / 2;
+		CB_GEM.graphicSpritesSceneObject.getById("info").get(0).data.fontSize = parseInt(fontSize) / 2.5 + "px";
 	}
 
 	//Resizes the toolbar and its icons:
@@ -635,6 +654,10 @@ function resizeElements(graphicSpritesSceneObject)
 			buttonElement.style.height = buttonElement.style.lineHeight = toolbarIconWidthAndHeight;
 		}
 	}
+	
+	//Resizes the font of the start button:
+	var startButton = CB_Elements.id("start_button");
+	if (startButton !== null) { startButton.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px"; }
 }
 
 
@@ -807,9 +830,6 @@ function manageInput(action)
 			//If possible, moves the player:
 			if (playerCanMove)
 			{
-				CB_GEM.data.player.xPrevious = CB_GEM.data.player.x;
-				CB_GEM.data.player.yPrevious = CB_GEM.data.player.y;
-				
 				//If there is a piece to move, also moves it:
 				if (destinyHasPieceToMove)
 				{

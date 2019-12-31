@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	This is an example of a simple <a href="https://en.wikipedia.org/wiki/Sokoban" target="_blank">Sokoban game</a> (using the <a href="<?php echo examplesLink("advanced", "simple_game_engine_files"); ?>" target="_blank">Game engine module from the previous example</a>).
+	This is an example of a simple <a href="https://en.wikipedia.org/wiki/Sokoban" target="_blank">Sokoban game</a> (using the <a href="<?php echo examplesLink("advanced", "simple_game_engine"); ?>" target="_blank">Game engine module from the previous example</a>).
 </p>
 
 <p>
@@ -29,7 +29,7 @@
 	<a href="<?php echo $dirPath; ?>img/player_right_1.gif" target="_blank">player_right_1.gif</a>,
 	<a href="<?php echo $dirPath; ?>img/player_right_2.gif" target="_blank">player_right_2.gif</a>,
 	<a href="<?php echo $dirPath; ?>img/player_up_1.gif" target="_blank">player_up_1.gif</a>,
-	<a href="<?php echo $dirPath; ?>img/player_up_2.gif" target="_blank">player_up_2.gif</a>,
+	<a href="<?php echo $dirPath; ?>img/player_up_2.gif" target="_blank">player_up_2.gif</a> and
 	<a href="<?php echo $dirPath; ?>img/stone.gif" target="_blank">stone.gif</a>.
 </p>
 

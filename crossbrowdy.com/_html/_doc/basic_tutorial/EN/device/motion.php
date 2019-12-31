@@ -7,7 +7,7 @@
 <p>
 	You can detect whether the device supports physical movements management easily (through the <a href="https://developer.mozilla.org/docs/Web/API/DeviceMotionEvent" target="_blank">Device Motion Event</a> used by the <a href="https://developer.mozilla.org/docs/Web/API/Detecting_device_orientation" target="_blank">Device Orientation API</a> or compatible ones):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Physical movements management support detection:
 	if (CB_Device.Motion.isSupported())
 	{
@@ -24,7 +24,7 @@
 <p>
 	To set an event handler to manage physical movements and their speed (normally, detected by an accelerometer):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks physical movements and their speed (use "null" as the first parameter to remove them):
 	CB_Device.Motion.onChange
 	(

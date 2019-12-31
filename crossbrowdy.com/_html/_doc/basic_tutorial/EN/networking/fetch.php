@@ -3,7 +3,7 @@
 <p>
 	CrossBrowdy will support the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API</a> natively or it will fallback back automatically to a polyfill internally, so you do not need to worry at all. Here is an example of Fetch management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//For modern clients:
 	CB_Net.Fetch.get("whatever/test_fetch_text.txt").then
 	(

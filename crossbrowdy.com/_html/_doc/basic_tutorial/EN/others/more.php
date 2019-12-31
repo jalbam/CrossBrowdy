@@ -3,7 +3,7 @@
 <p>
 	Here are some other interesting functions:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Calls a function once as it was one of the calls of a "symmetric" interval of a series of calls, having in mind the time taken by previous calls:
 	CB_symmetricCall(function(timeCalled) { CB_console("Function called!"); }, 1000, "interval_id"); //Similar to 'requestAnimationFrame'.
 	

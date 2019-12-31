@@ -38,7 +38,7 @@
 	When loading an audio file cache object, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
 	Here is an example loading an audio file cache:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the same audio but in different audio files (providing different formats, paths and data URIs):
 	//NOTE: CrossBrowdy will choose the best one(s) for the current client automatically.
 	var currentURL = location.href;
@@ -182,7 +182,7 @@
 <p>
 	In the case that the audio file cache object has the "checkManually" option enabled, we need to check each of its internally-used <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. We can do that easily by calling the "checkPlayingAll" manually after the audio file cache object has been created. It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//If the "checkManually" option was set to true, we need to check all the CB_AudioFile objects manually (by calling their 'checkPlaying' method):
 	audioFileCache.checkPlayingAll
 	(
@@ -207,7 +207,7 @@
 <p>
 	After the audio file cache object has been loaded successfully (and after calling "checkPlayingAll" successfully, if it was necessary), we can start using the audio file cache object freely:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the duration calculated among all the internal CB_AudioFile objects (as it can contain different formats, sometimes the duration may vary slightly):
 	var audioFileCacheDurationMinimum = audioFileCache.getDuration(); //Minimum duration calculated among all the internal CB_AudioFile objects.
 	var audioFileCacheDurationMaximum = audioFileCache.getDuration(true); //Maximum duration calculated among all the internal CB_AudioFile objects.
@@ -316,7 +316,7 @@
 <p>
 	Although the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> objects can automatically create new internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects or remove them when needed, it is also possible to create new ones or remove current ones manually:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to create a new internal CB_AudioFile object:
 	//NOTE: it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
 	var audioFile = audioFileCache.createAudioFile
@@ -346,7 +346,7 @@
 <p>
 	One of the most interesting features when managing audio file cache objects with CrossBrowdy is that you can change the audio API of all their internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects on the fly (even when they are currently playing!). This can be done easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to changes the audio API used by all the internal CB_AudioFile objects (this will work even on the fly, when they are currently playing):
 	audioFileCache.setAudioAPIAll
 	(
@@ -386,7 +386,7 @@
 <p>
 	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file cache object uses:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Executes a function over all the internal CB_AudioFile objects, being "this" each CB_AudioFile itself (same as 'audioFileCache.executeAll' and 'audioFileCache.executeFunctionAll'):
 	audioFileCache.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
 	audioFileCache.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); }, 100); //Adds a 100 milliseconds delay between each call.
@@ -444,7 +444,7 @@
 <p>
 	Some other interesting methods that you might not need:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Clears the sound instances (created by the 'audioFileCache.play' method) which have been cancelled:
 	audioFileCache.clearSoundInstances();
 	
@@ -462,7 +462,7 @@
 <p>
 	In order to free memory and resources, it is possible to destroy the audio file cache object and its internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Destroys all the internal CB_AudioFile objects (but not the audio file cache object itself), and frees memory:
 	audioFileCache.destroyAll();
 	audioFileCache.destroyAll(true); //Also stops sounds.
@@ -475,7 +475,7 @@
 <p>
 	It is also possible to re-load again an audio file cache object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Loads the audio file cache again with the data given:
 	/*	NOTE:
 		It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).

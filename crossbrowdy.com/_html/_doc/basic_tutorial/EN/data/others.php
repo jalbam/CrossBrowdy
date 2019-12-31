@@ -3,7 +3,7 @@
 <p>
 	Here is an example of some other data functions:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Check whether a given string is an E-Mail:
 	var email = "whoever_user@crossbrowdy.com";
 	if (CB_isEmail(email)) { CB_console(email + " is a valid E-Mail address!"); }

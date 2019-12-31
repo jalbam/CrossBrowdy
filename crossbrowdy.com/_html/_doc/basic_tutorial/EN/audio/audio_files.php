@@ -43,7 +43,7 @@
 <p>
 	Here are some examples loading an audio file or audio data URI with CrossBrowdy:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the audio file path (instead of a path, it could also be a string representing a data URI):
 	//Note: data URIs and some audio formats are not supported by some clients. Check the 'CB_AudioDetector' static class.
 	var filePathOrDataURI = "audio_data_URI_or_path/to/file.ext";
@@ -82,7 +82,7 @@
 	This is a common restriction in some clients with some audio APIs. Some of those clients could even block any audio if it was not created through a user-driven event, preventing it from playing at all even in the future.
 	Apart from that, when creating a new audio file object, due to its asynchronous nature, it is highly recommended to define its "callbackOk" and "callbackError" parameters always. Here is a more advanced example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the audio file path (instead of a path, it could also be a string representing a data URI):
 	//Note: data URIs and some audio formats are not supported by some clients. Check the 'CB_AudioDetector' static class.
 	var filePathOrDataURI = "audio/numeros/numeros.mp3";
@@ -145,7 +145,7 @@
 <p>
 	If the "autoLoad" option of the "options" parameter when calling the constructor is disabled, it will be necessary to load the audio manually. It is highly recommended to do it through a user-driver event (as "onClick", "onTouchStart", etc.):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Loads the audio manually:
 	audioFile.load();
 
@@ -165,7 +165,7 @@
 <p>
 	Once the audio has been created property (remember to use the "callbackOk" parameter with a function), it is recommended to call the "checkPlaying" method before anything else and it is highly recommended to do it through a user-driver event (as "onClick", "onTouchStart", etc.). This should only be done once the status of the audio file object is "UNCHECKED", never before. Calling this method is only necessary if the "autoPlay" option of the "options" parameter when calling the constructor is disabled (when it is enabled, it will call "checkPlaying" automatically internally). It would also be necessary to call this method again in the future if the audio file object had been reloaded, etc. Here is an example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks whether the audio can be played or not (needed when its status is "UNCHECKED"):
 	audioFile.checkPlaying
 	(
@@ -178,7 +178,7 @@
 <p>
 	After the audio file object has been loaded successfully (and after calling "checkPlaying" successfully, if it was necessary), we can start using the audio file object freely:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Shows the total duration of the audio (in milliseconds):
 	CB_console("Duration (ms): " + audioFile.getDuration());
 	
@@ -270,7 +270,7 @@
 <p>
 	One of the most interesting features when managing audio file objects with CrossBrowdy is that you can change their audio API on the fly (even when they are currently playing!). This can be done easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to change the audio API to the preferred one by the current client (this will work even on the fly, when it is currently playing):
 	audioFile.setAudioAPI(); //Calls 'CB_AudioDetector.getPreferredAPI(undefined, false)' internally to get the preferred audio API automatically.
 
@@ -294,7 +294,7 @@
 <p>
 	In order to free memory and resources, it is possible to destroy the audio file object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Destroys the audio file object and frees memory and resources:
 	audioFile.destructor(); //If it is currently playing, it will not stop it. But if it was looping, it will not loop again.
 	
@@ -314,7 +314,7 @@
 <p>
 	Finally, here are some other interesting examples that you might not need (the most likely):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the internal audio file API object being used (an instance of 'CB_AudioFile_API.WAAPI', 'CB_AudioFile_API.SM2', 'CB_AudioFile_API.ACMP' or 'CB_AudioFile_API.AAPI'):
 	var audioFileAPIObject = audioFile.audioFileObject; //Current audio file API object being used.
 	var audioFileAPIObjectLast = audioFile.audioFileObjectLast; //Last audio file API object created, may be not being used yet (can be different from 'audioFileAPIObject' when changing API, etc.).

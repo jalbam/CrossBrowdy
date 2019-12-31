@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	This is an example of a simple balloon popping game (using the <a href="<?php echo examplesLink("advanced", "simple_game_engine_files"); ?>" target="_blank">Game engine module from the previous example</a>).
+	This is an example of a simple balloon popping game (using the <a href="<?php echo examplesLink("advanced", "simple_game_engine"); ?>" target="_blank">Game engine module from the previous example</a>).
 </p>
 
 <p>

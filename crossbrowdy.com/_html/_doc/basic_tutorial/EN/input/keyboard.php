@@ -4,7 +4,7 @@
 	Here is an example of keyboard management with CrossBrowdy:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Managing keys pressed currently (this should normally be in a loop, checking constantly):
 	var keysDown = CB_Keyboard.getKeysDown(); //Object with the detected keys, being the index the key codes and the value true (being pressed currently) or false (released).
 	if (CB_Keyboard.isKeyDown([CB_Keyboard.keys.LEFT, CB_Keyboard.keys.UP, CB_Keyboard.keys.SPACEBAR]))

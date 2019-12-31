@@ -21,7 +21,7 @@
 	and provides multiple sprites groups management as well as many other advanced methods.
 	Here is an example:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Sets an internal CB_AudioFileSpritesPool object:
 	CB_Speaker.setAudioFileSpritesPool(audioFileSpritesPool); //The parameter must be a CB_AudioFileSpritesPool object.
 	
@@ -39,7 +39,7 @@
 <p>
 	Here are some examples of management with the <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> class:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Returns the volume sanitized (it does not allow values greater than 100 or lower than 0):
 	var volume = CB_Speaker.sanitizeVolume(-20); //Returns 0.
 	var volume_2 = CB_Speaker.sanitizeVolume(50); //Returns 50.
@@ -64,7 +64,7 @@
 <p>
 	Here is an example managing sound effects:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Sound effects:
 	var jsfxObject = CB_Speaker.getJsfxObject(); //Gets the 'jsfx' object.
 	if (jsfxObject !== null)
@@ -79,7 +79,7 @@
 <p>
 	Here is an example managing music composition:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Music composition:
 	var bandJSObject = CB_Speaker.getBandJSObject(); //Gets a new 'BandJS' object.
 	if (bandJSObject !== null)
@@ -94,7 +94,7 @@
 <p>
 	Here is an example managing processing and synthesizing:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Processing and synthesizing audio:
 	var timbreJSObject = CB_Speaker.getTimbreJSObject(); //Gets the 'T' object.
 	if (timbreJSObject !== null)

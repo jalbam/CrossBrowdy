@@ -231,6 +231,9 @@ function main()
 						
 						CB_Device.Vibration.start(100); //Makes the device vibrate.
 						playSoundFx("goal"); //Plays the goal sound.
+						
+						//Shows the "Goal!" message:
+						showGoalMessage();
 					}
 					//...otherwise, calculates collision with the front part of the player 2's paddle:
 					else if (CB_Collisions.isLineTouchingCircle(CB_GEM.data.player2.x, CB_GEM.data.player2.y, CB_GEM.data.player2.x, CB_GEM.data.player2.y + CB_GEM.data.player2.height, CB_GEM.data.ball.x, CB_GEM.data.ball.y, CB_GEM.data.ball.radius))
@@ -296,6 +299,9 @@ function main()
 
 						CB_Device.Vibration.start(100); //Makes the device vibrate.
 						playSoundFx("goal"); //Plays the goal sound.
+						
+						//Shows the "Goal!" message:
+						showGoalMessage();
 					}
 					//...otherwise, calculates collision with the front part of the  player 1's paddle:
 					else if (CB_Collisions.isLineTouchingCircle(CB_GEM.data.player1.x + CB_GEM.data.player1.width, CB_GEM.data.player1.y, CB_GEM.data.player1.x + CB_GEM.data.player1.width, CB_GEM.data.player1.y + CB_GEM.data.player1.height, CB_GEM.data.ball.x, CB_GEM.data.ball.y, CB_GEM.data.ball.radius))
@@ -399,6 +405,14 @@ function main()
 			
 			CB_Elements.hideById("loading"); //Hides the loading message.
 			CB_Elements.showById("start_button"); //Shows the start button.
+			
+			//Sets the event for the debug checkbox:
+			var debugCheckbox = CB_Elements.id("debug_checkbox");
+			if (debugCheckbox !== null)
+			{
+				debugCheckbox.checked = !!updateInfoDebug;
+				CB_Events.on(debugCheckbox, "change", function() { updateInfoDebug = !!debugCheckbox.checked; });
+			}
 		},
 		
 		//onError:
@@ -414,6 +428,8 @@ function gameStart(graphicSpritesSceneObject)
 
 	graphicSpritesSceneObject = graphicSpritesSceneObject || CB_GEM.graphicSpritesSceneObject;
 	if (!graphicSpritesSceneObject) { return; }
+
+	hideGoalMessage(); //Hides the "Goal!" message (just in case).
 	
 	//Hides the start button:
 	CB_Elements.hideById("start_button");
@@ -460,7 +476,9 @@ function gameStart(graphicSpritesSceneObject)
 function gameEnd(message)
 {
 	if (!CB_GEM.data.gameStarted) { return; }
-		
+
+	hideGoalMessage(); //Hides the "Goal!" message (just in case).
+	
 	message = CB_trim(message);
 	CB_GEM.data.gameStarted = false;
 	CB_Elements.insertContentById("start_button", (message !== "" ? message + "<br />" : "") + "Start game!")
@@ -469,20 +487,19 @@ function gameEnd(message)
 
 
 //Updates the information shown:
-var updateInfoDebug = true;
+var updateInfoDebug = false;
 function updateInfo(graphicSpritesSceneObject)
 {
 	graphicSpritesSceneObject.getById("info").get(0).src =
 		"Level: " + CB_GEM.data.level + "\n" +
 		"Score: " + CB_GEM.data.player1.goals + " - " + CB_GEM.data.player2.goals + "\n" +
-		"Ball update speed (ms): " + CB_GEM.data.ball.speedMs +
 		(!CB_Screen.isLandscape() ? "\nLandscape screen recommended!" : "") +
 		(
-			(
-				updateInfoDebug ?
-					"\nBall: " + CB_GEM.data.ball.x + ", " + CB_GEM.data.ball.y + " (" + (CB_GEM.data.ball.direction === 0 ? "stuck" : "released: " + (CB_GEM.data.ball.direction === 1 ? "left to right" : "right to left"))
-				: ""
-			) + "), vertical inclination (%): " + CB_GEM.data.ball.movePercentageVertical
+			updateInfoDebug ?
+				"Ball update speed (ms): " + CB_GEM.data.ball.speedMs +
+				"\nBall: " + CB_GEM.data.ball.x + ", " + CB_GEM.data.ball.y + " (" + (CB_GEM.data.ball.direction === 0 ? "stuck" : "released: " + (CB_GEM.data.ball.direction === 1 ? "left to right" : "right to left")) + ")" +
+				", vertical inclination (%): " + CB_GEM.data.ball.movePercentageVertical
+			: ""
 		);
 }
 
@@ -570,6 +587,25 @@ function resizeElements(graphicSpritesSceneObject, firstTime)
 		_fieldTopPrevious = fieldTop;
 		_fieldWidthPrevious = fieldWidth;
 		_fieldHeightPrevious = fieldHeight;
+		
+		//Resizes the message when a goal is scored:
+		var fontSize = parseInt(Math.min(CB_Screen.getWindowWidth(), CB_Screen.getWindowHeight()) * 0.07) + "px";
+		var goalElement = CB_Elements.id("goal");
+		if (goalElement !== null)
+		{
+			goalElement.style.fontSize = goalElement.style.lineHeight = parseInt(fontSize) * 1.8 + "px";
+			goalElement.style.left = (CB_Screen.getWindowWidth() / 2 - parseInt(goalElement.style.fontSize) * 8 / 6) + "px";
+			goalElement.style.top = (CB_Screen.getWindowHeight() / 2 - parseInt(goalElement.style.fontSize) / 2) + "px";
+		}
+		
+		//Resizes the FPS and the information text:
+		CB_GEM.graphicSpritesSceneObject.getById("fps_group").getById("fps").data.fontSize = parseInt(fontSize) / 1.5 + "px";
+		CB_GEM.graphicSpritesSceneObject.getById("info").get(0).top = parseInt(fontSize) / 2;
+		CB_GEM.graphicSpritesSceneObject.getById("info").get(0).data.fontSize = parseInt(fontSize) / 2 + "px";
+		
+		//Resizes the font of the start button:
+		var startButton = CB_Elements.id("start_button");
+		if (startButton !== null) { startButton.style.fontSize = parseInt(fontSize) / 3.5 + "px"; }
 	}
 }
 
@@ -810,6 +846,27 @@ function movePaddleToPoint(paddleId, yDestiny, graphicSpritesSceneObject)
 	}
 	
 	return paddleTop;
+}
+
+
+//Shows the "Goal!" message:
+var showingGoalMessage = false;
+var showGoalMessageTimeout = null;
+function showGoalMessage()
+{
+	clearTimeout(showGoalMessageTimeout);
+	CB_Elements.showById("goal");
+	showingGoalMessage = true;
+	showGoalMessageTimeout = setTimeout(hideGoalMessage, 1000);
+}
+
+
+//Hides the "Goal!" message:
+function hideGoalMessage()
+{
+	clearTimeout(showGoalMessageTimeout);
+	CB_Elements.hideById("goal");
+	showingGoalMessage = false;
 }
 
 

@@ -3,7 +3,7 @@
 <p>
 	Here is an example of touch management with CrossBrowdy:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Some useful functions:
 	var maxTouchPointsOrNull = CB_Touch.getMaxTouchPoints(); //Maximum of touch points supported by the device (or null if it was not possible to calculate).
 	var myBoolean = CB_Touch.delay(250); //First time, it will return true.
@@ -27,7 +27,7 @@
 <p>
 	Gestures and pressure can also be managed thanks to the <a href="https://hammerjs.github.io/" target="_blank">Hammer.js</a> and <a href="https://pressurejs.com/" target="_blank">Pressure.js</a> libraries:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the Hammer.js object (if any), useful for managing touch gestures:
 	var HammerJSObject = CB_Touch.getHammerJSObject();
 	//Do things with 'HammerJSObject'...

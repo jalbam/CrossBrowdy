@@ -22,7 +22,7 @@
 <p>
 	Here is an example of graphic sprites scene management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the sprites groups information ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object):
 	//Note: sprites groups, sprites and sub-sprites are always automatically ordered internally by their z-index, ascending order (remember to use the 'setZIndex' method of each if you want to modify it).
 	var spritesGroupsData =
@@ -135,7 +135,7 @@
 <p>
 	Here is an extended example creating a graphic sprites object using more options:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the sprites groups information ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object):
 	//Note: sprites groups, sprites and sub-sprites are always automatically ordered internally by their z-index, ascending order (remember to use the 'setZIndex' method of each if you want to modify it).
 	var spritesGroupsData =
@@ -468,7 +468,7 @@
 <p>
 	After creating the graphic sprites scene object (<a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> object), which will contain internal graphic sprites objects (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects), we can start managing it:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	CB_console(myGraphicSpritesScene.isSpritesScene); //Always returns true (since it is a 'CB_GraphicSpritesScene' object).
 	
 	//Sets the desired value of a given property name to the 'CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object as well to its 'CB_GraphicSprites' objects and their children (their 'CB_GraphicSprites.SPRITES_OBJECT' object, including their 'CB_GraphicSprites.SPRITE_OBJECT' and their 'CB_GraphicSprites.SUBSPRITE_OBJECT' objects). Calls the 'CB_GraphicSprites#setPropertyCascade' method internally.
@@ -549,7 +549,7 @@
 <p>
 	It is possible to insert more sprites groups (which will create new internal <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) as well as removing them (the internal <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects will also be removed). Here are some examples:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Inserts the desired sprites groups (it will create internal 'CB_GraphicSprites' objects):
 	myGraphicSpritesScene.insertSpritesGroups(spritesGroupsData); //The 'spritesGroupsData' parameter must be a 'CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object (same parameter as the constructor of the 'CB_GraphicSpritesScene' class).
 
@@ -570,7 +570,7 @@
 <p>
 	It is also possible to get a copy of a graphic sprites scene object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets a copy of the 'CB_GraphicSpritesScene' object:
 	//Note: to copy its internal 'CB_GraphicSprites' objects individually, you can use the 'getCopy' method of each. To copy sprites and sub-sprites, you can also use the 'CB_copyObject' function.
 	var myGraphicSpritesSceneCopy = myGraphicSpritesScene.getCopy();
@@ -580,7 +580,7 @@
 <p>
 	In order to free memory and resources, it is possible to destroy the graphic sprites scene object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Destroys the graphic sprites scene object (removing all sprites groups and 'CB_GraphicSprites' objects, etc.) and frees memory:
 	myGraphicSpritesScene.destructor();
 </code></pre>

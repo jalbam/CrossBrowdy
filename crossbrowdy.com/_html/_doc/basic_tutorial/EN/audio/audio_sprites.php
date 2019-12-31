@@ -42,7 +42,7 @@
 	When loading an audio file sprites object, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
 	Here is an example loading an audio file sprites object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the same audio but in different audio files (providing different formats, paths and data URIs):
 	//NOTE: CrossBrowdy will choose the best one(s) for the current client automatically.
 	var currentURL = location.href;
@@ -254,7 +254,7 @@
 <p>
 	In the case that the audio file sprites object has the "checkManually" option enabled, we need to check each of its internally-used <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. We can do that easily by calling the "checkPlayingAll" manually after the audio file sprites object has been created. It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise):
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//If the "checkManually" option was set to true, we need to check all the CB_AudioFile objects manually (by calling their 'checkPlaying' method):
 	audioFileSprites.checkPlayingAll
 	(
@@ -279,7 +279,7 @@
 <p>
 	After the audio file sprites object has been loaded successfully (and after calling "checkPlayingAll" successfully, if it was necessary), we can start using the audio file sprites object freely:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the duration calculated among all the internal CB_AudioFile objects (as it can contain different formats, sometimes the duration may vary slightly):
 	var audioFileSpritesDurationMinimum = audioFileSprites.getDuration(); //Minimum duration calculated among all the internal CB_AudioFile objects.
 	var audioFileSpritesDurationMaximum = audioFileSprites.getDuration(true); //Maximum duration calculated among all the internal CB_AudioFile objects.
@@ -385,7 +385,7 @@
 <p>
 	One of the key points of the audio file sprites objects is to manage audio sprites:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Plays a sprite by its ID (calls the 'audioFileSprites.play' method internally and returns the same, so it can also generate sound instances):
 	var soundInstanceId = audioFileSprites.playSprite
 	(
@@ -474,7 +474,7 @@
 <p>
 	Some more advanced sprites management examples:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets a sprite by its ID:
 	//NOTE: if not found, the returning object will contain a property named "fake" whose value will be set to true.
 	var sprite = audioFileSprites.getSprite("dos"); //Returns an object with 'startAt' and 'stopAt' properties.
@@ -502,7 +502,7 @@
 <p>
 	In case we need it, we can also get the internal <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> object to manage it:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the internal CB_AudioFileCache object:
 	var audioFileCache = audioFileSprites.audioFileCache;
 	
@@ -515,7 +515,7 @@
 <p>
 	Although the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> object (used internally by <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> objects) can automatically create new internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects or remove them when needed, it is also possible to create new ones or remove current ones manually:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to create a new internal CB_AudioFile object:
 	//NOTE: it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
 	var audioFile = audioFileSprites.createAudioFile
@@ -545,7 +545,7 @@
 <p>
 	One of the most interesting features when managing audio file sprites objects with CrossBrowdy is that you can change the audio API of all their internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects on the fly (even when they are currently playing!). This can be done easily:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to changes the audio API used by all the internal CB_AudioFile objects (this will work even on the fly, when they are currently playing):
 	audioFileSprites.setAudioAPIAll
 	(
@@ -619,7 +619,7 @@
 <p>
 	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file sprites object uses:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Executes a function over all the internal CB_AudioFile objects (being "this" each CB_AudioFile itself):
 	//Note: same as 'audioFileSprites.executeAll' and 'audioFileSprites.executeFunctionAll'.
 	audioFileSprites.forEach(function(index) { CB_console("CB_AudioFile ID: " + this.id); });
@@ -689,7 +689,7 @@
 <p>
 	Some other interesting methods that you might not need:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Clears the sound instances (created by the 'audioFileSprites.play' and 'audioFileSprites.playSprite' methods) which have been cancelled:
 	audioFileSprites.clearSoundInstances();
 	
@@ -703,7 +703,7 @@
 <p>
 	In order to free memory and resources, it is possible to destroy the audio file sprites object and its internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Destroys all the internal CB_AudioFile objects (but neither the audio file cache object nor the audio file sprites object) by calling 'audioFileSprites.audioFileCache.destroyAll' internally, and frees memory:
 	audioFileSprites.destroyAll();
 	audioFileSprites.destroyAll(true); //Also stops sounds.
@@ -716,7 +716,7 @@
 <p>
 	It is also possible to re-load again an audio file sprites object:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Loads the audio file sprites object again with the data given:
 	/*	NOTE:
 		It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).

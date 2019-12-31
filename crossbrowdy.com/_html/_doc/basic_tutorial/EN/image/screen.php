@@ -3,7 +3,7 @@
 <p>
 	Here are some examples of screen management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks whether the main window is focused or not:
 	if (CB_Screen.isFocused()) { CB_console("Screen is focused!"); }
 	else
@@ -97,7 +97,8 @@
 		1, //'initialScale'. Optional.
 		1, //'minimumScale'. Optional.
 		1, //'maximumScale'. Optional.
-		"device-dpi" //'targetDensityDPI'. Optional.
+		"device-dpi", //'targetDensityDPI'. Optional.
+		"no" //'shrinkToFit'. Optional.
 	);
 	
 	//Manages some screen events (use "null" as the first parameter to remove them):

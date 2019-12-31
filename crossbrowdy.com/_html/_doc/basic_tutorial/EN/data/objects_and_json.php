@@ -3,7 +3,7 @@
 <p>
 	Here is an example of objects and JSON management:
 </p>
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines a "class" and creates an instance of it with 3 properties (1 of them inherited through the prototype):
 	var myClass = function() {};
 	myClass.prototype.propertyInherited = "propertyInherited_value"; //Adds the "propertyInherited" property to the prototype.

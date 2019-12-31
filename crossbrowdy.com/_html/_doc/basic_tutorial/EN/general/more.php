@@ -4,7 +4,7 @@
 	Any JavaScript file can be lazy loaded this way:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Includes the desired script:
 	CB_includeJSFile
 	(
@@ -29,7 +29,7 @@
 	If needed, CrossBrowdy version and other things can be checked easily:
 </p>
 	
-<pre><code class="language-javascript">
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	CB_console("CrossBrowdy version is " + CB_VERSION);
 	CB_console("Script path used by CrossBrowdy: " + CB_scriptPath);
 	CB_console(CB_this); //Shows the "this" context used by CrossBrowdy.

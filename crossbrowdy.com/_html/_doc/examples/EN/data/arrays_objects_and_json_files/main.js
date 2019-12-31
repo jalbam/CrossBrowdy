@@ -88,8 +88,8 @@ function main()
 	var myArrayReplaced_3 = CB_replaceAll(arrayOfStrings, ["e", "v", "i"], "A"); //Replaces all occurrences of "e", "v" and "h" by "A". Returns: [ "LAAAl0", ["LAAAl1", ["LEVEL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].
 	var myArrayReplaced_4 = CB_replaceAll(arrayOfStrings, ["e", "v", "i"], "A", true); //Replaces all occurrences of "e", "v" and "h" by "A", case insensitive. Returns: [ "LAAAl0", ["LAAAl1", ["LAAAL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].
 	outputExpected =
-						[ "LAvAl0", ["LAvAl1", ["LEVEL2", "LAvAl2Again"], "LAvAl1Again"], "LAvAl0Again" ].toString() + [ "LAvAl0", ["LAvAl1", ["LAVAL2", "LAvAl2Again"], "LAvAl1Again"], "LAvAl0Again" ].toString() +
-						[ "LAAAl0", ["LAAAl1", ["LEVEL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].toString() + [ "LAAAl0", ["LAAAl1", ["LAAAL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].toString();
+		[ "LAvAl0", ["LAvAl1", ["LEVEL2", "LAvAl2Again"], "LAvAl1Again"], "LAvAl0Again" ].toString() + [ "LAvAl0", ["LAvAl1", ["LAVAL2", "LAvAl2Again"], "LAvAl1Again"], "LAvAl0Again" ].toString() +
+		[ "LAAAl0", ["LAAAl1", ["LEVEL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].toString() + [ "LAAAl0", ["LAAAl1", ["LAAAL2", "LAAAl2AgaAn"], "LAAAl1AgaAn"], "LAAAl0AgaAn" ].toString();
 	outputReal = myArrayReplaced.toString() + myArrayReplaced_2.toString() + myArrayReplaced_3.toString() + myArrayReplaced_4.toString();
 	checkOutput(outputExpected, outputReal);
 
@@ -105,10 +105,10 @@ function main()
 	var arrayTrimmed_7 = CB_Arrays.rtrim(fruitsArray_2.slice(0)); //Trims spaces in the right. Returns: [ "  watermelon", "    lemon", "strawberry", "durian", "mango" ].
 	var arrayTrimmed_8 = CB_Arrays.rtrim(fruitsArray_2.slice(0), [" ", "l", "n", "o"]); //Trims spaces, "l", "n" and "o" in the right. Returns: [ "  waterme", "    lem", "strawberry", "duria", "mang" ].
 	outputExpected =
-					[ "watermelon", "lemon", "strawberry", "durian", "mango" ].toString() + [ "  watermelon    ", "    lemon    ", "strawberry", "durian", "ango" ].toString() +
-					[ "watermelon", "on", "strawberry", "durian", "ango" ].toString() + [ "  watermelon    ", "    lemon    ", "strawberry", "n", "mango" ].toString() +
-					[ "watermelon    ", "lemon    ", "strawberry", "durian", "mango" ].toString() + [ "watermelon    ", "emon    ", "strawberry", "durian", "mango" ].toString() +
-					[ "  watermelon", "    lemon", "strawberry", "durian", "mango" ].toString() + [ "  waterme", "    lem", "strawberry", "duria", "mang" ].toString();
+		[ "watermelon", "lemon", "strawberry", "durian", "mango" ].toString() + [ "  watermelon    ", "    lemon    ", "strawberry", "durian", "ango" ].toString() +
+		[ "watermelon", "on", "strawberry", "durian", "ango" ].toString() + [ "  watermelon    ", "    lemon    ", "strawberry", "n", "mango" ].toString() +
+		[ "watermelon    ", "lemon    ", "strawberry", "durian", "mango" ].toString() + [ "watermelon    ", "emon    ", "strawberry", "durian", "mango" ].toString() +
+		[ "  watermelon", "    lemon", "strawberry", "durian", "mango" ].toString() + [ "  waterme", "    lem", "strawberry", "duria", "mang" ].toString();
 	outputReal = arrayTrimmed.toString() + arrayTrimmed_2.toString() + arrayTrimmed_3.toString() + arrayTrimmed_4.toString() + arrayTrimmed_5.toString() + arrayTrimmed_6.toString() + arrayTrimmed_7.toString() + arrayTrimmed_8.toString();
 	checkOutput(outputExpected, outputReal);
 
@@ -122,8 +122,8 @@ function main()
 	var arrayNew_7 = CB_Arrays.insertElement(["a", "b", "c"], null, "Z"); //Returns: [ "Z", "a", "b", "c" ] (default index is 0).
 	var arrayNew_8 = CB_Arrays.insertElement(["a", "b", "c"], -123, "Z"); //Returns: [ "a", "b", "c", "Z" ] (any negative index will be converted to positive one and the maximum index is the length of the array).
 	outputExpected =
-					[ "a", "Z", "b", "c" ].toString() + [ "a", "b", "Z", "c" ].toString() + [ "a", "b", "c", "Z" ].toString() + [ "a", "b", "c", "Z" ].toString() + [ "Z", "a", "b", "c" ].toString() + [ "Z", "a", "b", "c" ].toString() +
-					[ "Z", "a", "b", "c" ].toString() +	[ "a", "b", "c", "Z" ].toString();
+		[ "a", "Z", "b", "c" ].toString() + [ "a", "b", "Z", "c" ].toString() + [ "a", "b", "c", "Z" ].toString() + [ "a", "b", "c", "Z" ].toString() + [ "Z", "a", "b", "c" ].toString() + [ "Z", "a", "b", "c" ].toString() +
+		[ "Z", "a", "b", "c" ].toString() +	[ "a", "b", "c", "Z" ].toString();
 	outputReal = arrayNew.toString() + arrayNew_2.toString() + arrayNew_3.toString() + arrayNew_4.toString() + arrayNew_5.toString() + arrayNew_6.toString() + arrayNew_7.toString() + arrayNew_8.toString();
 	checkOutput(outputExpected, outputReal);
 
@@ -175,8 +175,8 @@ function main()
 	var objectsCombined_3 = CB_Arrays.combine([1, 2, 3], { 1 : 22, "index1" : "3", "index2" : "whatever", "index3" : 3 }, true); //Returns the same as 'objectsCombined'.
 	var objectsCombined_4 = CB_Arrays.combine({ 1 : 22, "index1" : "3", "index2" : "whatever", "index3" : 3 }, [1, 2, 3], true); //Returns the same as 'objectsCombined_2'.	
 	outputExpected =
-					JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 }) +
-					JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 });
+		JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 }) +
+		JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 });
 	outputReal = JSON.stringify(objectsCombined) + JSON.stringify(objectsCombined_2) + JSON.stringify(objectsCombined_3) + JSON.stringify(objectsCombined_4);
 	checkOutput(outputExpected, outputReal);
 	
@@ -215,8 +215,8 @@ function main()
 	var objectsCombined_7 = CB_combineArraysOrObjects([1, 2, 3], { 1 : 22, "index1" : "3", "index2" : "whatever", "index3" : 3 }, true); //Returns the same as 'objectsCombined_5'.
 	var objectsCombined_8 = CB_combineArraysOrObjects({ 1 : 22, "index1" : "3", "index2" : "whatever", "index3" : 3 }, [1, 2, 3], true); //Returns the same as 'objectsCombined_6'.
 	outputExpected =
-					JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 }) +
-					JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 });
+		JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 }) +
+		JSON.stringify({ 0: 1, 1: 22, 2: 3, index1: "3", index2: "whatever", index3: 3 }) + JSON.stringify({ 0: 1, 1: 2, 2: 3, index1: "3", index2: "whatever", index3: 3 });
 	outputReal = JSON.stringify(objectsCombined_5) + JSON.stringify(objectsCombined_6) + JSON.stringify(objectsCombined_7) + JSON.stringify(objectsCombined_8);
 	checkOutput(outputExpected, outputReal);
 	
@@ -262,14 +262,14 @@ function main()
 	var JSONObjectString_12 = CB_stringifyJSON(undefined, undefined, undefined, "error_value", true, function() { printMessage("Failed!"); }); //Returns "error_value".
 	var JSONObjectString_13 = CB_stringifyJSON(undefined, undefined, undefined, "error_value", false, function() { printMessage("Failed!"); }); //Returns undefined.
 	outputExpected =
-					JSON.stringify({ a : 1, "b" : { "c" : "hello" } }) + JSON.stringify({ a : 1, "b" : { "c" : "hello" } }) + "123" + "123" + "error_value" + "error_value" + "error_value" + "error_value" + "error_value" +
-					"error_value" + JSON.stringify({}) + JSON.stringify(null) + JSON.stringify({}) + "error_value" + "123" + "123" + "\"one_string\"" + "\"one_string\"" + "error_value" + JSON.stringify(undefined) + "error_value" +
-					"null" + "error_value" + "null" + "error_value" + JSON.stringify(undefined);
+		JSON.stringify({ a : 1, "b" : { "c" : "hello" } }) + JSON.stringify({ a : 1, "b" : { "c" : "hello" } }) + "123" + "123" + "error_value" + "error_value" + "error_value" + "error_value" + "error_value" +
+		"error_value" + JSON.stringify({}) + JSON.stringify(null) + JSON.stringify({}) + "error_value" + "123" + "123" + "\"one_string\"" + "\"one_string\"" + "error_value" + JSON.stringify(undefined) + "error_value" +
+		"null" + "error_value" + "null" + "error_value" + JSON.stringify(undefined);
 	outputReal =
-				JSONObjectString + JSON.stringify(JSONObject_2) + JSONObject_3 + JSONObject_4 + JSONObject_5 + JSONObject_6 +
-				JSONObject_7 + JSONObject_8 + JSONObject_9 + JSONObject_10 + JSON.stringify(JSONObject_11) + JSON.stringify(JSONObject_12) +
-				JSON.stringify(JSONObject_13) + JSONObject_14 + JSONObjectString_2 + JSONObjectString_3 + JSONObjectString_4 + JSONObjectString_5 + JSONObjectString_6 + JSONObjectString_7 + JSONObjectString_8 +
-				JSONObjectString_9 + JSONObjectString_10 + JSONObjectString_11 + JSONObjectString_12 + JSONObjectString_13;
+		JSONObjectString + JSON.stringify(JSONObject_2) + JSONObject_3 + JSONObject_4 + JSONObject_5 + JSONObject_6 +
+		JSONObject_7 + JSONObject_8 + JSONObject_9 + JSONObject_10 + JSON.stringify(JSONObject_11) + JSON.stringify(JSONObject_12) +
+		JSON.stringify(JSONObject_13) + JSONObject_14 + JSONObjectString_2 + JSONObjectString_3 + JSONObjectString_4 + JSONObjectString_5 + JSONObjectString_6 + JSONObjectString_7 + JSONObjectString_8 +
+		JSONObjectString_9 + JSONObjectString_10 + JSONObjectString_11 + JSONObjectString_12 + JSONObjectString_13;
 	checkOutput(outputExpected, outputReal);
 
 	//The 'CB_getJSONPropertyValue' function is similar to 'CB_getValueIndex' but it will accept strings (it will try to parse them as JSON objects) and will return the element given again if the property is not given:
@@ -376,34 +376,34 @@ function main()
 	var combination_83 = CB_combineAutomatically([ "a", "b", "c" ], [ "a", "b" ]); //Returns: ["a", "b", "c", "a", "b"].
 	var combination_84 = CB_combineAutomatically([ "a", "b", "c" ], [ "a", "b" ], true); //Returns: ["a", "b", "c"].
 	outputExpected =
-					JSON.stringify(null) + JSON.stringify(null) + JSON.stringify(null) + JSON.stringify(null) + JSON.stringify(true) + JSON.stringify(false) + JSON.stringify(false) + JSON.stringify(false) +
-					"p1=v1&p2=v2&p2=v2_alt&p3=v3" + "p2=v2_alt&p3=v3&p1=v1&p2=v2" + "p1=v1&p2=v2&p2=v2_alt&p3=v3" + "p2=v2_alt&p3=v3&p1=v1&p2=v2" +	JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
-					JSON.stringify({a: 123, b: "xyz"}) + JSON.stringify({a: 123, b: "xyz"}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +	JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
-					'hello&{ "a" : 123 }' +	'hello&{ "a" : 123 }' +	'{ "a" : 987, "b" : "xyz" }&hello' + '{ "a" : 987, "b" : "xyz" }&hello' + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
-					JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
-					JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +	JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
-					JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
-					JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +  JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
-					JSON.stringify({a: 123, b: "xyz"}) + JSON.stringify({a: 123, b: "xyz"}) + 'hello&{"a":123}' + 'hello&{"a":123}' + '{"a":123}&hello' + '{"a":123}&hello' + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
-					JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
-					JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
-					JSON.stringify({0: 12, 1: "b", a: 123}) + JSON.stringify({0: 12, 1: "b", a: 123}) + JSON.stringify({0: 12, 1: "b", a: 123}) + JSON.stringify({0: 12, 1: "b", a: 123}) +
-					JSON.stringify({0: "a", 1: "b", a: 123}) + JSON.stringify({0: "a", 1: "b", a: 123}) + JSON.stringify({0: "a", 1: "b", a: 123}) + JSON.stringify({0: "a", 1: "b", a: 123}) +
-					["a", "b", "a", "b", "c"].toString() + ["a", "b", "c"].toString() + ["a", "b", "c", "a", "b"].toString() + ["a", "b", "c"].toString();
+		JSON.stringify(null) + JSON.stringify(null) + JSON.stringify(null) + JSON.stringify(null) + JSON.stringify(true) + JSON.stringify(false) + JSON.stringify(false) + JSON.stringify(false) +
+		"p1=v1&p2=v2&p2=v2_alt&p3=v3" + "p2=v2_alt&p3=v3&p1=v1&p2=v2" + "p1=v1&p2=v2&p2=v2_alt&p3=v3" + "p2=v2_alt&p3=v3&p1=v1&p2=v2" +	JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
+		JSON.stringify({a: 123, b: "xyz"}) + JSON.stringify({a: 123, b: "xyz"}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +	JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
+		'hello&{ "a" : 123 }' +	'hello&{ "a" : 123 }' +	'{ "a" : 987, "b" : "xyz" }&hello' + '{ "a" : 987, "b" : "xyz" }&hello' + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
+		JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
+		JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +	JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
+		JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
+		JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +  JSON.stringify({a: 987, b: "xyz"}) + JSON.stringify({a: 987, b: "xyz"}) +
+		JSON.stringify({a: 123, b: "xyz"}) + JSON.stringify({a: 123, b: "xyz"}) + 'hello&{"a":123}' + 'hello&{"a":123}' + '{"a":123}&hello' + '{"a":123}&hello' + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
+		JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
+		JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) + JSON.stringify({a: 123}) +
+		JSON.stringify({0: 12, 1: "b", a: 123}) + JSON.stringify({0: 12, 1: "b", a: 123}) + JSON.stringify({0: 12, 1: "b", a: 123}) + JSON.stringify({0: 12, 1: "b", a: 123}) +
+		JSON.stringify({0: "a", 1: "b", a: 123}) + JSON.stringify({0: "a", 1: "b", a: 123}) + JSON.stringify({0: "a", 1: "b", a: 123}) + JSON.stringify({0: "a", 1: "b", a: 123}) +
+		["a", "b", "a", "b", "c"].toString() + ["a", "b", "c"].toString() + ["a", "b", "c", "a", "b"].toString() + ["a", "b", "c"].toString();
 	outputReal =
-					JSON.stringify(combination) + JSON.stringify(combination_2) + JSON.stringify(combination_3) + JSON.stringify(combination_4) + JSON.stringify(combination_5) + JSON.stringify(combination_6) +
-					JSON.stringify(combination_7) + JSON.stringify(combination_8) + combination_9 + combination_10 + combination_11 + combination_12 + JSON.stringify(combination_13) + JSON.stringify(combination_14) +
-					JSON.stringify(combination_15) + JSON.stringify(combination_16) + JSON.stringify(combination_17) + JSON.stringify(combination_18) + JSON.stringify(combination_19) + JSON.stringify(combination_20) +
-					combination_21 + combination_22 + combination_23 + combination_24 + JSON.stringify(combination_25) + JSON.stringify(combination_26) + JSON.stringify(combination_27) + JSON.stringify(combination_28) +
-					JSON.stringify(combination_29) + JSON.stringify(combination_30) + JSON.stringify(combination_31) + JSON.stringify(combination_32) + JSON.stringify(combination_33) + JSON.stringify(combination_34) +
-					JSON.stringify(combination_35) + JSON.stringify(combination_36) + JSON.stringify(combination_37) + JSON.stringify(combination_38) + JSON.stringify(combination_39) + JSON.stringify(combination_40) +
-					JSON.stringify(combination_41) + JSON.stringify(combination_42) + JSON.stringify(combination_43) + JSON.stringify(combination_44) + JSON.stringify(combination_45) + JSON.stringify(combination_46) +
-					JSON.stringify(combination_47) + JSON.stringify(combination_48) + JSON.stringify(combination_49) + JSON.stringify(combination_50) + JSON.stringify(combination_51) + JSON.stringify(combination_52) +
-					combination_53 + combination_54 + combination_55 + combination_56 + JSON.stringify(combination_57) + JSON.stringify(combination_58) + JSON.stringify(combination_59) + JSON.stringify(combination_60) +
-					JSON.stringify(combination_61) + JSON.stringify(combination_62) + JSON.stringify(combination_63) + JSON.stringify(combination_64) + JSON.stringify(combination_65) + JSON.stringify(combination_66) +
-					JSON.stringify(combination_67) + JSON.stringify(combination_68) + JSON.stringify(combination_69) + JSON.stringify(combination_70) + JSON.stringify(combination_71) + JSON.stringify(combination_72) +
-					JSON.stringify(combination_73) + JSON.stringify(combination_74) + JSON.stringify(combination_75) + JSON.stringify(combination_76) + JSON.stringify(combination_77) + JSON.stringify(combination_78) +
-					JSON.stringify(combination_79) + JSON.stringify(combination_80) + combination_81.toString() + combination_82.toString() + combination_83.toString() + combination_84.toString();
+		JSON.stringify(combination) + JSON.stringify(combination_2) + JSON.stringify(combination_3) + JSON.stringify(combination_4) + JSON.stringify(combination_5) + JSON.stringify(combination_6) +
+		JSON.stringify(combination_7) + JSON.stringify(combination_8) + combination_9 + combination_10 + combination_11 + combination_12 + JSON.stringify(combination_13) + JSON.stringify(combination_14) +
+		JSON.stringify(combination_15) + JSON.stringify(combination_16) + JSON.stringify(combination_17) + JSON.stringify(combination_18) + JSON.stringify(combination_19) + JSON.stringify(combination_20) +
+		combination_21 + combination_22 + combination_23 + combination_24 + JSON.stringify(combination_25) + JSON.stringify(combination_26) + JSON.stringify(combination_27) + JSON.stringify(combination_28) +
+		JSON.stringify(combination_29) + JSON.stringify(combination_30) + JSON.stringify(combination_31) + JSON.stringify(combination_32) + JSON.stringify(combination_33) + JSON.stringify(combination_34) +
+		JSON.stringify(combination_35) + JSON.stringify(combination_36) + JSON.stringify(combination_37) + JSON.stringify(combination_38) + JSON.stringify(combination_39) + JSON.stringify(combination_40) +
+		JSON.stringify(combination_41) + JSON.stringify(combination_42) + JSON.stringify(combination_43) + JSON.stringify(combination_44) + JSON.stringify(combination_45) + JSON.stringify(combination_46) +
+		JSON.stringify(combination_47) + JSON.stringify(combination_48) + JSON.stringify(combination_49) + JSON.stringify(combination_50) + JSON.stringify(combination_51) + JSON.stringify(combination_52) +
+		combination_53 + combination_54 + combination_55 + combination_56 + JSON.stringify(combination_57) + JSON.stringify(combination_58) + JSON.stringify(combination_59) + JSON.stringify(combination_60) +
+		JSON.stringify(combination_61) + JSON.stringify(combination_62) + JSON.stringify(combination_63) + JSON.stringify(combination_64) + JSON.stringify(combination_65) + JSON.stringify(combination_66) +
+		JSON.stringify(combination_67) + JSON.stringify(combination_68) + JSON.stringify(combination_69) + JSON.stringify(combination_70) + JSON.stringify(combination_71) + JSON.stringify(combination_72) +
+		JSON.stringify(combination_73) + JSON.stringify(combination_74) + JSON.stringify(combination_75) + JSON.stringify(combination_76) + JSON.stringify(combination_77) + JSON.stringify(combination_78) +
+		JSON.stringify(combination_79) + JSON.stringify(combination_80) + combination_81.toString() + combination_82.toString() + combination_83.toString() + combination_84.toString();
 	checkOutput(outputExpected, outputReal);
 }
 
