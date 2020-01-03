@@ -113,5 +113,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Screen.html" target="_blank">CB_Screen</a> static class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Screen.html" target="_blank">CB_Screen</a> static class.
 </p>

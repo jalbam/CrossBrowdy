@@ -1,6 +1,6 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo strtolower($language); ?>">
 	<head>
 		<!-- (c) CrossBrowdy by Joan Alba Maldonado (joanalbamaldonado@NO_SPAM_PLEASEgmail.com). Forbidden to publish, copy or modify without mentioning the author's name. -->
 		<?php
@@ -101,7 +101,7 @@
 		<style type="text/css">
 		<!--
 			<?php
-				require_once "_css.php";
+				require_once "_html/_css.php";
 				if ($category === "basic_tutorial" || $category === "examples")
 				{
 					if (file_exists("_html/_doc/_lib/prism.css")) { readfile("_html/_doc/_lib/prism.css"); }
@@ -233,10 +233,12 @@
 				</nav>
 			</div>
 		</div>
-		<?php
-			if (file_exists("_html/" . $category . "." . $language . ".php")) { require_once "_html/" . $category . "." . $language . ".php"; }
-			else if (file_exists("_html/" . $category . "." . CATEGORY_DEFAULT . ".php")) { require_once "_html/" . $category . "." . LANGUAGE_DEFAULT . ".php"; }
-		?>
+		<main>
+			<?php
+				if (file_exists("_html/" . $category . "." . $language . ".php")) { require_once "_html/" . $category . "." . $language . ".php"; }
+				else if (file_exists("_html/" . $category . "." . CATEGORY_DEFAULT . ".php")) { require_once "_html/" . $category . "." . LANGUAGE_DEFAULT . ".php"; }
+			?>
+		</main>
 		<footer><address><div class="author"><?php echo $projectCopyright[$language]; ?></div></address></footer>
 	</body>
 </html>

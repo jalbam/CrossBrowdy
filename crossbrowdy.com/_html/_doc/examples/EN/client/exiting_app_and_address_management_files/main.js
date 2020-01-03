@@ -26,5 +26,5 @@ function exit()
 function redirectTo(data)
 {
 	//If the first URI already has data, the data given will be attached to it (stripping/adding "&" and "?" symbols automatically):
-	CB_Client.redirectTo("http://crossbrowdy.com/", data);
+	CB_Client.redirectTo("https://crossbrowdy.com/", data);
 }

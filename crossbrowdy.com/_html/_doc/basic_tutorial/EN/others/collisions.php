@@ -66,10 +66,10 @@
 	//NOTE: for other types of collisions, check the API documentation.
 </code></pre>
 <p>
-	For some collisions with the mouse cursor, you can use the <a href="_html/_doc/api/CB_Mouse.html" target="_blank">CB_Mouse</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("input", "mouse"); ?>" target="_blank"><?php echo $basicTutorial["input"]["topics"]["mouse"][$language]; ?></a> topic of the basic tutorial.
+	For some collisions with the mouse cursor, you can use the <a href="api/CB_Mouse.html" target="_blank">CB_Mouse</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("input", "mouse"); ?>" target="_blank"><?php echo $basicTutorial["input"]["topics"]["mouse"][$language]; ?></a> topic of the basic tutorial.
 </p>
 
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Collisions.html" target="_blank">CB_Collisions</a> static class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Collisions.html" target="_blank">CB_Collisions</a> static class.
 </p>

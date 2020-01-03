@@ -16,5 +16,5 @@
 Read the documentation of the <a href="https://hammerjs.github.io/" target="_blank">Hammer.js</a> library to get more information about how to use it.
 
 <p>
-	You can check the <a href="guides<?php echo $PHPExtension; ?>" target="_blank">Guides & Tutorials</a> category as well as the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> in the case you need more information.
+	You can check the <a href="guides<?php echo $PHPExtension; ?>" target="_blank">Guides & Tutorials</a> category as well as the <a href="api/index.html" target="_blank">API documentation</a> in the case you need more information.
 </p>

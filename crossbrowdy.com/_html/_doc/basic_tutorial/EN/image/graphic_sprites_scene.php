@@ -1,21 +1,21 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	The graphic sprites scene objects (<a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a>) allows you to manage different groups of sprites (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) easily.
+	The graphic sprites scene objects (<a href="api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a>) allows you to manage different groups of sprites (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) easily.
 </p>
 
 <p>
-	Each graphic scene object (<a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a>) will contain one or more sprites groups (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects).
-	Sprites groups (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) are useful objects to manage multiple sprites (and their sub-sprites) for the same graphic entity, allowing to point only one sprite at a time. The sprite pointed will represent the current state of this sprites group (which is the current state of the graphic entity).
+	Each graphic scene object (<a href="api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a>) will contain one or more sprites groups (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects).
+	Sprites groups (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) are useful objects to manage multiple sprites (and their sub-sprites) for the same graphic entity, allowing to point only one sprite at a time. The sprite pointed will represent the current state of this sprites group (which is the current state of the graphic entity).
 </p>
 
 <p>
-	A graphic scene object (<a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a>) can be used, among other use cases, to represent a scene with its graphic entities (sprites and their sub-sprites). It can also be used as a buffer.
+	A graphic scene object (<a href="api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a>) can be used, among other use cases, to represent a scene with its graphic entities (sprites and their sub-sprites). It can also be used as a buffer.
 	The source ("src" property) of each sprite or each sub-sprite can be a text, an image, a bitmap, a 3D object, etc. So they can be used for any kind of source you may think of, including (but not limited to) one sprites sheet or more, one atlas or more, etc. or even a mix of all of them.
 </p>
 
 <p>
-	It is important to understand that the <a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> objects just provide a low-level way to manage different groups of sprites (and their sub-sprites) through their internal <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects and accept any kind of source and additional data (which can even include code), without providing advanced high-level features as graphic rendering.
+	It is important to understand that the <a href="api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> objects just provide a low-level way to manage different groups of sprites (and their sub-sprites) through their internal <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects and accept any kind of source and additional data (which can even include code), without providing advanced high-level features as graphic rendering.
 	This makes these objects powerful enough to be adapted to virtually any rendering engine you may want (2D or 3D), having to manage most of the logic yourself.
 </p>
 
@@ -466,7 +466,7 @@
 
 
 <p>
-	After creating the graphic sprites scene object (<a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> object), which will contain internal graphic sprites objects (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects), we can start managing it:
+	After creating the graphic sprites scene object (<a href="api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> object), which will contain internal graphic sprites objects (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects), we can start managing it:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	CB_console(myGraphicSpritesScene.isSpritesScene); //Always returns true (since it is a 'CB_GraphicSpritesScene' object).
@@ -541,13 +541,13 @@
 	); 
 </code></pre>
 <p>
-	To know how to manage <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects (and their sprites and sub-sprites), check the
+	To know how to manage <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects (and their sprites and sub-sprites), check the
 	<a href="<?php echo basicTutorialLink("image", "graphic_sprites"); ?>" target="_blank"><?php echo $basicTutorial["image"]["topics"]["graphic_sprites"][$language]; ?></a> topic of the basic tutorial.
 </p>
 
 
 <p>
-	It is possible to insert more sprites groups (which will create new internal <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) as well as removing them (the internal <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects will also be removed). Here are some examples:
+	It is possible to insert more sprites groups (which will create new internal <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) as well as removing them (the internal <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects will also be removed). Here are some examples:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Inserts the desired sprites groups (it will create internal 'CB_GraphicSprites' objects):
@@ -587,5 +587,5 @@
 
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> class.
 </p>

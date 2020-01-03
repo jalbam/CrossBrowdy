@@ -1,6 +1,6 @@
 <?php
-	define("SUBCATEGORY_DEFAULT", "basic");
-	define("TOPIC_DEFAULT", "canvas");
+	define("SUBCATEGORY_DEFAULT", "general");
+	define("TOPIC_DEFAULT", "hello_world");
 	define("CATEGORY_MAIN_NAME", "examples");
 	$categoryMainArray = &$examples;
 	require_once "_file_viewer.php";

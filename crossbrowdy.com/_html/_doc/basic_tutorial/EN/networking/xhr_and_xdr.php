@@ -134,8 +134,11 @@
 </code></pre>
 
 <p>
-	The URL of the proxy used can be defined in the <a href="_html/_doc/api/CB_Configuration.CrossBase.html#.CB_Net_XHR_PROXY_URL" target="_blank">CB_Configuration.CrossBase.CB_Net_XHR_PROXY_URL</a> parameter. By default, it points to a proxy already provided by CrossBrowdy.
-	Read about the <a href="_html/_doc/api/CB_Net.XHR.html#.callProxy" target="_blank">CB_Net.XHR.callProxy</a> function to get more information about its usage, the proxy used, how to create your own one if you want, etc.
+	The URL of the proxy used can be defined in the <a href="api/CB_Configuration.CrossBase.html#.CB_Net_XHR_PROXY_URL" target="_blank">CB_Configuration.CrossBase.CB_Net_XHR_PROXY_URL</a> parameter. By default, it points to a proxy already provided by CrossBrowdy.
+	Note that, for safety reasons, the default proxy only allows to request the URLs defined in the '$allowedURLs' array in the 'CB_proxy.config.php' file. Just edit it to allow other URLs.
+</p>
+<p>
+	Read about the <a href="api/CB_Net.XHR.html#.callProxy" target="_blank">CB_Net.XHR.callProxy</a> function to get more information about its usage, the proxy used, how to create your own one if you want, etc.
 </p>
 
 <p>
@@ -166,7 +169,10 @@
 	);
 </code></pre>
 <p>
-	Have into account that it is recommended to use the <a href="_html/_doc/api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static class instead to perform REST calls easier and in a much more powerful way. To get more information, read the <a href="<?php echo basicTutorialLink("networking", "rest"); ?>" target="_blank"><?php echo $basicTutorial["networking"]["topics"]["rest"][$language]; ?></a> topic of the basic tutorial.
+	Again, the URL of the proxy used (if we do not avoid using it) can be defined in the <a href="api/CB_Configuration.CrossBase.html#.CB_Net_XHR_PROXY_URL" target="_blank">CB_Configuration.CrossBase.CB_Net_XHR_PROXY_URL</a> parameter.
+</p>
+<p>
+	Have into account that it is recommended to use the <a href="api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static class instead to perform REST calls easier and in a much more powerful way. To get more information, read the <a href="<?php echo basicTutorialLink("networking", "rest"); ?>" target="_blank"><?php echo $basicTutorial["networking"]["topics"]["rest"][$language]; ?></a> topic of the basic tutorial.
 </p>
 
 <p>
@@ -178,5 +184,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Net.html" target="_blank">CB_Net</a> and the <a href="_html/_doc/api/CB_Net.XHR.html" target="_blank">CB_Net.XHR</a> static classes.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Net.html" target="_blank">CB_Net</a> and the <a href="api/CB_Net.XHR.html" target="_blank">CB_Net.XHR</a> static classes.
 </p>

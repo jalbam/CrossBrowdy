@@ -15,3 +15,6 @@
 		Coming soon
 	</p>
 </div>
+<?php
+	//TODO: Poner data type de software: https://developers.google.com/search/docs/data-types/software-app
+?>

@@ -1,5 +1,7 @@
 <?php
 	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+
+	//TODO: Think about using breadcrumbs: https://developers.google.com/search/docs/data-types/breadcrumb
 	
 	function guideLinks($contentArray, $linkFunction, $basicTurorialOrExamples)
 	{
@@ -24,30 +26,36 @@
 
 <header><h1 class="category_title">Guides &amp; Tutorials</h1></header>
 
-<a name="basic_tutorial"></a>
-<div class="category_text">
-	<h2 class="category_subtitle">Basic tutorial</h2>
-	<ol>
-		<nav>
-			<?php echo guideLinks($basicTutorial, "basicTutorialLink", "basic_tutorial"); ?>
-		</nav>
-	</ol>
-</div>
+<section>
+	<a name="basic_tutorial"></a>
+	<div class="category_text">
+		<h2 class="category_subtitle">Basic tutorial</h2>
+		<ol>
+			<nav>
+				<?php echo guideLinks($basicTutorial, "basicTutorialLink", "basic_tutorial"); ?>
+			</nav>
+		</ol>
+	</div>
+</section>
 
-<a name="examples"></a>
-<div class="category_text">
-	<h1 class="category_subtitle">Examples</h1>
-	<ol>
-		<nav>
-			<?php echo guideLinks($examples, "examplesLink", "examples"); ?>
-		</nav>
-	</ol>
-</div>
+<section>
+	<a name="examples"></a>
+	<div class="category_text">
+		<h1 class="category_subtitle">Examples</h1>
+		<ol>
+			<nav>
+				<?php echo guideLinks($examples, "examplesLink", "examples"); ?>
+			</nav>
+		</ol>
+	</div>
+</section>
 
-
-<div class="category_text">
-	<h1 class="category_subtitle">More</h1>
-	<p>
-		Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to get more information.
-	</p>
-</div>
+<section>
+	<a name="more"></a>
+	<div class="category_text">
+		<h1 class="category_subtitle">More</h1>
+		<p>
+			Check the <a href="api/index.html" target="_blank">API documentation</a> (<a href="api/printable/index.html" target="_blank">more printer-friendly version</a>) to get more information.
+		</p>
+	</div>
+</section>

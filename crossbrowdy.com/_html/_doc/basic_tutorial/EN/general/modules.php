@@ -84,7 +84,7 @@ CB_Modules.modules["MY_MODULE"] =
 CB_Modules.addNeededModule(CB_NAME, "MY_MODULE", { "MY_MODULE/MY_MODULE.js" : { load: true, mandatory: true } });
 </code></pre>
 <p>
-	Note that the module must be created and added before CrossBrowdy starts loading (before calling the <a href="_html/_doc/api/global.html#CB_init" target="_blank">CB_init</a> function). It could also be done during the CrossBrowdy loading process, for example using the multiple callback functions through events, but the main objective of this example is to keep it simple.
+	Note that the module must be created and added before CrossBrowdy starts loading (before calling the <a href="api/global.html#CB_init" target="_blank">CB_init</a> function). It could also be done during the CrossBrowdy loading process, for example using the multiple callback functions through events, but the main objective of this example is to keep it simple.
 </p>
 
 <p>
@@ -98,7 +98,7 @@ CB_Modules.addNeededModule(CB_NAME, "MY_MODULE", { "MY_MODULE/MY_MODULE.js" : { 
 	var myModuleProperty = CB_Modules.getProperty("MY_MODULE", "property_name");
 	
 	//Edits a desired property with the desired value of a given module:
-	CB_Modules.editProperty("MY_MODULE", "property_name", "property_value", "scalar", iterateArray); //Value type can be "array", "object" or "scalar".
+	CB_Modules.editProperty("MY_MODULE", "property_name", "property_value", "scalar", iterateArray); //Value type can be "array", "object" or "scalar", being 'iterateArray' a boolean to define whether to loop through the given array (if any) or not.
 	
 	//Adds the desired "neededFiles" to a given module:
 	CB_Modules.addNeededFiles("MY_MODULE", { "PATH/FILE.js" : { load: true, mandatory: true } });
@@ -112,5 +112,5 @@ CB_Modules.addNeededModule(CB_NAME, "MY_MODULE", { "MY_MODULE/MY_MODULE.js" : { 
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Modules.html" target="_blank">CB_Modules</a> object.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Modules.html" target="_blank">CB_Modules</a> object.
 </p>

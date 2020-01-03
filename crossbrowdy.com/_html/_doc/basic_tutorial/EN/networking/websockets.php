@@ -68,5 +68,5 @@
 To get more information about the usage of this feature, read the <a href="https://github.com/sockjs/sockjs-client" target="_blank">SockJS client library</a> documentation.
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Net.html" target="_blank">CB_Net</a>, the <a href="_html/_doc/api/CB_Net.Sockets.html" target="_blank">CB_Net.Sockets</a> and the <a href="_html/_doc/api/CB_Net.Sockets.SockJS.html" target="_blank">CB_Net.Sockets.SockJS</a> static classes.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Net.html" target="_blank">CB_Net</a>, the <a href="api/CB_Net.Sockets.html" target="_blank">CB_Net.Sockets</a> and the <a href="api/CB_Net.Sockets.SockJS.html" target="_blank">CB_Net.Sockets.SockJS</a> static classes.
 </p>

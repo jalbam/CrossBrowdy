@@ -138,5 +138,5 @@
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_baseSymbols.html" target="_blank">CB_baseSymbols</a> static class and some <a href="_html/_doc/api/global.html" target="_blank">global functions and variables</a>.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_baseSymbols.html" target="_blank">CB_baseSymbols</a> static class and some <a href="api/global.html" target="_blank">global functions and variables</a>.
 </p>

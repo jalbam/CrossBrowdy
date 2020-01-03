@@ -57,7 +57,7 @@ Some simple collisions can be managed easily:
 	}
 </code></pre>
 <p>
-	For more advanced collisions, you can use the <a href="_html/_doc/api/CB_Collisions.html" target="_blank">CB_Collisions</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("others", "collisions"); ?>" target="_blank"><?php echo $basicTutorial["others"]["topics"]["collisions"][$language]; ?></a> topic of the basic tutorial.
+	For more advanced collisions, you can use the <a href="api/CB_Collisions.html" target="_blank">CB_Collisions</a> static class. To get more information, read the <a href="<?php echo basicTutorialLink("others", "collisions"); ?>" target="_blank"><?php echo $basicTutorial["others"]["topics"]["collisions"][$language]; ?></a> topic of the basic tutorial.
 </p>
 
 <p>
@@ -120,5 +120,5 @@ Some simple collisions can be managed easily:
 
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Mouse.html" target="_blank">CB_Mouse</a> and the <a href="_html/_doc/api/CB_Mouse.CursorImage.html" target="_blank">CB_Mouse.CursorImage</a> static classes.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Mouse.html" target="_blank">CB_Mouse</a> and the <a href="api/CB_Mouse.CursorImage.html" target="_blank">CB_Mouse.CursorImage</a> static classes.
 </p>

@@ -14,7 +14,7 @@
 </p>
 
 <p>
-	The purpose of this example is to show different ways to use <a href="http://www.crossbrowdy.com/" target="_blank">CrossBrowdy</a> and some of its multiple features.
+	The purpose of this example is to show different ways to use <a href="https://crossbrowdy.com/" target="_blank">CrossBrowdy</a> and some of its multiple features.
 </p>
 
 <?php
@@ -24,18 +24,18 @@
 
 <p>
 	Additional files used (inside the &quot;ROMs&quot; folder) which belong to the different ROMs (<a href="https://en.wikipedia.org/wiki/CHIP-8" target="_blank">CHIP-8</a> software) downloaded from <a href="https://github.com/dmatlack/chip8/tree/master/roms/games" target="_blank">here</a>:
-	<a href="<?php echo $dirPath; ?>ROMs/Blinky [Hans Christian Egeberg, 1991].ch8" target="_blank">Blinky [Hans Christian Egeberg, 1991].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Brix [Andreas Gustafsson, 1990].ch8" target="_blank">Brix [Andreas Gustafsson, 1990].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Pong [Paul Vervalin, 1990].ch8" target="_blank">Pong [Paul Vervalin, 1990].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Space Intercept [Joseph Weisbecker, 1978].ch8" target="_blank">Space Intercept [Joseph Weisbecker, 1978].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Space Invaders [David Winter].ch8" target="_blank">Space Invaders [David Winter].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Syzygy [Roy Trevino, 1990].ch8" target="_blank">Syzygy [Roy Trevino, 1990].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Tetris [Fran Dachille, 1991].ch8" target="_blank">Tetris [Fran Dachille, 1991].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Tic-Tac-Toe [David Winter].ch8" target="_blank">Tic-Tac-Toe [David Winter].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Vertical Brix [Paul Robson, 1996].ch8" target="_blank">Vertical Brix [Paul Robson, 1996].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Wipe Off [Joseph Weisbecker].ch8" target="_blank">Wipe Off [Joseph Weisbecker].ch8</a>,
-	<a href="<?php echo $dirPath; ?>ROMs/Worm V4 [RB-Revival Studios, 2007].ch8" target="_blank">Worm V4 [RB-Revival Studios, 2007].ch8</a> and
-	<a href="<?php echo $dirPath; ?>ROMs/ZeroPong [zeroZshadow, 2007].ch8" target="_blank">ZeroPong [zeroZshadow, 2007].ch8</a>.
+	<a href="<?php echo $dirPath; ?>ROMs/Blinky [Hans Christian Egeberg, 1991].ch8" target="_blank" download>Blinky [Hans Christian Egeberg, 1991].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Brix [Andreas Gustafsson, 1990].ch8" target="_blank" download>Brix [Andreas Gustafsson, 1990].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Pong [Paul Vervalin, 1990].ch8" target="_blank" download>Pong [Paul Vervalin, 1990].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Space Intercept [Joseph Weisbecker, 1978].ch8" target="_blank" download>Space Intercept [Joseph Weisbecker, 1978].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Space Invaders [David Winter].ch8" target="_blank" download>Space Invaders [David Winter].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Syzygy [Roy Trevino, 1990].ch8" target="_blank" download>Syzygy [Roy Trevino, 1990].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Tetris [Fran Dachille, 1991].ch8" target="_blank" download>Tetris [Fran Dachille, 1991].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Tic-Tac-Toe [David Winter].ch8" target="_blank" download>Tic-Tac-Toe [David Winter].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Vertical Brix [Paul Robson, 1996].ch8" target="_blank" download>Vertical Brix [Paul Robson, 1996].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Wipe Off [Joseph Weisbecker].ch8" target="_blank" download>Wipe Off [Joseph Weisbecker].ch8</a>,
+	<a href="<?php echo $dirPath; ?>ROMs/Worm V4 [RB-Revival Studios, 2007].ch8" target="_blank" download>Worm V4 [RB-Revival Studios, 2007].ch8</a> and
+	<a href="<?php echo $dirPath; ?>ROMs/ZeroPong [zeroZshadow, 2007].ch8" target="_blank" download>ZeroPong [zeroZshadow, 2007].ch8</a>.
 </p>
 
 <?php
@@ -44,5 +44,5 @@
 ?>
 
 <p>
-	You can check the <a href="guides<?php echo $PHPExtension; ?>" target="_blank">Guides & Tutorials</a> category as well as the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> in the case you need more information.
+	You can check the <a href="guides<?php echo $PHPExtension; ?>" target="_blank">Guides & Tutorials</a> category as well as the <a href="api/index.html" target="_blank">API documentation</a> in the case you need more information.
 </p>

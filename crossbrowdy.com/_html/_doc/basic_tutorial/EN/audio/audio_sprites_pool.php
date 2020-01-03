@@ -1,11 +1,11 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	Audio file sprites pool objects (which are created using the <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class) allow you to use and reuse different groups of sprites (each sprite group being from the same sound) multiple times and simultaneously.
+	Audio file sprites pool objects (which are created using the <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class) allow you to use and reuse different groups of sprites (each sprite group being from the same sound) multiple times and simultaneously.
 </p>
 
 <p>
-	It is important to have in mind that each group of sprites (each being managed by a <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> object internally) should only contain the same sound (never different ones), although you should provide different audio formats of that sound so the audio file sprites pool object will be able to calculate and use the best one for the current client automatically.
+	It is important to have in mind that each group of sprites (each being managed by a <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> object internally) should only contain the same sound (never different ones), although you should provide different audio formats of that sound so the audio file sprites pool object will be able to calculate and use the best one for the current client automatically.
 	The more different formats you can provide, the more chances to support more clients.
 </p>
 
@@ -14,27 +14,27 @@
 </p>
 
 <p>
-	Internally, each audio file sprites pool object will normally manage one audio file sprites object (which use the <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> class) per each sprites group that will typically contain one <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> and each of them will have multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically (expanding itself) in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally. During this process, the audio file sprites pool object (<a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object) will have a 'LOADING' status again and after that the status will be 'LOADED' if all went well or 'FAILED' otherwise. When the 'LOAD' status is reached, the 'onLoad' event function (if any) will be called again (to prevent this, set the 'onLoad' property of the object to something which is not a function once it gets executed).
+	Internally, each audio file sprites pool object will normally manage one audio file sprites object (which use the <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> class) per each sprites group that will typically contain one <a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> and each of them will have multiple <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically (expanding itself) in the case it detects it needs more internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally. During this process, the audio file sprites pool object (<a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object) will have a 'LOADING' status again and after that the status will be 'LOADED' if all went well or 'FAILED' otherwise. When the 'LOAD' status is reached, the 'onLoad' event function (if any) will be called again (to prevent this, set the 'onLoad' property of the object to something which is not a function once it gets executed).
 </p>
 
 <p>
-	The main advantage of <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> objects is that you can manage different groups of sprites and not only one as with <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> objects.
+	The main advantage of <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> objects is that you can manage different groups of sprites and not only one as with <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> objects.
 </p>
 
 <p>
-	The <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> objects use a higher abstraction level than the <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a>.
+	The <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> objects use a higher abstraction level than the <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a>.
 </p>
 
 <p>
 	Note that, most of the times, it is recommended to deal with audio files using always the
-	<a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
+	<a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
 	which can contain a
-	<a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
+	<a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
 	(mainly using the
-	<a href="_html/_doc/api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
-	the <a href="_html/_doc/api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
+	<a href="api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
+	the <a href="api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
 	functions).
-	The <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
+	The <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
 	and provides multiple sprites groups management as well as many other advanced methods.
 </p>
 
@@ -485,7 +485,7 @@
 </code></pre>
 
 <p>
-	In the case that the audio file sprites pool object or any of its sprites groups has the "checkManually" option enabled, we need to check each of its internally-used <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. We can do that easily by calling the "checkPlayingAll" manually after the audio file sprites pool object has been created. It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise):
+	In the case that the audio file sprites pool object or any of its sprites groups has the "checkManually" option enabled, we need to check each of its internally-used <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. We can do that easily by calling the "checkPlayingAll" manually after the audio file sprites pool object has been created. It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise):
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//If the "checkManually" option was set to true, we need to check all the CB_AudioFile objects manually (by calling their 'checkPlaying' method):
@@ -518,7 +518,7 @@
 
 <p>
 	After the audio file sprites pool object has been loaded successfully (and after calling "checkPlayingAll" successfully, if it was necessary), we can start using the audio file sprites pool object freely.
-	The following way can be used to get the internal <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> object that belong to a desired sprites group to manage it:
+	The following way can be used to get the internal <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> object that belong to a desired sprites group to manage it:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the internal CB_AudioFileSprites object that belongs to the desired sprites group:
@@ -528,7 +528,7 @@
 	audioFileSpritesGroup.playSprite("tres");
 </code></pre>
 <p>
-	You can read more about the <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> class in the <a href="<?php echo basicTutorialLink("audio", "audio_sprites"); ?>" target="_blank">Audio sprites</a> topic.
+	You can read more about the <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> class in the <a href="<?php echo basicTutorialLink("audio", "audio_sprites"); ?>" target="_blank">Audio sprites</a> topic.
 </p>
 
 <p>
@@ -630,7 +630,7 @@
 </code></pre>
 
 <p>
-	One of the most interesting features when managing audio file sprites pool objects with CrossBrowdy is that you can change the audio API of all their internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects on the fly (even when they are currently playing!). This can be done easily:
+	One of the most interesting features when managing audio file sprites pool objects with CrossBrowdy is that you can change the audio API of all their internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects on the fly (even when they are currently playing!). This can be done easily:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to changes the audio API used by all the internal CB_AudioFile objects (this will work even on the fly, when they are currently playing):
@@ -678,7 +678,7 @@
 </code></pre>
 
 <p>
-	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file sprites pool object uses:
+	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file sprites pool object uses:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Executes a function over all the internal CB_AudioFile objects, being "this" each CB_AudioFile itself:
@@ -739,7 +739,7 @@
 	audioFileSpritesPool.stopAll();
 </code></pre>
 <p>
-	It is interesting to know that the methods above can also accept an array of <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects as a parameter to only affect those objects instead of all the internal ones.
+	It is interesting to know that the methods above can also accept an array of <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects as a parameter to only affect those objects instead of all the internal ones.
 </p>
 
 <p>
@@ -761,7 +761,7 @@
 </code></pre>
 
 <p>
-	In order to free memory and resources, it is possible to destroy the audio file sprites pool object and its internal <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> and <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects:
+	In order to free memory and resources, it is possible to destroy the audio file sprites pool object and its internal <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> and <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects:
 </p>	
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">	
 	//Destroys all the internal CB_AudioFile objects (but not the internal audio file sprites objects) by calling 'CB_AudioFileSprites#audioFileCache.destroyAll' of each internal CB_AudioFileSprites object, and frees memory:
@@ -786,5 +786,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class.
 </p>

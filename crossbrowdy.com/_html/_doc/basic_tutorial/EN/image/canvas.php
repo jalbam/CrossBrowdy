@@ -35,7 +35,7 @@
 </code></pre>
 
 <p>
-	Here is the JavaScript code with some examples creating canvas (<a href="_html/_doc/api/CB_Canvas.html" target="_blank">CB_Canvas</a>) objects:
+	Here is the JavaScript code with some examples creating canvas (<a href="api/CB_Canvas.html" target="_blank">CB_Canvas</a>) objects:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Creates a canvas object for the canvas whose id is "canvas_id" with the default values:
@@ -76,7 +76,7 @@
 </code></pre>
 
 <p>
-	Since some canvas emulation methods can be asynchronous, it is recommended to always use callbacks when creating the canvas (<a href="_html/_doc/api/CB_Canvas.html" target="_blank">CB_Canvas</a>) object and start working with it only once it loads (when the "onLoad" function is called). Here is an example with more methods:
+	Since some canvas emulation methods can be asynchronous, it is recommended to always use callbacks when creating the canvas (<a href="api/CB_Canvas.html" target="_blank">CB_Canvas</a>) object and start working with it only once it loads (when the "onLoad" function is called). Here is an example with more methods:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Defines the function to call once the canvas object has been created successfully:
@@ -149,7 +149,7 @@
 </code></pre>
 
 <p>
-	Once the canvas (<a href="_html/_doc/api/CB_Canvas.html" target="_blank">CB_Canvas</a>) object is created, we can also force it to re-load again with new options (not recommended for some emulation methods):
+	Once the canvas (<a href="api/CB_Canvas.html" target="_blank">CB_Canvas</a>) object is created, we can also force it to re-load again with new options (not recommended for some emulation methods):
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Re-loads the canvas with the desired options (not recommended for some emulation methods):
@@ -166,7 +166,7 @@
 </code></pre>
 	
 <p>
-	Finally, the <a href="_html/_doc/api/CB_Canvas.html" target="_blank">CB_Canvas</a> class provides some interesting static methods (most times they will be not needed as they are already called internally when creating a new object):
+	Finally, the <a href="api/CB_Canvas.html" target="_blank">CB_Canvas</a> class provides some interesting static methods (most times they will be not needed as they are already called internally when creating a new object):
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Checks whether canvas would be need to be emulated or not:
@@ -185,5 +185,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Canvas.html" target="_blank">CB_Canvas</a> class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Canvas.html" target="_blank">CB_Canvas</a> class.
 </p>

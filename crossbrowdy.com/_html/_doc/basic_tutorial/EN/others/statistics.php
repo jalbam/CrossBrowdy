@@ -9,7 +9,7 @@
 	/*
 		NOTE:
 			* If the stats are enabled, the URL defined in 'CB_Configuration.CrossBrowdy.STATS_URL' will be called (by including it as a JavaScript file) as soon as CrossBrowdy gets called (might not be ready yet).
-			* The URL will be called (included in the document as a JavaScript file) adding two parameters: "cb" parameter with "yes" as value and "url" parameter with the current URL visited by the user as the value.
+			* The URL will be called (included in the document as a JavaScript file) adding three parameters: "cb" parameter with the CrossBrowdy version as the value, "time" with a timestamp which belongs to the current time of the client and "url" parameter with the current URL visited by the user as the value.
 	*/
 	var CB_OPTIONS =
 	{
@@ -28,7 +28,7 @@
 <p>
 	Note that, if the stats are enabled (the 'CB_Configuration.CrossBrowdy.STATS' is set to true), the URL defined in 'CB_Configuration.CrossBrowdy.STATS_URL' will be called (by including it as a JavaScript file) as soon as
 	CrossBrowdy gets called (might not be ready yet).
-	The URL will be called (included in the document as a JavaScript file) adding two parameters: "cb" parameter with "yes" as value and "url" parameter with the current URL visited by the user as the value.
+	The URL will be called (included in the document as a JavaScript file) adding three parameters: "cb" parameter with the CrossBrowdy version as the value, "time" with a timestamp which belongs to the current time of the client and "url" parameter with the current URL visited by the user as the value.
 </p>
 
 <p>
@@ -40,5 +40,5 @@
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/global.html#CB_OPTIONS" target="_blank">CB_OPTIONS</a> and <a href="_html/_doc/api/CB_Configuration.html" target="_blank">CB_Configuration</a> objects.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/global.html#CB_OPTIONS" target="_blank">CB_OPTIONS</a> and <a href="api/CB_Configuration.html" target="_blank">CB_Configuration</a> objects.
 </p>

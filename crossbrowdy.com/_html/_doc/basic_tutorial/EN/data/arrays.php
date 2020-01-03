@@ -113,7 +113,7 @@
 </code></pre>
 
 <p>
-	Note that if the "<a href="_html/_doc/api/CB_Configuration.CrossBase.html#.EXTEND_DOM" target="_blank">EXTEND_DOM</a>" option of the <a href="_html/_doc/api/CB_Configuration.CrossBase.html" target="_blank">CB_Configuration.CrossBase</a> object is enabled, the following methods will be polyfilled automatically in clients which do not support them: 	
+	Note that if the "<a href="api/CB_Configuration.CrossBase.html#.EXTEND_DOM" target="_blank">EXTEND_DOM</a>" option of the <a href="api/CB_Configuration.CrossBase.html" target="_blank">CB_Configuration.CrossBase</a> object is enabled, the following methods will be polyfilled automatically in clients which do not support them: 	
 		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf" target="_blank">Array.prototype.indexOf</a>,
 		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf" target="_blank">Array.prototype.lastIndexOf</a>,
 		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray" target="_blank">Array.isArray</a>,
@@ -138,5 +138,5 @@
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Arrays.html" target="_blank">CB_Arrays</a> static class and some <a href="_html/_doc/api/global.html" target="_blank">global functions and variables</a>.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Arrays.html" target="_blank">CB_Arrays</a> static class and some <a href="api/global.html" target="_blank">global functions and variables</a>.
 </p>

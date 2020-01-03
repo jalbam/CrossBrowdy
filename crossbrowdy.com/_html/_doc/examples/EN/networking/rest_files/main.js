@@ -10,7 +10,7 @@ function main()
 	CB_Net.REST.actions["my_action"] =
 	{
 		//URL of the REST server:
-		"serverURL" : "http://www.crossbrowdy.com", //If not provided, it will use 'CB_Net.REST.SERVER_URL_DEFAULT'.
+		"serverURL" : "https://crossbrowdy.com", //If not provided, it will use 'CB_Net.REST.SERVER_URL_DEFAULT'.
 
 		//Route (path to the resource):
 		"route" : "/guides?whatever3=whatever3_data", //If provided, it will be attached at the end of the server URL.
@@ -48,7 +48,7 @@ function main()
 	CB_Net.REST.actions["my_action_2"] =
 	{
 		//URL of the REST server:
-		"serverURL" : "http://www.crossbrowdy.com", //If not provided, it will use 'CB_Net.REST.SERVER_URL_DEFAULT'.
+		"serverURL" : "https://crossbrowdy.com", //If not provided, it will use 'CB_Net.REST.SERVER_URL_DEFAULT'.
 
 		//Route (path to the resource):
 		"route" : "/download?whatever3={{whatever3_wildcard}}", //If provided, it will be attached at the end of the server URL.

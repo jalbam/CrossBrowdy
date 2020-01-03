@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	Using the <a href="_html/_doc/api/CB_Pointer.html" target="_blank">CB_Pointer</a> static class is a good way to deal with any pointer event (it could also come from a mouse or be a touch event). Internally, it uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events" target="_blank">Pointer API</a> if available and falls back to emulation otherwise.
+	Using the <a href="api/CB_Pointer.html" target="_blank">CB_Pointer</a> static class is a good way to deal with any pointer event (it could also come from a mouse or be a touch event). Internally, it uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events" target="_blank">Pointer API</a> if available and falls back to emulation otherwise.
 </p>
 
 <p>
@@ -26,5 +26,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Pointer.html" target="_blank">CB_Pointer</a> static class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Pointer.html" target="_blank">CB_Pointer</a> static class.
 </p>

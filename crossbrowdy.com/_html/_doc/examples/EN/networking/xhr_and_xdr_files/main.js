@@ -35,7 +35,13 @@ function OK(XHR, callbackFunctionError, type, contentBytes)
 {
 	CB_console("AJAX call succeeded! Status code is: " + CB_Net.XHR.getStatusCode(XHR));
 	CB_console("Content: " + CB_Net.XHR.getResponseContent(XHR));
-	CB_Elements.insertContentById("call_" + type, "[OK] [" + CB_Net.XHR.getStatusCode(XHR) + "] Content: " + CB_Net.XHR.getResponseContent(XHR) + (contentBytes ? " " + contentBytes : ""));
+	CB_Elements.insertContentById
+	(
+		"call_" + type,
+		"[OK] [" + CB_Net.XHR.getStatusCode(XHR) + "] " +
+		"Content: " + CB_Net.XHR.getResponseContent(XHR).replace(CB_regularExpressionString("img/", true, true), "https://dhtmlgames.com/img/") + //Replace the URL of the images (to show them correctly when requesting dhtmlgames.com).
+		(contentBytes ? " " + contentBytes : "")
+	);
 };
 
 
@@ -131,7 +137,7 @@ function callProxy()
 	};
 	var XHR = CB_Net.XHR.callProxy
 	(
-		"http://www.dhtmlgames.com/", //URL. Unique mandatory parameter. It will be passed to the proxy through the "p_url" parameter.
+		"https://dhtmlgames.com/", //URL. Unique mandatory parameter. It will be passed to the proxy through the "p_url" parameter.
 		null, //method. Default: 'POST'. It will be passed to the proxy through the "p_method" parameter.
 		null, //data. It can be either a string (like URL parameters) or a JSON object. Default: undefined. It will be passed to the proxy through the "p_data" parameter.
 		null, //headers. Default: undefined. It will be passed to the proxy through the "p_headers" parameter.

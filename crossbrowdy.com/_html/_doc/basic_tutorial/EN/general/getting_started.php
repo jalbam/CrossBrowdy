@@ -9,6 +9,22 @@
 </code></pre>
 
 <p>
+	The recommended place to include this file is inside the head section (inside the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head" target="_blank">&lt;head&gt; tag</a>) of the document.
+</p>
+
+<p>
+	Alternatively, you can also use the last CrossBrowdy version by including the CrossBrowdy main file which is available online:
+</p>
+
+<pre><code class="language-html line-numbers match-braces rainbow-braces">
+	&lt;script src="https://crossbrowdy.com/CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"&gt;&lt;/script&gt;&lt;!-- "type" and "language" parameters for legacy clients. --&gt;
+</code></pre>
+
+<p>
+	Have in mind that including the CrossBrowdy main file which is online should never be done for production. This method can be useful just for testing purposes. Some features might not work properly using this way and availability cannot be always guaranteed.
+</p>
+
+<p>
 	Then just start the CrossBrowdy framework using JavaScript language, from the same file:
 </p>
 	
@@ -35,5 +51,5 @@
 Note that CrossBrowdy will modify the CSS &quot;<i>style</i>&quot; attribute of this DOM element if needed, setting the &quot;<i>display</i>&quot; property to &quot;<i>block</i>&quot; if it is &quot;<i>none</i>&quot; and its &quot;<i>visibility</i>&quot; property to &quot;<i>visible</i>&quot; regardless its previous value.
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/global.html#CB_init" target="_blank">CB_init</a> and <a href="_html/_doc/api/global.html#CB_console" target="_blank">CB_console</a> functions.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/global.html#CB_init" target="_blank">CB_init</a> and <a href="api/global.html#CB_console" target="_blank">CB_console</a> functions.
 </p>

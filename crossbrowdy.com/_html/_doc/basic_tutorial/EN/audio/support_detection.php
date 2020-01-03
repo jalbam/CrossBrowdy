@@ -6,18 +6,18 @@
 
 <p>
 	The audio APIs will be used by classes such as
-	the <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> (static class),
-	the <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a>,
-	the <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a>,
-	the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a>,
-	the <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a>,
-	the <a href="_html/_doc/api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>
+	the <a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> (static class),
+	the <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a>,
+	the <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a>,
+	the <a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a>,
+	the <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a>,
+	the <a href="api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>
 	(using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank">HTML5 Web Audio API</a>),
-	the <a href="_html/_doc/api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>
+	the <a href="api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>
 	(using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio" target="_blank">HTML5 Audio API</a>),
-	the <a href="_html/_doc/api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a>
+	the <a href="api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a>
 	(using <a href="https://github.com/apache/cordova-plugin-media" target="_blank">Apache Cordova Media Plugin</a>) and
-	the <a href="_html/_doc/api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a>
+	the <a href="api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a>
 	(using <a href="http://schillmania.com/projects/soundmanager2/" target="_blank">SoundManager 2</a>),
 	etc.
 	Among these classes, the ones which are not related with a specific audio API already provide automatic detection of the best audio API
@@ -130,5 +130,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_AudioDetector.html" target="_blank">CB_AudioDetector</a> static class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_AudioDetector.html" target="_blank">CB_AudioDetector</a> static class.
 </p>

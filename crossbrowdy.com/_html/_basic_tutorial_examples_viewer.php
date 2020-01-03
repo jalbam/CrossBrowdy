@@ -104,4 +104,4 @@
 	echo '</div></nav>';
 	
 	//If it is an example, shows the "try me" floating button:
-	if (CATEGORY_MAIN_NAME === "examples") { echo getTryExampleButton(); }
+	if (CATEGORY_MAIN_NAME === "examples" && file_exists($dirPath . "index.html")) { echo getTryExampleButton(); }

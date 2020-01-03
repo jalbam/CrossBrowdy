@@ -1,42 +1,42 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	CrossBrowdy can manage audio files and even audio data URI (depending on the audio API and client used) through the <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> class.
+	CrossBrowdy can manage audio files and even audio data URI (depending on the audio API and client used) through the <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> class.
 	This class will detect automatically the best API to reproduce the audio but it can also be forced to use a certain audio API.
 </p>
 
 <p>
 	Depending on the audio API used, the internal audio management will be done through
-	the <a href="_html/_doc/api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>
+	the <a href="api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>
 	(using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API" target="_blank">HTML5 Web Audio API</a>),
-	the <a href="_html/_doc/api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>
+	the <a href="api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>
 	(using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio" target="_blank">HTML5 Audio API</a>),
-	the <a href="_html/_doc/api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a>
+	the <a href="api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a>
 	(using <a href="https://github.com/apache/cordova-plugin-media" target="_blank">Apache Cordova Media Plugin</a>) or
-	the <a href="_html/_doc/api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a>
+	the <a href="api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a>
 	(using <a href="http://schillmania.com/projects/soundmanager2/" target="_blank">SoundManager 2</a>)
 	classes. You do not need to worry about these classes at all as the internal management will be done automatically.
 </p>
 
 <p>
-	The <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects use a higher abstraction level than the audio file API objects
-	(<a href="_html/_doc/api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>,
-	<a href="_html/_doc/api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>,
-	<a href="_html/_doc/api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a>
-	and <a href="_html/_doc/api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a>)
-	but lower than the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> ones.
+	The <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects use a higher abstraction level than the audio file API objects
+	(<a href="api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>,
+	<a href="api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>,
+	<a href="api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a>
+	and <a href="api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a>)
+	but lower than the <a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> ones.
 </p>
 
 <p>
 	Note that, most of the times, it is recommended to deal with audio files using always the
-	<a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
+	<a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
 	which can contain a
-	<a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
+	<a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
 	(mainly using the
-	<a href="_html/_doc/api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
-	the <a href="_html/_doc/api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
+	<a href="api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
+	the <a href="api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
 	functions).
-	The <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
+	The <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
 	and provides multiple sprites groups management as well as many other advanced methods.
 </p>
 
@@ -329,5 +329,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a>, the <a href="_html/_doc/api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>, the <a href="_html/_doc/api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>, the <a href="_html/_doc/api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a> and the <a href="_html/_doc/api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a> classes.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a>, the <a href="api/CB_AudioFile_API.WAAPI.html" target="_blank">CB_AudioFile_API.WAAPI</a>, the <a href="api/CB_AudioFile_API.AAPI.html" target="_blank">CB_AudioFile_API.AAPI</a>, the <a href="api/CB_AudioFile_API.ACMP.html" target="_blank">CB_AudioFile_API.ACMP</a> and the <a href="api/CB_AudioFile_API.SM2.html" target="_blank">CB_AudioFile_API.SM2</a> classes.
 </p>

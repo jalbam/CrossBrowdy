@@ -21,7 +21,7 @@
 </code></pre>
 
 <p>
-	Note that the <a href="_html/_doc/api/CB_Touch.html#.delay" target="_blank">CB_Touch.delay</a> function can be useful, for example, to prevent the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event" target="_blank">onTouchStart</a> event to fire twice or more when a layer (container) is closed and behind there is another one with also the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event" target="_blank">onTouchStart</a> event.
+	Note that the <a href="api/CB_Touch.html#.delay" target="_blank">CB_Touch.delay</a> function can be useful, for example, to prevent the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event" target="_blank">onTouchStart</a> event to fire twice or more when a layer (container) is closed and behind there is another one with also the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event" target="_blank">onTouchStart</a> event.
 </p>
 
 <p>
@@ -40,9 +40,9 @@
 Read the documentation of the <a href="https://hammerjs.github.io/" target="_blank">Hammer.js</a> and <a href="https://pressurejs.com/" target="_blank">Pressure.js</a> libraries to get more information about how to use them.
 
 <p>
-	It is important to have into account that pressure will be tried to be calculated automatically and added to the "force" property of the touch event object received by all the touch events managed by CrossBrowdy. So, for common usage, it is very likely that you do not need to use the <a href="_html/_doc/api/CB_Touch.html#.getPressureJSObject" target="_blank">CB_Touch.getPressureJSObject</a> function at all.
+	It is important to have into account that pressure will be tried to be calculated automatically and added to the "force" property of the touch event object received by all the touch events managed by CrossBrowdy. So, for common usage, it is very likely that you do not need to use the <a href="api/CB_Touch.html#.getPressureJSObject" target="_blank">CB_Touch.getPressureJSObject</a> function at all.
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Touch.html" target="_blank">CB_Touch</a> static class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Touch.html" target="_blank">CB_Touch</a> static class.
 </p>

@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	Although it is possible to make REST calls through the <a href="_html/_doc/api/CB_Net.XHR.html#.callREST" target="_blank">CB_Net.XHR.callREST</a> function, it is recommended to use the powerful <a href="_html/_doc/api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static class instead to make things easier.
+	Although it is possible to make REST calls through the <a href="api/CB_Net.XHR.html#.callREST" target="_blank">CB_Net.XHR.callREST</a> function, it is recommended to use the powerful <a href="api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static class instead to make things easier.
 	Here is an example of REST management:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
@@ -65,6 +65,13 @@
 	}
 	else { CB_console("Action was not marked as aborted!"); }
 </code></pre>
+<p>
+	The URL of the proxy used (if we do not avoid using it) can be defined in the <a href="api/CB_Configuration.CrossBase.html#.CB_Net_XHR_PROXY_URL" target="_blank">CB_Configuration.CrossBase.CB_Net_XHR_PROXY_URL</a> parameter. By default, it points to a proxy already provided by CrossBrowdy.
+	Note that, for safety reasons, the default proxy only allows to request the URLs defined in the '$allowedURLs' array in the 'CB_proxy.config.php' file. Just edit it to allow other URLs.
+</p>
+<p>
+	Read about the <a href="api/CB_Net.XHR.html#.callProxy" target="_blank">CB_Net.XHR.callProxy</a> function to get more information about its usage, the proxy used, how to create your own one if you want, etc.
+</p>
 
 <p>
 	REST actions are highly configurable. This is an example:
@@ -333,9 +340,9 @@
 </code></pre>
 
 <p>
-	It is important to note that the name of the action and the value set in the "additionalData" parameter when calling <a href="_html/_doc/api/CB_Net.REST.html#.actionProcess" target="_blank">CB_Net.REST.actionProcess</a> will be sent to all callbacks just in case we need it.
+	It is important to note that the name of the action and the value set in the "additionalData" parameter when calling <a href="api/CB_Net.REST.html#.actionProcess" target="_blank">CB_Net.REST.actionProcess</a> will be sent to all callbacks just in case we need it.
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Net.html" target="_blank">CB_Net</a> and the <a href="_html/_doc/api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static classes.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Net.html" target="_blank">CB_Net</a> and the <a href="api/CB_Net.REST.html" target="_blank">CB_Net.REST</a> static classes.
 </p>

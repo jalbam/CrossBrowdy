@@ -1,5 +1,12 @@
 RewriteEngine  on
 
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
+RewriteCond %{REMOTE_ADDR} !^192\.168\.[0-9]+\.[0-9]+$
+
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 RewriteRule ^basic_tutorial\/([^\/]+)\/([^\/]+)\/? basic_tutorial.php?subcategory=$1&topic=$2&%{QUERY_STRING} [L,END]
 RewriteRule ^basic_tutorial\/([^\/]+)\/? basic_tutorial.php?subcategory=$1&%{QUERY_STRING} [L,END]
 RewriteRule ^basic_tutorial\/? basic_tutorial.php?%{QUERY_STRING} [L,END]
@@ -12,6 +19,17 @@ RewriteRule ^examples\/([^\/]+)\/([^\/]+)\/try\/? try_example.php?subcategory=$1
 RewriteRule ^examples\/([^\/]+)\/([^\/]+)\/? examples.php?subcategory=$1&topic=$2&%{QUERY_STRING} [L,END]
 RewriteRule ^examples\/([^\/]+)\/? examples.php?subcategory=$1&%{QUERY_STRING} [L,END]
 RewriteRule ^examples\/? examples.php?%{QUERY_STRING} [L,END]
+
+RewriteRule ^download\/([^\/]+)\/([^\/]+)\/? files/$1/$2?%{QUERY_STRING} [L,END]
+RewriteRule ^download\/([^\/]+)\/? files/$1?%{QUERY_STRING} [L,END]
+RewriteRule ^download\/? download.php?%{QUERY_STRING} [L,END]
+
+RewriteRule ^index\/? index.php?%{QUERY_STRING} [L,END]
+RewriteRule ^about\/? about.php?%{QUERY_STRING} [L,END]
+RewriteRule ^news\/? news.php?%{QUERY_STRING} [L,END]
+RewriteRule ^api\/? api.php?%{QUERY_STRING} [L,END]
+RewriteRule ^guides\/? guides.php?%{QUERY_STRING} [L,END]
+RewriteRule ^community\/? community.php?%{QUERY_STRING} [L,END]
 
 RewriteCond %{REQUEST_URI} [^/]$
 RewriteCond %{REQUEST_FILENAME} !-f

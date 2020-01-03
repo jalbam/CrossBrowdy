@@ -16,7 +16,7 @@
 	$projectName = "CrossBrowdy";
 	$projectCopyright = Array
 	(
-		"EN" => $projectName . ' by <a href="http://joanalbamaldonado.com/" target="_blank" class="author_link">Joan Alba Maldonado</a>'
+		"EN" => $projectName . ' by <a href="https://joanalbamaldonado.com/" target="_blank" class="author_link">Joan Alba Maldonado</a>'
 	);
 	$projectTitle = Array
 	(
@@ -65,7 +65,7 @@
 	(
 		"EN" => "Create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.\nCompatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets, smart watches, embedded devices and many others."
 	);
-	$projectURLDefault = "http://crossbrowdy.com/";
+	$projectURLDefault = "https://crossbrowdy.com/";
 
 	$projectURL = "";
 	$projectURLBase = "";

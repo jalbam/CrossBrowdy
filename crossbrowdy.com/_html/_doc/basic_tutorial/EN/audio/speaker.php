@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	The <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class provides a higher-level layer to manage audio easily.
+	The <a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class provides a higher-level layer to manage audio easily.
 </p>
 
 <p>
@@ -10,14 +10,14 @@
 
 <p>
 	Note that, most of the times, it is recommended to deal with audio files using always the
-	<a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
+	<a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
 	which can contain a
-	<a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
+	<a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
 	(mainly using the
-	<a href="_html/_doc/api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
-	the <a href="_html/_doc/api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
+	<a href="api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
+	the <a href="api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
 	functions).
-	The <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
+	The <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
 	and provides multiple sprites groups management as well as many other advanced methods.
 	Here is an example:
 </p>
@@ -33,11 +33,11 @@
 	}
 </code></pre>
 <p>
-	You can read more about the <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class in the <a href="<?php echo basicTutorialLink("audio", "audio_sprites_pool"); ?>" target="_blank">Audio sprites pool</a> topic.
+	You can read more about the <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class in the <a href="<?php echo basicTutorialLink("audio", "audio_sprites_pool"); ?>" target="_blank">Audio sprites pool</a> topic.
 </p>
 
 <p>
-	Here are some examples of management with the <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> class:
+	Here are some examples of management with the <a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> class:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Returns the volume sanitized (it does not allow values greater than 100 or lower than 0):
@@ -58,7 +58,7 @@
 	CB_Speaker.unmute();
 </code></pre>
 <p>
-	The functions above will affect the volume of the internal <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object (if any).
+	The functions above will affect the volume of the internal <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object (if any).
 </p>
 
 <p>
@@ -107,5 +107,5 @@
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class.
 </p>

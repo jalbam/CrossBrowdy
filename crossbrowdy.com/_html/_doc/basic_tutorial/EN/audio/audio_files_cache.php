@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	Audio file cache objects (which are created using the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> class) allow you to use and reuse the same sound multiple times and simultaneously.
+	Audio file cache objects (which are created using the <a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> class) allow you to use and reuse the same sound multiple times and simultaneously.
 </p>
 
 <p>
@@ -14,23 +14,23 @@
 </p>
 
 <p>
-	Internally, each audio file cache object will normally manage multiple <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically in the case it detects it needs more internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally. During this process, the audio file cache object (<a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a>) will have a 'LOADING' status again and after that the status will be 'LOADED' if all went well or 'FAILED' otherwise. When the 'LOAD' status is reached, the 'onLoad' event function (if any) will be called again (to prevent this, set the 'onLoad' property of the object to something which is not a function once it gets executed).
+	Internally, each audio file cache object will normally manage multiple <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. An audio file cache object can grow automatically in the case it detects it needs more internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects (for example, if it detects we want to play more sound instances simultaneously than the ones it currently has). It can also reload <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects automatically in the case they failed internally. During this process, the audio file cache object (<a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a>) will have a 'LOADING' status again and after that the status will be 'LOADED' if all went well or 'FAILED' otherwise. When the 'LOAD' status is reached, the 'onLoad' event function (if any) will be called again (to prevent this, set the 'onLoad' property of the object to something which is not a function once it gets executed).
 </p>
 
 <p>
-	The <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> objects use a higher abstraction level than the <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> but lower than the <a href="_html/_doc/api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> ones.
+	The <a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> objects use a higher abstraction level than the <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> but lower than the <a href="api/CB_AudioFileSprites.html" target="_blank">CB_AudioFileSprites</a> ones.
 </p>
 
 <p>
 	Note that, most of the times, it is recommended to deal with audio files using always the
-	<a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
+	<a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class
 	which can contain a
-	<a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
+	<a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> object
 	(mainly using the
-	<a href="_html/_doc/api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
-	the <a href="_html/_doc/api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
+	<a href="api/CB_Speaker.html#.setAudioFileSpritesPool" target="_blank">CB_Speaker.setAudioFileSpritesPool</a> and
+	the <a href="api/CB_Speaker.html#.getAudioFileSpritesPool" target="_blank">CB_Speaker.getAudioFileSpritesPool</a>
 	functions).
-	The <a href="_html/_doc/api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
+	The <a href="api/CB_AudioFileSpritesPool.html" target="_blank">CB_AudioFileSpritesPool</a> class uses audio files cache
 	and provides multiple sprites groups management as well as many other advanced methods.
 </p>
 
@@ -180,7 +180,7 @@
 </code></pre>
 
 <p>
-	In the case that the audio file cache object has the "checkManually" option enabled, we need to check each of its internally-used <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. We can do that easily by calling the "checkPlayingAll" manually after the audio file cache object has been created. It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise):
+	In the case that the audio file cache object has the "checkManually" option enabled, we need to check each of its internally-used <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects. We can do that easily by calling the "checkPlayingAll" manually after the audio file cache object has been created. It is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise):
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//If the "checkManually" option was set to true, we need to check all the CB_AudioFile objects manually (by calling their 'checkPlaying' method):
@@ -310,11 +310,11 @@
 	else { CB_console("The CB_AudioFile (if any) in the position 1 is not free!"); }
 </code></pre>
 <p>
-	You can read more about the <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> class in the <a href="<?php echo basicTutorialLink("audio", "audio_files"); ?>" target="_blank">Audio files</a> topic.
+	You can read more about the <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> class in the <a href="<?php echo basicTutorialLink("audio", "audio_files"); ?>" target="_blank">Audio files</a> topic.
 </p>
 
 <p>
-	Although the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> objects can automatically create new internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects or remove them when needed, it is also possible to create new ones or remove current ones manually:
+	Although the <a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> objects can automatically create new internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects or remove them when needed, it is also possible to create new ones or remove current ones manually:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to create a new internal CB_AudioFile object:
@@ -344,7 +344,7 @@
 </code></pre>
 
 <p>
-	One of the most interesting features when managing audio file cache objects with CrossBrowdy is that you can change the audio API of all their internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects on the fly (even when they are currently playing!). This can be done easily:
+	One of the most interesting features when managing audio file cache objects with CrossBrowdy is that you can change the audio API of all their internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects on the fly (even when they are currently playing!). This can be done easily:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Tries to changes the audio API used by all the internal CB_AudioFile objects (this will work even on the fly, when they are currently playing):
@@ -384,7 +384,7 @@
 </code></pre>
 
 <p>
-	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file cache object uses:
+	Apart from some previous methods seen before, it is also possible to perform other bulk actions that will affect all the internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects that the audio file cache object uses:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Executes a function over all the internal CB_AudioFile objects, being "this" each CB_AudioFile itself (same as 'audioFileCache.executeAll' and 'audioFileCache.executeFunctionAll'):
@@ -437,7 +437,7 @@
 	audioFileCache.stopAll();
 </code></pre>
 <p>
-	It is interesting to know that the methods above can also accept an array of <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects as a parameter to only affect those objects instead of all the internal ones.
+	It is interesting to know that the methods above can also accept an array of <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects as a parameter to only affect those objects instead of all the internal ones.
 </p>
 
 
@@ -460,7 +460,7 @@
 </code></pre>
 
 <p>
-	In order to free memory and resources, it is possible to destroy the audio file cache object and its internal <a href="_html/_doc/api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects:
+	In order to free memory and resources, it is possible to destroy the audio file cache object and its internal <a href="api/CB_AudioFile.html" target="_blank">CB_AudioFile</a> objects:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Destroys all the internal CB_AudioFile objects (but not the audio file cache object itself), and frees memory:
@@ -485,5 +485,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_AudioFileCache.html" target="_blank">CB_AudioFileCache</a> class.
 </p>

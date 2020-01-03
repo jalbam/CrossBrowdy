@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	With the <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class you can manage music composition easily. This is done thanks to the
+	With the <a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class you can manage music composition easily. This is done thanks to the
 	<a href="https://github.com/meenie/band.js" target="_blank">Band.js library</a>.
 </p>
 
@@ -42,5 +42,5 @@
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Speaker.html" target="_blank">CB_Speaker</a> static class.
 </p>

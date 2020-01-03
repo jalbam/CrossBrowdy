@@ -32,9 +32,9 @@
 </code></pre>
 
 <p>
-	Note that many devices will fire keyboard events although they are not real keyboards. This happens with many platforms and devices as for example with Nintendo Wii, Sony PlayStation (Vita, 3, 4), some TV remotes, etc. as well as with many others. CrossBrowdy already has this into account and include many of them in the <a href="_html/_doc/api/CB_Keyboard.keys.html" target="_blank">CB_Keyboard.keys</a> object.
+	Note that many devices will fire keyboard events although they are not real keyboards. This happens with many platforms and devices as for example with Nintendo Wii, Sony PlayStation (Vita, 3, 4), some TV remotes, etc. as well as with many others. CrossBrowdy already has this into account and include many of them in the <a href="api/CB_Keyboard.keys.html" target="_blank">CB_Keyboard.keys</a> object.
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_Keyboard.html" target="_blank">CB_Keyboard</a> static class, the <a href="_html/_doc/api/CB_Keyboard.extended.html" target="_blank">CB_Keyboard.extended</a> and <a href="_html/_doc/api/CB_Keyboard.keys.html" target="_blank">CB_Keyboard.keys</a> objects.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_Keyboard.html" target="_blank">CB_Keyboard</a> static class, the <a href="api/CB_Keyboard.extended.html" target="_blank">CB_Keyboard.extended</a> and <a href="api/CB_Keyboard.keys.html" target="_blank">CB_Keyboard.keys</a> objects.
 </p>

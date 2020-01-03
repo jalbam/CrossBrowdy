@@ -33,7 +33,7 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 			CB_REM_MODULE_NEEDED_MODULES[CB_GEM.REM_PATH + "rendering_engine_module.js"] = { load: true, mandatory: true, absolutePath: true };
 			CB_Modules.modules["GAME_ENGINE_MODULE"].neededModules = null;
 			CB_Modules.addNeededModule("GAME_ENGINE_MODULE", "RENDERING_ENGINE_MODULE", CB_REM_MODULE_NEEDED_MODULES);
-			
+
 			if (CB_GEM.DEBUG_MESSAGES) { CB_console("GAME_ENGINE_MODULE called"); }
 			CB_Modules.setStatus("GAME_ENGINE_MODULE", CB_Modules.STATUSES.LOADED);
 		},
@@ -84,9 +84,12 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 
 	//Needed modules:
 	"neededModules" :
-	{
-		"RENDERING_ENGINE_MODULE": { "rendering_engine_module.js" : { load: true, mandatory: true, absolutePath: true } }
-	},
+		[
+			{
+				"name" : "RENDERING_ENGINE_MODULE",
+				"neededFiles" : { "rendering_engine_module.js" : { load: true, mandatory: true, absolutePath: true } }
+			}
+		],
 
 	//Credits:
 	"credits" : "[CB] - GAME_ENGINE_MODULE by Joan Alba Maldonado" //Credits will be shown in the console when loading.

@@ -1,20 +1,20 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	When managing graphic sprites in CrossBrowdy, it is important to note that each graphic sprites object (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) contains only one sprites group.
-	Sprites groups (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) are useful objects to manage multiple sprites (and their sub-sprites) for the same graphic entity, allowing to point only one sprite at a time. The sprite pointed will represent the current state of this sprites group (which is the current state of the graphic entity).
-	To manage multiple graphic entities, you should use one sprites group (a <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) for each of them.
-	This can be done thanks to the <a href="_html/_doc/api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> class
+	When managing graphic sprites in CrossBrowdy, it is important to note that each graphic sprites object (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) contains only one sprites group.
+	Sprites groups (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects) are useful objects to manage multiple sprites (and their sub-sprites) for the same graphic entity, allowing to point only one sprite at a time. The sprite pointed will represent the current state of this sprites group (which is the current state of the graphic entity).
+	To manage multiple graphic entities, you should use one sprites group (a <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) for each of them.
+	This can be done thanks to the <a href="api/CB_GraphicSpritesScene.html" target="_blank">CB_GraphicSpritesScene</a> class
 	(read more in the <a href="<?php echo basicTutorialLink("image", "graphic_sprites_scene"); ?>" target="_blank"><?php echo $basicTutorial["image"]["topics"]["graphic_sprites_scene"][$language]; ?></a> topic of the basic tutorial).
 </p>
 
 <p>
-	Each sprites group (there is only one inside each <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) can contain multiple sprites and each sprite can contain multiple sub-sprites (which will compose the sprite and will be inside of it).
+	Each sprites group (there is only one inside each <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) can contain multiple sprites and each sprite can contain multiple sub-sprites (which will compose the sprite and will be inside of it).
 	Their source ("src" property) can be a text, an image, a bitmap, a 3D object, etc. So they can be used for any kind of source you may think of, including (but not limited to) one sprites sheet or more, one atlas or more, etc. or even a mix of all of them.
 </p>
 
 <p>
-	It is important to understand that the <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects just provide a low-level way to manage different sprites (and their sub-sprites) for the same graphic entity and accept any kind of source and additional data (which can even include code), without providing advanced high-level features as graphic rendering.
+	It is important to understand that the <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> objects just provide a low-level way to manage different sprites (and their sub-sprites) for the same graphic entity and accept any kind of source and additional data (which can even include code), without providing advanced high-level features as graphic rendering.
 	This makes these objects powerful enough to be adapted to virtually any rendering engine you may want (2D or 3D), having to manage most of the logic yourself.
 </p>
 
@@ -254,7 +254,7 @@
 </p>
 
 <p>
-	After creating the graphic sprites object (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object), we can start managing its sprites:
+	After creating the graphic sprites object (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object), we can start managing its sprites:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	CB_console(myGraphicSprites.isSprites); //Always returns true (since it is a 'CB_GraphicSprites' object).
@@ -671,7 +671,7 @@
 </code></pre>
 
 <p>
-	Each graphic sprites object (<a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) has an internal pointer that points to the current sprite. We can manage the current sprite, go to previous or next one or even modify this pointer to jump to the desired sprite:
+	Each graphic sprites object (<a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> object) has an internal pointer that points to the current sprite. We can manage the current sprite, go to previous or next one or even modify this pointer to jump to the desired sprite:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets the current position of the pointer (it belongs to an index of the 'myGraphicSprites.spritesGroup.sprites' array where a 'CB_GraphicSprites.SPRITE_OBJECT' object is placed, containing a sprite):
@@ -811,5 +811,5 @@
 </code></pre>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to read more about the <a href="_html/_doc/api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> class.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to read more about the <a href="api/CB_GraphicSprites.html" target="_blank">CB_GraphicSprites</a> class.
 </p>

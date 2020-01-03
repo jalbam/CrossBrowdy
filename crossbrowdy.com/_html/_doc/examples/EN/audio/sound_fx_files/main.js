@@ -18,7 +18,7 @@ function main()
 		//Defines the sound effects:
 		var library =
 		{
-			"select":
+			"sound_fx_1":
 			{
 				"Volume":
 				{
@@ -27,7 +27,7 @@ function main()
 					"Punch": 0.55
 				}
 			},
-			"jump":
+			"sound_fx_2":
 			{
 				"Frequency":
 				{

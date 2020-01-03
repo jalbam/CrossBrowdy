@@ -86,7 +86,7 @@
 			//return '<a href="' . $dirPath . 'index.html" target="_blank">Try this example</a>';
 			return '<a href="' . $category . '/' . $subcategory . '/' . $topic . '/try" target="_blank">Try this example</a>';
 		}
-		return "File not found";
+		return '<p class="general_text" style="text-align:center;">File not found</p>';
 	}
 	
 	
@@ -98,6 +98,6 @@
 			//return '<a href="' . $dirPath . 'index.html" target="_blank" class="try_example_floating">Try this example</a>';
 			return '<a href="' . $category . '/' . $subcategory . '/' . $topic . '/try" target="_blank" class="try_example_floating">Try this example</a>';
 		}
-		return "File not found";
+		return '<p class="general_text" style="text-align:center;">File not found</p>';
 	}
 	

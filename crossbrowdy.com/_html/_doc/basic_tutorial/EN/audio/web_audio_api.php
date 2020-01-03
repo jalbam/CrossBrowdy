@@ -12,5 +12,5 @@
 </p>
 
 <p>
-	Check the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> to get more information.
+	Check the <a href="api/index.html" target="_blank">API documentation</a> to get more information.
 </p>

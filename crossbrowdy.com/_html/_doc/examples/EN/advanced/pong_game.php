@@ -9,7 +9,7 @@
 </p>
 
 <p>
-	The purpose of this example is to show different ways to use <a href="http://www.crossbrowdy.com/" target="_blank">CrossBrowdy</a> and some of its multiple features.
+	The purpose of this example is to show different ways to use <a href="https://crossbrowdy.com/" target="_blank">CrossBrowdy</a> and some of its multiple features.
 </p>
 
 <?php
@@ -21,5 +21,5 @@
 ?>
 
 <p>
-	You can check the <a href="guides<?php echo $PHPExtension; ?>" target="_blank">Guides & Tutorials</a> category as well as the <a href="_html/_doc/api/index.html" target="_blank">API documentation</a> in the case you need more information.
+	You can check the <a href="guides<?php echo $PHPExtension; ?>" target="_blank">Guides & Tutorials</a> category as well as the <a href="api/index.html" target="_blank">API documentation</a> in the case you need more information.
 </p>
