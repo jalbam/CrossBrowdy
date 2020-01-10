@@ -1,6 +1,6 @@
 /* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
 
-var CB_GEM_DEBUG_MESSAGES = true; //Shows debug messages.
+var CB_GEM_DEBUG_MESSAGES = true; //Defines whether to shows debug messages or not.
 
 //Adds the game engine module to CrossBrowdy:
 CB_Modules.addNeededModule(CB_NAME, "GAME_ENGINE_MODULE", { "game_engine_module.js" : { load: true, mandatory: true, absolutePath: true } });

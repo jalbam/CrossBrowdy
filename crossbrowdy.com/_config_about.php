@@ -110,10 +110,10 @@
 							These credits and the &quot;<i>CrossBrowdy</i>&quot; name must be easily accessible somewhere in the software by any kind of user, not only in the code but also through the user interface.
 						</p>
 						<p>
-							In the case that the name of the authors are not shown through the user interface, they must remain in the source code and in the user interface the &quot;<i>CrossBrowdy</i>&quot; must still appear and always showing the address of the official web site (<i>http://CrossBrowdy.com/</i>).
+							In the case that the name of the authors are not shown through the user interface, they must remain in the source code and in the user interface the &quot;<i>CrossBrowdy</i>&quot; must still appear and always showing the address of the official web site (<i>https://CrossBrowdy.com/</i>).
 						</p>
 						<p>
-							A good example could be a game made with CrossBrowdy where it shows &quot;<i>Created by CrossBrowdy (http://CrossBrowdy.com/)</i>&quot; somewhere in the screen after pressing on a &quot;<i>Credits</i>&quot; option.
+							A good example could be a game made with CrossBrowdy where it shows &quot;<i>Created with CrossBrowdy (https://CrossBrowdy.com/)</i>&quot; somewhere in the screen after pressing on a &quot;<i>Credits</i>&quot; option.
 						</p>
 						<p>
 							CrossBrowdy also provides a splash screen that can be disabled by the developers. When it is enabled, this splash screen is shown when CrossBrowdy is loading. Keeping it enable can be a good idea because it will be enough to show the credits and respect these rules.

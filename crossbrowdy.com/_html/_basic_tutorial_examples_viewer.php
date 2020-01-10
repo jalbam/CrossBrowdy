@@ -1,7 +1,36 @@
 <?php
 	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
 
-	echo '<h1 class="category_title">';
+	$subcategoryFound = FALSE;
+	$topicFound = FALSE;
+	if (isset($categoryMainArray[$subcategory]) && isset($categoryMainArray[$subcategory]["subcategory"]) && isset($categoryMainArray[$subcategory]["subcategory"][$language]))
+	{
+		$subcategoryFound = TRUE;
+		
+		if (isset($categoryMainArray[$subcategory]["topics"]) && isset($categoryMainArray[$subcategory]["topics"][$topic]) && isset($categoryMainArray[$subcategory]["topics"][$topic][$language]))
+		{
+			$topicFound = TRUE;
+		}
+		else
+		{
+			foreach ($categoryMainArray[$subcategory]["topics"] as $firstTopic => $firstTopicArray)
+			{
+				$topic = $firstTopic;
+				break;
+			}
+		}
+	}
+	else
+	{
+		$subcategory = SUBCATEGORY_DEFAULT;
+		$topic = TOPIC_DEFAULT;
+	}
+
+	$optionBack = "guides";
+	$goBackCategoryLink = $optionBack . $PHPExtension . "#" . $category;
+	$goBackSubcategoryLink = $goBackCategoryLink . "_" . $subcategory;
+
+	echo '<h1 class="category_title"><a href="' . $goBackCategoryLink . '">';
 		if (isset($projectTitle[$language][$category . "_" . $subcategory . "_" . $topic]))
 		{
 			echo $projectTitle[$language][$category . "_" . $subcategory . "_" . $topic];
@@ -14,44 +43,16 @@
 		{
 			echo $projectTitle[$language][$category];
 		}
-	echo '</h1>';
-	
-	$subcategoryFound = FALSE;
-	$topicFound = FALSE;
-	if (isset($categoryMainArray[$subcategory]) && isset($categoryMainArray[$subcategory]["subcategory"]) && isset($categoryMainArray[$subcategory]["subcategory"][$language]))
-	{
-		echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["subcategory"][$language] . '</h2>';
-		$subcategoryFound = TRUE;
-		
-		if (isset($categoryMainArray[$subcategory]["topics"]) && isset($categoryMainArray[$subcategory]["topics"][$topic]) && isset($categoryMainArray[$subcategory]["topics"][$topic][$language]))
-		{
-			$topicFound = TRUE;
-			echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["topics"][$topic][$language] . '</h2>';
-		}
-		else
-		{
-			foreach ($categoryMainArray[$subcategory]["topics"] as $firstTopic => $firstTopicArray)
-			{
-				echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["topics"][$firstTopic][$language] . '</h2>';
-				break;
-			}
-			$topic = $firstTopic;
-		}
-	}
-	else
-	{
-		$subcategory = SUBCATEGORY_DEFAULT;
-		$topic = TOPIC_DEFAULT;
-		echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["subcategory"][$language] . '</h2>';
-		echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["topics"][$topic][$language] . '</h2>';
-	}
+	echo '</a></h1>';
 
+	echo '<h2 class="category_title"><a href="' . $goBackSubcategoryLink . '">' . $categoryMainArray[$subcategory]["subcategory"][$language] . '</a></h2>';
+	echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["topics"][$topic][$language] . '</h2>';
 
 	//Displays the content:
 	echo '<div class="' . CATEGORY_MAIN_NAME . '_text">';
 		if (!$subcategoryFound)
 		{
-			echo '<div style="text-align:center;"><p><b>Category chosen not found. Showing first one instead.</b></p></div>';
+			echo '<div style="text-align:center;"><p><b>Category chosen not found. Showing first one and its first topic instead.</b></p></div>';
 		}
 		else if (!$topicFound)
 		{
@@ -65,10 +66,7 @@
 		else { echo '<div style="text-align:center;"><p><b>File not found!</b></p></div>'; }
 		
 		//Displays the option to go back:
-		$optionBack = "guides";
-		$menuOptionLink = $optionBack . $PHPExtension . "#" . $category . "_" . $subcategory;
-		if (isset($menuOptionsLink[$language]) && isset($menuOptionsLink[$language][$optionBack])) { $menuOptionLink = $menuOptionsLink[$language][$optionBack]; }
-		echo '<p style="text-align:center; padding-top:20px;"><a href="' . $menuOptionLink . '">Go back to ' . $menuOptions[$language][$optionBack] . '</a></p>';
+		echo '<p style="text-align:center; padding-top:20px;"><a href="' . $goBackSubcategoryLink . '">Go back to ' . $menuOptions[$language][$optionBack] . '</a></p>';
 	echo '</div>';
 
 	//Displays the navigation bar:
@@ -96,7 +94,7 @@
 			if (trim($previousTopicLink) !== "") { echo '<a href="' . $previousTopicLink . '">&#171; Prev</a>'; }
 		echo '</span>';
 		echo '<span class="item">';
-			echo '<a href="' . $menuOptionLink . '">Return</a>';
+			echo '<a href="' . $goBackSubcategoryLink . '">Return</a>';
 		echo '</span>';
 		echo '<span class="item">';
 			if (trim($nextTopicLink) !== "") { echo '<a href="' . $nextTopicLink . '">Next &#187;</a>'; }

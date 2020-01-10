@@ -35,7 +35,7 @@ if (CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD) //Forces an emulation mode wh
 }
 
 
-//Main initialization function (internal usage only):
+//Main initialization function (internal usage only, it will be called automatically when the module loads and gets ready):
 CB_GEM._init = function()
 {
 	//If we want to, tries to keeps the screen awake and prevents it from turning off (must be executed through a user-driven event as onClick, etc.):

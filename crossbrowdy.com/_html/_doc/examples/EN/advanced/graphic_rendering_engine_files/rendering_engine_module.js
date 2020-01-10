@@ -36,13 +36,13 @@ CB_Modules.modules["RENDERING_ENGINE_MODULE"] =
 			if (CB_REM.DEBUG_MESSAGES) { CB_console("RENDERING_ENGINE_MODULE loaded"); }
 			
 			//Sets the module ready when CrossBase module is ready:
-			var checkCrossBaseLoaded =
+			var checkCrossBaseReady =
 				function()
 				{
 					//If CrossBase module is not ready yet:
 					if (!CB_Modules.modules["CrossBase"] || CB_Modules.modules["CrossBase"].status !== CB_Modules.STATUSES.READY)
 					{
-						return setTimeout(checkCrossBaseLoaded, 1); //Calls this checking function again.
+						return setTimeout(checkCrossBaseReady, 1); //Calls this checking function again.
 					}
 					//...otherwise, if CrossBase module is ready, proceeds:
 					else
@@ -51,7 +51,7 @@ CB_Modules.modules["RENDERING_ENGINE_MODULE"] =
 						CB_Modules.setStatus("RENDERING_ENGINE_MODULE", CB_Modules.STATUSES.READY); //Sets the RENDERING_ENGINE_MODULE as ready.
 					}
 				};
-			checkCrossBaseLoaded();
+			checkCrossBaseReady();
 		},
 
 	//Callback function to call when the module is ready:

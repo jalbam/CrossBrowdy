@@ -7,6 +7,8 @@
 			$baseName = dirname(trim($_SERVER["SCRIPT_NAME"]));
 			$baseName = rtrim($baseName, "/") . "/";
 			if (!is_string($baseName) || $baseName === "") { $baseName = $projectURL; }
+			if (strpos($baseName, ".php") !== false) { $baseName = substr($baseName, 0, strpos($baseName, ".php")) . "/"; }
+			
 		?>
 		<base href="<?php echo $baseName; ?>" id="document_base">
 		
@@ -137,23 +139,26 @@
 		
 		<meta name="msapplication-tap-highlight" content="no" />
 		
-		<meta property="og:url" content="<?php echo $projectURLCurrent; ?>" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="<?php echo $canonicalURL; ?>" />
 		<meta property="og:title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta property="og:site_name" content="<?php echo $projectName; ?>" />
-		<meta property="og:image" content="favicon128.png" />
+		<meta property="og:image" content="<?php echo $projectURLDefault; ?>favicon300x300.png" />
 		<meta property="og:image:type" content="image/png"/>
+		<meta property="og:image:width" content="300"/>
+		<meta property="og:image:height" content="300"/>
 		<meta property="article:author" content="Juan Alba Maldonado" />
 		<meta property="article:publisher" content="Juan Alba Maldonado" />
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale" content="<?php echo $languageTerritory; ?>" />
 		<meta property="og:description" content="<?php echo $pageDescription; ?>"/>
 
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:site" content="@jalbam1984" />
+		<meta name="twitter:site" content="@CrossBrowdy" />
 		<meta name="twitter:creator" content="@jalbam1984" />
 		<meta name="twitter:title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta name="twitter:description" content="<?php echo $pageDescription; ?>" />
-		<meta name="twitter:image" content="<?php echo $projectURL; ?>favicon128.png" />
-		<meta name="twitter:url" content="<?php echo $projectURLCurrent; ?>" />
+		<meta name="twitter:image" content="<?php echo $projectURLDefault; ?>favicon300x300.png" />
+		<meta name="twitter:url" content="<?php echo $canonicalURL; ?>" />
 
 		<meta itemprop="name" content="<?php echo $projectName; ?>" />
 		<meta itemprop="description" content="<?php echo $pageDescription; ?>" />

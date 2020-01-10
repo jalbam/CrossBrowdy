@@ -3,7 +3,7 @@
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
-var CB_GEM_DEBUG_MESSAGES = false; //Shows debug messages.
+var CB_GEM_DEBUG_MESSAGES = false; //Defines whether to shows debug messages or not.
 
 //Adds the game engine module to CrossBrowdy:
 var CB_GEM_MODULE_NEEDED_MODULES = {};

@@ -11,6 +11,7 @@
 	define("LANGUAGES", Array("EN"));
 	define("LANGUAGE_DEFAULT", "EN");
 	$language = LANGUAGE_DEFAULT;
+	$languageTerritory = "en_US";
 	
 	//Project information:
 	$projectName = "CrossBrowdy";
@@ -78,12 +79,12 @@
 	$projectURL = str_replace("index.php", "", $projectURL);
 	$projectURL = trim($projectURL, "/");
 	if (trim($projectURL) === "" || trim($HTTP_SERVER_VARS['PHP_SELF']) === "") { $projectURL = trim($projectURLDefault, "/"); }
-	$projectURL .= "/";
+	if (strpos($projectURL, ".php") === false) { $projectURL .= "/"; }
 	$projectURLCurrent = $projectURL;
-	if (isset($_SERVER) && isset($_SERVER["REQUEST_URI"]))
+	if (isset($HTTP_SERVER_VARS["REQUEST_URI"]))
 	{
-		$projectURLCurrent = $projectURLBase . ltrim($_SERVER["REQUEST_URI"]);
-		//$projectURLCurrent = rtrim($projectURL, "/") . "/" . ltrim($_SERVER["REQUEST_URI"], "/");
+		$projectURLCurrent = $projectURLBase . ltrim($HTTP_SERVER_VARS["REQUEST_URI"]);
+		//$projectURLCurrent = rtrim($projectURL, "/") . "/" . ltrim($HTTP_SERVER_VARS["REQUEST_URI"], "/");
 	}
 
 	$pagesDescription = Array
@@ -161,8 +162,8 @@
 			"Networking" => Array("Fetch", "XHR (Ajax)", "XDR", "proxy", "REST", "WebSockets"),
 			"Client" => Array("client detection",  "language detection", "native canvas detection", "CSS3 support detection", "PHP detection", "Node.js detection", "NW.js detection", "Electron detection", "Silverlight detection", "Flash detection", "redirections", "exiting the app"),
 			"Audio" => Array("music", "FX", "filters", "synth", "music composition", "processing", "files", "sprites", "cache", "pool", "speakers", "supported formats detection", "supported APIs detection"),
-			"Image" => Array("canvas", "viewport", "screens"),
-			"Others" => Array("modules", "JSON", "DOM elements", "arrays", "events", "data storage", "data compression", "base conversion", "template rendering", "lazy load", "collisions"),
+			"Image" => Array("canvas", "viewport", "screens", "sprites", "scenes"),
+			"Others" => Array("modules", "JSON", "DOM elements", "arrays", "events", "data storage", "data compression", "base conversion", "template rendering", "lazy load", "collisions", "symmetric intervals"),
 			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "video", "MIDI", "VR", "leap motion", "GraphQL", "databases", "Touch Bar", "many more")
 		)
 	);

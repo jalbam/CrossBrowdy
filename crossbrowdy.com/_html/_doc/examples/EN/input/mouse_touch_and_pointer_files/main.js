@@ -22,7 +22,6 @@ function main()
 	CB_Mouse.onLockChange(function(e) { showMouseEventsInformation("Lock status changed!"); });
 	CB_Mouse.onLockError(function(e) { showMouseEventsInformation("Lock error!"); });
 	
-
 	//Starts showing touch information:
 	var maxTouchPoints = CB_Touch.getMaxTouchPoints(); //Maximum of touch points supported by the device (or null if it was not possible to calculate).
 	CB_Elements.insertContentById("touch_max_touch_points", maxTouchPoints || "Unknown");
@@ -36,8 +35,7 @@ function main()
 	CB_Touch.onLeave(function(e) { showTouchEventsInformation("The 'onLeave' event was fired!"); });
 	CB_Touch.onMove(function(e) { showTouchEventsInformation("The 'onMove' event was fired!"); });
 	CB_Touch.onStart(function(e) { showTouchEventsInformation("The 'onStart' event was fired!"); });
-	
-	
+
 	//Setting pointer events:
 	CB_Pointer.onDown(function(e) { showPointerEventsInformation("The 'onDown' event has been fired!", e); });
 	CB_Pointer.onUp(function(e) { showPointerEventsInformation("The 'onUp' event has been fired!", e); });
@@ -50,7 +48,6 @@ function main()
 	CB_Pointer.onGotPointCapture(function(e) { showPointerEventsInformation("The 'onGotPointCapture' event has been fired!", e); });
 	CB_Pointer.onLostPointCapture(function(e) { showPointerEventsInformation("The 'onLostPointCapture' event has been fired!", e); });
 
-	
 	//Displays the default screen (mouse information) at the beginning:
 	displayScreen(maxTouchPoints ? "touch" : "mouse");
 }

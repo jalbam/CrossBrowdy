@@ -3,7 +3,7 @@
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
-var CB_GEM_DEBUG_MESSAGES = false; //Shows debug messages.
+var CB_GEM_DEBUG_MESSAGES = false; //Defines whether to shows debug messages or not.
 
 
 //Adds the game engine module to CrossBrowdy:
@@ -1349,7 +1349,7 @@ function showMusicChecker()
 	if (showMusicCheckerCalled) { return; }
 	showMusicCheckerCalled = true;
 	CB_Elements.insertContentById("music_progress", ""); //Empties the progress shown.
-	CB_Elements.insertContentById("button_load_check_music", "Check music");
+	CB_Elements.insertContentById("button_load_check_music", "Step 2:<br />Check music");
 	CB_Events.removeByName(CB_Elements.id("button_load_check_music"), "click"); //Removes the previous event handler from the button.
 	CB_Events.on(CB_Elements.id("button_load_check_music"), "click", checkMusic); //Attaches the event to the button to check the music.	
 	CB_Elements.showById("button_load_check_music"); //Shows the music checker button.

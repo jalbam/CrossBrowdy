@@ -1,8 +1,8 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
-<section>
-	<header><h1 class="category_title">About <?php echo $projectName; ?></h1></header>
-	<div class="category_text">
+<section itemscope itemtype="https://schema.org/AboutPage">
+	<header><h1 class="category_title" itemprop="name">About <?php echo $projectName; ?></h1></header>
+	<div class="category_text" itemprop="text">
 		<p>
 			CrossBrowdy is a free and open-source JavaScript framework that allows to create multimedia apps, emulators, game engines and games that will be compatible with any device.
 		</p>
@@ -59,19 +59,22 @@
 		<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CrossBrowdy</span> by
 		<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Juan Alba Maldonado</a> is licensed under a
 		<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.<br />
-		Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://crossbrowdy.com/" rel="dct:source" target="_blank">http://crossbrowdy.com/</a>.<br />
+		Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://crossbrowdy.com/" rel="dct:source" target="_blank">https://crossbrowdy.com/</a>.<br />
 		Permissions beyond the scope of this license may be available at
-		<a xmlns:cc="http://creativecommons.org/ns#" href="http://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" rel="cc:morePermissions" target="_blank">http://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
+		<a xmlns:cc="http://creativecommons.org/ns#" href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" rel="cc:morePermissions" target="_blank">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
 	</p>
 </div>
 
-<script type="application/ld+json">
-	{
-		"@context": "https://schema.org",
-		"@type": "FAQPage",
-		"mainEntity":
-		[
-			<?php echo $FAQSchemaCode; ?>
-		]
-	}
-</script>
+<?php
+	/*
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				"mainEntity":
+				[
+					<?php echo $FAQSchemaCode; ?>
+				]
+			}
+		</script>
+	*/

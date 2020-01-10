@@ -21,7 +21,9 @@
 			CB_console("File could not be loaded on time!"); //Note that "callbackOk" could still be called if we wanted to.
 		},
 		//Timeout limit in milliseconds. Optional (it will use the value of the "CB_includeJSFile_TIMEOUT_MS_DEFAULT" constant as default). Belongs to "timeoutMs":
-		95000
+		95000,
+		//Defines whether to load the file asynchronously or not. Optional (it will be true as default). Belongs to "asynchronously":
+		true
 	);
 </code></pre>
 

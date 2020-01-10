@@ -8,7 +8,7 @@ CB_REM.prototype._FPS_timeout = null; //Timeout for each call to the 'CB_REM#_FP
 CB_REM.prototype._onUpdatedFPS = null; //Callback to run when the FPS have been counted (each second).
 
 
-//Initialization function for the main static properties (it will be called automatically when the module loads):
+//Initialization function for the main static properties (internal usage only, it will be called automatically when the module loads and gets ready):
 CB_REM._init = function()
 {
 	CB_REM.BUFFER_RECOMMENDED = CB_Client.supportsCanvas() || CB_Canvas.bestEmulation() === "DHTML"; //Using buffer is only recommended when native canvas is supported or for some emulation methods (as some emulation methods flicker more or do not work at all with buffer).
@@ -16,7 +16,7 @@ CB_REM._init = function()
 }
 
 
-//Initialization function for the main instance properties (it will be called automatically by the constructor):
+//Initialization function for the main instance properties (internal usage only, it will be called automatically by the constructor):
 CB_REM.prototype._init = function()
 {
 	return this;

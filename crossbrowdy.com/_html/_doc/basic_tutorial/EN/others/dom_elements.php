@@ -5,8 +5,8 @@
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Getting an element by its ID:
-	var element = CB_Elements.id("element_id"); //Gets the element, using the cache if 'CB_Configuration.CrossBase.CB_Elements_id_USE_CACHE' is true (which is the default value). Equivalent to 'CB_Elements.get'
-	var element_2 = CB_Elements.id("element_id", true); //Gets the element using the cache. Equivalent to 'CB_Elements.get'
+	var element = CB_Elements.id("element_id"); //Gets the element, using the cache if 'CB_Configuration.CrossBase.CB_Elements_id_USE_CACHE' is true (which is the default value). Equivalent to 'CB_Elements.byId', 'CB_Elements.get' and 'CB_Elements.getById'.
+	var element_2 = CB_Elements.id("element_id", true); //Gets the element using the cache. Equivalent to 'CB_Elements.byId', 'CB_Elements.get' and 'CB_Elements.getById'.
 	var element_3 = CB_Elements.id("element_id", false); //Gets the element without using the cache (and updates the cache). Equivalent to 'CB_Elements.idCacheUpdate'.
 	var element_4 = CB_Elements.idCacheUpdate("element_id"); //Gets the element without using the cache (and updates it). Equivalent to 'CB_Elements.id' with the second parameter 'false'.
 

@@ -45,13 +45,13 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 			if (CB_GEM.DEBUG_MESSAGES) { CB_console("GAME_ENGINE_MODULE loaded"); }
 			
 			//Sets the module ready when CrossBase module is ready:
-			var checkCrossBaseLoaded =
+			var checkRenderingEngineReady =
 				function()
 				{
 					//If CrossBase module is not ready yet:
-					if (!CB_Modules.modules["CrossBase"] || CB_Modules.modules["CrossBase"].status !== CB_Modules.STATUSES.READY)
+					if (!CB_Modules.modules["RENDERING_ENGINE_MODULE"] || CB_Modules.modules["RENDERING_ENGINE_MODULE"].status !== CB_Modules.STATUSES.READY)
 					{
-						return setTimeout(checkCrossBaseLoaded, 1); //Calls this checking function again.
+						return setTimeout(checkRenderingEngineReady, 1); //Calls this checking function again.
 					}
 					//...otherwise, if CrossBase module is ready, proceeds:
 					else
@@ -65,7 +65,7 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 						CB_Modules.setStatus("GAME_ENGINE_MODULE", CB_Modules.STATUSES.READY); //Sets the GAME_ENGINE_MODULE as ready.
 					}
 				};
-			checkCrossBaseLoaded();
+			checkRenderingEngineReady();
 		},
 
 	//Callback function to call when the module is ready:

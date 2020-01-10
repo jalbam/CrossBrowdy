@@ -1,6 +1,6 @@
 /* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
 
-var CB_REM_DEBUG_MESSAGES = true; //Shows debug messages.
+var CB_REM_DEBUG_MESSAGES = true; //Defines whether to shows debug messages or not.
 
 //Adds the rendering engine module to CrossBrowdy:
 CB_Modules.addNeededModule(CB_NAME, "RENDERING_ENGINE_MODULE", { "rendering_engine_module.js" : { load: true, mandatory: true, absolutePath: true } });

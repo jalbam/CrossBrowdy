@@ -26,8 +26,9 @@
 
 <header><h1 class="category_title">Guides &amp; Tutorials</h1></header>
 
+
+<a name="basic_tutorial"></a>
 <section>
-	<a name="basic_tutorial"></a>
 	<div class="category_text">
 		<h2 class="category_subtitle">Basic tutorial</h2>
 		<ol>
@@ -38,8 +39,9 @@
 	</div>
 </section>
 
+
+<a name="examples"></a>
 <section>
-	<a name="examples"></a>
 	<div class="category_text">
 		<h1 class="category_subtitle">Examples</h1>
 		<ol>
