@@ -1,6 +1,6 @@
 CrossBrowdy 
 ============ 
-by Joan Alba Maldonado (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE)
+by [Joan Alba Maldonado](https://joanalbamaldonado.com/ "Joan Alba Maldonado's home page") (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE)
 
 Your cross-browser brodie!
 
@@ -100,7 +100,7 @@ Visit the [Community & Get Involved section](https://crossbrowdy.com/community "
 
 
 # License
-The code written by Joan Alba Maldonado (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE) which genuinely belongs to the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") project is
+The code written by [Joan Alba Maldonado](https://joanalbamaldonado.com/ "Joan Alba Maldonado's home page") (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE) which genuinely belongs to the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") project is
 licensed under the ["Creative Commons Attribution 4.0 International"](https://creativecommons.org/licenses/by/4.0/) license.
 
 Apart from that, it is important to have into account that [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") uses some external libraries and some code which may have their own license each. It is important to respect each license properly as the responsibility will always lie with you.
