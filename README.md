@@ -8,6 +8,8 @@ Your cross-browser brodie!
 
 It is compatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets, smart watches, embedded devices and many others.
 
+It is open source and free.
+
 Main web site: [https://crossbrowdy.com/](https://crossbrowdy.com/ "CrossBrowdy web site")
 
 
