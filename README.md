@@ -40,7 +40,7 @@ yarn add crossbrowdy
 bower install jalbam/crossbrowdy --save 
 ```
 
-Note: Bower will downlaod whole GitHub repository. 
+**Note**: Bower will downlaod whole GitHub repository. 
 
 
 # Getting started
