@@ -46,7 +46,7 @@
 		"type": "git",
 		"url": "git://github.com/jalbam/crossbrowdy.git"
 	},
-	"files": [ "CrossBrowdy\*.*" ],
+	"files": [ "CrossBrowdy/*.*" ],
 	"main": [ "CrossBrowdy.js" ],
 	"ignore":
 	[
