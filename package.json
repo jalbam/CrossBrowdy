@@ -43,11 +43,15 @@
 		"type": "git",
 		"url": "git://github.com/jalbam/crossbrowdy.git"
 	},
-	"files": [ "CrossBrowdy/**" ],
-	"main": [ "CrossBrowdy.js" ],
+	"files": [ "CrossBrowdy/", "documentation/" ],
+	"main": [ "CrossBrowdy/CrossBrowdy.js" ],
 	"ignore":
 	[
 	],
+	"directories":
+	{
+		"doc": "documentation/"
+	},
 	"moduleType": [ "globals" ],
 	"private": false
 }
