@@ -50,6 +50,7 @@
 	"main": [ "CrossBrowdy.js" ],
 	"ignore":
 	[
+		"documentation/node_modules/",
 		"crossbrowdy.com/",
 		"dist/",
 		"tests/",

@@ -20,7 +20,7 @@ echo Deleting previous API documentation files from the web site folder...
 del /s /q crossbrowdy.com\_html\_doc\api\*.*
 echo.
 echo Copying the new API documentation files to the web site folder...
-xcopy /e /h documentation\*.* crossbrowdy.com\_html\_doc\api\
+robocopy /e documentation crossbrowdy.com\_html\_doc\api\ /xd node_modules
 PAUSE
 
 :END
