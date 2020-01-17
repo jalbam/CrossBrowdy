@@ -99,7 +99,7 @@ Visit the [News section](https://crossbrowdy.com/news "CrossBrowdy News") to kee
 Visit the [Community & Get Involved section](https://crossbrowdy.com/community "Community & Get Involved") to access the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") community through different ways and to get involved with its development.
 
 
-## License
+# License
 The code written by Joan Alba Maldonado (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE) which genuinely belongs to the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") project is
 licensed under the ["Creative Commons Attribution 4.0 International"](https://creativecommons.org/licenses/by/4.0/) license.
 
