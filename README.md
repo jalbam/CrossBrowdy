@@ -8,7 +8,7 @@ Your cross-browser brodie!
 
 It is compatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets, smart watches, embedded devices and many others.
 
-Main web site: {@link https://crossbrowdy.com/}
+Main web site: (https://crossbrowdy.com/)
 
 
 # About &amp; FAQ
