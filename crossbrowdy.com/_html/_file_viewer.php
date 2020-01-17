@@ -62,7 +62,7 @@
 			$files = scandir("_html/_doc/" . $category . "/" . $language . "/" . $subcategory . "/" . $topic . "_files/");
 
 			$indexHTMLPosition = array_search("index.html", $files);
-			$onlineLinkingAdvice = "\r\n\t\t&lt;!-- Note: it is recommended to download CrossBrowdy instead of linking the online version. This is just for the example! --&gt;";
+			$onlineLinkingAdvice = "\r\n\t\t&lt;!-- Note: it is recommended to download CrossBrowdy instead of hotlinking the online version. This is just for the example! --&gt;";
 			if ($indexHTMLPosition !== FALSE)
 			{
 				$fileCode = getFileCode("index.html", $dirPath, "language-html");

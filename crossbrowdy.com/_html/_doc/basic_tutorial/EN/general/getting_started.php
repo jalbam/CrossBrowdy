@@ -21,7 +21,7 @@
 </code></pre>
 
 <p>
-	Have in mind that including the CrossBrowdy main file which is online should never be done for production. This method can be useful just for testing purposes. Some features might not work properly using this way and availability cannot be always guaranteed.
+	Have in mind that including the CrossBrowdy main file which is online should never be done for production. This <a href="https://en.wikipedia.org/wiki/Inline_linking" target="_blank">hotlinking method</a> can be useful just for testing purposes. Some features might not work properly using this way and availability cannot be always guaranteed.
 </p>
 
 <p>
