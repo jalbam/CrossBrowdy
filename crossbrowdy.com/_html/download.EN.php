@@ -28,17 +28,17 @@
 	<h4>Download the latest version from the command line (shell):</h4>
 
 	<p>
-		Using <strong>npm</strong>:
-	</p>
-	<div class="shell_command_line"><code class="language-shell">
-		<strong>npm</strong> i crossbrowdy
-	</code></div>
-	
-	<p>
 		Using <strong>Yarn</strong>:
 	</p>
 	<div class="shell_command_line"><code class="language-shell">
 		<strong>yarn</strong> add crossbrowdy
+	</code></div>
+
+	<p>
+		Using <strong>npm</strong>:
+	</p>
+	<div class="shell_command_line"><code class="language-shell">
+		<strong>npm</strong> i crossbrowdy
 	</code></div>
 
 	<p>
@@ -48,7 +48,7 @@
 		<strong>bower</strong> install jalbam/crossbrowdy --save
 	</code></div>
 	<p>
-		Note: Bower will downlaod whole GitHub repository.
+		Note: Bower will download whole GitHub repository.
 	</p>
 
 	<h3>Source code</h3>

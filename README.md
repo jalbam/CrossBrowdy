@@ -25,15 +25,15 @@ You can also download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web si
 Alternatively, from the command line (shell), you can also use one of the following commands to download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") while you are in your project folder:
 
 
-**npm**:
-```
-npm i crossbrowdy 
-```
-
-
 **Yarn**:
 ```
 yarn add crossbrowdy 
+```
+
+
+**npm**:
+```
+npm i crossbrowdy 
 ```
 
 
@@ -42,7 +42,7 @@ yarn add crossbrowdy
 bower install jalbam/crossbrowdy --save 
 ```
 
-**Note**: Bower will downlaod whole GitHub repository. 
+**Note**: Bower will download whole GitHub repository. 
 
 
 # Getting started
