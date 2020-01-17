@@ -57,7 +57,7 @@ function main()
 		draw(this);
 	};
 
-	//Creates a canvas object for the canvas whose id is "my_canvas" with the desired context type ("2d"), width and height and using callback functions (recommended):
+	//Creates a canvas object for the canvas whose ID is "my_canvas" with the desired context type ("2d"), width and height and using callback functions (recommended):
 	myCanvas = new CB_Canvas
 	(
 		"my_canvas", //canvasId. Unique required parameter.

@@ -50,14 +50,14 @@
 	CB_init
 	(
 		//Callback for when CrossBrowdy is loaded successfully:
-		main, //mainFunction. Recommended.
+		main, //mainFunction. Optional but recommended.
 		
 		//Path where the main script is located. If not provided (it is undefined or null), it will try to calculate it calling the 'CB_scriptPathCalculate' function internally:
-		null, //scriptPath. Default: CB_scriptPathCalculate().
+		null, //scriptPath. Optional. Default: CB_scriptPathCalculate().
 		
 		//Function to call when any of the required files fails to load (because of an error or because its timeout was fired):
 		//Note: it could be called more than once, for each file which failed loading.
-		function (filepath, callbackOk, callbackError, timeoutMs, asynchronously, CB_filesRequested, CB_filesLoaded) //onErrorLoadingFile.
+		function (filepath, callbackOk, callbackError, timeoutMs, asynchronously, CB_filesRequested, CB_filesLoaded) //onErrorLoadingFile. Optional.
 		{
 			CB_console(filepath); //The 'filepath' parameter when 'CB_includeJSFile' was called internally (if any).
 			CB_console(callbackOk); //The 'callbackOk' parameter when 'CB_includeJSFile' was called internally (if any).
@@ -69,12 +69,12 @@
 		},
 		
 		//Defines whether to show the splash screen or not:
-		true //showSplashScreen. Default: CB_Configuration.CrossBrowdy.SHOW_SPLASH_SCREEN_DEFAULT.
+		true //showSplashScreen. Optional. Default: CB_Configuration.CrossBrowdy.SHOW_SPLASH_SCREEN_DEFAULT.
 	);
 </code></pre>
 
 <p>
-	Finally, you can create a DOM element with &quot;<i>CB_console</i>&quot; id which CrossBrowdy will use in the case that the client does not support <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console" target="_blank">console</a>:
+	Finally and optionally, you can create a DOM element with &quot;<i>CB_console</i>&quot; ID which CrossBrowdy will use in the case that the client does not support <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console" target="_blank">console</a>:
 </p>
 
 <pre><code class="language-html line-numbers match-braces rainbow-braces">

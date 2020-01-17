@@ -67,6 +67,7 @@
 		"EN" => "Create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.\nCompatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets, smart watches, embedded devices and many others."
 	);
 	$projectURLDefault = "https://crossbrowdy.com/";
+	$projectURLDefault = trim($projectURLDefault, "/") . "/";
 
 	$projectURL = "";
 	$projectURLBase = "";
@@ -150,6 +151,10 @@
 		Array
 		(
 			"EN" => "Accepts other frameworks and libraries"
+		),
+		Array
+		(
+			"EN" => "Enhance UI and UX",
 		)
 	);
 

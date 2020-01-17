@@ -26,6 +26,13 @@
 
 <header><h1 class="category_title">Guides &amp; Tutorials</h1></header>
 
+<div class="category_text">
+	<p>
+		Apart from the <a href="<?php echo "guides" . $PHPExtension; ?>#basic_tutorial">Basic tutorial</a>,
+		you can check the <a href="<?php echo "guides" . $PHPExtension; ?>#examples">Examples section below</a>
+		and <a href="<?php echo "guides" . $PHPExtension; ?>#more">more things</a>.
+	</p>
+</div>
 
 <a name="basic_tutorial"></a>
 <section>

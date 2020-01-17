@@ -1,0 +1,55 @@
+{
+	"name": "crossbrowdy",
+	"description": "A Multimedia JavaScript framework to create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.",
+	"keywords":
+	[
+		"multimedia",
+		"javascript",
+		"framework",
+		"engine",
+		"library",
+		"cross-browser",
+		"cross-device",
+		"cross-platform",
+		"gamedev",
+		"game-dev",
+		"gamedevelopment",
+		"game-development",
+		"games",
+		"emulators",
+		"apps",
+		"hybrid",
+		"apache-cordova",
+		"apachecordova",
+		"cordova",
+		"easy-to-use",
+		"javascript-framework",
+		"javascript-api",
+		"javascript-library",
+		"javascript-engine",
+		"multiplatform",
+		"vanilla-javascript",
+		"open",
+		"open-source",
+		"opensource",
+		"free"
+	],
+	"author":
+	{
+		"name" : "Joan Alba Maldonado",
+		"email" : "joanalbamaldonadoNO_SPAM_PLEASE_DELETE_THIS@gmail.com",
+		"url" : "https://joanalbamaldonado.com/"
+	},
+	"homepage": "https://github.com/jalbam/crossbrowdy",
+	"repository":
+	{
+		"type": "git",
+		"url": "git://github.com/jalbam/crossbrowdy.git"
+	},
+	"files": [ "CrossBrowdy\*.*" ],
+	"main": [ "CrossBrowdy.js" ],
+	"ignore":
+	[
+	],
+	"private": false
+}

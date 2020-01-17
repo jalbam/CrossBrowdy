@@ -1,0 +1,93 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "source": {
+		"exclude":
+			[
+				"CrossBrowdy/CrossBase/audiovisual/audio/AudioContextMonkeyPatch/",
+				"CrossBrowdy/CrossBase/audiovisual/audio/band.js/",
+				"CrossBrowdy/CrossBase/audiovisual/audio/jsfx/",
+				"CrossBrowdy/CrossBase/audiovisual/audio/soundmanager2/",
+				"CrossBrowdy/CrossBase/audiovisual/audio/timbre.js/",
+				"CrossBrowdy/CrossBase/audiovisual/audio/WAAPISim/",
+
+				"CrossBrowdy/CrossBase/audiovisual/image/canvas/canbox/",
+				"CrossBrowdy/CrossBase/audiovisual/image/canvas/excanvas_with_canvas_text/",
+				"CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/",
+				"CrossBrowdy/CrossBase/audiovisual/image/canvas/slcanvas/",
+				"CrossBrowdy/CrossBase/audiovisual/image/NoSleep/",
+				"CrossBrowdy/CrossBase/audiovisual/image/detect_zoom/",
+
+				"CrossBrowdy/CrossBase/general/bluebird/",
+				"CrossBrowdy/CrossBase/general/JSON3/",
+				"CrossBrowdy/CrossBase/general/localStorage/",
+				"CrossBrowdy/CrossBase/general/lz-string/",
+				"CrossBrowdy/CrossBase/general/others/",
+				
+				"CrossBrowdy/CrossBase/input/controllers/gamepad-plus/",
+				"CrossBrowdy/CrossBase/input/controllers/wii-js/",
+				"CrossBrowdy/CrossBase/input/hammer.js/",
+				"CrossBrowdy/CrossBase/input/pressure.js/",
+				
+				"CrossBrowdy/CrossBase/net/fetch/fetch-ie8/",
+				"CrossBrowdy/CrossBase/net/sockets/SockJS/"
+			],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": ["plugins/markdown"], //Needed by DocStrap
+    "templates": {
+        "cleverLinks": true,
+		"default":
+		{
+			"includeDate": false,
+			"useLongnameInNav": true
+		},
+		"logoFile": "",
+		"monospaceLinks": false,
+		"dateFormat": "ddd MMM Do YYYY",
+		"outputSourceFiles": true,
+		"outputSourcePath": true,
+		"systemName": "CrossBrowdy API documentation",
+		"footer": "",
+		"copyright": "<a href=\"printable/\" target=\"_blank\">See a more printer-friendly version</a><hr /><span style=\"color:#000000\">© <address style=\"display:inline; font-style:normal;\"><a href=\"https://crossbrowdy.com/\" target=\"_blank\">CrossBrowdy</a></address> by <a href=\"https://joanalbamaldonado.com/\" target=\"_blank\">Joan Alba Maldonado</a><br />DocStrap Copyright © 2012-2015 The contributors to the JSDoc3 and DocStrap projects.</span>",
+		"navType": "inline", //"vertical",
+		/*
+		DocStrap themes:
+			cerulean
+			cosmo
+			cyborg
+			flatly
+			journal
+			lumen
+			paper
+			readable
+			sandstone
+			simplex
+			slate
+			spacelab
+			superhero
+			united
+			yeti
+		*/
+		"theme": "cosmo",
+		"search": true,
+		"linenums": true,
+		"collapseSymbols": true,
+		"inverseNav": false,
+		"protocol": "html://",
+		"methodHeadingReturns": true
+    },
+	"opts": {
+		"encoding": "utf8",
+		"template": "templates/default",
+		"destination": "./documentation/",
+		"recurse": true
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true
+	}
+}

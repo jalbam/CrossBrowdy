@@ -1,0 +1,152 @@
+General:
+	CrossBrowdy / CrossBase / Others:
+		BIG PROBLEM: in Opera Mini 12.0.1987.98155 and Opera Mini beta 13.0.2036.97454 with Android 4.4.4 (Ployer Momo8w), CrossBrowdy never loads (maybe it does not support SCRIPT tags loaded dynamically).
+
+
+Input:
+	CB_Mouse:
+		CB_Mouse.getButtonsDown():
+			* BUG: in Vivaldi 1.0.219.50, only detects one mouse button pressed even when multiple are pressed. I think it has something to do with the gestures functionality of the browser.
+			* BUG: in Vivaldi 1.0.219.50, when a mouse button is pressed and the mouse cursor is dragged outside the window and then the button is released, the button is detected as still pressed.
+			* BUG: in Opera 32.0 when right mouse button is pressed and cursor is dragged, even inside the window, the button remains as pressed after releasing it.
+			* BUG: in IE8, after clicking and dragging the scrollbars, the left button remains as pressed.
+			* ISSUE: In BlackBerry Playbook, sometimes mouse buttons are not released.
+
+
+Audiovisual:
+	Audio:
+		CB_AudioFile / CB_AudioFile[x]:
+			* MAYBE A PROBLEM: some computers, tabets, phones, etc. can enter in sleep mode and stop the audio but maybe they will not stop the setTimeout that loops or calculates the end of the audio in the play method of some API. Then it is possible that a desynchronization is caused. To prevent this, onvisibilitychange or onblur could be used (think about using onVsibilityChangeFunction of CB_Screen). The audio should be stopped but also the setTiemout and maybe other things -think about it- (maybe the pause method of CB_AudioFile is enough).
+			* VERY BIG PROBLEM: sounds does not work well most of the times in IE9 and IE10 (neither with AAPI nor SM2 which are the unique possibilities).
+			
+			
+		CB_AudioFile["WAAPI"]:
+			* ISSUE: Safari mobile (iPhone5 with iOS 9.1) does not let you control the volume. That is why, when checkPlaying is called, the sounds can be heard.
+			* PROBLEM (SEEMS SOLVED): In WAAPI and Android with Opera 33.0.2002.97617, sometimes it says playing=yes but nothing can be heard (neither pausing nor stopping and playing again works. Never). Nothing is shown in the console (tested with jsconsole.com). And currentTime does not change. So CB_AudioFile["WAAPI"] will mark the file as FAILED when it detects that currentTime does not change. It must be an error of Opera.
+			* PROBLEM: In CB_AudioFile["WAAPI"], loadByMediaElement() does not work, to let you not use AJAX.
+			* PROBLEM: In WAAPI, with Firefox 42.0 on Android, sometimes it does not play automatically when an object with autoplay is created (it is strange because sometimes it works and sometimes not).
+			* PROBLEM: In WAAPI, with Firefox 41.0.1 on Windows XP, when a song starts (as for example diestive_mix.ogg), sometimes the current time is more than 20 seconds!!! The current time is not accurate at all.
+			* PROBLEM: I think the volume of WAAPI does not work well (in WebView does not decrease until is less than 10, but in PC does).
+			* In Safari mobile (iPhone5 with iOS 9.1): when an object with autoplay is created, it remains with playing = true, but nothing can be heard. But when the play button is pressed then it works well.
+				Note: I think it is because it must be initialized with a user event as onclick for example.
+			* VERY BIG PROBLEM: it does not work well with Firefox 43.0.4 on Windows XP (ASUS EEE PC 901 with 2 GB of RAM). Sometimes it does not play or it plays and stops when you click any button, etc.
+				Note: In Firefox 44.0 works well again.
+
+		CB_AudioFile["AAPI"]:
+			* PROBLEM: In "Internet" (Spice AppleWebKit Webkit version: 534.30 App Version: 1.0_VER_2013.07.03_14:33:34) in CoolPad 5950 (Android 4.1.2), the unique API that works is AAPI but it seems that it takes too long to load (remains in LOADING long time). And after that it seems that only one sound per time is allowed.
+			* PROBLEM: In Android in CoolPad 5950 (Android 4.1.2) with Opera 27.0.1698.89115, takes too long to loop with AAPI and the currentTime runs anyway even when nothing is heard yet.
+				Note: it seems as it did many short loops before starting.
+			* PROBLEM: In Safari mobile (iPhone5 with iOS 9.1): sometimes (very few) cannot do the loop well when you try to play until near the end of the audio file.
+			* In Safari mobile (iPhone5 with iOS 9.1): does not care about neither startAt nor stopAt!!!! it ignores them.
+			* BIG PROBLEM: in Safari mobile (iPhone6s with iOS 9.1): when it tries to play a file whose stopAt is near the end of the file, then sometimes getDuration() starts returning the value of startAt (currentTime is modified with the value of startAt, so it is possible that it has something to do). Happens mainly when more than one file is played with AAPI at the same time, although the others do not have a stopAt near the end of the file.
+				Note: When this happens, normally the play detects that stopAt is greater than getDuration() (since getDuration returns startAt) and it sets stopAt = duration. And exits from play method calling the stop method because startAt == stopAt.
+			* BIG PROBLEM: in Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), sometimes when some files are played ("Arriba el ritmo, Valencia" in MP3), it is played jumping and messy. The currentTime also jumps (so it can give problems when the API is changed since the pauseTime would be wrong).
+			* BIG PROBLEM: in Chrome 46.0.2490.76, Opera 33.0.2002.97617 and Yandex 15.6 with Android 4.4.4 in Ployer Momo8w, sometimes the loop does not stop and continues with the rest of the sound (maybe the event timeupdate is not executed).
+				SOLUTION: enable CB_Configuration[CB_CROSSBASE_NAME].CB_AudioFile_AAPI_USE_TIMEOUT_TO_DETECT_STOPAT 
+			* PROBLEM: currentTime is not working on Web Positive on Haiku OS (it is always zero).
+
+
+		CB_AudioFile["SM2"]:
+			* PROBLEM: In CB_AudioFile["SM2"], onPosition() and onfinish work only sometimes (that is why setTimeout is being used synchronized).
+			* PROBLEM: In Android with WebView, when a new object with autoplay is created when another one is being played (both with SM2), the first one stops. It seems only one sound at the same time is allowed.
+			* PROBLEM: In Android with Opera 33.0.2002.97617, when a new object is created with autoplay it does not play automatically (remains as LOADED) and you have to click play manually. Sometimes it remains always as LOADING. Furthermore, only lets you create one per time (stops the current playing if you create one with autoplay). It seems it has a strange behaviour sometimes.
+			* PROBLEM: In Opera 33.0.2002.97617, Opera 27.0.1698.89115 (CoolPad 5950 with Android 4.1.2) and Chrome 46.0.2490.76 of Android does not work well (it does not play when an object with autoplay is created although it shows playing=true). But it works when you press play or you press pause and then press resume.
+				Note: could it be because it needs to be started with a click event??????? it is strange, because AAPI works.
+			* PROBLEM: In Opera 33.0.2002.97617, Chrome 46.0.2490.76 and Firefox 42.0 of Android, stops when a new object is created. It only lets one sound to be played per time.
+				Note: it seems that the same or similar happens with "Internet" (Spice AppleWebKit Webkit version: 534.30 App Version: 1.0_VER_2013.07.03_14:33:34) of CoolPad 5950 (Android 4.1.2).
+			* PROBLEM: In Android with WebView, loops all the time even when you have disabled the loop.
+			* PROBLEM: In Opera 32.0 and Vivaldi 1.0.219.50 with Windows XP Home Edition 32 bit, SM2 uses Flash. But when you try to make SM2 work, it remains always as LOADING.
+			* PROBLEM: In Safari mobile (iPhone5 with iOS 9.1): it always remains as LOADING.
+			* PROBLEM: In Firefox 42.0 (Ployer Momo8w) on Windows 10, sometimes when it stops it calls twice the onStop function.
+			* PROBLEM: currentTime is not working on Web Positive on Haiku OS (it is always zero).
+
+			
+		CB_AudioFile["ACMP"]:
+			* PROBLEM: In Android with WebView, sometimes the loop takes too long to start again. The time before it starts looping again seems the same amount of time that the track lasts playing (as it was playing silently before looping again).
+				Note: only happens when the file is played to its end or very near of it.
+				Note 2: it seems that every loop takes even longer to start again.
+
+		
+		CB_AudioFileCache:
+			* QUIRK: The onLoad function is called again when objects that have failed before are created again. Also the onError function, in the case it fails (and it would remain as FAILED).
+			* ISSUE: In Opera 33.0.2002.97617 and Chrome 46.0.2490.76 of Android and in Safari mobile, new objects cannot be created when needed (when the minimum is reached), since the currentTime does not change in the checkPlaying. Probably it is because the function is not being called from an onClick event or similar.
+			* ISSUE: In Internet Explorer 11 and Edge on Windows 10 (Ployer Momo8w) sometimes the sounds can be heard (very little) when you call playAll when they are unchecked.
+			* ISSUE: In Internet Explorer 11 and Edge (but it seems a little bit less in Edge) on Windows 10 (Ployer Momo8w) the sounds can be heard when the API is changed (from AAPI to SM2 or vice versa).
+			* ISSUE: In Edge (Windows 10 with Ployer Momo8w), sometimes all objects cannot change the API AAPI when you try with 70 big files or more (trying with "Arriba el ritmo, Valencia"), sometimes even less (with 64 or so). Maybe it is lack of memory.
+			* ISSUE: In Safari Mobile, in QQBrowser and in Chrome 46.0.2490.85 and 47.0.2526.70 (iPhone5 and iPhone6s with iOS 9.1), the sounds can be heard when creating a cache with AAPI!!!! (or when checkPlayingAll is called)
+			* ISSUE: sometimes the browsers are blocked a little bit when a new object is created!!!
+			* PROBLEM: In Safari Mobile (iPhone5 with iOS 9.1), does not create any sound with SM2.
+			* PROBLEM: In Firefox 42.0, Opera 32.0 and Chrome 46.0.2490.86 on Windows XP (ASUS EEE PC 901 with 2 GB of RAM), when WAAPI is used without cache in the load method (i.e., without taking advantage of the fact that the URI has been loaded before to get the binary data from the caches array) or when different big files are used, when a certain limit is reached, the web crashes (maybe due to lack of memory). The same happens when many objects change their API without using cache.
+			* PROBLEM: with Firefox 42.0 on Windows XP (with ASUS EEE PC 901 with 2 GB of RAM) and with Windows 10 (Ployer Momo8w) with SM2, failes when loads 100 or more!!! Mainly with big files.
+			* PROBLEM: In Safari on Windows XP (ASUS EEE PC 901 with 2 GB of RAM) and SM2 (with Flash), it cannot create more than 70 to 79 objects or so (sometimes less, like 50 or less, mainly if they are big files) maximum (it says that all attempts have failed).
+			* PROBLEM: In Internet Explorer 6 and 8 (maybe 5.5 and 7 too) on Windows XP (ASUS EEE PC 901 with 2 GB of RAM) and SM2 (with Flash), cannot create more than around 250 objects or so (sometimes less, like only 50 or so) maximum (it says that all attempts have failed).
+			* PROBLEM: In Internet Explorer 5.5, 6, 7 and 8 (and sometimes also in Safari) with Windows XP (ASUS EEE PC 901 with 2 GB of RAM) and SM2 (with Flash), when creating a cache with many objects (about 54 or more) throws different errors "a.iO.onload is null or is not an object" (line 49 of soundmanager2-nodebug-jsmin.js).
+			* PROBLEM: In Internet Explorer 5.5, 6 and 7 on Windows XP (ASUS EEE PC 901 with 2 GB of RAM) and SM2 (with Flash), when creating a cache with many elements (100 or so, sometimes less, as 25 or less, if they are big files) nothing can be heard when either play or play all is called. And it continues not working although we reload the page and we try a cache with less objects (deleting the history or even restarting the browser does not work either).
+			* PROBLEM: In Edge or Internet Explorer 11 with AAPI (Ployer Momo8w) on Windows 10, when creating a cache, sometimes the sounds can be heard. It seems it happens more when the CPU is busy and cannot pay attention to the browser. It also happens with checkPlayingAll.
+				Note: maybe it has been solved and now it only happens when the API is changed (at least in IE11).
+			* PROBLEM: In Vivaldi (with less objects) and Opera 32.0 (and also in Chrome 46.0.2490.86 but if you do it with many more objects) on Windows XP (ASUS EEE PC 901 with 2 GB of RAM), when creating many objects with AAPI (between 60 and 250 or more) of "pista 1" or of "Arriba el ritmo, Valencia" (maybe it also happens with other big files) and after that you change the API to WAAPI, the browser crashes when it tries to decode the binary code of the first WAAPI object. Probably due to lack of memory. But if you do the opposite (create WAAPI objects and transform them to AAPI) then all works well.
+			* PROBLEM: In Firefox 42.0 on Windows xP (ASUS EEE PC 901 with 2 GB of RAM), when creating objects with big files (as "Arriba el ritmo, Valencia"), takes several hours loading with only 70 files or less.
+			* PROBLEM: In Raspbian in Raspberry Pi ("Raspberry Pi Model B Revision 2.0 Mounting holes" with 512MB RAM (revision 000e) using Raspbian GNU/Linux 7 "wheezy" (Linux raspberrypi 4.1.19+ #858 armv6l GNU/Linux) with Epiphany (only works AAPI or SM2), the browser closes unexpectedly when trying to create a cache with 25 short files ("coins"). When trying to create less, as 15, it can only create 7 with AAPI (or 5 with SM2, although sometimes no one), sometimes not even that, and after that is says all attempts have failed. With big files ("Arriba el ritmo, Valencia"), it seems it happens the same and the same number can be created in the case it works.
+			* PROBLEM: In Internent Explorer 11, when creating many objects (about 250 or more, although less sometimes) with AAPI, when play is pressed to play an object, nothing can be heard and the onStop is executed immediately or almost immediately.
+			* PROBLEM: In Opera 33.0.2002.97617 and Chrome 46.0.2490.76 of Android, when you try to play all when all are AAPI (100 or so), many always remain as PLAYING when the shound has already finished. It is possible that currentTime does not change and then it never reaches the end of the playing.
+				POSSIBLE SOLUTION: In CB_AudioFile["AAPI"], in the play method, if there is no loop it should have a timeout (after the duration + margin) to perform the stop and mark the sound as free (clear the timeout when enters the play method again). The bad side is that it could stop the file before the desired time if the play method takes time to start (a margin should be added).
+				POSSIBLE SOLUTION 2: if after a time REALLY longer than the duration of the sound (startAt - stopAt) still continues in the same loop (utilize a counter that increments in every call to the play method) then stop the sound or declare it as FAILED or whatever it needs.
+			* PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), with AAPI sometimes it fails when playAll is called and the objects are deleted and take too long to be created again (and it could probably fail although I have not seen the case yet).
+			* PROBLEM: In Firefox 42.0, Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3) and in Intel XDK (Cordova) with Sony Xperia Z3, with SM2 only about 5 to 15 can be created at maximum and after that it fails the cache (the timeout of 15000ms is fired since the load method does not call any function, neither callbackOkFunction nor callbackErrorFunction).
+			* BIG PROBLEM: In Firefox 42.0 with Windows 7 (Lenovo Ideapad with AMD A10-4600M at 2.30 GHZ and 4 GB of RAM), it does not let to play more than 14 files of "Arriba el ritmo, Valencia" at the same time with AAPI. All the rest fail and are deleted to create new objects (but it cannot create new ones either!).
+			* BIG PROBLEM: In Internet Explorer 11, when creating many big objects (57 or less, sometimes 30 or less, of "Arriba el ritmo, Valencia", for example) sometimes the sound is played and never stops (not even with Stop all, since after pressing it they stop during a short time and after that they start playing again). It also does other strange things. It must be lack of memory.
+				Note: when changing API (IE 11 only allows AAPI and SM2) we must have into account that the system must create the objects twice (each API needs their objects). So in the worst cases only about 15 objects of big files can be used or even less.
+			* BIG PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3) and in Safari Mobile (iPhone5 with iOS 9.1), with AAPI cannot create objects dynamically when they are needed (when the minimum is reached), probably because it is not executed from a user event (as onClick).
+			* BIG PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), with SM2 the objects created dynamically when they are neeed (when the minimum is reached), says they are PLAYING but nothing can be heard (probably because it is not executed from a user event as onClick).
+			* BIG PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), with AAPI sometimes fails when creating a cache with more than 5 to 20 objects (as "numeros").
+			* BIG PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), with AAPI sometimes fails when performing checkPlayingAll.
+			* BIG PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), with AAPI sometimes some objects do not play any sound (although it says they are PLAYING).
+			* BIG PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), when changing from AAPI (maybe also from SM2) to WAAPI, sometimes the sound stops being heard (although it continues PLAYING).
+			* BIG PROBLEM: In Chrome 46.0.2490.76 and Opera 33.0.2002.97617 with Android (Sony Xperia Z3), when changing from any api to AAPI or SM2 (mainly happens when changing to SM2), sometimes the sound stops being heard (although it continues PLAYING).
+			* BIG PROBLEM: In Intel XDK (Cordova) with Sony Xperia Z3, when changing API to SM2, sometimes the sound stops being heard.
+			* BIG PROBLEM: In Intel XDK (Cordova) with Sony Xperia Z3, many times the cache does not load with ACMP if there are 16 sounds or more (sometimes less).
+			* BIG PROBLEM: In Intel XDK (Cordova) with Sony Xperia Z3, many times the sounds with ACMP cannot be heard (mainly the ones created dynamically. It seems this is improved when the play method is called from a user event as onClick).
+			* BIG PROBLEM: In Firefox de Android, sometimes it does not create more than 3 or 5 or not even a single one with AAPI!! and it remains always as LOADING. Especially when they are 50 or so of big files. And it usually remains at the last one or the penultime or in one of the last ones (almost at 100%).	
+			* BIG PROBLEM: In "Internet" (Spice AppleWebKit Webkit version: 534.30 App Version: 1.0_VER_2013.07.03_14:33:34) on CoolPad 5950 (Android 4.1.2), with AAPI sometimes detects the duration of the files as 1000ms (which is not true).
+			* BIG PROBLEM: In BlackBerry Playbook, the cache takes too long to load and after that no sound works! (however, CB_AudioFile and the CB_AudioFile[x]'s work).
+			* BIG PROBLEM: In UC Browser V10.7.5.658 with Android 4.4.4 (Ployer Momo8w), with AAPI (WAAPI is not supported), many times does not load all the objects of the cache or fails when performs the checkPlayingAll all the time (unless they are very few as 5 or so). Furthremore, the sounds are heard when loading or when doing the checkPlayingAll.
+			* BIG PROBLEM: In "Navegador", "Browser" (Lightning browser 2.1.2), UC Browser HD v3.4.3.532, Maxthon Browser 4.3.5.2000 Build 2900, Baidu Mini 1.1 (Framework version 1.1.0.1), Baidu Browser HD 1.9.0.2, Dolphin Zero, Dolphin V11.5.1_X86, Boat Browser 8.7.2 Build 5071, Boat Browser HD 2.2.1 Build 524, Boat Browser Mini 6.4.5 Build 3333, Mercury Browser 3.2.3, CM Browser 5.20.12 and DU Browser 5.2 with Android 4.4.4 (Ployer Momo8w), with AAPI (WAAPI is not supported), you have to click many times checkPlayingAll because they fail a lot when checking and when all are checked the sounds can be heard only sometimes when played and they start and stop wherever they want (with no sense at all). You can also heard sometimes the sounds when loading or checkPlayingAll. It is not usable.
+				SOLUTION: use another file format or another bitrate (dataURIs seem to work fine) and also load less files in the cache.
+			* BIG PROBLEM: In BlackBerry PlayBook (Tablet OS 2.1.0.1917) with OrigamiBrowser 1.0.2, no sound works!
+				POSSIBLE SOLUTION: If this browser and operating system could be detected (the userAgent does not give any useful clue), setting CB_Configuration[CB_CROSSBASE_NAME].CB_AudioFile_AudioFileCache_MUTE_ON_LOAD_AND_CHECKING to false would solve it.
+			* BIG PROBLEM: In BlackBerry PlayBook (Tablet OS 2.1.0.1917), with "Navegador" (default browser) and other browsers that use the same engine, when loading different files (mainly if they are big ones), 5 or more, it takes too long to load and after that some objects never play or others start playing very late. And all the page becomes slow and does not respond. Sometimes a message saying that the file cannot be played is shown.
+
+
+		CB_AudioFileSprites:
+			* PROBLEM: sometimes in QQBrowser (iPhone5 with iOS 9.1) in the test page, the first element, instead of remaining as UNCHECKED, does CHECKING and remains as LOADED. It usually happens when you click (when you click, CB_Speaker creates a maximum of 3 sound objetos if all 3 are compatible with the browser, and CB_AudioFile_API_WAAPI_maximumLoading is 3). It could be a conflict of a non-declared variable (whose context could be global).
+			* BIG PROBLEM: In "Internet" (Spice AppleWebKit Webkit version: 534.30 App Version: 1.0_VER_2013.07.03_14:33:34) on CoolPad 5950 (Android 4.1.2), it does not work well (detects duration of 1000ms in many objects, can be heard only sometimes, takes too long to load and to perform checking, the sounds cannot be heard when you try to play them or if they are heard they do not respect neither the startAt nor the stopAt, it seems only one sound per time works, etc...).
+			* BIG PROBLEM: In BlackBerry PlayBook (Tablet OS 2.1.0.1917) with "Navegador" (default browser), SimpleBrowser, Browse, Pointer Browser 2, Flash Browser, Dolphin Browser HD 7.2.0 and Boat Browser Mini 2.4, the precision of the sprites work very bad. It does not respect neither the startAt nor the stopAt. It seems to improve a little when setting CB_Configuration[CB_CROSSBASE_NAME].CB_AudioFile_AAPI_USE_TIMEOUT_TO_DETECT_STOPAT to false, but even so it does not work well.
+				POSSIBLE SOLUTION (TRY): change startAt and stopAt of the sprites to different values and also set CB_Configuration[CB_CROSSBASE_NAME].CB_AudioFile_AAPI_USE_TIMEOUT_TO_DETECT_STOPAT to false.
+				ALTERNATIVE SOLUTION: use full audio files instead of sprites (startAt = 0, stopAt = null).
+			* PROBLEM: sprites do not work in WebPositive in Haiku OS (probably because the property currentTime does not work).
+
+
+		CB_AudioFileSpritesPool:
+			* BIG PROBLEM: sometimes, in QQBrowser (iPhone5 with iOS 9.1), when checkAll is performed (when the mandatory button is pressed after the load), "Arriba el ritmo, Valencia" fails because it says that the currentTime does not change and all objects are deleted and appear again as UNCHECKED. It could be lack of memory because the file is very big (although it only tries to load 11).
+
+
+	Image
+		CB_Screen:
+			CB_Screen.isFullScreen():
+				* BUG: when the window is resized in test_game.htm and make it more little, it detects full screen!
+				* BUG: detects fullscreen in Chrome 46.0.2490.86 and such if it is inside an iframe.
+				!! PROBLEM: In Vivaldi 1.0.219.50, when the fullscreen button is clicked in the test page of CB_Screen and after that canceling the fullscreen with the F11 key, it continues detecting full screen.
+				!! PROBLEM: In Vivaldi 1.0.219.50, IE11, Opera 32.0, Firefox 42.0 and Chrome 46.0.2490.86, if F11 is pressed to enable full screen, then pressing the button to cancel full screen it does not work. To cancel full screen you must press F11 again.
+				!! PROBLEM: In IE5.5 and IE6 (Windows XP) it does not detect fullscreen when F11 is pressed.
+				* ISSUE: In IE10, full screen with ActiveX does not seem to work.
+
+
+			CB_Screen.setFullScreen():
+				!! BUG: Sometimes when calling FullScreen (clicking one button), throws this error in Firefox 42.0 (I think it is because the function takes more than 1 second to execute): La solicitud de pantalla completa ha sido denegada porque Element.mozRequestFullScreen() no ha sido llamada desde dentro de un manejador de eventos generado por el usuario de ejecución breve.
+
+
+			CB_Screen.unlockOrientation():
+				!! PROBLEM: In Internet Explorer 11, on Windows 10 (with Ployer MOMO8W tablet), it works changing orientation but it does not work "unlock orientation". After rotated, it only returns to the normal orientation when you click outside (for example, on the taskbar). But when clicking the browser with the test web of CB_Screen, it rotates again. On top of that, this behaviour propagates to all the test pages and there is no way to cancel it or it is very difficult.
+		
+		CB_Canvas:
+			* ISSUE: FlashCanvas does not let zoom.

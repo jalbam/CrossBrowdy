@@ -1,0 +1,440 @@
+General:
+	CrossBrowdy / CrossBase / Others:
+		* Take a look at Web Animations API (and polyfill at https://github.com/web-animations/web-animations-js)
+		* Remember that Cordova plugins must be loaded, including "device" (it needs some time when the app loads), before using them.
+		!!! It should include only needed files (for example, CB_AudioFile["WAAPI"] is not necessary if Web Audio API is not supported and CB_AudioFile["ACMP"] is not necessary if we are not using Cordova/PhoneGAP/Intel XDK, etc.).
+		!!! Include phonegap.js, cordova.js, intelxdk.js, etc. automatically (of the root folder!!) from the loader! Do not fail and let continue if they do not exist.
+		* Unique constant to define number of attempts to load one module or a script of a module.
+		* Variable with number of scripts already loaded and another one with the total number of scripts (loaded and not loaded). This way we can know approximately the loading progress in percentage.
+		* If a needed module fails, call the error function (callback) sending a parameter with the errors (maybe an array with files not loaded). If all has been fine or only not needed modules have failed, call the callback to initialize all (sending a parameter with the errors if there has been any).
+		* Errors and all the rest should be in localization arrays to support different languages (define a default language).
+		* Be able to choose language when loading CrossBrowdy (choose the language by default if the language does not exist).
+		* Localization arrays using strings as "File {%s} has failed", etc. and later the code will replace {%s} by a file name, etc.
+		* Function getLocalizedString(localization_array, [language = language_by_default], [array_with_wildcarts_to_replace_{%s} = []])
+		* Use a file called CB_config.js for the configuration of all the objects, general configuration, etc.
+		* IN PROGRESS: Detect whether the script is in a iframe (or iframe of an iframe of an iframe...) and apply all the events to all of them (or to the main iframe container) if we want (defined in a global constant as CB_MIND_IFRAME or similar)
+		* Enum flags with bitwise operators to make the script modular and consider to use this method to optimize functions, etc.
+		* THINK ABOUT: using CSSPrefix or CSS3Finalize or similar.
+		* THINK ABOUT: using new Array(size) if we know the size (or we want to set a maximum) to improve the performance in some cases. Be careful because the length property will be modified.
+		! Find a way to use a kind of cache (memoize or something like that?) for methods and functions. Take a look at memoizations.
+		!! Use CSS.supports polyfill and think about using it in CB_supportsCSS3Transform() if possible. Use cache in CSS.support!		* Take a look at MobileOptimized and HandheldFriendly meta tags.
+		!!! Introduce more stats to collect (only use CrossBrowdy for the essential ones, the ones that can be collected by PHP in the stats script do not need to be sent).
+		* Think about changing typeof(window.*) === "undefined" by "* in window", since in old Firefox versions they throw errors in JavaScript in strict mode.
+		* It is better not to use "in" (property in object) to make it compatible with IE4.
+		* Do not use push/pop to make it compatible with IE4 (use array[array.length] = value).
+		* THINK ABOUT: a function that executes setImmediate if it exists, otherwise nextTick or otherwise setTimeout(whatever, 0) (or setTimeout(whatever, 1)).
+		!!! Function that receives an object and a method and return the method with the vendor prefix (or null). To save code.
+		* THINK ABOUT: to call all or many of the functions sent as a callback (for example in CB_AudioFile/Cb_AudioFile[x]), use the .call() method to make "this" be the object.
+		* Remove all var that = this; in methods and place it as a global variable inside the objects where it is used a lot.
+		* Allow CB_intToBase to receive number parameter as a string so the integer will be able to be really big.
+		* THINK ABOUT: whether to make it compatible with AMD (Asynchronous module definition).
+		* Take a look at CrunchMe (http://crunchme.bitsnbites.eu/), Google Close compiler, and similar, to minify it. Take a look at:
+			* http://refresh-sf.com/
+			* http://lisperator.net/uglifyjs/#demo
+			* http://dean.edwards.name/packer/
+			* http://siorki.github.io/regPack.html
+		* THINK ABOUT: Option to load the scripts in sequential mode (one by one and in the desired order).
+		* THINK ABOUT: using "requires" also for modules (not only for files).
+		* Take a look at manifest.json to create an installable web app (related with progressive web apps).
+		* Make it compatible with wearables (smart watches, etc.). Take a look at Pebble, Tizen, etc.
+		* Take a look at Nintendo Web Framework.
+
+	CB_Arrays:
+		* Add methods as quick sort, bubble sort, etc.
+
+	CB_Collisions:
+		* Collisions with bitmaps of 0's and 1's (thinking about using bitwise operators) and add it to CB_Mouse/CB_Touch/etc.
+		* Collisions with lines with a width and add it to CB_Mouse/CB_Touch/etc.
+		* Collisions with triangles and add it to CB_Mouse/CB_Touch/etc.
+		* Collisions with ellipses.
+		* Collisions with more complex polygons.
+
+	CB_Elements:
+		@ Function that returns an array with the elements of a node sent that match a regular expression sent (and use it in test_elements.htm to get all the elements el[NUM] and apply to them the functions with con Array.forEach).
+		* THINK ABOUT: using an alternative to getComputedStyle for IE older than IE 9: element.currentStyle.borderBottomWidth
+		!! Take a look at getComputedStyle polyfill from here and try it to check whether it works well: https://github.com/jonathantneal/Polyfills-for-IE8
+		!! createElement for new and old browser! and use everywhere in the code the new function.
+		* Make CB_Elements.classes compatible with regular expressions (be careful with browsers not compatible with RegExp!).
+		* Find all functions and methods that call CB_Elements.id, CB_Elements.tag, CB_elements.classes and think about using cache forced or let it to be decided by a parameter.
+		* Method that calls to Document.elementFromPoint and use a fallback if it does not exist (if possible).
+
+	CB_events:
+		* THINK ABOUT: using prefixes in the event names when add or remove events if they exist.
+		* Emulate useCapture when addEventListener is not being used (when using attachEvent or target.onevent).
+		* Be able to use CB_Events.add and CB_Events.remove, etc. in a recursive way for children as well as for parents of an eventTarget (and be able to set a depth level, maybe 25 by default).
+		!!! Method that accepts a list of events with priority and another list with events without priority and a function. The function should be executed when any of those events is fired but only once (the rest of the evenrts will not fire it again). Useful, for instance, to let click or touchstart to be executed but not the two of them at the same time.
+		* THINK ABOUT: In CB_Events.add, a variable to force to respect the order (not all browsers execute the first function of a same event first). If the variable is true, create a wrapper function to execute all in order (old functions first). We should delete all previous associated events.
+
+	CB_Client:
+		* Object Browser, Agent or Navigator or something similar in CB_Client or outside.
+		* Push notifications in CB_Client (HTML5 API, Cordova, etc.).
+		* Support of Notifications.
+		* Take a look at Notifications API.
+		* Be able to use Google Chrome notifications (system tray) and similar ones.
+		* Take a look at Web Alarms API.
+		* Take a look at install banner flow, etc.
+		* Add ASP, JSP, etc. detector and detector of their version too.
+		* Have into account continentCode, countryCode, locationCode, timezoneCode, menuLanguage, onMenuLanguageChanged, etc. of Yahoo! Connected TV.
+		! Optimize detectBrowser with a function that returns always the first result from a cache (check whether it is not already optimized using a cache or not).
+		* Detect user/browser/system language (choose the best one) and use PhoneGap/Cordova if it is available.
+		* Event that is executed always when the app is closed.
+		* Create a "getSilverlightVersion" method.
+
+	CB_data:
+		* Think about implementing the sessionStorage features (and find fallbacks).
+		* Think about using jsurl: https://github.com/Sage/jsurl
+		* Think about using:
+			compresjs: https://github.com/cscott/compressjs
+			LZMA-JS: https://github.com/LZMA-JS/LZMA-JS
+			lzmajs: https://github.com/glinscott/lzmajs
+			lzma-purejs: https://github.com/cscott/lzma-purejs
+		* FileReader or AJAX fallback (with a hidden iframe I guess) to read files sent by form or drag and drop.
+		* BinFileReader?
+		* Data storage.
+		* Take a look at WebSQL (deprecated) database, IndexedDB, web storage, etc. and fallbacks
+		* Use HTML5 Web Storage.
+		* Take a look at SQLLite.
+		* Take a look at LevelDB.
+		* Take a look at noSQL databases.
+		* Take a look at local storage API.
+		* Take a look at File API
+		* Take a look at the Files and Directory Entries API
+		* Take a look at support to manage contacts (phonebook contacts, etc.).
+		* Use HTML5 AppCache.
+		* Take a look at localForage library and similar.
+		* Think about supporting NaCl and others (legacy ones).
+
+
+Input:
+	General / Others:
+		* Support Leap Motion.
+		* Accept voice commands (Web Speech API? Speech Input API? Text to Speech API?).
+		* Think about AR (Augmented Reality). Take a look at vuforia, etc.
+		* Take a look at Google Glass.
+		* Take a look at SmartEyeglass SDK, etc.
+		* Take a look at WearScript (http://www.wearscript.com/)
+		* Take a look at TAL by BBC (TV Application Layer): http://fmtvp.github.io/tal/getting-started/introducing-tal.html (it contains many keycodes of many TV platforms!)
+		* Take a look at Yahoo! ConnectedTV
+		* Apple tvOS (TVJS) to make it compatible with Apple TV.
+		* Take a look at Roku TV, etc.
+		* Take a look at Xbox SmartGlass JavaScript Library
+		* Take a look at object detection, face detection, eye tracking, etc.:
+			* https://github.com/mtschirs/js-objectdetect
+			* https://github.com/inspirit/jsfeat
+			* https://github.com/eduardolundgren/tracking.js
+			* https://github.com/foo123/HAAR.js
+			* https://github.com/foo123/FILTER.js
+		* Think about a CB_TouchBar class (which could belong to either input or image) to manage Apple Touch Bar.
+
+	CB_Keyboard / Virtual Keyboard:
+		* Create a virtualKeyboard that uses CSS classes (use a certain style by default) that can be changed on the fly and have configurable unicode keys. When pressing its buttons it could modify the arrays of CB_Keyboard (or be able to configure each event, to make it more universal). Be able to choose symbols and their output codes.
+		* Take a look at HTML5 Virtual Keyboard API
+		* Add codes to CB_Keyboard of http://www.javascripter.net/faq/keycodes.htm
+		* For NS4 (http://snipplr.com/view/1286/event-information/):
+			if( document.captureEvents && Event.KEYUP ) {
+				//remove this part if you do not need Netscape 4 to work
+				document.captureEvents( Event.KEYUP );
+			}
+			document.onkeyup = alertkey;
+		
+	CB_Pointer:
+		* THINK ABOUT: Support CSS pointer-events = "none" with a polyfill as https://github.com/kmewhort/pointer_events_polyfill
+		* Take a look at Pointer events and gestures in all browsers:
+			* IE: http://msdn.microsoft.com/en-us/library/ie/hh673557%28v=vs.85%29.aspx
+			* Firefox: https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events
+
+	CB_Touch:
+		* Consider deltas (movements/gestures).
+		* Consider interact.js (interactjs.io) instead of Hammer.js
+		* Take a look at GestureEvent (ongesturestart, ongesturechange, etc.), MSGesture (y MSInertiaStart...), etc:
+			* https://developer.apple.com/library/iad/documentation/UserExperience/Reference/GestureEventClassReference/index.html#//apple_ref/doc/uid/TP40009353-CH6-SW2
+			* https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html
+			* https://msdn.microsoft.com/en-us/library/dn433243(v=vs.85).aspx
+		* Make it compatible with trackpads.
+
+	CB_Mouse:
+		* THINK ABOUT: mouse detector (variable that will be set to true when onmousemove is fired and after that disables the event in order to execute it only once). Disadvantages: some systems fire onmousemove with the finger (touch) and could lead to false positives.
+		!!! THINK ABOUT: update mouse coordinates when scrolling (maybe in CB_Screen).
+		* THINK ABOUT: use ignoreScroll in isOver... methods.
+		* THINK ABOUT: creating setOnMouseEnterFunction (onEnter) and setOnMouseLeaveFunction (onLeave).
+		* Be able to limit things (events, coordinates, etc.) of the mouse and its use to one element or a certain group of elements (only use deltas over those elements, etc).
+		* Try to simulate the MouseLock API in old browsers.
+		* Use deltas for the mouse movements to know what direction is the mouse moved to. Try to do it the same way as or very similar to the Mouse Lock API.
+		* Use a function that detects whether the browser supports changing the mouse icon (cursor) by CSS and otherwise use the DIV image as a fallback (it must receive as parameters the directory and the base name of the cursor file or image, without extension).
+		!!! Apart from using document.onclick, also use document.body.onclick for the whole document! To make it work also in IE6 (maybe checking whether document.onclick is an object instead of a function... try and check!)
+		* For NS4 (http://snipplr.com/view/1286/event-information/):
+			if( myReference.captureEvents && Event.MOUSEMOVE ) {
+				//remove this part if you do not need Netscape 4 to work
+				myReference.captureEvents( Event.MOUSEMOVE );
+			}
+			myReference.onmousemove = alertCoord;
+		* Check whether we have to add up or not the scroll to the mouse coordinates (http://snipplr.com/view/1286/event-information/):
+		function alertCoord(e) {
+			if( !e ) {
+				if( window.event ) {
+					//Internet Explorer
+					e = window.event;
+				} else {
+					//total failure, we have no way of referencing the event
+					return;
+				}
+			}
+			if( typeof( e.pageX ) == 'number' ) {
+				//most browsers
+				var xcoord = e.pageX;
+				var ycoord = e.pageY;
+			} else if( typeof( e.clientX ) == 'number' ) {
+				//Internet Explorer and older browsers
+				//other browsers provide this, but follow the pageX/Y branch
+				var xcoord = e.clientX;
+				var ycoord = e.clientY;
+				var badOldBrowser = ( window.navigator.userAgent.indexOf( 'Opera' ) + 1 ) ||
+					( window.ScriptEngine && ScriptEngine().indexOf( 'InScript' ) + 1 ) ||
+					( navigator.vendor == 'KDE' )
+				if( !badOldBrowser ) {
+					if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) {
+						//IE 4, 5 & 6 (in non-standards compliant mode)
+						xcoord += document.body.scrollLeft;
+						ycoord += document.body.scrollTop;
+					} else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) {
+						//IE 6 (in standards compliant mode)
+						xcoord += document.documentElement.scrollLeft;
+						ycoord += document.documentElement.scrollTop;
+					}
+				}
+			} else {
+				//total failure, we have no way of obtaining the mouse coordinates
+				return;
+			}
+				window.alert('Mouse coordinates are ('+xcoord+','+ycoord+')');
+			}
+
+	CB_VR:
+		* Take a look at getVRDevices(), etc.
+		* Compatibility with OpenNI, Kinect, Wii MotionPlus, PlayStation move, etc.
+		* Compatibility with Oculus Rift, HTC Vive, Gear VR, Google Cardboard, etc.
+		* Take a look at OSVR, WebVR, WebVR Polyfill, MobileVR, etc.
+
+	Remote / Gamepad / Virtual Gamepad:
+		! Think about using Gamepad API Shim (contains Flash fallback): https://github.com/Qantas94Heavy/gamepad-shim
+		! Find a way to do button mapping (so we could use names as LEFT, RIGHT, etc.) and normalization for most browsers and gamepads (without forgetting proprietary ones as WII U, etc.).
+		! Create and normalize CB_Controllers_Proprietary (WII, WII_U, etc.) to simulate GamePad API (for getGamePads method).
+		! In CB_Controllers_Proprietary["WII"], find a way to detect the buttons that have been released.
+		! In CB_Controllers, use gamepad-plus to make it compatible with more browsers (and do not forget keyEventsEnabled property).
+		! Think about modifying the CB_Controllers.isButtonDown method or create a new one to check axis statuses (for desired gamepad or for all of them).
+		* Support for Virtual Gamepad (similar to Virtual Keyboard).
+		* Have into account the gamepads with analog sticks with more than 8 directions.
+		* Remember the vibration feature of some gamepads (console, PC, etc.).
+		* Remember the accelerometer, gyroscope, etc. of some gamepads (console, PC, etc.).
+		* Take a look at Toast Cordova plugin (https://github.com/Samsung/cordova-plugin-toast) and similar.
+		* Take a look at WinJS and UWP (Windows.Gaming.Input.Gamepad) with XBOX gamepad:
+			* Take a look at https://github.com/winjs/winjs/issues/1541
+			* Take a look at http://stackcode.xyz/sc?id=is37616821
+			* Take a look at http://stackoverflow.com/questions/37616821/xbox-one-controller-input-to-uwp-app
+			* Take a look at the example (in https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=11&ved=0ahUKEwjHt4SqycfOAhVTzmMKHQWCBFs4ChAWCB0wAA&url=http%3A%2F%2Fvideo.ch9.ms%2Fsessions%2Fbuild%2F2014%2F2-647.pptx&usg=AFQjCNHJvEXWeTd0F3o0UfPGM-cybjd-8w&sig2=7WVniV0Wyi_y3zgbagWe3A):
+				button.addEventListener("keyup", function (ev) {
+					if (ev.keyCode === WinJS.Utilities.Key.gamepadA) {
+						// Respond to the A button being pressed
+					}
+				}, false);
+		* Take a look at tvOS by Apple to make it compatible with Apple TV.
+		* Take a look at Apple MFi controllers.
+		* GamePad API:
+			* Gamepads detection do not work sometimes when more than one page with CrossBrowdy is open in some browsers (Firefox). Perhaps an option to disable gamepad in CrossBrowdy would be necessary (and just let it enable when we want to manage a gamepad).
+			* In CB_GamePad, map the buttons with the values of CB_Keyboard.WII, CB_Keyboard.SAMSUNG_TV, etc. to abstract various systems.
+			* Button IDs, etc. for GamePad API for different controllers can be found here: http://impactjs.com/forums/code/working-gamepad-support-for-chrome-22
+			* Mapping (and also normalizes I think): https://github.com/ensemblejs/gamepad-api-mappings
+			* Consider using plugins to support gamepads (for old browsers):
+				* Look for gamepad fallbacks in Flash, Silverlight, Java...			
+				* https://github.com/STRd6/Boomstick
+				* https://code.google.com/archive/p/javascript-joystick/
+			* Play Station 3, GamePad API (https://code.tutsplus.com/tutorials/an-introduction-to-the-html5-gamepad-api--active-10686 and https://javedarifkhan.wordpress.com/2013/09/27/an-introduction-to-the-html5-gamepad-api/):
+				ps3Buttons[12]  = 'triangle',
+				ps3Buttons[15]  = 'square',
+				ps3Buttons[14]  = 'cross',
+				ps3Buttons[13]  = 'circle',
+				ps3Buttons[4]   = 'up',
+				ps3Buttons[7]   = 'left',
+				ps3Buttons[6]   = 'down',
+				ps3Buttons[5]   = 'right',
+				ps3Buttons[10]  = 'L1',
+				ps3Buttons[8]   = 'L2',
+				ps3Buttons[11]  = 'R1',
+				ps3Buttons[9]   = 'R2',
+				ps3Buttons[1]   = 'L3',
+				ps3Buttons[2]   = 'R3',
+				ps3Buttons[16]  = 'PS',
+				ps3Buttons[0]   = 'select',
+				ps3Buttons[3]   = 'start';
+
+
+Audiovisual:
+	Webcam/Videoconference/Radio/Others: 
+		* Consider using WebRTC adapter: https://github.com/webrtcHacks/adapter or https://github.com/webrtc/adapter
+		* Take a look at WebRTC, ORTC, etc.
+		* Take a look at navigator.getUserMedia, navigator.webkitGetUserMedia, navigator.mozGetUserMedia, navigator.msGetUserMedia
+		* Take a look at camera support (webcam or phone camera, etc.).
+		* Take a look at FM radio support.
+		
+	Audio:
+		General / Microphone / Others:
+			* CB_Microphone class (it can use puede Web Audio API and maybe others) to access the micro.
+			* Audio sprites (compatible with playSound() and playSoundBase(), etc. or similar)
+			* Method called isPlayingSoundId(soundId) and isPlayingFile(soundFile)
+			* MIDI:
+				* Take a look at Web MIDI API.
+				* Take a look at https://github.com/sergi/jsmidi
+			* Speech to text/Text to speech (Take a look at Web Speech API and some libraries).
+			* Take a look at Web Speech API
+			* Take a look at Speech Recognition API
+			* Text-to-speech with WAV audio generator.
+			* Take a look at Dolby Audio support.
+			* Support Audio Data API for old Mozilla Firefox versions.
+			* FX generator with WAV audio generator.
+			* Find a conversor of WAV (generated dynamically) to MP3 and other formats for browsers that do not support WAV (as IE).
+			* Take a look at https://github.com/jussi-kalliokoski/audiolib.js
+			* Take a look at SoundJS, Howler, Audiolet, mediaelements.js, etc.
+			* Take a look at XAudioJS (https://github.com/taisel/XAudioJS and https://github.com/zhuomingliang/XAudioJS). Supports Mozilla Audio API, Web Audio API and Flash fallback.
+			* Look at some dynamic tone generator converted to WAV (in dataURI). For instance:
+				* https://www.sk89q.com/playground/jswav/
+				* https://www.npmjs.com/package/pcmjs
+				* https://github.com/fritzo/wavencoderjs
+				* riffwave.js
+			* Take a look at:
+				Possibles:
+				//! FX: https://github.com/leshylabs/sfMaker (generates tag base64 in WAV format and creates Audio tag) (does not seem to work in IE11)
+
+				Sound FX:
+				//jsfxr (as3fxr port which is a sfxr port): https://github.com/mneubrand/jsfxr (uses code from riffwave.js) (does not seem to work in IE11)
+				//jxfxr (sfxr port): https://github.com/grumdrig/jsfxr (uses riffwave.js) (does not seem to work in IE11)
+				! https://github.com/leshylabs/sfMaker (generates tag base64 in WAV format and creates Audio tag) (does not seem to work in IE11)
+
+				Processing:
+				//https://github.com/stuartmemo/theresas-sound-world (does not seem to work neither in IE11 nor in FF)
+				//Shore: https://github.com/noahbuscher/Shore (it can be seen on canvas) (does not seem to work in IE11)	
+				//https://github.com/kylestetz/lissajous (it does not seem to work in IE11 and it seems it only works in the console)
+				//DSP.js: https://github.com/corbanbrook/dsp.js (processes signals, includes oscillators, filters, etc. very old, uses Audio Data API de Mozilla)
+				//TunaJS: https://github.com/Theodeus/tuna (works with Web Audio API) (does not seem to work in IE11)
+				//WebAudio.js: https://github.com/jeromeetienne/webaudio.js (uses tQuery (Three.js + jQuery) and it seems it is more for surround sound and audio files)
+				! https://github.com/rserota/wad (Includes TunaJS and works with audio files. It does not work well with FF according to the web) (does not seem to work in IE11)
+				! https://github.com/alemangui/pizzicato (does not seem to work in IE11)
+				! https://github.com/colinbdclark/Flocking (does not seem to work in IE11)
+				! https://github.com/joelarson4/Thunder (does not seem to work in IE9 and maybe not even IE11. It has not been updated for years. It can create WAV files in base64)
+				! dynamicaudio.js: https://github.com/bfirsh/dynamicaudio.js/ (includes Flash fallback, uses Audio Data API of Mozilla which is old. Useful for old browsers)
+				# https://github.com/oampo/Audiolet (It seems it has not been updated for years)
+
+				Notes/Music:
+				//audiosynth: https://github.com/keithwhor/audiosynth (for musical notes, with instruments, etc.) (works with HTML5 Audio element) (does not seem to work in IE11)
+				//https://github.com/PencilCode/musical.js (does not seem to work in IE11)
+				//! https://github.com/saebekassebil/teoria
+				! https://github.com/Tonejs/Tone.js (does not seem to work in IE11)
+
+		CB_Speaker:
+			* THINK ABOUT AND TRY: play blank in 0 volume or near zero (maybe zero does not work), to prevent annoying humming noise in some clients.
+			* Be able to change PAN/balance (move the sound to the left speaker or to the right speaker a given %) in CB_Speaker and in CB_AudioFile (I guess only WAAPI will be able to do this) in systems with two speakers.
+			* Be able to do mute() in CB_Speaker decreasing the volume to cero and also pausing all the sounds as an option by parameter or a constant (for browsers/devices that do not let you control the volume). USE STACK!!!
+			*  timbre.js, band.js and jsfx should have into account the CB_Speaker._volume.
+
+		CB_AudioDetector:
+			! CB_AudioDetector.isAudioFormatSupported should return "" (empty string) if parameter dataURI = true in the browsers that do not support data URI in the Audio elements (as Internet Explorer).
+
+		CB_AudioFile / CB_AudioFile[x]:
+			* [IMPORTANT] Have into account the new way of managing audios, using Promises. Think about using catch, etc.
+			* Remember the allowOverlapping variable in CB_AudioFile.play() (now it does not work at all).
+			* Try to find a way to know the loading progress of a sound in a method or methods in CB_AudioFile and CB_AudioFile[x] (can be called getBytesLoaded() and getBytesTotal()).
+			* THINK ABOUT: only load CB_AudioFile["x"] if "x" is supported (if SM2 is supported, if Cordova is supported, etc).
+			* THINK ABOUT: In WAAPI, be able to load the file from another domain (using some cross-domain request method). Note: the file content can be loaded in BASE64 format and later use the constructor of CB_AudioFile["WAAPI"] or its load method sending in the URL parameter a data URI (data URIs already work).
+			* THINK ABOUT: let WAAPI use other methods apart from AJAX to load audios, as for example websockets, local storage, etc. (and enable the possibility to do it automatically if the previous method fails). Note: we can take advantage of the fact that WAAPI is already compatible with data URIs and we only would need to encode the file to base64 and later call the constructor or the load method of CB_AudioFile["WAAPI"].
+			* THINK ABOUT: Use Java and Silverlight fallbacks (take a look at mediaelementsjs).
+			* THINK ABOUT: In CB_AudioFile[x], be able to define the number of loops (if not defined and loop=true, they willd be infinite). It could be called numberOfLoops or loopsLimit or loopsMaximum, etc.
+			* THINK ABOUT: In CB_AudioFile[x], provide always a way to know what number of loop we are currently playing and how many loops have been played before in total since the sound was created. Specially for callback functionsn as onPlayStart or onStop.
+			* THINK ABOUT: In CB_AudioFile[x], be able to define callbacks for every loop and also a callback for when the sound finishes (after playing it or after playing all the loops. NOTE: maybe onStop method is enough for this).
+			* THINK ABOUT: In CB_AudioFile[x], think about not using setTimeout in the constructor to call the load() method (maybe this way some problems can be avoided in browsers that need the audio objects to be created from a user-generated event as onClick, etc.).
+			* Take a look at a Cordova API (compatible with PhoneGap and Intel XDK) with low latency which let stop sounds individually, set volume individually, know current time and duration, etc.
+			* In the future, finish getProgress of CB_AudioFile["ACMP"] (when Apache Cordova Media plugin supports this feature) and CB_AudioFile["WAAPI"] (when decodeAudioData supports it).
+			* THINK ABOUT: For old browsers, consider to let CB_AudioFile support audio using BGSOUND (very good for IE without Flash), EMBED and/or OBJECT tags.
+
+		CB_AudioFileCache:
+			* In CB_AudioFileCache.checkPlayingAll(), think about using ignoreQueue=true when calling checkPlaying of each object or not (to avoid problems with browsers that need audios to be created/played from a user-generated event as onClick, etc.).
+			* THINK ABOUT: when calling onStop, also send the parameters: soundInstanceId, startAt, stopAt, startAtNextLoop, loop, avoidDelayedPlay, allowedRecursiveDelay, startPlayingTime (the same as when calling onPlayStart).
+
+		CB_AudioFileSpritesPool:
+			* In CB_AudioFileSpritesPool, an option to load using an interchangably/balanced way: load an object in one CB_SoundSprites, then an object in the next CB_SoundSprites, etc. until all are filled (now it fills first the first CB_SoundSprits and after that it starts filling the next one, etc.).
+				NOTE: This way, it is more likely that all CB_SoundSprites have objects inside although some sprites fail. Otherwise, if one failed (using the current method), it is probably the current and next ones will not contain any sprite inside.
+				NOTE 2: do not create an object until we are sure the previous one has been created (use callbackOk and callbackError of createAudioFile)
+	Image:
+		Image / Others:
+			* Take a look at these libraries:
+				http://www.karlson.ru/jsgraphics/html/index.html
+				http://www.walterzorn.de/en/jsgraphics/jsgraphics_e.htm
+				http://raphaeljs.com/
+			* THINK ABOUT: supporting SVG (and fallbacks).
+			* Support video play, with subtitles, etc. (and fallbacks). Take a look at YM-Videoplayer, etc.
+			* Think about a CB_TouchBar class (which could belong to either input or image) to manage Apple Touch Bar.
+
+		CB_Screen:
+			* THINK ABOUT: To make it compatible with IE and maybe other browsers, perhaps CB_Screen.setViewport should be able to change the viewport with CSS (with media queries I think).
+			! Detect Apache Cordova and use it for Fullscreen.
+			* Method to prevent zooming (preventing keys as CTRL and + or CONTROL and mousewheel, setting viewport, etc... all that can be done to prevent a zoom).
+			* Think about using onClick in CB_Screen (it would be an onclick event of body/document/window).
+			* CONSIDER: be able to leave fullscreen after pressing F11 (in CB_Keyboard there is CB_Keyboard.preventF11Key already).
+			! Detect fullscreen in Apache Cordova.
+			! Check new attributes for the ViewPort and let them to be set optionally in CB_Screen.setViewport.
+			* Support multiple screens (take a look at the Presentation API, etc.).
+			* Be able to change screen brightness and other options (at least using an Apache Cordova plugin and Screen.mozBrightness for Firefox OS).
+			* Think about adding the option to make screenshots/snapshots (it should support canvas). Take a look at html2canvas library.cb
+			* Take into account the aspectRatio, onAspectRatioChanged, etc. of Yahoo! Connected TV
+			* Providing support to the two screens of Nintendo 3DS is easy: https://3dbrew.org/wiki/Internet_Browser#Using_Both_Screens
+			* THINK ABOUT: Also check the window size to detect full screen for some browsers where the Fullscreen API will say it is full screen when part of the window is occupied by the JavaScript/developer console.
+
+		CB_Canvas:
+			! Take a look at jebgl (canvas emulated by Java)
+			! THINK ABOUT: In setCanvas use an array with the favourite emulation methods and try one by one with try-cache, this way it will always work.
+			! Consider webgl-compat, cwebgl, iewebgl, etc.
+			! Think about using Canvas 5 Polyfill: https://github.com/google/canvas-5-polyfill (it would need to create the canvas object, emulated or not, before loading this polyfill as it will add methods to it).
+
+
+Net:
+	* Consider to use Social API and/or Web Share API.
+ 	* Take a look at socket.io (before it had a Flash fallback and so on but now it does not). And take a look at Engine.io (the socket.io engine).
+	* THINK ABOUT: if AJAX fails because it is a cross-domain request or whatever, have an option to use some fallbacks automatically as iframe, a PHP proxy (if PHP is enabled), that supports TXT, binary, etc. Use always the fallback by default directly for the rest of requests to the same domain or protocol, for optimization purposes.
+	* Have an array or object with the numbers and errors in AJAX (to explain the meaning of the different error codes) and think about having an option that returns the error when it receives its number. IMPORTANT: with the number, return an error in the format ERROR_BLA_BLA (it would be a constant string) and later give a possibility to translate it into different languages.
+	* Take a look at XDR, etc. to do cross domain requests.
+	* Consider flXHR.
+	* Fallback to iframe if AJAX is not supported!!!
+	* Consider Comet / HTTP Push, etc.
+	* THINK ABOUT: Detect compatibility with CORS in XMLHTTPRequest.
+	* Take a look at service workers (useful if the connection is lost, etc.)
+	* Take a look at support for bluetooth, NFC (this one maybe in Data or in CB_Device), etc.
+	* Take a look at support for reading and sending SMS and do phone calls.
+	* Take a look at support of sockets (not websockets) as in Navigator.mozTCPSocket, etc.
+	* Take a look at Network Service Discovery API.
+	* Take a look at Beacon API
+	* Send files by AJAX (using FormData, etc. and fallbacks as iframe, etc.). Remember File API.
+	* Take a look at STOMP to communicate between clients through a server, etc. (http://stomp.github.io/stomp-specification-1.2.html)
+	* Use forever iframe when websockets is not supported, etc. (maybe not needed if already used by SockJS, I need to check it).
+	* Think about functions/object(s) to perform cross-domain requests creating SCRIPT tags, iframes, using PHP proxy, etc.
+	* THINK ABOUT: support JSONP.
+	* Use a polyfill for encodeURI and encodeURIComponent (and modify the DOM if possible).
+	* Think about using Porthole (https://github.com/ternarylabs/porthole).
+	* Considerar libreria GraphQL.
+
+
+Device:
+	* Object Time in Device.
+	* Events of Apache Cordova as deviceready (pensar), pause, resume, etc.
+	* Be able to detect using Cordova/PhoneGap/Intel XDK the device buttons and assign to them events as backbutton, menubutton, searchbutton (only android), startcallbutton / endcallbutton / volumedownbutton / volumeupbutton (only BB10), etc. CHECK WHETHER IT IS POSSIBLE TO MAKE IT WORK IN OTHER PLATFORMS WHICH ARE NOT BLACKBERRY!!!
+	* Detect buttons as volume up, volume down, power button, etc.
+	* Use Mozilla's Wake Lock API, W3C Wake Lock API, Standby API, etc. with the "system" parameter (o similar to the "system" parameter, depending of the API) to crate a method to keep the CPU, wifi, etc. active.
+	* Take a look at the possibility of use IR (infrared), noise sensor, barometer, heart rate, thermometer, humidity sensor, pedometer, fingerprint detector, etc.
+	* Search for an Apache Cordova plugin that supports ambient light sensor that works in Android, iOS, Windows Phone, etc.
+	* Search for an Apache Cordova plugin that supports proximity sensor that works in Android, iOS, Windows Phone, etc.
+	* Take a look at Generic Sensor API and Sensor API.
+	* Take a look at Blackberry WebWorks Sensors (https://developer.blackberry.com/html5/apis/v1_0/blackberry.sensors.html).
+	* Take a look at devicecompass event.
+	* Magnetometer/Metal detector (at least in Apache Cordova).
+	* Method or methods to calculate performance (could be called performanceTest maybe) that returns a score (performanceScore). Let test some selected things isolated (as boxshadow, etc.) or all in general. Useful to adapt a game settings, visual effects, etc. to the current running machine.
+	* Method to be able to enable the camera flash as it was a flashlight (in HTML5 as well as in Apache Cordova with cordova flashlight plugin or similar).
+	* Find a good library to normalize orientation/motion/compass (GyroNorm, Gyro.js, Full-Tilt...) or another method.
+	* Take a look at WebUSB API.
+	* Take a look at serial port communication (as for example https://github.com/vanevery/p5.serialport) and through USB and GPIO, etc. too.

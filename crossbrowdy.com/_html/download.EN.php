@@ -17,4 +17,6 @@
 </div>
 <?php
 	//TODO: Poner data type de software: https://developers.google.com/search/docs/data-types/software-app
+	
+	//TODO: Poner enlace a old versions (directory files/). Rellenar el directory con todas las versiones (buscar en emails, FTP, etc.).
 ?>

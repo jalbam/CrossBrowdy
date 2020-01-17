@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "crossbrowdy"
+        versionCode = "47"
+        version     = "0.47a" >
+
+    <!-- versionCode is optional and Android only -->
+
+	<preference name="phonegap-version" value="3.6.3" />
+	
+    <name>CrossBrowdy</name>
+
+	<content src="index.html" />
+
+    <access origin="*" />
+	
+	<icon src="icon.png" />
+	<gap:splash src="icon.png" />
+	
+    <description>
+        CrossBrowdy is an object-oriented JavaScript engine that allows to create multimedia apps, emulators, game engines and games that will be compatible with any device.
+    </description>
+
+    <author href="https://www.joanalbamaldonado.com" email="workindalian@gmail.com">
+        Joan Alba Maldonado
+    </author>
+
+    <!-- Preferences: -->
+	<preference name="orientation" value="default" />        <!-- all: default means both landscape and portrait are enabled -->
+    <preference name="target-device" value="universal" />      <!-- all: possible values handset, tablet, or universal -->
+    <preference name="fullscreen" value="true" />           <!-- all: hides the status bar at the top of the screen -->
+    <preference name="prerendered-icon" value="true" />           <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
+    <preference name="ios-statusbarstyle" value="black-opaque" />   <!-- ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar -->
+    <preference name="detect-data-types" value="false" />           <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
+    <preference name="exit-on-suspend" value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
+    <preference name="auto-hide-splash-screen" value="true" />           <!-- ios: if set to false, the splash screen must be hidden using a JavaScript API -->
+    <preference name="disable-cursor" value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
+    <preference name="android-minSdkVersion" value="7" />              <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
+    <preference name="android-installLocation" value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
+	<preference name="webviewbounce" value="false" /> <!-- Prevents rubber (elastic) scrolling on iOS -->
+
+	<!-- Permissions: -->
+	<!-- <preference name="permissions" value="none"/> -->
+	<!-- <feature name="http://api.phonegap.com/1.0/battery"/> <!-- maps to android:BROADCAST_STICKY permission -->
+    <!-- <feature name="http://api.phonegap.com/1.0/camera"/> <!-- maps to android:CAMERA, winphone:ID_CAP_ISV_CAMERA, and winphone:ID_HW_FRONTCAMERA permissions -->
+    <!-- <feature name="http://api.phonegap.com/1.0/contacts"/> <!-- maps to android:READ_CONTACTS, android:WRITE_CONTACTS, android:GET_ACCOUNTS, and winphone:ID_CAP_CONTACTS permissions -->
+    <!-- <feature name="http://api.phonegap.com/1.0/file"/> <!-- maps to WRITE_EXTERNAL_STORAGE permission -->
+    <!-- <feature name="http://api.phonegap.com/1.0/network"/> <!-- maps to android:ACCESS_NETWORK_STATE, and winphone:ID_CAP_NETWORKING permissions -->
+	<feature name="http://api.phonegap.com/1.0/geolocation"/> <!-- maps to android:ACCESS_COARSE_LOCATION, android:ACCESS_FINE_LOCATION, android:ACCESS_LOCATION_EXTRA_COMMANDS, and winphone:ID_CAP_LOCATION permissions -->
+    <feature name="http://api.phonegap.com/1.0/media"/> <!-- maps to android:RECORD_AUDIO, android:RECORD_VIDEO, android:MODIFY_AUDIO_SETTINGS, and winphone:ID_CAP_MICROPHONE permissions -->
+    <feature name="http://api.phonegap.com/1.0/notification"/> <!-- maps to VIBRATE permission -->
+	<feature name="http://api.phonegap.com/1.0/device"/> <!-- maps to winphone:ID_CAP_IDENTITY_DEVICE permission -->
+	
+	<!-- Plugins: -->
+	<gap:plugin name="nl.x-services.plugins.insomnia" />
+	<gap:plugin name="org.apache.cordova.media" version="0.2.8" />
+</widget>

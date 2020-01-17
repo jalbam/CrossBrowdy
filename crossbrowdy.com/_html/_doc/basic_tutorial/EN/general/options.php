@@ -5,18 +5,19 @@
 </p>
 	
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
-	//Sets desired options before starting:
+	//Sets desired options before starting (the ones not set will keep their default value):
 	var CB_OPTIONS =
 	{
 		//Options for CrossBrowdy (general options):
 		CrossBrowdy:
 		{
-			CB_console_ALLOW_ALERTS: false //It will not use alert()'s as a fallback when using 'CB_console' and neither the 'console' object nor a DOM element with "CB_console" ID are found.
+			SHOW_SPLASH_SCREEN_DEFAULT: false, //Defines whether to show or not the loading splash screen. Default: true.
+			CB_console_ALLOW_ALERTS: false //It will not use alert()'s as a fallback when using 'CB_console' and neither the 'console' object nor a DOM element with "CB_console" ID are found. Default: true.
 		},
 		//Options for the CrossBase module (main module):
 		CrossBase:
 		{
-			CB_LOAD_SLCANVAS: true //Forces to load SLCanvas.
+			SLCANVAS_LOAD: true //Forces to load SLCanvas.
 		}
 	};
 	

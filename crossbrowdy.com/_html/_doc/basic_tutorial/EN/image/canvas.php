@@ -38,16 +38,16 @@
 	Here is the JavaScript code with some examples creating canvas (<a href="api/CB_Canvas.html" target="_blank">CB_Canvas</a>) objects:
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
-	//Creates a canvas object for the canvas whose id is "canvas_id" with the default values:
+	//Creates a canvas object for the canvas whose ID is "canvas_id" with the default values:
 	var myCanvas = new CB_Canvas("canvas_id");
 	
-	//Creates a canvas object for the canvas whose id is "canvas_id_2" with the desired context type ("2d"):
+	//Creates a canvas object for the canvas whose ID is "canvas_id_2" with the desired context type ("2d"):
 	var myCanvas_2 = new CB_Canvas("canvas_id_2", "2d");
 	
-	//Creates a canvas object for the canvas whose id is "canvas_id_3" with the desired context type ("2d"), width and height:
+	//Creates a canvas object for the canvas whose ID is "canvas_id_3" with the desired context type ("2d"), width and height:
 	var myCanvas_3 = new CB_Canvas("canvas_id_3", "2d", CB_Screen.getWindowWidth(), CB_Screen.getWindowHeight());
 	
-	//Creates a canvas object for the canvas whose id is "canvas_id_4" with the desired context type ("2d"), width and height and using callback functions (recommended):
+	//Creates a canvas object for the canvas whose ID is "canvas_id_4" with the desired context type ("2d"), width and height and using callback functions (recommended):
 	var myCanvas_4 = new CB_Canvas
 	(
 		"canvas_id_4", //canvasId. Unique required parameter.
@@ -128,10 +128,10 @@
 		this.disableAntiAliasing();
 	};
 	
-	//Creates a canvas object for the canvas whose id is "canvas_id_4" with the desired context type ("2d"), width and height and using callback functions (recommended):
+	//Creates a canvas object for the canvas whose ID is "canvas_id_5" with the desired context type ("2d"), width and height and using callback functions (recommended):
 	var myCanvas = new CB_Canvas
 	(
-		"canvas_id", //canvasId. Unique required parameter.
+		"canvas_id_5", //canvasId. Unique required parameter.
 		"2d", //contextType.
 		CB_Screen.getWindowWidth(), //canvasWidth.
 		CB_Screen.getWindowHeight(), //canvasHeight.

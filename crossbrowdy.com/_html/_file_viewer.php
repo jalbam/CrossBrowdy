@@ -49,7 +49,7 @@
 	//Shows all files:
 	function getFilesCodeAll()
 	{
-		global $dirPath, $category, $subcategory, $topic, $language;
+		global $dirPath, $category, $subcategory, $topic, $language, $projectURLDefault;
 		
 		$dirPath = "_html/_doc/" . $category . "/" . $language . "/" . $subcategory . "/" . $topic . "_files/";
 		
@@ -60,11 +60,29 @@
 			$files = scandir("_html/_doc/" . $category . "/" . $language . "/" . $subcategory . "/" . $topic . "_files/");
 
 			$indexHTMLPosition = array_search("index.html", $files);
+			$onlineLinkingAdvice = "\r\n\t\t&lt;!-- Note: it is recommended to download CrossBrowdy instead of linking the online version. This is just for the example! --&gt;";
 			if ($indexHTMLPosition !== FALSE)
 			{
 				$fileCode = getFileCode("index.html", $dirPath, "language-html");
-				$output .= str_replace("../../../../../../CrossBrowdy", "CrossBrowdy", $fileCode);
+				//$output = str_replace("../../../../../../CrossBrowdy", "CrossBrowdy", $fileCode);
+				$output = str_replace("../../../../../../CrossBrowdy/", $projectURLDefault . "CrossBrowdy/", $fileCode);
+				
+				$output = str_replace
+				(
+					"&lt;!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: --&gt;",
+					"&lt;!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: --&gt;" . $onlineLinkingAdvice,
+					$output
+				);
+
+				$output = str_replace
+				(
+					"&lt;!-- Loads CrossBrowdy.js (main file): --&gt;",
+					"&lt;!-- Loads CrossBrowdy.js (main file): --&gt;" . $onlineLinkingAdvice,
+					$output
+				);
+								
 				$output = str_replace("../../../../../../guides", "/guides", $output);
+				
 			}
 
 			$output .= getFilesCode("html", $files, "language-html", Array("index.html"));
