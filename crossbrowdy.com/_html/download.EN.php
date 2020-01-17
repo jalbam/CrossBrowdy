@@ -8,7 +8,7 @@
 				if (file_exists(CB_FILENAME_PATH_ZIP_REAL_LATEST))
 				{
 			?>
-					<a href="get_file?version=current" class="download_button">
+					<a href="get_file<?php echo $PHPExtension; ?>?version=current" class="download_button">
 						Download <?php echo CB_VERSION_CURRENT; ?> version
 					</a>
 					<?php
@@ -42,13 +42,13 @@
 	</code></div>
 
 	<p>
-		Using <strong>Bower</strong> (whole repo):
+		Using <strong>Bower</strong>:
 	</p>
 	<div class="shell_command_line"><code class="language-shell">
 		<strong>bower</strong> install jalbam/crossbrowdy --save
 	</code></div>
 	<p>
-		Note: Bower will download whole GitHub repository.
+		Note: Bower will also download the <a href="api<?php echo $PHPExtension; ?>" target="_blank">API documentation</a>.
 	</p>
 
 	<h3>Source code</h3>

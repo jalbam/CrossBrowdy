@@ -37,12 +37,12 @@ npm i crossbrowdy
 ```
 
 
-**Bower** (whole repo):
+**Bower**:
 ```
 bower install jalbam/crossbrowdy --save 
 ```
 
-**Note**: Bower will download whole GitHub repository. 
+**Note**: Bower will also download the [API documentation](https://crossbrowdy.com/api/ "CrossBrowdy API documentation").
 
 
 # Getting started
