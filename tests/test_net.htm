@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+
+		<title>CrossBrowdy - Network test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				/*
+				position:absolute;
+				left:360px;
+				top:2px;
+				*/
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			function init()
+			{
+				CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			}
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				//Set events:
+				setEvents();
+
+				CB_Elements.insertContentById("xhr_supported", CB_Net.XHR.supported() ? "YES" : "NO");
+
+				CB_Net.XHR.call
+				(
+					"net/test_get.txt", //url
+					"GET", //method
+					null, //variables
+					null, //headers
+					null, //responseType
+					null, //mimeType
+					null, //callbackFunction
+					function(XHR, callbackFunctionError) { CB_Elements.insertContentById("xhr_response_get", "OK! [" + CB_Net.XHR.getResponseContent(XHR, true) + "]"); }, //callbackFunctionOK
+					function(XHR, callbackFunctionOk) { CB_Elements.insertContentById("xhr_response_get", "ERROR! [" + CB_Net.XHR.getResponseContent(XHR, true) + "]"); }, //callbackFunctionError
+					null, //allowedSuccessStatuses
+					true, //asynchronous
+					null //XHR
+				);
+				
+
+				CB_Net.XHR.callForm
+				(
+					"net/test_post.php", //url
+					"test=" + CB_Net.URLValueEncode("If you read this it means all is fine!"), //variables
+					null, //headers
+					null, //responseType
+					null, //charset
+					null, //callbackFunction
+					function(XHR, callbackFunctionError) { CB_Elements.insertContentById("xhr_response_post", "[SEEMS OK] RESPONSE: " + CB_Net.XHR.getResponseContent(XHR, true, 1)); }, //callbackFunctionOK
+					function(XHR) { CB_Elements.insertContentById("xhr_response_post", "[ERROR!] RESPONSE: " + CB_Net.XHR.getResponseContent(XHR, true)); }, //callbackFunctionError
+					null, //allowedSuccessStatuses
+					null //XHR
+				);
+				
+				
+				CB_Net.XHR.callBinary
+				(
+					"audio/hola/hola.wav", //url
+					null, //variables
+					null, //headers
+					"arraybuffer", //blobOrArrayBuffer
+					null, //callbackFunction
+					function(XHR, callbackFunctionError) //callbackFunctionOK:
+					{
+						//* Source: mobz @ http://stackoverflow.com/questions/9267899/arraybuffer-to-base64-encoded-string
+						if (typeof(Uint8Array) !== "undefined")
+						{
+							var binary = "";
+							var bytes = new Uint8Array(XHR.response);
+							var len = bytes.byteLength;
+							for (var i = 0; i < len; i++)
+							{
+								binary += String.fromCharCode(bytes[i]);
+							}
+							CB_Elements.insertContentById("xhr_response_binary", binary.substr(0, 100) + " [...]");
+							if (window.btoa)
+							{
+								CB_Elements.insertContentById("xhr_response_binary_base64", window.btoa(binary).substr(0, 100) + " [...]");
+							}
+							else
+							{
+								CB_Elements.insertContentById("xhr_response_binary_base64", "btoa function NOT SUPPORTED!");
+							}
+						}
+						else
+						{
+							CB_Elements.insertContentById("xhr_response_binary", "[Uint8Array NOT SUPPORTED but response is OK]: " + XHR.response);
+							CB_Elements.insertContentById("xhr_response_binary_base64", "[Uint8Array NOT SUPPORTED but response is OK]");
+						}
+					},
+					function(XHR) //callbackFunctionError:
+					{
+						CB_Elements.insertContentById("xhr_response_binary", "[ERROR] " + CB_Net.XHR.getResponseContent(XHR, true) + " - " + XHR.errorMessage);
+						CB_Elements.insertContentById("xhr_response_binary_base64", "[ERROR] " + CB_Net.XHR.getResponseContent(XHR, true) + " - " + XHR.errorMessage);
+					},
+					[200, 206], //allowedSuccessStatuses
+					null //XHR
+				);
+
+				CB_Net.XHR.callProxy
+				(
+					"http://www.dhtmlgames.com/yasminoku/", //url
+					"GET", //method
+					null, //variables
+					null, //headers
+					null, //responseType
+					true, //forceJSON
+					true, //getHeaders
+					true, //headersForceOneDimension
+					true, //headersForceOneDimensionValues
+					true, //transparentStatus
+					true, //transparentHeaders
+					null, //callbackFunction
+					function(XHR, callbackFunctionError) //callbackFunctionOK:
+					{
+						CB_Elements.id("xhr_response_proxy").style.fontSize = "10px";
+						CB_Elements.insertContentById
+						(
+							"xhr_response_proxy",
+							"[OK!]" + 
+							"<ul>STATUS: " + CB_Net.XHR.getStatusCode(XHR, null, false) + "</ul>" +
+							"<ul>HEADERS: " + getObjectAsString(CB_Net.XHR.getResponseHeaders(XHR, false), null, true, false) + "</ul>" +
+							"<ul>RESPONSE: " + CB_Net.XHR.getResponseContent(XHR, true).replace(/</g, "&lt;").replace(/>/g, "&gt;").substr(0, 300) + " [...]</ul>"
+						);
+					},
+					function(XHR, callbackFunctionOk) //callbackFunctionError:
+					{
+						CB_Elements.insertContentById("xhr_response_proxy", "[ERROR]: " + CB_Net.XHR.getResponseContent(XHR, true) + " - " + XHR.errorMessage);
+					},
+					null, //allowedSuccessStatuses
+					null //XHR
+				);
+
+				//NOTE: For safety reasons, the default proxy only allows to request the URLs defined in the '$allowedURLs' array in the 'CB_proxy.config.php' file. Just edit it to allow other URLs.
+				CB_Net.XHR.callREST
+				(
+					"http://localhost/CrossBrowdy/tests/net/fake_rest_server/index.php", //serverURL
+					"/whatever/whatever2", //route
+					"example=example_data", //dataURL
+					"PUT", //method
+					{ "dataItem" : "data_value" }, //data
+					{ "Content-Type" : "application/json" }, //headers
+					null, //responseType
+					false, //avoidProxy
+					true, //forceJSON
+					true, //getHeaders
+					false, //headersForceOneDimension
+					false, //headersForceOneDimensionValues
+					true, //transparentStatus
+					true, //transparentHeaders
+					function(XHR, callbackFunctionError) //callbackFunctionOK:
+					{
+						CB_Elements.id("xhr_response_rest").style.fontSize = "10px";
+						CB_Elements.insertContentById
+						(
+							"xhr_response_rest",
+							"[OK!]" + 
+							"<ul>STATUS: " + CB_Net.XHR.getStatusCode(XHR, null, false) + "</ul>" +
+							"<ul>HEADERS: " + getObjectAsString(CB_Net.XHR.getResponseHeaders(XHR, false), null, true, false, 3) + "</ul>" +
+							"<ul>RESPONSE: " + CB_Net.XHR.getResponseContent(XHR, true).replace(/</g, "&lt;").replace(/>/g, "&gt;").substr(0, 300) + "</ul>"
+						);
+					},
+					function(XHR) //callbackFunctionError:
+					{
+						CB_Elements.insertContentById("xhr_response_rest", "[ERROR]: " + CB_Net.XHR.getResponseContent(XHR, true) + " - " + XHR.errorMessage);
+						CB_console(XHR);
+					},
+					null, //allowedSuccessStatuses
+					null //XHR
+				);
+
+				CB_Net.XHR.callREST
+				(
+					"http://localhost/CrossBrowdy/tests/net/fake_rest_server/index.php", //serverURL
+					"/wherever/wherever2", //route
+					"example2=example_data2", //dataURL
+					"DELETE", //method
+					{ "dataItem2" : "data_value2" }, //data
+					{ "Content-Type" : "application/json" }, //headers
+					null, //responseType
+					true, //avoidProxy
+					true, //forceJSON
+					true, //getHeaders
+					false, //headersForceOneDimension
+					false, //headersForceOneDimensionValues
+					true, //transparentStatus
+					true, //transparentHeaders
+					function(XHR, callbackFunctionError) //callbackFunctionOK:
+					{
+						CB_Elements.id("xhr_response_rest_no_proxy").style.fontSize = "10px";
+						CB_Elements.insertContentById
+						(
+							"xhr_response_rest_no_proxy",
+							"[OK!]" + 
+							"<ul>STATUS: " + CB_Net.XHR.getStatusCode(XHR, null, false) + "</ul>" +
+							"<ul>HEADERS: " + getObjectAsString(CB_Net.XHR.getResponseHeaders(XHR, false), null, true, false) + "</ul>" +
+							"<ul>RESPONSE: " + CB_Net.XHR.getResponseContent(XHR, true).replace(/</g, "&lt;").replace(/>/g, "&gt;").substr(0, 300) + "</ul>"
+						);
+					},
+					function(XHR) //callbackFunctionError:
+					{
+						CB_Elements.insertContentById("xhr_response_rest_no_proxy", "[ERROR]: " + CB_Net.XHR.getResponseContent(XHR, true) + " - " + XHR.errorMessage);
+						CB_console(XHR);
+					},
+					null, //allowedSuccessStatuses
+					null //XHR
+				);
+				
+				CB_Net.REST.actions["test_action"] = 
+				{
+					"route" : "/whoever/whoever2?whatever3={{whatever3}}",
+					"routeWildcardData" :
+						function(actionName, additionalData)
+						{
+							return { "whatever3" : "whatever3_data" };
+						},
+					"method" : "GET",
+					"data" :
+						function(actionName, additionalData)
+						{
+							var data = "dataItem3=dataItem3_value&whateverItem=whateverItem_value";
+							return data;
+						},
+					"responseType" : undefined,
+					"getHeaders" : false,
+					"callbackOk" :
+						function(actionName, XHR, callbackError, additionalData)
+						{
+							CB_Elements.insertContentById(additionalData.elementId, "[OK]: STATUS=" + XHR.status + ", Response=" + XHR.responseText);
+						},
+					"callbackError" :
+						function(actionName, XHR, additionalData)
+						{
+							CB_Elements.insertContentById(additionalData.elementId, "[ERROR]: STATUS=" + XHR.status + ", Response=" + XHR.responseText + " - " + XHR.errorMessage);
+						}
+				};
+				
+				CB_Net.REST.actionProcess("test_action", { "elementId" : "rest_action_response" }, null, "http://localhost/CrossBrowdy/tests/net/fake_rest_server/index.php", false);
+
+				CB_Net.REST.actions["test_action_2"] = CB_Net.REST.actions["test_action"];
+
+				CB_Net.REST.actionProcess("test_action_2", { "elementId" : "rest_action_response_no_proxy" }, null, "http://localhost/CrossBrowdy/tests/net/fake_rest_server/index.php", true);
+
+				/*
+				CB_Net.REST.actionAbort(XHR)
+				CB_Net.REST.actionAbortCancel(XHR)
+				CB_Net.REST.actionIsAborted(XHR)
+				*/
+				
+				var websocket = CB_Net.Sockets.SockJS.listen
+				(
+					///////"http://localhost:9999/echo", //serverURL
+					"http://192.168.1.2:9999/echo", //serverURL
+					//"http://192.168.0.70:9999/echo", //serverURL
+					function webSocketsOnOpen(evt) { CB_Elements.insertContentById("sock_js_response_transport", "[" + websocket.transport + "] "); }, //onOpen
+					function webSocketsOnClose(evt) { CB_Elements.insertContentById("sock_js_response", "Websocket closed. Reason: " + evt.reason); }, //onClose
+					function webSocketsOnMessage(evt) { CB_Elements.insertContentById("sock_js_response", evt.data); }, //onMessage
+					function webSocketsOnError(evt) { CB_Elements.insertContentById("sock_js_response", "Websocket error: " + JSON.stringify(evt)); }, //onError
+					undefined, //options
+					undefined //protocols
+				)
+
+				CB_Net.Fetch.get("net/test_fetch_text.txt").then
+				(
+					function(response) { return response.text(); }//,
+					//function(error) { CB_Elements.insertContentById("fetch_response_text", "ERROR: " + getObjectAsString(error, null, true, false)); }
+				).then
+				(
+					function(body) { CB_Elements.insertContentById("fetch_response_text", "RECEIVED: " + body); },
+					function(error) { CB_Elements.insertContentById("fetch_response_text", "ERROR (A): " + getObjectAsString(error, null, true, false)); }
+				);//["catch"](function(error) { CB_Elements.insertContentById("fetch_response_text", "ERROR (B): " + getObjectAsString(error, null, true, false)); });
+
+				CB_Net.Fetch.get("net/test_fetch_json.txt").then
+				(
+					function(response) { return response.json(); }//,
+					//function(error) { CB_Elements.insertContentById("fetch_response_json", "ERROR: " + getObjectAsString(error, null, true, false)); }
+				).then
+				(
+					function(body) { CB_Elements.insertContentById("fetch_response_json", "RECEIVED: " + getObjectAsString(body, null, true, false)); }
+				)["catch"](function(error) { CB_Elements.insertContentById("fetch_response_json", "ERROR (B): " + getObjectAsString(error, null, true, false)); });
+				
+				return;
+			}
+
+			//Cancel all events:
+			function cancelEvents()
+			{
+				//Cancel all events:
+
+				//Clear all the intervals:
+				
+				return;
+			}
+
+
+			//Set all events:
+			function setEvents()
+			{
+				//Cancel previous events first (if any):
+				cancelEvents();
+
+				//Set the events:
+
+				return;
+			}
+
+			
+			function sockJSSendMessage()
+			{
+				var message = CB_Elements.id("sockjs_message_input").value;
+				CB_Net.Sockets.SockJS.send(message, null, function() { alert("MESSAGE CANNNOT BE SENT THROUGH SockJS!"); });
+			}
+			
+			
+			function getObjectAsString(desiredObject, elementId, avoidPrinting, avoidRecursive, levelMax, levelCurrent)
+			{
+				var info = "{ ";
+				if (typeof(levelMax) === "undefined" || levelMax === null || isNaN(levelMax)) { levelMax = 10; }
+				if (typeof(levelCurrent) === "undefined" || levelCurrent === null || isNaN(levelCurrent)) { levelCurrent = 0; }
+				for (var property in desiredObject)
+				{
+					if (CB_Arrays.sizeof(desiredObject[property]) === 0 || CB_isString(desiredObject[property]))
+					{
+						info += property + ": " + desiredObject[property] + ", ";
+					}
+					else if (!avoidRecursive && levelCurrent < levelMax)
+					{
+						info += property + ": " + getObjectAsString(desiredObject[property], elementId, true, avoidRecursive, levelMax, ++levelCurrent) + ", ";
+					}
+				}
+				info = CB_rtrim(info, ", ");
+				info += " }";
+				if (!avoidPrinting) { CB_Elements.id(elementId).innerHTML = info; }
+				return info;
+			}
+			
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd" onload="init();">
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - Network test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div id="changeColor" style="font-size:16px; text-align:center;">This is a network test</div>
+			<br />
+			<div style="text-align:center;"><button onClick="cancelEvents(); alert('All events stopped');">Cancel events</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setEvents(); alert('All events started');">Set events</button></div>
+			<br />
+			<br />
+			XHR (AJAX) supported: <div id="xhr_supported" class="dataInfo">Wait...</div>
+			<br />
+			XHR (AJAX) response (GET): <div id="xhr_response_get" class="dataInfo">Wait...</div>
+			<br />
+			XHR (AJAX) response (POST/FORM): <div id="xhr_response_post" class="dataInfo">Wait...</div>
+			<br />
+			XHR (AJAX) response (binary using ArrayBuffer): <div id="xhr_response_binary" class="dataInfo">Wait...</div>
+			<br />
+			XHR (AJAX) response (binary using ArrayBuffer) in base64: <div id="xhr_response_binary_base64" class="dataInfo">Wait...</div>
+			<br />
+			XHR (AJAX) response with proxy: <div id="xhr_response_proxy" class="dataInfo">Wait...</div>
+			<br />
+			XHR (AJAX) response with REST (using proxy): <div id="xhr_response_rest" class="dataInfo">Wait...</div>
+			<br />
+			XHR (AJAX) response with REST (no proxy): <div id="xhr_response_rest_no_proxy" class="dataInfo">Wait...</div>
+			<br />
+			REST action (using proxy): <div id="rest_action_response" class="dataInfo">Wait...</div>
+			<br />
+			REST action (no proxy): <div id="rest_action_response_no_proxy" class="dataInfo">Wait...</div>
+			<br />
+			<br />
+			Fetch response (text): <div id="fetch_response_text" class="dataInfo">Wait...</div>
+			<br />
+			Fetch response (JSON): <div id="fetch_response_json" class="dataInfo">Wait...</div>
+			<br />
+			<br />
+			WebSockets (SockJS): <div id="sock_js_response_transport" class="dataInfo"></div><div id="sock_js_response" class="dataInfo">Wait...</div>
+			<form action="#" onSubmit="return false;">
+				<input type="text" value="Hello CrossBrowdy!" name="sockjs_message_input" id="sockjs_message_input" />
+				<input type="submit" value="Send" onClick="sockJSSendMessage(); return false;">
+			</form>
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="display:none; visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+	</body>
+</html>

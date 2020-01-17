@@ -1,0 +1,526 @@
+<!-- <!DOCTYPE html> -->
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - Mouse test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				position:absolute;
+				left:360px;
+				top:2px;
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			CB_init(main);//, "../CrossBrowdy/"); //It will call main function when ready.
+
+			var myCB_Canvas; //It will store the canvas.
+			
+		
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+//				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				//Creates a CB_Canvas object with a canvas (id "mycanvas") that will be created dinamically:
+				myCB_Canvas = new CB_Canvas("mycanvas", "2d"); //It will use default width and height and default main alternative mode (flash).
+
+				//We get the canvas ("mycanvas"):
+				var canvas = myCB_Canvas.get();
+				
+				canvas.style.position = "absolute";
+				canvas.style.left = "20px";
+				canvas.style.top = "50px";
+					
+				//We size it:
+				myCB_Canvas.setWidth("350");
+				myCB_Canvas.setHeight("350");
+
+				//Paints canvas:
+				paintCanvas();
+
+				//Set events:
+				setEvents();
+
+				return;
+			}
+
+			//Cancel all events:
+			function cancelEvents()
+			{
+				//clearInterval(mouseMoveInterval);
+				
+				return;
+			}
+
+
+			//Set all events:
+			function setEvents()
+			{
+				//Cancel previous events first (if any):
+				cancelEvents();
+
+				//Disables contextual menu:
+				CB_Elements.contextMenuDisable();
+
+				//Sets the function for when a click happens:
+				CB_Mouse.onClick(mouseClick, true, true);
+				
+				//Set the function for when a double click happens:
+				CB_Mouse.onDblClick(mouseDblClick, true, true);
+
+				//Sets the functionn for when lock state changes:
+				CB_Mouse.onLockChange(function() { if (CB_Mouse.isLocked(true) !== CB_Mouse.wasLocked()) { CB_console("Lock state change! now is " + (CB_Mouse.isLocked() ? "LOCKED" : "UNLOCKED")); } }, true, true);
+				
+				//Sets the function for when a mouse button is down or up:
+				refreshButtonsDown(); //Refreshes buttons state now.
+				CB_Mouse.onButtonDown(refreshButtonsDown, true, true);
+				CB_Mouse.onButtonUp(refreshButtonsDown, true, true);
+				CB_Mouse.onLeave(refreshButtonsDown, true, true);
+
+				//Sets interval that will refresh status of the mouse position:
+				mouseMoved(); //Executes it for the first time.
+				CB_Mouse.onMove(mouseMoved, true, true);
+
+				//Sets event for when mouse wheel is used:
+				CB_Mouse.onWheel(mouseWheel);
+				
+				return;
+			}
+
+
+			//Function that paints the canvas:
+//			var lastFillStyle;
+			var rectangleX = 100;
+			var rectangleY = 10;
+			var rectangleWidth = 150;
+			var rectangleHeight = 60;
+			var circleX = 200;
+			var circleY = 200;
+			var circleRadius = 80;
+			var lineX2 = 20;
+			var lineY2 = 200;
+			var lineX1 = 60;
+			var lineY1 = 100;
+			function paintCanvas(fillStyle)
+			{
+				if (typeof(fillStyle) === "undefined" || fillStyle === null) { fillStyle = "#f0aa0f"; }
+
+//				if (lastFillStyle === fillStyle) { return; }
+
+				//If canvas is supported by the browser:
+				if (myCB_Canvas.isSupported())
+				{
+					//We get the context:
+					var context = myCB_Canvas.getContext();
+
+					context.fillStyle = fillStyle;
+					context.beginPath();
+//					context.lineWidth = 0;
+					context.fillRect(rectangleX, rectangleY, rectangleWidth, rectangleHeight);
+					context.fill();
+
+					context.fillStyle = fillStyle;
+					context.beginPath();
+//					context.lineWidth = 0;
+					context.arc(circleX, circleY, circleRadius, 0, Math.PI * 2, true);
+					context.fill();
+
+					context.strokeStyle = fillStyle;
+					context.beginPath();
+    				context.moveTo(lineX1, lineY1);
+				    context.lineWidth = 1;
+					context.lineTo(lineX2, lineY2);
+					context.stroke();
+
+//					lastFillStyle = fillStyle;
+				}
+				
+				return;
+			}
+
+			
+			//Function that updates buttons pressed:
+			function refreshButtonsDown(e)
+			{
+//				e = CB_Events.normalize(e);
+//				if (typeof(e.preventDefault) !== "undefined") { e.preventDefault(); }
+				
+				var buttonsPressed = CB_Mouse.getButtonsDown();
+				
+				var leftButtonDiv = CB_Elements.id("leftButton");
+				var middleButtonDiv = CB_Elements.id("middleButton");
+				var rightButtonDiv = CB_Elements.id("rightButton");
+				
+				if (buttonsPressed.LEFT) { leftButtonDiv.innerHTML = "PRESSED"; }
+				else { leftButtonDiv.innerHTML = "released"; }
+
+				if (buttonsPressed.MIDDLE) { middleButtonDiv.innerHTML = "PRESSED"; }
+				else { middleButtonDiv.innerHTML = "released"; }
+
+				if (buttonsPressed.RIGHT) { rightButtonDiv.innerHTML = "PRESSED"; }
+				else { rightButtonDiv.innerHTML = "released"; }
+
+				return false;
+			}
+
+			
+			//Function executed when a click happens (onClick event):
+			function mouseClick(e)
+			{
+				//For all elements:
+				var divElements = [ "element1", "element2", "element3", "element4" ];
+				var divElementsLength = divElements.length;
+				var element = null;
+				var elementName = "";
+				for (var x = 0; x < divElementsLength; x++)
+				{
+					//Changes element border depending on whether there is collision or not:
+					elementName = divElements[x];
+					element = CB_Elements.id(elementName);
+					if (CB_Mouse.isOverElement(element))
+					{
+						element.style.borderWidth = "30px";
+					}
+					else { element.style.borderWidth = "10px"; }
+				}
+				
+				return false;
+			}
+
+
+			//Function executed when a double click happens (onDblClick event):
+			function mouseDblClick(e)
+			{
+				//For all elements:
+				var divElements = [ "element1", "element2", "element3", "element4" ];
+				var divElementsLength = divElements.length;
+				var element = null;
+				var elementName = "";
+				for (var x = 0; x < divElementsLength; x++)
+				{
+					//Changes element border depending on whether there is collision or not:
+					elementName = divElements[x];
+					element = CB_Elements.id(elementName);
+					if (CB_Mouse.isOverElement(element))
+					{
+						element.style.borderWidth = "80px";
+					}
+					else { element.style.borderWidth = "10px"; }
+				}
+				
+				CB_Mouse.unlock();
+				
+				return false;
+			}
+
+			
+			//Function executed when mouse is moved (onMouseMove event):
+			function mouseMoved(e, x, y)
+			{
+				//Show position of the mouse:
+				var mouseX = CB_Mouse.getX();
+				var mouseY = CB_Mouse.getY();
+				var mousePositionDiv = CB_Elements.id("mousePosition");
+				mousePositionDiv.innerHTML = mouseX + ", " + mouseY;
+
+				//Show movement of the mouse:
+				var mouseXMovement = CB_Mouse.getXMovement();
+				var mouseYMovement = CB_Mouse.getYMovement();
+				var mouseMovementDiv = CB_Elements.id("mouseMovement");
+				mouseMovementDiv.innerHTML = mouseXMovement + ", " + mouseYMovement;
+
+				//For all elements:
+				var divElements = [ "element1", "element2", "element3", "element4" ];
+				var cursors = ["cursor.cur", "cursor.ani", "cursor.gif", "cursor.png"];
+				var cursorCSS = "";
+				var divElementsLength = divElements.length;
+				var element = null;
+				var elementName = "";
+				for (var x = 0; x < divElementsLength; x++)
+				{
+					//Changes element color depending on whether there is collision or not:
+					elementName = divElements[x];
+					element = CB_Elements.id(elementName);
+					if (CB_Mouse.isOverElement(element))
+					{
+						element.style.backgroundColor = "#00ffff";
+						//cursorCSS = "url(cursors/" + cursors[x] + "), auto";
+						//CB_Mouse.setCSS(cursorCSS);
+					}
+					else { element.style.backgroundColor = "#00ff00"; element.style.borderWidth = "10px"; }
+					
+					showInfoElement(element);
+				}
+
+				var canvas = myCB_Canvas.get();
+				if (CB_Mouse.isOverCircle(circleX, circleY, circleRadius, canvas)) { paintCanvas("#0000aa"); }
+				else if (CB_Mouse.isOverRectangle(rectangleX, rectangleY, rectangleWidth, rectangleHeight, canvas)) { paintCanvas("#0000aa"); }
+				else if (CB_Mouse.isOverSegment(lineX1, lineY1, lineX2, lineY2, null, canvas)) { paintCanvas("#0000aa"); }
+				else { paintCanvas("#00aa00"); }
+
+				return;
+			}
+
+
+			//Function that detects if mouse collides with an element given:
+			function showInfoElement(element)
+			{
+				if (typeof(element) === "undefined" || element === null || typeof(element.id) === "undefined" || element.id === null) { return false; }
+
+				var elementName = element.id;
+
+				var mouseRelativeX = CB_Mouse.getXRelative(CB_Elements.getLeft(element));
+				var mouseRelativeY = CB_Mouse.getYRelative(CB_Elements.getTop(element));
+				var elementWidth = CB_Elements.getWidth(element);
+				var elementHeight = CB_Elements.getHeight(element);
+
+				//Shows information:
+				var elementLeft = CB_Elements.getLeft(element);
+				var elementTop = CB_Elements.getTop(element);
+				element.innerHTML = elementLeft + "," + elementTop + " [" + elementWidth + ", " + elementHeight + "]"
+				var mouseRelativePositionElementDiv = CB_Elements.id("mouseRelativePosition_" + elementName);
+				mouseRelativePositionElementDiv.innerHTML = mouseRelativeX + ", " + mouseRelativeY;
+				
+				return;
+			}
+
+			
+			//Changes cursor CSS:
+			function changeCursorCSS(cursor, button)
+			{
+				var cursorCSS = "url(cursors/" + cursor + "), auto";
+				//CB_Mouse.setCSS(cursorCSS);
+				//CB_Mouse.setCSS(cursorCSS, button);
+				CB_Mouse.setCSS(cursorCSS);
+				return;
+			}
+
+			
+			//Shows a fake cursor image:
+			var showingFakeCursor = false;
+			var hideCursorImageFunctionSet = false;
+			function showFakeCursorImage(hideCursor, isSprite)
+			{
+				var cursorImage = "ranisima.gif"
+				var cursorImageWidth = 40;
+				var cursorImageHeight = 40;
+				var numberOfFrames = 1;
+				var framesMs = 10;
+				if (isSprite)
+				{
+					cursorImage = "bird_sprites.gif";
+					cursorImageWidth = 38;
+					cursorImageHeight = 36;
+					numberOfFrames = 4;
+					//alert("setting a sprite: " + cursorImage);
+				}
+				//else { alert("setting a normal cursor: " + cursorImage + "(hideCursor="+hideCursor+")"); }
+				CB_Mouse.CursorImage.set(true, "../tests/cursors/" + cursorImage, cursorImageWidth, cursorImageHeight, hideCursor, isSprite, numberOfFrames, framesMs);
+				//showingFakeCursor = true;
+
+				if (CB_Mouse.CursorImage.get() !== null && !hideCursorImageFunctionSet)
+				{
+					var restoreCursor = function()
+										{
+											//if (showingFakeCursor)
+											if (CB_Mouse.CursorImage.isShowing())
+											{
+												if (CB_Mouse.isOverElement(CB_Mouse.CursorImage.get()))
+												{
+													CB_Mouse.CursorImage.hide();
+													showingFakeCursor = false;
+												}
+											}
+										};
+					setTimeout(function() { CB_Mouse.onClick(restoreCursor, true); }, 100);
+					hideCursorImageFunctionSet = true;
+				}
+			
+				return;
+			}
+
+
+			//Shows a fake cursor image:
+			function showFakeCursorImageSprite(hideCursor)
+			{
+				showFakeCursorImage(hideCursor, true);
+			}
+			
+			
+			//Called when using mouse wheel:
+			function mouseWheel(e)
+			{
+				var mouse_wheel = document.getElementById("mouse_wheel");
+				if (mouse_wheel !== null)
+				{
+					var text = "<br />";
+					text += "e.deltaX = " + e.deltaX + "<br />";
+					text += "e.deltaY = " + e.deltaY + "<br />";
+					text += "e.deltaZ = " + e.deltaZ + "<br />";
+					text += "e.deltaMode = " + e.deltaMode + "<br />";
+					mouse_wheel.innerHTML = text;
+				}
+			}
+			
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd">
+		<div id="element4" style="padding:0px; position:absolute; left:0px; top:0px; width:80px; height:80px; background-color:#ddaaff; border:0px dashed gray; z-index:999;"></div>
+		<div style="padding:0px; position:absolute; left:5px; top:85px; width:200px; text-align:left; z-index:999;">
+			Mouse position relative to this element: <div id="mouseRelativePosition_element4" class="dataInfo"></div>
+		</div>
+
+		<div style="padding:10px; left:10px; top:10px; border:30px dashed pink; z-index:999;">
+			<div style="padding:20px; border:10px dashed brown; z-index:999; text-align:right;">
+				CrossBrowdy forever!
+				<div id="element3" style="padding:30px; display:inline; left:15px; top:15px; width:80px; height:80px; background-color:#0000ff; border:20px dashed purple; z-index:999;"></div>
+				<br />
+				<br />
+				<br />
+				<br />
+				<div style="padding:40px; display:inline; left:15px; top:70px; width:200px; text-align:right; z-index:999;">
+					Mouse position relative to this element: <div id="mouseRelativePosition_element3" class="dataInfo"></div>
+				</div>
+			</div>
+		</div>
+		<div style="position:absolute; left:-180px; top:-150px; border:300px dashed red;">
+			<div style="position:absolute; left:300px; top:320px; width:200px; height:100px; border:100px dashed yellow;">
+				<div id="element1" style="position:absolute; left:20px; top:20px; width:80px; height:80px; background-color:#ff0000; border:20px solid orange;"></div>
+				<div style="position:absolute; left:20px; top:70px; width:200px;">
+					Mouse position relative to this element: <div id="mouseRelativePosition_element1" class="dataInfo"></div>
+				</div>
+			</div>
+		</div>
+		<div style="left:80px; top:250px; border:30px dashed blue;">
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<div style="border:100px dashed yellow;">
+				<div id="element2" style="left:20px; top:20px; width:80px; height:80px; background-color:#00ff00; border:20px dotted orange;"></div>
+				<div style="left:900px; top:70px; width:200px;">
+					Mouse position relative to this element: <div id="mouseRelativePosition_element2" class="dataInfo"></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - Mouse test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div style="text-align:center;"><button onClick="cancelEvents(); alert('All events stopped');">Cancel events</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setEvents(); alert('All events started');">Set events</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setTimeout(function() { showFakeCursorImage(true); }, 100);">Show fake cursor image</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setTimeout(function() { showFakeCursorImage(false); }, 100);">Show fake cursor image (without hiding normal cursor)</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setTimeout(function() { showFakeCursorImageSprite(true); }, 100);">Show fake cursor image (sprite)</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="changeCursorCSS('cursor.ani', this);">Set cursor.ani</button></div>			
+			<br />
+			<div style="text-align:center;"><button onClick="changeCursorCSS('cursor.cur', this);">Set cursor.cur</button></div>			
+			<br />
+			<div style="text-align:center;"><button onClick="changeCursorCSS('cursor.gif', this);">Set cursor.gif</button></div>
+			<br />
+			<div style="text-align:center;"><button id="changeCursorPNG" onClick="changeCursorCSS('cursor.png', this);">Set cursor.png</button></div>			
+			<br />
+			<div style="text-align:center;"><button onClick="alert('Cursor will be hidden... and resored after 10 seconds!'); CB_Mouse.hide(); setTimeout(function() { CB_Mouse.restore(); alert('Cursor restored!'); }, 10000);">Hide cursor</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="CB_Mouse.lock(this);">Lock cursor (double click to unlock!)</button></div>
+			<br />
+			Mouse position: <div id="mousePosition" class="dataInfo"></div>
+			<br />
+			<br />
+			Mouse movement: <div id="mouseMovement" class="dataInfo"></div>
+			<br />
+			<br />
+			Left button: <div id="leftButton" class="dataInfo"></div>
+			<br />
+			Middle button: <div id="middleButton" class="dataInfo"></div>
+			<br />
+			Right button: <div id="rightButton" class="dataInfo"></div>
+			<br />
+			<br />
+			Mouse wheel: <div id="mouse_wheel" class="dataInfo"></div>
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+	</body>
+</html>

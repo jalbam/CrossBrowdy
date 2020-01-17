@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - CB_Elements test</title>
+
+		<style>
+			.mystyle
+			{
+				position:absolute;
+				background-color:#0000aa;
+				border:0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				position:absolute;
+				left:360px;
+				top:2px;
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				//Set events:
+				setEvents();
+				
+				return;
+			}
+
+			//Cancel all events:
+			function cancelEvents()
+			{
+				//Cancel all events:
+				CB_Keyboard.onKeyDown(null);
+				
+				//Clear all the intervals:
+				clearInterval(updateElementsInfoInterval);
+				
+				return;
+			}
+
+
+			//Set all events:
+			var updateElementsInfoInterval;
+			function setEvents()
+			{
+				//Cancel previous events first (if any):
+				cancelEvents();
+
+				//Set the events:
+				CB_Keyboard.onKeyDown(function() { if (CB_Keyboard.isKeyDown(CB_Keyboard.keys["ESC"])) { hideShowElements(); } });
+				
+				var x = 0;
+				var element = CB_Elements.id("el" + x++);
+				var elements = [];
+				while (element !== null)
+				{
+					//We add the event to the current element:
+					(function(elementId, currentElement) //Auto-execute to send the actual element object (otherwise the event would always access to the last value of variable element).
+					//new function()
+					{
+						//var elementId = element.id;
+						//var currentElement = element;
+						var func = function()
+								   {
+									   alert("Deleting " + elementId + "...");
+									   CB_Elements.remove(currentElement);
+								   };
+						CB_Events.add(element, "click", func);
+					})(element.id, element);
+					//}
+					element = CB_Elements.id("el" + x++);
+				}
+				
+				//Set the intervals:
+				updateElementsInfoInterval = setInterval(updateElementsInfo, 1);
+				
+				return;
+			}
+
+			
+			//Show info of the elements:
+			var extendedInfo = true;
+			function updateElementsInfo()
+			{
+				var x = 0;
+				var element = CB_Elements.id("el" + x);
+				var elements = [];
+				var border, borderInteger;
+				var styleWidth, styleHeight, styleWidthNumeric, styleHeightNumeric;
+				var width, height;
+				var styleX, styleY, styleXNumeric, styleYNumeric, defaultX, defaultY, noScrollX, noScrollY, withScrollX, withScrollY;
+				
+				while (element !== null)
+				{
+					border = CB_Elements.getStyleProperty(element, "border");
+					position = CB_Elements.getStyleProperty(element, "position");
+					borderInteger = CB_Elements.getStylePropertyInteger(element, "border")[0];
+					styleWidth = CB_Elements.getStyleProperty(element, "width");
+					styleHeight = CB_Elements.getStyleProperty(element, "height");
+					styleWidthNumeric = CB_Elements.getStylePropertyNumeric(element, "width")[0];
+					styleHeightNumeric = CB_Elements.getStylePropertyNumeric(element, "height")[0];
+					width = CB_Elements.getWidth(element);
+					height = CB_Elements.getHeight(element);
+					styleX = CB_Elements.getStyleProperty(element, "left");
+					styleY = CB_Elements.getStyleProperty(element, "top");
+					styleXNumeric = CB_Elements.getStylePropertyNumeric(element, "left")[0];
+					styleYNumeric = CB_Elements.getStylePropertyNumeric(element, "top")[0];
+					defaultX = CB_Elements.getLeft(element);
+					defaultY = CB_Elements.getTop(element);
+					noScrollX = CB_Elements.getLeft(element, true);
+					noScrollY = CB_Elements.getTop(element, true);
+					withScrollX = CB_Elements.getLeft(element, false);
+					withScrollY = CB_Elements.getTop(element, false);
+					if (extendedInfo)
+					{
+						element.innerHTML = "[Element " + x + "] - id: " + element.id +" <br />";
+						element.innerHTML += "Position: " + position + "<br />";
+						element.innerHTML += "Border: " + border + " (integer: " + borderInteger + ")<br />";
+						element.innerHTML += "Dimensions (in style property): " + (styleWidth ? styleWidth : "no") + ", " + (styleHeight ? styleHeight : "no") + " (numeric: " + styleWidthNumeric + ", " + styleHeightNumeric + ")<br />";
+						element.innerHTML += "* Dimensions (with border): " + width + ", " + height + "<br />";
+						element.innerHTML += "Coordinates (in style property): " + styleX + ", " + styleY + " (numeric: " + styleXNumeric + ", " + styleYNumeric + ")<br />";
+						element.innerHTML += "* Coordinates (default): " + defaultX + ", " + defaultY + "<br />";
+						element.innerHTML += "* Coordinates (ignore scroll): " + noScrollX + ", " + noScrollY + "<br />";
+						element.innerHTML += "* Coordinates (mind scroll): " + withScrollX + ", " + withScrollY + "<br />";
+					}
+					else
+					{
+						element.innerHTML = element.id + " (" + defaultX + "," + defaultY + ")";
+					}
+					element = CB_Elements.id("el" + ++x);
+				}
+				
+				//Shows additional info:
+				var tagsToSearch = {
+								       document : ["div", "span", "br"],
+									   info : ["div", "span", "br"]
+								   };
+				var elementsNumber, baseElement, showInfoLabel, tagToSearch, tagsLength;
+				var tagsInfo = CB_Elements.id("tagsInfo");
+				tagsInfo.innerHTML = "";
+				var elementsNumberTotal = 0;
+				for (var currentParent in tagsToSearch)
+				{
+					tagsInfo.innerHTML += "<br />TAGs in " + currentParent + ":<br />";
+					tagsLength = tagsToSearch[currentParent].length;
+					var elementsNumberPartial = 0;
+					for (var x = 0; x < tagsLength; x++)
+					{
+						tagToSearch = tagsToSearch[currentParent][x];
+						baseElement = currentParent === "document" ? document : CB_Elements.id(currentParent);
+						elements = CB_Elements.tag(tagToSearch, baseElement);
+						elementsNumber = elements ? elements.length : 0;
+						tagsInfo.innerHTML += "* " + tagToSearch.toUpperCase() + ": " + elementsNumber + "<br />";
+						elementsNumberPartial += elementsNumber;
+					}
+					tagsInfo.innerHTML += "** Total TAGs in " + currentParent + ": " + elementsNumberPartial + "<br />";
+					elementsNumberTotal += elementsNumberPartial;
+				}
+				tagsInfo.innerHTML += "<br /># TOTAL TAGs: " + elementsNumberTotal;
+				
+				return;
+			}
+
+			
+			//Function that hide or shows the elements:
+			//var showingElements = true;
+			function hideShowElements()
+			{
+				//showingElements = !showingElements;
+				var elements = CB_Elements.tag("div", document);
+				var elementsLength = elements.length;
+				var elementId;
+				var elementParents, elementParentsLength;
+				for (var x = 0; x < elementsLength; x++)
+				{
+					elementId = elements[x].id;
+					if (elementId.substring(0, 2) === "el" && !isNaN(elementId.substring(2)))
+					{
+						hideShowElement(elements[x]);
+					}
+				}
+				return;
+			}
+
+			
+			//Function that hides or shows an element:
+			function hideShowElement(element)
+			{
+				//element.style.visibility = showingElements ? "visible" : "hidden";
+				element.style.visibility = (element.style.visibility === "hidden") ? "visible" : "hidden";
+				//Does the same with its parents too if they are containers (have class container):
+				elementParents = CB_Elements.getParents(element);
+				var hideParentContainersFunction = function(elementParent)
+												   {
+													   if (typeof(elementParent.style) !== "undefined" && elementParent.style !== null)
+													   {
+														   if (elementParent.className === "container")
+														   {
+															   elementParent.style.visibility = element.style.visibility;
+														   }
+													   }
+												   };
+				CB_forEach(elementParents, hideParentContainersFunction);
+				return;
+			}
+			
+			
+			//Function that deletes the TAGs we want:
+			function deleteTags(tagName)
+			{
+				CB_Elements.tagRemove(tagName, document);
+				return;
+			}
+
+			
+			//Function that deletes all elements with a given class name:
+			function deleteClass(className)
+			{
+				CB_Elements.classesRemove(className, document);
+				return;
+			}
+			
+			
+			//Function that changes the background colour of elements using the class given:
+			function hideShowClass(classGiven)
+			{
+				var elements = CB_Elements.classes(classGiven, document);
+				var elementsLength = elements.length;
+				for (var x = 0; x < elementsLength; x++)
+				{
+					hideShowElement(elements[x]);
+					//elements[x].style.visibility = (elements[x].style.visibility === "visible") ? "hidden" : "visible";
+					//console.log(elements[x].id + " is now " + elements[x].style.visibility);
+				}
+				return;
+			}
+			
+			
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd">
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - CB_Elements test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div id="changeColor" style="font-size:16px; text-align:center;">This is an elements test</div>
+			<br />
+			Click on an element to delete it
+			<br />
+			<br />
+			<div style="text-align:center;"><button onClick="cancelEvents(); alert('All events stopped');">Cancel events</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setEvents(); alert('All events started');">Set events</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="hideShowElements();">Hide / show elements (hotkey: ESC)</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="hideShowClass('myClass1');">Hide / show elements with class 'myClass1'</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="hideShowClass('myClass2');">Hide / show elements with class 'myClass2'</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="deleteTags('div');">Delete DIV elements</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="deleteTags('span');">Delete SPAN elements</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="deleteTags('br');">Delete BR elements</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="deleteClass('myClass1');">Delete elements with class 'myClass1'</button></div>
+			<br />
+			<label for="extendedInfoInput"><input id="extendedInfoInput" type="checkbox" onChange="extendedInfo = !extendedInfo;" checked/> Show extended info</label>
+			<div id="tagsInfo" style="font-size:11px;"></div>
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+		
+		<div id="el0" class="myClass1" style="position:absolute; left:-10px; top:0px; border:0px; background-color:red; font-size:10px; opacity:0.8;">Element 0</div>
+		<br />
+		<div id="el1" class="myClass1" style="position:absolute; left:240px; top:-3px; border:1px solid black; background-color:yellow; font-size:10px; opacity:0.8;">Element 1</div>
+		<br />
+		<div id="el2" class="myClass2" style="position:absolute; left:50px; top:120px; border:10px solid blue; background-color:orange; font-size:10px; opacity:0.8;">Element 2</div>
+		<br />
+		<div id="el3" class="myClass1" style="position:fixed; left:85px; top:260px; border:5px dotted orange; background-color:brown; font-size:10px; opacity:0.8;">Element 3</div>
+		<br />
+		<div id="el4" class="myClass2" style="position:relative; width:300px; left:10px; top:320px; border:2px dashed yellow; background-color:green; font-size:10px; opacity:0.8;">Element 4</div>
+		
+		<div class="container">
+			<div id="el5" class="myClass2" style="position:absolute; left:50px; top:520px; border:15px solid brown; background-color:gray; font-size:10px; opacity:0.8;">Element 5</div>
+		</div>
+
+		<div class="container" style="position:absolute; left:13px; top:37px;">
+			<div id="el6" class="myClass1" style="position:absolute; width:300px; left:480px; top:-30px; border:5px dotted gray; background-color:pink; font-size:10px; opacity:0.8;">Element 6</div>
+		</div>
+
+		<div class="container" style="position:absolute; left:13px; top:37px;">
+			<div id="el7" class="myClass1" style="position:relative; width:300px; left:620px; top:100px; border:0px; background-color:purple; font-size:10px; opacity:0.8;">Element 7</div>
+		</div>
+
+		<div class="container" style="position:absolute; left:130px; top:137px;">
+			<div id="el8" class="myClass2" style="position:fixed; width:300px; left:350px; top:310px; border:10px solid green; background-color:magenta; font-size:10px; opacity:0.8;">Element 8</div>
+		</div>
+
+		<div class="container" style="position:fixed; left:13px; top:37px;">
+			<div id="el9" class="myClass2" style="position:absolute; width:300px; left:300px; top:100px; border:0px; background-color:crimson; font-size:10px; opacity:0.8;">Element 9</div>
+		</div>
+
+		<div class="container" style="position:fixed; left:13px; top:37px;">
+			<div id="el10" class="myClass1" style="position:relative; width:300px; left:320px; top:390px; border:12px dotted blue; background-color:coral; font-size:10px; opacity:0.8;">Element 10</div>
+		</div>
+
+		<div class="container" style="position:fixed; left:130px; top:137px;">
+			<div id="el11" class="myClass2" style="position:fixed; width:300px; left:350px; top:530px; border:3px dashed yellow; background-color:beige; font-size:10px; opacity:0.8;">Element 11</div>
+		</div>
+		
+		<div class="container" style="position:relative; left:13px; top:37px;">
+			<div id="el12" class="myClass1" style="position:absolute; width:300px; left:640px; top:20px; border:30px solid red; background-color:khaki; font-size:10px; opacity:0.8;">Element 12</div>
+		</div>
+
+		<div class="container" style="position:relative; left:13px; top:37px;">
+			<div id="el13" class="myClass2" style="position:relative; width:300px; left:650px; top:200px; border:12px dashed khaki; background-color:fuchsia; font-size:10px; opacity:0.8;">Element 13</div>
+		</div>
+
+		<div class="container" style="position:relative; left:30px; top:137px;">
+			<div id="el14" class="myClass2" style="position:fixed; width:300px; left:680px; top:580px; border:5px solid orange; background-color:cornsilk; font-size:10px; opacity:0.8;">Element 14</div>
+		</div>
+
+
+		
+		<div class="container" style="position:relative; left:30px; top:137px;">
+			<div class="container" style="position:absolute; left:30px; top:137px;">
+				<div id="el15" class="myClass1" style="position:fixed; width:300px; left:810px; top:5px; border:5px solid orange; background-color:darkseagreen; font-size:10px; opacity:0.8;">Element 15</div>
+			</div>
+		</div>
+
+		<div class="container" style="position:relative; left:30px; top:137px;">
+			<div class="container" style="position:fixed; left:30px; top:137px;">
+				<div id="el16" class="myClass2" style="position:absolute; width:300px; left:0px; top:-100px; border:5px solid orange; background-color:royalblue; font-size:10px; opacity:0.8;">Element 16</div>
+			</div>
+		</div>
+		
+		<div class="container" style="position:absolute; left:30px; top:137px;">
+			<div class="container" style="position:relative; left:30px; top:137px;">
+				<div id="el17" class="myClass2" style="position:fixed; width:300px; left:6px; top:520px; border:5px solid orange; background-color:sienna; font-size:10px; opacity:0.8;">Element 17</div>
+			</div>
+		</div>
+
+		<div class="container" style="position:absolute; left:30px; top:137px;">
+			<div class="container" style="position:fixed; left:30px; top:137px;">
+				<div id="el18" class="myClass2" style="position:relative; width:300px; left:650px; top:280px; border:5px solid orange; background-color:peru; font-size:10px; opacity:0.8;">Element 18</div>
+			</div>
+		</div>
+		
+		<div class="container" style="position:fixed; left:30px; top:137px;">
+			<div class="container" style="position:relative; left:30px; top:137px;">
+				<div id="el19" class="myClass2" style="position:absolute; width:300px; left:-45px; top:120px; border:5px solid orange; background-color:orangered; font-size:10px; opacity:0.8;">Element 19</div>
+			</div>
+		</div>
+
+		<div class="container" style="position:fixed; left:30px; top:137px;">
+			<div class="container" style="position:absolute; left:30px; top:137px;">
+				<div id="el20" class="myClass2" style="position:relative; width:300px; left:620px; top:-120px; border:5px solid orange; background-color:lime; font-size:10px; opacity:0.8;">Element 20</div>
+			</div>
+		</div>
+		
+		
+
+	</body>
+</html>

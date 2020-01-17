@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - Events test</title>
+
+		<style>
+			#info
+			{
+				position:absolute;
+				left:580px;
+				top:2px;
+				font-size:18px;
+				background-color:#dddddd;
+				border:1px dotted #222222;			
+     			padding:10px;
+				text-align:center;
+			}
+			.dataInfo
+			{
+				text-align:left;
+				font-size:12px;
+				color:#aaffaa;
+			    width:540px;
+			    height:370px;
+     			background-color:#333333;
+     			overflow:scroll;
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			
+			var numberLineConsole = 1; //It will store the number of the last line of the console.
+			
+			var selectOptions = [ "click", "resize", "keydown", "blur" ];
+			var instructionsOption = {
+										"click" : "click anywhere",
+										"resize" : "resize the window or zoom the content",
+										"keydown" : "press a key",
+										"blur" : "change the focus to another window"
+									 };
+
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(1100, null, true, null, null, null, null);
+
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				clearConsole();
+				setSelectOptions();
+				changeButtons();
+				return;
+			}
+			
+
+			//Funcion that sets an event:
+			function setEvent(useCapture, keepOldEventFunction, erasable)
+			{
+				if (typeof(erasable) === "undefined" || erasable === null) { erasable = true; }
+			
+				var eventType = CB_Elements.id("eventType").value;
+				var eventTarget = document;
+				if (eventType === "resize") { eventTarget = window; }
+
+				CB_Events.add(eventTarget, eventType, function () { logConsole("Function for " + eventType + " event executed! (useCapture = " + useCapture + ", erasable = " + erasable + ")"); }, useCapture, keepOldEventFunction, erasable);
+				logConsole("Event handler for " + eventType + " event set [useCapture = " + useCapture + ", keepOldEventFunction = " + keepOldEventFunction + ", erasable = " + erasable + "]");
+				return;
+			}
+
+
+			//Function that removes all the events of one type:
+			function removeAllEventsType(forceDelete)
+			{
+				var eventType = CB_Elements.id("eventType").value;
+				var eventTarget = document;
+				if (eventType === "resize") { eventTarget = window; }
+				
+				CB_Events.removeByName(eventTarget, eventType, forceDelete);
+				logConsole("All " + eventType + " events stopped");
+				return;
+			}
+
+			
+			function executeAllEventsType(e)
+			{
+				var eventType = CB_Elements.id("eventType").value;
+				var eventTarget = document;
+				if (eventType === "resize") { eventTarget = window; }
+				
+				CB_Events.executeByName(eventTarget, eventType, e);
+				logConsole("All " + eventType + " events executed");
+				return;
+			}
+			
+
+			//Function that shows information about the events in the console:
+			function logConsole(info)
+			{
+				var logConsole = CB_Elements.id("logConsole");
+				logConsole.innerHTML += "[" + numberLineConsole++ + "] " + info + "<br />";
+				logConsole.scrollTop = logConsole.scrollHeight;
+			
+				return;
+			}
+
+			
+			//Function that clears the cosole:
+			function clearConsole()
+			{
+				var logConsole = CB_Elements.id("logConsole");
+				logConsole.innerHTML = "";
+				numberLineConsole = 1;
+				return;
+			}
+
+			
+			//Function that removes all events:
+			function removeAllEvents(forceDelete)
+			{
+				CB_Events.removeAll(forceDelete);
+				logConsole("All events removed");
+				return;
+			}
+			
+			
+			//Function that creates the options for select:
+			function setSelectOptions()
+			{
+				var select = CB_Elements.id("eventType");
+				var selectOptionsLength = selectOptions.length;
+				for (var x = 0; x < selectOptionsLength; x++)
+				{
+					select.options[x] = new Option(selectOptions[x], selectOptions[x]);
+					selectOptions;
+				}
+				return;
+			}
+			
+			
+			//Function that changes the text of the buttons according to the event selected:
+			function changeButtons()
+			{
+				var buttons = document.getElementsByTagName("button");
+				
+				var buttonText;
+				var eventType = CB_Elements.id("eventType").value;
+				var buttonsLength = buttons.length;
+				var selectOptionsLength = selectOptions.length;
+				for (var x = 0; x < buttonsLength; x++)
+				{
+					buttonText = buttons[x].innerHTML;
+
+					for (var y = 0; y < selectOptionsLength; y++)
+					{
+						buttonText = buttonText.replace(new RegExp(selectOptions[y], "gi"), eventType);
+					}
+					
+					buttons[x].innerHTML = buttonText;
+				}
+				
+				changeInstructions();
+
+				return;
+			}
+			
+
+			//Function that changes the instructions according to the event selected:
+			function changeInstructions()
+			{
+				var eventType = CB_Elements.id("eventType").value;
+				var instructions = instructionsOption[eventType];
+				
+				CB_Elements.id("instructions").innerHTML = "[" + eventType + "] " + instructions;
+				
+				return;
+			}
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd">
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - Events test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div id="changeColor" style="font-size:16px; text-align:center;">Try to fire the events by following the instructions:</div>
+			<div id="instructions"></div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="removeAllEvents();">Remove all events</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="removeAllEvents(true);">Remove all events (force delete not erasables)</button>
+			</div>
+			<br />			
+			Event type:
+			<select id="eventType" onChange="changeButtons();">
+			</select>
+			<br />
+			<br />
+			<div style="text-align:center;">
+				<button onClick="removeAllEventsType();">Remove all click events</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="removeAllEventsType(true);">Remove all click events (force delete not erasables)</button>
+			</div>
+			<br />
+			<br />
+			<div style="text-align:center;">
+				<button onClick="executeAllEventsType();">Execute all click events</button>
+			</div>
+			<br />
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(null, null);">Set click event handler (default behaviour)</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(true, true);">Set click event handler (use capture, keep previous handlers)</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(false, true);">Set click event handler (don't use capture, keep previous handlers)</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(true, false);">Set click event handler (use capture, don't keep previous handlers)</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(false, false);">Set click event handler (don't use capture, don't keep previous handlers)</button>
+			</div>
+
+
+
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(true, true, false);">Set click event handler (use capture, keep previous handlers, not erasable)</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(false, true, false);">Set click event handler (don't use capture, keep previous handlers, not erasable)</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(true, false, false);">Set click event handler (use capture, don't keep previous handlers, not erasable)</button>
+			</div>
+			<br />
+			<div style="text-align:center;">
+				<button onClick="setEvent(false, false, false);">Set click event handler (don't use capture, don't keep previous handlers, not erasable)</button>
+			</div>
+
+
+
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+		</div>
+		<div style="position:absolute; top:10px; left:10px; text-align:center;">
+			Console:
+			<br />
+			<div id="logConsole" class="dataInfo"></div>
+			<div style="text-align:center;">
+				<button onClick="clearConsole();">Clear console</button>
+			</div>
+			<div id="CB_console" style="visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+	</body>
+</html>

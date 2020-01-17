@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - CB_AudioFile test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				width:90%;
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				
+				margin:10px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:90%;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<!-- <script src="http://jsconsole.com/remote.js?297BE1B8-686B-4126-A1D3-EDDA546D2947"></script> -->
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript" src="test_audiofile.js"></script>
+		<script type="text/javascript">
+		<!--
+			//Forces to load the used APIs:
+			var CB_OPTIONS =
+				{
+					//Options for CrossBase module:
+					CrossBase:
+					{
+						SM2_LOAD: true, //Necessary for using SM2.
+						CORDOVAJS_LOAD: true //cordova.js is necessary for ACMP.
+					}
+				};
+		
+			//Starts CrossBrowdy:
+			function init()
+			{
+				CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			}
+
+			var audioFileObjects = {};
+			var audioFileObjectLast;
+			
+			var showAudioFileObjectInfoInterval;
+				
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+				//Starts the inspector to show information about the audio object currently playing:
+				startShowAudioFileObjectInfoInterval();
+			
+				CB_Keyboard.onKeyDown(keyDownFunction);
+			
+				//Fills the select:
+				var file_selector = document.getElementById("file_selector");
+				if (file_selector !== null)
+				{
+					var option_x;
+					for (var file in files)
+					{
+						option_x = document.createElement("option");
+						option_x.value = file;
+						option_x.textContent = option_x.innerText = file + (files[file] !== "" ? " (data URI available)" : "");
+						file_selector.appendChild(option_x);
+					}
+				}
+				
+				CB_Elements.insertContentById("preferred_api", CB_AudioDetector.getPreferredAPI(undefined));
+				CB_Elements.insertContentById("preferred_api_emulation", CB_AudioDetector.getPreferredAPI(undefined, true));
+				
+				//Tests the CB_AudioDetector:
+				testAudioDetector();
+			}
+
+			
+			function onStopFunction()
+			{
+				CB_console("onStop event fired!!!");
+			}
+			
+			
+			function keyDownFunction(e, keyDown)
+			{
+				//if (keycode === CB_Keyboard.keys.P)
+				if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.P)) { buttonPressed("play"); }
+				else if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.S)) { buttonPressed("stop"); }
+			}
+			
+			//Starts the inspector to show information about the audio object currently playing:
+			function startShowAudioFileObjectInfoInterval()
+			{
+				clearInterval(showAudioFileObjectInfoInterval);
+				showAudioFileObjectInfoInterval = setInterval(function() { showAudioFileObjectInfo(audioFileObjectLast); }, 1);
+			}
+			
+
+			//Creates a new CB_AudioFile object:
+			var x = 0;
+			var lastFileName = "";
+			var lastRequestMethod = "";
+			function createAudioFileObject(API, options, alternativeAPIs)
+			{
+				if (!CB_ready) { return; }
+				//var filePath = CB_scriptPath + "../tests/audio/numeros.wav";
+				//var filePath = CB_scriptPath + "../tests/audio/coins.ogg";
+				
+				var file_selector = document.getElementById("file_selector");
+				if (file_selector === null) { return; }
+				
+				var fileName = file_selector.value;
+
+				var requestMethod = document.getElementById("request_method_normal").checked ? "normal" : "data_uri";
+				document.getElementById("request_method_info").innerHTML = requestMethod === "normal" ? "normal" : "data URI";
+				
+				if (requestMethod === "data_uri" && typeof(files[fileName]) !== "undefined" && files[fileName] !== "")
+				{
+					filePath = files[fileName];
+					lastFileName = filePath;
+					lastRequestMethod = requestMethod;
+				}
+				else
+				{
+					lastRequestMethod = "normal";
+					lastFileName = fileName;
+					var filePath = "audio/";
+					if (API === "ACMP" || API === "WAAPI")
+					{
+						var url = location.href;
+						url = url.substring(0, url.indexOf("test_audiofile_audiodetector.htm"));
+						filePath = url + filePath;
+					}
+					filePath += fileName;
+				}
+
+				document.getElementById("pause_resume").innerHTML = "&#10073;&#10073;";
+				
+				var last_object_created = document.getElementById("last_object_created");
+				last_object_created.innerHTML = "#" + x;
+				
+				var audioId = "au_" + API + "_" + x++;
+				
+				var message = document.getElementById("message");
+				if (message !== null) { message.innerHTML = "none"; }
+
+				var start_time = document.getElementById("start_time");
+				var stop_time = document.getElementById("stop_time");
+				start_time.value = stop_time.value = "0";
+				
+				audioFileObjectLast = audioFileObjects[API] = new CB_AudioFile(filePath, audioId, options, API, callbackOk, callbackError, alternativeAPIs);
+				audioFileObjectLast.onStop(onStopFunction, false);
+				var loop = document.getElementById("loop");
+				loop.checked = audioFileObjectLast.loop ? true : false;
+				
+				var api_selector = document.getElementById("api_selector");
+				api_selector.innerHTML = "";
+				var APIs = [ "WAAPI", "SM2", "AAPI", "ACMP" ];
+				if (api_selector !== null)
+				{
+					var option_x;
+					var APIsLength = APIs.length;
+					for (var y = 0; y < APIsLength; y++)
+					{
+						if (APIs[y] === API) { continue; }
+						option_x = document.createElement("option");
+						option_x.value = APIs[y];
+						option_x.textContent = APIs[y];
+						api_selector.appendChild(option_x);
+					}
+				}
+				var change_api = document.getElementById("change_api");
+				change_api.style.display = api_selector.style.display = "inline";
+			}
+			
+	
+			//Called when a file is loaded fine:
+			function callbackOk(text)
+			{
+				text = CB_trim(text);
+				var message = document.getElementById("message");
+				if (message !== null)
+				{
+					message.innerHTML = (text === "") ? "Audio loaded!" : text;
+				}
+				
+				//Restarts player data:
+				var start_time = document.getElementById("start_time");
+				if (start_time !== null) { start_time.value = "0"; }
+				var stop_time = document.getElementById("stop_time");
+				
+				if (typeof(audioFileObjectLast) === "undefined" || audioFileObjectLast === null) { return; }
+				
+				if (stop_time !== null) { stop_time.value = audioFileObjectLast.getDuration(); }
+				var tracker = document.getElementById("tracker");
+				if (tracker !== null) { tracker.max = audioFileObjectLast.getDuration(); tracker.value = 0; }
+			}
+
+
+			//Called when a file failed to load:
+			function callbackError(error)
+			{
+				var message = document.getElementById("message");
+				if (message !== null) { message.innerHTML = "Audio failed to load/check! " + error; }
+			}
+			
+			
+			function showAudioFileObjectInfo(audioFileObject)
+			{
+				var destroy = document.getElementById("destroy");
+				var destroy_with_stop = document.getElementById("destroy_with_stop");
+				if (typeof(audioFileObject) !== "undefined" && audioFileObject instanceof CB_AudioFile)
+				{
+					destroy.style.display = "inline";
+					destroy_with_stop.style.display = "inline";
+					
+					document.getElementById("progress").innerHTML = CB_numberFormat(audioFileObject.getProgress(), 2, true);
+					
+					var now_playing = document.getElementById("now_playing");
+					var status = document.getElementById("status");
+					var playing = document.getElementById("playing");
+					var paused = document.getElementById("paused");
+					var stopped = document.getElementById("stopped");
+					var audio_api = document.getElementById("audio_api");
+					var volume = document.getElementById("volume");
+					var mute = document.getElementById("mute");
+					var duration = document.getElementById("duration");
+					var current_time = document.getElementById("current_time");
+					var loop = document.getElementById("loop");
+					var tracker = document.getElementById("tracker");
+
+					/*
+					var bytes_loaded = document.getElementById("bytes_loaded");
+					var bytes_total = document.getElementById("bytes_total");
+					bytes_loaded.innerHTML = audioFileObject.getBytesLoaded();
+					bytes_total.innerHTML = audioFileObject.getBytesTotal();
+					*/
+					
+					if (audioFileObjectLast.isPaused())
+					{
+						document.getElementById("pause_resume").innerHTML = "R";
+					}
+					else
+					{
+						document.getElementById("pause_resume").innerHTML = "&#10073;&#10073;";
+					}
+					
+					var filePlaying = audioFileObject.filePath;
+					if (filePlaying.substring(0, 5).toLowerCase() === "data:") { filePlaying = filePlaying.substring(0, 15) + "[...]" + filePlaying.substring(filePlaying.length - 10); }
+					now_playing.innerHTML = filePlaying;
+					status.innerHTML = audioFileObject.getStatusString();
+					playing.innerHTML = audioFileObject.isPlaying() ? "yes" : "no";
+					paused.innerHTML = audioFileObject.isPaused() ? "yes" : "no";
+					stopped.innerHTML = audioFileObject.isStopped() ? "yes" : "no";
+					audio_api.innerHTML = audioFileObject.audioAPI;
+					volume.innerHTML = audioFileObject.getVolume();
+					mute.checked = audioFileObject.getVolume() === 0 ? true : false;
+					duration.innerHTML = audioFileObject.getDuration();
+					current_time.innerHTML = audioFileObject.getCurrentTime();
+					
+					tracker.max = audioFileObjectLast.getDuration();
+					tracker.value = audioFileObject.getCurrentTime();
+
+					if (audioFileObjectLast.isPlaying())
+					{
+						loop.checked = audioFileObject.loop ? true : false;
+					}
+					
+					var start_time = document.getElementById("start_time");
+					var stop_time = document.getElementById("stop_time");
+					
+					var play = document.getElementById("play");
+					var stop = document.getElementById("stop");
+					var pause_resume = document.getElementById("pause_resume");
+					var volume_up = document.getElementById("volume_up");
+					var volume_down = document.getElementById("volume_down");
+					if (audioFileObject.getStatusString() !== "LOADED")
+					{
+						tracker.disabled = volume_down.disabled = volume_up.disabled = pause_resume.disabled = stop.disabled = play.disabled = true;
+						tracker.style.backgroundColor = volume_down.style.backgroundColor = volume_up.style.backgroundColor = pause_resume.style.backgroundColor = stop.style.backgroundColor = play.style.backgroundColor = "#dddddd";
+						try
+						{
+							tracker.style.cursor = volume_down.style.cursor = volume_up.style.cursor = pause_resume.style.cursor = stop.style.cursor = play.style.cursor = "cross";
+						} catch (e){}
+					}
+					else
+					{
+						tracker.disabled = volume_down.disabled = volume_up.disabled = pause_resume.disabled = stop.disabled = play.disabled = false;
+						tracker.style.backgroundColor = volume_down.style.backgroundColor = volume_up.style.backgroundColor = pause_resume.style.backgroundColor = stop.style.backgroundColor = play.style.backgroundColor = "#0000aa";
+						
+						try
+						{
+							tracker.style.cursor = volume_down.style.cursor = volume_up.style.cursor = pause_resume.style.cursor = stop.style.cursor = play.style.cursor = "pointer";
+							tracker.style.cursor = volume_down.style.cursor = volume_up.style.cursor = pause_resume.style.cursor = stop.style.cursor = play.style.cursor = "hand";
+						}
+						catch (e)
+						{
+							try
+							{
+								tracker.style.cursor = volume_down.style.cursor = volume_up.style.cursor = pause_resume.style.cursor = stop.style.cursor = play.style.cursor = "hand";
+							}
+							catch (e) {}
+						}
+					}
+					
+					var api_selector = document.getElementById("api_selector");
+					var change_api = document.getElementById("change_api");
+					if (audioFileObject.getStatusString() === "LOADING" || audioFileObject.getStatusString() === "CHECKING")
+					{
+						api_selector.style.display = "none";
+						change_api.style.display = "none";
+					}
+					else
+					{
+						api_selector.style.display = "inline";
+						change_api.style.display = "inline";
+					}
+					
+					var check = document.getElementById("check");
+					if (audioFileObject.getStatusString() === "UNCHECKED")
+					{
+						check.style.display = "inline";
+					}
+					else
+					{
+						check.style.display = "none";
+					}
+					
+					if (audioFileObject.getStatusString() !== "LOADED" || !audioFileObject.isStopped())
+					{
+						mute.disabled = start_time.disabled = stop_time.disabled = true;
+						if (audioFileObject.isPaused())
+						{
+							loop.disabled = false;
+						}
+						else { loop.disabled = true; }
+					}
+					else
+					{
+						loop.disabled = mute.disabled = start_time.disabled = stop_time.disabled = false;
+					}
+					
+					if (audioFileObject.audioAPI === "SM2")// && typeof(soundManager) !== "undefined" && soundManager !== null)
+					{
+						if (CB_AudioDetector.isSM2UsingFlash())
+						{
+							audio_api.innerHTML += " (using Flash emulation)";
+						}
+					}
+					else if (audioFileObject.audioAPI === "WAAPI")// && typeof(soundManager) !== "undefined" && soundManager !== null)
+					{
+						if (CB_AudioDetector.isWAAPIUsingEmulation())
+						{
+							audio_api.innerHTML += " (using emulation)";
+						}
+						else { audio_api.innerHTML += " (native)"; }
+					}
+
+					
+					var load = document.getElementById("load");
+					if (audioFileObject.getStatusString() === "UNLOADED" || audioFileObject.getStatusString() === "FAILED" || audioFileObject.getStatusString() === "ABORTED")
+					{
+						load.style.display = "inline";
+					}
+					else
+					{
+						load.style.display = "none";
+					}
+				}
+				else { destroy.style.display = destroy_with_stop.style.display = "none"; }
+			}
+			
+			
+			var changeVolumeInterval;
+			function buttonPressed(action)
+			{
+				if (typeof(audioFileObjectLast) === "undefined" || audioFileObjectLast === null) { return; }
+				if (action === "play")
+				{
+					//audioFileObjectLast.pause(); //Pauses to avoid overlapping sounds (previous with current).
+					var startAt = document.getElementById("start_time").value;
+					var stopAt = document.getElementById("stop_time").value;
+					var loop = document.getElementById("loop").checked;
+					//document.getElementById("pause_resume").innerHTML = "&#10073;&#10073;";
+					audioFileObjectLast.play(startAt, stopAt, loop);
+				}
+				else if (action === "stop")
+				{
+					//document.getElementById("pause_resume").innerHTML = "&#10073;&#10073;";
+					audioFileObjectLast.stop();
+				}
+				else if (action === "pause_resume")
+				{
+					if (audioFileObjectLast.isPlaying())
+					{
+						audioFileObjectLast.pause();
+						//alert("pausing!");
+						//document.getElementById("pause_resume").innerHTML = "R";
+					}
+					else if (audioFileObjectLast.isPaused())
+					{
+						//var stopAt = document.getElementById("stop_time").value;
+						var loop = document.getElementById("loop").checked;
+						//alert("resuming:" + stopAt);
+						//audioFileObjectLast.resume(stopAt, loop);
+						audioFileObjectLast.resume(loop);
+						//document.getElementById("pause_resume").innerHTML = "&#10073;&#10073;";
+					}
+				}
+				else if (action === "volume_up")
+				{
+					audioFileObjectLast.setVolume(audioFileObjectLast.getVolume() + 1);
+				}
+				else if (action === "volume_down")
+				{
+					audioFileObjectLast.setVolume(audioFileObjectLast.getVolume() - 1);
+				}
+				else if (action === "mute_unmute")
+				{
+					if (audioFileObjectLast.getVolume() > 0)
+					{
+						audioFileObjectLast.mute();
+					}
+					else { audioFileObjectLast.unmute(); }
+				}
+				else if (action === "load")
+				{
+					audioFileObjectLast.load(audioFileObjectLast.filePath, audioFileObjectLast.audioAPI, false, callbackOk, callbackError);
+				}
+				else if (action === "check")
+				{
+					audioFileObjectLast.checkPlaying(
+						function() { callbackOk("File was checked and is ok."); },
+						function() { callbackError("File was checked and is NOT ok!"); }
+					);
+				}
+				else if (action === "destroy")
+				{
+					audioFileObjectLast.destructor();
+					var message = document.getElementById("message");
+					if (message !== null) { message.innerHTML = "none"; }
+				}
+				else if (action === "destroy_with_stop")
+				{
+					audioFileObjectLast.destructor(true, false, true);
+					var message = document.getElementById("message");
+					if (message !== null) { message.innerHTML = "none"; }
+				}
+			}
+			
+			//Changes the current API:
+			function changeAPI()
+			{
+				var desiredAPI = document.getElementById("api_selector").value;
+				var message = document.getElementById("message");
+				if (message !== null)
+				{
+					message.innerHTML = "Trying to change to " + desiredAPI + "...";
+				}
+
+				//Sets the file path:
+				var filePath = lastFileName;
+				if (lastRequestMethod === "normal")
+				{
+					filePath = "audio/" + filePath;
+					if (desiredAPI === "ACMP" || desiredAPI === "WAAPI")
+					{
+						var url = location.href;
+						url = url.substring(0, url.indexOf("test_audiofile_audiodetector.htm"));
+						filePath = url + filePath;
+					}
+				}
+				
+				//CB_console("Requesting: " + filePath);
+				audioFileObjectLast.filePath = filePath;
+				
+				//Changes the API:
+				audioFileObjectLast.setAudioAPI(desiredAPI, true, false, APIChangeOK, APIChangeError);
+			}
+			
+			
+			//The API has been changed well:
+			function APIChangeOK()
+			{
+				var API = audioFileObjectLast.audioAPI;
+				
+				var message = document.getElementById("message");
+				if (message !== null)
+				{
+					message.innerHTML = "API Changed well! New API: " + API;
+				}
+				
+				//Updates the select:
+				var api_selector = document.getElementById("api_selector");
+				api_selector.innerHTML = "";
+				var APIs = [ "WAAPI", "SM2", "AAPI", "ACMP" ];
+				if (api_selector !== null)
+				{
+					var option_x;
+					var APIsLength = APIs.length;
+					for (var y = 0; y < APIsLength; y++)
+					{
+						if (APIs[y] === API) { continue; }
+						option_x = document.createElement("option");
+						option_x.value = APIs[y];
+						option_x.textContent = APIs[y];
+						api_selector.appendChild(option_x);
+					}
+				}
+			}
+			
+			
+			//The API has not been changed:
+			function APIChangeError(error)
+			{
+				var message = document.getElementById("message");
+				if (message !== null)
+				{
+					message.innerHTML = "API could not be changed! " + error;
+				}
+			}
+			
+			
+			//Test AudioDetector:
+			function testAudioDetector()
+			{
+				var supported_formats_div = document.getElementById("supported_formats");
+				var supported_formats_data_uri_div = document.getElementById("supported_formats_data_uri");
+				var supported_apis_div = document.getElementById("supported_apis");
+				
+				supported_formats_div.innerHTML =
+					'<span style="color:#00aa00;">PROBABLY:</span><br />' +
+					CB_AudioDetector.getSupportedAudioFormats(null, ["probably"], false).join("<br />") +
+					'<br /><span style="color:#00aa00;">MAYBE:</span><br />' +
+					CB_AudioDetector.getSupportedAudioFormats(null, ["maybe"], false).join("<br />") +
+					'<br /><span style="color:#00aa00;">NOT SUPPORTED:</span><br />' +
+					CB_AudioDetector.getSupportedAudioFormats(null, [""], false).join("<br />");
+
+				supported_formats_data_uri_div.innerHTML =
+					'<span style="color:#00aa00;">PROBABLY:</span><br />' +
+					CB_AudioDetector.getSupportedAudioFormats(null, ["probably"], true).join("<br />") +
+					'<br /><span style="color:#00aa00;">MAYBE:</span><br />' +
+					CB_AudioDetector.getSupportedAudioFormats(null, ["maybe"], true).join("<br />") +
+					'<br /><span style="color:#00aa00;">NOT SUPPORTED:</span><br />' +
+					CB_AudioDetector.getSupportedAudioFormats(null, [""], true).join("<br />");
+				
+				supported_apis_div.innerHTML = CB_AudioDetector.getSupportedAPIs().join("<br />");
+			}
+		// -->
+		</script>
+		
+	</head>
+	<body onload="init();" bgcolor="#ffaadd">
+		<center>
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - CB_AudioFile test</div>
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<h4 style="margin:2px;">
+				Last audio object created: <span id="last_object_created">none</span>
+				<button id="destroy" style="display:none; width:70px; margin:0px; cursor:hand; cursor:pointer;" onClick="buttonPressed('destroy');">destroy</button>
+				<button id="destroy_with_stop" style="display:none; width:150px; margin:0px; cursor:hand; cursor:pointer;" onClick="buttonPressed('destroy_with_stop');">destroy with stop</button>
+			</h4>
+			Selected file: <span id="now_playing" style="color:#00aa00;">none</span> / Request method: <span id="request_method_info" style="color:#00aa00;">none</span>
+			<br />
+			Audio Object message: <span id="message" style="color:#00aa00;">none</span>
+			<br />
+			Audio API: <span id="audio_api" style="color:#00aa00;">none</span>
+			<select name="api_selector" id="api_selector" style="display:none;">
+			</select>
+			<button id="change_api" style="display:none; width:120px; margin:0px; cursor:hand; cursor:pointer;" onClick="changeAPI();">Change API</button>
+			<br />
+			Status: <span id="status" style="color:#00aa00;">UNKNOWN</span> <span style="color:#0000aa;">(<span id="progress">0</span>%)</span>
+			<button id="load" style="display:none; width:50px; margin:0px; cursor:hand; cursor:pointer;" onClick="buttonPressed('load');">Load</button>
+			<button id="check" style="display:none; width:60px; margin:0px; cursor:hand; cursor:pointer;" onClick="buttonPressed('check');">Check</button>
+			<!-- <br />
+			Loaded: <span id="bytes_loaded">0</span> of <span id="bytes_total">0</span> bytes-->
+			<br />
+			Playing: <span id="playing" style="color:#00aa00;">no</span> / Paused: <span id="paused" style="color:#00aa00;">no</span> / Stopped: <span id="stopped" style="color:#00aa00;">yes</span>
+			<br />
+			Volume: <span id="volume" style="color:#00aa00;">0</span>
+			-
+			<label for="mute">Mute: <input id="mute" name="mute" type="checkbox" onClick="clearInterval(showAudioFileObjectInfoInterval); buttonPressed('mute_unmute'); startShowAudioFileObjectInfoInterval();" checked disabled/></label>
+			<br />
+			Duration: <span id="duration" style="color:#00aa00;">none</span> / Current time: <span id="current_time" style="color:#00aa00;">0</span>
+			<br />
+			Start time: <input type="text" value="0" id="start_time" disabled />
+			<br />
+			Stop time: <input type="text" value="0" id="stop_time" disabled />
+			<br />
+			<label for="loop">Loop: <input id="loop" name="loop" type="checkbox" disabled /></label>
+			<br />
+			<button id="play" title="Play ('P')" onClick="buttonPressed('play');" style="width:37px; height:37px; background-color:#dddddd; cursor:not-allowed;">&#9654;</button>
+			<button id="pause_resume" title="Pause/Resume" onClick="buttonPressed('pause_resume');" style="width:37px; height:37px; background-color:#dddddd; cursor:not-allowed;">&#10073;&#10073;</button>
+			<button id="stop" title="Stop" onClick="buttonPressed('stop');" style="width:37px; height:37px; background-color:#dddddd; cursor:not-allowed;">&#9646;</button>
+			&nbsp;
+			<button id="volume_down" title="Volume down" onClick="buttonPressed('volume_down');" onMouseDown="clearInterval(changeVolumeInterval); changeVolumeInterval = setInterval(function() { buttonPressed('volume_down'); }, 100);" onMouseUp="clearInterval(changeVolumeInterval);" style="width:37px; height:37px; background-color:#dddddd; cursor:not-allowed;">&darr;</button>
+			<button id="volume_up" title="Volume up" onClick="buttonPressed('volume_up');" onMouseDown="clearInterval(changeVolumeInterval); changeVolumeInterval = setInterval(function() { buttonPressed('volume_up'); }, 100);" onMouseUp="clearInterval(changeVolumeInterval);" style="width:37px; height:37px; background-color:#dddddd; cursor:not-allowed;">&uarr;</button>
+			<br />
+			<input id="tracker" type="range" min="0" max="99999999999999999999999999999999" value="0" step="0.1" />
+			<br />
+			<table width="100%" style="background-color:#00aaaa;">
+				<tr>
+					<td colspan="3" align="center">
+						<select name="file_selector" id="file_selector" onChange="document.getElementById('request_method_data_uri').checked = false; document.getElementById('request_method_normal').checked = true; if (typeof(files[this.value]) !== 'undefined' && files[this.value] === '') { document.getElementById('request_method_data_uri').disabled = true; document.getElementById('request_method_data_uri_text').style.textDecoration = 'line-through'; } else { document.getElementById('request_method_data_uri').disabled = false; document.getElementById('request_method_data_uri_text').style.textDecoration = 'none'; }">
+						</select>
+						<label for="request_method_normal"><input type="radio" name="request_method" id="request_method_normal" value="normal" checked />Normal URL</label>
+						<label for="request_method_data_uri"><input type="radio" name="request_method" id="request_method_data_uri" value="data_uri" /><span id="request_method_data_uri_text">data URI</span></label>
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor="#ff0000" align="center" valign="top">
+						<center>
+						WAAPI (Web Audio API)
+						<br />
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('WAAPI');" style="margin:5px;">
+								new CB_AudioFile (default options)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('WAAPI', { autoLoad: false, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: false, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('WAAPI', { autoLoad: true, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('WAAPI', { autoLoad: true, autoPlay: true, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('WAAPI', { autoLoad: true, autoPlay: true, loop: true });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: true)
+							</button>
+						</div>
+						</center>
+					</td>
+					<td bgcolor="#00ff00" align="center" valign="top">
+						<center>
+						SM2 (SoundManager 2 API)
+						<br />
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('SM2');" style="margin:5px;">
+								new CB_AudioFile (default options)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('SM2', { autoLoad: false, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: false, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('SM2', { autoLoad: true, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('SM2', { autoLoad: true, autoPlay: true, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('SM2', { autoLoad: true, autoPlay: true, loop: true });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: true)
+							</button>
+						</div>
+						</center>
+					</td>
+					<td bgcolor="#0000ff" align="center" valign="top">
+						<center>
+						AAPI (Audio API)
+						<br />
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('AAPI');" style="margin:5px;">
+								new CB_AudioFile (default options)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('AAPI', { autoLoad: false, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: false, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('AAPI', { autoLoad: true, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('AAPI', { autoLoad: true, autoPlay: true, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('AAPI', { autoLoad: true, autoPlay: true, loop: true });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: true)
+							</button>
+						</div>
+						</center>
+					</td>
+					<td bgcolor="#ffff00" align="center" valign="top">
+						<center>
+						ACMP (Apache Cordova Media Plugin)
+						<br />
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('ACMP');" style="margin:5px;">
+								new CB_AudioFile (default options)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('ACMP', { autoLoad: false, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: false, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('ACMP', { autoLoad: true, autoPlay: false, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: false, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('ACMP', { autoLoad: true, autoPlay: true, loop: false });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: false)
+							</button>
+						</div>
+						<div style="text-align:center;">
+							<button onClick="createAudioFileObject('ACMP', { autoLoad: true, autoPlay: true, loop: true });" style="margin:5px;">
+								new CB_AudioFile (autoLoad: true, autoPlay: true, loop: true)
+							</button>
+						</div>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			Supported audio formats (ordered by preference):
+			<div id="supported_formats" style="color:#aa0000;"></div>
+			<br />
+			Supported audio formats in data URI (ordered by preference):
+			<div id="supported_formats_data_uri" style="color:#aa0000;"></div>
+			<br />
+			Supported audio APIs (ordered by preference):
+			<div id="supported_apis" style="color:#aa00ff;"></div>
+			<br />
+			Preferred audio API (emulation not allowed):
+			<div id="preferred_api" style="color:#aa00ff;"></div>
+			<br />
+			Preferred audio API (emulation allowed):
+			<div id="preferred_api_emulation" style="color:#aa00ff;"></div>
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="display:none; visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+		</center>
+	</body>
+</html>

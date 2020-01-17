@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SockJS test server on NW.js</title>
+		<style>
+		body { color:#ffffff; background-color:#000000; overflow:hidden; }
+		#credits { position:fixed; top:2px; right:2px; color:#555555; font-size:12px; font-style:italic; }
+		#messages { color:#00ffcc; }
+		#clients { color:#00ff00; }
+		#messages { height:100px; overflow:auto; }
+		#send_form { position:fixed; bottom:0px; right:0px; width:100%; background-color:#aa0000; }
+		textarea { resize:none; width:80%; height:80px; padding:0; margin:10px; display:table-cell; vertical-align:middle; }
+		input { width:10%; height:80px; padding:0px; margin:10px; display:table-cell; vertical-align:middle; }
+		</style>
+	</head>
+	<body>
+		<div id="credits">Joan Alba Maldonado (joanalbamaldonado AT gmail DOT com)</div>
+		
+		Number of clients: <span id="clients">0</span>
+		<br />
+		Message from the client:
+		<div id="messages"></div>
+		
+		<br />
+		
+		<div id="send_form">
+			<form action="#" onSubmit="return false;">
+				<textarea name="message_input" id="message_input" />Hello client!</textarea>
+				<input type="submit" value="Send" onClick="sendMessage(); return false;">
+			</form>
+		</div>
+		
+		<script>
+			var http = require('http');
+			var sockjs = require('sockjs');
+			
+			var clients = 0;
+
+			var connObject = null;
+			
+			var echo = sockjs.createServer({ sockjs_url: '../../../CrossBrowdy/CrossBase/net/sockets/SockJS/sockjs.min.js' /*'http://cdn.jsdelivr.net/sockjs/1.0.1/sockjs.min.js'*/ });
+			echo.on
+			(
+				'connection',
+				function(conn)
+				{
+					connObject = conn;
+					clients++;
+					document.getElementById("clients").innerHTML = clients;
+					conn.write("Welcome to SockJS server!");
+					
+					conn.on
+					(
+						'data',
+						function(message)
+						{
+							conn.write("MESSAGE RECEIVED: " + message);
+							document.getElementById("messages").innerHTML = message;
+						}
+					);
+					
+					conn.on('close', function() { clients--; document.getElementById("clients").innerHTML = clients; });
+				}
+			);
+
+			var server = http.createServer();
+			echo.installHandlers(server, {prefix:'/echo'});
+
+			server.listen(9999);
+			
+			function sendMessage()
+			{
+				if (typeof(connObject) === "undefined" || connObject === null) { return; }
+				var message = document.getElementById("message_input").value;
+				connObject.write("MESSAGE FROM THE SERVER: " + message);
+			}
+		</script>  
+	</body>
+</html>

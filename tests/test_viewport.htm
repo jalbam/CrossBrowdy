@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - Dynamic viewport test</title>
+
+		<style>
+			#info
+			{
+				position:absolute;
+				left:0px;
+				top:0px;
+				font-size:18px;
+				background-color:#dddddd;
+				border:1px dotted #222222;			
+     			padding:10px;
+				text-align:center;
+			}
+			.options
+			{
+				font-size:14px;
+				line-height:14px;
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:80%;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				//Sets the viewport according to the initial options:
+				setViewport();
+
+				return;
+			}
+			
+			
+			//Function that sets the viewport according to the options chosen:
+			function setViewport()
+			{
+				//If any of the checkboxes is checked, applies them (useful for the first time when the page is loaded):
+				if (CB_Elements.id("useDeviceWidth").checked) { CB_Elements.id("width").value = "device-width"; }
+				if (CB_Elements.id("useDeviceHeight").checked) { CB_Elements.id("height").value = "device-height"; }
+				if (CB_Elements.id("useDeviceDPI").checked) { CB_Elements.id("targetDensityDPI").value = "device-dpi"; }
+				var enableShrinkToFit = !!CB_Elements.id("enableShrinkToFit").checked;
+				if (CB_Elements.id("width").value === "device-width") { CB_Elements.id("useDeviceWidth").checked = true; }
+				if (CB_Elements.id("height").value === "device-height") { CB_Elements.id("useDeviceHeight").checked = true; }
+				if (CB_Elements.id("targetDensityDPI").value === "device-dpi") { CB_Elements.id("useDeviceDPI").checked = true; }
+
+				//Sets the options:
+				var width_ = CB_Elements.id("width").value;
+				var height_ = CB_Elements.id("height").value;
+				var userScalable = CB_Elements.id("userScalable").value;
+				var initialScale = CB_Elements.id("initialScale").value;
+				var minimumScale = CB_Elements.id("minimumScale").value;
+				var maximumScale = CB_Elements.id("maximumScale").value;
+				var targetDensityDPI = CB_Elements.id("targetDensityDPI").value;
+
+				//If anything is not set, it will be set to null:
+				if (CB_trim(width_) === "") { width_ = null; }
+				if (CB_trim(height_) === "") { height_ = null; }
+				if (CB_trim(userScalable) === "") { userScalable = null; }
+				if (CB_trim(initialScale) === "") { initialScale = null; }
+				if (CB_trim(minimumScale) === "") { minimumScale = null; }
+				if (CB_trim(maximumScale) === "") { maximumScale = null; }
+				if (CB_trim(targetDensityDPI) === "") { targetDensityDPI = null; }
+				
+				//Sets the viewport tag:
+				var code = "CB_Screen.setViewport(width_, height_, userScalable, initialScale, minimumScale, maximumScale, targetDensityDPI, enableShrinkToFit);";
+				eval(code);
+				
+				//Show current viewport:
+				var currentViewport = "";
+				if (width_ !== null) { currentViewport += "<span style=\"color:orange;\">width=" + width_ + "</span>"; }
+				if (height_ !== null) { if (CB_trim(currentViewport) !== "") { currentViewport += ", "; } currentViewport += "<span style=\"color:red;\">height=" + height_ + "</span>"; }
+				if (userScalable !== null)
+				{
+					if (CB_trim(currentViewport) !== "") { currentViewport += ", "; }
+					currentViewport += "<span style=\"color:purple;\">user-scalable=" + (userScalable == 0 ? "no" : "yes") + "</span>";
+					currentViewport += ", ";
+					currentViewport += "<span style=\"color:purple;\">user-scalable=" + userScalable + "</span>";
+				}
+				if (initialScale !== null) { if (CB_trim(currentViewport) !== "") { currentViewport += ", "; } currentViewport += "<span style=\"color:blue;\">initial-scale=" + initialScale + "</span>"; }
+				if (minimumScale !== null) { if (CB_trim(currentViewport) !== "") { currentViewport += ", "; } currentViewport += "<span style=\"color:brown;\">minimum-scale=" + minimumScale + "</span>"; }
+				if (maximumScale !== null) { if (CB_trim(currentViewport) !== "") { currentViewport += ", "; } currentViewport += "<span style=\"color:green;\">maximum-scale=" + maximumScale + "</span>"; }
+				if (targetDensityDPI !== null) { if (CB_trim(currentViewport) !== "") { currentViewport += ", "; } currentViewport += "<span style=\"color:gray;\">target-densitydpi=" + targetDensityDPI + "</span>"; }
+				if (CB_trim(currentViewport) !== "") { currentViewport += ", "; }
+				currentViewport += "<span style=\"color:yellow;\">shrink-to-fit=" + (enableShrinkToFit ? "yes" : "no") + "</span>";
+				
+				currentViewport = '&lt;meta name=&quot;viewport&quot; content=&quot;' + currentViewport + '&quot;&gt;';
+				showCurrentViewport(currentViewport);
+				
+				return;
+			}
+			
+
+			//Function that shows the current applied viewport options:
+			function showCurrentViewport(code)
+			{
+				CB_Elements.id("currentViewport").innerHTML = code;
+			
+				return;
+			}
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd">
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - Dynamic viewport test</div>
+			<br />
+			<a href="index.htm">Go back</a>
+			<br />
+			<br />
+			Current viewport options:
+			<div id="currentViewport" class="options"></div>
+			<br />
+			<br />
+			Viewport options (leave something blank if you don't want it to be set):
+			<br />
+			<br />
+			<div class="options" style="width:65%; margin-left:15%;">
+				<div style="text-align:right;">
+					width: <input type="text" id="width" size="13" class="options" />
+					<input type="checkbox" name="useDeviceWidth" id="useDeviceWidth" onClick="if (this.checked) { document.getElementById('width').value = 'device-width'; }" /><label for="useDeviceWidth">Use device-width</label>
+					<br />
+					height: <input type="text" id="height" size="13" class="options" />
+					<input type="checkbox" name="useDeviceHeight" id="useDeviceHeight" onClick="if (this.checked) { document.getElementById('height').value = 'device-height'; }" /><label for="useDeviceHeight">Use device-height</label>
+					<br />
+					user-scalable:
+						<select id="userScalable" class="options" />
+							<option value="0">0 (no)</option>
+							<option value="1">1 (yes)</option>
+						</select>
+					<br />
+					initial-scale: <input type="text" id="initialScale" size="3" class="options" value="1.0" />
+					<br />
+					minimum-scale: <input type="text" id="minimumScale" size="3" class="options" value="0.5" />
+					<br />
+					maximum-scale: <input type="text" id="maximumScale" size="3" class="options" value="3.0" />
+					<br />
+					target-densitydpi: <input type="text" id="targetDensityDPI" size="10" class="options" />
+					<input type="checkbox" name="useDeviceDPI" id="useDeviceDPI" onClick="if (this.checked) { document.getElementById('targetDensityDPI').value = 'device-dpi'; }" /><label for="useDeviceDPI">Use device-dpi</label>
+					<br />
+					shrink-to-fit: <input type="checkbox" name="enableShrinkToFit" id="enableShrinkToFit" />
+					<br>
+					<br>
+					<button onClick="alert('New content for viewport meta tag will be set...'); setViewport();">Apply</button>
+				</div>
+			</div>
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+		
+	</body>
+</html>

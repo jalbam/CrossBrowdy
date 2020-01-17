@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - Keyboard test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				position:absolute;
+				left:360px;
+				top:2px;
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			
+			//Creates the variable that will host the CB_Canvas object:
+			var myCB_Canvas; //Global variable.
+			
+			//Initial circle coordinates (global variables):
+			var circleX = 200;
+			var circleY = 200;
+
+			//Initial circle #2 coordinates (global variables):
+			var circle2X = 100;
+			var circle2Y = 100;
+
+			//ID of the requestAnimationFrame for moveCircle2:
+			var moveCircle2raf;
+			
+			//Interval that will show keysDown array information:
+			var showKeysDownArrayInterval;
+
+			//Interval that will show the typed string:
+			var typedStringInterval;
+
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				//Creates a CB_Canvas object with the element "mycanvas" that already exists:
+				myCB_Canvas = new CB_Canvas("mycanvas", "2d"); //It will use default width and height.
+
+				//The typed string will expire (be cleared) after 1000 milliseconds (1 second):
+				CB_Keyboard.setTypedStringExpiration(1000);
+
+				//The keys pressed array will expire (be cleared) after 1000 milliseconds (1 second):
+				CB_Keyboard.setKeysPressedExpiration(1000);
+
+				//Set events:
+				setEvents();
+
+				//Paints the circle for the first time:
+				moveCircle();
+
+				return;
+			}
+
+			//Cancel all events:
+			function cancelEvents()
+			{
+				//Cancel all events:
+				CB_Keyboard.onKeyPress(null);
+				CB_Keyboard.onKeyDown(null);
+				CB_Keyboard.onKeyUp(null);
+				//CB_Keyboard.setOnKeyPressFunction(showKeyPress, true);
+
+				//Clear all the intervals:
+//				clearInterval(moveCircle2Interval);
+				cancelAnimationFrame(moveCircle2raf);
+				clearInterval(showKeysDownArrayInterval);
+				clearInterval(typedStringInterval);
+				
+				return;
+			}
+
+
+			//Set all events:
+			function setEvents()
+			{
+				//Cancel previous events first (if any):
+				cancelEvents();
+
+				//It will call the function when a key is pressed:
+				CB_Keyboard.onKeyPress(showKeyPress);
+
+				//It will call these functions when a key is down:
+				CB_Keyboard.onKeyDown(showKeyDown);
+				CB_Keyboard.onKeyDown(moveCircle); //It will move the circle 1.
+
+				//It will call the function when a key is up:
+				CB_Keyboard.onKeyUp(showKeyUp);
+
+				//Paints the circle 2 for the first time:
+				moveCircle2();
+
+				//Sets interval that will refresh status of the keysDown array:
+				showKeysDownArrayInterval = setInterval(showKeysDownArray, 20);
+				
+				//Sets the interval that will show the typed string and the keys pressed array:
+				typedStringInterval = setInterval(showTypedStringAndKeysPressed, 20);
+
+				return;
+			}
+
+			
+			//Function executed when a key is pressed (onKeyPress event):
+			function showKeyPress(e, keyCode)
+			{
+				return showInfo(e, keyCode, "keyPress");
+			}
+
+
+			//Function executed when a key is down (onKeyDown event):
+			function showKeyDown(e, keyCode)
+			{//alert("keyDown");
+				return showInfo(e, keyCode, "keyDown");
+			}
+
+
+			//Function executed when a key is released (onKeyUp event):
+			function showKeyUp(e, keyCode)
+			{//alert("keyUp");
+				return showInfo(e, keyCode, "keyUp");
+			}
+			
+			
+			//Function that moves the circle:
+			function moveCircle(e, keyCode)
+			{
+				//We get the canvas ("mycanvas"):
+				var canvas = myCB_Canvas.get();
+
+				//If a key has been sent correctly (it won't be the first time):
+				if (typeof(e) !== "undefined" && e !== null)
+				{
+					if (typeof(keyCode) !== "undefined" && keyCode !== null)
+					{
+						//Moves the circle depending on the key pressed:
+                    	if (keyCode === 40) { circleY += 8; } //Down arrow.
+                    	else if (keyCode === 39) { circleX += 8; } //Right arrow.
+	                    else if (keyCode === 37) { circleX -= 8; } //Left arrow.
+        	            else if (keyCode === 38) { circleY -= 8; } //Up arrow.
+					}
+				}
+				else //The first time, we will set the canvas with its default properties:
+				{
+					//Applies CSS class to the canvas:
+					canvas.className = "mystyle";
+					
+					//We size it:
+					myCB_Canvas.setWidth("350");
+					myCB_Canvas.setHeight("650");
+				}
+				
+				//Paints the circle:
+				if (myCB_Canvas.isSupported())
+				{
+					//We get the context:
+					var context = myCB_Canvas.getContext();
+
+					//Clears the canvas:
+					myCB_Canvas.clear();
+				
+					//Draws the circle:
+					var r = Math.floor(Math.random() * 256);
+					var g = Math.floor(Math.random() * 256);
+					var b = Math.floor(Math.random() * 256);
+					context.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+					var radius = Math.floor(Math.random() * 20) + 60;
+					context.beginPath();
+					context.arc(circleX, circleY, radius, 0, Math.PI * 2, true);
+					context.closePath();
+					context.fill();
+
+					context.save();
+
+					var rotate = Math.round(Math.random());
+					context.translate(circleX + (rotate ? 0 : -10), circleY - 10);
+					context.rotate(Math.PI / (rotate ? 4 : 0));
+					r = Math.floor(Math.random() * 256);
+					g = Math.floor(Math.random() * 256);
+					b = Math.floor(Math.random() * 256);
+					context.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+					context.beginPath();
+					context.fillRect(0, 0, 20, 20);
+					context.closePath();
+					context.fill();
+					
+					context.restore();
+				}
+				
+				return;
+			}
+
+
+			//Function that moves the circle #2:
+			function moveCircle2()
+			{
+				//We get the canvas ("mycanvas"):
+				var canvas = myCB_Canvas.get();
+
+				var keysDown = CB_Keyboard.getKeysDown();
+				//var keysDownLength = keysDown.length;
+				//for (var x = 0; x < keysDownLength; x++)
+				for (var keyCode in keysDown)
+				{
+					if (keysDown[keyCode])
+					{
+                    	if (keyCode === 40) { circle2Y += 8; } //Down arrow.
+        	            if (keyCode === 38) { circle2Y -= 8; } //Up arrow.
+						if (keyCode === 39) { circle2X += 8; } //Right arrow.
+	                    if (keyCode === 37) { circle2X -= 8; } //Left arrow.
+					}
+				}
+
+			
+				//Paints the circle:
+				if (myCB_Canvas.isSupported())
+				{
+					//We get the context:
+					var context = myCB_Canvas.getContext();
+
+					//Draws the circle:
+					var r = Math.floor(Math.random() * 256);
+					var g = Math.floor(Math.random() * 256);
+					var b = Math.floor(Math.random() * 256);
+					context.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+					var radius = Math.floor(Math.random() * 20) + 60;
+					context.beginPath();
+					context.arc(circle2X, circle2Y, radius, 0, Math.PI * 2, true);
+					context.closePath();
+					context.fill();
+				}
+				
+				//Calls the function again after some time:
+				moveCircle2raf = requestAnimationFrame(moveCircle2);
+				
+				return;
+			}
+			
+			
+			//Function that shows information about the key:
+			function showInfo(e, keyCode, idBeginning)
+			{
+				var CTRLkey = e.ctrlKey ? "yes" : "no";
+				var ALTkey = e.altKey ? "yes" : "no";
+				var SHIFTkey = e.shiftKey ? "yes" : "no";
+				var METAkey = e.metaKey ? "yes" : "no";
+				CB_Elements.id(idBeginning + "Type").innerHTML = e.type;
+				CB_Elements.id(idBeginning + "Code").innerHTML = keyCode;
+				CB_Elements.id(idBeginning + "Character").innerHTML = String.fromCharCode(keyCode);
+				CB_Elements.id(idBeginning + "Identifier").innerHTML = e.keyIdentifier;
+				CB_Elements.id(idBeginning + "Location").innerHTML = e.location;//(typeof(e.location) !== "undefined" && e.location !== null) ? e.location : e.keyLocation;
+				CB_Elements.id(idBeginning + "CTRLPressed").innerHTML = CTRLkey;
+				CB_Elements.id(idBeginning + "ALTPressed").innerHTML = ALTkey;
+				CB_Elements.id(idBeginning + "SHIFTPressed").innerHTML = SHIFTkey;
+				CB_Elements.id(idBeginning + "METAPressed").innerHTML = METAkey;
+				return;
+			}
+			
+			
+			//Function that show the keysDown array status:
+			function showKeysDownArray()
+			{
+				var div = CB_Elements.id("keysDownArray");
+				var keysDown = CB_Keyboard.getKeysDown();
+				
+				div.innerHTML = "";
+				//var keysDownLength = keysDown.length;
+				//for (var x = 0; x < keysDownLength; x++)
+				for (var keyCode in keysDown)
+				{
+					if (keysDown[keyCode])
+					{
+						div.innerHTML += keyCode + " is down<br />";
+					}
+				}
+				
+				//Also refreshes additional info:
+				showAdditionalInfo();
+				
+				return;
+			}
+			
+			
+			//Function that shows additional info:
+			function showAdditionalInfo()
+			{
+				var div = CB_Elements.id("additionalInfo");
+				div.innerHTML = "";
+				for (var keyAlias in CB_Keyboard.keys)
+				{
+					if (CB_Keyboard.isKeyDown(CB_Keyboard.keys[keyAlias]))
+					{
+						div.innerHTML += keyAlias + " is Pressed!<br />";
+					}
+				}
+				
+				return;
+			}
+			
+			
+			//Function that shows the typed string and the keys pressed array:
+			function showTypedStringAndKeysPressed()
+			{
+				var typedString = CB_Keyboard.getTypedString();
+				var typedStringCodes = CB_Keyboard.getTypedStringCodes();
+				
+				CB_Elements.id("typedString").innerHTML = typedString;
+				
+				var codes = "";
+				var typedStringCodesLength = typedStringCodes.length;
+				for (var x = 0; x < typedStringCodesLength; x++)
+				{
+					
+					codes += typedStringCodes[x] + " ";
+				}
+				
+				CB_Elements.id("typedStringCodes").innerHTML = codes;
+
+				var keysPressedCodes = CB_Keyboard.getKeysPressed();
+
+				var codes = "";
+				var keysPressedCodesLength = keysPressedCodes.length;
+				for (var x = 0; x < keysPressedCodesLength; x++)
+				{
+					
+					codes += keysPressedCodes[x] + " ";
+				}
+				
+				CB_Elements.id("keysPressedCodes").innerHTML = codes;
+
+		
+				return;
+			}
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd">
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - Keyboard test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div id="changeColor" style="font-size:16px; text-align:center;">Try to move the circles with the arrow keys</div>
+			<br />
+			<div style="text-align:center;"><button onClick="cancelEvents(); alert('All events stopped');">Cancel events</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setEvents(); alert('All events started');">Set events</button></div>
+			<br />
+			Key press code: <div id="keyPressCode" class="dataInfo"></div>
+			(event type: <div id="keyPressType" class="dataInfo"></div>)
+			<br />
+			* Character: <div id="keyPressCharacter" class="dataInfo"></div>
+			<br />
+			* Identifier: <div id="keyPressIdentifier" class="dataInfo"></div>
+			<br />
+			* Location: <div id="keyPressLocation" class="dataInfo"></div>
+			<br />
+			* CTRL pressed: <div id="keyPressCTRLPressed" class="dataInfo"></div>
+			<br />
+			* ALT pressed: <div id="keyPressALTPressed" class="dataInfo"></div>
+			<br />
+			* SHIFT pressed: <div id="keyPressSHIFTPressed" class="dataInfo"></div>
+			<br />
+			* META pressed: <div id="keyPressMETAPressed" class="dataInfo"></div>
+			<br />
+			<br />
+			Key down code: <div id="keyDownCode" class="dataInfo"></div>
+			(event type: <div id="keyDownType" class="dataInfo"></div>)
+			<br />
+			* Character: <div id="keyDownCharacter" class="dataInfo"></div>
+			<br />
+			* Identifier: <div id="keyDownIdentifier" class="dataInfo"></div>
+			<br />
+			* Location: <div id="keyDownLocation" class="dataInfo"></div>
+			<br />
+			* CTRL pressed: <div id="keyDownCTRLPressed" class="dataInfo"></div>
+			<br />
+			* ALT pressed: <div id="keyDownALTPressed" class="dataInfo"></div>
+			<br />
+			* SHIFT pressed: <div id="keyDownSHIFTPressed" class="dataInfo"></div>
+			<br />
+			* META pressed: <div id="keyDownMETAPressed" class="dataInfo"></div>
+			<br />
+			<br />
+			Key up code: <div id="keyUpCode" class="dataInfo"></div>
+            (event type: <div id="keyUpType" class="dataInfo"></div>)
+			<br />
+			* Character: <div id="keyUpCharacter" class="dataInfo"></div>
+			<br />
+			* Identifier: <div id="keyUpIdentifier" class="dataInfo"></div>
+			<br />
+			* Location: <div id="keyUpLocation" class="dataInfo"></div>
+			<br />
+			* CTRL pressed: <div id="keyUpCTRLPressed" class="dataInfo"></div>
+			<br />
+			* ALT pressed: <div id="keyUpALTPressed" class="dataInfo"></div>
+			<br />
+			* SHIFT pressed: <div id="keyUpSHIFTPressed" class="dataInfo"></div>
+			<br />
+			* META pressed: <div id="keyUpMETAPressed" class="dataInfo"></div>
+			<br />
+			<br />
+			Additional info:
+			<br />
+			<div id="additionalInfo" class="dataInfo"></div>
+			<br />
+			keysDown array:
+			<br />
+			<div id="keysDownArray" class="dataInfo"></div>
+			<br />
+			Typed string:
+			<br />
+			<div id="typedString" class="dataInfo" style="border:1px solid black; display:block; width:95%; overflow:scroll;"></div>
+			<br />
+			Typed string codes:
+			<div id="typedStringCodes" class="dataInfo" style="border:1px solid black; display:block; width:95%; overflow:scroll;"></div>
+			<br />
+			Keys pressed codes:
+			<div id="keysPressedCodes" class="dataInfo" style="border:1px solid black; display:block; width:95%; overflow:scroll;"></div>
+			<br />
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+	</body>
+</html>

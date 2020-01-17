@@ -1,0 +1,48 @@
+{
+    "name": "sockjs_test_server_nwjs",
+    "webexe_settings": {
+        "custom_script": "",
+        "windows-x32": true,
+        "nw_version": "0.14.6",
+        "export_dir": "output",
+        "download_dir": "C:/Users/jalbam/AppData/Local/Web2Executable/Web2Executable/files/downloads",
+        "sdk_build": false,
+        "nw_compression_level": 0,
+        "force_download": false,
+        "mac-x64": false,
+        "linux-x64": false,
+        "uncompressed_folder": false,
+        "linux-x32": false,
+        "windows-x64": false
+    },
+    "window": {
+        "kiosk_emulation": false,
+        "visible_on_all_workspaces": false,
+        "id": "sockjs_test_server_nwjs_source",
+        "show_in_taskbar": true,
+        "always_on_top": false,
+        "frame": true,
+        "visible": true,
+        "min_width": 500,
+        "as_desktop": false,
+        "kiosk": false,
+        "width": 500,
+        "resizable": true,
+        "min_height": 220,
+        "transparent": false,
+        "fullscreen": false,
+        "title": "SockJS test server on NW.js",
+        "show": true,
+        "height": 220
+    },
+    "node-remote": [],
+    "webkit": {
+        "double_tap_to_zoom_enabled": false,
+        "plugin": false
+    },
+    "additional_trust_anchors": [],
+    "app_name": "sockjs_test_server_nwjs",
+    "version": "0.1",
+    "nodejs": true,
+    "main": "index.html"
+}

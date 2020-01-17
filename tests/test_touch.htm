@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - CB_Touch test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				/*
+				position:absolute;
+				left:360px;
+				top:2px;
+				*/
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			function init()
+			{
+				CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			}
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, false, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				//Set events:
+				var storedData = null;
+				
+				setInterval
+				(
+					function()
+					{
+						currentData = CB_Touch.getData();
+						if (currentData !== storedData)
+						{
+							storedData = currentData;
+							showData(storedData);
+						}
+					},
+					10
+				);
+
+				
+				//* Source: https://github.com/hammerjs/hammer.js 
+				var Hammer = CB_Touch.getHammerJSObject();
+				if (Hammer !== null)
+				{
+					var element = document.getElementById("element");
+					var mananger = new Hammer.Manager(document.body);
+					
+					var pinch = new Hammer.Pinch();
+					var rotate = new Hammer.Rotate();
+					pinch.recognizeWith(rotate);
+					
+					mananger.add([pinch, rotate]);
+					
+					mananger.on
+					(
+						"rotate",
+						function(e)
+						{
+							element.style.transform = "rotate(" + Math.round(e.rotation) + "deg)";
+						}
+					);
+					
+					mananger.on
+					(
+						"pinchin pinchout",
+						function(e)
+						{
+							element.style.backgroundColor = element.style.backgroundColor === "orange" ? "purple" : "orange";
+							if (e.type === "pinchout" && parseInt(element.style.height) < 500)
+							{
+								element.style.width = element.style.height = (parseInt(element.style.height) + (e.distance * 0.05)) + "px";
+							}
+							else //"pinchin":
+							{
+								if (parseInt(element.style.height) > 50)
+								{
+									element.style.width = element.style.height = (parseInt(element.style.height) - (e.distance * 0.05)) + "px";
+								}
+							}
+							
+						}
+					);
+				}
+				
+				return;
+			}
+
+			
+			function showData(data)
+			{
+				if (data === null) { CB_Elements.id("data").style.color = "#aaaaaa"; return; }
+			
+				CB_console(data);
+				
+				var dataInfo = "<br />";
+				
+				dataInfo += "altKey: " + data.altKey + "<br />";
+				dataInfo += "ctrlKey: " + data.ctrlKey + "<br />";
+				dataInfo += "shiftKey: " + data.shiftKey + "<br />";
+				dataInfo += "metaKey: " + data.metaKey + "<br />";
+				dataInfo += "target: " + data.target + "<br />";
+				dataInfo += "type: " + data.type + "<br />";
+				dataInfo += "number of touches: " + data.touches.length + "<br />";
+								
+				var properties = [ "targetTouches", "touches", "changedTouches" ];
+				
+				for (var x = 0; x < properties.length; x++)
+				{
+					dataInfo += "<br />";
+					dataInfo += properties[x] + ": ";
+					dataInfo += getPointsData(data[properties[x]]);
+					dataInfo += "<br />";
+				}
+				
+				CB_Elements.id("data").style.color = "#ff0000";
+				CB_Elements.id("data").innerHTML = dataInfo;
+			}
+
+			
+			function getPointsData(points)
+			{
+				var info = "";
+				//points = CB_Touch.normalizePoints(points);
+				for (var x = 0; x < points.length; x++)
+				{
+					info += getPointData(points[x]);
+				}
+				return info;
+			}
+			
+			
+			function getPointData(point)
+			{
+				//point = CB_Touch.normalizePoint(point);
+			
+				var data = "[<br />";
+				
+				data += "Identifier: " + point.identifier + "<br />";
+				data += "screenX: " + point.screenX + "<br />";
+				data += "screenY: " + point.screenY + "<br />";
+				data += "clientX: " + point.clientX + "<br />";
+				data += "clientY: " + point.clientY + "<br />";
+				data += "pageX: " + point.pageX + "<br />";
+				data += "pageY: " + point.pageY + "<br />";
+				data += "target: " + point.target + "<br />";
+				data += "radiusX: " + point.radiusX + "<br />";
+				data += "radiusY: " + point.radiusY + "<br />";
+				data += "rotationAngle: " + point.rotationAngle + "<br />";
+				data += "force: " + point.force + "<br />";
+				data += "]";
+				
+				return data;
+			}
+			
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd" onload="init();">
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - CB_Touch test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div id="changeColor" style="font-size:16px; text-align:center;">This is a touch test</div>
+			<br />
+			<br />
+			<div style="text-align:center; width:100%;">
+				<center>
+					<div id="element" style="width:200px; height:200px; background-color:orange;"></div>
+				</center>
+			</div>
+			<br />
+			<br />
+			Current data: <div id="data" class="dataInfo"></div>
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="display:none; visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+	</body>
+</html>

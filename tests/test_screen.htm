@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<meta http-equiv="X-UA-Compatible" content="chrome=IE8">
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+
+		<title>CrossBrowdy - Screen test</title>
+
+		<style>
+			body
+			{
+				background-color:#ffaadd;
+			}
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			.mystyle2
+			{
+				position: absolute;
+				background-color: #ff0000;
+				border: 10px solid #000000;
+			}
+			#info
+			{
+				position:absolute;
+				left:360px;
+				top:2px;
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+			
+				//Creates a CB_Canvas object with a canvas (id "mycanvas") that will be created dinamically:
+				var myCB_Canvas = new CB_Canvas("mycanvas", "2d"); //It will use default width and height and default main alternative mode (flash).
+
+				//Creates a CB_Canvas object with a canvas (id "mycanvas2") that will be created dinamically:
+				var myCB_Canvas2 = new CB_Canvas("mycanvas2", "2d", 300, 250, null, null, null, "vml", true); //It will use 300 as width and 250 as height and vml as main alternative mode.
+
+//alert("modos: " + myCB_Canvas.getMode() + "/" + myCB_Canvas2.getMode());
+
+				//Set events:
+				setEvents();
+
+
+				//CB_Events.add(document, "click", function() { CB_Screen.setFullScreen(event); }, true, true, false);
+
+				//Shows canvas mode for every canvas:
+				showCanvasMode(myCB_Canvas);
+				showCanvasMode(myCB_Canvas2);
+				
+				var canvas;
+				
+				//If canvas that uses myCB_Canvas is supported by the browser:
+				if (myCB_Canvas.isSupported())
+				{
+					//We get the canvas ("mycanvas"):
+					canvas = myCB_Canvas.get();
+					
+					//Applies CSS class to the canvas:
+					canvas.className = "mystyle";
+					
+					//We size it:
+					myCB_Canvas.setWidth("350");
+ 					myCB_Canvas.setHeight("350");
+
+					//We get the context:
+					var context = myCB_Canvas.getContext();
+					
+					//Do things with the canvas context:
+					context.fillStyle = "#ff00ff";
+					context.fillRect(2, 1, 200, 50);
+					context.fill();
+
+					context.strokeStyle = "#f0aa0f";
+					context.lineWidth = 20;
+					context.arc(200, 200, 80, 0, Math.PI * 2, true);
+					context.stroke();
+
+					context.lineWidth = 2;
+					context.strokeStyle = "#f0ff0f";
+					context.font = "42px verdana";
+					context.save();
+					context.rotate(Math.PI/4);
+					context.strokeText("Hello CrossBrowdy!", 70, 50);
+			        context.restore();
+					context.stroke();
+				}
+				
+				//If canvas that uses myCB_Canvas2 is supported by the browser:
+				if (myCB_Canvas2.isSupported())
+				{
+					
+					canvas = myCB_Canvas2.get();
+					canvas.className = "mystyle2";
+					canvas.style.left = "15px";
+					canvas.style.top = "425px";
+					
+					context = canvas.getContext("2d");
+					context.lineWidth = 5;
+					context.fillStyle = "#ff00ff";
+					context.strokeStyle = "#003300";
+					context.fillRect(2, 1, 200, 50);
+					//context.fill();
+					context.lineWidth = 20;
+					context.fillStyle = "#00ff00";
+					context.strokeStyle = "#003300";
+					context.font = "30px arial";
+					context.fillText("Hello CrossBrowdy!", 30, 30);
+					context.arc(200, 200, 80, 0, Math.PI * 2, true);
+					context.fill();
+					
+				}
+				
+				return;
+			}
+
+
+			//Show canvas mode:
+			function showCanvasMode(CB_CanvasObject)
+			{
+				var canvasModeDiv = CB_Elements.id("canvasMode");
+				
+				canvasModeDiv.innerHTML += "<br />&quot;" + CB_CanvasObject.getId() + "&quot; uses " + CB_CanvasObject.getMode() + " mode";
+				if (CB_CanvasObject.getMode() === "NORMAL") { canvasModeDiv.innerHTML += " (native canvas support)"; }
+				//else if (CB_CanvasObject.getMode() === "NORMAL") { canvasModeDiv.innerHTML += " (no emulation active)"; }
+				else if (CB_CanvasObject.getMode() === "DHTML") { canvasModeDiv.innerHTML += " (using DHTML emulation with Canbox)"; }
+				else if (CB_CanvasObject.getMode() === "VML") { canvasModeDiv.innerHTML += " (using VML emulation with ExplorerCanvas)"; }
+				else if (CB_CanvasObject.getMode() === "FLASH") { canvasModeDiv.innerHTML += " (using Flash emulation with FlashCanvas)"; }
+			
+				return;
+			}
+
+			
+			//Changes the divs with the screen information:
+			function refreshInfo()
+			{
+				//if (typeof(FlashCanvas) !== "undefined") { alert("yupiiiiiii"); }
+			
+				//Gets info:
+				var screenResolution = CB_Screen.getWidth()  + " x " + CB_Screen.getHeight();
+				var previousScreenResolution = CB_Screen.getWidthPrevious()  + " x " + CB_Screen.getHeightPrevious();
+				var screenColorDepth = CB_Screen.getColorDepth();
+				var screenAvailableResolution = CB_Screen.getAvailableWidth()  + " x " + CB_Screen.getAvailableHeight();
+				var previousScreenAvailableResolution = CB_Screen.getAvailableWidthPrevious()  + " x " + CB_Screen.getAvailableHeightPrevious();
+				var windowResolution = CB_Screen.getWindowWidth()  + " x " + CB_Screen.getWindowHeight();
+				var previousWindowResolution = CB_Screen.getWindowWidthPrevious()  + " x " + CB_Screen.getWindowHeightPrevious();
+				var orientation = "Portrait";
+				if (CB_Screen.isLandscape()) { orientation = "Landscape"; }
+				
+				//Displays info:
+				CB_Elements.id("screenResolution").innerHTML = screenResolution;
+				CB_Elements.id("previousScreenResolution").innerHTML = previousScreenResolution;
+				CB_Elements.id("screenColorDepth").innerHTML = screenColorDepth + " bit";
+				CB_Elements.id("screenAvailableResolution").innerHTML = screenAvailableResolution;
+				CB_Elements.id("previousScreenAvailableResolution").innerHTML = previousScreenAvailableResolution;
+				CB_Elements.id("windowResolution").innerHTML = windowResolution;
+				CB_Elements.id("previousWindowResolution").innerHTML = previousWindowResolution;
+				CB_Elements.id("orientation").innerHTML = orientation;
+				CB_Elements.id("zoom").innerHTML = CB_Screen.getZoom();
+				CB_Elements.id("previousZoom").innerHTML = CB_Screen.getZoomPrevious();
+				CB_Elements.id("pixelRatio").innerHTML = CB_Screen.getPixelRatio();
+				CB_Elements.id("previousPixelRatio").innerHTML = CB_Screen.getPixelRatioPrevious();
+
+				return;
+			}
+
+
+			//Refreshes the times that orientation has been changed:
+			var orientationChangedTimes = 0;
+			function refreshCounter(count)
+			{
+				if (typeof(count) === "undefined" || count === null) { count = true; }
+				if (count) { orientationChangedTimes++; }
+				CB_Elements.id("orientationChangedCounter").innerHTML = orientationChangedTimes;
+				return;
+			}
+
+			
+			//Function that refreshes the visiblity mode (web is visible or not):
+			function refreshVisibilityMode()
+			{
+				var visible = CB_Screen.isVisible();
+				var div = CB_Elements.id("visibilityMode");
+				if (visible)
+				{
+					div.innerHTML = "Web is visible";
+				}
+				else
+				{
+					div.innerHTML = "Web not visible";
+				}
+				return;
+			}
+
+
+			//Function that refreshes the focus mode (web is focused or not):
+			function refreshFocusMode()
+			{
+				var focused = CB_Screen.isFocused();
+				var div = CB_Elements.id("focusMode");
+				
+				if (focused)
+				{
+					div.innerHTML = "Web is focused";
+				}
+				else
+				{
+					div.innerHTML = "Web not focused";
+				}
+				return;
+			}
+			
+			
+			//Function that refreshes the div with "orientation mode":
+			function refreshOrientationMode()
+			{
+				var orientation = "Portrait";
+				if (CB_Screen.isLandscape()) { orientation = "Landscape"; }
+				CB_Elements.id("orientationMode").innerHTML = orientation + " mode";
+				return;
+			}
+			
+			
+			//Function that tells whether full screen mode is active or not:
+			function refreshFullScreenMode()
+			{
+				var isFullScreen = CB_Screen.isFullScreen();
+				
+				CB_Elements.id("fullScreenMode").innerHTML = (isFullScreen ? "ON" : "OFF");
+				
+				return;
+			}
+			
+
+			function refreshScroll()
+			{
+				CB_Elements.id("scroll").innerHTML = "(" + CB_Screen.getScrollLeft() + "," + CB_Screen.getScrollTop() + ")";
+				return;
+			}
+			
+
+			//Changes canvas background:
+			function changeCanvasBackground(idCanvas)
+			{
+				if (typeof(idCanvas) === "undefined" || idCanvas === null) { idCanvas = "mycanvas"; }
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				CB_Elements.id(idCanvas).style.backgroundColor = "rgb(" + r + ", " + g + ", " + b + ")";
+				CB_Elements.id(idCanvas).style.background = "rgb(" + r + ", " + g + ", " + b + ")";
+				return;
+			}
+			
+			
+			//Show an alert with the screen information:
+			function infoAlert()
+			{
+				alert(
+					"Screen resolution: " + CB_Screen.getWidth() + " x " + CB_Screen.getHeight() + "\n\n" +
+					"Screen color depth: " + CB_Screen.getColorDepth() + "\n\n" +
+					"Screen available resolution: " + CB_Screen.getAvailableWidth() + " x " + CB_Screen.getAvailableHeight() + "\n\n" +
+					"Window resolution: " + CB_Screen.getWindowWidth() + " x " + CB_Screen.getWindowHeight() + "\n" +
+					"* Previous window resolution: " + CB_Screen.getWindowWidthPrevious() + " x " + CB_Screen.getWindowHeightPrevious() + "\n\n" +
+					"Orientation: " + (CB_Screen.isLandscape() ? "Landscape" : "Portrait") + "\n\n" +
+					"Zoom: " + CB_Screen.getZoom() + "\n" +
+					"* Previous Zoom: " + CB_Screen.getZoomPrevious() + "\n\n" +
+					"Pixel ratio: " + CB_Screen.getPixelRatio() + "\n" +
+					"* Previous pixel ratio: " + CB_Screen.getPixelRatioPrevious()
+				);
+				return;
+			}
+
+			
+			//Cancel all events:
+			function cancelEvents()
+			{
+				CB_Screen.onOrientationChange(null);
+				CB_Screen.onResizeOrZoom(null);
+				CB_Screen.onResize(null);
+				CB_Screen.onVisibilityChange(null);
+				CB_Screen.onFocusChange(null);
+				CB_Screen.onFullScreenChange(null);
+				
+				return;
+			}
+
+
+			//Set all events:
+			function setEvents()
+			{
+				//Cancel previous events first (if any):
+				cancelEvents();
+				
+				//Refreshes info every time a window resize or zoom is applied:
+				refreshInfo(); //Refreshes info now.
+				CB_Screen.onResizeOrZoom(refreshInfo);
+
+				//Refreshes the counter every time that orientation is changed:
+				refreshCounter(false); //Refreshes counter now.
+				CB_Screen.onOrientationChange(refreshCounter);
+
+				//Refreshes visibility mode (web visible):
+				refreshVisibilityMode(); //Refreshes div now.
+				CB_Screen.onVisibilityChange(refreshVisibilityMode);
+
+				//Refreshes focus mode (web focused):
+				refreshFocusMode(); //Refreshes div now.
+				CB_Screen.onFocusChange(refreshFocusMode);
+
+				//Refreshes orientation mode div every time that orientation is changed:
+				refreshOrientationMode(); //Refreshes div now.
+				CB_Screen.onOrientationChange(refreshOrientationMode);
+
+				//Change mycanvas background color every time that a window resize or zoom is applied:
+				CB_Screen.onResizeOrZoom(function() { changeCanvasBackground("mycanvas"); });
+
+				//Change mycanvas2 background color every time that a window resize is applied (we do this after creating CB_Canvas object that created mycanvas2 dinamically):
+				CB_Screen.onResize(function() { changeCanvasBackground("mycanvas2"); });
+				
+				//Updates the full screen mode when it changes:
+				refreshFullScreenMode(); //Shows full screen mode now.
+				CB_Screen.onFullScreenChange(refreshFullScreenMode);
+
+				refreshScroll();
+				CB_Screen.onScrollLeft(refreshScroll);
+				CB_Screen.onScrollTop(refreshScroll);
+				
+				return;
+			}
+			
+			
+			function forceOrientation(orientationChosen)
+			{
+				if (typeof(CB_Screen) !== "undnefined")
+				{
+					CB_Screen.setOrientation(orientationChosen);
+				}
+			}
+			
+
+			function unlockOrientation()
+			{
+				if (typeof(CB_Screen) !== "undnefined")
+				{
+					CB_Screen.unlockOrientation();
+				}
+			}
+		// -->
+		</script>
+		
+	</head>
+	<body>
+		<!-- <canvas id="mycanvas2" width="320" height="240" class="mystile2"></canvas> -->
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - Screen test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div id="changeColor" style="font-size:16px; text-align:center;">Try to resize the window or zoom the content</div>
+			<br />
+			<div style="text-align:center;"><button onClick="infoAlert();">Alert with information</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="cancelEvents(); alert('All events stopped');">Cancel events</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="setEvents(); alert('All events started');">Set events</button></div>
+			<br />
+
+<!--	<div id="mierda" style="z-index:999; left:0px; top:0px; background:yellow;">hola</div> -->
+	
+			<br />
+			Full screen mode: <div id="fullScreenMode" class="dataInfo"></div>
+			<br />
+			<div style="text-align:center;"><button onClick="CB_Screen.setFullScreen(true, null, true);">Full screen mode (allows reload in new window)</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="CB_Screen.setFullScreen();">Full screen mode</button></div>
+			<br />
+			<div style="text-align:center;"><button onClick="CB_Screen.setFullScreen(false);">Normal screen mode</button></div>
+			<br />
+			<br />
+			Force orientation (most browsers need Full screen):
+			<br />
+			<input value="Orientation: portrait-primary" type="button" onClick="forceOrientation('portrait-primary');" />
+			<input value="Orientation: portrait-secondary" type="button" onClick="forceOrientation('portrait-secondary');" />
+			<input value="Orientation: landscape-primary" type="button" onClick="forceOrientation('landscape-primary');" />
+			<input value="Orientation: landscape-secondary" type="button" onClick="forceOrientation('landscape-secondary');" />
+			<input value="Unlock orientation" type="button" onClick="unlockOrientation();" />
+			<br />
+			<br />
+			Canvas: <div id="canvasMode" class="dataInfo"></div>
+			<br />
+			<br />
+			Screen resolution: <div id="screenResolution" class="dataInfo"></div>
+			<br />
+			- Previous screen resolution: <div id="previousScreenResolution" class="dataInfo"></div>
+			<br />
+			<br />
+			Scroll: <div id="scroll" class="dataInfo"></div>
+			<br />
+			<br />
+			Screen color depth: <div id="screenColorDepth" class="dataInfo"></div>
+			<br />
+			<br />
+			Screen available resolution: <div id="screenAvailableResolution" class="dataInfo"></div>
+			<br />
+			- Previous screen available resolution: <div id="previousScreenAvailableResolution" class="dataInfo"></div>
+			<br />
+			<br />
+			Window resolution: <div id="windowResolution" class="dataInfo"></div>
+			<br />
+			- Previous window resolution: <div id="previousWindowResolution" class="dataInfo"></div>
+			<br />
+			<br />
+			Orientation: <div id="orientation" class="dataInfo"></div>
+			<br />
+			* Times orientation changed: <div id="orientationChangedCounter" class="dataInfo"></div>
+			<br />
+			<br />
+			Zoom: <div id="zoom" class="dataInfo"></div>
+			<br />
+			- Previous zoom: <div id="previousZoom" class="dataInfo"></div>
+			<br />
+			<br />
+			Pixel ratio: <div id="pixelRatio" class="dataInfo"></div>
+			<br />
+			- Previous pixel ratio: <div id="previousPixelRatio" class="dataInfo"></div>
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+		<div id="orientationMode" style="position:absolute; left:10px; top:355px; border:1px dashed #dddddd; padding:2px; width:330px; text-align:center;"></div>
+		<div id="visibilityMode" style="position:absolute; left:10px; top:385px; border:1px dashed #dddddd; padding:2px; width:160px; text-align:center;"></div>
+		<div id="focusMode" style="position:absolute; left:180px; top:385px; border:1px dashed #dddddd; padding:2px; width:160px; text-align:center;"></div>
+	</body>
+</html>

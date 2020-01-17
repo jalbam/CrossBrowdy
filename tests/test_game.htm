@@ -1,0 +1,1457 @@
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<!--
+		
+		<meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, height=device-height, target-densitydpi=device-dpi, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		-->
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - Test game</title>
+
+		<style>
+			body
+			{
+				background-color:#ffffff;
+				overflow:hidden;
+			}
+
+			.loading_text
+			{
+				border:0px;
+				text-align:center;
+				font-size:40px;
+				font-family:verdana;
+				color:#bb0000;
+			}
+			
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+				text-align:center;
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+				z-index:12;
+				cursor:pointer;
+				cursor:hand;
+			}
+
+			#options
+			{
+				position:absolute;
+				left:0px;
+				top:0px;
+				font-size:12px;
+				line-height:12px;				
+				font-family:verdana;
+				color:#aaaaff;
+				text-align:left;
+				background-color:#222222;
+				padding:2px;
+				border:1px #ffffff dotted;
+				z-index:11;
+				filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6; -khtml-opacity:0.6;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			#CB_credits
+			{
+				position:absolute;
+				left:0px;
+				top:0px;
+				width:35%;
+				font-size:9px;
+				line-height:11px;
+				font-family:verdana;
+				color:#aaaaff;
+				text-align:left;
+				background-color:#222222;
+				padding:6px;
+				border:1px #ffffff dotted;
+				z-index:10;
+				filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6; -khtml-opacity:0.6;
+			}
+
+			#CB_coordinates
+			{
+				position:absolute;
+				left:0px;
+				top:35px;
+				font-size:14px;
+				font-family:verdana;
+				color:#ffff00;
+				text-align:left;
+				background-color:#111111;
+				padding:6px;
+				border:1px #ffffff dotted;
+				z-index:10;
+				filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6; -khtml-opacity:0.6;
+			}
+
+			#CB_consoleGame
+			{
+				position:absolute;
+				left:2px;
+				top:0px;
+				width:50%;
+				height:110px;
+				text-align:center;
+				background-color:#222222;
+				padding:6px;
+				border:1px #ffffff dotted;
+				z-index:10;
+				filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6; -khtml-opacity:0.6;
+			}
+
+			#CB_consoleText
+			{
+				position:relative;
+				width:100%;
+				height:110px;
+				font-size:10px;
+				font-family:verdana;
+				color:#00ff00;
+				text-align:left;
+				background-color:#222222;
+				padding:6px;
+				overflow:scroll;
+				z-index:11;
+			}
+
+			.buttonConsole
+			{
+				width:40%;
+			}
+
+			#CB_controls
+			{
+				position:absolute;
+				left:0px;
+				top:10px;
+				width:270px;
+				height:180px;
+				font-size:14px;
+				line-height:40px;
+				font-family:verdana;
+				color:#ffff00;
+				text-align:center;
+				background-color:#111111;
+				padding:6px;
+				border:1px #ffffff dotted;
+				z-index:20;
+				filter:alpha(opacity=60); opacity:0.6; -moz-opacity:0.6; -khtml-opacity:0.6;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			#CB_upButton, #CB_downButton, #CB_leftButton, #CB_rightButton
+			{
+				background-color:#0000ff;
+				width:80px;
+				height:80px;
+				font-size:50px;
+				line-height:80px;
+			}
+
+			#canvasWrapper
+			{
+				position:absolute;
+				top:0px;
+				left:0px;
+				background:yellow;
+				overflow:hidden;
+				/*border:10px orange solid;*/
+				z-index:7;
+			}
+
+			#canvasBackground
+			{
+				position:absolute;
+				top:0px;
+				left:0px;
+				z-index:8;
+			}
+
+			#canvasForeground
+			{
+				position:absolute;
+				top:0px;
+				left:0px;
+				z-index:9;
+			}
+
+			#canvasDiv
+			{
+				position:absolute;
+				left:0px;
+				top:0px;
+				padding:0px;
+				overflow:hidden;
+				z-index:8;
+			}
+
+			#characterDiv
+			{
+				position:absolute;
+				font-size:0px;
+				left:0px;
+				top:0px;
+				width:60;
+				height:60;
+				background-color:#222222;
+				padding:0px;
+				z-index:9;
+			}
+		</style>
+
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Sets CrossBrowdy options (before initing it):
+			var CB_OPTIONS =
+				{
+					//Options for CrossBrowdy:
+					CrossBrowdy:
+					{
+						CB_console_ALLOW_ALERTS: false //Won't show alerts in the browsers that doesn't have console.
+					},
+					//Options for CrossBase module:
+					CrossBase:
+					{
+						SLCANVAS_LOAD : true //Forces to load SLCanvas.
+					}
+				};
+			if (navigator.appVersion.indexOf("MSIE 5") === -1) //IE5/5.5 doesn't support Canbox.
+			{
+				CB_OPTIONS.CrossBase.CB_LOAD_CANBOX = true; //Forces to load Canbox.
+			}
+
+			//Starts CrossBrowdy:
+			CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+
+			var debugMode = false; //Defines if it's in debug mode or not.
+
+			var useCanvas = true; //Sets whether use canvas or just DHTML.
+			var alternativeCanvasEmulationMethods = [ "FLASH", "SILVERLIGHT", "VML" ]; //Canvas emulation methods in order of preference: "FLASH" uses FlashCanvas, "VML" uses ExplorerCanvas and "DHTML" uses CanBox.
+			//var alternativeCanvasEmulationMethods = [ "DHTML" ]; //Canvas emulation methods in order of preference: "FLASH" uses FlashCanvas, "VML" uses ExplorerCanvas and "DHTML" uses CanBox.
+			var forceFirstEmulationMethod = false; //Forces the first emulation method (if possible).
+			var allowFlashCanvasLocally = false; //Set to false if we don't want to use FlashCanvas locally.
+
+			var KEYS_DOWN = [ 40 ]; //Array with keys used for move down.
+			var KEYS_UP = [ 38 ]; //Array with keys used for move down.
+			var KEYS_LEFT = [ 37 ]; //Array with keys used for move down.
+			var KEYS_RIGHT = [ 39 ]; //Array with keys used for move down.
+
+			var divsCreated = false; //Defines whether the divs has already been created.
+
+			var numberLineConsole = 1; //It will store the number of the last line of the console.
+
+			var gameLoopIDraf;
+
+			//var controlInterval; //Interval that will move character when the screen controls are pressed.
+
+			var canvasWrapper; //DIV that wrappers either canvases or DIVs.
+			var CB_CanvasBackground; //Global variable that will store a CB_Canvas instance (for background).
+			var canvasBackground; //Global variable that will store the canvas (for background).
+			var canvasBackgroundContext; //Global variable that will store the context of the canvas (for background).
+			var CB_CanvasForeground; //Global variable that will store a CB_Canvas instance (for foreground).
+			var canvasForeground; //Global variable that will store the canvas (for foreground).
+			var canvasForegroundContext; //Global variable that will store the context of the canvas (for foreground).
+
+			var gamePaused = false; //Tells whether game is paused or not.
+			
+			var hasBeenChanges = true; //It tells whether has been changes to paint or not.
+
+			var canvasWidth = 320; //Canvas (or div) width (320 is default value but will be updated automatically).
+			var canvasHeight = 240; //Canvas (or div) height (240 is default value but will be updated automatically).
+
+			var characterX = 0; //Main character left position  (pixels).
+			var characterY = 0; //Main character top position  (pixels).
+			var previousCharacterX = 0; //Main character left position  (pixels).
+			var previousCharacterY = 0; //Main character top position  (pixels).
+			var characterWidth = 60; //Main character width (pixels).
+			var characterHeight = 60; //Main character height (pixels).
+			var previousCharacterWidth = characterWidth; //Main character width (pixels).
+			var previousCharacterHeight = characterHeight; //Main character height (pixels).
+			var characterPixelsSpeed = 60; //Numbers of pixels that characters moves every step.
+
+			var mapPainted = false;
+			var mapTileColors= {
+								" " : "#000033",
+
+								"f" : "#0000dd",
+								"C" : "#0000cc",
+
+								"G" : "#aa0000",
+								"E" : "#bb0000",
+
+								"W" : "#00ddff",
+								"Z" : "#ff0000",
+
+								"D" : "#00ffff",
+								"." : "#ffff00"
+							   };
+			var map = [
+				"                          ffC                                                                                                                                                                           ",
+				"                   fCC   CCCfff                                                                                                      ..                                                                 ",
+				"                  ffCCC  CCCfffCC                                                                                                    ..                                                                 ",
+				"              CCCfffCCCffCCCfffCCCf    fffCCC                             ffCCCff   CffCC                                             .                                                                 ",
+				"             CfffCCCfffCCfffCCCfffCC  fCCCfffC                          fCCCfffCCCfffCCfffCCCff                    ...                ..                                                                ",
+				"            CCfffCCCfffCCfffCCCfffCCCffCCCfffCC                        ffCCCfffCCCfffCCfffCCCfff                    ....              ..             .                                                  ",
+				"            CCfffCCCfffCCfffCCCfffCCCffCCCfffCCC                     CfffCCCfffCCCfffCCfffCCCfffC                     ....             ..           ..                                                  ",
+				"            ffCCCfffCCCffCCCfffCCCfffCCfffCCCfffC                  CffCCCfffCCCfffCCCffCCCfffCCCf                      .....           ..           ..                                                  ",
+				"            ffCCCfffCCCffCCCfffCCCfffCCfffCCCfffCC                CCffCCCfffCCCfffCCCffCCCfffCCCf                         ...       ........       ...                                                  ",
+				"            ffCCCfffCCCffCCCfffCCCfffCCfffCCCfffCCC               CCffCCCfffCCCfffCCCffCCCfffCCCf                          ....  ..............   ...                                                   ",
+				"            CCfffCCCfffCCfffCCCfffCCCffCCCfffCCCfffCCCff          ffCCfffCCCfffCCCfffCCfffCCCfff                             ...................  ..                                     fCCC           ",
+				"         ffCCCfffCCCfffCCfffCCCfffCCCffCCCfffCCCfffCCCffCC         fCCfffCCCfffCCCfffCCfffCCCff                              ......................                               ffCCCfffCCCf          ",
+				"         ffCCCfffCCCfffCCfffCCCfffCCCffCCCfffCCCfffCCCffCC             ffCCCfffCCCfffCCfffCC                               ........................                              fffCCCfffCCCfffC       ",
+				"         CCfffCCCfffCCCffCCCfffCCCfffCCfffCCCfffCCCfffCCfff            CCfffCCCfffCCCffCCCff                              .........................                              CCCfffCCCfffCCCff      ",
+				"         CCfffCCCfffCCCffCCCfffCCCfffCCfffCCCfffCCCfffCCfffC           CCfffCCCfffCCCffCCCf                               ....W....W.....WWW.WW.....                             CCCfffCCCfffCCCff      ",
+				"         CCfffCCCfffCCCffCCCfffCCCfffCCfffCCCfffCCCfffCCfffC            CfffCCCfff                                       .....WW..WW......WWWWW......                            CCCfffCCCfffCCCff      ",
+				"          fCCCfffCCCfffCCfffCCCfffCCCffCCCfffCCCfffCCCffCCCf              CCfffCCC                                       .....WW.WWW.......WWW.......                            fffCCCfffCCCfffCC      ",
+				"         ffCCCfffCCCfffCCfffCCCfffCCCffCCCfffCCCfffCCCffCCCf                                                        ...........WWWW.......WWWW.......           ....             fffCCCfffCCCfffCCf   ff",
+				"         ffCCCfffCCCfffCCfffCCCfffCCCffCCCfffCCCfffCCCffCCCf                                                    ..............WWWWW......WWWWWW......   ............             fffCCCfffCCCfffCCf   ff",
+				"         CCfffCCCfffCCCffCCCfffCCCfffCCfffCCCfffCCCfffCCfffC                                                  ......    .....WWW.WWW.....WW...W..............                    CCCfffCCCfffCCCffC   ff",
+				"         CCfffCCCfffCC   CCCfffCCCfff   ffCCCfffCCCfffCCfff                                                 ....        .....WW...WW...................                          CCCfffCCCfffCCCffC     ",
+				"          CfffCCCfffCC      fffCCCfff     CCCfff                                                                        .............................                             CCfffCCCfffCCCf       ",
+				"           CCCfffCCCf         CfffCC        fCCC                                                                        .............................                                  fffCCCff         ",
+				"             CfffCCC                                                                                                    .............................                                     CCCff         ",
+				"                                                                                                                        ....Z..................Z.....                                                   ",
+				"                                                                                                                        ....ZZ................ZZ.....                                                   ",
+				"                                                                                                                        ....ZZZ...............ZZ....                                                    ",
+				"                                                                                                                      .......ZZZ............ZZZ.......                                                  ",
+				"                                                                                                                     ... .....ZZZZ.........ZZZ..........                                                ",
+				"                                                                                                                    ...  .......ZZZZZ...ZZZZZ......  ......                                             ",
+				"                                                                                                                   ...    .........ZZZZZZZ........       ....                                           ",
+				"                                                                                                                  ...     .......................          ....                                         ",
+				"                                                                                                                  ..       .....................            ....                                        ",
+				"                                                                                                                 ..         ...................               ...                                       ",
+				"                                                                                                                ...         .....................              ...                                      ",
+				"                                                                                                                ..         ...  .............  ..               ...                                     ",
+				"                                                                                                                          ...    ..  ..         ..               ...                                    ",
+				"                                                                                                                         ...    ...   .         ...               ..                                    ",
+				"                                                                                                                        ...    ...    ..         ..                                                     ",
+				"                                                                                                                       ...     ..     ..          ..                                                    ",
+				"                                                                                                                       ..     ..      ..          ..                                                    ",
+				"                                                                                                                      ..      ..      ..           .                                                    ",
+				"                                                                                                                      ..     ..       ..           .                                                    ",
+				"                                                                                                                             ..       ..           .                                                    ",
+				"                                                                                                                             ..       ..           .                                                    ",
+				"                                                                                                                                      ..                                                                ",
+				"                                                                                                                                      ..                                                                ",
+				"                                                                                                                                      ..                                                                ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                                                                                                                                                                                                        ",
+				"                              GEEEGGG                                                                                                                                                                   ",
+				"                          EEGGGEEEGGGEEG                              EEEGGGE                                                                                                                           ",
+				"                         EEEGGGEEEGGGEEGG                            GEEEGGGEEE                                                                                                                         ",
+				"                        EGGGEEEGGGEEEGGEEE                          EEGGGEEEGGGE                                                                                                                        ",
+				"                       EEGGGEEEGGGEEEGGEEEGG                       GEEGGGEEEGGGEE                                                                                                                       ",
+				"                      GEEGGGEEEGGGEEEGGEEEGGG                     GGEEGGGEEEGGGEEEG                                                                                                                     ",
+				"                      EGGEEEGGGEEEGGGEEGGGEEEG                   EEEGGEEEGGGEEEGGGEE                                                                                                                    ",
+				"                     EEGGEEEGGGEEEGGGEEGGGEEEG                   EEEGGEEEGGGEEEGGGEEEG                                                                                                                  ",
+				"                     EEGGEEEGGGEEEGGGEEGGGEEEGG                 GEEEGGEEEGGGEEEGGGEEEGG                            EEEGGGEEE                                                                            ",
+				"                    GGGEEGGGEEEGGGEEEGGEEEGGGEEE               EEGGGEEGGGEEEGGGEEEGGGEEGG                     GGGEEGGGEEEGGGEE                                                                          ",
+				"                    GGGEEGGGEEEGGGEEEGGEEEGGGEEEGG           GEEEGGGEEGGGEEEGGGEEEGGGEEGGGE                EEEGGGEEGGGEEEGGGEEEGGG                                                                      ",
+				"                    GGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGE       GGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEE            GGGEEEGGGEEGGGEEEGGGEEEGGGEE                                                                    ",
+				"                   GEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGE       GGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGE                                                                   ",
+				"                   GEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEE                                                                  ",
+				"                   GEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEE                                                                 ",
+				"                  EEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGE                                                                ",
+				"                  EEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE                                                              ",
+				"                 EEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEG                                                             ",
+				"                 GGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEE                                                            ",
+				"                EGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEG                                                          ",
+				"               EEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGG                                                        ",
+				"             EGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGE                          GGEE                       ",
+				"EE          EEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEG                    EEGGGEEG                      ",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGE      EGGGEEEGGGEEGG                     ",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEG                   ",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGG                  ",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGE                ",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGE             ",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGG        ",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"EEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEE",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG",
+				"GGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGGEEGGGEEEGGGEEEGGEEEGGGEEEGGGEEEGGEEEGGG"
+			];
+			var mapsTilesWidthMax = 300;
+			//var mapsTilesHeightMax = 60;
+			var mapTilesWidth = Math.min(map[0].length, mapsTilesWidthMax);
+			var mapTilesHeight = map.length;//Math.min(map.length, mapsTilesHeightMax);
+			var mapColsDisplayed = 100; //Columns displayed on the screen.
+			var mapRowsDisplayed = mapTilesHeight; //Rows displayed on the screen.
+
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Writes the credits:
+				CB_Elements.id("CB_credits").innerHTML = CB_credits();
+
+				//Clears the console:
+				clearConsole();
+
+				//Applies the initial mode (debug or not):
+				applyDebugMode(debugMode);
+
+				//If still doesn't exist, creates the canvas wrapper:
+				canvasWrapper = CB_Elements.id("canvasWrapper");
+				if (typeof(canvasWrapper) === "undefined" || canvasWrapper === null)
+				{
+					canvasWrapper = document.createElement("div");
+					canvasWrapper.id = "canvasWrapper";
+				}
+				document.body.appendChild(canvasWrapper);
+
+				//Creates a CB_Canvas object with a canvas (id "canvasBackground") that will be created dinamically:
+				CB_CanvasBackground = new CB_Canvas("canvasBackground", "2d", null, null, null, null, canvasWrapper, alternativeCanvasEmulationMethods, forceFirstEmulationMethod, false, allowFlashCanvasLocally); //It will use default width and height.
+
+				//Creates a CB_Canvas object with a canvas (id "canvasForeground") that will be created dinamically:
+				CB_CanvasForeground = new CB_Canvas("canvasForeground", "2d", null, null, null, null, canvasWrapper, alternativeCanvasEmulationMethods, forceFirstEmulationMethod, false, allowFlashCanvasLocally); //It will use default width and height.
+
+				//Initializes the game:
+				initGame();
+
+				//Hides loading message:
+				CB_Elements.id("loading").style.visibility = "hidden";
+
+				//Show the controls and the options:
+				CB_Elements.id("CB_controls").style.visibility = "visible";
+				CB_Elements.id("options").style.visibility = "visible";
+				
+				return;
+			}
+
+			
+			//Function that sets the mode (debug or not):
+			function applyDebugMode(debugModeToSet)
+			{
+				if (debugModeToSet)
+				{
+					logConsole("Debug mode enabled");
+					
+					//Shows all the DIVs:
+					CB_Elements.id("CB_coordinates").style.visibility = "visible";
+					CB_Elements.id("CB_consoleGame").style.visibility = "visible";
+					CB_Elements.id("CB_credits").style.visibility = "visible";
+
+					//Checks the box:
+					CB_Elements.id("debugMode").checked = true;
+				}
+				else
+				{
+					logConsole("Debug mode disabled");
+					
+					//Hides all the DIVs:
+					CB_Elements.id("CB_coordinates").style.visibility = "hidden";
+					CB_Elements.id("CB_consoleGame").style.visibility = "hidden";
+					CB_Elements.id("CB_credits").style.visibility = "hidden";
+					
+					//Unchecks the box:
+					CB_Elements.id("debugMode").checked = false;
+				}
+				
+				debugMode = debugModeToSet;
+			}
+
+
+			//Set all events:
+			function setEvents()
+			{
+				//Cancel previous events first (if any):
+				cancelEvents();
+				
+				//Calls the function every time a window resize or zoom is applied:
+				CB_Screen.onResizeOrZoom(screenSizeChanged, false);
+
+				//Calls the function every time that full screen mode changes:
+				CB_Elements.id("fullScreenMode").checked = CB_Screen.isFullScreen(); //Sets the box checked or unchecked.
+				CB_Screen.onFullScreenChange(fullScreenModeChanged);
+
+				//Calls the function every time that orientation is changed:
+				CB_Screen.onOrientationChange(screenSizeChanged, false);
+
+				//Calls the function every time that visibility or focus is changed:
+				CB_Screen.onVisibilityChange(visibilityOrFocusChanged, false);
+				CB_Screen.onFocusChange(visibilityOrFocusChanged, false);
+				
+				//Restore focus when a key is down:
+				CB_Keyboard.onKeyDown(function() { CB_Screen.focus(); }, false);
+				
+				//Cancels game pause if a mouse button is pressed:
+				//CB_Events.add(window, "mousedown", function() { pauseResumeGame(false); });
+				//CB_Events.add(window, "click", function() { pauseResumeGame(false); });
+				//CB_Events.add(window, "touchstart", function() { pauseResumeGame(false); });
+				CB_Events.add(document, "mousedown", function() { pauseResumeGame(false); });
+				CB_Events.add(document, "click", function() { pauseResumeGame(false); });
+				CB_Events.add(document, "touchstart", function() { pauseResumeGame(false); });
+				CB_Events.add(CB_Elements.id("CB_changeModeButton"), "mousedown", function() { pauseResumeGame(false); });
+				CB_Events.add(CB_Elements.id("CB_changeModeButton"), "click", function() { pauseResumeGame(false); });
+				CB_Events.add(CB_Elements.id("CB_changeModeButton"), "touchstart", function() { pauseResumeGame(false); });
+				CB_Events.add(CB_Elements.id("CB_consoleButton"), "mousedown", function() { pauseResumeGame(false); });
+				CB_Events.add(CB_Elements.id("CB_consoleButton"), "click", function() { pauseResumeGame(false); });
+				CB_Events.add(CB_Elements.id("CB_consoleButton"), "touchstart", function() { pauseResumeGame(false); });
+
+				//Wherever and whenever the mouse button is release, it cancels the interval for screen controls:
+				CB_Events.add(document, "mouseup", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(document, "touchend", function() { CB_Keyboard.clearKeysDown(); });
+
+				//If the user enters the document zone (which is not the same as screen controls), it cancels the interval:
+				CB_Events.add(document, "mouseover", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(document, "mousenter", function() { CB_Keyboard.clearKeysDown(); });
+				//CB_Events.add(document, "touchstart", function() { logConsole("touchstart"); CB_Keyboard.clearKeysDown(); });
+
+				//If the user drags the surface, it cancels the interval for screen controls:
+				CB_Events.add(document, "drag", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(document, "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("canvasBackground"), "drag", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("canvasBackground"), "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("canvasForeground"), "drag", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("canvasForeground"), "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_controls"), "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_upButton"), "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_downButton"), "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "touchmove", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_controls"), "drag", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_upButton"), "drag", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_downButton"), "drag", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "drag", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "drag", function() { CB_Keyboard.clearKeysDown(); });
+			
+				//Set events for screen controls:
+				CB_Events.add(CB_Elements.id("CB_upButton"), "mousedown", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_UP[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_downButton"), "mousedown", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_DOWN[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "mousedown", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_LEFT[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "mousedown", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_RIGHT[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_upButton"), "touchstart", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_UP[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_downButton"), "touchstart", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_DOWN[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "touchstart", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_LEFT[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "touchstart", function() { CB_Keyboard.clearKeysDown(); CB_Keyboard.keysDown[KEYS_RIGHT[0]] = true; }, true);
+				CB_Events.add(CB_Elements.id("CB_controls"), "mouseup", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_upButton"), "mouseup", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_downButton"), "mouseup", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "mouseup", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "mouseup", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_controls"), "touchend", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_upButton"), "touchend", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_downButton"), "touchend", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "touchend", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "touchend", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_controls"), "mouseleave", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_upButton"), "mouseleave", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_downButton"), "mouseleave", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "mouseleave", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "mouseleave", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_controls"), "mouseout", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_upButton"), "mouseout", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_downButton"), "mouseout", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_leftButton"), "mouseout", function() { CB_Keyboard.clearKeysDown(); });
+				CB_Events.add(CB_Elements.id("CB_rightButton"), "mouseout", function() { CB_Keyboard.clearKeysDown(); });
+
+//				CB_Events.add(CB_Elements.id("CB_upButton"), "click", function() { CB_Keyboard.keysDown[KEYS_UP[0]] = true; });
+//				CB_Events.add(CB_Elements.id("CB_downButton"), "click", function() { CB_Keyboard.keysDown[KEYS_DOWN[0]] = true; });
+//				CB_Events.add(CB_Elements.id("CB_leftButton"), "click", function() { CB_Keyboard.keysDown[KEYS_LEFT[0]] = true; });
+//				CB_Events.add(CB_Elements.id("CB_rightButton"), "click", function() { CB_Keyboard.keysDown[KEYS_RIGHT[0]] = true; });
+
+				//Starts game cycle:
+				//cancelAnimationFrame(gameLoopIDraf); //requestAnimationFrame is buggy in Firefox 20.0.1 and doesn't redraw canvas sometimes.
+				clearTimeout(gameLoopIDraf);
+				
+				gameLoop();
+				//gameLoopInterval = setInterval(gameLoop, gameLoopMilliseconds);
+			
+				return;
+			}
+
+			
+			//Cancel all events:
+			function cancelEvents()
+			{
+				CB_Screen.onOrientationChange(null);
+				CB_Screen.onResizeOrZoom(null);
+				CB_Screen.onResize(null);
+				CB_Screen.onFullScreenChange(null);
+				CB_Screen.onVisibilityChange(null);
+				CB_Screen.onFocusChange(null);
+				CB_Keyboard.onKeyDown(null);
+
+				return;
+			}
+
+
+			//Function that initializes the game:
+			function initGame()
+			{
+				//If the canvas is still trying to load, we exit and call the function a little bit later:
+				if (CB_CanvasBackground.loading || CB_CanvasForeground.loading)
+				{
+					if (CB_CanvasBackground.getMode() !== "SILVERLIGHT" || CB_Client.supportsSilverlight())
+					{
+						logConsole("Canvas trying to load (mode " + CB_CanvasBackground.getMode() + "). Waits 1000ms...");
+						setTimeout(initGame, 1000);
+						return;
+					}
+					else { logConsole("Canvas can't use Silverlight because it is not installed!"); }
+				}
+				
+				//If canvas is not supported by the browser or uses Flash and is not installed, it will use DHTML:
+				if (!CB_CanvasBackground.isSupported() || CB_CanvasBackground.getMode() === "FLASH" && (!CB_Client.supportsFlash() || CB_Client.getFlashVersion()[0] < 9))
+				{
+					logConsole("Canvas not supported (mode " + CB_CanvasBackground.getMode() + "). Using DHTML");
+					
+					//Will not use canvas:
+					useCanvas = false;
+					
+					//Hide canvas:
+					CB_Elements.id("canvasBackground").style.visibility = "hidden";
+					CB_Elements.id("canvasForeground").style.visibility = "hidden";
+				} else { logConsole("Canvas supported (mode " + CB_CanvasBackground.getMode() + ")"); }
+
+				logConsole("Game displayed in " + (useCanvas ? "canvas" : "DHTML") + " mode...");
+				
+				//Check the boxes properly:
+				CB_Elements.id("canvasMode").checked = !useCanvas;
+
+				//Initialize the elements:
+				initGameElements();
+
+				//We size it for the first time:
+				screenSizeChanged();
+
+				//Show initial coordinates:
+				showCoordinates();
+
+				//Set has the map had never been painted:
+				mapPainted = false;
+
+				//Set events and starts the game:
+				setEvents();
+				
+				return;
+			}
+
+			
+			//Function that initializes the elements:
+			function initGameElements()
+			{
+				//If we want to use canvas:
+				if (useCanvas)
+				{
+					//We get the canvas ("canvasBackground"):
+					canvasBackground = CB_CanvasBackground.get();
+
+					//We get the canvas ("canvasForeground"):
+					canvasForeground = CB_CanvasForeground.get();
+
+					//We get the context for the background:
+					canvasBackgroundContext = CB_CanvasBackground.getContext();
+
+					//We get the context for the foreground:
+					canvasForegroundContext = CB_CanvasForeground.getContext();
+
+					//If the divs has been created before, it hides them:
+					if (divsCreated)
+					{
+					    logConsole("Hidding previous DIV's...");
+					    var characterDiv = CB_Elements.id("characterDiv");
+					    characterDiv.style.visibility = "hidden";
+					    var canvasDiv = CB_Elements.id("canvasDiv");
+					    canvasDiv.style.visibility = "hidden";
+					}
+				}
+				//...otherwise, we will use DHTML:
+				else
+				{
+					//Hides canvas:
+					//canvasBackground = CB_CanvasBackground.get();
+					//canvasForeground = CB_CanvasForeground.get();
+					//canvasBackground.style.visibility = "hidden";
+					//canvasForeground.style.visibility = "hidden";
+					
+				
+					//Only if the DIV's has not been created before:
+					if (!divsCreated)
+					{
+					    logConsole("Creating DIV's...");
+
+					    //Creates the DIV that simulates the canvas:
+						var canvasDiv = document.createElement("div");
+					    canvasDiv.id = "canvasDiv";
+					    canvasWrapper.appendChild(canvasDiv);
+					    
+					    //Creates the character DIV:
+						var characterDiv = document.createElement("div");
+					    characterDiv.id = "characterDiv";
+					    characterDiv.style.width = characterWidth;
+					    characterDiv.style.height = characterHeight;
+						canvasDiv.appendChild(characterDiv);
+
+					    divsCreated = true;
+					}
+					//...otherwise, just display them:
+					else
+					{
+					    logConsole("Showing previous DIV's...");
+					    var characterDiv = CB_Elements.id("characterDiv");
+					    characterDiv.style.visibility = "visible";
+					    var canvasDiv = CB_Elements.id("canvasDiv");
+					    canvasDiv.style.visibility = "visible";
+					}
+				}
+
+				return;
+			}
+
+
+			//Function that represents the game cycle (loop):
+			function gameLoop()
+			{
+				//If the game is paused, exits:
+				//if (gamePaused) { return; }
+
+				//Check for keys pressed and moves the character if it's needed:
+				checkKeysDown();
+
+				//If there has been any changes to paint:
+				if (hasBeenChanges)
+				{
+					//Paints the scene:
+					paintScene();
+
+					//Sets as there are no new changes to paint yet:
+					hasBeenChanges = false;
+				}
+				
+				//showCoordinates();
+
+				//Calls the cycle again after some time:
+				//gameLoopIDraf = requestAnimationFrame(gameLoop); //requestAnimationFrame is buggy in Firefox 20.0.1 and doesn't redraw canvas sometimes.
+				gameLoopIDraf = CB_symmetricCall(gameLoop, 16);
+				
+				return;
+			}
+
+
+			//Function that paints the scene:
+			function paintScene()
+			{
+				//Paints the map (if it has not been done yet):
+				if (!mapPainted) { paintMap(); }
+				
+				//Re-paints the character at its coordinates:
+				paintCharacter();
+				//logConsole("Paints character!!!");
+
+				//Moves canvas background according to the character position:
+				moveBackground();
+		
+				return;
+			}
+
+
+			//Function that paints the map:
+			function paintMap(fistColumn, firstRow, lastColum, lastRow)
+			{
+				if (typeof(firstColumn) === "undefined" || firstColumn === null) { firstColumn = 0; }
+				if (typeof(firstRow) === "undefined" || firstRow === null) { firstRow = 0; }
+				if (typeof(lastColumn) === "undefined" || lastColumn === null) { lastColumn = -1; }
+				if (typeof(lastRow) === "undefined" || lastRow === null) { lastRow = mapTilesHeight; }
+				
+				if (firstColumn < 0) { firstColumn = 0; }
+				if (firstRow < 0) { firstRow = 0; }
+				if (lastRow > mapTilesHeight) { firstRow = mapTilesHeight; }
+				
+				logConsole("Painting map (" + mapTilesWidth + " x " + mapTilesHeight + ")...");
+
+				var currentTile;
+				var currentTileColumn = 0;
+				var currentTileRow = 0;
+
+				var codeGenerated = "";
+				var mapColumnLength;
+				for (var r = firstRow; r < lastRow; r++)
+				{
+					mapColumnLength = map[r].length;
+					if (lastColumn === -1) { lastColumn = mapColumnLength; }
+					for (var c = firstColumn; c < (lastColumn > mapColumnLength ? mapColumnLength : lastColumn); c++)
+					{
+						//Paints the tile:
+						currentTile = map[r].substring(c, c + 1);
+						codeGenerated += paintTile(currentTile, c, r);
+					}
+				}
+
+				logConsole("Map painted! Showing it...");
+
+				//If we use canvas, applies changes to the canvas:
+				if (useCanvas)
+				{
+					if (CB_CanvasBackground.getMode() !== "DHTML") { canvasBackgroundContext.fill(); }
+				}
+				//..otherwise, we apply HTML code 
+				else
+				{
+					if (CB_trim(codeGenerated) !== "")
+					{
+						logConsole("Applying HTML code with DIVs...");
+						canvasDiv.innerHTML += codeGenerated;
+						CB_Elements.idCacheUpdate("characterDiv"); //Updates cache for characterDiv (since getElementById returns different object after modifying its parent by innerHTML).
+					}
+				}
+
+				logConsole("Map generated and showing right now");
+
+				mapPainted = true;
+				
+				return;
+			}
+
+
+			//Function that paints a tile:
+			function paintTile(tile, tileColumn, tileRow)
+			{
+				var tileWidth = Math.ceil(canvasWidth / mapColsDisplayed);
+				var tileHeight = Math.ceil(canvasHeight / mapRowsDisplayed);
+
+				var tileColor = "#000000";
+				if (typeof(mapTileColors[tile]) !== "undefined" && mapTileColors[tile] !== null) { tileColor = mapTileColors[tile]; }
+				
+				var codeGenerated = "";
+				
+				if (useCanvas)
+				{
+					//Paints the tile:
+					canvasBackgroundContext.fillStyle = tileColor;
+					//KAKA//canvasBackgroundContext.beginPath();
+					canvasBackgroundContext.fillRect(tileColumn * tileWidth, tileRow * tileHeight, tileWidth, tileHeight);
+					//KAKA//canvasBackgroundContext.closePath();
+				}
+				else
+				{
+					//Gets the tile:
+					var tileDiv = CB_Elements.id("tile_" + tileColumn + "_" + tileRow);
+
+					//If the tile DIV doesn't exist, creates it:
+					if (typeof(tileDiv) === "undefined" || tileDiv === null)
+					{
+						/*
+						tileDiv = document.createElement("div");
+						tileDiv.id = "tile_" + tileColumn + "_" + tileRow;
+						tileDiv.style.position = "absolute";
+						tileDiv.style.backgroundColor = tileColor;
+						
+						var canvasDiv = CB_Elements.id("canvasDiv");
+						canvasDiv.appendChild(tileDiv);
+						*/
+						//logConsole("Generating HTML for tile...");
+						codeGenerated = '<div id="tile_' + tileColumn + '_' + tileRow + '" style="position:absolute; background-color:' + tileColor + '; left:' + tileColumn * tileWidth + '; top:' + tileRow * tileHeight + '; width:' + tileWidth + '; height:' + tileHeight + ';"></div>';
+					}
+					else
+					{
+						tileDiv.style.left = tileColumn * tileWidth;
+						tileDiv.style.top = tileRow * tileHeight;
+						tileDiv.style.width = tileWidth;
+						tileDiv.style.height = tileHeight;
+					}
+				}
+				
+				return codeGenerated;
+			}
+
+
+			//Function that shows the main character:
+			function paintCharacter(changeShape)
+			{
+				//Random background color:
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+
+				if (useCanvas)
+				{
+					//Clears the canvas where character was:
+					canvasForegroundContext.clearRect(previousCharacterX, previousCharacterY, previousCharacterWidth, previousCharacterHeight);
+					//With SLCanvas clearRect doesn't work properly, so we clear all again:
+					if (CB_CanvasForeground.getMode() === "SILVERLIGHT")
+					{
+						CB_CanvasForeground.clear(false);
+						//canvasForegroundContext.clearRect(previousCharacterX - 300, previousCharacterY - 300, previousCharacterWidth + 300, previousCharacterHeight + 300);
+					}
+					
+					//Next time it will clear the current character width:
+					previousCharacterWidth = characterWidth;
+					previousCharacterHeight = characterHeight;
+
+					//Paints the character:
+					canvasForegroundContext.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+					//KAKA//canvasForegroundContext.beginPath();
+					canvasForegroundContext.fillRect(characterX, characterY, characterWidth, characterHeight);
+					//KAKA//canvasForegroundContext.closePath();
+					//KAKA//canvasForegroundContext.fill();
+				}
+				else
+				{
+					var characterDiv = CB_Elements.id("characterDiv");
+
+					//If has been set, changes the shape:
+					if (changeShape)
+					{
+						characterDiv.style.width = characterWidth;
+						characterDiv.style.height = characterHeight;
+					}
+
+					characterDiv.style.backgroundColor = "rgb(" + r + ", " + g + ", " + b + ")";
+
+					characterDiv.style.left = characterX;
+					characterDiv.style.top = characterY;
+				}
+
+				return;
+			}
+
+
+			//Executed every time that full screen mode is changed:
+			function fullScreenModeChanged(refreshScreen)
+			{
+				if (typeof(refreshScreen) === "undefined" || refreshScreen === null) { refreshScreen = true; }
+				var isFullScreen = CB_Screen.isFullScreen();
+				CB_Elements.id("fullScreenMode").checked = isFullScreen;
+				logConsole("Full screen mode changed! Now is " + ((isFullScreen) ? "enabled" : "disabled"));
+				if (refreshScreen) { screenSizeChanged(); }
+				return;
+			}
+			
+
+			//Executed every time that window size is changed, zoom is applied, etc:
+			function screenSizeChanged()
+			{
+				var windowWidth = CB_Screen.getWindowWidth();
+				var windowHeight = CB_Screen.getWindowHeight();
+
+				if (windowWidth > 0 && windowHeight > 0)
+				{
+					//Sets the new canvas (or div) size:
+					canvasWidth = windowWidth;
+					canvasHeight = windowHeight;
+
+					//Resizes the canvas wrapper:
+					canvasWrapper.style.width = windowWidth;
+					canvasWrapper.style.height = windowHeight;
+
+					//Reallocate elements:
+					reallocateElementsPosition();
+
+					//There has been changes to paint:
+					hasBeenChanges = true;
+ 				}
+
+				//Restores the focus (just in case it has been lost):
+				CB_Screen.focus();
+
+				//Updates the coordinates:
+				showCoordinates();
+
+				return;
+			}
+
+
+			//Reallocates the elements to legal positions:
+			function reallocateElementsPosition()
+			{
+				var credits = CB_Elements.id("CB_credits");
+				credits.style.top = canvasHeight - 330;
+				credits.style.left = parseInt(canvasWidth / 1.8);
+				
+				var console = CB_Elements.id("CB_consoleGame");
+				console.style.top = canvasHeight - 210;
+
+				var controls = CB_Elements.id("CB_controls");
+				controls.style.left = canvasWidth - 290;
+
+				//Resizes the character according to the new proportions:
+				previousCharacterWidth = characterWidth;
+				previousCharacterHeight = characterHeight;
+//				characterWidth = parseInt(canvasWidth / mapColsDisplayed) + 1;
+//				characterHeight = parseInt(canvasHeight / mapRowsDisplayed) + 1;
+				characterWidth = Math.ceil(canvasWidth / mapColsDisplayed);
+				characterHeight = Math.ceil(canvasHeight / mapRowsDisplayed);
+
+				if (previousCharacterWidth < characterWidth) { previousCharacterWidth = characterWidth; }
+				if (previousCharacterHeight < characterHeight) { previousCharacterHeight = characterHeight; }
+				paintCharacter(true); //Paints the character with the new size.
+
+				var canvasDiv = CB_Elements.id("canvasDiv");
+
+				if (useCanvas)
+				{
+					//Hides the DIVs (if they exist):
+					if (typeof(canvasDiv) !== "undefined" && canvasDiv !== null)
+					{
+						canvasDiv.style.visibility = "hidden";
+						characterDiv.style.visibility = "hidden";
+						
+						//Uses same scroll:
+						canvasBackground.style.left = canvasDiv.style.left;
+						canvasForeground.style.left = canvasDiv.style.left;
+						
+						//Destroys DIV data (to free some memory):
+						//canvasDiv.innerHTML = "";
+						
+						logConsole("Canvas will use same scroll as DIV: " + canvasBackground.style.left);
+					}
+					else { canvasBackground.style.left = 0; canvasForeground.style.left = 0; } //Not scroll at first.
+					
+					//Sets canvas size according to the size of the map:
+					CB_CanvasBackground.setWidth(Math.ceil(canvasWidth / mapColsDisplayed) * mapTilesWidth);
+					CB_CanvasBackground.setHeight(canvasHeight);
+					CB_CanvasBackground.clear(false, "#000000"); //Uses black background color.
+					//KAKA//canvasBackgroundContext.fill();
+
+					//Set foreground canvas size and clears it:
+					CB_CanvasForeground.setWidth(Math.ceil(canvasWidth / mapColsDisplayed) * mapTilesWidth);
+					CB_CanvasForeground.setHeight(canvasHeight);
+					CB_CanvasForeground.clear(false); //Uses no color (transparent).
+					//KAKA//canvasForegroundContext.fill();
+					
+					//Show canvases:
+					canvasBackground.style.visibility = "visible";
+					canvasForeground.style.visibility = "visible";
+				}
+				else
+				{
+					//Hides the canvases (if they exist):
+					if (typeof(canvasBackground) !== "undefined" && canvasBackground !== null)
+					{
+						//Modifies their visibility:
+						canvasBackground.style.visibility = "hidden";
+						canvasForeground.style.visibility = "hidden";
+						
+						//Uses same scroll:
+						canvasDiv.style.left = canvasBackground.style.left;
+						logConsole("Using same scroll: " + canvasDiv.style.left);
+						logConsole("DIV will use same scroll as canvas: " + canvasDiv.style.left);
+					}
+					else { canvasDiv.style.left = 0; } //Not scroll at first.
+
+					canvasDiv.style.width = Math.ceil(canvasWidth / mapColsDisplayed) * mapTilesWidth;
+					canvasDiv.style.height = canvasHeight;
+					canvasDiv.style.backgroundColor = "#000000";
+					canvasDiv.style.visibility = "visible";
+					characterDiv.style.visibility = "visible";
+				}
+
+				//Paints the map:
+				mapPainted = false;
+
+				//If it's not in a legal position, reallocates main character:
+				if (characterX < 0) { characterX = 0; logConsole("Main character in illegal position, X restored to 0"); }
+				if (characterX + characterWidth > Math.ceil(canvasWidth / mapColsDisplayed) * mapTilesWidth) { characterX = canvasWidth - characterWidth; logConsole("Main character in illegal position, X restored to " + characterX); }
+				if (characterY < 0) { characterY = 0; logConsole("Main character in illegal position, Y restored to 0"); }
+				if (characterY + characterHeight > canvasHeight) { characterY = canvasHeight - characterHeight; logConsole("Main character in illegal position, Y restored to " + characterY); }
+				
+
+
+				//Places character where it should be (according to previous proportions):
+				
+					
+					
+				//Uses the correct scroll according to the previous one:
+				
+				
+				
+				//Modifies the speed according to the new size:
+				//characterPixelsSpeed
+				
+				
+				return;
+			}
+
+
+
+			//Executed every time that visibility or focus is changed:
+			function visibilityOrFocusChanged()
+			{
+				var applyPause = false;
+				
+				var visible = CB_Screen.isVisible();
+				var focused = CB_Screen.isFocused();
+				
+				if (!visible || !focused)
+				{
+					applyPause = true;
+					CB_Keyboard.clearKeysDown(); //Cancels the interval for screen controls.
+					if (!gamePaused)
+					{
+						logConsole("Visibility or focus lost! Applying pause... [visible = " + visible + ", focused = " + focused + "]");
+					}
+				}
+				else if (gamePaused) { logConsole("Visibility and focus restored! Resuming the game..."); }
+				
+				//Pauses or resumes the game:
+				pauseResumeGame(applyPause);
+				
+				return;
+			}
+			
+			
+			//Pauses of resumes the game:
+			function pauseResumeGame(applyPause)
+			{
+				//If game status is already applied, it exits:
+				if (gamePaused === applyPause) { return; }
+				
+				//If we need to pause the game:
+				if (applyPause)
+				{
+					gamePaused = true;
+					logConsole("Game paused");
+				}
+				//...otherwise, if we need to resume the game:
+				else
+				{
+					gamePaused = false;
+					logConsole("Game resumed");
+				}
+			}
+			
+
+			//Detects when a key is down:
+			var KEYS_DOWN_length = KEYS_DOWN.length;
+			var KEYS_UP_length = KEYS_UP.length;
+			var KEYS_LEFT_length = KEYS_LEFT.length;
+			var KEYS_RIGHT_length = KEYS_RIGHT.length;
+			function checkKeysDown()
+			{
+				//If the game is paused, exits:
+				if (gamePaused) { return; }
+				
+				//Stores previous coordinates:
+				previousCharacterX = characterX;
+				previousCharacterY = characterY;
+
+				var keysDown = CB_Keyboard.keysDown;
+				var keyCode = 0;
+				
+				//Checks if any key for down is being pressed:
+				//var KEYS_DOWN_length = KEYS_DOWN.length;
+				for (var x = 0; x < KEYS_DOWN_length; x++)
+				{
+					keyCode = KEYS_DOWN[x];
+					if (keysDown[keyCode]) { moveCharacter("down"); break; }
+				}
+
+				//Checks if any key for up is being pressed:
+				//var KEYS_UP_length = KEYS_UP.length;
+				for (var x = 0; x < KEYS_UP_length; x++)
+				{
+					keyCode = KEYS_UP[x];
+					if (keysDown[keyCode]) { moveCharacter("up");  break; }
+				}
+
+				//Checks if any key for left is being pressed:
+				//var KEYS_LEFT_length = KEYS_LEFT.length;
+				for (var x = 0; x < KEYS_LEFT_length; x++)
+				{
+					keyCode = KEYS_LEFT[x];
+					if (keysDown[keyCode]) { moveCharacter("left");  break; }
+				}
+
+				//Checks if any key for right is being pressed:
+				//var KEYS_RIGHT_length = KEYS_RIGHT.length;
+				for (var x = 0; x < KEYS_RIGHT_length; x++)
+				{
+					keyCode = KEYS_RIGHT[x];
+					if (keysDown[keyCode]) { moveCharacter("right");  break; }
+				}
+
+				//If the character has moved, there has been changes to paint:
+				if (characterX !== previousCharacterX || characterY !== previousCharacterY)
+				{
+					hasBeenChanges = true;
+					showCoordinates(); //Shows new coordinates.
+				}
+
+				return;
+			}
+			
+
+			//Function that moves the character:
+			function moveCharacter(direction)
+			{
+				//Stores previous coordinates:
+//				previousCharacterX = characterX;
+//				previousCharacterY = characterY;
+
+				switch (direction)
+				{
+					case "down":
+						if (characterY + characterHeight + characterPixelsSpeed <= canvasHeight)
+						{
+							characterY += characterPixelsSpeed;
+						} else { characterY = canvasHeight - characterHeight; }
+						//hasBeenChanges = true;
+						break;
+					case "up":
+						if (characterY - characterPixelsSpeed >= 0)
+						{
+							characterY -= characterPixelsSpeed;
+						} else { characterY = 0; }
+						//hasBeenChanges = true;
+						break;
+					case "left":
+						if (characterX - characterPixelsSpeed >= 0)
+						{
+							characterX -= characterPixelsSpeed;
+						} else { characterX = 0; }
+						//hasBeenChanges = true;
+						break;
+					case "right":
+						if (characterX + characterWidth + characterPixelsSpeed <= Math.ceil(canvasWidth / mapColsDisplayed) * mapTilesWidth)
+						{
+							characterX += characterPixelsSpeed;
+						} else { characterX = Math.ceil(canvasWidth / mapColsDisplayed) * mapTilesWidth - characterWidth; }
+						//hasBeenChanges = true;
+						break;
+					default: return;
+				}
+/*
+				//Shows new coordinates (if there has been any changes):
+				if (hasBeenChanges)
+				{
+					//Re-paints the character at the new coordinates:
+					paintCharacter();
+
+					//Moves canvas background according to the character position:
+					moveBackground();
+
+					//Show new coordinates:
+					showCoordinates();
+				}
+*/				
+				return;
+			}
+
+			
+			//Function that moves the background according to the character position:
+			function moveBackground()
+			{
+				var canvasBackgroundLeft;
+				
+				if (useCanvas) { canvasBackgroundLeft = parseInt(canvasBackground.style.left); }
+				else { canvasBackgroundLeft = parseInt(canvasDiv.style.left); }
+				
+				var canvasBackgroundLeftNew = canvasBackgroundLeft;
+				
+				var relativeCharacterX = characterX + canvasBackgroundLeft;
+
+				if (relativeCharacterX - characterPixelsSpeed > canvasWidth / 2)
+				{
+					canvasBackgroundLeftNew = canvasBackgroundLeft - characterPixelsSpeed;
+				}
+				else if (relativeCharacterX < canvasWidth / 2)
+				{
+					canvasBackgroundLeftNew = canvasBackgroundLeft + characterPixelsSpeed;
+				}
+
+				//It won't let go out of the map:
+				if (Math.abs(canvasBackgroundLeftNew) + canvasWidth > Math.ceil(canvasWidth / mapColsDisplayed) * mapTilesWidth)
+				{
+					canvasBackgroundLeftNew = canvasBackgroundLeft;
+				}
+				if (canvasBackgroundLeftNew > 0)
+				{
+					canvasBackgroundLeftNew = canvasBackgroundLeft;
+				}
+
+				//Applies the scroll:
+				if (useCanvas)
+				{
+					canvasBackground.style.left = canvasBackgroundLeftNew;
+					canvasForeground.style.left = canvasBackgroundLeftNew;
+				}
+				else { canvasDiv.style.left = canvasBackgroundLeftNew; }
+
+				
+				return;
+			}
+
+
+			//Function that shows coordinates:
+			function showCoordinates()
+			{
+				var coordinates = CB_Elements.id("CB_coordinates");
+				
+				coordinates.innerHTML = "Mode: " + (useCanvas ? "canvas" : "DHTML");
+				if (useCanvas && CB_CanvasBackground)
+				{
+					if (CB_CanvasBackground.getMode() === "NORMAL") { coordinates.innerHTML += " (native, no emulation)"; }
+					else { coordinates.innerHTML += " (" + CB_CanvasBackground.getMode() + " emulation)"; }
+				}
+				coordinates.innerHTML += "<br />Available pixels: " + CB_Screen.getWindowWidth() + " x " + CB_Screen.getWindowHeight();
+				coordinates.innerHTML += "<br />Map length: " + mapTilesWidth + " x " + mapTilesHeight + " (tiles)";
+				coordinates.innerHTML += "<br />Main character size: " + characterWidth + " x " + characterHeight;
+//				coordinates.innerHTML += "<br />* Main character previous size: " + previousCharacterWidth + " x " + previousCharacterHeight;
+				coordinates.innerHTML += "<br />Main character coordinates: (" + characterX + ", " + characterY + ")";
+				coordinates.innerHTML += "<br />* Main character previous coordinates: (" + previousCharacterX + ", " + previousCharacterY + ")";
+
+				return;
+			}
+
+
+			//Function that shows information about the events in the console:
+			function logConsole(info)
+			{
+				var logConsole = CB_Elements.id("CB_consoleText");
+				logConsole.innerHTML += "[" + numberLineConsole++ + "] " + info + "<br />";
+				logConsole.scrollTop = logConsole.scrollHeight;
+			
+				return;
+			}
+
+			
+			//Function that clears the cosole:
+			function clearConsole()
+			{
+				var logConsole = CB_Elements.id("CB_consoleText");
+				logConsole.innerHTML = "";
+				numberLineConsole = 1;
+				return;
+			}
+
+
+			function toggleFullScreen()
+			{
+				var documentBase = CB_Client.getDocumentBase();
+				var element = documentBase.body;
+				if (documentBase.documentElement) { element = documentBase.documentElement; }
+
+				CB_Screen.setFullScreen(CB_Elements.id('fullScreenMode').checked, element);
+				
+				setTimeout(function() { fullScreenModeChanged(false); }, 10);
+				
+				return;
+			}
+
+		// -->
+		</script>
+		
+	</head>
+	<body>
+		<table border="0" width="100%" height="100%" id="loading" style="border:0px; width:100%; height:100%; padding:0px;">
+			<tr>
+				<td class="loading_text" align="center" valign="middle">
+					Loading...
+				</td>
+			</tr>
+		</table>
+
+		<div id="options" style="visibility:hidden;">
+			<label for="debugMode"><input type="checkbox" id="debugMode" onClick="applyDebugMode(!debugMode);" /> Debug mode</label>
+			<label for="canvasMode"><input type="checkbox" id="canvasMode" onClick="useCanvas = !useCanvas; initGame();" /> Use DHTML (not canvas)</label>
+			<!-- <label for="fullScreenMode"><input type="checkbox" id="fullScreenMode" onClick="if (document.getElementById('fullScreenMode').checked) { CB_Screen.setFullScreen(); } else { CB_Screen.setFullScreen(false); }; fullScreenModeChanged();" /> Full screen</label> -->
+			<label for="fullScreenMode"><input type="checkbox" id="fullScreenMode" onClick="toggleFullScreen();" /> Full screen</label>
+		</div>
+
+		<div id="CB_coordinates" style="visibility:hidden;"></div>
+
+		<div id="CB_consoleGame" style="visibility:hidden;">
+			<div id="CB_consoleText"></div>
+			<button id="CB_consoleButton" class="buttonConsole" onClick="clearConsole();">Clear console</button>
+		</div>
+
+		<div id="CB_controls" style="visibility:hidden;">
+			<button id="CB_upButton" style="position:absolute; top:10px; left:100px;">&uarr;</button>
+			<br />
+			<button id="CB_leftButton" style="position:absolute; top:100px; left:10px;">&larr;</button>
+			<button id="CB_downButton" style="position:absolute; top:100px; left:100px;">&darr;</button>
+			<button id="CB_rightButton" style="position:absolute; top:100px; left:190px;">&rarr;</button>
+		</div>
+
+		<div id="CB_credits" style="visibility:hidden;">CrossBrowdy by Joan Alba Maldonado</div>
+	</body>
+</html>

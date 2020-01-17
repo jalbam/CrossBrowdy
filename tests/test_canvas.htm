@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - Canvas test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				position:absolute;
+				left:550px;
+				top:2px;
+				width:400px;
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<script type="text/javascript" src="../CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js"></script>
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			var CB_OPTIONS =
+				{
+					//Options for CrossBase module:
+					CrossBase:
+					{
+						SLCANVAS_LOAD : true, //Forces to load SLCanvas.
+						FLASHCANVAS_LOAD : true, //forces to load FlashCanvas.
+						CANBOX_LOAD : true, //Forces to load Canbox.
+						EXCANVAS_LOAD : true, //Forces to load ExplorerCanvas.
+						CANVAS_TEXT_LOAD : true //Forces to load text-canvas.
+					}
+				};
+			if (navigator.appVersion.indexOf("MSIE 5") !== -1) //IE5/5.5 doesn't support Canbox and ExplorerCanvas.
+			{
+				CB_OPTIONS.CrossBase.CANBOX_LOAD = false; //Canbox will not be loaded.
+				CB_OPTIONS.CrossBase.EXCANVAS_LOAD = false; //ExplorerCanvas will not be loaded.
+				CB_OPTIONS.CrossBase.CANVAS_TEXT_LOAD = false; //text-canvas will not be loaded.
+			}
+
+			function init()
+			{
+				//Starts CrossBrowdy:
+				CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			}
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				var emulationMethods = [ null, "auto", "flash", "silverlight", "vml", "dhtml", "none" ]; //AUTO or null = automatic, FLASH = FlashCanvas, SILVERLIGHT = SLCanvas, VML = ExplorerCanvas, DHTML = Canbox, NONE = no emulation at all.
+				emulationMethodsLength = emulationMethods.length;
+
+				document.getElementById("flash_info").innerHTML = "[<b>" + (typeof(FlashCanvas) !== "undefined" ? "available" : "not available") + "</b>]";
+				document.getElementById("silverlight_info").innerHTML = "[<b>" + (typeof(slcanvas) !== "undefined" ? "available" : "not available") + "</b>]";
+				document.getElementById("vml_info").innerHTML = "[<b>" + (typeof(G_vmlCanvasManager) !== "undefined" && G_vmlCanvasManager.initElement.toString().indexOf("macromedia") === -1 ? "available" : "not available") + "</b>]";
+				document.getElementById("dhtml_info").innerHTML = "[<b>" + (typeof(_CanboxManager) !== "undefined" ? "available" : "not available") + "</b>]";
+				
+				var canvasInfo = CB_Elements.id("canvasInfo");
+				canvasInfo.innerHTML = "";
+				var canvasId;
+				var divInfoBelow;
+				
+				var suffixes = ["dynamic", "static"];
+				//var suffixes = ["dynamic"];
+				var suffix;
+				var divHeader;
+				for (y = 0; y < suffixes.length; y++)
+				{
+					suffix = suffixes[y];
+					divHeader = document.createElement("div");
+					divHeader.style.color = "#aa0000";
+					divHeader.style.fontSize = "9px";
+					divHeader.style.position = "absolute";
+					divHeader.style.top = (y * 280 + 15) + "px";
+					divHeader.style.left = "10px";
+					divHeader.innerHTML = "* " + suffix + ":";
+					document.body.appendChild(divHeader);
+					
+					for (var x = 0; x < emulationMethodsLength; x++)
+					{
+						canvasId = "canvas_" + (emulationMethods[x] === null ? "null" : emulationMethods[x]) + "_" + suffix;
+						
+						//Creates the canvases:
+						if (emulationMethods[x] === null || emulationMethods[x].toUpperCase() === "AUTO")
+						{
+							eval("var " + canvasId + " = new CB_Canvas('" + canvasId + "', '2d', 100, 100, null, null, null, " + (emulationMethods[x] === null ? null : "'" + emulationMethods[x] + "'") + ");");
+							if (canvasInfo !== null)
+							{
+								canvasInfo.innerHTML += canvasId + ': ' + eval(canvasId + ".getMode()") + ' mode (tried ' + emulationMethods[x] + ')<br />';
+							}
+						}
+						else
+						{
+							eval("var " + canvasId + " = new CB_Canvas('" + canvasId + "', '2d', 100, 100, null, null, null, '" + emulationMethods[x] + "', true, false);");
+							if (canvasInfo !== null)
+							{
+								canvasInfo.innerHTML += canvasId + ': ' + eval(canvasId + ".getMode()") + ' mode (tried ' + emulationMethods[x] + ' as unique emulation)<br />';
+							}
+						}
+						
+						//Sets the style for every canvas:
+						eval(canvasId + ".get().style.border = '1px dotted blue';");
+						eval(canvasId + ".get().style.position = 'absolute';");
+						
+						var top = (parseInt(x / 4) * 140 + 30) + (y * 280);
+						var left = (x % 4) * 135 + 10;
+						eval(canvasId + ".get().style.top = '" + top + "px';");
+						eval(canvasId + ".get().style.left = '" + left + "px';");
+						
+						//Paints the canvases:
+						drawCanvas(eval(canvasId));
+
+						//Shows the informacion:
+						divInfoBelow = document.createElement("div");
+						divInfoBelow.style.position = "absolute";
+						divInfoBelow.style.left = left + "px";
+						divInfoBelow.style.top = (top + 100) + "px";
+						divInfoBelow.style.fontSize = "9px";
+						divInfoBelow.style.fontFamily = "arial";
+						divInfoBelow.innerHTML = eval(canvasId + ".getMode()") + " (tried " + emulationMethods[x] + ")";
+						document.body.appendChild(divInfoBelow);
+					}
+				}
+				
+				return;
+			}
+			
+			
+			//Function that draws in a canvas given:
+			function drawCanvas(canvasObject)
+			{
+				//If canvas that uses this CB_Canvas object is supported by the browser and it is ready to be used:
+				if (canvasObject.isSupported() && canvasObject.isReady() && !canvasObject.loading)
+				{
+					canvas = canvasObject.get();
+					
+					context = canvasObject.getContext("2d");
+					
+					if (!context) { return; }
+					
+					context.fillStyle = "#ff22ff";
+					context.fillRect(2, 1, 200, 50);
+					
+					context.lineWidth = 5;
+					context.fillStyle = "#ff22ff";
+					context.strokeStyle = "#cc3300";
+					context.fillRect(2, 1, 200, 50);
+					context.fillStyle = "#aa22ff";
+					context.strokeStyle = "#cc33dd";
+					context.fillRect(2, 1, 20, 5);
+					//context.fill();
+					context.lineWidth = 20;
+					context.fillStyle = "#00aaaa";
+					context.strokeStyle = "#003300";
+					
+					//SLCanvas doesn't support font and fillText methods:
+					//try
+					//{
+						
+						context.font = "10px arial";
+						context.fillText("Hello CrossBrowdy!", 10, 30);
+					//} catch(e){}
+					
+					context.fillStyle = "#00ff00";
+					context.arc(20, 40, 8, 0, Math.PI * 2, true);
+					context.fill();
+				}
+				//...otherwise, we call the function again:
+				else
+				{
+					setTimeout(function() { drawCanvas(canvasObject); }, 10);
+				}
+			}
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd" onLoad="init();">
+		<canvas id="canvas_null_static">canvas_null_static not supported</canvas>
+		<canvas id="canvas_auto_static">canvas_auto_static not supported</canvas>
+		<canvas id="canvas_flash_static">canvas_flash_static not supported</canvas>
+		<canvas id="canvas_silverlight_static">canvas_silverlight_static not supported</canvas>
+		<canvas id="canvas_vml_static">canvas_vml_static not supported</canvas>
+		<canvas id="canvas_dhtml_static">canvas_dhtml_static not supported</canvas>
+		<canvas id="canvas_none_static">canvas_none_static not supported</canvas>
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - Canvas test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<div id="changeColor" style="font-size:16px; text-align:center;">This is a canvas test</div>
+			<br />
+			<span style="font-size:12px; font-family:arial;">
+				AUTO or null = automatic (uses normal mode if able or fallbacks to an emulation method)<br />
+				FLASH = FlashCanvas <span id="flash_info"></span><br />
+				SILVERLIGHT = SLCanvas <span id="silverlight_info"></span><br />
+				VML = ExplorerCanvas <span id="vml_info"></span><br />
+				DHTML = Canbox <span id="dhtml_info"></span><br />
+				NONE = no emulation at all<br />
+				<div style="text-align:center;">(normal mode means native canvas support, without emulation)</div>
+			</span>
+			<br />
+			NOTE: FlashCanvas seems to have problems with already existing canvas elements if you use lazy load method to load it (which CrossBrowdy uses). So the FlashCanvas script has been included inline in the HEAD tag. We would not need to include FlashCanvas script manually if we only used dynamic created canvas (created by JavaScript).
+			<br />
+			<br />
+			<div id="canvasInfo" style="font-size:10px; font-family:verdana;"></div>
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="display:none; visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+	</body>
+</html>

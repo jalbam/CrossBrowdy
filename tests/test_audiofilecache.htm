@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - CB_AudioFileCache test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				width:95%;
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<!-- <script src="http://jsconsole.com/remote.js?6BA41838-0EE3-4C31-A339-09889515E8D3"></script> -->
+		<script type="text/javascript" src="test_audiofile.js"></script>
+		<script type="text/javascript" src="test_audiofilecache.js"></script>
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			function init()
+			{
+				CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			}
+
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				CB_Keyboard.onKeyDown(keyDownFunction);
+				
+				//Fills the select for the files:
+				var audio_files_select = document.getElementById("audio_files");
+				if (audio_files_select !== null)
+				{
+					var option_x;
+					var selectedFirst = null;
+					for (var file in filesURIs)
+					{
+						option_x = document.createElement("option");
+						option_x.value = file;
+						option_x.textContent = option_x.innerText = file;
+						audio_files_select.appendChild(option_x);
+						if (selectedFirst === null)
+						{
+							selectedFirst = file;
+						}
+					}
+					selectAudioFile(selectedFirst);
+				}
+
+				//Fills all APIs:
+				var all_apis = document.getElementById("all_apis");
+				var all_apis_change = document.getElementById("all_apis_change");
+				if (all_apis !== null)
+				{
+					var all_apis_text = "";
+					var all_apis_all_text = "";
+					var api;
+					var CB_AudioFileCache_PREFERRED_AUDIO_APIS_length = CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_APIS.length;
+					for (var x = 0; x < CB_AudioFileCache_PREFERRED_AUDIO_APIS_length; x++)
+					{
+						api = CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_APIS[x];
+						all_apis_text += '<a href="#" onClick="insertAPI(\'' + api + '\'); return false;">' + api + '</a>, ';
+						all_apis_all_text += '<a href="#" onClick="insertAPI(\'' + api + '\', \'apis_preference_all\'); return false;">' + api + '</a>, ';
+					}
+					all_apis_change.innerHTML = all_apis.innerHTML = "";
+					all_apis.innerHTML = all_apis_text.substring(0, all_apis_text.length - 2);
+					all_apis_change.innerHTML = all_apis_all_text.substring(0, all_apis_all_text.length - 2);
+				}
+				
+				document.getElementById("check_manually").checked = false;
+				
+				//Starts showing the info:
+				showCacheInfo();
+				
+				var APIs = null;
+				//APIs = ["WAAPI"];
+				//APIs = ["AAPI"];
+				//APIs = ["SM2"];
+				printMessage("Tries to create a cache with APIs: " + APIs);
+				var playCalled = false;
+				
+				var playedAutomaticallyTimes = 0;
+				createCache
+				(
+					2, // minimumAudioFilesLocal
+					null, //maximumAudioFilesLocal
+					null, //retriesLocal
+					APIs, //preferredAPIsLocal
+					null, //preferredFormatsLocal
+					filesURIs["arriba_el_ritmo_valencia"], //filesURIsLocal
+					true, //checkManuallyLocal
+					function() //callbackOk
+					{
+						if (playAutomaticallyCancelled) { return; }
+						
+						if (playCalled)
+						{
+							if (playedAutomaticallyTimes++ < 2)
+							{
+								setTimeout(playAutomaticallyFunction, 8000 * playedAutomaticallyTimes);
+							}
+							return;
+						}
+						
+						playCalled = true;
+						if (cacheObjects.length === 1) { document.getElementById("check_and_play_auto_loaded").style.display = "block"; }
+					},
+					function(error) { printMessage("Error loading the cache to play sounds automatically!"); } //callbackError
+				);
+
+				var playAutomaticallyFunction =
+					function()
+					{
+						if (playAutomatically)
+						{
+							printMessage("Automatically playing the sound in 3 seconds (2 times with 5 seconds of difference)...");
+							setTimeout(function(){
+								play(playedAutomaticallyTimes * 25 + 25);
+							}, 3000);
+							//playAutomatically = false;
+							setTimeout(function(){
+								play(playedAutomaticallyTimes * 25 + 25);
+							}, 8000);
+							/*
+							setTimeout(function(){
+								play();
+							}, 9500);
+							setTimeout(function(){
+								play();
+							}, 12000);
+							setTimeout(function(){
+								play();
+							}, 15000);
+							setTimeout(function(){
+								play();
+							}, 18000);
+							*/
+						}
+						else
+						{
+							setTimeout(playAutomaticallyFunction, 1);
+						}
+					};
+				setTimeout(playAutomaticallyFunction, 1);
+				
+				return;
+			}
+
+			
+			var playAutomatically = false;
+			var playAutomaticallyCancelled = false;
+			function checkAndPlayAutoLoaded()
+			{
+				//checkAll(function() { play(); }, null);
+				checkAll(function() { playAutomatically = true; }, null);
+				document.getElementById("check_and_play_auto_loaded").style.display = "none";
+			}
+			
+			
+			function keyDownFunction(e, keyDown)
+			{
+				if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.P)) { play(); }
+				else if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.S)) { stopLast(); }
+			}
+						
+			
+			function showCacheInfo()
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					var cacheObject = cacheObjects[objectNumber];
+					
+					document.getElementById("number").innerHTML = "#" + objectNumber;
+					
+					if (cacheObject.getAudioFileBySoundInstanceId(soundInstanceIdLast) !== null)
+					{
+						document.getElementById("last_sound_instance_object").innerHTML = cacheObject.getAudioFileBySoundInstanceId(soundInstanceIdLast).id;
+					}
+					else
+					{
+						document.getElementById("last_sound_instance_object").innerHTML = "none";
+					}
+					
+					var id = cacheObject.id;
+					document.getElementById("id").innerHTML = id;
+					
+					var statusString = cacheObject.getStatusString();
+					var status = cacheObject.getStatus();
+					document.getElementById("status").innerHTML = statusString + " (" + status + ")";
+					
+					var objectsCreated = cacheObject.getAudioFilesNumber(false);
+					var objectsCreatedReal = cacheObject.getAudioFilesNumber(true);
+					document.getElementById("objects_created").innerHTML = objectsCreated + " (" + objectsCreatedReal + " real)";
+					
+					document.getElementById("duration").innerHTML = cacheObject.getDuration();
+					document.getElementById("duration_maximum").innerHTML = cacheObject.getDuration(true);
+					
+					document.getElementById("minimum_objects").innerHTML =  cacheObject.minimumAudioFiles;
+					var maximumAudioFiles = "no limit";
+					if (typeof(cacheObject.maximumAudioFiles) !== "undefined" && cacheObject.maximumAudioFiles !== null && !isNaN(cacheObject.maximumAudioFiles) && cacheObject.maximumAudioFiles >= 1)
+					{
+						maximumAudioFiles = cacheObject.maximumAudioFiles;
+					}
+					document.getElementById("maximum_objects").innerHTML =  maximumAudioFiles;
+					
+					document.getElementById("free_objects").innerHTML = cacheObject.getAudioFilesFreeNumber();
+					
+					document.getElementById("progress").innerHTML = CB_numberFormat(cacheObject.getProgress(true), 2, true);
+					
+					document.getElementById("playing").innerHTML = cacheObject.isPlaying() ? "yes" : "no";
+				
+					var objects_api = document.getElementById("objects_api");
+					var object_api_text = "";
+					var isFree = "";
+					var actionPerforming = "";
+					var audioFiles = cacheObject.getAudioFiles(false);
+					for (var x = 0; x < objectsCreatedReal; x++)
+					{
+						if (audioFiles[x] !== null)
+						{
+							filePath = audioFiles[x].filePath;
+							if (filePath.length > 20) { filePath = filePath.substring(0, 5) + "[...]" + filePath.substring(filePath.length - 10); }
+							
+							isFree = cacheObject.isAudioFileFree(audioFiles[x].id) ? "FREE" : "BUSY";
+							if (audioFiles[x].isPlaying()) { actionPerforming = "PLAYING"; }
+							else if (audioFiles[x].isStopped()) { actionPerforming = "STOPPED"; }
+							else if (audioFiles[x].isPaused()) { actionPerforming = "PAUSED"; }
+							else { actionPerforming = "UNKNOWN"; }
+							object_api_text += "#" + x + " => " + audioFiles[x].audioAPI + " [" + audioFiles[x].getStatusString() + "] [" + isFree + "] [" + actionPerforming + "] [" + audioFiles[x].getDuration() + " ms] {" + filePath + "}\n";
+						}
+					}
+					if (objects_api.value !== object_api_text) { objects_api.value = object_api_text; }
+
+					var freeAudioFiles = cacheObject.getAudioFilesFree();
+					var freeAudioFilesLength = freeAudioFiles.length;
+					var freeAudioFilesText = "";
+					for (x = 0; x < freeAudioFilesLength; x++)
+					{
+						if (x !== 0) { freeAudioFilesText += ", "; }
+						freeAudioFilesText += freeAudioFiles[x].id;
+					}
+					if (freeAudioFilesText === "") { freeAudioFilesText = "none"; }
+					document.getElementById("free_audio_files").innerHTML = freeAudioFilesText;
+
+					var busyAudioFiles = cacheObject.getAudioFilesBusy();
+					var busyAudioFilesLength = busyAudioFiles.length;
+					var busyAudioFilesText = "";
+					for (x = 0; x < busyAudioFilesLength; x++)
+					{
+						if (x !== 0) { busyAudioFilesText += ", "; }
+						if (typeof(busyAudioFiles[x]) === "undefined" || busyAudioFiles[x] === null) { console.log("Wow, null o undefined en " + x + ", busyAudioFilesLength=" + busyAudioFilesLength); }
+						busyAudioFilesText += busyAudioFiles[x].id;
+					}
+					if (busyAudioFilesText === "") { busyAudioFilesText = "none"; }
+					document.getElementById("busy_audio_files").innerHTML = busyAudioFilesText;
+				}
+				setTimeout(showCacheInfo, 1);
+			}
+			
+			
+			function selectAudioFile(file)
+			{
+				//Fills all formats:
+				var all_formats = document.getElementById("all_formats");
+				if (all_formats !== null)
+				{
+					var all_formats_text = "";
+					for (var format in filesURIs[file])
+					{
+						all_formats_text += '<a href="#" onClick="insertFormat(\'' + format + '\'); return false;">' + format + '</a>, ';
+					}
+					all_formats.innerHTML = "";
+					all_formats.innerHTML = all_formats_text.substring(0, all_formats_text.length - 2);
+				}
+			}
+			
+			
+			function insertFormat(format)
+			{
+				var formats_preference = document.getElementById("formats_preference");
+				if (formats_preference !== null)
+				{
+					formats_preference.value += ((CB_trim(formats_preference.value) !== "") ? ", " : "") + format;
+				}
+			}
+			
+			
+			function insertAllFormats()
+			{
+				var formats_preference = document.getElementById("formats_preference");
+				if (formats_preference !== null)
+				{
+					var audio_files_select = document.getElementById("audio_files");
+					if (audio_files_select !== null)
+					{
+						var file = audio_files_select.value;
+						formats_preference.value = "";
+						for (var format in filesURIs[file])
+						{
+							insertFormat(format);
+						}
+					}
+				}
+			}
+
+
+			function clearAllFormats()
+			{
+				var formats_preference = document.getElementById("formats_preference");
+				if (formats_preference !== null) { formats_preference.value = ""; }
+			}
+			
+			
+			function insertAPI(API, elementId)
+			{
+				var apis_preference = document.getElementById(elementId ? elementId : "apis_preference");
+				if (apis_preference !== null)
+				{
+					apis_preference.value += ((CB_trim(apis_preference.value) !== "") ? ", " : "") + API;
+				}
+			}
+			
+			
+			function insertAllAPIs(elementId)
+			{
+				var apis_preference = document.getElementById(elementId ? elementId : "apis_preference");
+				if (apis_preference !== null)
+				{
+					apis_preference.value = "";
+					var api;
+					var CB_AudioFileCache_PREFERRED_AUDIO_APIS_length = CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_APIS.length;
+					for (var x = 0; x < CB_AudioFileCache_PREFERRED_AUDIO_APIS_length; x++)
+					{
+						api = CB_Configuration[CB_BASE_NAME].CB_AudioFileCache_PREFERRED_AUDIO_APIS[x];
+						insertAPI(api, elementId);
+					}
+				}
+			}
+
+
+			function clearAllAPIs(elementId)
+			{
+				var apis_preference = document.getElementById(elementId ? elementId : "apis_preference");
+				if (apis_preference !== null) { apis_preference.value = ""; }
+			}
+
+			
+			var cacheObjects = [];
+			function createCache(minimumAudioFilesLocal, maximumAudioFilesLocal, retriesLocal, preferredAPIsLocal, preferredFormatsLocal, filesURIsLocal, checkManuallyLocal, callbackOk, callbackError)
+			{
+				document.getElementById("check_and_play_auto_loaded").style.display = "none";
+				
+				var numberOfCaches = cacheObjects.length;
+				var id = "audio_cache_" + numberOfCaches;
+				var minimumAudioFiles = document.getElementById("minimum_audio_files").value;
+				var maximumAudioFiles = document.getElementById("maximum_audio_files").value;
+				var retries = document.getElementById("retries").value;
+				var audio_files_select = document.getElementById("audio_files");
+				
+				var apis_preference = document.getElementById("apis_preference");
+				var preferredAPIs = CB_trim(apis_preference.value.replace(/[ ,]+/g, ",")); // /\s+,|\s+/
+				preferredAPIs = preferredAPIs.split(",");
+				
+				var formats_preference = document.getElementById("formats_preference");
+				var preferredFormats = CB_trim(formats_preference.value.replace(/[ ,]+/g, ",")); // /\s+,|\s+/
+				preferredFormats = preferredFormats.split(",");
+				
+				var file = audio_files_select.value;
+				var data =
+				{
+					"id" : id,
+					"minimumAudioFiles" : minimumAudioFilesLocal || minimumAudioFiles,
+					"maximumAudioFiles" : maximumAudioFilesLocal || maximumAudioFiles,
+					"retries" : retriesLocal || retries,
+					"preferredAPIs" : preferredAPIsLocal || preferredAPIs,
+					"preferredFormats" : preferredFormatsLocal || preferredFormats,
+					"URIs" : filesURIsLocal || filesURIs[file],
+					"checkManually" : checkManuallyLocal || document.getElementById("check_manually").checked,
+					"onLoad" :
+						function(objectsNeedChecking)
+						{
+							if (numberOfCaches === 0 && playAutomaticallyCancelled) { return; }
+							cacheLoaded(numberOfCaches, objectsNeedChecking);
+							
+							if (typeof(callbackOk) === "function") { callbackOk(); }
+						},
+					"onError" :
+						function(error)
+						{
+							cacheError(error, numberOfCaches);
+							if (typeof(callbackError) === "function") { callbackError(error); }
+						}
+				};
+				
+				printMessage("Creating cache #" + numberOfCaches + "...");				
+				
+				cacheObjects[numberOfCaches] = new CB_AudioFileCache(data);
+			}
+
+			
+			function cacheLoaded(numberOfCache, objectsNeedChecking)
+			{
+				var additionalText = "";
+				//if (cacheObjects[numberOfCache].checkManually)
+				{
+					additionalText = " (" + objectsNeedChecking;
+					if (objectsNeedChecking === 0) { additionalText = " (no object needs to be checked or is checking)" }
+					else if (objectsNeedChecking === 1) { additionalText += " needs to be checked or is checking)" }
+					else { additionalText += " need to be checked or are checking)" }
+				}
+				printMessage("* Cache #" + numberOfCache + " loaded!!!" + additionalText);
+			}
+			
+			
+			function cacheError(error, numberOfCache)
+			{
+				printMessage("* Cache #" + numberOfCache + " not loaded!!! Message: " + error);
+			}
+			
+			function printMessage(message)
+			{
+				var messages = document.getElementById("messages");
+				if (messages !== null)
+				{
+					if (message === null) { messages.value = ""; return; }
+					else if (CB_trim(messages.value).toLowerCase() === "none") { messages.value = ""; }
+					messages.value += message + "\n";
+					messages.scrollTop = messages.scrollHeight;
+				}
+			}
+			
+			function destroyCache(stop)
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					document.getElementById("check_and_play_auto_loaded").style.display = "none";
+					printMessage("* Destroying cache #" + objectNumber + " (" + (stop ? "with stop" : "without stopping") + ")...");
+					cacheObjects[objectNumber].destructor(stop);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cache #" + objectNumber + " cannot be destroyed (it is undefined or null).");
+					}
+					else { printMessage("* Cache to be destroyed not found."); }
+				}
+			}
+			
+			
+			function createFiles()
+			{
+				var numberFiles = document.getElementById("create_files").value;
+				numberFiles = parseInt(CB_trim(numberFiles));
+
+				if (isNaN(numberFiles) || numberFiles <= 0)
+				{
+					printMessage("* Cannot create audio files. Invalid number.");
+					return;
+				}
+				
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Creating " + numberFiles + " audio files more for cache #" + objectNumber + " (until reach " + (numberFiles + cacheObjects[objectNumber].audioFilesCreated) + ")...");
+					cacheObjects[objectNumber].createAudioFiles(numberFiles + cacheObjects[objectNumber].audioFilesCreated);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot create " + numberFiles + " audio files for cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot create " + numberFiles + " audio files. Cache not found."); }
+				}
+			}
+			
+			
+			var lastObjectPlaying = null;
+			var soundInstanceIdLast = null;
+			function play(volumeForced)
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Playing a file from cache #" + objectNumber + "...");
+					
+					var startAt = CB_trim(document.getElementById("start_at").value);
+					var stopAt = CB_trim(document.getElementById("stop_at").value);
+					var loop = document.getElementById("loop").checked ? true : false;
+					var volume = volumeForced || CB_trim(document.getElementById("volume").value);
+					
+					var soundInstanceID = soundInstanceIdLast =
+						cacheObjects[objectNumber].play
+						(
+							startAt,
+							stopAt,
+							loop,
+							volume,
+							//avoidDelayedPlay, //avoidDelayedPlay
+							null, //allowedRecursiveDelay
+							null, //allowedRecursiveDelaySkipping
+							function() //onPlayStartFunction
+							{
+								document.getElementById("last_playing").innerHTML = this.id;
+								lastObjectPlaying = this;
+								printMessage("*** Audio file with ID " + this.id + " is playing now! (unless it fails)");
+							}, 
+							function() //onStopFunction
+							{
+								printMessage("*** Audio file of cache #" + objectNumber + " stopped playing.");
+								lastObjectPlaying = null;
+							}
+						);
+					
+					//lastObjectPlaying = audioObjectPlaying;
+					
+					//if (soundInstanceID !== null && typeof(soundInstanceID) !== "undefined")
+					//{
+						printMessage("** Sound instance with ID " + soundInstanceID + " is playing or will play when is available (depending on the settings).");
+					//}
+					/*
+					else
+					{
+						printMessage("** No free Audio file! Cannot be played (at least not immediately).");
+					}
+					*/
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cache #" + objectNumber + " cannot use play method (it is undefined or null).");
+					}
+					else { printMessage("* Cache not found. Cannot call play method."); }
+				}
+
+			}
+			
+			
+			function stopLast()
+			{
+				if (lastObjectPlaying === null || !lastObjectPlaying.isPlaying() && !lastObjectPlaying.isPaused()) { printMessage("Cannot stop last sound. No sound is playing or paused."); return; }
+				
+				printMessage("** Stopping last sound (ID is " + lastObjectPlaying.id + ")...");
+				
+				lastObjectPlaying.stop();
+			}
+
+			
+			function pauseLast()
+			{
+				if (lastObjectPlaying === null || !lastObjectPlaying.isPlaying()) { printMessage("Cannot pause last sound. No sound is playing."); return; }
+				
+				printMessage("** Pausing last sound (ID is " + lastObjectPlaying.id + ")...");
+				
+				lastObjectPlaying.pause();
+			}
+
+			
+			function resumeLast()
+			{
+				if (lastObjectPlaying === null || !lastObjectPlaying.isPaused()) { printMessage("Cannot pause last sound. No sound is paused."); return; }
+				
+				printMessage("** Resuming last sound (ID is " + lastObjectPlaying.id + ")...");
+				
+				lastObjectPlaying.resume();
+			}
+			
+			
+
+			function destroyAll(stopSounds)
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Destroying all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].destroyAll(stopSounds);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot destroy all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot destroy all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function checkAll(callbackOk, callbackError)
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Checking all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].checkPlayingAll
+					(
+						function(performedActions) //callbackOk
+						{
+							printMessage("* All objects of cache #" + objectNumber + " checked! (total: " + performedActions + ")");
+							if (typeof(callbackOk) === "function") { callbackOk(); }
+						}, 
+						function(error, performedActions) //callbackError
+						{
+							printMessage("* Error checking all objects of cache #" + objectNumber + "! Checked: " + performedActions + ". Message: " + error);
+							if (typeof(callbackError) === "function") { callbackOk(error, performedActions); }
+						}
+					);
+					
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						var message = "* Cannot check all objects of cache #" + objectNumber + " (it is undefined or null).";
+					}
+					else { message = "* Cannot check all objects. Cache not found."; }
+					printMessage(message);
+					if (typeof(callbackError) === "function") { callbackOk(message); }
+				}
+			}
+			
+			
+			function playAll(includingPlaying, avoidDelayedPlay)
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Playing all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].playAll(0, null, false, null, avoidDelayedPlay, null, function() { document.getElementById("last_playing").innerHTML = this.id; lastObjectPlaying = this; }, null, includingPlaying);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot play all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot play all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function stopAll()
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Stopping all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].stopAll();
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot stop all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot stop all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function playAndStopAll(includingPlaying)
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Playing and stopping all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].playAndStopAll(includingPlaying);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot play and stop all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot play and stop all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function pauseAll()
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Pausing all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].pauseAll();
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot pause all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot pause all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function resumeAll()
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Resuming all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].resumeAll(null, null, null, function() { document.getElementById("last_playing").innerHTML = this.id; lastObjectPlaying = this; });
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot resume all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot resume all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function muteAll()
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Muting all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].muteAll();
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot mute all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot mute all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function unmuteAll()
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Unmuting all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].unmuteAll();
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot unmute all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot unmute all objects. Cache not found."); }
+				}
+			}
+			
+		
+			function setVolumeAll()
+			{
+				var volume = CB_trim(document.getElementById("volume_all").value);
+				
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Setting volume " + volume + " for all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].setVolumeAll(volume);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot set volume for all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot set volume for all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function setAudioAPIAll()
+			{
+				var apis_preference = document.getElementById("apis_preference_all");
+				var preferredAPIs = CB_trim(apis_preference.value.replace(/[ ,]+/g, ",")); // /\s+,|\s+/
+				preferredAPIs = preferredAPIs.split(",");
+				
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Setting APIs (" + apis_preference.value + ") for all objects of cache #" + objectNumber + "...");
+					cacheObjects[objectNumber].setAudioAPIAll
+					(
+						preferredAPIs,
+						function(objectsChangedAPI, performedActions, actionsNeeded) { printMessage("** Set APIs for all objects performed well. Objects changed API: " + objectsChangedAPI); },
+						function(error, errorsHappened, objectsChangedAPI, performedActions, actionsNeeded) { printMessage("** Could not set APIs for all objects. Objects changed API: " + objectsChangedAPI + ". Errors happened: " + errorsHappened + ". Message: " + error); }
+					);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot set APIs for all objects of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot set APIs for all objects. Cache not found."); }
+				}
+			}
+			
+			
+			function purge()
+			{
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					var desiredNumber = document.getElementById("purge_number").value;
+					printMessage("* Purging cache #" + objectNumber + " (desiredNumber="+desiredNumber+")...");
+					var setAsMinimumAudioFiles = !!document.getElementById("set_as_minimum").checked;
+					var includePlaying = !!document.getElementById("include_playing").checked;
+					var stopSounds = !!document.getElementById("stop_sounds").checked;
+				
+					var objectsRemoved = cacheObjects[objectNumber].purge(desiredNumber, setAsMinimumAudioFiles, includePlaying, stopSounds);
+					
+					printMessage("* Objects removed: " + objectsRemoved);
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot purge cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot purge. Cache not found."); }
+				}
+			}
+			
+			
+			function cancelSoundIds()
+			{
+				var volume = CB_trim(document.getElementById("volume_all").value);
+				
+				var objectNumber = cacheObjects.length-1;
+				if (cacheObjects.length >= 1 && typeof(cacheObjects[objectNumber]) !== "undefined" && cacheObjects[objectNumber] !== null)
+				{
+					printMessage("* Cancelling all sound IDs which are going to play (if any) from cache #" + objectNumber + "...");
+					var totalCancelled = cacheObjects[objectNumber].cancelSoundInstances(true);
+					printMessage("** Total sound IDs cancelled: " + totalCancelled + " (maybe some were already played)");
+				}
+				else
+				{
+					if (objectNumber >= 1)
+					{
+						printMessage("* Cannot cancel all sound IDs of cache #" + objectNumber + " (it is undefined or null).");
+					}
+					else { printMessage("* Cannot cancel all sound IDs. Cache not found."); }
+				}
+			}
+			
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd" onLoad="init();">
+		<center>
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - CB_AudioFileCache test</div>
+			<center><a href="index.htm">Go back</a></center>
+			
+			<center>
+			<table border="0" width="98%" align="center" cellspacing="0" cellpadding="2">
+				<tr>
+					<td width="33%" align="right">
+						Cache object number: <span id="number" style="color:#00aa00;">none</span>
+						<br />
+						ID: <span id="id" style="color:#00aa00;">none</span>
+						<br />
+						Status: <span id="status" style="color:#00aa00;">none</span> <span style="color:#0000aa;">(<span id="progress">0</span>%)</span>
+						<br />
+						Playing: <span id="playing" style="color:#00aa00;">no</span>
+						<br />
+						Objects created: <span id="objects_created" style="color:#00aa00;">0</span>
+						<br />
+						Minimum objects: <span id="minimum_objects" style="color:#00aa00;">0</span>
+						<br />
+						Maximum objects: <span id="maximum_objects" style="color:#00aa00;">0</span>
+						<br />
+						Free objects: <span id="free_objects" style="color:#00aa00;">0</span>
+						<br />
+						Duration (minimum): <span id="duration" style="color:#00aa00;">0</span>
+						<br />
+						Duration (maximum): <span id="duration_maximum" style="color:#00aa00;">0</span>
+						<br />
+						Last playing object: <span id="last_playing" style="color:#00aa00;">none</span>
+						<br />
+						Object associated to last sound instance ID: <span id="last_sound_instance_object" style="color:#00aa00;">none</span>
+					</td>
+					<td width="33%" align="center">
+						<center>
+							Messages:
+							<button style="width:70px;" onClick="printMessage(null);">Clear</button>
+							<br />
+							<textarea id="messages" cols="40" rows="5" style="font-size:11px; color:#aa0000;">None</textarea>
+						</center>
+					</td>
+					<td width="33%" align="center">
+						<center>
+							Audio objects information:
+							<br />
+							<textarea id="objects_api" cols="90" rows="5" style="font-size:11px; color:#bb00aa;">None</textarea>
+						</center>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" align="center">
+						<center>
+							<button id="check_and_play_auto_loaded" onClick="checkAndPlayAutoLoaded();" style="display:none;">Check and play auto loaded cache</button>
+							<button onClick="cancelSoundIds();">Cancel all sound IDs (the ones which will be played)</button>
+						</center>
+					</td>
+				</tr>
+			</table>
+			</center>
+			
+			<hr />
+			
+			Audio files:
+			<select id="audio_files" name="audio_files" onChange="selectAudioFile(this.value);">
+			</select>
+
+			<label for="check_manually">Check manually <input type="checkbox" id="check_manually" name="check_manually" /></label>
+			
+			<br />
+			Minimum audio files: <input type="text" id="minimum_audio_files" name="minimum_audio_files" size="10" value="25" />
+			Maximum audio files (empty or zero = no limit): <input type="text" id="maximum_audio_files" name="maximum_audio_files" size="10" value="" />
+			
+			<br />
+			
+			Retries (before trying next method or failing): <input type="text" id="retries" name="retries" size="10" value="1" />
+			
+			<center>
+			<table border="1" width="98%" align="center" cellspacing="0" cellpadding="2">
+				<tr>
+					<td width="50%" align="center" valign="top">
+						All APIs: <span id="all_apis"></span> <button style="width:85px;" onClick="insertAllAPIs();">Select all</button>
+						<br />
+						APIs chosen (by order of preference):
+						<br />
+						<textarea id="apis_preference" cols="20" rows="2"></textarea> <button style="width:55px;" onClick="clearAllAPIs();">Clear</button>
+					</td>
+					<td width="50%" align="center" valign="top">
+						All Formats: <span id="all_formats" style="color:#00aa00;"></span> <button style="width:85px;" onClick="insertAllFormats();">Select all</button>
+						<br />
+						Formats chosen (by order of preference): 
+						<br />
+						<textarea id="formats_preference" cols="30" rows="2"></textarea> <button style="width:55px;" onClick="clearAllFormats();">Clear</button>
+					</td>
+					<!--
+					<td width="33%" align="center">
+						All URIs: <span id="all_uris"></span> <button style="width:85px;" onClick="insertAllURIs();">Select all</button>
+						<br />
+						URIs chosen (by order of preference): 
+						<br />
+						<textarea id="uris_preference" cols="20" rows="2"></textarea> <button style="width:55px;" onClick="clearAllURIs();">Clear</button>
+					</td>
+					-->
+				</tr>
+			</table>
+			</center>
+
+			<button style="width:120px;" onClick="playAutomaticallyCancelled = true; createCache();">Create cache</button>
+			<button style="width:120px;" onClick="destroyCache(false);">Destroy cache</button>
+			<button style="width:200px;" onClick="destroyCache(true);">Destroy cache (with stop)</button>
+
+			<hr />
+			
+			Create <input type="text" id="create_files" name="create_files" size="10" value="10" /> audio files more
+			<button style="width:70px;" onClick="createFiles();">Create</button>
+			
+			<hr />
+			
+			Start at: <input type="text" id="start_at" name="start_at" size="15" value="0">
+			Stop at: <input type="text" id="stop_at" name="stop_at" size="15" value="">
+			<label for="loop"><input type="checkbox" id="loop" name="loop"> Loop</label>
+			Volume: <input type="text" id="volume" name="volume" size="3" value="100" maxlength="3">
+			<button style="width:50px;" onClick="play();">Play</button>
+			<button style="width:85px;" onClick="stopLast();">Stop last</button>
+			<button style="width:90px;" onClick="pauseLast();">Pause last</button>
+			<button style="width:110px;" onClick="resumeLast();">Resume last</button>
+			
+			<hr />
+			
+			<button style="width:100px;" onClick="destroyAll();">Destroy all</button>
+			<button style="width:100px;" onClick="destroyAll(true);">Destroy all (with stop)</button>
+			<button style="width:75px;" onClick="checkAll();">Check all</button>
+			<button style="width:70px;" onClick="playAll();">Play all</button>
+			<button style="width:140px;" onClick="playAll(false, true);">Play all (avoid delayed play)</button>
+			<button style="width:280px;" onClick="playAll(true);">Play all (including already playing ones)</button>
+			<button style="width:280px;" onClick="playAll(true, true);">Play all (including already playing ones, avoid delayed play)</button>
+			<button style="width:80px;" onClick="stopAll();">Stop all</button>
+			<button style="width:130px;" onClick="playAndStopAll();">Play and Stop all</button>
+			<button style="width:340px;" onClick="playAndStopAll(true);">Play and Stop all (including already playing ones)</button>
+			<button style="width:80px;" onClick="pauseAll();">Pause all</button>
+			<button style="width:100px;" onClick="resumeAll();">Resume all</button>
+			<button style="width:80px;" onClick="muteAll();">Mute all</button>
+			<button style="width:100px;" onClick="unmuteAll();">Unmute all</button>
+		
+			Volume: <input type="text" id="volume_all" name="volume_all" size="3" value="50" maxlength="3">
+			<button style="width:120px;" onClick="setVolumeAll();">Set volume all</button>
+			
+			<hr />
+			
+			All APIs: <span id="all_apis_change"></span> <button style="width:85px;" onClick="insertAllAPIs('apis_preference_all');">Select all</button>
+			<br />
+			APIs chosen (by order of preference):
+			<br />
+			<textarea id="apis_preference_all" cols="20" rows="2"></textarea> <button style="width:55px;" onClick="clearAllAPIs('apis_preference_all');">Clear</button>
+			<button style="width:130px;" onClick="setAudioAPIAll();">Set audio API all</button>
+	
+			<hr />
+			
+			Desired number of objects (bigger than the minimum):
+			<br />
+
+			<label for="set_as_minimum"><input type="checkbox" name="set_as_minimum" id="set_as_minimum"> Set as minimum</label>
+			<label for="include_playing"><input type="checkbox" name="include_playing" id="include_playing"> Include playing files</label>
+			<label for="stop_sounds"><input type="checkbox" name="stop_sounds" id="stop_sounds"> Stop sounds</label>
+			<input type="text" name="purge_number" id="purge_number" size="4" value="10" />
+			<button style="width:60px;" onClick="purge();">Purge</button>
+		
+			<br />
+			<br />
+			
+			Free audio files: <span id="free_audio_files" style="color:#00aa00;">none</span>
+			<br />
+			Busy audio files: <span id="busy_audio_files" style="color:#00aa00;">none</span>
+		
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="display:none; visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+		</center>
+	</body>
+</html>

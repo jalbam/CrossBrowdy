@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+		<script src="../cordova.js"></script>          <!-- phantom library, needed for Cordova api calls, added during build -->
+		<script src="../xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
+		
+		<title>CrossBrowdy - AudioFileSprites test</title>
+
+		<style>
+			.mystyle
+			{
+				position: absolute;
+				background-color: #0000aa;
+				border: 0px;
+				left:0px;
+				top:0px;
+			}
+			#info
+			{
+				font-size:18px;
+				background-color:#dddddd;
+				padding:10px;
+				border:1px dotted #222222;			
+			}
+			.dataInfo
+			{
+				display:inline;
+				color:#005500;
+				
+			}
+			button
+			{
+				font-size:14px;
+				line-height:14px;
+				height:32px;
+				padding-left:10px;
+				padding-right:10px;
+
+				text-align:center;
+				
+				width:480px;
+
+				border:1px dashed #00ff00;
+				color:#ffbb00;
+     			background-color:#aa0000;
+			}
+		</style>
+
+		<!--[if lt IE 9]> 
+			<script type="text/javascript" src="NO../CrossBrowdy/screen/canvas/FlashCanvas/bin/flashcanvas.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="test_audiofile.js"></script>
+		<script type="text/javascript" src="test_audiofilecache.js"></script>
+		<script type="text/javascript" src="test_audiofilesprites.js"></script>
+		<script type="text/javascript" src="../CrossBrowdy/CrossBrowdy.js"></script> <!-- CrossBrowdy by Joan Alba Maldonado (workindalian@gmail.com) -->
+		<script type="text/javascript">
+		<!--
+			//Starts CrossBrowdy:
+			function init()
+			{
+				CB_init(main, "../CrossBrowdy/"); //It will call main function when ready.
+			}
+			
+			//This function called main will be called when CrossBrowdy is ready:
+			var APIS_DEFAULT = [ "WAAPI", "AAPI", "ACMP", "SM2" ];
+			//if (navigator.appVersion.indexOf("MSIE 9") !== -1) { APIS_DEFAULT = [ "WAAPI", "SM2", "ACMP", "AAPI" ]; } //IE9 have works better with SM2 than with AAPI.
+			function main()
+			{
+				//Sets the viewport tag:
+				CB_Screen.setViewport(900, null, true, null, null, null, null);
+			
+				//Show credits:
+				CB_Elements.id("credits").innerHTML = CB_credits();
+
+				var sprite_group_selector = document.getElementById("sprite_group_selector");
+				if (sprite_group_selector !== null)
+				{
+					var option_x;
+					for (var spritesGroupName in spritesGroups)
+					{
+						option_x = document.createElement("option");
+						option_x.value = spritesGroupName;
+						option_x.textContent = option_x.innerText = spritesGroupName;
+						sprite_group_selector.appendChild(option_x);
+					}
+				}
+				
+				createAudioFileSprites("numeros", APIS_DEFAULT);
+
+				showInfo();
+				
+				return;
+			}
+			
+			
+			var lastProgress = 0;
+			var alsoCountUncheckedAndChecking = true;
+			function showInfo()
+			{
+				document.getElementById("status").innerHTML = lastSpritesObject.getStatusString();
+				
+				var progress = lastSpritesObject.getProgress(true, alsoCountUncheckedAndChecking);
+				if (progress !== lastProgress)
+				{
+					lastProgress = progress;
+					document.getElementById("loading_progress_bar").value = CB_numberFormat(progress, 2, false);
+					document.getElementById("loading_progress").innerHTML = CB_numberFormat(progress, 2, true);
+				}
+				
+				document.getElementById("audio_files_created").innerHTML = lastSpritesObject.getAudioFilesNumber(false);
+				var objectsCreatedReal = lastSpritesObject.getAudioFilesNumber(true);
+				document.getElementById("audio_files_created_real").innerHTML = objectsCreatedReal;
+				
+				document.getElementById("free_objects").innerHTML = lastSpritesObject.getAudioFilesFreeNumber();
+				
+				document.getElementById("duration").innerHTML = lastSpritesObject.getDuration();
+				document.getElementById("duration_maximum").innerHTML = lastSpritesObject.getDuration(true);
+				
+				document.getElementById("is_playing").innerHTML = lastSpritesObject.isPlaying() ? "yes" : "no";
+				
+				var objects_info = document.getElementById("objects_info");
+				var object_api_text = "";
+				var isFree = "";
+				var actionPerforming = "";
+				var filePath;
+				var audioFiles = lastSpritesObject.getAudioFiles(false);
+				for (var x = 0; x < objectsCreatedReal; x++)
+				{
+					if (audioFiles[x] !== null)
+					{
+						filePath = audioFiles[x].filePath;
+						if (filePath.length > 20) { filePath = filePath.substring(0, 5) + "[...]" + filePath.substring(filePath.length - 10); }
+						
+						isFree = lastSpritesObject.isAudioFileFree(audioFiles[x].id) ? "FREE" : "BUSY";
+						if (audioFiles[x].isPlaying()) { actionPerforming = "PLAYING"; }
+						else if (audioFiles[x].isStopped()) { actionPerforming = "STOPPED"; }
+						else if (audioFiles[x].isPaused()) { actionPerforming = "PAUSED"; }
+						else { actionPerforming = "UNKNOWN"; }
+						object_api_text += "#" + x + ":" + audioFiles[x].id + " => " + audioFiles[x].audioAPI + " [" + audioFiles[x].getStatusString() + "] [" + isFree + "] [" + actionPerforming + "] [" + audioFiles[x].getDuration() + " ms] {" + filePath + "}\n";
+					}
+				}
+				if (objects_info.value !== object_api_text) { objects_info.value = object_api_text; }
+			
+				
+				var sprites_info = document.getElementById("sprites_info");
+				var sprites_info_text = "";
+				
+				var sprites = lastSpritesObject.getSprites(true);
+				var audioFilesLength;
+				for (var spriteId in sprites)
+				{
+					sprites_info_text += spriteId + " ";
+					
+					if (lastSpritesObject.isPlayingSprite(spriteId)) { sprites_info_text += "(PLAYING): "; }
+					else { sprites_info_text += "(NOT PLAYING): "; }
+					
+					audioFiles = lastSpritesObject.getAudioFilesUsedBySpriteId(spriteId, false);
+					audioFilesLength = audioFiles.length;
+					for (x = 0; x < audioFilesLength; x++)
+					{
+						if (x > 0) { sprites_info_text += ", "; }
+						sprites_info_text += audioFiles[x].id; 
+					}
+					
+					sprites_info_text += "\n";
+				}
+				
+				sprites_info_text += "- Audio file IDs: ";
+				audioFiles = lastSpritesObject.getAudioFilesUsed(true, true, false);
+				audioFilesLength = audioFiles.length;
+				for (x = 0; x < audioFilesLength; x++)
+				{
+					if (x > 0) { sprites_info_text += ", "; }
+					sprites_info_text += audioFiles[x].id; 
+				}
+				
+				sprites_info_text += "\n- Sound instances: " + lastSpritesObject.getSoundInstancesId(true, true);
+				
+				if (sprites_info.value !== sprites_info_text) { sprites_info.value = sprites_info_text; }
+
+				
+				var freeAudioFiles = lastSpritesObject.getAudioFilesFree();
+				var freeAudioFilesLength = freeAudioFiles.length;
+				var freeAudioFilesText = "";
+				for (x = 0; x < freeAudioFilesLength; x++)
+				{
+					if (x !== 0) { freeAudioFilesText += ", "; }
+					freeAudioFilesText += freeAudioFiles[x].id;
+				}
+				if (freeAudioFilesText === "") { freeAudioFilesText = "none"; }
+				document.getElementById("free_audio_files").innerHTML = freeAudioFilesText;
+
+				var busyAudioFiles = lastSpritesObject.getAudioFilesBusy();
+				var busyAudioFilesLength = busyAudioFiles.length;
+				var busyAudioFilesText = "";
+				for (x = 0; x < busyAudioFilesLength; x++)
+				{
+					if (x !== 0) { busyAudioFilesText += ", "; }
+					busyAudioFilesText += busyAudioFiles[x].id;
+				}
+				if (busyAudioFilesText === "") { busyAudioFilesText = "none"; }
+				document.getElementById("busy_audio_files").innerHTML = busyAudioFilesText;
+				
+				
+				setTimeout(showInfo, 1);
+			}
+			
+			
+			var spriteCounter = 0;
+			var audioFileSprites = [];
+			var lastSpritesObject;
+			var lastSpritesGroupName;
+			function createAudioFileSprites(spritesGroupName, preferredAPIs)
+			{
+				if (typeof(spritesGroupName) === "undefined" || spritesGroupName === null)
+				{
+					spritesGroupName = document.getElementById("sprite_group_selector").value;
+				}
+				
+				if (typeof(preferredAPIs) === "undefined" || preferredAPIs === null)
+				{
+					var APIs = document.getElementById("api_selector").value.toUpperCase();
+					if (APIs === "DEFAULT") { preferredAPIs = APIS_DEFAULT; }
+					else { preferredAPIs = [ APIs ]; }
+				}
+				
+				document.getElementById("check_all").style.display = "none";
+				document.getElementById("sprite_controls").style.display = "none";
+				
+				printMessage("Loading CB_AudioFileSprites #" + audioFileSprites.length + "...");
+				
+				lastSpritesGroupName = spritesGroupName;
+				
+				alsoCountUncheckedAndChecking = true;
+				lastSpritesObject = audioFileSprites[audioFileSprites.length] =
+					new CB_AudioFileSprites
+					(
+						{	
+							id : spritesGroupName + spriteCounter++,
+							preferredAPIs : preferredAPIs,
+							preferredFormats : null,
+							URIs : filesURIs[spritesGroupName],
+							minimumAudioFiles : 16,
+							maximumAudioFiles : null,
+							minimumAudioFilesFree : null,
+							newAudioFilesWhenNeeded : null,
+							retries : null,
+							checkManually : true,
+							checkManuallyOnNeededCreated : false,
+							checkManuallyOnPlayingFailed : false,
+							checkManuallyOnCheckingFailed : true,
+							disableAutoLoad : null,
+							onLoad : audioFileSpritesLoaded,
+							onError : function(error) { printMessage("CB_AudioFileSprites #" + (audioFileSprites.length - 1) + " failed: " + error); },
+							sprites : spritesGroups[spritesGroupName]
+						}
+					);
+				
+				document.getElementById("destroy").style.display = "inline";
+			}
+
+			
+			function destroy(stopSounds)
+			{
+				printMessage("Destroying CB_AudioFileSprites #" + (audioFileSprites.length - 1) + " (stopSounds = " + stopSounds + ")...");
+				lastSpritesObject.destructor(stopSounds);
+			}
+			
+			
+			function audioFileSpritesLoaded(objectsNeedChecking)
+			{
+				printMessage("CB_AudioFileSprites #" + (audioFileSprites.length - 1) + " loaded! (" + objectsNeedChecking + " to be checked)");
+				if (objectsNeedChecking > 0) { document.getElementById("check_all").style.display = "inline"; }
+			}
+
+			
+			function printMessage(message)
+			{
+				var messages = document.getElementById("messages");
+				if (messages !== null)
+				{
+					if (message === null) { messages.value = ""; return; }
+					else if (CB_trim(messages.value).toLowerCase() === "none") { messages.value = ""; }
+					messages.value += message + "\n";
+					messages.scrollTop = messages.scrollHeight;
+				}
+			}
+			
+			
+			function checkAll()
+			{
+				document.getElementById("check_all").style.display = "none";
+				printMessage("Checking all objects of CB_AudioFileSprites #" + audioFileSprites.length + "...");
+				alsoCountUncheckedAndChecking = false;
+				lastSpritesObject.checkPlayingAll
+				(
+					function(performed)
+					{
+						document.getElementById("check_all").style.display = "none";
+						
+						var sprites_selector = document.getElementById("sprites_selector");
+						if (sprites_selector !== null)
+						{
+							sprites_selector.innerHTML = "";
+							var option_x;
+							for (var spriteName in spritesGroups[lastSpritesGroupName])
+							{
+								option_x = document.createElement("option");
+								option_x.value = spriteName;
+								option_x.textContent = option_x.innerText = spriteName;
+								sprites_selector.appendChild(option_x);
+							}
+						}
+						
+						document.getElementById("loop").checked = false;
+						
+						document.getElementById("sprite_controls").style.display = "inline";
+						
+						printMessage("All objects of CB_AudioFileSprites #" + (audioFileSprites.length - 1) + " checked successfully! Total: " + performed);
+					},
+					function (error, performed)
+					{
+						printMessage("Error checking all objects of CB_AudioFileSprites #" + (audioFileSprites.length - 1) + "! Checked: " + performed + ". Message: " +  error);
+						document.getElementById("check_all").style.display = "inline";
+					}
+				);
+			}
+			
+			
+			function playSprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				printMessage("Sprite '" + spriteId + "' will be played as soon as possible...");
+				lastSpritesObject.playSprite
+				(
+					spriteId, //spriteId
+					document.getElementById("loop").checked, //loop,
+					document.getElementById("volume").value, //volume,
+					null, //allowedRecursiveDelay
+					null, //allowedRecursiveDelaySkipping
+					function(soundInstanceId, startAt, stopAt, startAtNextLoop, loop, avoidDelayedPlay, allowedRecursiveDelay, startPlayingTime)
+					{
+						printMessage("Playing sprite '" + spriteId + "' from " + startAt + " to " + stopAt + " now (unless it fails)! using " + this.id + " [loop=" + ((loop) ? "yes" : "no") + "] [soundInstanceId=" + soundInstanceId + "] [startAtNextLoop=" + startAtNextLoop + ", avoidDelayedPlay=" + avoidDelayedPlay + ", allowedRecursiveDelay=" + allowedRecursiveDelay + ", startPlayingTime=" + startPlayingTime + "]");
+					}, //onPlayStartFunction
+					function(soundInstanceId) { printMessage("Sprite '" + spriteId + "' stopped (used " + this.id + "). [soundInstanceId=" + soundInstanceId + "]"); } //onStopFunction
+				);
+			}
+			
+			
+			function stopSprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				printMessage("Trying to stop all sprites '" + spriteId + "' (if any is playing)...");
+				lastSpritesObject.stopSprite(spriteId);
+			}
+			
+			
+			function pauseSprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				printMessage("Trying to pause all sprites '" + spriteId + "' (if any is playing)...");
+				lastSpritesObject.pauseSprite(spriteId, function() { printMessage("Sprite '" + spriteId + "' using " + this.id + " paused."); });
+			}
+
+
+			function resumeSprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				printMessage("Trying to resume all sprites '" + spriteId + "' (if any is paused)...");
+				lastSpritesObject.resumeSprite
+				(
+					spriteId, //spriteId
+					null, //loop
+					null, //allowedRecursiveDelay
+					null, //allowedRecursiveDelaySkipping
+					function(soundInstanceId, startAt, stopAt, startAtNextLoop, loop, avoidDelayedPlay, allowedRecursiveDelay, startPlayingTime)
+					{
+						printMessage("Sprite resumed '" + spriteId + "' from " + startAtNextLoop + " to " + stopAt + " (starts at " + startAt + ") [loop=" + ((loop) ? "yes" : "no") + "] [startAtNextLoop=" + startAtNextLoop + ", avoidDelayedPlay=" + avoidDelayedPlay + ", allowedRecursiveDelay=" + allowedRecursiveDelay + ", startPlayingTime=" + startPlayingTime + "]");
+					},
+					function(soundInstanceId) { printMessage("Sprite '" + spriteId + "' stopped (used " + this.id + "). [soundInstanceId=" + soundInstanceId + "]"); } //onStop
+				);
+			}
+
+			
+			function setVolumeSprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				var volume = document.getElementById("volume").value;
+				printMessage("Trying to set volume " + volume + " to all sprites '" + spriteId + "'...");
+				lastSpritesObject.setVolumeSprite(spriteId, volume, false, function() { printMessage("Volume of sprite '" + spriteId + "' set to " + this.getVolume()); });
+			}
+
+			
+			function muteSprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				printMessage("Trying to mute to all sprites '" + spriteId + "'...");
+				lastSpritesObject.muteSprite(spriteId, function() { printMessage("Sprite '" + spriteId + "' muted."); });
+			}
+
+
+			function unmuteSprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				printMessage("Trying to unmute to all sprites '" + spriteId + "'...");
+				lastSpritesObject.unmuteSprite(spriteId, function() { printMessage("Sprite '" + spriteId + "' unmuted."); });
+			}
+			
+			
+			function setAudioAPISprite()
+			{
+				var spriteId = document.getElementById("sprites_selector").value;
+				var API = document.getElementById("api_selector_sprite").value.toUpperCase();
+				printMessage("Trying to set API " + API + " for sprite '" + spriteId + "' (if any is playing)...");
+				API = [ API ];
+				lastSpritesObject.setAudioAPISprite
+				(
+					spriteId, //spriteId
+					API, //preferredAPIs
+					function(objectsChangedAPI, performedActions, actionsNeeded)
+					{
+						printMessage("API set to " + API + " for sprite '" + spriteId + "' successfully! Performed actions: " + performedActions + " (needed to set: " + actionsNeeded + "). Objects changed API: " + objectsChangedAPI);
+					},
+					function(error, errorsHappened, objectsChangedAPI, performedActions, actionsNeeded)
+					{ 
+						printMessage("API set to " + API + " for sprite '" + spriteId + "' failed. Performed actions: " + performedActions + " (needed to set: " + actionsNeeded + "). Objects changed API: " + objectsChangedAPI + ". Errors: " + errorsHappened + ". Message: " + error);
+					},
+					false, //mandatory
+					false //forceReload
+				);
+			}
+			
+			
+			function play()
+			{
+				var startAt = document.getElementById("start_at").value;
+				var stopAt = document.getElementById("stop_at").value;
+				var stopAtText = stopAt;
+				if (CB_trim(stopAt) === "") { stopAtText = "NULL"; }
+				printMessage("Clip from " + startAt + " to " + stopAtText + " will be played as soon as possible...");
+				lastSpritesObject.play
+				(
+					startAt, //startAt
+					stopAt, //stopAt
+					document.getElementById("loop_play").checked, //loop
+					document.getElementById("volume_play").value, //volume
+					null, //allowedRecursiveDelay
+					null, //allowedRecursiveDelaySkipping
+					function(soundInstanceId, startAt, stopAt, startAtNextLoop, loop, avoidDelayedPlay, allowedRecursiveDelay, startPlayingTime)
+					{
+						printMessage("Playing clip from " + startAt + " to " + stopAt + " now (unless it fails)! using " + this.id + " [loop=" + ((loop) ? "yes" : "no") + "] [soundInstanceId=" + soundInstanceId + "] [startAtNextLoop=" + startAtNextLoop + ", avoidDelayedPlay=" + avoidDelayedPlay + ", allowedRecursiveDelay=" + allowedRecursiveDelay + ", startPlayingTime=" + startPlayingTime + "]");
+					}, //onPlayStartFunction
+					function() { printMessage("Clip from " + startAt + " to " + stopAtText + " stopped (used " + this.id + ")."); } //onStopFunction
+				);
+			}
+			
+			
+			function playAll(includingPlaying)
+			{
+				printMessage("Trying to play all (includingPlaying=" + includingPlaying + ")...");
+				lastSpritesObject.playAll
+				(
+					null, //startAt
+					null, //stopAt
+					null, //loop
+					null, //volume
+					null, //avoidDelayedPlay
+					null, //allowedRecursiveDelay
+					function(startAt, stopAt, startAtNextLoop, loop, avoidDelayedPlay, allowedRecursiveDelay, startPlayingTime)
+					{
+						printMessage("Playing clip from " + startAt + " to " + stopAt + " now (unless it fails)! using " + this.id + " [loop=" + ((loop) ? "yes" : "no") + "] [startAtNextLoop=" + startAtNextLoop + ", avoidDelayedPlay=" + avoidDelayedPlay + ", allowedRecursiveDelay=" + allowedRecursiveDelay + ", startPlayingTime=" + startPlayingTime + "]");
+					}, //onPlayStartFunction
+					function() { printMessage("Clip stopped (used " + this.id + ")."); }, //onStopFunction
+					includingPlaying
+				);
+			}
+			
+			
+			function playAndStopAll(includingPlaying)
+			{
+				printMessage("Trying to play and stop all (includingPlaying=" + includingPlaying + ")...");
+				lastSpritesObject.playAndStopAll(includingPlaying, null);
+			}
+			
+			
+			function stopAll()
+			{
+				printMessage("Trying to stop all (if any is playing or paused)...");
+				lastSpritesObject.stopAll();
+			}
+			
+			
+			function pauseAll()
+			{
+				printMessage("Trying to pause all (if any is playing)...");
+				lastSpritesObject.pauseAll(function() { printMessage("Sprite or clip using " + this.id + " paused."); });
+			}
+
+
+			function resumeAll()
+			{
+				printMessage("Trying to resume all (if any is paused)...");
+				lastSpritesObject.resumeAll
+				(
+					null, //loop
+					null, //allowedRecursiveDelay
+					null, //allowedRecursiveDelaySkipping
+					function(soundInstanceId, startAt, stopAt, startAtNextLoop, loop, avoidDelayedPlay, allowedRecursiveDelay, startPlayingTime)
+					{
+						printMessage("Clim resumed from " + startAtNextLoop + " to " + stopAt + " (starts at " + startAt + ") [loop=" + ((loop) ? "yes" : "no") + "] [startAtNextLoop=" + startAtNextLoop + ", avoidDelayedPlay=" + avoidDelayedPlay + ", allowedRecursiveDelay=" + allowedRecursiveDelay + ", startPlayingTime=" + startPlayingTime + "]");
+					}, //onPlayStart
+					function() { printMessage("Clip stopped (used " + this.id + ")."); } //onStop
+				);
+			}
+
+			
+			
+			function setVolumeAll()
+			{
+				var volume = document.getElementById("volume_all").value;
+				printMessage("Trying to set volume " + volume + " to all...");
+				lastSpritesObject.setVolumeAll(volume, false, function() { printMessage("Volume of sprite or clip using " + this.id + " set to " + this.getVolume()); });
+			}
+
+			
+			function muteAll()
+			{
+				printMessage("Trying to mute to all...");
+				lastSpritesObject.muteAll(function() { printMessage("Sprite or clip using " + this.id + " muted."); });
+			}
+
+
+			function unmuteAll()
+			{
+				printMessage("Trying to unmute all...");
+				lastSpritesObject.unmuteAll(function() { printMessage("Sprite or clip using " + this.id + " unmuted."); });
+			}
+			
+			
+			function destroyAll(stopSounds)
+			{
+				printMessage("Destroying all (stopSounds=" + stopSounds + ")...");
+				lastSpritesObject.destroyAll(stopSounds);
+			}
+			
+			
+			function setAudioAPIAll()
+			{
+				var API = document.getElementById("api_selector_all").value.toUpperCase();
+				printMessage("Trying to set API " + API + " for all...");
+				API = [ API ];
+				lastSpritesObject.setAudioAPIAll
+				(
+					API, //preferredAPIs
+					function(objectsChangedAPI, performedActions, actionsNeeded)
+					{
+						printMessage("API set to " + API + " for all successfully! Performed actions: " + performedActions + " (needed to set: " + actionsNeeded + "). Objects changed API: " + objectsChangedAPI);
+					},
+					function(error, errorsHappened, objectsChangedAPI, performedActions, actionsNeeded)
+					{ 
+						printMessage("API set to " + API + " for all failed. Performed actions: " + performedActions + " (needed to set: " + actionsNeeded + "). Objects changed API: " + objectsChangedAPI + ". Errors: " + errorsHappened + ". Message: " + error);
+					},
+					false, //mandatory
+					false //forceReload
+				);
+			}
+			
+			
+			function clearSoundInstances(clearWithObjectAssociated)
+			{
+				printMessage("Trying to clear sound instances which have been cancelled... [clearWithObjectAssociated=" + clearWithObjectAssociated + "]");
+				var cleared = lastSpritesObject.clearSoundInstances(clearWithObjectAssociated);
+				printMessage("Cleared " + cleared + " sound instances!");
+			}
+			
+			
+			function cancelSoundInstances(cancelWithObjectAssociated)
+			{
+				printMessage("Trying to cancel all sound instances... [cancelWithObjectAssociated=" + cancelWithObjectAssociated + "]");
+				var cancelled = lastSpritesObject.cancelSoundInstances(true, cancelWithObjectAssociated);
+				printMessage("Cancelled " + cancelled + " sound instances!");
+			}
+			
+			
+			var id_changed = 0;
+			function changeSpritesId(includeWithoutSpriteAssociated)
+			{
+				printMessage("Trying to change the ID of all sprites being used... [includeWithoutSpriteAssociated=" + includeWithoutSpriteAssociated + "]");
+				lastSpritesObject.executeFunctionAllSprites
+				(
+					function()
+					{
+						this.id = "ID_CHANGED_" + id_changed++;
+					}, //functionEach
+					0, //delayBetweenEach,
+					includeWithoutSpriteAssociated, //includeWithoutSpriteAssociated
+					false //avoidCancelled
+				);			
+			}
+			
+			
+		// -->
+		</script>
+		
+	</head>
+	<body bgcolor="#ffaadd" onload="init();">
+		<div id="info">
+			<div style="font-size:30px; color:red; text-align:center;">CrossBrowdy - AudioFileSprites test</div>
+			<br />
+			<center><a href="index.htm">Go back</a></center>
+			<br />
+			<center>
+				API:
+				<select id="api_selector">
+					<option value="DEFAULT">DEFAULT (WAAPI, AAPI, ACMP, SM2)</option>
+					<option value="WAAPI">WAAPI</option>
+					<option value="AAPI">AAPI</option>
+					<option value="ACMP">ACMP</option>
+					<option value="SM2">SM2</option>
+				</select>
+				Sprite group:
+				<select name="sprite_group_selector" id="sprite_group_selector">
+				</select>
+				<button style="width:70px;" onClick="createAudioFileSprites();">Load</button>
+				<button id="destroy" style="width:70px; display:none;" onClick="destroy(true);">Destroy</button>
+				<br />
+				Audio objects information:
+				<br />
+				<textarea id="objects_info" cols="110" rows="8" style="font-size:11px; color:#bb00aa;">None</textarea>
+				<br />
+				Sprites information:
+				<br />
+				<textarea id="sprites_info" cols="110" rows="14" style="font-size:11px; color:#00aabb;">None</textarea>
+				<br />
+				Messages:
+				<button style="width:70px;" onClick="printMessage(null);">Clear</button>
+				<br />
+				<textarea id="messages" cols="110" rows="8" style="font-size:11px; color:#aa0000;">None</textarea>
+				<br />
+				Status: <span id="status"></span>
+				<br />
+				Audio files created: <span id="audio_files_created" style="color:#00aa00;">0</span> (<span id="audio_files_created_real" style="color:#00aa00;">0</span> real)
+				- Free: <span id="free_objects" style="color:#00aa00;">0</span>
+				<br />
+				Loading progress: <progress id="loading_progress_bar" value="0" max="100"></progress> <span id="loading_progress" style="color:#00aa00;">0</span>%
+				<br />
+				Duration (minimum): <span id="duration" style="color:#00aa00;">0</span>ms
+				<br />
+				Duration (maximum): <span id="duration_maximum" style="color:#00aa00;">0</span>ms
+				<br />
+				Playing: <span id="is_playing" style="color:#00aa00;">no</span>
+				<br />
+				<button id="check_all" style="width:85px; display:none;" onClick="checkAll();">Check all</button>
+				<span id="sprite_controls" style="display:none;">
+					<hr />
+					Sprite ID:
+					<select name="sprites_selector" id="sprites_selector" onChange="document.getElementById('loop').checked = false;">
+					</select>
+					Volume: <input id="volume" type="text" maxlength="3" size="3" value="100" />
+					<label for="loop"><input type="checkbox" name="loop" id="loop" /> Loop</label>
+					<button style="width:95px;" onClick="playSprite();">Play sprite</button>
+					<button style="width:95px;" onClick="stopSprite();">Stop sprite</button>
+					<button style="width:110px;" onClick="pauseSprite();">Pause sprite</button>
+					<button style="width:120px;" onClick="resumeSprite();">Resume sprite</button>
+					<button style="width:100px;" onClick="setVolumeSprite();">Set volume sprite</button>
+					<button style="width:70px;" onClick="muteSprite();">Mute sprite</button>
+					<button style="width:70px;" onClick="unmuteSprite();">Unmute sprite</button>
+					<br />
+					API:
+					<select id="api_selector_sprite">
+						<option value="WAAPI">WAAPI</option>
+						<option value="AAPI">AAPI</option>
+						<option value="ACMP">ACMP</option>
+						<option value="SM2">SM2</option>
+					</select>
+					<button style="width:100px;" onClick="setAudioAPISprite();">Set API sprite</button>
+					<hr />
+					Start at:
+					<input id="start_at" type="text" size="10" value="0" />
+					Stop at:
+					<input id="stop_at" type="text" size="10" value="" />
+					Volume: <input id="volume_play" type="text" maxlength="3" size="3" value="100" />
+					<label for="loop_play"><input type="checkbox" name="loop_play" id="loop_play" /> Loop</label>
+					<button style="width:70px;" onClick="play();">Play</button>
+					<hr />
+					<button style="width:85px;" onClick="playAll(false);">Play all</button>
+					<button style="width:135px;" onClick="playAndStopAll(false);">Play and Stop all</button>
+					<button style="width:155px;" onClick="playAll(true);">Play all (including playing ones)</button>
+					<button style="width:180px;" onClick="playAndStopAll(true);">Play and Stop all (including playing ones)</button>
+					<br />
+					<button style="width:85px;" onClick="stopAll();">Stop all</button>
+					<button style="width:85px;" onClick="pauseAll();">Pause all</button>
+					<button style="width:95px;" onClick="resumeAll();">Resume all</button>
+					<button style="width:85px;" onClick="muteAll();">Mute all</button>
+					<button style="width:95px;" onClick="unmuteAll();">Unmute all</button>
+					Volume: <input id="volume_all" type="text" maxlength="3" size="3" value="100" />
+					<button style="width:100px;" onClick="setVolumeAll();">Set volume</button>
+					<br />
+					<button style="width:100px;" onClick="destroyAll(false);">Destroy all</button>
+					<button style="width:150px;" onClick="destroyAll(true);">Destroy all (and stop sounds)</button>
+					<br />
+					API:
+					<select id="api_selector_all">
+						<option value="WAAPI">WAAPI</option>
+						<option value="AAPI">AAPI</option>
+						<option value="ACMP">ACMP</option>
+						<option value="SM2">SM2</option>
+					</select>
+					<button style="width:100px;" onClick="setAudioAPIAll();">Set API all</button>
+					<br />
+					<button style="width:100px;" onClick="clearSoundInstances(false);">Clear audio instances</button>
+					<button style="width:250px;" onClick="clearSoundInstances(true);">Clear audio instances (including with object associated)</button>
+					<button style="width:130px;" onClick="cancelSoundInstances(false);">Cancel audio instances</button>
+					<button style="width:250px;" onClick="cancelSoundInstances(true);">Cancel audio instances (including with object associated)</button>
+					<br />
+					<button style="width:160px;" onClick="changeSpritesId(false);">Change all sprites ID</button>
+					<button style="width:250px;" onClick="changeSpritesId(true);">Change all sprites ID (including without sprite associated)</button>
+				</span>
+			</center>
+			<br />
+			<br />
+			Free audio files: <span id="free_audio_files" style="color:#00aa00;">none</span>
+			<br />
+			Busy audio files: <span id="busy_audio_files" style="color:#00aa00;">none</span>
+			<br />
+			<br />
+			<div id="credits" style="font-size:12px; color:#aa0000; text-align:left;">CrossBrowdy by Joan Alba Maldonado</div>
+			<div id="CB_console" style="display:none; visibility:hidden; font-size:12px; text-align:left; width:100%; height:200px; overflow:scroll;"><span style="font-weight:bold;">Console:</span><br /></div>
+		</div>
+	</body>
+</html>

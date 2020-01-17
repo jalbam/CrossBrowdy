@@ -1,0 +1,5 @@
+1) Install dependencies (not needed unless they are deleted):
+	npm install sockjs
+
+2) Run the test server:
+	node test.js
