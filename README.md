@@ -8,7 +8,7 @@ Your cross-browser brodie!
 
 It is compatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets, smart watches, embedded devices and many others.
 
-Main web site: https://crossbrowdy.com/
+Main web site: [https://crossbrowdy.com/](https://crossbrowdy.com/ "CrossBrowdy web site")
 
 
 # About &amp; FAQ
@@ -105,4 +105,4 @@ licensed under the ["Creative Commons Attribution 4.0 International"](https://cr
 
 Apart from that, it is important to have into account that [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") uses some external libraries and some code which may have their own license each. It is important to respect each license properly as the responsibility will always lie with you.
 
-See more at ["What is the CrossBrowdy's copyright and license?"](https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license).
+See more at ["_What is the CrossBrowdy's copyright and license?_"](https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license).
