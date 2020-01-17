@@ -1,6 +1,7 @@
 /**
  * @file Miscellaneous code.
  *  @author Joan Alba Maldonado <workindalian@gmail.com>
+ *  @license Creative Commons Attribution 4.0 International. See more at {@link https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license}.
  *  @todo Think about a 'CB_symmetricInterval' function, similar to {@link CB_symmetricCall} but calling the callback function automatically.
  */
 

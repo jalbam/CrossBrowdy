@@ -1,4 +1,6 @@
 <?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+
 	//Basic tutorial structure:
 	$basicTutorial = Array
 	(

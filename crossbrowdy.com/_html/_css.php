@@ -1,5 +1,6 @@
-<?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 <?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+
 	if ($category === "api")
 	{
 		echo 'body, html { height:94%; }';
@@ -878,7 +879,7 @@ a.download_old
 a.download_old:hover
 {
 	color:#000000;
-	text-decoration:none;
+	text-decoration:underline;
 }
 
 

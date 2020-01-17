@@ -1,4 +1,6 @@
 <?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+
 	define("SUBCATEGORY_DEFAULT", "general");
 	define("TOPIC_DEFAULT", "getting_started");
 	define("CATEGORY_MAIN_NAME", "basic_tutorial");

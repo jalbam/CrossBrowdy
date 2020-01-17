@@ -1,4 +1,6 @@
 <?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+
 	$dirPath = "_html/_doc/" . $category . "/" . $language . "/" . $subcategory . "/" . $topic . "_files/";
 
 	

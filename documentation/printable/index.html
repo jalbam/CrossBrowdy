@@ -100,9 +100,52 @@
 
 
     <section class="readme-section">
-        <article><h1>CrossBrowdy</h1><p>Your cross-browser brodie!</p>
-<p>CrossBrowdy is an object-oriented JavaScript framework that allows to create multimedia apps, emulators, game engines, games and similar that will be compatible with any device.</p>
-<p>Main web site: <a href="http://crossbrowdy.com/">http://crossbrowdy.com/</a></p></article>
+        <article><h1>CrossBrowdy </h1><p>by Joan Alba Maldonado (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE)</p>
+<p>Your cross-browser brodie!</p>
+<p><a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> is a Multimedia JavaScript framework that can be used to create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.</p>
+<p>It is compatible with web browsers, desktop and laptop computers, mobile devices (phones, tablets), desktop and handheld video game consoles, TV sets, smart watches, embedded devices and many others.</p>
+<p>Main web site: <a href="https://crossbrowdy.com/">https://crossbrowdy.com/</a></p>
+<h1>About &amp; FAQ</h1><p>Visit the <a href="https://crossbrowdy.com/about" title="About &amp; FAQ">About &amp; FAQ section</a> to read more about <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a>.</p>
+<h1>Download</h1><p>To include it in your project and start using it, the most common way to download <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> for production is through the <a href="https://crossbrowdy.com/download" title="Download CrossBrowdy">Download section</a> from the official web site.</p>
+<p>You can also download <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> from GitHub directly. Just download the whole content of the <strong><a href="https://github.com/jalbam/CrossBrowdy/blob/master/dist/">dist/</a></strong> folder.</p>
+<p>Alternatively, from the command line (shell), you can also use one of the following commands to download <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> while you are in your project folder:</p>
+<p><strong>npm</strong>:</p>
+<pre class="prettyprint source"><code>npm i crossbrowdy </code></pre><p><strong>Yarn</strong>:</p>
+<pre class="prettyprint source"><code>yarn add crossbrowdy </code></pre><p><strong>Bower</strong> (whole repo):</p>
+<pre class="prettyprint source"><code>bower install jalbam/crossbrowdy --save </code></pre><p>Note: Bower will downlaod whole GitHub repository. </p>
+<h1>Getting started</h1><p>Visit the <a href="https://crossbrowdy.com/basic_tutorial/general/getting_started/" title="Getting started with CrossBrowdy">Getting started topic</a> from the <a href="https://crossbrowdy.com/guides#basic_tutorial" title="CrossBrowdy's Basic tutorial">Basic tutorial</a> to learn more.</p>
+<h2>Here you have a simple example:</h2><pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html>
+    &lt;head>
+        &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; />
+        &lt;title>My first CrossBrowdy project!&lt;/title>
+        &lt;script src=&quot;CrossBrowdy/CrossBrowdy.js&quot; type=&quot;text/javascript&quot; language=&quot;javascript&quot;>&lt;/script>&lt;!-- &quot;type&quot; and &quot;language&quot; parameters for legacy clients. -->
+        &lt;script type=&quot;text/javascript&quot; language=&quot;javascript&quot;>
+            CB_init(main); //It will call the &quot;main&quot; function when ready.
+
+            //This function will be called when CrossBrowdy is ready:
+            function main()
+            {
+                //Now, you can start using CrossBrowdy here...
+                CB_console(&quot;CrossBrowdy started!&quot;);
+            }
+        &lt;/script>
+    &lt;/head>
+    &lt;body>
+        &lt;!-- The &quot;CB_console&quot; element will be used automatically in the case that the client does not support console: -->
+        &lt;div id=&quot;CB_console&quot; style=&quot;display:none; visibility:hidden; overflow:scroll;&quot;>
+            &lt;span style=&quot;font-weight:bold;&quot;>Console:&lt;/span>&lt;br />
+        &lt;/div>
+    &lt;/body>
+&lt;/html></code></pre><h1>Usage</h1><p>Visit the <a href="https://crossbrowdy.com/guides" title="Guides &amp; Tutorials for CrossBrowdy">Guides &amp; Tutorials section</a> to get all the information you may need.</p>
+<h1>Basic tutorial</h1><p>Check the <a href="https://crossbrowdy.com/guides#basic_tutorial" title="CrossBrowdy's Basic tutorial">Basic tutorial</a> to learn how to use it.</p>
+<h1>Examples</h1><p>Check the <a href="https://crossbrowdy.com/guides#examples" title="CrossBrowdy examples">Examples section</a> to see some live examples and learn through their code.</p>
+<h1>API documentation</h1><p>For more technical documentation, visit the <a href="https://crossbrowdy.com/api/" title="CrossBrowdy API documentation">API documentation section</a>.</p>
+<h1>News</h1><p>Visit the <a href="https://crossbrowdy.com/news" title="CrossBrowdy News">News section</a> to keep up to date.</p>
+<h1>Community &amp; Get Involved</h1><p>Visit the <a href="https://crossbrowdy.com/community" title="Community &amp; Get Involved">Community &amp; Get Involved section</a> to access the <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> community through different ways and to get involved with its development.</p>
+<h2>License</h2><p>The code written by Joan Alba Maldonado (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE) which genuinely belongs to the <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> project is<br>licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">&quot;Creative Commons Attribution 4.0 International&quot;</a> license.</p>
+<p>Apart from that, it is important to have into account that <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> uses some external libraries and some code which may have their own license each. It is important to respect each license properly as the responsibility will always lie with you.</p>
+<p>See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">&quot;What is the CrossBrowdy's copyright and license?&quot;</a>.</p></article>
     </section>
 
 
@@ -162,6 +205,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -268,6 +318,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -372,6 +429,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -478,6 +542,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -582,6 +653,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -688,6 +766,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -792,6 +877,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -898,6 +990,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -1002,6 +1101,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -1108,6 +1214,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -1212,6 +1325,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -1318,6 +1438,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -1422,6 +1549,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -1528,6 +1662,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -1632,6 +1773,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -1738,6 +1886,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -1842,6 +1997,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -1948,6 +2110,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -2053,6 +2222,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -2157,6 +2333,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -2270,6 +2453,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -2375,6 +2565,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -2479,6 +2676,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -2592,6 +2796,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -2696,6 +2907,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -2802,6 +3020,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -2906,6 +3131,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -3012,6 +3244,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -3116,6 +3355,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -3222,6 +3468,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -3326,6 +3579,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -3432,6 +3692,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -3536,6 +3803,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	
@@ -3642,6 +3916,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -3747,6 +4028,13 @@
 	
 
 	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
+	
 
 	
 
@@ -3851,6 +4139,13 @@
 
 	
 
+	
+	<dt class="tag-license method-doc-label method-doc-details-label">License:</dt>
+	<dd class="tag-license">
+		<ul class="dummy">
+			<li>Creative Commons Attribution 4.0 International. See more at <a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.</li>
+		</ul>
+	</dd>
 	
 
 	

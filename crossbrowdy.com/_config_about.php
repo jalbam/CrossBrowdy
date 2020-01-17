@@ -1,4 +1,7 @@
 <?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+	
+	//Questions and answers for the FAQ section:
 	$FAQ = Array
 	(
 		"EN" => Array

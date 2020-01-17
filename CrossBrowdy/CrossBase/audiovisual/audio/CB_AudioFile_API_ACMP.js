@@ -1,6 +1,7 @@
 /**
  * @file Audio files management using "ACMP" ([Apache Cordova Media Plugin]{@link https://github.com/apache/cordova-plugin-media}). Contains the {@link CB_AudioFile_API.ACMP} class.
  *  @author Joan Alba Maldonado <workindalian@gmail.com>
+ *  @license Creative Commons Attribution 4.0 International. See more at {@link https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license}.
  */
  
 

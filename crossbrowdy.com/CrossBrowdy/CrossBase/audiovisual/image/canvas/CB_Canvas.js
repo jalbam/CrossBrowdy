@@ -1,6 +1,7 @@
 /**
  * @file Canvas management (including emulation fallbacks). Contains the {@link CB_Canvas} class.
  *  @author Joan Alba Maldonado <workindalian@gmail.com>
+ *  @license Creative Commons Attribution 4.0 International. See more at {@link https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license}.
  */
 
 

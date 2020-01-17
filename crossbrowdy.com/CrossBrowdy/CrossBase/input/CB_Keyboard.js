@@ -1,6 +1,7 @@
 /**
  * @file Keyboard management (and other devices which also fire [keyboard events]{@link https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent} as TV remote controls, game consoles' gamepads, etc.). Contains the {@link CB_Keyboard} static class.
  *  @author Joan Alba Maldonado <workindalian@gmail.com>
+ *  @license Creative Commons Attribution 4.0 International. See more at {@link https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license}.
  */
 
 /**

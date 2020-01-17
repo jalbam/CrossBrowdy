@@ -1,6 +1,7 @@
 /**
  * @file Audio files management using "SM2" ([SoundManager 2]{@link http://schillmania.com/projects/soundmanager2/}). Contains the {@link CB_AudioFile_API.SM2} class.
  *  @author Joan Alba Maldonado <workindalian@gmail.com>
+ *  @license Creative Commons Attribution 4.0 International. See more at {@link https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license}.
  */
 
 

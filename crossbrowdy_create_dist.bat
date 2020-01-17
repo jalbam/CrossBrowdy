@@ -10,6 +10,7 @@ echo.
 echo Copying necessary files...
 
 REM main:
+copy CrossBrowdy\LICENSE dist\CrossBrowdy\
 copy CrossBrowdy\*.js dist\CrossBrowdy\
 copy CrossBrowdy\CrossBase\*.js dist\CrossBrowdy\CrossBase\
 

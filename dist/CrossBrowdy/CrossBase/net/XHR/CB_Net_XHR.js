@@ -1,6 +1,7 @@
 /**
  * @file [XMLHttpRequest]{@link https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest} ([XHR]{@link https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/XMLHttpRequest}, [AJAX]{@link https://en.wikipedia.org/wiki/Ajax_(programming)}) and related management. Contains the {@link CB_Net.XHR} static class.
  *  @author Joan Alba Maldonado <workindalian@gmail.com>
+ *  @license Creative Commons Attribution 4.0 International. See more at {@link https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license}.
  */
 
 

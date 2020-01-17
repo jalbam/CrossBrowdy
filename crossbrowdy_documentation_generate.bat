@@ -2,11 +2,11 @@
 
 REM Generates the API documentation (normal and the more printer-friendly one):
 echo Generating normal API documentation...
-call jsdoc CrossBrowdy -c documentation_jsdoc_conf.json -t ./documentation/node_modules/ink-docstrap/template --verbose -R documentation_README.md
+call jsdoc CrossBrowdy -c documentation_jsdoc_conf.json -t ./documentation/node_modules/ink-docstrap/template --verbose -R README.md
 
 echo.
 echo Generating the more printer-frindly API documentation...
-call jsdoc CrossBrowdy -c documentation_jsdoc_conf_printable.json -t ./documentation/node_modules/ink-docstrap_printable/template --verbose -R documentation_README.md
+call jsdoc CrossBrowdy -c documentation_jsdoc_conf_printable.json -t ./documentation/node_modules/ink-docstrap_printable/template --verbose -R README.md
 
 
 REM Asks for copying the API documentation to the web site folder:

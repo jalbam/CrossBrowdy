@@ -1,4 +1,7 @@
 <?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+
+
 	//Returns a variable (GET or POST):
 	function getGetOrPost($getOrPost, $index, $trim = TRUE)
 	{

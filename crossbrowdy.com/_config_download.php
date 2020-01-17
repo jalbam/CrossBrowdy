@@ -1,0 +1,11 @@
+<?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+	
+	define("CB_VERSION_CURRENT", "0.99.95.3");
+	define("CB_FILENAME_BASE", "CrossBrowdy_{VERSION}");
+	define("CB_FILENAME_PATH_ZIP", "download/" . CB_FILENAME_BASE . ".zip");
+	define("CB_FILENAME_PATH_ZIP_REAL", "files/" . CB_FILENAME_BASE . ".zip");
+	
+	define("CB_FILENAME_BASE_LATEST", str_replace("{VERSION}", CB_VERSION_CURRENT, CB_FILENAME_BASE));
+	define("CB_FILENAME_PATH_ZIP_LATEST", str_replace("{VERSION}", CB_VERSION_CURRENT, CB_FILENAME_PATH_ZIP));
+	define("CB_FILENAME_PATH_ZIP_REAL_LATEST", str_replace("{VERSION}", CB_VERSION_CURRENT, CB_FILENAME_PATH_ZIP_REAL));
