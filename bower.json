@@ -50,6 +50,14 @@
 	"main": [ "CrossBrowdy.js" ],
 	"ignore":
 	[
+		"crossbrowdy.com/",
+		"dist/",
+		"tests/",
+		"*.bat",
+		"*.7z",
+		"*.zip",
+		"*.xml",
+		"*.json"
 	],
 	"directories":
 	{
