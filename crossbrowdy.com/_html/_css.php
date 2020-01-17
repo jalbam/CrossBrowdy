@@ -798,6 +798,90 @@ code
 	}
 }
 
+
+.shell_command_line
+{
+	font-style:italic;
+	color:#aa0000;
+	background-color:#dddddd;
+	padding:10px;
+}
+
+
+a.download_button
+{
+	color:#ffffff;
+	background-color:#0000dd;
+	
+	padding:10px;
+
+	font-size:24px;
+	font-size:1.5em;
+	font-size:150%;
+	font-size:2.5vmin;
+	
+	border-radius:18px;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	-khtml-border-radius:18px;
+	
+	-moz-box-shadow:1px 2px 6px 1px #bbbbbb;
+	-webkit-box-shadow:1px 2px 6px 1px #bbbbbb;
+	-o-box-shadow:1px 2px 6px 1px #bbbbbb;
+	-khtml-box-shadow:1px 2px 6px 1px #bbbbbb;
+	box-shadow:1px 2px 6px 1px #bbbbbb;
+}
+@media (orientation: portrait)
+{
+	a.download_button
+	{
+		font-size:12px;
+		font-size:0.6em;
+		font-size:60%;
+		font-size:3vmin;
+	}
+}
+a.download_button:hover
+{
+	color:#00ffff;
+	text-decoration:none;
+	background-color:#0000ff;
+}
+
+.download_size
+{
+	font-style:italic;
+	line-height:0px;
+	font-size:6px;
+	font-size:0.3em;
+	font-size:30%;
+	font-size:1.5vmin;
+}
+
+a.download_old
+{
+	font-size:20px;
+	font-size:0.7em;
+	font-size:70%;
+	font-size:2.1vmin;
+}
+@media (orientation: portrait)
+{
+	a.download_old
+	{
+		font-size:12px;
+		font-size:0.6em;
+		font-size:60%;
+		font-size:3vmin;
+	}
+}
+a.download_old:hover
+{
+	color:#000000;
+	text-decoration:none;
+}
+
+
 #api_iframe_container
 {
 	display:block;
