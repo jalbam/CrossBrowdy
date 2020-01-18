@@ -25,24 +25,24 @@ You can also download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web si
 Alternatively, from the command line (shell), you can also use one of the following commands to download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") while you are in your project folder:
 
 
-**Yarn**:
+## Using **[Yarn](https://yarnpkg.com/en/package/crossbrowdy "CrossBrowdy's Yarn package")**:
 ```
 yarn add crossbrowdy 
 ```
 
 
-**npm**:
+## Using **[npm](https://www.npmjs.com/package/crossbrowdy "CrossBrowdy's npm package")**:
 ```
 npm i crossbrowdy 
 ```
 
 
-**Bower**:
+## Using **Bower**:
 ```
 bower install jalbam/crossbrowdy --save 
 ```
 
-**Note**: Bower will also download the [API documentation](https://crossbrowdy.com/api/ "CrossBrowdy API documentation").
+**Note**: [Yarn](https://yarnpkg.com/en/package/crossbrowdy "CrossBrowdy's Yarn package"), [npm](https://www.npmjs.com/package/crossbrowdy "CrossBrowdy's npm package") and Bower will also download the [API documentation](https://crossbrowdy.com/api/ "CrossBrowdy API documentation").
 
 
 # Getting started

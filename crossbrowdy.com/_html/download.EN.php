@@ -28,14 +28,14 @@
 	<h4>Download the latest version from the command line (shell):</h4>
 
 	<p>
-		Using <strong>Yarn</strong>:
+		Using <strong><a href="https://yarnpkg.com/en/package/crossbrowdy" target="_blank">Yarn</a></strong>:
 	</p>
 	<div class="shell_command_line"><code class="language-shell">
 		<strong>yarn</strong> add crossbrowdy
 	</code></div>
 
 	<p>
-		Using <strong>npm</strong>:
+		Using <strong><a href="https://www.npmjs.com/package/crossbrowdy" target="_blank">npm</a></strong>:
 	</p>
 	<div class="shell_command_line"><code class="language-shell">
 		<strong>npm</strong> i crossbrowdy
@@ -48,7 +48,7 @@
 		<strong>bower</strong> install jalbam/crossbrowdy --save
 	</code></div>
 	<p>
-		Note: Bower will also download the <a href="api<?php echo $PHPExtension; ?>" target="_blank">API documentation</a>.
+		Note: <a href="https://yarnpkg.com/en/package/crossbrowdy" target="_blank">Yarn</a>, <a href="https://www.npmjs.com/package/crossbrowdy" target="_blank">npm</a> and Bower will also download the <a href="api<?php echo $PHPExtension; ?>" target="_blank">API documentation</a>.
 	</p>
 
 	<h3>Source code</h3>
