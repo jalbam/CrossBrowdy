@@ -14,7 +14,7 @@ Main web site: [https://crossbrowdy.com/](https://crossbrowdy.com/ "CrossBrowdy 
 
 
 # About &amp; FAQ
-Visit the [About &amp; FAQ section](https://crossbrowdy.com/about "About &amp; FAQ") to read more about [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site").
+Visit the [About &amp; FAQ section](https://crossbrowdy.com/about "About &amp; FAQ") to know more about [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site").
 
 
 # Download
@@ -97,8 +97,17 @@ For more technical documentation, visit the [API documentation section](https://
 Visit the [News section](https://crossbrowdy.com/news "CrossBrowdy News") to keep up to date.
 
 
+# Help
+Check ["_I still have a problem, doubt or suggestion. What can I do?_"](https://crossbrowdy.com/about#i_have_a_problem_doubt_or_suggestion_what_can_i_do).
+
+
 # Community & Get Involved
-Visit the [Community & Get Involved section](https://crossbrowdy.com/community "Community & Get Involved") to access the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") community through different ways and to get involved with its development.
+Visit the [Community & Get Involved section](https://crossbrowdy.com/community "Community & Get Involved") to access the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") community through different ways and also to get involved and contribute with its development.
+
+
+# Credits
+CrossBrowdy project was created by [Joan Alba Maldonado (aka Juan Alba Maldonado)](https://joanalbamaldonado.com/ "Joan Alba Maldonado's home page").
+It also uses some external libraries and "third-party" code. The name of these libraries and the name of the authors of these libraries and that other code can be found in the source code as well as in the splash screen (if it was no disabled) and in the console when CrossBrowdy is loading. As this information may vary with each version, it is not included here. 
 
 
 # License

@@ -169,7 +169,7 @@
 					"answer" =>
 					'
 						<p>
-							CrossBrowdy project was created by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a>. It also uses some external libraries and &quot;third-party&quot; code. The name of these libraries and the name of the authors of these libraries and other code can be found in the source code as well as in the splash screen and in the <i>console</i> when CrossBrowdy is loading. As this information may vary with each version, it is not included here.
+							CrossBrowdy project was created by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a>. It also uses some external libraries and &quot;third-party&quot; code. The name of these libraries and the name of the authors of these libraries and that other code can be found in the source code as well as in the splash screen (if it was no disabled) and in the <i>console</i> when CrossBrowdy is loading. As this information may vary with each version, it is not included here.
 						</p>
 					'
 				),

@@ -10,7 +10,7 @@
 		FreeLists mailing list: <a href="https://www.freelists.org/list/crossbrowdy" target="_blank">https://www.freelists.org/list/crossbrowdy</a>
 	</p>
 	<p>
-		Reddit Community: <a href="https://www.reddit.com/r/CrossBrowdy/" target="_blank">https://www.reddit.com/r/CrossBrowdy/</a>
+		Reddit community: <a href="https://www.reddit.com/r/CrossBrowdy/" target="_blank">https://www.reddit.com/r/CrossBrowdy/</a>
 	</p>
 	<h3>Chats and others</h3>
 	<p>
