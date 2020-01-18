@@ -20,7 +20,7 @@ Visit the [About &amp; FAQ section](https://crossbrowdy.com/about "About &amp; F
 # Download
 To include it in your project and start using it, the most common way to download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") for production is through the [Download section](https://crossbrowdy.com/download "Download CrossBrowdy") from the official web site.
 
-You can also download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") from GitHub directly. Just download the whole content of the **[dist/](https://github.com/jalbam/CrossBrowdy/blob/master/dist/)** folder.
+You can also download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") from [the GitHub repository](https://github.com/jalbam/CrossBrowdy/ "CrossBrowdy's GitHub repository") directly. Just download the whole content of the **[dist/](https://github.com/jalbam/CrossBrowdy/blob/master/dist/)** folder.
 
 Alternatively, from the command line (shell), you can also use one of the following commands to download [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") while you are in your project folder:
 
