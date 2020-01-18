@@ -57,6 +57,7 @@ Visit the [Getting started topic](https://crossbrowdy.com/basic_tutorial/general
 		<title>My first CrossBrowdy project!</title>
 		<script src="CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
 		<script type="text/javascript" language="javascript">
+		<!--
 			CB_init(main); //It will call the "main" function when ready.
 
 			//This function will be called when CrossBrowdy is ready:
@@ -65,6 +66,7 @@ Visit the [Getting started topic](https://crossbrowdy.com/basic_tutorial/general
 				//Now, you can start using CrossBrowdy here...
 				CB_console("CrossBrowdy started!");
 			}
+		// -->
 		</script>
 	</head>
 	<body>

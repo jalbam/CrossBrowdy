@@ -30,6 +30,7 @@
 	
 <pre><code class="language-html line-numbers match-braces rainbow-braces">
 	&lt;script type="text/javascript" language="javascript"&gt;
+	&lt;!--
 		CB_init(main); //It will start CrossBrowdy and it will call the "main" function when ready.
 
 		//This function will be called when CrossBrowdy is ready:
@@ -38,6 +39,7 @@
 			//Now, you can start using CrossBrowdy here...
 			CB_console("CrossBrowdy started!");
 		}
+	// --&gt;
 	&lt;/script&gt;
 </code></pre>
 
@@ -99,6 +101,7 @@
 			&lt;title&gt;My first CrossBrowdy project!&lt;/title&gt;
 			&lt;script src="CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"&gt;&lt;/script&gt;&lt;!-- "type" and "language" parameters for legacy clients. --&gt;
 			&lt;script type="text/javascript" language="javascript"&gt;
+			&lt;!--
 				CB_init(main); //It will call the "main" function when ready.
 
 				//This function will be called when CrossBrowdy is ready:
@@ -107,6 +110,7 @@
 					//Now, you can start using CrossBrowdy here...
 					CB_console("CrossBrowdy started!");
 				}
+			// --&gt;
 			&lt;/script&gt;
 		&lt;/head&gt;
 		&lt;body&gt;

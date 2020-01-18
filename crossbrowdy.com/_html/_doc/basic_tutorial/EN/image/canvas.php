@@ -24,7 +24,7 @@
 </p>
 <pre><code class="language-html line-numbers match-braces rainbow-braces">
 	&lt;!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: --&gt;
-	&lt;script type="text/javascript" src="CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js"&gt;&lt;/script&gt;&lt;!-- FlashCanvas/ExplorerCanvas do not support lazy load. --&gt;
+	&lt;script src="CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js" type="text/javascript" language="javascript"&gt;&lt;/script&gt;&lt;!-- FlashCanvas/ExplorerCanvas do not support lazy load. --&gt;
 </code></pre>
 
 <p>
