@@ -1917,7 +1917,7 @@ CB_Modules.modules[CB_BASE_NAME] =
 			"CrossBase/audiovisual/audio/CB_AudioFileSprites.js" : { load: true, mandatory: true }, //CB_AudioFileSprites class.
 			"CrossBase/audiovisual/audio/CB_AudioFileSpritesPool.js" : { load: true, mandatory: true }, //CB_AudioFileSpritesPool class.
 			"CrossBase/audiovisual/audio/CB_Speaker.js" : { load: true, mandatory: true }, //CB_Speaker static class.
-			"CrossBase/general/PHP/PHP_detector.php" : { load: true, mandatory: true },
+			"CrossBase/general/PHP/PHP_detector.php" : { load: true, mandatory: false },
 
 			//Dynamic filepath:
 			"VALUEOF_CB_Configuration.CrossBase.LOCALSTORAGE_POLYFILL_PATH_SCRIPT_FILE" : { load: true, mandatory: true }, //localStorage polyfill by Morten Houmøller Nygaard.
