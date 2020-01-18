@@ -320,6 +320,7 @@ var CB_Client = function() { return CB_Client; };
 	 */
 	CB_Client.getPHPVersion = function(asString)
 	{
+		if (typeof(CB_PHPVersion) === "undefined") { CB_PHPVersion = 0; }
 		return asString ? (CB_PHPVersion + "") : (CB_PHPVersion + "").split(".");
 	}
 
