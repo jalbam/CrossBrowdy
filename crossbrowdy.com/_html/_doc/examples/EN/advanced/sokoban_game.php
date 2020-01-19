@@ -39,24 +39,24 @@
 </p>
 <p>
 	&quot;First contact&quot; by Black Lark:
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">black_lark-first_contact-compressed.m4a</a>,
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">black_lark-first_contact-compressed.mp3</a>,
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">black_lark-first_contact-compressed.ogg</a> and
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">black_lark-first_contact-compressed.wav</a>.
+		<a href="<?php echo $dirPath; ?>img/black_lark-first_contact-compressed.m4a" target="_blank">black_lark-first_contact-compressed.m4a</a>,
+		<a href="<?php echo $dirPath; ?>img/black_lark-first_contact-compressed.mp3" target="_blank">black_lark-first_contact-compressed.mp3</a>,
+		<a href="<?php echo $dirPath; ?>img/black_lark-first_contact-compressed.ogg" target="_blank">black_lark-first_contact-compressed.ogg</a> and
+		<a href="<?php echo $dirPath; ?>img/black_lark-first_contact-compressed.wav" target="_blank">black_lark-first_contact-compressed.wav</a>.
 </p>
 <p>
 	&quot;Invisible hand&quot; by Weary Eyes:
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">smokefishe-sorry_for_lying-compressed.m4a</a>,
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">smokefishe-sorry_for_lying-compressed.mp3</a>,
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">smokefishe-sorry_for_lying-compressed.ogg</a> and
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">smokefishe-sorry_for_lying-compressed.wav</a>.
+		<a href="<?php echo $dirPath; ?>img/smokefishe-sorry_for_lying-compressed.m4a" target="_blank">smokefishe-sorry_for_lying-compressed.m4a</a>,
+		<a href="<?php echo $dirPath; ?>img/smokefishe-sorry_for_lying-compressed.mp3" target="_blank">smokefishe-sorry_for_lying-compressed.mp3</a>,
+		<a href="<?php echo $dirPath; ?>img/smokefishe-sorry_for_lying-compressed.ogg" target="_blank">smokefishe-sorry_for_lying-compressed.ogg</a> and
+		<a href="<?php echo $dirPath; ?>img/smokefishe-sorry_for_lying-compressed.wav" target="_blank">smokefishe-sorry_for_lying-compressed.wav</a>.
 </p>
 <p>
 	&quot;Sorry for lying&quot; by Smokefishe:
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">weary_eyes-invisible_hand-compressed.m4a</a>,
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">weary_eyes-invisible_hand-compressed.mp3</a>,
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">weary_eyes-invisible_hand-compressed.ogg</a> and
-		<a href="<?php echo $dirPath; ?>img/music.mp3" target="_blank">weary_eyes-invisible_hand-compressed.wav</a>.
+		<a href="<?php echo $dirPath; ?>img/weary_eyes-invisible_hand-compressed.m4a" target="_blank">weary_eyes-invisible_hand-compressed.m4a</a>,
+		<a href="<?php echo $dirPath; ?>img/weary_eyes-invisible_hand-compressed.mp3" target="_blank">weary_eyes-invisible_hand-compressed.mp3</a>,
+		<a href="<?php echo $dirPath; ?>img/weary_eyes-invisible_hand-compressed.ogg" target="_blank">weary_eyes-invisible_hand-compressed.ogg</a> and
+		<a href="<?php echo $dirPath; ?>img/weary_eyes-invisible_hand-compressed.wav" target="_blank">weary_eyes-invisible_hand-compressed.wav</a>.
 </p>
 
 <?php

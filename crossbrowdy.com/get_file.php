@@ -7,11 +7,19 @@
 	
 	require_once "_config_download.php";
 
-	$version = strtolower(getGet("version"));
-	if ($version === "" || $version === "current" || $version === "last" || $version === "latest") { $version = CB_VERSION_CURRENT; }
+	$id = strtolower(getGet("id"));
+	if ($id === "" || $id === "current" || $id === "last" || $id === "latest") { $id = CB_VERSION_CURRENT; }
 	
-	$fileToDownload = str_replace("{VERSION}", $version, CB_FILENAME_PATH_ZIP_REAL);
-	$fileToDownloadBeautifulLink = str_replace("{VERSION}", $version, CB_FILENAME_PATH_ZIP);
+	if ($id === "examples")
+	{
+		$fileToDownload = EXAMPLES_FILENAME_PATH_ZIP_REAL;
+		$fileToDownloadBeautifulLink = EXAMPLES_FILENAME_PATH_ZIP;
+	}
+	else
+	{
+		$fileToDownload = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP_REAL);
+		$fileToDownloadBeautifulLink = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP);
+	}
 	
 	if (file_exists($fileToDownload))
 	{

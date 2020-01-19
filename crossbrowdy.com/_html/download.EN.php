@@ -8,7 +8,7 @@
 				if (file_exists(CB_FILENAME_PATH_ZIP_REAL_LATEST))
 				{
 			?>
-					<a href="get_file<?php echo $PHPExtension; ?>?version=current" class="download_button">
+					<a href="get_file<?php echo $PHPExtension; ?>?id=current" class="download_button">
 						Download <?php echo CB_VERSION_CURRENT; ?> version
 					</a>
 					<?php

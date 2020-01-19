@@ -56,6 +56,7 @@
 				<?php echo guideLinks($examples, "examplesLink", "examples"); ?>
 			</nav>
 		</ol>
+		All the examples together can be downloaded <a href="get_file<?php echo $PHPExtension; ?>?id=examples">here</a>.
 	</div>
 </section>
 

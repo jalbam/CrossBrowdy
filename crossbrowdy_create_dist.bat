@@ -2,7 +2,7 @@
 
 echo Removing folder and creating empty structure...
 
-del /s /q dist\CrossBrowdy\*.*
+rmdir /s /q dist\CrossBrowdy
 xcopy /t /e CrossBrowdy\*.* dist\CrossBrowdy\
 
 

@@ -65,6 +65,8 @@
 		}
 		else { echo '<div style="text-align:center;"><p><b>File not found!</b></p></div>'; }
 		
+		echo 'All the examples together can be downloaded <a href="get_file' . $PHPExtension . '?id=examples">here</a>.';
+		
 		//Displays the option to go back:
 		echo '<p style="text-align:center; padding-top:20px;"><a href="' . $goBackSubcategoryLink . '">Go back to ' . $menuOptions[$language][$optionBack] . '</a></p>';
 	echo '</div>';
