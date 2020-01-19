@@ -39,6 +39,7 @@ function main()
 		gameStarted: false,
 		ballonsPerLoopInitial: ballonsPerLoopInitial, //Initial number of ballons appearing per loop.
 		balloonsPerLoop: ballonsPerLoopInitial, //Number of ballons appearing per loop.
+		loopsToIncreaseBalloonsPerLoopCounter: 0, //Internal counter of the number of loops before the 'loopsToIncreaseBalloonsPerLoop' gets increased.
 		balloonsAppearingMsInitial: balloonsAppearingMsInitial, //Initial milliseconds to wait before creating a new balloon.
 		balloonsAppearingMs: balloonsAppearingMsInitial, //Milliseconds to wait before creating a new balloon.
 		balloonsIdCounter: 0,
@@ -46,7 +47,7 @@ function main()
 		balloonsPopped: 0,
 		score: 0
 	};
-	var loopsToIncreaseBaloonsPerLoop = 50; //Number of loops necessary to increase (by one) the number of balloons per loop.
+	var loopsToIncreaseBalloonsPerLoop = 50; //Number of loops necessary to increase (by one) the number of balloons per loop.
 	var balloonsAppearingMsMinimum = 150; //Minimum of milliseconds to wait to create another new balloon. The 'CB_GEM.data.balloonsAppearingMs' integer will never be lower than this value.
 	var balloonsAppearingMsDecreasingPerLoop = 2; //Number of milliseconds that will be decreased from the 'CB_GEM.data.balloonsAppearingMs' integer (to increase speed after a balloon appears).
 	var balloonsCounterMax = 150;
@@ -100,7 +101,6 @@ function main()
 	//Defines the callbacks for the game loop:
 	var timingLastTime = 0;
 	var timingNow = null;
-	var loopsToIncreaseBaloonsPerLoopCounter = 0;
 	CB_GEM.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expectedCallingTime) //When the game loop starts, before rendering the graphics (if it returns false, it will skip rendering in this loop):
 	{
 		if (!CB_GEM.data.gameStarted) { return; }
@@ -172,8 +172,8 @@ function main()
 			CB_GEM.data.balloonsAppearingMs -= balloonsAppearingMsDecreasingPerLoop;
 			if (CB_GEM.data.balloonsAppearingMs < balloonsAppearingMsMinimum) { CB_GEM.data.balloonsAppearingMs = balloonsAppearingMsMinimum; }
 			
-			loopsToIncreaseBaloonsPerLoopCounter++;
-			if (loopsToIncreaseBaloonsPerLoopCounter > loopsToIncreaseBaloonsPerLoop) { CB_GEM.data.balloonsPerLoop++; loopsToIncreaseBaloonsPerLoopCounter = 0; }
+			CB_GEM.data.loopsToIncreaseBalloonsPerLoopCounter++;
+			if (CB_GEM.data.loopsToIncreaseBalloonsPerLoopCounter > loopsToIncreaseBalloonsPerLoop) { CB_GEM.data.balloonsPerLoop++; CB_GEM.data.loopsToIncreaseBalloonsPerLoopCounter = 0; }
 			
 			timingLastTime = timingNow; //Updates the last timing when the last balloon was created.
 			
@@ -278,6 +278,7 @@ function gameStart()
 	CB_GEM.data.score = 0;
 	CB_GEM.data.balloonsPerLoop = CB_GEM.data.ballonsPerLoopInitial;
 	CB_GEM.data.balloonsAppearingMs = CB_GEM.data.balloonsAppearingMsInitial;
+	CB_GEM.data.loopsToIncreaseBalloonsPerLoopCounter = 0;
 	
 	//Prepares the sound effects and plays one of them (recommended to do this through a user-driven event):
 	try
@@ -416,7 +417,7 @@ function playMusic()
 	var audioObject = T("mml", { mml: [mml0, mml1] }, synth).on
 	(
 		"ended",
-		function() { this.stop(); }
+		function() { this.stop(); this.start(); } //Starts again (loops).
 	).set({ buddies: master }).start();
 
 	playingMusic = audioObject.playbackState === 1;
