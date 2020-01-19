@@ -17,7 +17,7 @@
 	var parameters_4 = CB_Net.getURIParameters(null, null, ["parameter5"], true); //If "parameter5" existed, it will keep its value. The value will be empty otherwise.
 	
 	//Examples giving a URL:
-	var URL = "https://www.crossbrowdy.com/guides.php?parameter1=value1&amp;parameter2=value2&amp;parameter3=value3&amp;parameter4=value4&amp;parameter5=value5#parameter1=value1_hash&amp;parameter2=value2_hash&amp;parameter3=value3_hash&amp;parameter4=value4_hash&amp;parameter5=value5_hash";
+	var URL = "https://www.crossbrowdy.com/guides?parameter1=value1&amp;parameter2=value2&amp;parameter3=value3&amp;parameter4=value4&amp;parameter5=value5#parameter1=value1_hash&amp;parameter2=value2_hash&amp;parameter3=value3_hash&amp;parameter4=value4_hash&amp;parameter5=value5_hash";
 	var parameters_5 = CB_Net.getURIParameters(URL); //Returns 'parameter1=value1&amp;parameter2=value2&amp;parameter3=value3&amp;parameter4=value4&amp;parameter5=value5'.
 	var parameters_6 = CB_Net.getURIParameters(URL, ["parameter1", "parameter2"]); //Returns 'parameter3=value3&amp;parameter4=value4&amp;parameter5=value5'.
 	var parameters_7 = CB_Net.getURIParameters(URL, null, ["parameter2", "parameter3"]); //Returns 'parameter2=value2&amp;parameter3=value3'.
@@ -56,7 +56,7 @@
 	var hashParameters_4 = CB_Net.getHashParameters(null, null, ["parameter5"], true); //If "parameter5" existed, it will keep its value. The value will be empty otherwise.
 	
 	//Examples giving a URL:
-	var URL = "https://www.crossbrowdy.com/guides.php?parameter1=value1&amp;parameter2=value2&amp;parameter3=value3&amp;parameter4=value4&amp;parameter5=value5#parameter1=value1_hash&amp;parameter2=value2_hash&amp;parameter3=value3_hash&amp;parameter4=value4_hash&amp;parameter5=value5_hash";
+	var URL = "https://www.crossbrowdy.com/guides?parameter1=value1&amp;parameter2=value2&amp;parameter3=value3&amp;parameter4=value4&amp;parameter5=value5#parameter1=value1_hash&amp;parameter2=value2_hash&amp;parameter3=value3_hash&amp;parameter4=value4_hash&amp;parameter5=value5_hash";
 	var parameters_5 = CB_Net.getHashParameters(URL); //Returns 'parameter1=value1_hash&amp;parameter2=value2_hash&amp;parameter3=value3_hash&amp;parameter4=value4_hash&amp;parameter5=value5_hash'.
 	var parameters_6 = CB_Net.getHashParameters(URL, ["parameter1", "parameter2"]); //Returns 'parameter3=value3_hash&amp;parameter4=value4_hash&amp;parameter5=value5_hash'.
 	var parameters_7 = CB_Net.getHashParameters(URL, null, ["parameter2", "parameter3"]); //Returns 'parameter2=value2_hash&amp;parameter3=value3_hash'.
@@ -78,7 +78,7 @@
 </p>
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 	//Gets all the desired parameters using the own format desired:
-	var URL = "https://www.crossbrowdy.com/guides.php?data=[key1-     value1    ,key2-   value2   ,key3-   value3   ]#whatever";
+	var URL = "https://www.crossbrowdy.com/guides?data=[key1-     value1    ,key2-   value2   ,key3-   value3   ]#whatever";
 	var values = CB_Net.getURIParameters(URL, null, null, null, null, "[", "]", ",", "-"); //Returns "key1-value1,key2-value2,key3-value3".
 	
 	//Gets the value of the desired parameter, using the own format desired:

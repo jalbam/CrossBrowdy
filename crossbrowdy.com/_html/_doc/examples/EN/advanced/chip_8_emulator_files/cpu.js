@@ -356,6 +356,7 @@ function emulationLoop()
 
 //Performs a CPU cycle:
 var a, b; //It will execute the opcode's argument being executed.
+var lastTiming = 0;
 function performCycle()
 {
 	//Decodes and performs the current opcode:
@@ -387,12 +388,13 @@ function performCycle()
 	//Update timers:
 	if (!emulatorPaused)
 	{
-		if (timerDelay > 0) { timerDelay--; }
+		if (timerDelay > 0 && CB_Device.getTiming() - lastTiming > 1) { timerDelay--; }
 		if (timerSound > 0)
 		{
 			if (timerSound === 1) { playSoundFx("beep"); } //Plays a "beep" sound.
-			timerSound--;
+			timerSound--; //if (CB_Device.getTiming() - lastTiming > 15) { timerSound--; }
 		}
+		lastTiming = CB_Device.getTiming();
 	}
 	else if (waitingForKey)
 	{

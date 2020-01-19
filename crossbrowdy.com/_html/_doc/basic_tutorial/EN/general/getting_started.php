@@ -1,7 +1,7 @@
 <?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
 
 <p>
-	After <a href="download.php">downloading</a> CrossBrowdy and placing it in your working folder (for this example, inside a subfolder called &quot;<i>CrossBrowdy</i>&quot;), create an HTML file with the following content:
+	After <a href="download<?php echo $PHPExtension; ?>">downloading</a> CrossBrowdy and placing it in your working folder (for this example, inside a subfolder called &quot;<i>CrossBrowdy</i>&quot;), create an HTML file with the following content:
 </p>
 
 <pre><code class="language-html line-numbers match-braces rainbow-braces">

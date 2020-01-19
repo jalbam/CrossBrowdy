@@ -222,7 +222,7 @@ function setROMsData()
 			author: "David Winter",
 			year: null,
 			file: "Space Invaders [David Winter].ch8",
-			cyclesPerLoop: 6,
+			cyclesPerLoop: 10,
 			contentMatches: function(ROMContent) //Returns true if the given ROM content matches this ROM. Used to identify ROMs.
 			{
 				return ROMContentToString(ROMContent).indexOf("SPACE INVADERS 0.91 By David WINTER") !== -1;
@@ -313,7 +313,7 @@ function setROMsData()
 			author: "Fran Dachille",
 			year: 1991,
 			file: "Tetris [Fran Dachille, 1991].ch8",
-			cyclesPerLoop: 1,
+			cyclesPerLoop: 2,
 			contentMatches: function(ROMContent) //Returns true if the given ROM content matches this ROM. Used to identify ROMs.
 			{
 				var ROMContentString = ROMContentToString(ROMContent);
