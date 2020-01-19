@@ -74,7 +74,6 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 			"1.0", //'initialScale'. Optional.
 			"1.0", //'minimumScale'. Optional.
 			"1.0", //'maximumScale'. Optional.
-			"device-dpi", //'targetDensityDPI'. Optional.
 			"no" //'shrinkToFit'. Optional.
 		);
 	}

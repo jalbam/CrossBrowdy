@@ -1,6 +1,8 @@
 ﻿/**
  * T("timbre.js") - A JavaScript library for objective sound programming
  */
+var _timbreJSInitializer = function() //CrossBrowdy modification to be able to initialize the library after an user-driven event (as onClick, etc.).
+{
 (function(undefined) {
     "use strict";
 
@@ -11987,3 +11989,4 @@
     fn.register("zmap", ZMapNode);
 
 })(timbre);
+};

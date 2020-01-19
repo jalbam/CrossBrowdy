@@ -96,7 +96,7 @@
 				if (CB_trim(targetDensityDPI) === "") { targetDensityDPI = null; }
 				
 				//Sets the viewport tag:
-				var code = "CB_Screen.setViewport(width_, height_, userScalable, initialScale, minimumScale, maximumScale, targetDensityDPI, enableShrinkToFit);";
+				var code = "CB_Screen.setViewport(width_, height_, userScalable, initialScale, minimumScale, maximumScale, enableShrinkToFit, targetDensityDPI);";
 				eval(code);
 				
 				//Show current viewport:

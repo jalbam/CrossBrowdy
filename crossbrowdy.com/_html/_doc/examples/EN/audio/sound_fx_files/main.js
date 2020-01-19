@@ -11,6 +11,20 @@ var sfx = null;
 //This function will be called when CrossBrowdy is ready:
 function main()
 {
+	//Hides any messages:
+	CB_Elements.hideById("messages");
+
+	//Shows the start button:
+	CB_Elements.showById("start_button");
+}
+
+
+//Prepares the 'jsfx' object and shows the controls if all goes well:
+function jsfxObjectPrepare()
+{
+	//Hides the start button:
+	CB_Elements.hideById("start_button");
+	
 	//Sound effects example:
 	var jsfxObject = CB_Speaker.getJsfxObject(); //Gets the 'jsfx' object.
 	if (jsfxObject !== null)
@@ -77,16 +91,14 @@ function main()
 		//Loads the sound effects:
 		sfx = CB_AudioDetector.isAPISupported("WAAPI") ? jsfxObject.Live(library) : jsfxObject.Sounds(library); //Uses AudioContext (Web Audio API) if available.
 		
-		//Hides any messages:
-		CB_Elements.hideById("messages");
-		
 		//Shows the controls:
 		CB_Elements.showById("controls");
 	}
 	else
 	{
 		var message = "The 'jsfx' (used by the jsfx library) object is null. Probably not supported.";
-		CB_Elements.insertContentById("messages", message); //Hides any messages.
+		CB_Elements.showById("messages");
+		CB_Elements.insertContentById("messages", message);
 		CB_console(message);
 	}
 }

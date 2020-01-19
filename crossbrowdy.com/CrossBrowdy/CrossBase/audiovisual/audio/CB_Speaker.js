@@ -172,7 +172,33 @@ var CB_Speaker = CB_Speakers = function() { return CB_Speaker; };
 					//If all objects are null it means all have either played or failed:
 					if (allNull) { CB_Speaker._silentAudioFilePlayedWAAPI = true; }
 				}
+				
 			  
+				//If not done before, initializes the jsfx library:
+				if (typeof(jsfx) === "undefined" && typeof(_jsfxInitializer) === "function")
+				{
+					//Initializes the jsfx library:
+					_jsfxInitializer(CB_this["jsfx"] = {});
+					_jsfxInitializer = null; //Prevents executing it more than once.
+					
+					//Gets and stores the jsfx object (if any):
+					CB_Speaker._jsfxObject = (typeof(jsfx) !== "undefined" && jsfx !== null) ? jsfx : null;
+				}
+
+
+				//If not done before, initializes the timbre.js library:
+				if (typeof(T) === "undefined" && typeof(_timbreJSInitializer) === "function")
+				{
+					_timbreJSInitializer.call(CB_this);
+					_timbreJSInitializer = null; //Prevents executing it more than once.
+					
+					//Gets and stores the timbre.js object (if any):
+					CB_Speaker._timbreJSObject = (typeof(T) !== "undefined" && T !== null) ? T : null;
+				}
+				
+				
+				//TODO: Think about initializing Band.js library here too (the same as with jsfx and timbre.js libraries).
+
 			};
 		CB_Events.add(document, "click", silentAudioFilePlay, true, true, false);
 		//CB_Events.add(document, "touchstart", silentAudioFilePlay, true, true, false);

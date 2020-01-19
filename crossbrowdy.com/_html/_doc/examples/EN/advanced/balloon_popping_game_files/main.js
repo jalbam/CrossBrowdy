@@ -19,9 +19,6 @@ function main()
 {
 	CB_console("CrossBrowdy and all needed modules loaded. Starting game...");
 	
-	//Prepares the background music (to play it later):
-	prepareMusic();
-	
 	//Defines the events to detect the input:
 	var pointerX = null;
 	var pointerY = null;
@@ -298,7 +295,7 @@ function gameStart()
 
 	//Starts playing the background music (recommended to do this through a user-driven event):
 	playMusic(); //If it was playing already, it will not do anything.
-	
+
 	//Sets the game as started:
 	CB_GEM.data.gameStarted = true; //When set to true, starts the game automatically as the game loops detect it.
 }
@@ -364,87 +361,64 @@ function playSoundFx(id)
 }
 
 
-//Prepares background music:
-var timbreJSObject = null; //Global 'T' object to play the sounds.
-var bufferResult = null; //Global 'result'.
-function prepareMusic()
-{
-	//Audio processing and synthesizing (taken from https://mohayonao.github.io/timbre.js/reich.html):
-	timbreJSObject = CB_Speaker.getTimbreJSObject(); //Gets the 'T' object.
-	if (timbreJSObject !== null)
-	{
-		timbreJSObject.rec
-		(
-			function(output)
-			{
-				var midis = [69, 71, 72, 76, 69, 71, 72, 76].scramble();
-				var msec  = timbreJSObject.timevalue("bpm120 l8");
-				var synth = timbreJSObject
-				(
-					"OscGen",
-					{ env: timbreJSObject("perc", { r: msec, ar: true }) }
-				);
-
-				timbreJSObject
-				(
-					"interval",
-					{ interval: msec },
-					function(count)
-					{
-						if (count < midis.length)
-						{
-							synth.noteOn(midis[count], 100);
-						}
-						else { output.done(); }
-					}
-				).start();
-
-				output.send(synth);
-			}
-		).then
-		(
-			function(result) { bufferResult = result; }
-		);
-	}
-}
-
-
 //Plays the background music:
+var timbreJSObject = null; //Global 'T' object to play the sounds.
 var playingMusic = false;
-var playMusicTimeout = null;
 function playMusic()
 {
-	clearTimeout(playMusicTimeout);
+	if (!CB_GEM.data.musicEnabled) { return; }
+	
+	//Audio processing and synthesizing (taken from https://mohayonao.github.io/timbre.js/satie.html):
+	timbreJSObject = CB_Speaker.getTimbreJSObject(); //Gets the 'T' object.
 	if (timbreJSObject === null || playingMusic) { return; }
-	else if (!CB_GEM.data.musicEnabled) { return; }
-	else if (!bufferResult) { playMusicTimeout = setTimeout(playMusic, 1000); } //If the buffer is still not ready, calls itself again after some time.
-
-	try
-	{
-		var L = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
-		var R = timbreJSObject("buffer", { buffer: bufferResult, loop: true });
-	}
-	catch(E)
-	{
-		CB_GEM.data.musicEnabled = false;
-		CB_console("Cannot create buffer. Error: " + E);
-		return;
-	}
 
 	playingMusic = true;
 
-	var num = 400;
-	var duration = L.duration;
+	var mml0, mml1;
+	var env = T("adsr", { d: 3000, s: 0, r: 600 });
+	var synth = T("SynthDef", { mul: 0.45, poly: 8 });
 
-	R.pitch = (duration * (num - 1)) / (duration * num);
+	synth.def = function(opts)
+	{
 
-	//Plays the audio:
-	//Note: at least the first time, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
-	timbreJSObject
+		var op1 = T("sin", { freq: opts.freq * 6, fb: 0.25, mul: 0.4 });
+		var op2 = T("sin", { freq: opts.freq, phase: op1, mul: opts.velocity / 128 });
+		return env.clone().append(op2).on("ended", opts.doneAction).bang();
+	};
+
+	var master = synth;
+	var mod = T("sin", { freq: 2, add: 3200, mul: 800, kr: 1 });
+	master = T("eq", { params: { lf: [800, 0.5, -2], mf: [6400, 0.5, 4] } }, master);
+	master = T("phaser", { freq: mod, Q: 2, steps: 4 }, master);
+	master = T("delay", { time: "BPM60 L16", fb: 0.65, mix: 0.25 }, master);
+
+	mml0 = "t60 l4 v6 q2 o3";
+	mml0 += "[ [g < b0<d0f+2>> d <a0<c+0f+2>>]8 ";
+	mml0 += "f+ <a0<c+0f+2>>> b<<b0<d0f+2>> e<g0b2> e<b0<d0g2>> d<f0a0<d2>>";
+	mml0 += ">a<<a0<c0e2>> d<g0b0<e2>> d<d0g0b0<e2>> d<c0e0a0<d2>> d<c0f+0a0<d2>>";
+	mml0 += "d<a0<c0f2>> d<a0<c0e2>> d<d0g0b0<e2>> d<c0e0a0<d2>> d<c0f+0a0<d2>>";
+	mml0 += "| e<b0<e0g2>> f+<a0<c+0f+2>>> b<<b0<d0f+2>> e<<c+0e0a2>> e<a0<c+0f+0a2>>";
+	mml0 += "eb0<a0<d>e0b0<d0g>> a0<g2.> d0a0<d2.> ]";
+	mml0 += "e<b0<e0g2>> e<a0<d0f0a2>> e<a0<c0f2>> e<<c0e0a2>> e<a0<c0f0a2>>";
+	mml0 += "eb0<a0<d>e0b0<d0g>> a0<g2.> d0a0<d2.>";
+
+	mml1 = "t60 v14 l4 o6";
+	mml1 += "[ r2. r2. r2. r2.";
+	mml1 += "rf+a gf+c+ >b<c+d >a2. f+2.& f+2.& f+2.& f+2.< rf+a gf+c+ >b<c+d >a2.<";
+	mml1 += "c+2. f+2. >e2.&e2.&e2.";
+	mml1 += "ab<c ed>b< dc>b< d2.& d2d";
+	mml1 += "efg acd ed>b <d2.& d2d";
+	mml1 += "| g2. f+2.> bab< c+de c+de>";
+	mml1 += "f+2. c0e0a0<c2.> d0f+0a0<d2. ]";
+	mml1 += "g2. f2.> b<cf edc edc>";
+	mml1 += "f2. c0e0a0<c2.> d0f0a0<d2.";
+
+	var audioObject = T("mml", { mml: [mml0, mml1] }, synth).on
 	(
-		"delay",
-		{ time: "bpm120 l16", fb: 0.1, cross: true },
-		timbreJSObject("pan", { pos: -0.6 }, L),
-		timbreJSObject("pan", { pos: +0.6 }, R)
-	).play();
+		"ended",
+		function() { this.stop(); }
+	).set({ buddies: master }).start();
+
+	playingMusic = audioObject.playbackState === 1;
+	if (playingMusic) { CB_console("Playing music..."); }
 }

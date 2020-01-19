@@ -97,8 +97,8 @@
 		1, //'initialScale'. Optional.
 		1, //'minimumScale'. Optional.
 		1, //'maximumScale'. Optional.
-		"device-dpi", //'targetDensityDPI'. Optional.
-		"no" //'shrinkToFit'. Optional.
+		"no", //'shrinkToFit'. Optional.
+		"device-dpi" //'targetDensityDPI'. Optional.
 	);
 	
 	//Manages some screen events (use "null" as the first parameter to remove them):

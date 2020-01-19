@@ -15,6 +15,20 @@ var bufferResult = null;
 //This function will be called when CrossBrowdy is ready:
 function main()
 {
+	//Hides any messages:
+	CB_Elements.hideById("messages");
+
+	//Shows the start button:
+	CB_Elements.showById("start_button");
+}
+
+
+//Prepares the 'T' object and shows the controls if all goes well:
+function prepareTimbreJSObject()
+{
+	//Hides the start button:
+	CB_Elements.hideById("start_button");
+	
 	//Audio processing and synthesizing example (taken from https://mohayonao.github.io/timbre.js/reich.html):
 	timbreJSObject = CB_Speaker.getTimbreJSObject(); //Gets the 'T' object.
 	if (timbreJSObject !== null)
@@ -64,6 +78,7 @@ function main()
 	else
 	{
 		var message = "The 'T' object (used by the timbre.js library) is null. Probably not supported.";
+		CB_Elements.showById("messages");
 		CB_Elements.insertContentById("messages", message);
 		CB_console(message);
 	}

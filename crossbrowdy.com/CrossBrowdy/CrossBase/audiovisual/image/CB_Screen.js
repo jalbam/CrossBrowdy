@@ -1699,11 +1699,11 @@ var CB_Screen = function() { return CB_Screen; };
 	 *  @param {number} [initialScale] - Desired value for the "initial-scale" parameter.
 	 *  @param {number} [minimumScale] - Desired value for the "minimum-scale" parameter.
 	 *  @param {number} [maximumScale] - Desired value for the "maximum-scale" parameter.
-	 *  @param {string|number} [targetDensityDPI] - Desired value for the "target-densitydpi" parameter.
 	 *  @param {string} [shrinkToFit] - Desired value for the "shrink-to-fit" parameter.
+	 *  @param {string|number} [targetDensityDPI] - Desired value for the "target-densitydpi" parameter.
 	 *  @returns {Node|null} Returns the DOM element which belongs to the [Viewport]{@link https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag} meta tag affected (it will have been just created if no one existed before). If a [Viewport]{@link https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag} meta tag could not be created or modified, returns null.
 	 */
-	CB_Screen.setViewport = function(width, height, userScalable, initialScale, minimumScale, maximumScale, targetDensityDPI, shrinkToFit)
+	CB_Screen.setViewport = function(width, height, userScalable, initialScale, minimumScale, maximumScale, shrinkToFit, targetDensityDPI)
 	{
 		//Finds the meta tag viewport (if any):
 		var viewport = CB_Elements.id("viewport");

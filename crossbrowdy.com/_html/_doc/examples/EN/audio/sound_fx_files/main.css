@@ -9,3 +9,31 @@ button { color:#006600; }
 button:hover { color:#660000; cursor:pointer; cursor:hand; }
 #controls { display:none; visibility:hidden; text-align:center; }
 #messages { text-align:center; color:#00aa00; font-weight:bold; margin-bottom:20px; }
+#start_button
+{
+	visibility: hidden;
+	display: none;
+	position:absolute;
+	left:25%;
+	top:25%;
+	width:50%;
+	height:50%;
+	color:#ff0000;
+	font-weight:bold;
+	cursor:pointer;
+	cursor:hand;
+	filter:alpha(opacity=80);
+	opacity:0.8;
+	-moz-opacity:0.8;
+	-khtml-opacity:0.8;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+#start_button:hover
+{
+	color:#ffaa00;
+	filter:alpha(opacity=100);
+	opacity:1;
+	-moz-opacity:1;
+	-khtml-opacity:1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}

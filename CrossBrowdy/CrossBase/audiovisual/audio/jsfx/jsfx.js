@@ -1,4 +1,5 @@
-(function(jsfx){
+var _jsfxInitializer = function(jsfx) //CrossBrowdy modification to be able to initialize the library after an user-driven event (as onClick, etc.).
+{
 	'use strict';
 
 	var chr = String.fromCharCode;
@@ -1111,4 +1112,4 @@
 		}
 		return new Uint8Array(N);
 	}
-})(this.jsfx = {});
+};
