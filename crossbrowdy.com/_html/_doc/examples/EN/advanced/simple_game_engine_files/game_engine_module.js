@@ -20,19 +20,26 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 	"onCall" :
 		function(scriptPathGiven)
 		{
+			//Stores the desired options for the rendering engine:
+			CB_this.CB_REM_DEBUG_MESSAGES = CB_GEM.DEBUG_MESSAGES;
+			CB_this.CB_REM_PATH = CB_GEM.REM_PATH;
+
+			//If a 'CB_GEM.PATH' is given, updates the needed files and modules to search for them in the desired path:
 			if (CB_GEM.PATH)
 			{
 				CB_Modules.modules["GAME_ENGINE_MODULE"].neededFiles = {};
 				CB_Modules.modules["GAME_ENGINE_MODULE"].neededFiles[CB_GEM.PATH + "game_engine.js"] = { load: true, mandatory: true, absolutePath: true };
 			}
 			
-			//Adds the rendering engine module to the game engine module:
-			CB_this.CB_REM_DEBUG_MESSAGES = CB_GEM.DEBUG_MESSAGES;
-			CB_this.CB_REM_PATH = CB_GEM.REM_PATH;
-			var CB_REM_MODULE_NEEDED_MODULES = {};
-			CB_REM_MODULE_NEEDED_MODULES[CB_GEM.REM_PATH + "rendering_engine_module.js"] = { load: true, mandatory: true, absolutePath: true };
-			CB_Modules.modules["GAME_ENGINE_MODULE"].neededModules = null;
-			CB_Modules.addNeededModule("GAME_ENGINE_MODULE", "RENDERING_ENGINE_MODULE", CB_REM_MODULE_NEEDED_MODULES);
+			//If a 'CB_GEM.REM_PATH' is given, updates the needed files and modules to search for them in the desired path:
+			if (CB_GEM.REM_PATH)
+			{			
+				//Adds the rendering engine module to the game engine module:
+				var CB_REM_MODULE_NEEDED_MODULES = {};
+				CB_REM_MODULE_NEEDED_MODULES[CB_GEM.REM_PATH + "rendering_engine_module.js"] = { load: true, mandatory: true, absolutePath: true };
+				CB_Modules.modules["GAME_ENGINE_MODULE"].neededModules = null;
+				CB_Modules.addNeededModule("GAME_ENGINE_MODULE", "RENDERING_ENGINE_MODULE", CB_REM_MODULE_NEEDED_MODULES);
+			}
 
 			if (CB_GEM.DEBUG_MESSAGES) { CB_console("GAME_ENGINE_MODULE called"); }
 			CB_Modules.setStatus("GAME_ENGINE_MODULE", CB_Modules.STATUSES.LOADED);

@@ -19,6 +19,7 @@ CB_Modules.modules["RENDERING_ENGINE_MODULE"] =
 	"onCall" :
 		function(scriptPathGiven)
 		{
+			//If a 'CB_REM_PATH' is given, updates the needed files to search for them in the desired path:
 			if (CB_REM_PATH)
 			{
 				CB_Modules.modules["RENDERING_ENGINE_MODULE"].neededFiles = {};

@@ -5,83 +5,88 @@
 </p>
 	
 <pre><code class="language-javascript line-numbers match-braces rainbow-braces">
-//Module basic configuration:
-CB_Modules.modules["MY_MODULE"] =
-{
-	//Name of the module:
-	"name" : "MY_MODULE",
+	//Module basic configuration:
+	CB_Modules.modules["MY_MODULE"] =
+	{
+		//Name of the module:
+		"name" : "MY_MODULE",
 
-	//Status (UNKNOWN, UNLOADED, LOADING, LOADED, READY or FAILED):
-	"status" : CB_Modules.STATUSES.UNLOADED,
+		//Status (UNKNOWN, UNLOADED, LOADING, LOADED, READY or FAILED):
+		"status" : CB_Modules.STATUSES.UNLOADED,
 
-	//Function to call as soon as the module is called (before loading its files):
-	"onCall" : 
-		function(scriptPathGiven)
-		{
-			//Do things...
-			CB_Modules.setStatus("MY_MODULE", CB_Modules.STATUSES.LOADED);
-		},
-
-	//Callback function to call when the module has been loaded successfully:
-	"onLoad" :
-		function(scriptPathGiven)
-		{
-			//Do things...
-			CB_Modules.setStatus("MY_MODULE", CB_Modules.STATUSES.READY);
-		},
-	
-	//Callback function to call when the module is ready:
-	"onReady" :
-		function(scriptPathGiven)
-		{
-			//Do things...
-		},
-
-	//Needed files:
-	"neededFiles" :
-		{
-			//Filepaths:
-			"mandatory.js" : { load: true, mandatory: false }, //Needs to be loaded. Not mandatory. Relative path.
-			"not_mandatory.js" : { load: true, mandatory: true, absolutePath: true }, //Needs to be loaded. Mandatory (CrossBrowdy will not begin without it). Absolute path.
-			
-			"file1.js" : { load: true, id: "file1" }, //Identifier is "file1" (needed to be required by other files).
-			"file2.js" : { load: true, id: "file2" }, //Identifier is "file2" (needed to be required by other files).
-			"file3.js" : { load: true, requires: ["file1", "file2"] }, //Requires "file1" and "file2".
-			
-			"with_checker.js" : //Using a checker:
+		//Function to call as soon as the module is called (before loading its files):
+		"onCall" : 
+			function(scriptPathGiven)
 			{
-				load: true,
-				loadChecker:
-					function(filepath, neededFile)
-					{
-						var load = true;
-						
-						//Do things...
-						
-						return load; //The file will load only if it returns "true".
-					}
+				//Do things...
+				CB_Modules.setStatus("MY_MODULE", CB_Modules.STATUSES.LOADED);
+			},
+
+		//Callback function to call when the module has been loaded successfully:
+		"onLoad" :
+			function(scriptPathGiven)
+			{
+				//Do things...
+				CB_Modules.setStatus("MY_MODULE", CB_Modules.STATUSES.READY);
+			},
+		
+		//Callback function to call when the module is ready:
+		"onReady" :
+			function(scriptPathGiven)
+			{
+				//Do things...
+			},
+
+		//Needed files:
+		"neededFiles" :
+			{
+				//Filepaths:
+				"not_mandatory.js" : { load: true, mandatory: false }, //Needs to be loaded. Not mandatory. Relative path.
+				"mandatory.js" : { load: true, mandatory: true, absolutePath: true }, //Needs to be loaded. Mandatory (CrossBrowdy will not begin without it). Absolute path.
+				
+				"file1.js" : { load: true, id: "file1" }, //Identifier is "file1" (needed to be required by other files).
+				"file2.js" : { load: true, id: "file2" }, //Identifier is "file2" (needed to be required by other files).
+				"file3.js" : { load: true, requires: ["file1", "file2"] }, //Requires "file1" and "file2".
+				
+				"with_checker.js" : //Using a checker:
+				{
+					load: true,
+					loadChecker:
+						function(filepath, neededFile)
+						{
+							var load = true;
+							
+							//Do things...
+							
+							return load; //The file will load only if it returns "true".
+						}
+				},
+				
+				//Dynamic filepaths (using variables):
+				"VALUEOF_myVar" : { load: true, mandatory: true }, //The filepath will be searched in "myVar".
+				"VALUEOF_myObject.mySubObject.myProperty" : { load: true, mandatory: true } //The filepath will be searched in "myObject.mySubObject.myProperty".
 			},
 			
-			//Dynamic filepaths (using variables):
-			"VALUEOF_myVar" : { load: true, mandatory: true }, //The filepath will be searched in "myVar".
-			"VALUEOF_myObject.mySubObject.myProperty" : { load: true, mandatory: true } //The filepath will be searched in "myObject.mySubObject.myProperty".
-		},
+		//Needed modules:
+		"neededModules" :
+			[
+				{
+					"name" : "ANOTHER_MODULE",
+					"neededFiles" : { "ANOTHER_MODULE/ANOTHER_MODULE.js" : { load: true, mandatory: true } } //Same format as the previous "neededFiles".
+				}
+			],
 		
-	//Needed modules:
-	"neededModules" :
-		[
-			{
-				"name" : "ANOTHER_MODULE",
-				"neededFiles" : { "ANOTHER_MODULE/ANOTHER_MODULE.js" : { load: true, mandatory: true } } //Same format as the previous "neededFiles".
-			}
-		],
-	
-	//Credits:
-	"credits" : "[CB] MY_MODULE by Joan Alba Maldonado<br />" //Credits will be shown in the console when loading.
-};
+		//Credits:
+		"credits" : "[CB] MY_MODULE by Joan Alba Maldonado<br />" //Credits will be shown in the console when loading.
+	};
+</code></pre>
 
+<p>
+	Then, if the previous code above was stored in a file called '<i>MY_MODULE.js</i>' inside a folder called '<i>MY_MODULE_FOLDER</i>', we can add the module to CrossBrowdy this way:
+</p>
+<pre><code class="language-javascript line-numbers match-braces rainbow-braces">
 //Adds the module to CrossBrowdy:
-CB_Modules.addNeededModule(CB_NAME, "MY_MODULE", { "MY_MODULE/MY_MODULE.js" : { load: true, mandatory: true } });
+CB_Modules.addNeededModule(CB_NAME, "MY_MODULE", { "MY_MODULE_FOLDER/MY_MODULE.js" : { load: true, mandatory: true } });
 </code></pre>
 <p>
 	Note that the module must be created and added before CrossBrowdy starts loading (before calling the <a href="api/global.html#CB_init" target="_blank">CB_init</a> function). It could also be done during the CrossBrowdy loading process, for example using the multiple callback functions through events, but the main objective of this example is to keep it simple.
