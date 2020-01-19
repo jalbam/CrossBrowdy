@@ -392,7 +392,7 @@ function performCycle()
 		if (timerSound > 0)
 		{
 			if (timerSound === 1) { playSoundFx("beep"); } //Plays a "beep" sound.
-			timerSound--; //if (CB_Device.getTiming() - lastTiming > 15) { timerSound--; }
+			timerSound--; //if (CB_Device.getTiming() - lastTiming > 1) { timerSound--; }
 		}
 		lastTiming = CB_Device.getTiming();
 	}
