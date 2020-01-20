@@ -111,7 +111,10 @@
 <p>You can also download <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> from <a href="https://github.com/jalbam/CrossBrowdy/" title="CrossBrowdy's GitHub repository">the GitHub repository</a> directly. Just download the whole content of the <strong><a href="https://github.com/jalbam/CrossBrowdy/blob/master/dist/">dist/</a></strong> folder.</p>
 <p>Alternatively, from the command line (shell), you can also use one of the following commands to download <a href="https://crossbrowdy.com/" title="CrossBrowdy web site">CrossBrowdy</a> while you are in your project folder:</p>
 <h2>Using <strong><a href="https://yarnpkg.com/en/package/crossbrowdy" title="CrossBrowdy's Yarn package">Yarn</a></strong>:</h2><pre class="prettyprint source"><code>yarn add crossbrowdy </code></pre><h2>Using <strong><a href="https://www.npmjs.com/package/crossbrowdy" title="CrossBrowdy's npm package">npm</a></strong>:</h2><pre class="prettyprint source"><code>npm i crossbrowdy </code></pre><h2>Using <strong>Bower</strong>:</h2><pre class="prettyprint source"><code>bower install jalbam/crossbrowdy --save </code></pre><p><strong>Note</strong>: <a href="https://yarnpkg.com/en/package/crossbrowdy" title="CrossBrowdy's Yarn package">Yarn</a>, <a href="https://www.npmjs.com/package/crossbrowdy" title="CrossBrowdy's npm package">npm</a> and Bower will also download the <a href="https://crossbrowdy.com/api/" title="CrossBrowdy API documentation">API documentation</a>.</p>
-<h1>Getting started</h1><p>Visit the <a href="https://crossbrowdy.com/basic_tutorial/general/getting_started/" title="Getting started with CrossBrowdy">Getting started topic</a> from the <a href="https://crossbrowdy.com/guides#basic_tutorial" title="CrossBrowdy's Basic tutorial">Basic tutorial</a> to learn more.</p>
+<h1>Hotlinking</h1><p>Instead of downloading CrossBrowdy, you can <a href="https://en.wikipedia.org/wiki/Inline_linking">hotlink</a> it by directly pointing to a version available online. For instance this way you will be pointing to the last version:</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://crossbrowdy.com/CrossBrowdy/CrossBrowdy.js&quot; type=&quot;text/javascript&quot; language=&quot;javascript&quot;>&lt;/script>&lt;!-- &quot;type&quot; and &quot;language&quot; parameters for legacy clients. --></code></pre><p>You can find a list of some <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN providers</a> in the <a href="https://crossbrowdy.com/download#cdn_providers" title="CDN providers for CrossBrowdy">Download section</a> of the official web site. Thanks to them, you will be able to always use the last up-to-date version or even to point to a specific version you may prefer.</p>
+<p>Have in mind that including the CrossBrowdy main file from a <a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN provider</a> should never be done for production. This <a href="https://en.wikipedia.org/wiki/Inline_linking">hotlinking method</a> can be useful just for testing purposes. Some features might not work properly using this way and availability cannot be always guaranteed.</p>
+<h1>Getting started</h1><p>Just include the main JavaScript file, which is called <em>CrossBrowdy.js</em>, in your HTML file. The recommended place to include this main JavaScript file is inside the head section (inside the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head">&lt;head&gt; tag</a>) of the document.</p>
 <h2>Here you have a simple example:</h2><pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
 &lt;html>
     &lt;head>
@@ -137,8 +140,9 @@
             &lt;span style=&quot;font-weight:bold;&quot;>Console:&lt;/span>&lt;br />
         &lt;/div>
     &lt;/body>
-&lt;/html></code></pre><h1>Usage</h1><p>Visit the <a href="https://crossbrowdy.com/guides" title="Guides &amp; Tutorials for CrossBrowdy">Guides &amp; Tutorials section</a> to get all the information you may need.</p>
-<h1>Basic tutorial</h1><p>Check the <a href="https://crossbrowdy.com/guides#basic_tutorial" title="CrossBrowdy's Basic tutorial">Basic tutorial</a> to learn how to use it.</p>
+&lt;/html></code></pre><p>Visit the <a href="https://crossbrowdy.com/basic_tutorial/general/getting_started/" title="Getting started with CrossBrowdy">Getting started topic</a> from the <a href="https://crossbrowdy.com/guides#basic_tutorial" title="CrossBrowdy's Basic tutorial">Basic tutorial</a> to learn more.</p>
+<h1>Usage</h1><p>Visit the <a href="https://crossbrowdy.com/guides" title="Guides &amp; Tutorials for CrossBrowdy">Guides &amp; Tutorials section</a> to get all the information you may need.</p>
+<h1>Learn</h1><p>Check the <a href="https://crossbrowdy.com/guides#basic_tutorial" title="CrossBrowdy's Basic tutorial">Basic tutorial</a> to learn how to use it.</p>
 <h1>Examples</h1><p>Check the <a href="https://crossbrowdy.com/guides#examples" title="CrossBrowdy examples">Examples section</a> to see some live examples and learn through their code.</p>
 <h1>API documentation</h1><p>For more technical documentation, visit the <a href="https://crossbrowdy.com/api/" title="CrossBrowdy API documentation">API documentation section</a>.</p>
 <h1>News</h1><p>Visit the <a href="https://crossbrowdy.com/news" title="CrossBrowdy News">News section</a> to keep up to date.</p>
@@ -4250,7 +4254,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Sun Jan 19th 2020
+		on Mon Jan 20th 2020
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

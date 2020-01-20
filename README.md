@@ -45,8 +45,18 @@ bower install jalbam/crossbrowdy --save
 **Note**: [Yarn](https://yarnpkg.com/en/package/crossbrowdy "CrossBrowdy's Yarn package"), [npm](https://www.npmjs.com/package/crossbrowdy "CrossBrowdy's npm package") and Bower will also download the [API documentation](https://crossbrowdy.com/api/ "CrossBrowdy API documentation").
 
 
+# Hotlinking
+Instead of downloading CrossBrowdy, you can [hotlink](https://en.wikipedia.org/wiki/Inline_linking) it by directly pointing to a version available online. For instance this way you will be pointing to the last version:
+```html
+<script src="https://crossbrowdy.com/CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+```
+You can find a list of some [CDN providers](https://en.wikipedia.org/wiki/Content_delivery_network) in the [Download section](https://crossbrowdy.com/download#cdn_providers "CDN providers for CrossBrowdy") of the official web site. Thanks to them, you will be able to always use the last up-to-date version or even to point to a specific version you may prefer.
+
+Have in mind that including the CrossBrowdy main file from a [CDN provider](https://en.wikipedia.org/wiki/Content_delivery_network) should never be done for production. This [hotlinking method](https://en.wikipedia.org/wiki/Inline_linking) can be useful just for testing purposes. Some features might not work properly using this way and availability cannot be always guaranteed.
+
+
 # Getting started
-Visit the [Getting started topic](https://crossbrowdy.com/basic_tutorial/general/getting_started/ "Getting started with CrossBrowdy") from the [Basic tutorial](https://crossbrowdy.com/guides#basic_tutorial "CrossBrowdy's Basic tutorial") to learn more.
+Just include the main JavaScript file, which is called _CrossBrowdy.js_, in your HTML file. The recommended place to include this main JavaScript file is inside the head section (inside the [&lt;head&gt; tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)) of the document.
 
 ## Here you have a simple example:
 ```html
@@ -77,13 +87,14 @@ Visit the [Getting started topic](https://crossbrowdy.com/basic_tutorial/general
 	</body>
 </html>
 ```
+Visit the [Getting started topic](https://crossbrowdy.com/basic_tutorial/general/getting_started/ "Getting started with CrossBrowdy") from the [Basic tutorial](https://crossbrowdy.com/guides#basic_tutorial "CrossBrowdy's Basic tutorial") to learn more.
 
 
 # Usage
 Visit the [Guides &amp; Tutorials section](https://crossbrowdy.com/guides "Guides &amp; Tutorials for CrossBrowdy") to get all the information you may need.
 
 
-# Basic tutorial
+# Learn
 Check the [Basic tutorial](https://crossbrowdy.com/guides#basic_tutorial "CrossBrowdy's Basic tutorial") to learn how to use it.
 
 

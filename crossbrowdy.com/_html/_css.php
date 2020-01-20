@@ -902,3 +902,26 @@ a.download_old:hover
 	margin:0px;
 	padding:0px;
 }
+
+
+.cdn_item
+{
+	display:list-item;
+	list-style-type:none;
+	list-style-position:inside;
+	margin-left:30px;
+	font-size:20px;
+	font-size:0.7em;
+	font-size:70%;
+	font-size:2.1vmin;
+}
+@media (orientation: portrait)
+{
+	.cdn_item
+	{
+		font-size:12px;
+		font-size:0.6em;
+		font-size:60%;
+		font-size:3vmin;
+	}
+}

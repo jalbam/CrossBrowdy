@@ -51,6 +51,62 @@
 		Note: <a href="https://yarnpkg.com/en/package/crossbrowdy" target="_blank">Yarn</a>, <a href="https://www.npmjs.com/package/crossbrowdy" target="_blank">npm</a> and Bower will also download the <a href="api<?php echo $PHPExtension; ?>" target="_blank">API documentation</a>.
 	</p>
 
+	
+	<a name="cdn_providers"></a>
+	<h3>CDN Providers</h3>
+	<p>
+		Alternatively, instead of downloading CrossBrowdy, you can <a href="https://en.wikipedia.org/wiki/Inline_linking" target="_blank">hotlink</a> its main JavaScript file (which is called <i>CrossBrowdy.js</i>) by directly pointing to a version available online.
+	</p>
+	<p>
+		Thanks to the <a href="https://en.wikipedia.org/wiki/Content_delivery_network" target="_blank">CDN providers</a>, you will be able to always use the last up-to-date version or even to point to a specific version you may prefer.
+	</p>
+	
+	<p>
+		Using <strong><a href="https://cdn.jsdelivr.net/npm/crossbrowdy/" target="_blank">jsDelivr</a></strong>:
+	</p>
+	<p class="cdn_item">
+		Last version:
+		<a href="https://cdn.jsdelivr.net/npm/crossbrowdy/CrossBrowdy/CrossBrowdy.js" target="_blank">https://cdn.jsdelivr.net/npm/crossbrowdy/CrossBrowdy/CrossBrowdy.js</a>
+	</p>
+	<p class="cdn_item">
+		Specific vesion (example):
+		<a href="https://cdn.jsdelivr.net/npm/crossbrowdy@0.99.9-6.1/CrossBrowdy/CrossBrowdy.js" target="_blank">https://cdn.jsdelivr.net/npm/crossbrowdy@0.99.9-6.1/CrossBrowdy/CrossBrowdy.js</a>
+	</p>
+
+	<p>
+		Using <strong><a href="https://unpkg.com/browse/crossbrowdy/" target="_blank">UNPKG</a></strong>:
+	</p>
+	<p class="cdn_item">
+		Last version:
+		<a href="https://unpkg.com/crossbrowdy/CrossBrowdy/CrossBrowdy.js" target="_blank">https://unpkg.com/crossbrowdy/CrossBrowdy/CrossBrowdy.js</a>
+	</p>
+	<p class="cdn_item">
+		Last version through <a href="https://npmcdn.com/" target="_blank">npmcdn.com</a>:
+		<a href="https://npmcdn.com/crossbrowdy/CrossBrowdy/CrossBrowdy.js" target="_blank">https://npmcdn.com/crossbrowdy/CrossBrowdy/CrossBrowdy.js</a>
+	</p>
+	<p class="cdn_item">
+		Specific vesion (example):
+		<a href="https://unpkg.com/crossbrowdy@0.99.9-6.1/CrossBrowdy/CrossBrowdy.js" target="_blank">https://unpkg.com/crossbrowdy@0.99.9-6.1/CrossBrowdy/CrossBrowdy.js</a>
+	</p>
+	<p class="cdn_item">
+		Specific vesion (example) through <a href="https://npmcdn.com/" target="_blank">npmcdn.com</a>:
+		<a href="https://npmcdn.com/crossbrowdy@0.99.9-6.1/CrossBrowdy/CrossBrowdy.js" target="_blank">https://npmcdn.com/crossbrowdy@0.99.9-6.1/CrossBrowdy/CrossBrowdy.js</a>
+	</p>
+
+	<p>
+		Using <strong><a href="https://crossbrowdy.com/" target="_blank">CrossBrowdy.com</a></strong> (not recommended):
+	</p>
+	<p class="cdn_item">
+		Last version:
+		<a href="https://crossbrowdy.com/CrossBrowdy/CrossBrowdy.js" target="_blank">https://crossbrowdy.com/CrossBrowdy/CrossBrowdy.js</a>
+	</p>
+	
+	
+	<p>
+		Have in mind that including the CrossBrowdy main file from a <a href="https://en.wikipedia.org/wiki/Content_delivery_network" target="_blank">CDN provider</a> should never be done for production. This <a href="https://en.wikipedia.org/wiki/Inline_linking" target="_blank">hotlinking method</a> can be useful just for testing purposes. Some features might not work properly using this way and availability cannot be always guaranteed.
+	</p>
+
+
 	<h3>Source code</h3>
 	<p>
 		The entire source code of the CrossBrowdy project can be found on GitHub:
