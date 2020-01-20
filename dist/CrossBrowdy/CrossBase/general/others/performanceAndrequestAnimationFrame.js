@@ -50,7 +50,7 @@ if (!Date.now) { Date.now = function() { return new Date().getTime(); } }
 })();
 
 
-// requestAnimationFrame polyfill by Erik Möller.
+// requestAnimationFrame polyfill by Erik MÃ¶ller.
 // Fixes from Paul Irish, Tino Zijdel, Andrew Mao, Klemen Slavic, Darius Bacon and Joan Alba Maldonado.
 // Adapted from https://gist.github.com/paulirish/1579671 which derived from
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
