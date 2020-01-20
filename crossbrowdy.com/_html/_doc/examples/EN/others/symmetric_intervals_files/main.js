@@ -6,10 +6,14 @@ CB_init(start); //It will call the "start" function when ready.
 //Stores times information:
 var times =
 {
-	"raf": { min: 1000 / 60, max: null, timer: null, lastTimeCalled: 0 },
-	"sym8": { ms: 8, min: null, max: null, timer: null, lastTimeCalled: 0 },
-	"sym16": { ms: 16, min: null, max: null, timer: null, lastTimeCalled: 0 },
-	"sym1000": { ms: 1000, min: null, max: null, timer: null, lastTimeCalled: 0 }
+	"raf": { min: 1000 / 60, max: null, avg: null, timer: null, lastValues: null, lastValuesPointer: 0, lastTimeCalled: 0 },
+	"sym0": { ms: 0, min: null, max: null, avg: null, timer: null, lastValues: null, lastValuesPointer: 0, lastTimeCalled: 0 },
+	"sym1": { ms: 1, min: null, max: null, avg: null, timer: null, lastValues: null, lastValuesPointer: 0, lastTimeCalled: 0 },
+	"sym2": { ms: 2, min: null, max: null, avg: null, timer: null, lastValues: null, lastValuesPointer: 0, lastTimeCalled: 0 },
+	"sym4": { ms: 4, min: null, max: null, avg: null, timer: null, lastValues: null, lastValuesPointer: 0, lastTimeCalled: 0 },
+	"sym8": { ms: 8, min: null, max: null, avg: null, timer: null, lastValues: null, lastValuesPointer: 0, lastTimeCalled: 0 },
+	"sym16": { ms: 16, min: null, max: null, avg: null, timer: null, lastValues: null, lastValuesPointer: 0, lastTimeCalled: 0 },
+	"sym1000": { ms: 1000, min: null, max: null, avg: null, timer: null, lastValues: [], lastValuesPointer: 0, lastTimeCalled: 0 }
 };
 
 
@@ -27,6 +31,8 @@ function start()
 		}
 		times[id].min = null;
 		times[id].max = null;
+		times[id].lastValues = [];
+		times[id].lastValuesPointer = 0;
 		times[id].lastTimeCalled = null;
 		
 		CB_Elements.insertContentById(id + "_min_time", "Calculating...");
@@ -52,13 +58,26 @@ function calculateTime(id, timeCalled)
 	if (typeof(timeCalled) === "undefined" || timeCalled === null) { return; }
 	else if (times[id].lastTimeCalled === null) { times[id].lastTimeCalled = timeCalled; return; }
 	
-	//Calculate times:
+	//Calculate and stores maximum and minimum times:
 	var timeDifference = timeCalled - times[id].lastTimeCalled;
 	if (timeDifference < times[id].min || times[id].min === null) { times[id].min = timeDifference; printMessage("Minimum set for '" + id + "': " + timeDifference); }
 	if (timeDifference > times[id].max || times[id].max === null) { times[id].max = timeDifference; printMessage("Maximum set for '" + id + "': " + timeDifference); }
 	times[id].lastTimeCalled = timeCalled;
+
+	//Stores current time as one of the last values:
+	times[id].lastValues[times[id].lastValuesPointer] = timeDifference;
+	times[id].lastValuesPointer++;
+	times[id].lastValuesPointer %= 10;
 	
-	//Shows the times:
+	//Calculates and stores average:
+	var timesSum = 0;
+	for (var x = times[id].lastValues.length - 1; x >= 0; x--)
+	{
+		timesSum += times[id].lastValues[x];
+	}
+	times[id].avg = timesSum / times[id].lastValues.length;
+	
+	//Shows the times just calculated:
 	showTime(id);
 }
 
@@ -68,6 +87,7 @@ function showTime(id)
 {
 	CB_Elements.insertContentById(id + "_min_time", times[id].min);
 	CB_Elements.insertContentById(id + "_max_time", times[id].max);
+	CB_Elements.insertContentById(id + "_avg_time", times[id].avg);
 }
 
 

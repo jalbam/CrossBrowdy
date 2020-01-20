@@ -14,7 +14,7 @@
 		<script src="main.js" type="text/javascript" language="javascript"></script>
 	</head>
 	<body>
-		The values may vary during time. Wait as much as you want...
+		The values may vary during time. Average times are calculated with the last time values (10 maximum). Wait as much as you want...
 		<br />
 		<br />
 		requestAnimationFrame (could have been polyfilled automatically by CrossBrowdy):
@@ -22,32 +22,64 @@
 		<span id="raf">
 			Minimum time: <span id="raf_min_time"></span><br />
 			Maximum time: <span id="raf_max_time"></span><br />
+			Average time: <span id="raf_avg_time"></span><br />
 		</span>
 		<br />
+		CB_symmetricCall at 0 ms:
+		<br />
+		<span id="sym0">
+			Minimum time: <span id="sym0_min_time"></span><br />
+			Maximum time: <span id="sym0_max_time"></span><br />
+			Average time: <span id="sym0_avg_time"></span><br />
+		</span>
+		<br />
+		CB_symmetricCall at 1 ms:
+		<br />
+		<span id="sym1">
+			Minimum time: <span id="sym1_min_time"></span><br />
+			Maximum time: <span id="sym1_max_time"></span><br />
+			Average time: <span id="sym1_avg_time"></span><br />
+		</span>
+		<br />
+		CB_symmetricCall at 2 ms:
+		<br />
+		<span id="sym2">
+			Minimum time: <span id="sym2_min_time"></span><br />
+			Maximum time: <span id="sym2_max_time"></span><br />
+			Average time: <span id="sym2_avg_time"></span><br />
+		</span>
+		<br />
+		CB_symmetricCall at 4 ms:
+		<br />
+		<span id="sym4">
+			Minimum time: <span id="sym4_min_time"></span><br />
+			Maximum time: <span id="sym4_max_time"></span><br />
+			Average time: <span id="sym4_avg_time"></span><br />
+		</span>
 		<br />
 		CB_symmetricCall at 8 ms:
 		<br />
 		<span id="sym8">
 			Minimum time: <span id="sym8_min_time"></span><br />
 			Maximum time: <span id="sym8_max_time"></span><br />
+			Average time: <span id="sym8_avg_time"></span><br />
 		</span>
-		<br />
 		<br />
 		CB_symmetricCall at 16 ms:
 		<br />
 		<span id="sym16">
 			Minimum time: <span id="sym16_min_time"></span><br />
 			Maximum time: <span id="sym16_max_time"></span><br />
+			Average time: <span id="sym16_avg_time"></span><br />
 		</span>
-		<br />
 		<br />
 		CB_symmetricCall at 1000 ms:
 		<br />
 		<span id="sym1000">
 			Minimum time: <span id="sym1000_min_time"></span><br />
 			Maximum time: <span id="sym1000_max_time"></span><br />
+			Average time: <span id="sym1000_avg_time"></span><br />
 		</span>
-		<br />
 		<br />
 		Messages:
 		<div id="messages"></div>
@@ -56,6 +88,6 @@
 		<div id="CB_console" style="display:none; visibility:hidden; overflow:scroll;">
 			<span style="font-weight:bold;">Console:</span><br />
 		</div>
-		<div id="crossbrowdy_info"><a href="../../../../../../guides#examples" target="_blank">CrossBrowdy.com</a> example</div>
+		<div id="crossbrowdy_info"><a href="https://crossbrowdy.com/examples/others/symmetric_intervals" target="_blank">CrossBrowdy.com example</a></div>
 	</body>
 </html>
