@@ -139,25 +139,62 @@
 		
 		<meta name="msapplication-tap-highlight" content="no" />
 		
+		<?php
+			$imageToShare = "favicon300x300.png";
+			$imageToShareWidth = 300;
+			$imageToShareHeight = 300;
+			$snapshotsPath = "img/snapshots/";
+			$snapshotsExtension = ".png";
+			
+			if (isset($subcategory) && $subcategory !== "" && isset($topic) && $topic !== "" && file_exists($snapshotsPath . $category . "." . $subcategory . "." . $topic . "." . strtoupper($language) . $snapshotsExtension))
+			{
+				$imageToShare = $snapshotsPath . $category . "." . $subcategory . "." . $topic . "." . strtoupper($language) . $snapshotsExtension;
+				$imageToShareWidth = 800;
+				$imageToShareHeight = 600;
+			}
+			else if (isset($subcategory) && $subcategory !== "" && file_exists($snapshotsPath . $category . "." . $subcategory . "." . strtoupper($language) . $snapshotsExtension))
+			{
+				$imageToShare = $snapshotsPath . $category . "." . $subcategory . "." . strtoupper($language) . $snapshotsExtension;
+				$imageToShareWidth = 800;
+				$imageToShareHeight = 600;
+			}
+			else if (file_exists($snapshotsPath . $category . "." . strtoupper($language) . $snapshotsExtension))
+			{
+				$imageToShare = $snapshotsPath . $category . "." . strtoupper($language) . $snapshotsExtension;
+				$imageToShareWidth = 800;
+				$imageToShareHeight = 600;
+			}
+			else if (file_exists($snapshotsPath . $category . $snapshotsExtension))
+			{
+				$imageToShare = $snapshotsPath . $category . $snapshotsExtension;
+				$imageToShareWidth = 800;
+				$imageToShareHeight = 600;
+			}
+			
+			$imageToShare = $projectURLDefault . $imageToShare;
+			
+			if (isset($category))
+		?>
+
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="<?php echo $canonicalURL; ?>" />
 		<meta property="og:title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta property="og:site_name" content="<?php echo $projectName; ?>" />
-		<meta property="og:image" content="<?php echo $projectURLDefault; ?>favicon300x300.png" />
+		<meta property="og:image" content="<?php echo $imageToShare; ?>" />
 		<meta property="og:image:type" content="image/png"/>
-		<meta property="og:image:width" content="300"/>
-		<meta property="og:image:height" content="300"/>
+		<meta property="og:image:width" content="<?php echo $imageToShareWidth; ?>"/>
+		<meta property="og:image:height" content="<?php echo $imageToShareHeight; ?>"/>
 		<meta property="article:author" content="Juan Alba Maldonado" />
 		<meta property="article:publisher" content="Juan Alba Maldonado" />
 		<meta property="og:locale" content="<?php echo $languageTerritory; ?>" />
 		<meta property="og:description" content="<?php echo $pageDescription; ?>"/>
 
-		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@CrossBrowdy" />
 		<meta name="twitter:creator" content="@jalbam1984" />
 		<meta name="twitter:title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta name="twitter:description" content="<?php echo $pageDescription; ?>" />
-		<meta name="twitter:image" content="<?php echo $projectURLDefault; ?>favicon300x300.png" />
+		<meta name="twitter:image" content="<?php echo $imageToShare; ?>" />
 		<meta name="twitter:url" content="<?php echo $canonicalURL; ?>" />
 
 		<meta itemprop="name" content="<?php echo $projectName; ?>" />

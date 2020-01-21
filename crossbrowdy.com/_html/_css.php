@@ -61,7 +61,7 @@ address { font-style:normal; }
 	text-align:center;
 	line-height:40px;
 	
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#ffffff;
 	text-align:center;
 	font-size:48px;
@@ -138,7 +138,7 @@ address { font-style:normal; }
 
 .menu_item_link
 {
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#ffffff;
 	text-align:center;
 	font-size:48px;
@@ -194,7 +194,7 @@ address { font-style:normal; }
 
 .title
 {
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#2345fd;
 	text-align:center;
 	font-size:200px;
@@ -499,7 +499,7 @@ address { font-style:normal; }
 
 .category_title
 {
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#000000;
 	text-align:center;
 }
@@ -544,7 +544,7 @@ h2.category_title
 
 .category_text
 {
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#000000;
 	text-align:left;
 	font-size:29px;
@@ -568,7 +568,7 @@ h2.category_title
 
 .category_subtitle
 {
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#000000;
 	text-align:left;
 	font-size:29px;
@@ -674,7 +674,7 @@ code
 	text-align:center;
 	line-height:40px;
 	
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#ffffff;
 	text-align:center;
 	font-size:48px;
@@ -704,7 +704,7 @@ code
 
 .general_text, .basic_tutorial_text, .examples_text
 {
-	font-family:courier, monospace;
+	font-family:courier, monospace, arial;
 	color:#000000;
 	text-align:left;
 	font-size:29px;

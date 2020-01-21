@@ -5,10 +5,11 @@
 	$pathBeginning = isset($_SERVER["REQUEST_URI"]) && (substr($_SERVER["REQUEST_URI"], -1) === "/") ? "../" : "";
 	
 	$pathEnding = "";
-	if (strpos($_SERVER["REQUEST_URI"], "/api/") !== false)
+	if (isset($_SERVER["REQUEST_URI"]) && strpos($_SERVER["REQUEST_URI"], "/api/") !== false)
 	{
 		$pathEnding = substr($_SERVER["REQUEST_URI"], strpos($_SERVER["REQUEST_URI"], "/api/") + 5);
-		if (strpos($_SERVER["REQUEST_URI"], "/api/printable") !== false) { $pathBeginning = "../../"; }
+		if (substr($_SERVER["REQUEST_URI"], -14) === "/api/printable") { $pathBeginning = "../"; $pathEnding .= "/"; }
+		else if (strpos($_SERVER["REQUEST_URI"], "/api/printable") !== false) { $pathBeginning = "../../"; }
 		else if (substr($_SERVER["REQUEST_URI"], -5) === ".html") { $pathBeginning = "../"; }
 	}
 	
