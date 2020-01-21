@@ -138,7 +138,6 @@
 		<link rel="image_src" type="image/png" href="favicon128.png" />
 		
 		<meta name="msapplication-tap-highlight" content="no" />
-		
 		<?php
 			$imageToShare = "favicon300x300.png";
 			$imageToShareWidth = 300;

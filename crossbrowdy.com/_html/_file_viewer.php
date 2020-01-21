@@ -7,8 +7,19 @@
 	//Shows the content of a given file:
 	function getFileCode($file = "index.html", $path, $codeClass = "language-html")
 	{
-		$fileContent = file_get_contents($path . $file);
-		if ($fileContent === FALSE) { return ""; }
+		//$fileContent = file_get_contents($path . $file);
+		//if ($fileContent === FALSE) { return ""; }
+		$fileContentArray = file($path . $file); //file_get_contents($path . $file);
+		if ($fileContentArray === FALSE) { return ""; }
+
+		$fileContent = "";
+		foreach ($fileContentArray as $line)
+		{
+			if (strpos($line, 'name="twitter:') !== FALSE) { continue; }
+			else if (strpos($line, 'property="og:') !== FALSE) { continue; }
+			else if (strpos($line, 'property="article:') !== FALSE) { continue; }
+			$fileContent .= $line;
+		}
 
 		$output = "";
 		
