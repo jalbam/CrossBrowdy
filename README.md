@@ -116,6 +116,7 @@ Check ["_I still have a problem, doubt or suggestion. What can I do?_"](https://
 
 # Community & Get Involved
 Visit the [Community & Get Involved section](https://crossbrowdy.com/community "Community & Get Involved") to access the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") community through different ways and also to get involved and contribute with its development.
+Please, before contributing, do not forget to read first the [code of conduct](https://github.com/jalbam/CrossBrowdy/blob/master/CODE_OF_CONDUCT.md) and [contributing](https://github.com/jalbam/CrossBrowdy/blob/master/CONTRIBUTING.md) documents.
 
 
 # Credits
