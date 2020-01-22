@@ -105,6 +105,8 @@ Check the [Examples section](https://crossbrowdy.com/guides#examples "CrossBrowd
 # API documentation
 For more technical documentation, visit the [API documentation section](https://crossbrowdy.com/api/ "CrossBrowdy API documentation").
 
+There is also a [structure diagram](https://github.com/jalbam/CrossBrowdy/blob/master/documentation/crossbrowdy_structure_diagram.html) that can be useful to get an abstract idea about the logic structure used by [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site").
+
 
 # News
 Visit the [News section](https://crossbrowdy.com/news "CrossBrowdy News") to keep up to date.
