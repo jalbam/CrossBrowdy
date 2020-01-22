@@ -88,7 +88,7 @@
 							This software can also be ported to iOS / iPadOS (iPhone, iPad), Android (including phones, tablets, Android TV, Nokia X, Amazon Fire OS...) or others and run as a mobile app (using Apache Cordova, PhoneGap, Ionic, etc.).
 						</p>
 						<p>
-							Apart from that, CrossBrowdy software will also run on many video game consoles, TV sets, smart watches, embedded devices and so on. This will also include other devices, platforms and technologies, some legacy ones, such as PWA (Progressive Web App), UWP (Universal Windows Platform), Apple TV (tvOS), Facebook app, BlackBerry 10, BlackBerry Tablet OS (BlackBerry PlayBook), Nokia Series 40 (Nokia S40) / WRT Widget, W3C Packaged Web App (W3C Widget) / Nokia Asha widget, WebOS, Windows Phone (from 7.1 to 8.1), Chrome OS / Chromium OS (Google Chrome App), Firefox OS (Mozilla Firefox App) / KaiOS, Sailfish OS...
+							Apart from that, CrossBrowdy software will also run on many video game consoles, TV sets, smart watches, embedded devices and so on. This will also include other devices, platforms and technologies, some legacy ones, such as PWA (Progressive Web App), UWP (Universal Windows Platform) / WinJS, Apple TV (tvOS), Facebook app, BlackBerry 10, BlackBerry Tablet OS (BlackBerry PlayBook), Nokia Series 40 (Nokia S40) / WRT Widget, W3C Packaged Web App (W3C Widget) / Nokia Asha widget, WebOS, Windows Phone (from 7.1 to 8.1), Chrome OS / Chromium OS (Google Chrome App), Firefox OS (Mozilla Firefox App) / KaiOS, Sailfish OS...
 						</p>
 						<p>
 							Finally, CrossBrowdy can also be used to develop web browser extensions although it is important to pay attention to possible safety restrictions that some web browsers may have. To comply with them, some code modifications may be needed.
@@ -122,9 +122,17 @@
 							CrossBrowdy also provides a splash screen that can be disabled by the developers. When it is enabled, this splash screen is shown when CrossBrowdy is loading. Keeping it enable can be a good idea because it will be enough to show the credits and respect these rules.
 						</p>
 						<p>
-							<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CrossBrowdy</span> by
-							<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Juan Alba Maldonado</a>
-							is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.<br />
+							<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CrossBrowdy web site content (<a href="https://crossbrowdy.com/" target="_blank">crossbrowdy.com</a>)</span> by
+							<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a> is licensed under a
+							<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a> (SPDX short identifier: &quot;<i>CC BY 4.0</i>&quot;).<br />
+						</p>
+						<p>
+							<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><a href="https://crossbrowdy.com/api" target="_blank">CrossBrowdy API documentation</a></span> by
+							<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a> is licensed under a
+							<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a> (SPDX short identifier: &quot;<i>CC BY 4.0</i>&quot;).<br />
+						</p>
+						<p>
+							The code written by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a>, which genuinely belongs to the CrossBrowdy project, is licensed under the <a href="https://choosealicense.com/licenses/bsd-2-clause/" target="_blank">2-Clause BSD License license</a> (aka &quot;<i>Simplified BSD License</i>&quot; or &quot;<i>FreeBSD License</i>&quot;, SPDX short identifier: &quot;<i>BSD-2-Clause</i>&quot;).
 						</p>
 						<p>
 							Apart from all of this, it is important to have into account that CrossBrowdy uses some external libraries and some code which may have their own license each. It is important to respect each license properly as the responsibility will always lie with you.
@@ -242,7 +250,7 @@
 					"answer" =>
 					'
 						<p>
-							If you have any suggestion to make to improve this project (including the web site), you can contact the author. Take a look at <a href="about' . $PHPExtension . '#where_can_i_find_the_credits_and_contact_the_authors" class="faq_link">Where can I find the credits and contact the authors?</a>.
+							If you have any suggestion to make to improve this project (including the <a href="https://crossbrowdy.com/" target="_blank">web site</a>), you can contact the author. Take a look at <a href="about' . $PHPExtension . '#where_can_i_find_the_credits_and_contact_the_authors" class="faq_link">Where can I find the credits and contact the authors?</a>.
 						</p>
 						<p>
 							If you have any doubt or problem which could not be solved so far, visit the <a href="community" target="_blank">' . $menuOptions[$language]["community"] . '</a> section and try to ask your question publicly in some of the available channels.

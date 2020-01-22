@@ -1,5 +1,35 @@
 General:
+	Web site:
+		* For the "about" section of the web site:
+			* Currently, it is compatible with:
+				* LG Smart TV (Linux 35230)
+				* Smart TV Alliance
+				* Samsung TV / Samsung Smart TV / Orsay / Tizen TV
+				* Wii (Wiimote)
+				* Firefox OS for TV
+				* Opera TV
+				* webOS
+				* Google TV / Android TV
+				* Roku TV
+				* Firefox OS for TV
+				* Ouya/Razer Forge TV
+				* Mad Catz M.O.J.O
+				* Pandora/DragonBox Pyra
+				* PGS
+				* Nokia S40, S60 (Symbian) as N97, etc.
+				* Chromebook, Chromebox
+				* Nintendo DS, Nintendo DSi, Nintendo 3DS, Nintendo 3DSi, New Nintendo 3DS, Nintendo 2DS, Nintendo Switch
+				* Nintendo Wii, Wii U, Wii Mini, etc.
+				* XBOX ONE
+				* Sony PlayStation 3, Sony PlayStation 4
+				* Sony PS Vita (PlayStation Vita)
+				* nVidia Shield
+				* (write more)
+
+
 	CrossBrowdy / CrossBase / Others:
+		! Place all the content from TODO.txt (and perhaps ISSUES.txt too) to other places as code (for jsdoc), GitHub issues, etc.
+		* Change all the 'navigator.appVersion.indexOf(...)' for a cached variable.
 		* Take a look at Web Animations API (and polyfill at https://github.com/web-animations/web-animations-js)
 		* Remember that Cordova plugins must be loaded, including "device" (it needs some time when the app loads), before using them.
 		!!! It should include only needed files (for example, CB_AudioFile["WAAPI"] is not necessary if Web Audio API is not supported and CB_AudioFile["ACMP"] is not necessary if we are not using Cordova/PhoneGAP/Intel XDK, etc.).

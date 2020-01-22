@@ -124,8 +124,9 @@ It also uses some external libraries and "third-party" code. The name of these l
 
 
 # License
-The code written by [Joan Alba Maldonado](https://joanalbamaldonado.com/ "Joan Alba Maldonado's home page") (joanalbamaldonadoNO_SPAM_PLEASE AT gmail DOT com, without NO_SPAM_PLEASE) which genuinely belongs to the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") project is
-licensed under the ["Creative Commons Attribution 4.0 International"](https://creativecommons.org/licenses/by/4.0/) license.
+The content from the [API documentation](https://crossbrowdy.com/api/ "CrossBrowdy API documentation"), the content from the [official web site](https://crossbrowdy.com/ "CrossBrowdy web site"), including tutorials, examples, etc. created by [Joan Alba Maldonado (aka Juan Alba Maldonado)](https://joanalbamaldonado.com/ "Joan Alba Maldonado's home page") is licensed under a [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/) (SPDX short identifier: "_CC BY 4.0_").
+
+The code written by [Joan Alba Maldonado (aka Juan Alba Maldonado)](https://joanalbamaldonado.com/ "Joan Alba Maldonado's home page"), which genuinely belongs to the [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy project") project, is licensed under the [2-Clause BSD License](https://choosealicense.com/licenses/bsd-2-clause/) (aka "_Simplified BSD License_" or "_FreeBSD License_", SPDX short identifier: "_BSD-2-Clause_").
 
 Apart from that, it is important to have into account that [CrossBrowdy](https://crossbrowdy.com/ "CrossBrowdy web site") uses some external libraries and some code which may have their own license each. It is important to respect each license properly as the responsibility will always lie with you.
 

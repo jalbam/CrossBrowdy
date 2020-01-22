@@ -1,10 +1,46 @@
-The code written by Joan Alba Maldonado (workindalian@gmail.com) which
-genuinely belongs to the CrossBrowdy project is licensed under the
-"Creative Commons Attribution 4.0 International" license.
+The code written by Joan Alba Maldonado (https://joanalbamaldonado.com), aka
+Juan Alba Maldonado, which genuinely belongs to the CrossBrowdy project, is
+licensed under the "The 2-Clause BSD License" (aka "Simplified BSD License"
+or "FreeBSD License", SPDX short identifier: "BSD-2-Clause").
 
-Apart from that, it is important to have into account that CrossBrowdy
-uses some external libraries and some code which may have their own license
-each. It is important to respect each license properly as the responsibility
-will always lie with you.
+The content from the API documentation, the content from the official web site,
+including tutorials, examples, etc. created by Joan Alba Maldonado
+(https://joanalbamaldonado.com), aka Juan Alba Maldonado, is licensed under a
+"Creative Commons Attribution 4.0 International" license (SPDX short
+identifier: "CC BY 4.0").
+
+Apart from that, it is important to have into account that CrossBrowdy uses
+some external libraries and some code which may have their own license each.
+It is important to respect each license properly as the responsibility will
+always lie with you.
 
 See more at https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license.
+
+
+--- The 2-Clause BSD License (SPDX short identifier: BSD-2-Clause):
+
+	Copyright (c) 2020, Joan Alba Maldonado (aka Juan Alba Maldonado) - https://joanalbamaldonado.com
+
+	Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+	1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+	2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	
+	
+--- The Creative Commons Attribution 4.0 International license (SPDX short identifier: CC BY 4.0):
+	
+	CrossBrowdy API documentation by Joan Alba Maldonado (aka Juan Alba Maldonado) - https://joanalbamaldonado.com
+
+	CrossBrowdy API documentation is licensed under a Creative Commons Attribution 4.0 International License.
+
+	You should have received a copy of the license along with this work. If not, see: http://creativecommons.org/licenses/by/4.0/
+	
+	
+	CrossBrowdy web site content (crossbrowdy.com) by Joan Alba Maldonado (aka Juan Alba Maldonado) - https://joanalbamaldonado.com
+
+	CrossBrowdy web site content (crossbrowdy.com) is licensed under a Creative Commons Attribution 4.0 International License.
+
+	You should have received a copy of the license along with this work. If not, see: http://creativecommons.org/licenses/by/4.0/

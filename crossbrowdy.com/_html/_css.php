@@ -467,18 +467,22 @@ address { font-style:normal; }
 }
 
 
+hr
+{
+	margin-top:20px;
+	margin-bottom:10px;
+}
+
 .license
 {
 	text-align:center;
 
 	font-family:arial;
 	font-weight:normal;
-	font-style:italic;
 	color:#888888;
 	
-	padding-right:20px;
-	padding-top:20px;
-	padding-bottom:50px;
+	padding-top:0px;
+	padding-bottom:0px;
 	
 	font-size:20px !important;
 	font-size:0.7em !important;
