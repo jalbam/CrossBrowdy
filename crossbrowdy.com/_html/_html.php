@@ -106,7 +106,7 @@
 				require_once "_html/_css.php";
 				if ($category === "basic_tutorial" || $category === "examples")
 				{
-					if (file_exists("_html/_doc/_lib/prism.css")) { readfile("_html/_doc/_lib/prism.css"); }
+					if (file_exists("_html/_lib/prism/prism.css")) { readfile("_html/_lib/prism/prism.css"); }
 				}
 			?>
 		-->
@@ -228,6 +228,25 @@
 					menuOptions.style.display = menuBackground.style.display = menuOptions.style.display !== "block" ? "block" : "none";
 				}
 			}
+
+			function toggleSharingBar()
+			{
+				var sharingBarIcons = document.getElementsByClassName("sharing_icon");
+				
+				var visibility = null;
+				for (var x = sharingBarIcons.length - 1; x >= 0; x--)
+				{
+					visibility = visibility || (sharingBarIcons[x].style.visibility !== "visible" ? "visible" : "hidden");
+					sharingBarIcons[x].style.visibility = visibility;
+				}
+				
+				var sharingBarButton = document.getElementById("sharing_bar_button");
+				if (sharingBarButton !== null)
+				{
+					if (visibility === "visible") { sharingBarButton.src = "img/sharing/button_close.svg"; }
+					else { sharingBarButton.src = "img/sharing/button_open.svg"; }
+				}
+			}
 			
 			function keyDown(e)
 			{
@@ -235,23 +254,26 @@
 				if (e.keyCode) { keyCode = e.keyCode; }
 				else if (typeof(event) !== "undefined" && event.keyCode) { keyCode = event.keyCode; }
 				else if (window.Event && e.which) { keyCode = e.which; }
-				if (keyCode === 27) { toggleMenu() }
+				if (keyCode === 27) { toggleMenu(); } //ESC key.
+				else if (keyCode === 113 || keyCode === 115 || keyCode === 119) { toggleSharingBar(); } //F2, F4 and F8 keys.
 			}
 		// -->
 		</script>
-		<script language="javascript" type="text/javascript">
-		<!--
-			try //IE6 gives problems:
+		<?php
+			if (($category === "basic_tutorial" || $category === "examples") && file_exists("_html/_lib/prism/prism.js"))
 			{
-				<?php
-					if ($category === "basic_tutorial" || $category === "examples")
-					{
-						if (file_exists("_html/_doc/_lib/prism.js")) { readfile("_html/_doc/_lib/prism.js"); }
-					}
 				?>
-			} catch (E) {}
-		// -->
-		</script>
+				<script language="javascript" type="text/javascript">
+				<!--
+					try //IE6 gives problems:
+					{
+						<?php readfile("_html/_lib/prism/prism.js"); ?>
+					} catch (E) {}
+				// -->
+				</script>
+				<?php
+			}
+		?>
 	</head>
 	<body leftmargin="0" topmargin="0" onKeyDown="keyDown(event);">
 		<div id="menu_background" onClick="toggleMenu();"></div>
@@ -281,5 +303,33 @@
 			?>
 		</main>
 		<footer><address><div class="author"><?php echo $projectCopyright[$language]; ?></div></address></footer>
+		
+		<?php
+			//If wanted and possible, uses sharing buttons:
+			if (SHARING_ENABLED && sizeof($sharingMedias) > 0 && file_exists("_html/_lib/goodshare.js/goodshare.min.js"))
+			{
+				echo '<!-- Using goodshare.js (https://goodshare.js.org/). Icons from social-share-button (https://github.com/huacnlee/social-share-button). -->';
+				echo '<img src="img/sharing/button_open.svg" style="visibility:hidden; display:none;" />';
+				echo '<img src="img/sharing/button_close.svg" style="visibility:hidden; display:none;" />';
+				echo '<span id="sharing_bar">';
+				foreach ($sharingMedias as $sharingMediaIndex => $sharingMedia)
+				{
+					echo '<img src="img/sharing/' . $sharingMediaIndex . '.svg" alt="' . $sharingMedia[$language] . '" title="Share on ' . $sharingMedia[$language] . '" class="sharing_icon icon-' . $sharingMediaIndex . '" data-social="' . $sharingMediaIndex . '" data-url="' . $canonicalURL . '" data-image="' . $imageToShare . '" />';
+					echo '<br />';
+				}
+				echo '<img src="img/sharing/button_open.svg" id="sharing_bar_button" onClick="toggleSharingBar();" alt="Share" title="Share" />';
+				echo '</span>';
+				?>
+				<script language="javascript" type="text/javascript">
+				<!--
+					try //IE6 gives problems:
+					{
+						<?php readfile("_html/_lib/goodshare.js/goodshare.min.js"); ?>
+					} catch (E) {}
+				// -->
+				</script>
+				<?php
+			}
+		?>
 	</body>
 </html>

@@ -14,4 +14,5 @@
 	$category = str_replace(".php", "", basename(trim($category)));
 	if (!array_key_exists($category, $menuOptions[$language]) || !file_exists($category . ".php") || !file_exists("_html/" . $category . "." . $language . ".php") && !file_exists("_html/" . $category . "." . LANGUAGE_DEFAULT . ".php")) { $category = CATEGORY_DEFAULT; }
 	
+	require_once "_config_sharing.php";
 	require_once "_html/_html.php";

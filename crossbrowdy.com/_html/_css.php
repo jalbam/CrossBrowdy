@@ -929,3 +929,104 @@ a.download_old:hover
 		font-size:3vmin;
 	}
 }
+
+
+#sharing_bar
+{
+	position:fixed;
+	bottom:50px;
+	left:0px;
+	
+	color:#aa0000;
+	z-index:10;
+}
+#sharing_bar_button
+{
+	background-color:#aaaaaa;
+	display:table-cell;
+	vertical-align:middle;
+	
+	font-size:3vmin;
+	line-height:2vmin;
+	
+	width:3.6em;
+	width:22%;
+	width:6vmin;
+
+	height:3.6em;
+	height:22%;
+	height:6vmin;
+	
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2x;
+	-khtml-border-radius:2px;
+	
+	filter: alpha(opacity=70);
+	opacity:0.7;
+	-moz-opacity:0.7;
+	-khtml-opacity:0.7;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+}
+@media (orientation: portrait)
+{
+	#sharing_bar_button
+	{
+		width:4.4em;
+		width:26%;
+		width:11vmin;
+		
+		height:4.4em;
+		height:26%;
+		height:11vmin;
+	}
+}
+#sharing_bar_button:hover
+{
+	cursor:hand;
+	cursor:pointer;
+}
+.sharing_icon
+{
+	visibility:hidden;
+
+	width:3.6em;
+	width:22%;
+	width:6vmin;
+
+	height:3.6em;
+	height:22%;
+	height:6vmin;
+	
+	filter: alpha(opacity=90);
+	filter:grayscale(50%);
+	opacity:0.9;
+	-moz-opacity:0.9;
+	-khtml-opacity:0.9;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+}
+@media (orientation: portrait)
+{
+	.sharing_icon
+	{
+		width:4.4em;
+		width:26%;
+		width:11vmin;
+		
+		height:4.4em;
+		height:26%;
+		height:11vmin;
+	}
+}
+.sharing_icon:hover
+{
+	filter: alpha(opacity=100);
+	filter:grayscale(0%);
+	opacity:1;
+	-moz-opacity:1;
+	-khtml-opacity:1;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
+	cursor:hand;
+	cursor:pointer;
+}
