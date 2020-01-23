@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+documentation/* linguist-documentation
+crossbrowdy.com/_html/_doc/api/* linguist-documentation
