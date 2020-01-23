@@ -183,308 +183,6 @@
             
 <hr>
 <dt>
-    <h4 class="name" id=".get"><span class="type-signature">&lt;static> </span>get<span class="signature">(eventFunction [, keepOldFunction] [, useCapture] [, callbackError])</span><span class="type-signature"> &rarr; {undefined|false}</span></h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Sets the event to get the ambient light or removes it. Uses the <a href="https://w3.org/TR/ambient-light/">Ambient Light Sensor API</a> or the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events">Ambient Light Sensor Events (&quot;ondevicelight&quot;)</a> or <a href="https://modernweb.com/introduction-to-the-ambient-light-api/">&quot;onlightlevel&quot; event</a>.<br>        <br/><br>        The given &quot;eventFunction&quot; will receive the event object as the first parameter but this event object will vary depending on the way to get the ambient light which is supported by the client (if any):<br>        <br /><br>        First choice, if available, uses the <a href="https://w3.org/TR/ambient-light/">Ambient Light Sensor API</a> and &quot;event.value&quot; will contain the units in lux.<br>        <br /><br>        Second choice, if available, uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events">Ambient Light Sensor Events (&quot;ondevicelight&quot;)</a> and &quot;event.value&quot; will contain the units in lux.<br>        <br /><br>        Third choice, if available, uses the <a href="https://modernweb.com/introduction-to-the-ambient-light-api/">&quot;onlightlevel&quot; event</a> and &quot;event.value&quot; will be &quot;&quot; (an empty string), &quot;dim&quot;, &quot;normal&quot; or &quot;bright&quot; instead of a number.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th style="width:12%; min-width:110px;">Name</th>
-        
-
-        <th style="width:12%; min-width:110px;">Type</th>
-
-        
-        <th style="width:12%; min-width:110px;">Argument</th>
-        
-
-        
-        <th style="width:12%; min-width:110px;">Default</th>
-        
-
-        <th class="last" style="min-width:310px;">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>eventFunction</code></td>
-            
-
-            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-            
-                
-<span class="param-type">function</span>
-|
-
-<span class="param-type">null</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-                </td>
-            
-
-            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function that will be called when the event is fired. The event object received will already be normalized by the <a href="CB_Device.AmbientLight.html#.normalizeEvent"><code>CB_Device.AmbientLight.normalizeEvent</code></a> function automatically. Despite of this, due to the big differences between different clients, the event object received as the first parameter will vary depending on the way to get the ambient light which is supported by the client (if any). If a null value is used, the event will be removed.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
-            
-
-            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-            
-                
-<span class="param-type">boolean</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener or not.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
-            
-
-            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-            
-                
-<span class="param-type">float</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackError</code></td>
-            
-
-            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-            
-                
-<span class="param-type">function</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
-                
-                </td>
-            
-
-            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Callback that will be called if there is any error getting the ambient light. Only used by the <a href="https://w3.org/TR/ambient-light/">Ambient Light Sensor API</a> (if available).</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="CrossBase_device_CB_Device.js.html">CrossBase/device/CB_Device.js</a>,
-				 <a href="CrossBase_device_CB_Device.js.html#sunlight-1-line-1093">line 1093</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>Returns false in the case that no way to get the ambient light is available or undefined otherwise.</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">undefined</span>
-|
-
-<span class="param-type">false</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
     <h4 class="name" id=".isSupported"><span class="type-signature">&lt;static> </span>isSupported<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
     
@@ -843,6 +541,308 @@
     
 </dd>
 
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id=".onChange"><span class="type-signature">&lt;static> </span>onChange<span class="signature">(eventFunction [, keepOldFunction] [, useCapture] [, callbackError])</span><span class="type-signature"> &rarr; {undefined|false}</span></h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Sets the event to get the ambient light or removes it. Uses the <a href="https://w3.org/TR/ambient-light/">Ambient Light Sensor API</a> or the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events">Ambient Light Sensor Events (&quot;ondevicelight&quot;)</a> or <a href="https://modernweb.com/introduction-to-the-ambient-light-api/">&quot;onlightlevel&quot; event</a>.<br>        <br/><br>        The given &quot;eventFunction&quot; will receive the event object as the first parameter but this event object will vary depending on the way to get the ambient light which is supported by the client (if any):<br>        <br /><br>        First choice, if available, uses the <a href="https://w3.org/TR/ambient-light/">Ambient Light Sensor API</a> and &quot;event.value&quot; will contain the units in lux.<br>        <br /><br>        Second choice, if available, uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events">Ambient Light Sensor Events (&quot;ondevicelight&quot;)</a> and &quot;event.value&quot; will contain the units in lux.<br>        <br /><br>        Third choice, if available, uses the <a href="https://modernweb.com/introduction-to-the-ambient-light-api/">&quot;onlightlevel&quot; event</a> and &quot;event.value&quot; will be &quot;&quot; (an empty string), &quot;dim&quot;, &quot;normal&quot; or &quot;bright&quot; instead of a number.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th style="width:12%; min-width:110px;">Name</th>
+        
+
+        <th style="width:12%; min-width:110px;">Type</th>
+
+        
+        <th style="width:12%; min-width:110px;">Argument</th>
+        
+
+        
+        <th style="width:12%; min-width:110px;">Default</th>
+        
+
+        <th class="last" style="min-width:310px;">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>eventFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>The function that will be called when the event is fired. The event object received will already be normalized by the <a href="CB_Device.AmbientLight.html#.normalizeEvent"><code>CB_Device.AmbientLight.normalizeEvent</code></a> function automatically. Despite of this, due to the big differences between different clients, the event object received as the first parameter will vary depending on the way to get the ambient light which is supported by the client (if any). If a null value is used, the event will be removed.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>keepOldFunction</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    true
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether we want to keep any possible previous event listener or not.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>useCapture</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">float</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Defines whether the event we want to add will use capture or not. This parameter will be effective only if the current client supports the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">addEventListener</a> method and will be used as its third parameter.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><code>callbackError</code></td>
+            
+
+            <td class="type" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default" style="width:12%; min-width:110px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;">
+                
+                </td>
+            
+
+            <td class="description last" style="min-width:310px; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; line-break:strict; hyphens:none; -webkit-hyphens:none; -moz-hyphens:none;"><p>Callback that will be called if there is any error getting the ambient light. Only used by the <a href="https://w3.org/TR/ambient-light/">Ambient Light Sensor API</a> (if available).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="CrossBase_device_CB_Device.js.html">CrossBase/device/CB_Device.js</a>,
+				 <a href="CrossBase_device_CB_Device.js.html#sunlight-1-line-1093">line 1093</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Returns false in the case that no way to get the ambient light is available or undefined otherwise.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+|
+
+<span class="param-type">false</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
         </dl>
     
 
@@ -897,7 +897,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Wed Jan 22nd 2020
+		on Thu Jan 23rd 2020
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

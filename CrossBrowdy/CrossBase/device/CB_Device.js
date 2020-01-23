@@ -1090,7 +1090,7 @@ CB_Device.AmbientLight = function() { return CB_Device.AmbientLight; };
 	 *  @param {function} [callbackError] - Callback that will be called if there is any error getting the ambient light. Only used by the [Ambient Light Sensor API]{@link https://w3.org/TR/ambient-light/} (if available).
 	 *  @returns {undefined|false} Returns false in the case that no way to get the ambient light is available or undefined otherwise.
 	 */
-    CB_Device.AmbientLight.get = function(eventFunction, keepOldFunction, useCapture, callbackError)
+    CB_Device.AmbientLight.onChange = function(eventFunction, keepOldFunction, useCapture, callbackError)
 	{
 		if (typeof(AmbientLightSensor) !== "undefined")
 		{
@@ -1209,7 +1209,7 @@ CB_Device.Proximity = function() { return CB_Device.Proximity; };
 	 *  @param {function} [callbackError] - Callback that will be called if there is any error getting the proximity. Only used by the [Proximity Sensor API]{@link https://w3.org/TR/proximity/} (if available).
 	 *  @returns {undefined|false} Returns false in the case that no way to get the proximity is available or undefined otherwise.
 	 */
-	CB_Device.Proximity.get = function(eventFunction, detectNear, keepOldFunction, useCapture, callbackError)
+	CB_Device.Proximity.onChange = function(eventFunction, detectNear, keepOldFunction, useCapture, callbackError)
 	{
 		if (!detectNear)
 		{

@@ -12,8 +12,8 @@ function main()
 		CB_console("The ambient light detection is supported (through the Ambient Light Sensor API or the Ambient Light Sensor Events ('ondevicelight') or 'onlightlevel' event or compatible ones).");
 		CB_Elements.insertContentById("light_sensor", "Yes");
 
-		//Gets the ambient light:
-		CB_Device.AmbientLight.get(function(data) { CB_console("Light detected: " + data.value); CB_Elements.insertContentById("light_level", data.value); }); //Data will be normalized automatically.
+		//Gets the ambient light now and also every time it changes:
+		CB_Device.AmbientLight.onChange(function(data) { CB_console("Light detected: " + data.value); CB_Elements.insertContentById("light_level", data.value); }); //Data will be normalized automatically.
 	}
 	else
 	{
@@ -27,8 +27,8 @@ function main()
 		CB_console("The proximity detection is supported (through the Proximity Sensor API or the Proximity Sensor Events as 'ondeviceproximity' or 'onuserproximity' or compatible ones).");
 		CB_Elements.insertContentById("proximity_sensor", "Yes");
 
-		//Gets the proximity:
-		CB_Device.Proximity.get(function(data) { CB_console("Proximity detected: " + data.value); CB_Elements.insertContentById("proximity_level", data.value); }); //Data will be normalized automatically.
+		//Gets the proximity now and also every time it changes:
+		CB_Device.Proximity.onChange(function(data) { CB_console("Proximity detected: " + data.value); CB_Elements.insertContentById("proximity_level", data.value); }); //Data will be normalized automatically.
 	}
 	else
 	{

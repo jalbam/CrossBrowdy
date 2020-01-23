@@ -12,8 +12,8 @@
 	{
 		CB_console("The ambient light detection is supported (through the Ambient Light Sensor API or the Ambient Light Sensor Events ('ondevicelight') or 'onlightlevel' event or compatible ones).");
 		
-		//Gets the ambient light:
-		CB_Device.AmbientLight.get(function(data) { CB_console("Light detected: " + data.value); }); //Data will be normalized automatically.
+		//Gets the ambient light now and also every time it changes:
+		CB_Device.AmbientLight.onChange(function(data) { CB_console("Light detected: " + data.value); }); //Data will be normalized automatically.
 	}
 	else
 	{
