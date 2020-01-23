@@ -945,9 +945,14 @@ a.download_old:hover
 	background-color:#aaaaaa;
 	display:table-cell;
 	vertical-align:middle;
+
+	position:fixed;
 	
-	font-size:3vmin;
-	line-height:2vmin;
+	bottom:2.6em;
+	bottom:8%;
+	bottom:8vmin;
+	
+	left:0px;
 	
 	width:3.6em;
 	width:22%;
@@ -956,6 +961,9 @@ a.download_old:hover
 	height:3.6em;
 	height:22%;
 	height:6vmin;
+
+	font-size:3vmin;
+	line-height:2vmin;
 	
 	border-radius:2px;
 	-moz-border-radius:2px;
@@ -972,6 +980,10 @@ a.download_old:hover
 {
 	#sharing_bar_button
 	{
+		bottom:7.2em;
+		bottom:44%;
+		bottom:12vmin;
+
 		width:4.4em;
 		width:26%;
 		width:11vmin;
@@ -1029,4 +1041,49 @@ a.download_old:hover
 
 	cursor:hand;
 	cursor:pointer;
+}
+#sharing_icons_column_1
+{
+	position:fixed;
+	bottom:7.2em;
+	bottom:44%;
+	bottom:12vmin;
+	left:0px;
+	margin-bottom:20px;
+}
+@media (orientation: portrait)
+{
+	#sharing_icons_column_1
+	{
+		bottom:8.8em;
+		bottom:52%;
+		bottom:22vmin;
+		margin-bottom:20px;
+	}
+}
+#sharing_icons_column_2
+{
+	position:fixed;
+	bottom:7.2em;
+	bottom:44%;
+	bottom:12vmin;
+	left:3.6em;
+	left:22%;
+	left:6vmin;
+	margin-left:2px;
+	margin-bottom:20px;
+	
+}
+@media (orientation: portrait)
+{
+	#sharing_icons_column_2
+	{
+		bottom:8.8em;
+		bottom:52%;
+		bottom:22vmin;
+		left:4.4em;
+		left:26%;
+		left:11vmin;
+		margin-bottom:20px;
+	}
 }

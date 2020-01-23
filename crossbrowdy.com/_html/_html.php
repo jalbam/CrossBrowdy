@@ -312,11 +312,16 @@
 				echo '<img src="img/sharing/button_open.svg" style="visibility:hidden; display:none;" />';
 				echo '<img src="img/sharing/button_close.svg" style="visibility:hidden; display:none;" />';
 				echo '<span id="sharing_bar">';
+				$sharingIconCounter = 1;
+				$sharingIconsPerCol = ceil(sizeof($sharingMedias) / 2) < 9 ? ceil(sizeof($sharingMedias) / 2) : 9;
+				$sharingIconsCode = Array("first_column" => "", "second_column" => "");
 				foreach ($sharingMedias as $sharingMediaIndex => $sharingMedia)
 				{
-					echo '<img src="img/sharing/' . $sharingMediaIndex . '.svg" alt="' . $sharingMedia[$language] . '" title="Share on ' . $sharingMedia[$language] . '" class="sharing_icon icon-' . $sharingMediaIndex . '" data-social="' . $sharingMediaIndex . '" data-url="' . $canonicalURL . '" data-image="' . $imageToShare . '" />';
-					echo '<br />';
+					$sharingIconsCode[$sharingIconCounter <= $sharingIconsPerCol ? "first_column" : "second_column"] .= '<img src="img/sharing/' . $sharingMediaIndex . '.svg" alt="' . $sharingMedia[$language] . '" title="Share on ' . $sharingMedia[$language] . '" class="sharing_icon icon-' . $sharingMediaIndex . '" data-social="' . $sharingMediaIndex . '" data-url="' . $canonicalURL . '" data-image="' . $imageToShare . '" /><br />';
+					$sharingIconCounter++;
 				}
+				echo '<div id="sharing_icons_column_1">' . $sharingIconsCode["first_column"] . '</div>';
+				echo '<div id="sharing_icons_column_2">' . $sharingIconsCode["second_column"] . '</div>';
 				echo '<img src="img/sharing/button_open.svg" id="sharing_bar_button" onClick="toggleSharingBar();" alt="Share" title="Share" />';
 				echo '</span>';
 				?>
