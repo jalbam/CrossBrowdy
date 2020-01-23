@@ -35,12 +35,15 @@
 	$snapshotsURLData = array_merge($snapshotsURLData, getGuideLinks($basicTutorial, "basic_tutorial"));
 	$snapshotsURLData = array_merge($snapshotsURLData, getGuideLinks($examples, "examples"));
 	
+	$snapshotsTotal = sizeof($snapshotsURLData);
+	$snapshotsCurrent = 1;
 	foreach ($snapshotsURLData as $url)
 	{
 		$screenshotFileLoop = str_replace("/", ".", $url) . "." . $language . ".png";
 		$commandLoop = str_replace("{url}", $projectURLDefault . $url, str_replace("{screenshot_file}", $screenshotFileLoop, $snapshotsCommand));
-		echo "Snapshot for: " . $url . "\n";
+		echo "Snapshot #" . $snapshotsCurrent . " of " . $snapshotsTotal . " for: " . $url . "\n";
 		echo "* Executing: " . $commandLoop . "\n";
 		echo shell_exec($commandLoop);
 		echo "\n";
+		$snapshotsCurrent++;
 	}
