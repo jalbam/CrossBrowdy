@@ -17,8 +17,18 @@
 	}
 	else
 	{
-		$fileToDownload = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP_REAL);
-		$fileToDownloadBeautifulLink = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP);
+		$dist = strtolower(getGet("dist"));
+		
+		if ($dist === "yes" || $dist === "1" || $dist === "true")
+		{
+			$fileToDownload = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP_REAL_DIST);
+			$fileToDownloadBeautifulLink = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP_DIST);
+		}
+		else
+		{
+			$fileToDownload = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP_REAL);
+			$fileToDownloadBeautifulLink = str_replace("{VERSION}", $id, CB_FILENAME_PATH_ZIP);
+		}
 	}
 	
 	if (file_exists($fileToDownload))

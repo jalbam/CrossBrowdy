@@ -10,6 +10,9 @@
 		FreeLists mailing list: <a href="https://www.freelists.org/list/crossbrowdy" target="_blank">https://www.freelists.org/list/crossbrowdy</a>
 	</p>
 	<p>
+		TuxFamily mailing list: <a href="https://listengine.tuxfamily.org/lists.tuxfamily.org/crossbrowdy/" target="_blank">https://listengine.tuxfamily.org/lists.tuxfamily.org/crossbrowdy/</a>
+	</p>
+	<p>
 		Reddit community: <a href="https://www.reddit.com/r/CrossBrowdy/" target="_blank">https://www.reddit.com/r/CrossBrowdy/</a>
 	</p>
 	<h3>Chats and others</h3>

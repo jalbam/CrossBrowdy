@@ -39,4 +39,4 @@ echo.
 echo Deleting examples folder...
 rmdir /s /q crossbrowdy.com\files\examples
 
-PAUSE
+pause

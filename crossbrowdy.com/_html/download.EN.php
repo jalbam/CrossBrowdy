@@ -3,23 +3,45 @@
 <header><h1 class="category_title">Download <?php echo $projectName; ?></h1></header>
 <div class="category_text">
 	<div style="text-align:center;">
-		<p>
-			<?php
-				if (file_exists(CB_FILENAME_PATH_ZIP_REAL_LATEST))
-				{
-			?>
-					<a href="get_file<?php echo $PHPExtension; ?>?id=current" class="download_button">
-						Download <?php echo CB_VERSION_CURRENT; ?> version
-					</a>
-					<?php
-						/*<div class="download_size">(<?php echo number_format(filesize(CB_FILENAME_PATH_ZIP_REAL_LATEST) / 1014, 2); ?> KB)</div>*/
-					?>
-			<?php
-				}
-				else { echo "Coming soon!"; }
-			?>
-		</p>
-		<p>
+		<div class="download_container">
+			<p>
+				<?php
+					if (file_exists(CB_FILENAME_PATH_ZIP_REAL_LATEST))
+					{
+				?>
+						<a href="get_file<?php echo $PHPExtension; ?>?id=current" class="download_button">
+							Download <?php echo CB_VERSION_CURRENT; ?> version
+						</a>
+						<p class="download_button_footer">
+							Includes the API documentation
+						</p>
+						<div class="download_size">(<?php echo number_format(filesize(CB_FILENAME_PATH_ZIP_REAL_LATEST) / 1014, 2); ?> KB)</div>
+				<?php
+					}
+					else { echo "Coming soon!"; }
+				?>
+			</p>
+		</div>
+		<div class="download_container">
+			<p>
+				<?php
+					if (file_exists(CB_FILENAME_PATH_ZIP_REAL_LATEST_DIST))
+					{
+				?>
+						<a href="get_file<?php echo $PHPExtension; ?>?id=current&dist=yes" class="download_button">
+							Download <?php echo CB_VERSION_CURRENT; ?>.dist version
+						</a>
+						<p class="download_button_footer">
+							Just essential files, for distribution
+						</p>
+						<div class="download_size">(<?php echo number_format(filesize(CB_FILENAME_PATH_ZIP_REAL_LATEST_DIST) / 1014, 2); ?> KB)</div>
+				<?php
+					}
+					else { echo "Coming soon!"; }
+				?>
+			</p>
+		</div>
+		<p class="download_old">
 			<a href="<?php echo "download" . $PHPExtension; ?>#old_versions" class="download_old">Download old versions</a>
 		</p>
 	</div>

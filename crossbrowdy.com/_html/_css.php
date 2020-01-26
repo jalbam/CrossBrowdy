@@ -813,6 +813,15 @@ code
 }
 
 
+.download_container
+{
+	background-color:#eeeeee;
+	border-radius:18px;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	-khtml-border-radius:18px;
+}
+
 a.download_button
 {
 	color:#ffffff;
@@ -853,16 +862,51 @@ a.download_button:hover
 	background-color:#0000ff;
 }
 
-.download_size
+.download_button_footer
 {
-	font-style:italic;
-	line-height:0px;
-	font-size:6px;
-	font-size:0.3em;
-	font-size:30%;
-	font-size:1.5vmin;
+	color:#666666;
+	font-size:19px;
+	font-size:0.67em;
+	font-size:67%;
+	font-size:2vmin;
+}
+@media (orientation: portrait)
+{
+	.download_button_footer
+	{
+		font-size:12px;
+		font-size:0.6em;
+		font-size:60%;
+		font-size:3vmin;
+	}
 }
 
+.download_size
+{
+	color:#888888;
+	font-style:italic;
+	line-height:0px;
+	font-size:19px;
+	font-size:0.67em;
+	font-size:67%;
+	font-size:2vmin;
+	margin-bottom:45px;
+}
+@media (orientation: portrait)
+{
+	.download_size
+	{
+		font-size:12px;
+		font-size:0.6em;
+		font-size:60%;
+		font-size:3vmin;
+	}
+}
+
+p.download_old
+{
+	margin-bottom:55px;
+}
 a.download_old
 {
 	font-size:20px;
