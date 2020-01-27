@@ -35,6 +35,12 @@ body
 }
 
 
+h3, h4
+{
+	margin-top:60px;
+}
+
+
 a
 {
 	color:#2345fd;
@@ -881,6 +887,12 @@ a.download_button:hover
 	}
 }
 
+
+.download_size_first
+{
+	margin-bottom:45px;
+}
+
 .download_size
 {
 	color:#888888;
@@ -890,7 +902,6 @@ a.download_button:hover
 	font-size:0.67em;
 	font-size:67%;
 	font-size:2vmin;
-	margin-bottom:45px;
 }
 @media (orientation: portrait)
 {
@@ -903,16 +914,19 @@ a.download_button:hover
 	}
 }
 
-p.download_old
-{
-	margin-bottom:55px;
-}
 a.download_old
 {
 	font-size:20px;
 	font-size:0.7em;
 	font-size:70%;
 	font-size:2.1vmin;
+}
+a.download_examples
+{
+	font-size:12px;
+	font-size:0.6em;
+	font-size:60%;
+	font-size:3vmin;
 }
 @media (orientation: portrait)
 {
@@ -923,8 +937,15 @@ a.download_old
 		font-size:60%;
 		font-size:3vmin;
 	}
+	a.download_examples
+	{
+		font-size:38px;
+		font-size:2.4em;
+		font-size:240%;
+		font-size:4vmin;
+	}
 }
-a.download_old:hover
+a.download_old:hover, a.download_examples:hover
 {
 	color:#000000;
 	text-decoration:underline;

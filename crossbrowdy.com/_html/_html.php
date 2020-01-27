@@ -278,7 +278,7 @@
 	<body leftmargin="0" topmargin="0" onKeyDown="keyDown(event);">
 		<div id="menu_background" onClick="toggleMenu();"></div>
 		<div id="menu">
-			<div id="menu_button" onClick="toggleMenu();"><?php echo $menuButton[$language]; ?></div>
+			<div id="menu_button" onClick="toggleMenu();" title="Menu (ESC)"><?php echo $menuButton[$language]; ?></div>
 			<div id="menu_options">
 				<nav>
 				<?php
@@ -322,7 +322,7 @@
 				}
 				echo '<div id="sharing_icons_column_1">' . $sharingIconsCode["first_column"] . '</div>';
 				echo '<div id="sharing_icons_column_2">' . $sharingIconsCode["second_column"] . '</div>';
-				echo '<img src="img/sharing/button_open.svg" id="sharing_bar_button" onClick="toggleSharingBar();" alt="Share" title="Share" />';
+				echo '<img src="img/sharing/button_open.svg" id="sharing_bar_button" onClick="toggleSharingBar();" alt="Share" title="Share (F2)" />';
 				echo '</span>';
 				?>
 				<script language="javascript" type="text/javascript">

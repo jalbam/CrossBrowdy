@@ -10,15 +10,15 @@
 					{
 				?>
 						<a href="get_file<?php echo $PHPExtension; ?>?id=current" class="download_button">
-							Download <?php echo CB_VERSION_CURRENT; ?> version
+							Download <strong><?php echo CB_VERSION_CURRENT; ?></strong> version
 						</a>
 						<p class="download_button_footer">
 							Includes the API documentation
 						</p>
-						<div class="download_size">(<?php echo number_format(filesize(CB_FILENAME_PATH_ZIP_REAL_LATEST) / 1014, 2); ?> KB)</div>
+						<div class="download_size download_size_first">(<?php echo number_format(filesize(CB_FILENAME_PATH_ZIP_REAL_LATEST) / 1014, 2); ?> KB)</div>
 				<?php
 					}
-					else { echo "Coming soon!"; }
+					else { echo "Download for normal version coming soon!"; }
 				?>
 			</p>
 		</div>
@@ -29,7 +29,7 @@
 					{
 				?>
 						<a href="get_file<?php echo $PHPExtension; ?>?id=current&dist=yes" class="download_button">
-							Download <?php echo CB_VERSION_CURRENT; ?>.dist version
+							Download <strong><?php echo CB_VERSION_CURRENT; ?>.dist</strong> version
 						</a>
 						<p class="download_button_footer">
 							Just essential files, for distribution
@@ -37,12 +37,16 @@
 						<div class="download_size">(<?php echo number_format(filesize(CB_FILENAME_PATH_ZIP_REAL_LATEST_DIST) / 1014, 2); ?> KB)</div>
 				<?php
 					}
-					else { echo "Coming soon!"; }
+					else { echo "Download for distribution version coming soon!"; }
 				?>
 			</p>
 		</div>
 		<p class="download_old">
 			<a href="<?php echo "download" . $PHPExtension; ?>#old_versions" class="download_old">Download old versions</a>
+		</p>
+		<p class="download_examples">
+			<a href="get_file<?php echo $PHPExtension; ?>?id=examples" class="download_examples">Download working examples</a><br />
+			<a href="guides<?php echo $PHPExtension; ?>#examples" class="download_examples" target="_blank">...or try them on-line!</a><br />
 		</p>
 	</div>
 
