@@ -37,7 +37,7 @@ body
 
 h3, h4
 {
-	margin-top:60px;
+	margin-top:40px;
 }
 
 
