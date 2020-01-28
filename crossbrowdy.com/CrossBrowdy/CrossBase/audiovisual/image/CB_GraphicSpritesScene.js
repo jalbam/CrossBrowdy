@@ -90,7 +90,7 @@
  *  @typedef {Object} CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT
  *  @property {string|*} [id='CB_GraphicSpritesScene_' + CB_GraphicSpritesScene._idUnique++] - Identifier of the sprites groups object and also for the graphic sprites scene (also used as the {@link CB_GraphicSprites.id} property for the {@link CB_GraphicSpritesScene} object). It should be unique. Recommended. It must be a value which evaluates to true. By default, it is generated automatically (with an internal counter).
  *  @property {*} [src=""] - The value for the "src" property which will be used as default if not provided (or the provided one was wrong) in the given {@link CB_GraphicSprites.SPRITES_OBJECT} objects (in the "spritesGroups" property), when creating the internal {@link CB_GraphicSprites} objects.
- *  @property {string} [srcType={@link CB_GraphicSprites.SRC_TYPES.DEFAULT}] - The value for the "srcType" property which will be used as default if not provided (or the provided one was wrong) in the given {@link CB_GraphicSprites.SPRITES_OBJECT} objects (in the "spritesGroups" property), when creating the internal {@link CB_GraphicSprites} objects. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
+ *  @property {string} [srcType={@link CB_GraphicSprites.SRC_TYPES_DEFAULT}] - The value for the "srcType" property which will be used as default if not provided (or the provided one was wrong) in the given {@link CB_GraphicSprites.SPRITES_OBJECT} objects (in the "spritesGroups" property), when creating the internal {@link CB_GraphicSprites} objects. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
  *  @property {number} [srcLeft={@link CB_GraphicSprites.LEFT_SOURCE_DEFAULT}] - The value for the "srcLeft" property which will be used as default if not provided (or the provided one was wrong) in the given {@link CB_GraphicSprites.SPRITES_OBJECT} objects (in the "spritesGroups" property), when creating the internal {@link CB_GraphicSprites} objects.
  *  @property {number} [srcTop={@link CB_GraphicSprites.TOP_SOURCE_DEFAULT}] - The value for the "srcTop" property which will be used as default if not provided (or the provided one was wrong) in the given {@link CB_GraphicSprites.SPRITES_OBJECT} objects (in the "spritesGroups" property), when creating the internal {@link CB_GraphicSprites} objects.
  *  @property {number} [srcWidth={@link CB_GraphicSprites.WIDTH_SOURCE_DEFAULT}] - The value for the "srcWidth" property which will be used as default if not provided (or the provided one was wrong) in the given {@link CB_GraphicSprites.SPRITES_OBJECT} objects (in the "spritesGroups" property), when creating the internal {@link CB_GraphicSprites} objects.
@@ -246,7 +246,7 @@ CB_GraphicSpritesScene.prototype.insertSpritesGroups = function(spritesGroups, b
 	this.parent = this.spritesGroups.parent = spritesGroups.parent;
 	this.id = this.spritesGroups.id = spritesGroups.id = spritesGroups.id || "CB_GraphicSpritesScene_" + CB_GraphicSpritesScene._idUnique++;
 	this.spritesGroups.src = spritesGroups.src = spritesGroups.src || !isNaN(spritesGroups.src) && spritesGroups.src !== null ? spritesGroups.src : "";
-	this.spritesGroups.srcType = spritesGroups.srcType = spritesGroups.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT;
+	this.spritesGroups.srcType = spritesGroups.srcType = spritesGroups.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT;
 	spritesGroups.srcLeft = parseFloat(spritesGroups.srcLeft);
 	this.spritesGroups.srcLeft = spritesGroups.srcLeft = !isNaN(spritesGroups.srcLeft) ? spritesGroups.srcLeft : parseFloat(CB_GraphicSprites.LEFT_SOURCE_DEFAULT) || 0;
 	spritesGroups.left = parseFloat(spritesGroups.left);
@@ -414,7 +414,7 @@ CB_GraphicSpritesScene.prototype.insertSpritesGroup = CB_GraphicSpritesScene.pro
 	spritesGroup = spritesGroup || {};
 	spritesGroup.parent = this; //Overwrites the parent to point to the CB_GraphicSprites itself which will contain it.
 	spritesGroup.src = spritesGroup.src || !isNaN(spritesGroup.src) && spritesGroup.src !== null ? spritesGroup.src : this.spritesGroups.src || !isNaN(this.spritesGroups.src) && this.spritesGroups.src !== null ? this.spritesGroups.src : "";
-	spritesGroup.srcType = spritesGroup.srcType || this.spritesGroups.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT;
+	spritesGroup.srcType = spritesGroup.srcType || this.spritesGroups.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT;
 	spritesGroup.srcLeft = parseFloat(spritesGroup.srcLeft);
 	spritesGroup.srcLeft = !isNaN(spritesGroup.srcLeft) ? spritesGroup.srcLeft : parseFloat(this.spritesGroups.srcLeft);
 	spritesGroup.srcLeft = !isNaN(spritesGroup.srcLeft) ? spritesGroup.srcLeft : parseFloat(CB_GraphicSprites.LEFT_SOURCE_DEFAULT) || 0;

@@ -28,7 +28,7 @@
  *  @typedef {Object} CB_GraphicSprites.SUBSPRITE_OBJECT
  *  @property {string|*} [id='CB_GraphicSprites.subSprite_' + CB_GraphicSprites._idSubSpriteUnique++] - Identifier of the sub-sprite. It should be unique. It must be a value which evaluates to true. By default, it is generated automatically (with an internal counter).
  *  @property {*} [src=this.parent.src|""] - Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. They can be used for any kind of source you may think of, including (but not limited to) one sprites sheet or more, one atlas or more, etc. or even a mix of all of them. If not provided, as default it will use the value from the sprite that it belongs to.
- *  @property {string} [srcType=this.parent.srcType|{@link CB_GraphicSprites.SRC_TYPES.DEFAULT}] - Type of the source of origin. If not provided, as default it will use the value from the sprite that it belongs to. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
+ *  @property {string} [srcType=this.parent.srcType|{@link CB_GraphicSprites.SRC_TYPES_DEFAULT}] - Type of the source of origin. If not provided, as default it will use the value from the sprite that it belongs to. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
  *  @property {number} [srcLeft=this.parent.srcLeft|{@link CB_GraphicSprites.LEFT_SOURCE_DEFAULT}] - Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from the sprite that it belongs to.
  *  @property {number} [srcTop=this.parent.srcTop|{@link CB_GraphicSprites.TOP_SOURCE_DEFAULT}] - Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from the sprite that it belongs to.
  *  @property {number} [srcWidth=this.parent.srcWidth|{@link CB_GraphicSprites.WIDTH_SOURCE_DEFAULT}] - Width of the original source. Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from the sprite that it belongs to.
@@ -88,7 +88,7 @@
  *  @typedef {Object} CB_GraphicSprites.SPRITE_OBJECT
  *  @property {string|*} [id='CB_GraphicSprites.sprite_' + CB_GraphicSprites._idSpriteUnique++] - Identifier of the sprite. It should be unique. Recommended. It must be a value which evaluates to true. By default, it is generated automatically (with an internal counter).
  *  @property {*} [src=this.parent.src|""] - Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. They can be used for any kind of source you may think of, including (but not limited to) one sprites sheet or more, one atlas or more, etc. or even a mix of all of them. If not provided, as default it will use the value from the sprites group that it belongs to.
- *  @property {string} [srcType=this.parent.srcType|{@link CB_GraphicSprites.SRC_TYPES.DEFAULT}] - Type of the source of origin. If not provided, as default it will use the value from the sprites group that it belongs to. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
+ *  @property {string} [srcType=this.parent.srcType|{@link CB_GraphicSprites.SRC_TYPES_DEFAULT}] - Type of the source of origin. If not provided, as default it will use the value from the sprites group that it belongs to. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
  *  @property {number} [srcLeft=this.parent.srcLeft|{@link CB_GraphicSprites.LEFT_SOURCE_DEFAULT}] - Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from the sprites group that it belongs to.
  *  @property {number} [srcTop=this.parent.srcTop|{@link CB_GraphicSprites.TOP_SOURCE_DEFAULT}] - Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from the sprites group that it belongs to.
  *  @property {number} [srcWidth=this.parent.srcWidth|{@link CB_GraphicSprites.WIDTH_SOURCE_DEFAULT}] - Width of the original source. Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from the sprites group that it belongs to.
@@ -196,7 +196,7 @@
  *  @typedef {Object} CB_GraphicSprites.SPRITES_OBJECT
  *  @property {string|*} [id='CB_GraphicSprites_' + CB_GraphicSprites._idUnique++] - Identifier of the group of graphic sprites (also used as the {@link CB_GraphicSprites.id} property for the {@link CB_GraphicSprites} object). It should be unique. Recommended. It must be a value which evaluates to true. By default, it is generated automatically (with an internal counter).
  *  @property {*} [src=""] - Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. They can be used for any kind of source you may think of, including (but not limited to) one sprites sheet or more, one atlas or more, etc. or even a mix of all of them.
- *  @property {string} [srcType={@link CB_GraphicSprites.SRC_TYPES.DEFAULT}] - Type of the source of origin. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
+ *  @property {string} [srcType={@link CB_GraphicSprites.SRC_TYPES_DEFAULT}] - Type of the source of origin. It should point to a property of the {@link CB_GraphicSprites.SRC_TYPES} object. You can use other values of the {@link CB_GraphicSprites.SRC_TYPES} object or create new ones.
  *  @property {number} [srcLeft={@link CB_GraphicSprites.LEFT_SOURCE_DEFAULT}] - Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from {@link CB_GraphicSprites.LEFT_SOURCE_DEFAULT}.
  *  @property {number} [srcTop={@link CB_GraphicSprites.TOP_SOURCE_DEFAULT}] - Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from {@link CB_GraphicSprites.TOP_SOURCE_DEFAULT}.
  *  @property {number} [srcWidth={@link CB_GraphicSprites.WIDTH_SOURCE_DEFAULT}] - Width of the original source. Unit agnostic (only numeric values are allowed). If not provided, as default it will use the value from {@link CB_GraphicSprites.WIDTH_SOURCE_DEFAULT}.
@@ -343,6 +343,7 @@ CB_GraphicSprites.prototype.type = "sprites";
  */
 CB_GraphicSprites.SRC_TYPES =
 {
+	DEFAULT: 0,
 	IMAGE: 0,
 	TEXT: 1,
 	SEGMENT: 2,
@@ -357,15 +358,18 @@ CB_GraphicSprites.SRC_TYPES =
 	BITMAP: 11,
 	MAP: 12
 }
-
-
+/**
+ * Alias for {@link CB_GraphicSprites.SRC_TYPES_DEFAULT}.
+ *  @constant CB_GraphicSprites.SRC_TYPES.DEFAULT
+ *  @see {@link CB_GraphicSprites.SRC_TYPES_DEFAULT}
+ */
 /**
  * Default "srcType", the type of the original source.
  *	@constant
  *  @type {integer}
- *  @default
+ *  @default {@link CB_GraphicSprites.SRC_TYPES.IMAGE}
  */
-CB_GraphicSprites.SRC_TYPES.DEFAULT = CB_GraphicSprites.SRC_TYPES.IMAGE;
+CB_GraphicSprites.SRC_TYPES_DEFAULT = CB_GraphicSprites.SRC_TYPES.DEFAULT = CB_GraphicSprites.SRC_TYPES.IMAGE;
 
 /**
  * Default width ("srcWidth") of the original source. Unit agnostic.
@@ -512,7 +516,7 @@ CB_GraphicSprites.prototype.insertSprites = CB_GraphicSprites.prototype.insertSp
 	this.parent = this.spritesGroup.parent = spritesGroup.parent;
 	this.id = this.spritesGroup.id = spritesGroup.id = spritesGroup.id || "CB_GraphicSprites_" + CB_GraphicSprites._idUnique++;
 	this.spritesGroup.src = spritesGroup.src = spritesGroup.src || !isNaN(spritesGroup.src) && spritesGroup.src !== null ? spritesGroup.src : "";
-	this.spritesGroup.srcType = spritesGroup.srcType = spritesGroup.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT;
+	this.spritesGroup.srcType = spritesGroup.srcType = spritesGroup.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT;
 	spritesGroup.srcLeft = parseFloat(spritesGroup.srcLeft);
 	this.spritesGroup.srcLeft = spritesGroup.srcLeft = !isNaN(spritesGroup.srcLeft) ? spritesGroup.srcLeft : parseFloat(CB_GraphicSprites.LEFT_SOURCE_DEFAULT) || 0;
 	spritesGroup.left = parseFloat(spritesGroup.left);
@@ -664,7 +668,7 @@ CB_GraphicSprites.prototype.insertSprite = CB_GraphicSprites.prototype.insert = 
 	sprite.time = !isNaN(parseInt(sprite.time)) ? parseInt(sprite.time) : 0;
 	sprite.id = sprite.id || "CB_GraphicSprites.sprite_" + CB_GraphicSprites._idSpriteUnique++;
 	sprite.src = sprite.src || !isNaN(sprite.src) && sprite.src !== null ? sprite.src : this.spritesGroup.src || !isNaN(this.spritesGroup.src) && this.spritesGroup.src !== null ? this.spritesGroup.src : "";
-	sprite.srcType = sprite.srcType || this.spritesGroup.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT;
+	sprite.srcType = sprite.srcType || this.spritesGroup.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT;
 	sprite.srcLeft = parseFloat(sprite.srcLeft);
 	sprite.srcLeft = !isNaN(sprite.srcLeft) ? sprite.srcLeft : parseFloat(this.spritesGroup.srcLeft);
 	sprite.srcLeft = !isNaN(sprite.srcLeft) ? sprite.srcLeft : parseFloat(CB_GraphicSprites.LEFT_SOURCE_DEFAULT) || 0;
@@ -945,7 +949,7 @@ CB_GraphicSprites.prototype.insertSubSprite = function(subSprite, sprite, avoidU
 	subSprite.time = !isNaN(parseInt(subSprite.time)) ? parseInt(subSprite.time) : !isNaN(parseInt(sprite.time)) ? parseInt(sprite.time) : 0;
 	subSprite.id = subSprite.id || "CB_GraphicSprites.subSprite_" + CB_GraphicSprites._idSubSpriteUnique++;
 	subSprite.src = subSprite.src || !isNaN(subSprite.src) && subSprite.src !== null ? subSprite.src : sprite.src || !isNaN(sprite.src) && sprite.src !== null ? sprite.src : this.spritesGroup.src || !isNaN(this.spritesGroup.src) && this.spritesGroup.src !== null ? this.spritesGroup.src : "";
-	subSprite.srcType = subSprite.srcType || sprite.srcType || this.spritesGroup.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT;
+	subSprite.srcType = subSprite.srcType || sprite.srcType || this.spritesGroup.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT;
 	subSprite.srcLeft = parseFloat(subSprite.srcLeft);
 	subSprite.srcLeft = !isNaN(subSprite.srcLeft) ? subSprite.srcLeft : parseFloat(sprite.srcLeft);
 	subSprite.srcLeft = !isNaN(subSprite.srcLeft) ? subSprite.srcLeft : parseFloat(this.spritesGroup.srcLeft);

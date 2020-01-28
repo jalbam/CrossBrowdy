@@ -143,7 +143,7 @@
 		//'my_sprites_groups_1' ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object). Some missing or non-valid properties will get a default value:
 		id: "my_sprites_groups_1", //Identifier of the sprites groups object (also used for the 'CB_GraphicSpritesScene' object). Optional but recommended. It should be unique. By default, it is generated automatically.
 		src: undefined, //The value for the "src" property which will be used as default if not provided (or the provided one was wrong) in the given 'CB_GraphicSprites.SPRITES_OBJECT' objects (in the "spritesGroups" property). Default: "".
-		srcType: CB_GraphicSprites.SRC_TYPES.IMAGE, //The value for the "srcType" property which will be used as default if not provided (or the provided one was wrong) in the given 'CB_GraphicSprites.SPRITES_OBJECT' objects (in the "spritesGroups" property). Default: CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+		srcType: CB_GraphicSprites.SRC_TYPES.IMAGE, //The value for the "srcType" property which will be used as default if not provided (or the provided one was wrong) in the given 'CB_GraphicSprites.SPRITES_OBJECT' objects (in the "spritesGroups" property). Default: CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 		srcLeft: 0, //The value for the "srcLeft" property which will be used as default if not provided (or the provided one was wrong) in the given 'CB_GraphicSprites.SPRITES_OBJECT' objects (in the "spritesGroups" property). Default: CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 		srcTop: 0, //The value for the "srcTop" property which will be used as default if not provided (or the provided one was wrong) in the given 'CB_GraphicSprites.SPRITES_OBJECT' objects (in the "spritesGroups" property). Default: CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 		srcWidth: 64, //The value for the "srcWidth" property which will be used as default if not provided (or the provided one was wrong) in the given 'CB_GraphicSprites.SPRITES_OBJECT' objects. Default: CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -171,7 +171,7 @@
 			{
 				id: "my_sprites_1", //Identifier of the sprites group (also used for the 'CB_GraphicSprites' object). Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 				src: "path/to/image.gif", //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-				srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+				srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 				srcLeft: undefined, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 				srcTop: undefined, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 				srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -192,7 +192,7 @@
 					{
 						id: "my_sprite_1", //Identifier for the sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 						src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 						srcLeft: undefined, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 						srcTop: undefined, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 						srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -213,7 +213,7 @@
 							{
 								id: "my_subsprite_1", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 10, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 20, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -232,7 +232,7 @@
 							{
 								id: "my_subsprite_2", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 20, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 40, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -253,7 +253,7 @@
 					{
 						id: "my_sprite_2", //Identifier for the sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 						src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 						srcLeft: undefined, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 						srcTop: undefined, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 						srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -274,7 +274,7 @@
 							{
 								id: "my_subsprite_3", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 30, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 60, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -293,7 +293,7 @@
 							{
 								id: "my_subsprite_4", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 40, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 80, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -316,7 +316,7 @@
 			{
 				id: "my_sprites_2", //Identifier of the sprites group (also used for the 'CB_GraphicSprites' object). Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 				src: "path/to/image2.gif", //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-				srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+				srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 				srcLeft: undefined, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 				srcTop: undefined, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 				srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -337,7 +337,7 @@
 					{
 						id: "my_sprite_3", //Identifier for the sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 						src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 						srcLeft: undefined, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 						srcTop: undefined, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 						srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -358,7 +358,7 @@
 							{
 								id: "my_subsprite_5", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 10, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 20, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -377,7 +377,7 @@
 							{
 								id: "my_subsprite_6", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 20, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 40, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -398,7 +398,7 @@
 					{
 						id: "my_sprite_4", //Identifier for the sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 						src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+						srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 						srcLeft: undefined, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 						srcTop: undefined, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 						srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -419,7 +419,7 @@
 							{
 								id: "my_subsprite_7", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 30, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 60, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
@@ -438,7 +438,7 @@
 							{
 								id: "my_subsprite_8", //Identifier for the sub-sprite. Optional but recommended. It should be unique. If not provided, it will be calculated automatically.
 								src: undefined, //Source of origin. Can be a path or identifier of an image, text, bitmap, 3D object, etc. Optional but recommended. Default: this.parent.src || "".
-								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES.DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
+								srcType: undefined, //Type of the source of origin. Optional. Default: this.parent.srcType || CB_GraphicSprites.SRC_TYPES_DEFAULT. You can use other values of the 'CB_GraphicSprites.SRC_TYPES' object or create new ones.
 								srcLeft: 40, //Left (horizontal) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcLeft || CB_GraphicSprites.LEFT_SOURCE_DEFAULT.
 								srcTop: 80, //Top (vertical) position in the original source (having in mind its real width and height). Unit agnostic (only numeric values allowed). Default: this.parent.srcTop || CB_GraphicSprites.TOP_SOURCE_DEFAULT.
 								srcWidth: undefined, //Width of the original source. Unit agnostic (only numeric values allowed). Default: this.parent.srcWidth || CB_GraphicSprites.WIDTH_SOURCE_DEFAULT.
