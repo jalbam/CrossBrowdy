@@ -1034,8 +1034,12 @@ a.download_old:hover, a.download_examples:hover
 	height:22%;
 	height:6vmin;
 
+	font-size:12px;
+	font-size:0.6em;
+	font-size:60%;
 	font-size:3vmin;
-	line-height:2vmin;
+	
+	line-height:12px;
 	
 	border-radius:2px;
 	-moz-border-radius:2px;
