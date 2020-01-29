@@ -17,6 +17,10 @@ echo.
 echo Removing empty folders...
 ROBOCOPY crossbrowdy.com\files\examples\ crossbrowdy.com\files\examples\ /s /move /njh /njs
 
+echo.
+echo Copying LICENSE file...
+copy LICENSE crossbrowdy.com\files\examples\
+
 REM Compresses all generating a ZIP file (source: cam029 @ https://superuser.com/a/1151380):
 echo.
 echo Compressing all and generating ZIP file...

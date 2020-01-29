@@ -1,4 +1,4 @@
-/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License. */
 /* Using timbre.js library internally: https://mohayonao.github.io/timbre.js/ */
 /* Using subcollider.js library internally: https://mohayonao.github.io/subcollider/ */
 

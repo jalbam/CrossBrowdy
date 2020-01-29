@@ -1,4 +1,4 @@
-/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License. */
 
 //Defines the needed properties:
 CB_GEM.REM = CB_GEM.REM || null; //It will store the CB_REM object (Graphic Rendering Engine Module object).

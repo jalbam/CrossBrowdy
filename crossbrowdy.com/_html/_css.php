@@ -446,19 +446,19 @@ address { font-style:normal; }
 	padding-top:20px;
 	padding-bottom:50px;
 	
-	font-size:20px !important;
-	font-size:0.7em !important;
-	font-size:70% !important;
-	font-size:2.1vmin !important;
+	font-size:20px;
+	font-size:0.7em;
+	font-size:70%;
+	font-size:2.1vmin;
 }
 @media (orientation: portrait)
 {
 	.author
 	{
-		font-size:12px !important;
-		font-size:0.6em !important;
-		font-size:60% !important;
-		font-size:3vmin !important;
+		font-size:12px;
+		font-size:0.6em;
+		font-size:60%;
+		font-size:3vmin;
 	}
 }
 
@@ -475,8 +475,15 @@ address { font-style:normal; }
 
 hr
 {
-	margin-top:20px;
+	color:#eeeeee;
+	margin-top:40px;
 	margin-bottom:10px;
+	
+	-moz-box-shadow:1px 2px 6px 1px #bbbbbb;
+	-webkit-box-shadow:1px 2px 6px 1px #bbbbbb;
+	-o-box-shadow:1px 2px 6px 1px #bbbbbb;
+	-khtml-box-shadow:1px 2px 6px 1px #bbbbbb;
+	box-shadow:1px 2px 6px 1px #bbbbbb;
 }
 
 .license
@@ -490,19 +497,19 @@ hr
 	padding-top:0px;
 	padding-bottom:0px;
 	
-	font-size:20px !important;
-	font-size:0.7em !important;
-	font-size:70% !important;
-	font-size:2.1vmin !important;
+	font-size:14px;
+	font-size:0.5em;
+	font-size:50%;
+	font-size:1.5vmin;
 }
 @media (orientation: portrait)
 {
 	.license
 	{
-		font-size:12px !important;
-		font-size:0.6em !important;
-		font-size:60% !important;
-		font-size:3vmin !important;
+		font-size:11px;
+		font-size:0.46em;
+		font-size:46%;
+		font-size:2.3vmin;
 	}
 }
 

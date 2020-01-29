@@ -1,4 +1,4 @@
-/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License. */
 /* Using jsfx library internally: https://github.com/loov/jsfx */
 
 CB_init(main); //It will call the "main" function when ready.

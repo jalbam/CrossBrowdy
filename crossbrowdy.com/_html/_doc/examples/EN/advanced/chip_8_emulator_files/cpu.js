@@ -1,4 +1,4 @@
-/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License. */
 /* Documentation source: http://www.multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/ */
 /* Some code by Rodrigo Navarro taken (modified) from: https://github.com/reu/chip8.js/blob/master/src/cpu.js */
 

@@ -1,4 +1,4 @@
-/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. */
+/* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License. */
 
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";

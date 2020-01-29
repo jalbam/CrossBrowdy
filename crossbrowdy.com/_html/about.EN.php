@@ -50,34 +50,6 @@
 	</div>
 </section>
 
-<hr />
-
-<div class="category_text">
-	<!-- License: -->
-	<p class="license">
-		<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><img alt="Creative Commons Attribution 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" width="88" height="31" /></a><br />
-		<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CrossBrowdy web site content (<a href="https://crossbrowdy.com/" target="_blank">crossbrowdy.com</a>)</span> by
-		<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a> is licensed under a
-		<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.<br />
-		Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://crossbrowdy.com/" rel="dct:source" target="_blank">https://crossbrowdy.com/</a>.<br />
-		Permissions beyond the scope of this license may be available at
-		<a xmlns:cc="http://creativecommons.org/ns#" href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" rel="cc:morePermissions" target="_blank">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
-	</p>
-	<p class="license">
-		<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><a href="https://crossbrowdy.com/api" target="_blank">CrossBrowdy API documentation</a></span> by
-		<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a> is licensed under a
-		<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.<br />
-		Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://crossbrowdy.com/api" rel="dct:source" target="_blank">https://crossbrowdy.com/api</a>.<br />
-		Permissions beyond the scope of this license may be available at
-		<a xmlns:cc="http://creativecommons.org/ns#" href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" rel="cc:morePermissions" target="_blank">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
-	</p>
-	<p class="license">
-		The code written by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a>, which genuinely belongs to the CrossBrowdy project, is licensed under the <a href="https://choosealicense.com/licenses/bsd-2-clause/" target="_blank">2-Clause BSD License license</a> (aka &quot;<i>Simplified BSD License</i>&quot; or &quot;<i>FreeBSD License</i>&quot;).<br />
-		More information at
-		<a xmlns:cc="http://creativecommons.org/ns#" href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" rel="cc:morePermissions" target="_blank">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
-	</p>
-</div>
-
 <?php
 	/*
 		<script type="application/ld+json">

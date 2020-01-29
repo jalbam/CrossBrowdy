@@ -122,7 +122,7 @@
 							CrossBrowdy also provides a splash screen that can be disabled by the developers. When it is enabled, this splash screen is shown when CrossBrowdy is loading. Keeping it enable can be a good idea because it will be enough to show the credits and respect these rules.
 						</p>
 						<p>
-							<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CrossBrowdy web site content (<a href="https://crossbrowdy.com/" target="_blank">crossbrowdy.com</a>)</span> by
+							<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CrossBrowdy web site content (<a href="https://crossbrowdy.com/" target="_blank">crossbrowdy.com</a>, including tutorials and examples)</span> by
 							<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a> is licensed under a
 							<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a> (SPDX short identifier: &quot;<i>CC BY 4.0</i>&quot;).<br />
 						</p>
