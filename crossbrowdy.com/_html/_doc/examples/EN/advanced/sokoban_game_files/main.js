@@ -255,9 +255,7 @@ function main()
 						function(alias, element, elementData, elementMapParent, elementLoopHeightDefault, x, y)
 						{
 							return ELEMENTS_HEIGHT;
-						},
-					//Renews the internal cache by creating a new copy of the cached element ('CB_GraphicSprites', 'CB_GraphicSprites.SPRITE_OBJECT' or 'CB_GraphicSprites.SUBSPRITE_OBJECT') every time it is rendered:
-					renewCache: true //Useful to represent each element in a different way (for example, rotated using different angles). NOTE: performance will be decreased using this.
+						}
 				},
 				sprites:
 				[
@@ -1006,11 +1004,13 @@ function updatePlayerPosition(mapArray)
 //Prepares sound effects:
 var sfx = null; //Global object to play the sounds.
 var prepareSoundFxExecuted = false;
-function prepareSoundFx()
+function prepareSoundFx(forceReload)
 {
-	if (prepareSoundFxExecuted) { return; }
+	if (!forceReload && prepareSoundFxExecuted) { return; }
 
 	prepareSoundFxExecuted = true;
+
+	CB_console("Preparing sound FX" + (forceReload ? " (forcing reload)" : "") + "...");
 	
 	var jsfxObject = CB_Speaker.getJsfxObject(); //Gets the 'jsfx' object.
 	if (jsfxObject !== null)
@@ -1045,8 +1045,15 @@ function prepareSoundFx()
 //Plays the desired sound effect (by its identifier):
 function playSoundFx(id)
 {
-	if (!sfx || typeof(sfx[id]) !== "function") { return; }
-	else if (!CB_GEM.data.soundEnabled) { return; }
+	if (!CB_GEM.data.soundEnabled) { return; }
+	else if (!sfx || typeof(sfx[id]) !== "function")
+	{
+		CB_console("Sound FX '" + id + "' cannot be played! An user-driven event might be needed to be fired before being able to play sounds.");
+		prepareSoundFx(true); //Forces reloading sounds.
+		if (!sfx || typeof(sfx[id]) !== "function") { return; }
+	}
+
+	CB_console("Playing sound FX: " + id);
 
 	//Note: at least the first time, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
 	sfx[id]();

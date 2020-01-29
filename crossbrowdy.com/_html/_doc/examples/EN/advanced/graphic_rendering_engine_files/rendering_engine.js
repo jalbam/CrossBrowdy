@@ -870,6 +870,11 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 							elementLoop = elementLoop.data.beforeDrawing.call(elementLoop, elementLoop, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element);
 							if (!elementLoop || typeof(elementLoop.isDisabled) !== "function" || elementLoop.isDisabled()) { continue; }
 						}
+						else if (elementLoop.isSprites && elementLoop.spritesGroup && elementLoop.spritesGroup.data && typeof(elementLoop.spritesGroup.data.beforeDrawing) === "function")
+						{
+							elementLoop = elementLoop.spritesGroup.data.beforeDrawing.call(elementLoop, elementLoop, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element);
+							if (!elementLoop || typeof(elementLoop.isDisabled) !== "function" || elementLoop.isDisabled()) { continue; }
+						}
 
 						this._onDrawMapElement = function() { CB_REM._elementDrawn(elementLoop, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element, undefined, true); }
 
@@ -992,30 +997,12 @@ CB_REM._getMapElement = function(elementIndexOrId, elementData, mapElement, CB_G
 		element = CB_REM._MAP_ELEMENTS_CACHE[mapElement.id].elements[elementCacheIndex] || null;
 	}
 	
-	//If found in the cache, returns it and exits:
-	if (element !== null) { return element; }
-	//...otherwise, finds the element in the 'CB_GraphicSpritesScene' object and caches it:
-	else
+	//If the element has not been found in the cache, finds the element in the 'CB_GraphicSpritesScene' object and caches it:
+	if (element === null)
 	{
 		element = CB_REM._findElement(elementIndexOrId, elementData, mapElement, CB_GraphicSpritesSceneObject);
 		if (element !== null)
 		{
-			//Calculates the width and height attributes:
-			element.width =
-				typeof(elementData.width) === "function" ? elementData.width(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsWidthDefault, mapX, mapY) :
-				!isNaN(parseFloat(elementData.width)) ? parseFloat(elementData.width) :
-				typeof(mapElement.data.elementsWidth) === "function" ? mapElement.data.elementsWidth(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsWidthDefault, mapX, mapY) :
-				!isNaN(parseFloat(mapElement.data.elementsWidth)) ? parseFloat(mapElement.data.elementsWidth) :
-				element.width ||
-				elementsWidthDefault;
-			element.height =
-				typeof(elementData.height) === "function" ? elementData.height(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsHeightDefault, mapX, mapY) :
-				!isNaN(parseFloat(elementData.height)) ? parseFloat(elementData.height) :
-				typeof(mapElement.data.elementsHeight) === "function" ? mapElement.data.elementsHeight(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsHeightDefault, mapX, mapY) :
-				!isNaN(mapElement.data.elementsHeight) ? parseFloat(mapElement.data.elementsHeight) :
-				element.height ||
-				elementsHeightDefault;
-
 			//Stores the element in the cache:
 			if (elementData.destroyOnRewnew && CB_REM._MAP_ELEMENTS_CACHE[mapElement.id].elements[elementCacheIndex] !== element)
 			{
@@ -1029,6 +1016,26 @@ CB_REM._getMapElement = function(elementIndexOrId, elementData, mapElement, CB_G
 			}
 			CB_REM._MAP_ELEMENTS_CACHE[mapElement.id].elements[elementCacheIndex] = element;
 		}
+	}
+	
+	//If the element has been found, updates its attributes:
+	if (element !== null)
+	{
+		//Calculates the width and height attributes:
+		element.width =
+			typeof(elementData.width) === "function" ? elementData.width(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsWidthDefault, mapX, mapY) :
+			!isNaN(parseFloat(elementData.width)) ? parseFloat(elementData.width) :
+			typeof(mapElement.data.elementsWidth) === "function" ? mapElement.data.elementsWidth(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsWidthDefault, mapX, mapY) :
+			!isNaN(parseFloat(mapElement.data.elementsWidth)) ? parseFloat(mapElement.data.elementsWidth) :
+			element.width ||
+			elementsWidthDefault;
+		element.height =
+			typeof(elementData.height) === "function" ? elementData.height(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsHeightDefault, mapX, mapY) :
+			!isNaN(parseFloat(elementData.height)) ? parseFloat(elementData.height) :
+			typeof(mapElement.data.elementsHeight) === "function" ? mapElement.data.elementsHeight(mapElement.src[mapY][mapX], element, elementData, mapElement, elementsHeightDefault, mapX, mapY) :
+			!isNaN(mapElement.data.elementsHeight) ? parseFloat(mapElement.data.elementsHeight) :
+			element.height ||
+			elementsHeightDefault;
 	}
 	
 	return element;
@@ -1046,12 +1053,15 @@ CB_REM._findElement = function(elementIndexOrId, elementData, mapElement, CB_Gra
 		else { element = CB_GraphicSpritesSceneObject.get(elementIndexOrId, null); }
 	}
 	
-	if (element !== null && elementData.renewCache) //'CB_GraphicSprites' object found.
+	if (element !== null) //'CB_GraphicSprites' object found.
 	{
-		//Makes a copy of the 'CB_GraphicSprites' to renew it:
-		element = element.getCopy(false, false);
-		element.parent.spritesGroups.items[element.position] = element;
-		element.parent.spritesGroups.itemsByZIndex[element.positionByZIndex] = element;
+		if (elementData.renewCache)
+		{
+			//Makes a copy of the 'CB_GraphicSprites' to renew it:
+			element = element.getCopy(false, false);
+			element.parent.spritesGroups.items[element.position] = element;
+			element.parent.spritesGroups.itemsByZIndex[element.positionByZIndex] = element;
+		}
 		element.data = element.spritesGroup.data;
 	}
 	else
