@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>CrossBrowdy examples</title>
+		<script src="CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+		<script type="text/javascript" language="javascript">
+		<!--
+			CB_init(main); //It will call the "main" function when ready.
+
+			//This function will be called when CrossBrowdy is ready:
+			function main()
+			{
+				CB_console("CrossBrowdy started!");
+				CB_Elements.insertContentById("loading_message", "CrossBrowdy started!")
+			}
+		// -->
+		</script>
+		<style type="text/css">
+		<!--
+			#loading_message, #links, h1, #visit_crossbrowdy_com { text-align:center; }
+			h1 { margin-bottom:0px; }
+			h1 { color:#aa0000; }
+			
+			h2 { margin-top:30px; margin-bottom:0px; }
+			h2 { color:#aaaa00; }
+			#loading_message { color:#00aa00; }
+
+			#visit_crossbrowdy_com { color:#008888; margin-top:30px; }
+			
+			a { color:#0000aa; text-decoration:none; }
+			a:hover { color:#0000dd; text-decoration:underline; }
+			
+			hr { margin-top:30px; background-color:#cccccc; border:0px; height:1px; }
+			
+			div .license { text-align:center; color:#777777; }
+			div .license a { color:#999999; text-decoration:underline; }
+			div .license a:hover { color:#555555; text-decoration:none; }
+			
+			#author { text-align:right; color:#555555; }
+		-->
+		</style>
+	</head>
+	<body>
+		<h1><a href="https://crossbrowdy.com/" target="_blank">CrossBrowdy</a> examples</h1>
+		<div id="loading_message">Loading CrossBrowdy...</div>
+		<div id="visit_crossbrowdy_com">Visit <a href="https://crossbrowdy.com/" target="_blank">CrossBrowdy.com</a> for more</div>
+		<div id="links">{{examples_links}}</div>
+		<hr>
+		<div>
+			<!-- License: -->
+			<p class="license">
+				<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">CrossBrowdy web site content (<a href="https://crossbrowdy.com/" target="_blank">crossbrowdy.com</a>, including tutorials and examples)</span> by
+				<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a> is licensed under a
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.<br />
+				Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://crossbrowdy.com/" rel="dct:source" target="_blank">https://crossbrowdy.com/</a>.<br />
+				Permissions beyond the scope of this license may be available at
+				<a xmlns:cc="http://creativecommons.org/ns#" href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" rel="cc:morePermissions" target="_blank">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
+			</p>
+			<p class="license">
+				<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title"><a href="https://crossbrowdy.com/api" target="_blank">CrossBrowdy API documentation</a></span> by
+				<a xmlns:cc="http://creativecommons.org/ns#" href="https://joanalbamaldonado.com/" property="cc:attributionName" rel="cc:attributionURL" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a> is licensed under a
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.<br />
+				Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://crossbrowdy.com/api" rel="dct:source" target="_blank">https://crossbrowdy.com/api</a>.<br />
+				Permissions beyond the scope of this license may be available at
+				<a xmlns:cc="http://creativecommons.org/ns#" href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" rel="cc:morePermissions" target="_blank">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
+			</p>
+			<p class="license">
+				The code written by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a>, which genuinely belongs to the CrossBrowdy project, is licensed under the <a href="https://choosealicense.com/licenses/bsd-2-clause/" target="_blank">2-Clause BSD License license</a> (aka &quot;<i>Simplified BSD License</i>&quot; or &quot;<i>FreeBSD License</i>&quot;).<br />
+				More information at
+				<a href="https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license" target="_blank">https://crossbrowdy.com/about#what_is_the_crossbrowdy_copyright_and_license</a>.
+			</p>
+		</div>
+		<footer><address><div id="author"><a href="https://crossbrowdy.com/" target="_blank">CrossBrowdy</a> by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado</a></div></address></footer>
+	</body>
+</html>

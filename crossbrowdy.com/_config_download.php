@@ -4,7 +4,7 @@
 	define("DOWNLOAD_FOLDER", "download/");
 	define("DOWNLOAD_FOLDER_REAL", "files/");
 
-	define("EXAMPLES_FILENAME_BASE", "examples");
+	define("EXAMPLES_FILENAME_BASE", "CrossBrowdy_examples");
 	define("EXAMPLES_FILENAME_PATH_ZIP", DOWNLOAD_FOLDER . EXAMPLES_FILENAME_BASE . ".zip");
 	define("EXAMPLES_FILENAME_PATH_ZIP_REAL", DOWNLOAD_FOLDER_REAL . EXAMPLES_FILENAME_BASE . ".zip");
 	

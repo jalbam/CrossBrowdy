@@ -21,13 +21,17 @@ echo.
 echo Copying LICENSE file...
 copy LICENSE crossbrowdy.com\files\examples\
 
+echo.
+echo Generating index.html from the template...
+call php _scripts/create_examples_index.php >crossbrowdy.com\files\examples\index.html
+
 REM Compresses all generating a ZIP file (source: cam029 @ https://superuser.com/a/1151380):
 echo.
 echo Compressing all and generating ZIP file...
-del /s /q crossbrowdy.com\files\examples.zip
+del /s /q crossbrowdy.com\files\CrossBrowdy_examples.zip
 setlocal
 	set sourceDir=crossbrowdy.com\files\examples\
-	set zipFile=crossbrowdy.com\files\examples.zip
+	set zipFile=crossbrowdy.com\files\CrossBrowdy_examples.zip
 
 	REM Create PowerShell script:
 	echo Write-Output 'Custom PowerShell profile in effect!'    > %~dp0TempZipScript.ps1
