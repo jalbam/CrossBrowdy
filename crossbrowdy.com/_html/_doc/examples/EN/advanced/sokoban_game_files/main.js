@@ -1001,6 +1001,16 @@ function updatePlayerPosition(mapArray)
 }
 
 
+//Skips music loader (to play silent mode):
+function skipLoadingMusic()
+{
+	CB_console("Skipping loading music...");
+	CB_GEM.data.musicEnabled = false;
+	CB_Elements.hideById("music_loader_checker"); //Hides the music loader.
+	CB_Elements.showById("start_button"); //Shows the start button.
+}
+
+
 //Prepares sound effects:
 var sfx = null; //Global object to play the sounds.
 var prepareSoundFxExecuted = false;
@@ -1066,7 +1076,8 @@ var songTitles = []; //Array to keep the title of all the loaded songs.
 var prepareMusicExecuted = false;
 function prepareMusic()
 {
-	if (prepareMusicExecuted) { return; }
+	if (!CB_GEM.data.musicEnabled) { return; }
+	else if (prepareMusicExecuted) { return; }
 	prepareMusicExecuted = true;
 	
 	CB_console("Preparing music...");
@@ -1207,9 +1218,7 @@ function prepareMusic()
 		CB_console("[CB_AudioFileSpritesPool] Audio file sprites pool object failed: " + error);
 		
 		//Lets continue anyway:
-		CB_GEM.data.musicEnabled = false;
-		CB_Elements.hideById("music_loader_checker"); //Hides the music loader.
-		CB_Elements.showById("start_button"); //Shows the start button.
+		skipMusicLoader();
 	};
 
 	//Defines the function to call when the audio file sprites pool object is created:
@@ -1353,7 +1362,8 @@ function prepareMusic()
 var showMusicCheckerCalled = false; //To prevent showing the checker again.
 function showMusicChecker()
 {
-	if (showMusicCheckerCalled) { return; }
+	if (!CB_GEM.data.musicEnabled) { return; }
+	else if (showMusicCheckerCalled) { return; }
 	showMusicCheckerCalled = true;
 	CB_Elements.insertContentById("music_progress", ""); //Empties the progress shown.
 	CB_Elements.insertContentById("button_load_check_music", "Step 2:<br />Check music");
@@ -1366,7 +1376,8 @@ function showMusicChecker()
 //Checks the music:
 function checkMusic()
 {
-	if (!(audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be checked because 'audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
+	if (!CB_GEM.data.musicEnabled) { return; }
+	else if (!(audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be checked because 'audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
 	
 	CB_console("[CB_AudioFileSpritesPool] Checking music (status: " + audioFileSpritesPool.getStatusString() + ")...");
 	CB_Elements.hideById("button_load_check_music"); //Hides the music checker button.
@@ -1398,9 +1409,7 @@ function checkMusic()
 			CB_console("[CB_AudioFileSpritesPool] Total unchecked CB_AudioFile objects before calling this method: " + uncheckedObjects);
 			
 			//Lets continue anyway:
-			CB_GEM.data.musicEnabled = false;
-			CB_Elements.hideById("music_loader_checker"); //Hides the music checker.
-			CB_Elements.showById("start_button"); //Shows the start button.
+			skipMusicLoader();
 		}
 	);	
 }

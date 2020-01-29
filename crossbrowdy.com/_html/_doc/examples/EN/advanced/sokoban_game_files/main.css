@@ -9,6 +9,8 @@ button { cursor:pointer; cursor:hand; }
 span { color:#aa0000; }
 #debug_switch { position:absolute; top:0px; right:6px; z-index:2; color:#ffaa00; }
 #debug_switch, label, #debug_checkbox  { cursor:hand; cursor:pointer; }
+#skip_music_loader { position:absolute; bottom:10px; left:10px; cursor:hand; cursor:pointer; }
+#skip_music_loader:hover { cursor:hand; cursor:pointer; color:#0000aa; }
 #loading, #music_loader_checker
 {
 	position:absolute;
