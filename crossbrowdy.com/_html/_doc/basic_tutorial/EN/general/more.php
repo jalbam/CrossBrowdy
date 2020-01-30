@@ -11,12 +11,12 @@
 		//Filepath:
 		"path/to/script.js",
 		//Callback when the file has been loaded successfully. Optional. Belongs to "callbackOk":
-		function (filePath, callbackOk, callbackTimeout, timeoutMs)
+		function (filePath, callbackOk, callbackError, timeoutMs)
 		{
-			CB_console("File loaded!"); //Note that "callbackTimeout" could still be called if we wanted to.
+			CB_console("File loaded!"); //Note that "callbackError" could still be called if we wanted to.
 		},
-		//Callback when the file could not be loaded on time, after the timeout expires. Optional. Belongs to "callbackTimeout"):
-		function (filePath, callbackOk, callbackTimeout, timeoutMs)
+		//Callback when there is any error including the file or it cannot be included after the defined timeout. Optional. Belongs to "callbackError":
+		function (filePath, callbackOk, callbackError, timeoutMs)
 		{
 			CB_console("File could not be loaded on time!"); //Note that "callbackOk" could still be called if we wanted to.
 		},
