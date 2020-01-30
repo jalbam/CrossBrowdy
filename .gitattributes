@@ -5,6 +5,10 @@ documentation/* linguist-documentation
 crossbrowdy.com/_html/_doc/api/* linguist-documentation
 
 *.css linguist-detectable=false
-
 *.htm linguist-detectable=false
 *.html linguist-detectable=false
+*.md linguist-detectable=false
+*.txt linguist-detectable=false
+*.ts linguist-detectable=false
+*.svg linguist-detectable=false
+*.less linguist-detectable=false
