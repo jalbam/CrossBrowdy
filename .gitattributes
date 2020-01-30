@@ -3,3 +3,8 @@
 
 documentation/* linguist-documentation
 crossbrowdy.com/_html/_doc/api/* linguist-documentation
+
+*.css linguist-detectable=false
+
+*.htm linguist-detectable=false
+*.html linguist-detectable=false
