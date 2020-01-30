@@ -934,7 +934,7 @@ function prepareMusic()
 
 
 //Plays the background music:
-//* Frog's Theme by Yasunori Mitsuda (version by Jarred Mack and Cody Lundquist using Band.js library). Taken from: https://github.com/meenie/band.js (example: http://plnkr.co/edit/vVrFxg?p=preview).
+//* Frog's Theme (Chrono Trigger) by Yasunori Mitsuda (version by Jarred Mack and Cody Lundquist using Band.js library). Taken from: https://github.com/meenie/band.js (example: http://plnkr.co/edit/vVrFxg?p=preview).
 var playingMusic = false;
 function playMusic()
 {
