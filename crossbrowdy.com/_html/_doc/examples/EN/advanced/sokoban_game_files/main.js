@@ -1218,7 +1218,7 @@ function prepareMusic()
 		CB_console("[CB_AudioFileSpritesPool] Audio file sprites pool object failed: " + error);
 		
 		//Lets continue anyway:
-		skipMusicLoader();
+		skipLoadingMusic();
 	};
 
 	//Defines the function to call when the audio file sprites pool object is created:
@@ -1409,7 +1409,7 @@ function checkMusic()
 			CB_console("[CB_AudioFileSpritesPool] Total unchecked CB_AudioFile objects before calling this method: " + uncheckedObjects);
 			
 			//Lets continue anyway:
-			skipMusicLoader();
+			skipLoadingMusic();
 		}
 	);	
 }
