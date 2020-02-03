@@ -937,7 +937,11 @@ CB_Configuration[CB_BASE_NAME].PHONEGAPJS_PATH_ABSOLUTE = false;
  *  @type {boolean}
  *  @default !{@link CB_Configuration.CrossBase.PHONEGAPJS_LOAD}
  */
-CB_Configuration[CB_BASE_NAME].CORDOVAJS_LOAD = !CB_Configuration[CB_BASE_NAME].PHONEGAPJS_LOAD && window.location && window.location.protocol !== "http:" && window.location.protocol !== "https:"; //CB_Configuration[CB_BASE_NAME].needsCordovaJS();
+CB_Configuration[CB_BASE_NAME].CORDOVAJS_LOAD =
+	!CB_Configuration[CB_BASE_NAME].PHONEGAPJS_LOAD && window.location && window.location.protocol !== "http:" && window.location.protocol !== "https:" && navigator.userAgent.indexOf("Electron") === -1 &&
+	(
+		typeof(require) !== "function" || (typeof(nw) === "undefined" && (nw === null || !nw.App) && typeof(require("nw.gui")) === "undefined")
+	); //CB_Configuration[CB_BASE_NAME].needsCordovaJS();
 
 /**
  * Callback checker to determine whether cordova.js (used by [Apache Cordova]{@link https://cordova.apache.org/}) is needed or not. Requires {@link CB_Configuration.CrossBase.CORDOVAJS_LOAD} set to true.

@@ -63,6 +63,7 @@ function prepareROMSelector()
 //Loads a desired ROM through XHR (AJAX):
 var XHR = null;
 var XHRError = false;
+var XHRAllowedSuccessStatuses = null; //Array that will filled later with the status codes which will be used to consider an XHR request as successful.
 function loadROMXHR(ROMId, cyclesPerLoop, keysMapping)
 {
 	if (!CB_GEM.data.emulatorStarted) { return; }
@@ -115,6 +116,7 @@ function loadROMXHR(ROMId, cyclesPerLoop, keysMapping)
 		enableElements([ "button_pause", "button_fullscreen", "button_file_selector", "file_selector", "rom_selector", "cpl_input" ], true);
 	};
 	
+	XHRAllowedSuccessStatuses = XHRAllowedSuccessStatuses || (CB_Client.isRunningOnElectron() || CB_Client.isRunningOnNWjs() ? [0, 200, 201] : [200, 201])
 	XHR = CB_Net.XHR.callBinary
 	(
 		//Parameters ("null" or "undefined" ones will get their default value, if needed, automatically):
@@ -125,7 +127,7 @@ function loadROMXHR(ROMId, cyclesPerLoop, keysMapping)
 		null, //callbackFunction. Default: undefined. If provided, it will ignore both "callbackFunctionOK" and "callbackFunctionError".
 		getFileSuccessFunction, //callbackFunctionOK. Default: undefined. Ignored if "callbackFunction" is provided.
 		getFileErrorFunction, //callbackFunctionError. Default: undefined. Ignored if "callbackFunction" is provided.
-		[200, 201], //allowedSuccessStatuses. Default: 200.
+		XHRAllowedSuccessStatuses, //allowedSuccessStatuses. Default: 200.
 		XHR //XHR. Default: undefined. When not provided, it will try to create a new XHR object internally and it will be returned.
 	);
 }
