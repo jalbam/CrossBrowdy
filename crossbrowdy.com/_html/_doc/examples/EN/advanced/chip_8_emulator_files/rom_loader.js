@@ -116,7 +116,7 @@ function loadROMXHR(ROMId, cyclesPerLoop, keysMapping)
 		enableElements([ "button_pause", "button_fullscreen", "button_file_selector", "file_selector", "rom_selector", "cpl_input" ], true);
 	};
 	
-	XHRAllowedSuccessStatuses = XHRAllowedSuccessStatuses || (CB_Client.isRunningOnElectron() || CB_Client.isRunningOnNWjs() ? [0, 200, 201] : [200, 201])
+	XHRAllowedSuccessStatuses = XHRAllowedSuccessStatuses || (CB_Client.isRunningOnElectron() || CB_Client.isRunningOnNWjs() || CB_Client.isRunningLocally() ? [0, 200, 201] : [200, 201]); //Allows status 0 for file protocol as well as for NW.js and Electron.
 	XHR = CB_Net.XHR.callBinary
 	(
 		//Parameters ("null" or "undefined" ones will get their default value, if needed, automatically):

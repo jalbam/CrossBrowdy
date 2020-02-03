@@ -96,6 +96,7 @@ General:
 		* THINK ABOUT: In CB_Events.add, a variable to force to respect the order (not all browsers execute the first function of a same event first). If the variable is true, create a wrapper function to execute all in order (old functions first). We should delete all previous associated events.
 
 	CB_Client:
+		* Consider using platform-detect library (https://www.npmjs.com/package/platform-detect).
 		* Object Browser, Agent or Navigator or something similar in CB_Client or outside.
 		* Push notifications in CB_Client (HTML5 API, Cordova, etc.).
 		* Support of Notifications.
