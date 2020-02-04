@@ -1008,7 +1008,7 @@ a.download_old:hover, a.download_examples:hover
 	position:fixed;
 	bottom:50px;
 	left:0px;
-	
+
 	color:#aa0000;
 	z-index:10;
 }
@@ -1073,6 +1073,11 @@ a.download_old:hover, a.download_examples:hover
 {
 	cursor:hand;
 	cursor:pointer;
+}
+#sharing_icons
+{
+	display:none;
+	visibility:hidden;
 }
 .sharing_icon
 {
