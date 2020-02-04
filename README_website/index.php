@@ -227,7 +227,7 @@
 		<meta property="og:url" content="https://crossbrowdy.tuxfamily.org/" />
 		<meta property="og:title" content="CrossBrowdy - Multimedia JavaScript framework - README file" />
 		<meta property="og:site_name" content="CrossBrowdy" />
-		<meta property="og:image" content="https://crossbrowdy.com/img/logo.png" />
+		<meta property="og:image" content="https://crossbrowdy.tuxfamily.org/snapshot.png" />
 		<meta property="og:image:type" content="image/png"/>
 		<meta property="og:image:width" content="800"/>
 		<meta property="og:image:height" content="600"/>
@@ -241,7 +241,7 @@
 		<meta name="twitter:creator" content="@jalbam1984" />
 		<meta name="twitter:title" content="CrossBrowdy - Multimedia JavaScript framework - README file" />
 		<meta name="twitter:description" content="Open-source JavaScript framework to create cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps" />
-		<meta name="twitter:image" content="https://crossbrowdy.com/img/logo.png" />
+		<meta name="twitter:image" content="https://crossbrowdy.tuxfamily.org/snapshot.png" />
 		<meta name="twitter:url" content="https://crossbrowdy.tuxfamily.org/" />
 
 		<meta itemprop="name" content="CrossBrowdy" />

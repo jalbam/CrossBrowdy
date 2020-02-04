@@ -19,6 +19,12 @@
 	$snapshotsPath = "crossbrowdy.com/img/snapshots/";
 	$snapshotsCommand = '"c:\Program Files\Mozilla Firefox\firefox" -P headless-profile -headless --window-size=800,600 --screenshot ' . $snapshotsPath . '{screenshot_file} {url}';
 
+	echo "Snapshot for README web site\n";
+	$commandLoop = str_replace("{url}", "https://crossbrowdy.tuxfamily.org/", str_replace("{screenshot_file}", "snapshot.png", str_replace($snapshotsPath, "README_website\\", $snapshotsCommand)));
+	echo "* Executing: " . $commandLoop . "\n";
+	echo shell_exec($commandLoop);
+	echo "\n";
+	
 	function getGuideLinks($contentArray, $basicTurorialOrExamples)
 	{
 		$links = Array();
