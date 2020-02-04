@@ -196,6 +196,15 @@
 				color:#cccccc;
 			}
 
+			#fork_me_on_github
+			{
+				filter:alpha(opacity=85);
+				opacity:0.85;
+				-moz-opacity:0.85;
+				-khtml-opacity:0.85;
+				-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+			}
+
 			<?php
 				if (file_exists("_lib/prism/prism.css")) { readfile("_lib/prism/prism.css"); }
 			?>
@@ -264,5 +273,6 @@
 		<br />
 		<br />
 		<footer><address><div class="author">CrossBrowdy by <a href="https://joanalbamaldonado.com/" target="_blank" class="author_link">Joan Alba Maldonado</a></div></address></footer>
+		<a href="https://github.com/jalbam/crossbrowdy" target="_blank"><img style="position:fixed; top:0; right:0; border:0;" src="github_fork_me_right_upper.gif" alt="Fork me on GitHub" id="fork_me_on_github"></a>
 	</body>
 </html>
