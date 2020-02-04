@@ -77,7 +77,10 @@
 				background-color:#dddddd;
 				font-family:verdana, times, serif;
 				
-				margin:0px;
+				margin-left:20px;
+				margin-right:20px;
+				margin-top:0px;
+				margin-bottom:0px;
 
 				background-image:-webkit-gradient(
 					linear,
@@ -120,21 +123,28 @@
 
 			h1
 			{
-				margin-top:50px;
+				margin-top:40px;
 				color:#cc0000;
 			}
 
 			h2, h3, h4, h5, h6
 			{
-				margin-top:35px;
+				margin-top:30px;
 				color:#990000;
 			}
 
 			p
 			{
-				font-size:22px;
-				font-size:1.35em;
-				font-size:135%;
+				font-size:18px;
+				font-size:1.10em;
+				font-size:110%;
+			}
+			
+			code.language-html
+			{
+				font-size:11px !important;
+				font-size:0.70em !important;
+				font-size:70% !important;
 			}
 
 			a
