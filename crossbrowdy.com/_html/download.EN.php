@@ -150,8 +150,7 @@
 	<a name="old_versions"></a>
 	<h3>Old versions</h3>
 	<p>
-		Coming soon
-		<?php //TODO: Poner enlace a old versions (directorio "files/"). Rellenar el directorio con todas las versiones (buscar en emails, FTP, etc.). ?>
+		<a href="files/" target="_blank">Click here</a> to download old CrossBrowdy (formerly known as CrossBase) version.
 	</p>
 </div>
 <?php
