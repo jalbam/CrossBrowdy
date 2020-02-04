@@ -150,7 +150,7 @@
 	<a name="old_versions"></a>
 	<h3>Old versions</h3>
 	<p>
-		<a href="files/" target="_blank">Click here</a> to download old CrossBrowdy (formerly known as CrossBase) version.
+		<a href="files/" target="_blank">Click here</a> to download old CrossBrowdy (formerly known as <i>CrossBase</i>) versions.
 	</p>
 </div>
 <?php
