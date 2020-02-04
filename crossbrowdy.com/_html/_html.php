@@ -1,6 +1,8 @@
-<?php if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); } ?>
-<!DOCTYPE html>
-<html lang="<?php echo strtolower($language); ?>">
+<?php
+	if (!defined("CROSSBROWDY_WEB") || CROSSBROWDY_WEB !== "YES") { exit(); }
+	$langHTML = strtolower($language);
+?><!DOCTYPE html>
+<html lang="<?php echo $langHTML; ?>">
 	<head>
 		<!-- (c) CrossBrowdy by Joan Alba Maldonado (joanalbamaldonado@NO_SPAM_PLEASEgmail.com). Forbidden to publish, copy or modify without mentioning the author's name. -->
 		<?php
@@ -54,7 +56,7 @@
 		
 		<meta http-equiv="title" content="<?php echo $projectTitleHeader; ?>" />
 		<meta name="title" content="<?php echo $projectTitleHeader; ?>" />
-		<meta name="DC.Title" lang="en" content="<?php echo $projectTitleHeader; ?>" />
+		<meta name="DC.Title" lang="<?php echo $langHTML; ?>" content="<?php echo $projectTitleHeader; ?>" />
 
 		<?php
 			$pageDescription = $pagesDescription[$language]["_DEFAULT"];
@@ -73,11 +75,11 @@
 		?>
 
 		<meta name="description" content="<?php echo $pageDescription; ?>" />
-		<meta name="DC.Description" lang="en" content="<?php echo $pageDescription; ?>" />
+		<meta name="DC.Description" lang="<?php echo $langHTML; ?>" content="<?php echo $pageDescription; ?>" />
 		<meta http-equiv="description" content="<?php echo $pageDescription; ?>" />
 
 		<meta name="subject" content="<?php echo $pageDescription; ?>" />
-		<meta name="DC.Subject" lang="en" content="<?php echo $pageDescription; ?>" />
+		<meta name="DC.Subject" lang="<?php echo $langHTML; ?>" content="<?php echo $pageDescription; ?>" />
 
 		<meta name="keywords" content="<?php echo $projectKeywords[$language]; ?>" />
 		<meta name="DC.Keywords" content="<?php echo $projectKeywords[$language]; ?>" />
@@ -95,7 +97,7 @@
 		<meta name="GOOGLEBOT" content="all" />
 
 		<meta name="copyright" content="&copy; <?php echo date("Y"); ?> <?php echo $projectName; ?> by Joan Alba Maldonado" />
-		<meta name="DC.Rights" content="(c) <?php echo date("Y"); ?> <?php echo $projectName; ?> by Joan Alba Maldonado" lang="es" />
+		<meta name="DC.Rights" content="(c) <?php echo date("Y"); ?> <?php echo $projectName; ?> by Joan Alba Maldonado" lang="<?php echo $langHTML; ?>" />
 
 		<meta http-equiv="Reply-To" content="joanalbamaldonado@NO_SPAM_PLEASEgmail.com" />
 		<meta name="htdig-email" content="joanalbamaldonado@NO_SPAM_PLEASEgmail.com" />
