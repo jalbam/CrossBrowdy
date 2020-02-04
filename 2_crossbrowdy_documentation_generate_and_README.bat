@@ -1,5 +1,8 @@
 @echo OFF
 
+REM Copies README.md to the README website:
+copy /y README.md README_website
+
 REM Generates the API documentation (normal and the more printer-friendly one):
 echo Generating normal API documentation...
 call jsdoc CrossBrowdy -c documentation_jsdoc_conf.json -t ./documentation/node_modules/ink-docstrap/template --verbose -R README.md
