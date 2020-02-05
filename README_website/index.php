@@ -99,21 +99,59 @@
 				background-repeat:no-repeat;
 			}
 
-			h1.title
+			a.title_link
 			{
 				text-align:center;
+				
 				margin-top:0px;
+				
 				color:#007700;
 				
 				font-size:48px;
 				font-size:3em;
 				font-size:300%;
+				
+				font-weight:bold;
+			}
+
+			a.title_link:hover
+			{
+				color:#00aa00;
+				text-decoration:none;
 			}
 			
+			#logo_image
+			{
+				width:160px; height:160px;
+				
+				transform:scale(0.8);
+				-o-transform:scale(0.8);
+				-ms-transform:scale(0.8);
+				-khtml-transform:scale(0.8);
+				-webkit-transform:scale(0.8);
+			}
+			#logo_image.final
+			{
+				width:160px; height:160px;
+				
+				transform:scale(1) rotate(720deg);
+				-o-transform:scale(1) rotate(720deg);
+				-ms-transform:scale(1) rotate(720deg);
+				-khtml-transform:scale(1) rotate(720deg);
+				-webkit-transform:scale(1) rotate(720deg);
+				
+				transition:all 1000ms;
+				-moz-transition:all 1000ms;
+				-webkit-transition:all 1000ms;
+				-o-transition:all 1000ms;
+				-khtml-transition:all 1000ms;
+				-ms-transition:all 1000ms;
+			}
+
 			h2.title
 			{
 				text-align:center;
-				margin-top:0px;
+				margin-top:30px;
 				color:#005500;
 				
 				font-size:32px;
@@ -216,10 +254,10 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-		<link rel="apple-touch-startup-image" href="favicon128.png">
-		<link rel="apple-touch-icon" href="favicon128.png">
+		<link rel="apple-touch-startup-image" href="https://crossbrowdy.tuxfamily.org/favicon128.png">
+		<link rel="apple-touch-icon" href="https://crossbrowdy.tuxfamily.org/favicon128.png">
 
-		<link rel="image_src" type="image/png" href="favicon128.png" />
+		<link rel="image_src" type="image/png" href="https://crossbrowdy.tuxfamily.org/favicon128.png" />
 		
 		<meta name="msapplication-tap-highlight" content="no" />
 		
@@ -227,7 +265,7 @@
 		<meta property="og:url" content="https://crossbrowdy.tuxfamily.org/" />
 		<meta property="og:title" content="CrossBrowdy - Multimedia JavaScript framework - README file" />
 		<meta property="og:site_name" content="CrossBrowdy" />
-		<meta property="og:image" content="https://crossbrowdy.tuxfamily.org/snapshot.png" />
+		<meta property="og:image" content="https://crossbrowdy.tuxfamily.org/img/snapshot.png" />
 		<meta property="og:image:type" content="image/png"/>
 		<meta property="og:image:width" content="800"/>
 		<meta property="og:image:height" content="600"/>
@@ -241,12 +279,12 @@
 		<meta name="twitter:creator" content="@jalbam1984" />
 		<meta name="twitter:title" content="CrossBrowdy - Multimedia JavaScript framework - README file" />
 		<meta name="twitter:description" content="Open-source JavaScript framework to create cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps" />
-		<meta name="twitter:image" content="https://crossbrowdy.tuxfamily.org/snapshot.png" />
+		<meta name="twitter:image" content="https://crossbrowdy.tuxfamily.org/img/snapshot.png" />
 		<meta name="twitter:url" content="https://crossbrowdy.tuxfamily.org/" />
 
 		<meta itemprop="name" content="CrossBrowdy" />
 		<meta itemprop="description" content="Open-source JavaScript framework to create cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps" />
-		<meta itemprop="image" content="favicon128.png" /> 
+		<meta itemprop="image" content="https://crossbrowdy.tuxfamily.org/favicon128.png" /> 
 		
 		<link rel="author" href="https://plus.google.com/101309215015488397249" />
 		<link rel="publisher" href="https://plus.google.com/101309215015488397249" />
@@ -261,7 +299,12 @@
 		</script>
 	</head>
 	<body leftmargin="0" topmargin="0">
-		<h1 class="title"><u>CrossBrowd</u>y</h1>
+		<center>
+			<a href="https://crossbrowdy.com/" target="_blank" class="title_link">
+				<img src="img/logo.png" id="logo_image" onLoad="this.className = 'final';" /><br />
+				<u>CrossBrowd</u>y
+			</a>
+		</center>
 		<h2 class="title">README file</h2>
 		<?php
 			require_once "_lib/Parsedown/Parsedown.php";
@@ -272,7 +315,7 @@
 		?>
 		<br />
 		<br />
-		<footer><address><div class="author">CrossBrowdy by <a href="https://joanalbamaldonado.com/" target="_blank" class="author_link">Joan Alba Maldonado</a></div></address></footer>
-		<a href="https://github.com/jalbam/crossbrowdy" target="_blank"><img style="position:fixed; top:0; right:0; border:0;" src="github_fork_me_right_upper.gif" alt="Fork me on GitHub" id="fork_me_on_github"></a>
+		<footer><address><div class="author"><a href="https://crossbrowdy.com/" target="_blank" class="author_link">CrossBrowdy</a> by <a href="https://joanalbamaldonado.com/" target="_blank" class="author_link">Joan Alba Maldonado</a></div></address></footer>
+		<a href="https://github.com/jalbam/crossbrowdy" target="_blank"><img style="position:fixed; top:0; right:0; border:0;" src="img/github_fork_me_right_upper.gif" alt="Fork me on GitHub" id="fork_me_on_github"></a>
 	</body>
 </html>

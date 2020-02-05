@@ -134,10 +134,10 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-		<link rel="apple-touch-startup-image" href="favicon128.png">
-		<link rel="apple-touch-icon" href="favicon128.png">
+		<link rel="apple-touch-startup-image" href="<?php echo $projectURLDefault; ?>favicon128.png">
+		<link rel="apple-touch-icon" href="<?php echo $projectURLDefault; ?>favicon128.png">
 
-		<link rel="image_src" type="image/png" href="favicon128.png" />
+		<link rel="image_src" type="image/png" href="<?php echo $projectURLDefault; ?>favicon128.png" />
 		
 		<meta name="msapplication-tap-highlight" content="no" />
 		<?php
@@ -200,7 +200,7 @@
 
 		<meta itemprop="name" content="<?php echo $projectName; ?>" />
 		<meta itemprop="description" content="<?php echo $pageDescription; ?>" />
-		<meta itemprop="image" content="favicon128.png" /> 
+		<meta itemprop="image" content="<?php echo $projectURLDefault; ?>favicon128.png" /> 
 		
 		<link rel="author" href="https://plus.google.com/101309215015488397249" />
 		<link rel="publisher" href="https://plus.google.com/101309215015488397249" />
