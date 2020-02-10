@@ -36,6 +36,9 @@
 			<p>
 				Facebook group: <a href="https://www.facebook.com/groups/crossbrowdy/" target="_blank">https://www.facebook.com/groups/crossbrowdy/</a>
 			</p>
+			<p>
+				YouTube channel: <a href="https://www.youtube.com/channel/UCqHbCZIjfauQy3Mq2eXkubg" target="_blank">https://www.youtube.com/channel/UCqHbCZIjfauQy3Mq2eXkubg</a>
+			</p>
 		</div>
 	</section>
 
