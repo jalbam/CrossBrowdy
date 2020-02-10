@@ -299,23 +299,27 @@
 		</script>
 	</head>
 	<body leftmargin="0" topmargin="0">
-		<center>
-			<a href="https://crossbrowdy.com/" target="_blank" class="title_link">
-				<img src="img/logo.png" id="logo_image" onLoad="this.className = 'final';" /><br />
-				<u>CrossBrowd</u>y
-			</a>
-		</center>
-		<h2 class="title">README file</h2>
-		<?php
-			require_once "_lib/Parsedown/Parsedown.php";
-			$markdownFile = trim(@file_get_contents("README.md"));
-			if ($markdownFile === FALSE || $markdownFile === "") { echo "File '" . $markdownFile . "' not found or content empty!"; exit; }
-			$Parsedown = new Parsedown();
-			echo $Parsedown->text($markdownFile);
-		?>
-		<br />
-		<br />
-		<footer><address><div class="author"><a href="https://crossbrowdy.com/" target="_blank" class="author_link">CrossBrowdy</a> by <a href="https://joanalbamaldonado.com/" target="_blank" class="author_link">Joan Alba Maldonado</a></div></address></footer>
-		<a href="https://github.com/jalbam/crossbrowdy" target="_blank"><img style="position:fixed; top:0; right:0; border:0;" src="img/github_fork_me_right_upper.gif" alt="Fork me on GitHub" id="fork_me_on_github"></a>
+		<header>
+			<center>
+				<a href="https://crossbrowdy.com/" target="_blank" class="title_link">
+					<img src="img/logo.png" id="logo_image" onLoad="this.className = 'final';" /><br />
+					<u>CrossBrowd</u>y
+				</a>
+			</center>
+			<h2 class="title">README file</h2>
+		</header>
+		<main>
+			<?php
+				require_once "_lib/Parsedown/Parsedown.php";
+				$markdownFile = trim(@file_get_contents("README.md"));
+				if ($markdownFile === FALSE || $markdownFile === "") { echo "File '" . $markdownFile . "' not found or content empty!"; exit; }
+				$Parsedown = new Parsedown();
+				echo $Parsedown->text($markdownFile);
+			?>
+			<aside><a href="https://github.com/jalbam/crossbrowdy" target="_blank"><img style="position:fixed; top:0; right:0; border:0;" src="img/github_fork_me_right_upper.gif" alt="Fork me on GitHub" id="fork_me_on_github"></a></aside>
+			<br />
+			<br />
+		</main>
+		<footer><address><div class="author"><a href="https://crossbrowdy.com/" target="_blank" class="author_link">CrossBrowdy</a> by <span itemprop="author publisher" itemscope itemtype="http://schema.org/Person"><a href="https://joanalbamaldonado.com/" target="_blank" class="author_link"><span itemprop="name">Joan Alba Maldonado</span></a></span></div></address></footer>
 	</body>
 </html>

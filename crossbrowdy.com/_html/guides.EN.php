@@ -37,7 +37,7 @@
 	<a name="basic_tutorial"></a>
 	<section>
 		<div class="category_text">
-			<h2 class="category_subtitle">Basic tutorial</h2>
+			<header><h2 class="category_subtitle">Basic tutorial</h2></header>
 			<nav>
 				<ol>
 					<?php echo guideLinks($basicTutorial, "basicTutorialLink", "basic_tutorial"); ?>
@@ -49,7 +49,7 @@
 	<a name="examples"></a>
 	<section>
 		<div class="category_text">
-			<h1 class="category_subtitle">Examples</h1>
+			<header><h1 class="category_subtitle">Examples</h1></header>
 			<nav>
 				<ol>
 					<?php echo guideLinks($examples, "examplesLink", "examples"); ?>
@@ -62,7 +62,7 @@
 	<section>
 		<a name="more"></a>
 		<div class="category_text">
-			<h1 class="category_subtitle">More</h1>
+			<header><h1 class="category_subtitle">More</h1></header>
 			<p>
 				Check the <a href="api/index.html" target="_blank">API documentation</a> (<a href="api/printable/index.html" target="_blank">more printer-friendly version</a>) to get more information.
 			</p>

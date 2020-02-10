@@ -17,7 +17,7 @@
 	$projectName = "CrossBrowdy";
 	$projectCopyright = Array
 	(
-		"EN" => $projectName . ' by <a href="https://joanalbamaldonado.com/" target="_blank" class="author_link">Joan Alba Maldonado</a>'
+		"EN" => $projectName . ' by <span itemprop="author publisher" itemscope itemtype="http://schema.org/Person"><a href="https://joanalbamaldonado.com/" target="_blank" class="author_link"><span itemprop="name">Joan Alba Maldonado</span></a></span>'
 	);
 	$projectTitle = Array
 	(
