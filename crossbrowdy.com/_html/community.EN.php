@@ -28,6 +28,9 @@
 				Twitter account: <a href="https://twitter.com/CrossBrowdy" target="_blank">https://twitter.com/CrossBrowdy</a>
 			</p>
 			<p>
+				Instagram account: <a href="https://www.instagram.com/crossbrowdy/" target="_blank">https://www.instagram.com/crossbrowdy/</a>
+			</p>
+			<p>
 				Facebook page: <a href="https://www.facebook.com/CrossBrowdy/" target="_blank">https://www.facebook.com/CrossBrowdy/</a>
 			</p>
 			<p>
