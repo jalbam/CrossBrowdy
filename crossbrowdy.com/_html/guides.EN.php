@@ -25,47 +25,47 @@
 ?>
 
 <header><h1 class="category_title">Guides &amp; Tutorials</h1></header>
-
-<div class="category_text">
-	<p>
-		Apart from the <a href="<?php echo "guides" . $PHPExtension; ?>#basic_tutorial">Basic tutorial</a>,
-		you can check the <a href="<?php echo "guides" . $PHPExtension; ?>#examples">Examples section below</a>
-		and <a href="<?php echo "guides" . $PHPExtension; ?>#more">more things</a>.
-	</p>
-</div>
-
-<a name="basic_tutorial"></a>
-<section>
+<main>
 	<div class="category_text">
-		<h2 class="category_subtitle">Basic tutorial</h2>
-		<ol>
-			<nav>
-				<?php echo guideLinks($basicTutorial, "basicTutorialLink", "basic_tutorial"); ?>
-			</nav>
-		</ol>
-	</div>
-</section>
-
-
-<a name="examples"></a>
-<section>
-	<div class="category_text">
-		<h1 class="category_subtitle">Examples</h1>
-		<ol>
-			<nav>
-				<?php echo guideLinks($examples, "examplesLink", "examples"); ?>
-			</nav>
-		</ol>
-		All the examples together can be downloaded <a href="get_file<?php echo $PHPExtension; ?>?id=examples">here</a>.
-	</div>
-</section>
-
-<section>
-	<a name="more"></a>
-	<div class="category_text">
-		<h1 class="category_subtitle">More</h1>
 		<p>
-			Check the <a href="api/index.html" target="_blank">API documentation</a> (<a href="api/printable/index.html" target="_blank">more printer-friendly version</a>) to get more information.
+			Apart from the <a href="<?php echo "guides" . $PHPExtension; ?>#basic_tutorial">Basic tutorial</a>,
+			you can check the <a href="<?php echo "guides" . $PHPExtension; ?>#examples">Examples section below</a>
+			and <a href="<?php echo "guides" . $PHPExtension; ?>#more">more things</a>.
 		</p>
 	</div>
-</section>
+
+	<a name="basic_tutorial"></a>
+	<section>
+		<div class="category_text">
+			<h2 class="category_subtitle">Basic tutorial</h2>
+			<nav>
+				<ol>
+					<?php echo guideLinks($basicTutorial, "basicTutorialLink", "basic_tutorial"); ?>
+				</ol>
+			</nav>
+		</div>
+	</section>
+
+	<a name="examples"></a>
+	<section>
+		<div class="category_text">
+			<h1 class="category_subtitle">Examples</h1>
+			<nav>
+				<ol>
+					<?php echo guideLinks($examples, "examplesLink", "examples"); ?>
+				</ol>
+			</nav>
+			All the examples together can be downloaded <a href="get_file<?php echo $PHPExtension; ?>?id=examples">here</a>.
+		</div>
+	</section>
+
+	<section>
+		<a name="more"></a>
+		<div class="category_text">
+			<h1 class="category_subtitle">More</h1>
+			<p>
+				Check the <a href="api/index.html" target="_blank">API documentation</a> (<a href="api/printable/index.html" target="_blank">more printer-friendly version</a>) to get more information.
+			</p>
+		</div>
+	</section>
+</main>

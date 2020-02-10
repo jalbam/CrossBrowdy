@@ -30,7 +30,7 @@
 	$goBackCategoryLink = $optionBack . $PHPExtension . "#" . $category;
 	$goBackSubcategoryLink = $goBackCategoryLink . "_" . $subcategory;
 
-	echo '<h1 class="category_title"><a href="' . $goBackCategoryLink . '">';
+	echo '<header><h1 class="category_title"><a href="' . $goBackCategoryLink . '">';
 		if (isset($projectTitle[$language][$category . "_" . $subcategory . "_" . $topic]))
 		{
 			echo $projectTitle[$language][$category . "_" . $subcategory . "_" . $topic];
@@ -43,33 +43,35 @@
 		{
 			echo $projectTitle[$language][$category];
 		}
-	echo '</a></h1>';
+	echo '</a></h1></header>';
 
-	echo '<h2 class="category_title"><a href="' . $goBackSubcategoryLink . '">' . $categoryMainArray[$subcategory]["subcategory"][$language] . '</a></h2>';
-	echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["topics"][$topic][$language] . '</h2>';
+	echo '<main>';
+		echo '<h2 class="category_title"><a href="' . $goBackSubcategoryLink . '">' . $categoryMainArray[$subcategory]["subcategory"][$language] . '</a></h2>';
+		echo '<h2 class="category_title">' . $categoryMainArray[$subcategory]["topics"][$topic][$language] . '</h2>';
 
-	//Displays the content:
-	echo '<div class="' . CATEGORY_MAIN_NAME . '_text">';
-		if (!$subcategoryFound)
-		{
-			echo '<div style="text-align:center;"><p><b>Category chosen not found. Showing first one and its first topic instead.</b></p></div>';
-		}
-		else if (!$topicFound)
-		{
-			echo '<div style="text-align:center;"><p><b>Topic chosen not found. Showing first one of the category instead.</b></p></div>';
-		}
-		
-		if (file_exists("_html/_doc/" . CATEGORY_MAIN_NAME . "/" . $language . "/" . $subcategory . "/" . $topic . ".php"))
-		{
-			require_once "_html/_doc/" . CATEGORY_MAIN_NAME . "/" . $language . "/" . $subcategory . "/" . $topic . ".php";
-		}
-		else { echo '<div style="text-align:center;"><p><b>File not found!</b></p></div>'; }
-		
-		if (CATEGORY_MAIN_NAME === "examples") { echo 'All the examples together can be downloaded <a href="get_file' . $PHPExtension . '?id=examples">here</a>.'; }
-		
-		//Displays the option to go back:
-		echo '<p style="text-align:center; padding-top:20px;"><a href="' . $goBackSubcategoryLink . '">Go back to ' . $menuOptions[$language][$optionBack] . '</a></p>';
-	echo '</div>';
+		//Displays the content:
+		echo '<div class="' . CATEGORY_MAIN_NAME . '_text">';
+			if (!$subcategoryFound)
+			{
+				echo '<div style="text-align:center;"><p><b>Category chosen not found. Showing first one and its first topic instead.</b></p></div>';
+			}
+			else if (!$topicFound)
+			{
+				echo '<div style="text-align:center;"><p><b>Topic chosen not found. Showing first one of the category instead.</b></p></div>';
+			}
+			
+			if (file_exists("_html/_doc/" . CATEGORY_MAIN_NAME . "/" . $language . "/" . $subcategory . "/" . $topic . ".php"))
+			{
+				require_once "_html/_doc/" . CATEGORY_MAIN_NAME . "/" . $language . "/" . $subcategory . "/" . $topic . ".php";
+			}
+			else { echo '<div style="text-align:center;"><p><b>File not found!</b></p></div>'; }
+			
+			if (CATEGORY_MAIN_NAME === "examples") { echo 'All the examples together can be downloaded <a href="get_file' . $PHPExtension . '?id=examples">here</a>.'; }
+			
+			//Displays the option to go back:
+			echo '<p style="text-align:center; padding-top:20px;"><a href="' . $goBackSubcategoryLink . '">Go back to ' . $menuOptions[$language][$optionBack] . '</a></p>';
+		echo '</div>';
+	echo '</main>';
 
 	//Displays the navigation bar:
 	$previousTopicLink = "";
