@@ -88,6 +88,40 @@ span { color:#aa0000; }
 #toolbar { z-index:2; position:absolute; right:50px; top:50px; }
 .toolbar_icon { cursor:pointer; cursor:hand; }
 #level_selector { color:#3300bb; vertical-align:bottom; text-align:center; }
+#controls_toggler
+{
+	z-index:2;
+	position:absolute;
+	bottom:50px;
+	right:0px;
+
+	text-align:center;
+	font-weight:bold;
+	line-height:50px;
+	color:#ffffff;
+	border:1px dashed #ffffff;
+	background-color:#5555aa;
+	cursor:pointer;
+	cursor:hand;
+	width:50px;
+	height:50px;
+	margin:2px;
+	
+	border-radius:12px;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	-khtml-border-radius:12px;
+
+	filter:alpha(opacity=50);
+	opacity:0.5;
+	-moz-opacity:0.5;
+	-khtml-opacity:0.5;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+#controls_toggler.controls_hidden
+{
+	background-color:#0000ff;
+}
 #controls
 {
 	z-index:2;

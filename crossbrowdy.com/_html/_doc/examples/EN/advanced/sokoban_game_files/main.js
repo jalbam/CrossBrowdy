@@ -335,10 +335,7 @@ function main()
 				toolbarIconElement = CB_Elements.id(toolbarIconsIDs[x]);
 				if (toolbarIconElement !== null)
 				{
-					toolbarIconElement.style.draggable = false;
-					toolbarIconElement.style.touchAction = "none";
-					CB_Elements.contextMenuDisable(toolbarIconElement);
-					CB_Elements.preventSelection(toolbarIconElement);
+					makeElementSolid(toolbarIconElement);
 					CB_Events.on(toolbarIconElement, "mousedown", toolbarIconEvent);
 				}
 			}
@@ -361,13 +358,15 @@ function main()
 			}
 
 			//Sets the events to the screen controls:
+			var screenControlsToggler = CB_Elements.id("controls_toggler");
+			if (screenControlsToggler !== null)
+			{
+				makeElementSolid(screenControlsToggler);
+			}
 			var screenControls = CB_Elements.id("controls");
 			if (screenControls !== null)
 			{
-				screenControls.style.draggable = false;
-				screenControls.style.touchAction = "none";
-				CB_Elements.contextMenuDisable(screenControls);
-				CB_Elements.preventSelection(screenControls);
+				makeElementSolid(screenControls);
 			}
 			var movePlayerButtonEvent = function() { if (this.id) { manageInput(this.id.replace("screen_button_", "").toUpperCase()); } };
 			var screenButtonsIDs = [ "screen_button_up", "screen_button_down", "screen_button_left", "screen_button_right" ]; //Identifiers of the screen buttons.
@@ -377,10 +376,7 @@ function main()
 				buttonElement = CB_Elements.id(screenButtonsIDs[x]);
 				if (buttonElement !== null)
 				{
-					buttonElement.style.draggable = false;
-					buttonElement.style.touchAction = "none";
-					CB_Elements.contextMenuDisable(buttonElement);
-					CB_Elements.preventSelection(buttonElement);
+					makeElementSolid(buttonElement);
 					CB_Events.on(buttonElement, "mousedown", movePlayerButtonEvent);
 				}
 			}
@@ -635,6 +631,15 @@ function resizeElements(graphicSpritesSceneObject)
 	}
 	
 	//Resizes the screen controls:
+	var screenControlsToggler = CB_Elements.id("controls_toggler");
+	if (screenControlsToggler !== null)
+	{
+		screenControlsToggler.style.right = "0px";
+		screenControlsToggler.style.bottom = toolbarIconMargin;
+		screenControlsToggler.style.width = (parseInt(toolbarIconWidthAndHeight) / 2) + "px";
+		screenControlsToggler.style.height = screenControlsToggler.style.lineHeight = (parseInt(toolbarIconWidthAndHeight) / 2) + "px";
+		screenControlsToggler.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px";
+	}
 	var screenControls = CB_Elements.id("controls");
 	if (screenControls !== null)
 	{
@@ -687,8 +692,15 @@ function manageInput(action)
 	{
 		var actionPerformed = false;
 		
-		//After pressing the ESC key, ends the game:
-		if (action === "ABORT" || CB_Keyboard.isKeyDown(CB_Keyboard.keys.ESC) || CB_Controllers.isButtonDown(9))
+		
+		//After pressing the 'C' key or a specific gamepad button, shows/hides the screen controls:
+		if (action === "TOGGLE_SCREEN_CONTROLS" || CB_Keyboard.isKeyDown(CB_Keyboard.keys.C) || CB_Controllers.isButtonDown(10))
+		{
+			screenControlsToggle();
+			actionPerformed = true;
+		}
+		//...otherwise, after pressing the ESC key or a specific gamepad button, ends the game:
+		else if (action === "ABORT" || CB_Keyboard.isKeyDown(CB_Keyboard.keys.ESC) || CB_Controllers.isButtonDown(9))
 		{
 			gameEnd("Game aborted");
 			actionPerformed = true;
@@ -1469,4 +1481,43 @@ function fullScreenToggle()
 		CB_console("Normal mode detected. Trying to enable full screen mode...");
 		CB_Screen.setFullScreen(true, undefined, true); //Allows reloading into another (bigger) window (for legacy clients).
 	}
+}
+
+
+//Toggles screen controls (make them show or hide):
+function screenControlsToggle()
+{
+	CB_console("Toggling screen controls...");
+	CB_Elements.showHideById
+	(
+		"controls", //element.
+		undefined, //displayValue.
+		true, //checkValues.
+		false, //computed.
+		undefined, //onToggleDisplay. Calls the function after showing/hiding the element.
+		function(element, displayValue) //onShow. Calls the function after showing the element.
+		{
+			CB_console("Controls shown!");
+			CB_Elements.setClassById("controls_toggler", "");
+		},
+		function(element, displayValue) //onHide. Calls the function after hiding the element.
+		{
+			CB_console("Controls hidden!");
+			CB_Elements.setClassById("controls_toggler", "controls_hidden");
+		}
+	);
+}
+
+
+//Makes a DOM element non-draggable, non-selectable, etc.:
+function makeElementSolid(element)
+{
+	if (element !== null)
+	{
+		element.style.draggable = false;
+		element.style.touchAction = "none";
+		CB_Elements.contextMenuDisable(element);
+		CB_Elements.preventSelection(element);
+	}
+	return element;
 }

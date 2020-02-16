@@ -71,6 +71,40 @@ span { color:#aa0000; }
 #file_selector { visibility:hidden; display:none; }
 #rom_selector { margin-top:2px; }
 #cpl_input { margin:0px; padding:0px; border:1px solid #555555; }
+#controls_toggler
+{
+	z-index:3;
+	position:absolute;
+	bottom:50px;
+	right:0px;
+
+	text-align:center;
+	font-weight:bold;
+	line-height:50px;
+	color:#ffffff;
+	border:1px dashed #ffffff;
+	background-color:#5555aa;
+	cursor:pointer;
+	cursor:hand;
+	width:50px;
+	height:50px;
+	margin:2px;
+	
+	border-radius:12px;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	-khtml-border-radius:12px;
+
+	filter:alpha(opacity=50);
+	opacity:0.5;
+	-moz-opacity:0.5;
+	-khtml-opacity:0.5;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+#controls_toggler.controls_hidden
+{
+	background-color:#0000ff;
+}
 #controls
 {
 	z-index:3;

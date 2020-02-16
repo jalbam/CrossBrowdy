@@ -206,10 +206,7 @@ function main()
 				toolbarIconElement = CB_Elements.id(toolbarIconsIDs[x]);
 				if (toolbarIconElement !== null)
 				{
-					toolbarIconElement.style.draggable = false;
-					toolbarIconElement.style.touchAction = "none";
-					CB_Elements.contextMenuDisable(toolbarIconElement);
-					CB_Elements.preventSelection(toolbarIconElement);
+					makeElementSolid(toolbarIconElement);
 					CB_Events.on(toolbarIconElement, "click", toolbarIconEvent);
 					if (toolbarIconsIDs[x] === "cpl_input")
 					{
@@ -234,13 +231,15 @@ function main()
 			//Sets the events to the screen controls:
 			var screenControlsButtonPressEvent = function() { if (!CB_GEM.data.emulatorStarted || !emulatingROM() || !this.id) { return; } screenButtonPress(parseInt(this.id.replace("screen_button_", "")), true, this); };
 			var screenControlsButtonReleaseEvent = function() { if (this.id) { screenButtonPress(parseInt(this.id.replace("screen_button_", "")), false, this); } };
+			var screenControlsToggler = CB_Elements.id("controls_toggler");
+			if (screenControlsToggler !== null)
+			{
+				makeElementSolid(screenControlsToggler);
+			}
 			var screenControls = CB_Elements.id("controls");
 			if (screenControls !== null)
 			{
-				screenControls.style.draggable = false;
-				screenControls.style.touchAction = "none";
-				CB_Elements.contextMenuDisable(screenControls);
-				CB_Elements.preventSelection(screenControls);
+				makeElementSolid(screenControls);
 			}
 			var buttonElement = null;
 			for (var x = 0; x < 16; x++)
@@ -248,10 +247,7 @@ function main()
 				buttonElement = CB_Elements.id("screen_button_" + x);
 				if (buttonElement !== null)
 				{
-					buttonElement.style.draggable = false;
-					buttonElement.style.touchAction = "none";
-					CB_Elements.contextMenuDisable(buttonElement);
-					CB_Elements.preventSelection(buttonElement);
+					makeElementSolid(buttonElement);
 					CB_Events.on(buttonElement, "touchstart", screenControlsButtonPressEvent);
 					CB_Events.on(buttonElement, "mousedown", screenControlsButtonPressEvent);
 					CB_Events.on(buttonElement, "touchend", screenControlsButtonReleaseEvent);
@@ -460,6 +456,15 @@ function resizeElements(graphicSpritesSceneObject)
 	}
 	
 	//Resizes the screen controls:
+	var screenControlsToggler = CB_Elements.id("controls_toggler");
+	if (screenControlsToggler !== null)
+	{
+		screenControlsToggler.style.right = "0px";
+		screenControlsToggler.style.bottom = toolbarIconMargin;
+		screenControlsToggler.style.width = (parseInt(toolbarIconWidthAndHeight) / 2) + "px";
+		screenControlsToggler.style.height = screenControlsToggler.style.lineHeight = (parseInt(toolbarIconWidthAndHeight) / 2) + "px";
+		screenControlsToggler.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px";
+	}
 	var screenControls = CB_Elements.id("controls");
 	if (screenControls !== null)
 	{
@@ -536,20 +541,33 @@ function manageInput(action)
 	//If not enough time has been elapsed since the last movement, exits (to avoid moving or processing the input too fast):
 	if (CB_Device.getTiming() < _inputProcessedLastTime + _ignoreInputMs) { return; }
 
+	var actionPerformed = false;
+
 	//If the emulator has not started:
 	if (!CB_GEM.data.emulatorStarted)
 	{
 		//If return, space or a button (button 1, 2 or 3) or axis from any gamepad is pressed, starts the emulator:
 		if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.ENTER) || CB_Keyboard.isKeyDown(CB_Keyboard.keys.SPACEBAR) || CB_Controllers.isButtonDown([1, 2, 3]) || CB_Controllers.getAxesDown().length > 0 || CB_Controllers.getAxesDown("", -1).length > 0)
 		{
+			actionPerformed = true;
 			emulatorStart();
-			_inputProcessedLastTime = CB_Device.getTiming(); //As we have processed the input, updates the time with the new one (to avoid processing the input too fast).
-			return;
 		}
 	}
 	else if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.ESC))
 	{
+		actionPerformed = true;
 		emulatorEnd("Emulator paused");
+		
+	}
+	else if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.T))
+	{
+		actionPerformed = true;
+		screenControlsToggle();
+	}
+	
+	if (actionPerformed)
+	{
+		_inputProcessedLastTime = CB_Device.getTiming(); //As we have processed the input, updates the time with the new one (to avoid processing the input too fast).		
 	}
 }
 
@@ -650,4 +668,43 @@ function enableElements(elementsIDsArray, enable)
 			}
 		}
 	}
+}
+
+
+//Toggles screen controls (make them show or hide):
+function screenControlsToggle()
+{
+	CB_console("Toggling screen controls...");
+	CB_Elements.showHideById
+	(
+		"controls", //element.
+		undefined, //displayValue.
+		true, //checkValues.
+		false, //computed.
+		undefined, //onToggleDisplay. Calls the function after showing/hiding the element.
+		function(element, displayValue) //onShow. Calls the function after showing the element.
+		{
+			CB_console("Controls shown!");
+			CB_Elements.setClassById("controls_toggler", "");
+		},
+		function(element, displayValue) //onHide. Calls the function after hiding the element.
+		{
+			CB_console("Controls hidden!");
+			CB_Elements.setClassById("controls_toggler", "controls_hidden");
+		}
+	);
+}
+
+
+//Makes a DOM element non-draggable, non-selectable, etc.:
+function makeElementSolid(element)
+{
+	if (element !== null)
+	{
+		element.style.draggable = false;
+		element.style.touchAction = "none";
+		CB_Elements.contextMenuDisable(element);
+		CB_Elements.preventSelection(element);
+	}
+	return element;
 }
