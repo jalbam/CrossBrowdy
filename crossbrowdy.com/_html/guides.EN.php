@@ -64,7 +64,7 @@
 		<div class="category_text">
 			<header><h1 class="category_subtitle">More</h1></header>
 			<p>
-				Check the <a href="api/index.html" target="_blank">API documentation</a> (<a href="api/printable/index.html" target="_blank">more printer-friendly version</a>) to get more information.
+				Check the <a href="api/index.html" target="_blank">API documentation</a> (<a href="api/printable/index.html" target="_blank">more printer-friendly version here</a>) to get more information.
 			</p>
 		</div>
 	</section>

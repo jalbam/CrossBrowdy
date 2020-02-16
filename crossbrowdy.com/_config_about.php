@@ -155,6 +155,23 @@
 					'
 				),
 
+			"How to use it?" =>
+				Array
+				(
+					"question" => "How to use CrossBrowdy?",
+					"answer" =>
+					'
+						<p>
+							Using CrossBrowdy should not difficult. To start learning how to use it, you can visit the <a href="guides' . $PHPExtension . '" target="_blank">' . $menuOptions[$language]["guides"] . '</a> section where you can find
+							a <a href="guides' . $PHPExtension . '#basic_tutorial" target="_blank">a complete tutorial with many topics</a>, as well as <a href="guides' . $PHPExtension . '#examples" target="_blank">many live examples with their source code</a>
+							and <a href="guides' . $PHPExtension . '#more" target="_blank">more things</a>.
+						</p>
+						<p>
+							For a more technical approach or as a consultation guide, you may want to take a look at the <a href="api/index.html" target="_blank">API documentation</a> (<a href="api/printable/index.html" target="_blank">more printer-friendly version here</a>).
+						</p>
+					'
+				),
+
 			"how_to_contribute_to_crossbrowdy_or_help_the_project" =>
 				Array
 				(
@@ -165,7 +182,7 @@
 							CrossBrowdy is using <a href="https://github.com/jalbam/CrossBrowdy" target="_blank">GitHub</a> and there you can not only find the source code of the whole project but also help informing about any bugs you might find, suggest code modifications, etc.
 						</p>
 						<p>
-							For more information, you can take a look at the <a href="community" target="_blank">' . $menuOptions[$language]["community"] . '</a> section.
+							For more information, you can take a look at the <a href="community' . $PHPExtension . '" target="_blank">' . $menuOptions[$language]["community"] . '</a> section.
 						</p>
 					'
 				),
@@ -253,7 +270,7 @@
 							If you have any suggestion to make to improve this project (including the <a href="https://crossbrowdy.com/" target="_blank">web site</a>), you can contact the author. Take a look at <a href="about' . $PHPExtension . '#where_can_i_find_the_credits_and_contact_the_authors" class="faq_link">Where can I find the credits and contact the authors?</a>.
 						</p>
 						<p>
-							If you have any doubt or problem which could not be solved so far, visit the <a href="community" target="_blank">' . $menuOptions[$language]["community"] . '</a> section and try to ask your question publicly in some of the available channels.
+							If you have any doubt or problem which could not be solved so far, visit the <a href="community' . $PHPExtension . '" target="_blank">' . $menuOptions[$language]["community"] . '</a> section and try to ask your question publicly in some of the available channels.
 						</p>
 						<p>
 							The two main reasons to expose publicly your doubts are because you will have more chances to get an answer (even probably different ones, as there are often more than one solution for a same problem) and, mainly,
