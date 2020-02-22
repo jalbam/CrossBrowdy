@@ -68,6 +68,7 @@ General:
 		* Take a look at manifest.json to create an installable web app (related with progressive web apps).
 		* Make it compatible with wearables (smart watches, etc.). Take a look at Pebble, Tizen, etc.
 		* Take a look at Nintendo Web Framework.
+		* Consider CSS Houdini, CSS Paint API, etc.
 
 	CB_Arrays:
 		* Add methods as quick sort, bubble sort, etc.
