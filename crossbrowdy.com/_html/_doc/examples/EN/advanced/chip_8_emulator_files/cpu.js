@@ -216,6 +216,8 @@ function loadROMContent(ROMContent, cyclesPerLoop, keysMapROM, ROMId)
 		return;
 	}
 
+	timerDelayMsToDecrease = 1; //Default value.
+
 	//If not given a ROM id, tries to identify the ROM through its data:
 	if (!CB_isString(ROMId) || !ROMId)
 	{
@@ -261,14 +263,13 @@ function loadROMContent(ROMContent, cyclesPerLoop, keysMapROM, ROMId)
 		}
 		else { CB_console("ROM with ID " + ROMId + " not found!"); }
 		
-		timerDelayMsToDecrease = 1;
 		if (typeof(ROMs[ROMId].timerDelayMsToDecrease) !== "undefined" && ROMs[ROMId].timerDelayMsToDecrease !== null && !isNaN(ROMs[ROMId].timerDelayMsToDecrease))
 		{
 			timerDelayMsToDecrease = ROMs[ROMId].timerDelayMsToDecrease;
 		}
-
-		CB_console("Timer will be decreased each " + timerDelayMsToDecrease + " millisecond(s).");
 	}
+
+	CB_console("Timer will be decreased each " + timerDelayMsToDecrease + " millisecond(s).");
 
 	loadingROMHidden = false; //Marks the loading message as showing.
 	CB_Elements.showById("loading_rom"); //Loading message will be showing already when loading the ROM for the first time but not when resetting.
