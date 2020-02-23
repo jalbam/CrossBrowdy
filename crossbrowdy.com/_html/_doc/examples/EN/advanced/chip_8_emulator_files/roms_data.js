@@ -258,6 +258,7 @@ function setROMsData()
 			year: 1990,
 			file: "Syzygy [Roy Trevino, 1990].ch8",
 			cyclesPerLoop: 3,
+			timerDelayMsToDecrease: 35,
 			contentMatches: function(ROMContent) //Returns true if the given ROM content matches this ROM. Used to identify ROMs.
 			{
 				var ROMContentString = ROMContentToString(ROMContent);

@@ -27,6 +27,7 @@ var stack = new Array(16); //Stack content.
 var sp = null; //Stack pointer.
 
 var timerDelay = null; //Countdown 60Hz timer for delays.
+var timerDelayMsToDecrease = 1; //Milliseconds to decrease the timer delay (1 by default). It will updated internally automatically depending on the ROM loaded.
 var timerSound = null; //Countdown 60Hz timer for sounds.
 
 var drawFlag = false; //Flag to define whether to draw the screen or not.
@@ -259,6 +260,14 @@ function loadROMContent(ROMContent, cyclesPerLoop, keysMapROM, ROMId)
 			lastROMIdLoaded = ROMId;
 		}
 		else { CB_console("ROM with ID " + ROMId + " not found!"); }
+		
+		timerDelayMsToDecrease = 1;
+		if (typeof(ROMs[ROMId].timerDelayMsToDecrease) !== "undefined" && ROMs[ROMId].timerDelayMsToDecrease !== null && !isNaN(ROMs[ROMId].timerDelayMsToDecrease))
+		{
+			timerDelayMsToDecrease = ROMs[ROMId].timerDelayMsToDecrease;
+		}
+
+		CB_console("Timer will be decreased each " + timerDelayMsToDecrease + " millisecond(s).");
 	}
 
 	loadingROMHidden = false; //Marks the loading message as showing.
@@ -388,13 +397,13 @@ function performCycle()
 	//Update timers:
 	if (!emulatorPaused)
 	{
-		if (timerDelay > 0 && CB_Device.getTiming() - lastTiming > 1) { timerDelay--; }
+		if (timerDelay > 0 && CB_Device.getTiming() - lastTiming > timerDelayMsToDecrease) { timerDelay--; lastTiming = CB_Device.getTiming(); }
 		if (timerSound > 0)
 		{
 			if (timerSound === 1) { playSoundFx("beep"); } //Plays a "beep" sound.
 			timerSound--; //if (CB_Device.getTiming() - lastTiming > 1) { timerSound--; }
 		}
-		lastTiming = CB_Device.getTiming();
+		//lastTiming = CB_Device.getTiming();
 	}
 	else if (waitingForKey)
 	{
