@@ -249,7 +249,12 @@
 				"chip_8_emulator" => Array
 				(
 					"EN" => "CHIP-8 emulator"
+				)/*,
+				"tower_defense_game" => Array
+				(
+					"EN" => "Tower defense game"
 				)
+				*/
 			)
 		)
 	);
