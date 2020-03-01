@@ -73,7 +73,7 @@
 		global $PHPExtension;
 		$subcategory = trim($subcategory);
 		$topic = trim($topic);
-		return rtrim($category . $PHPExtension . "/" . $subcategory . "/" . $topic . "/", "/") . "/";
+		return rtrim($category . $PHPExtension . "/" . $subcategory . "/" . $topic . "/", "/");// . "/";
 	}
 	
 	
