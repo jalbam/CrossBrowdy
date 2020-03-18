@@ -12,7 +12,7 @@ CB_REM.prototype._onUpdatedFPS = null; //Callback to run when the FPS have been 
 CB_REM._init = function()
 {
 	CB_REM.BUFFER_RECOMMENDED = CB_Client.supportsCanvas() || CB_Canvas.bestEmulation() === "DHTML"; //Using buffer is only recommended when native canvas is supported or for some emulation methods (as some emulation methods flicker more or do not work at all with buffer).
-	if (CB_REM.DEBUG_MESSAGES) { CB_console("RENDERING_ENGINE_MODULE recommends using buffer: " + (CB_REM.BUFFER_RECOMMENDED ? "Yes" : "No")); }
+	if (CB_REM.DEBUG_MESSAGES) { CB_console("[CB_REM] RENDERING_ENGINE_MODULE recommends using buffer: " + (CB_REM.BUFFER_RECOMMENDED ? "Yes" : "No")); }
 }
 
 
@@ -1182,4 +1182,4 @@ CB_REM.prototype.setData = function(getDataObject, graphicSpritesSceneObject, av
 //TODO: A 'reset' method could be useful sometimes.
 
 
-if (CB_REM.DEBUG_MESSAGES) { CB_console("rendering_engine.js inserted in the document"); }
+if (CB_REM.DEBUG_MESSAGES) { CB_console("[CB_REM] rendering_engine.js inserted in the document"); }

@@ -1,11 +1,13 @@
 /* This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License. */
 
-var CB_REM_DEBUG_MESSAGES = true; //Defines whether to shows debug messages or not.
+//Defines whether to shows debug messages or not:
+var CB_REM_DEBUG_MESSAGES = true;
 
 //Adds the rendering engine module to CrossBrowdy:
 CB_Modules.addNeededModule(CB_NAME, "RENDERING_ENGINE_MODULE", { "rendering_engine_module.js" : { load: true, mandatory: true, absolutePath: true } });
 
-var FORCED_EMULATION_METHOD = null; //Forces an emulation mode which can be 'SILVERLIGHT', 'FLASH', 'DHTML' or 'VML' (testing purposes). Use null or undefined to disable it.
+//Forces an emulation mode which can be 'SILVERLIGHT', 'FLASH', 'DHTML' or 'VML' (testing purposes):
+var FORCED_EMULATION_METHOD = null; //Use null or undefined to disable it.
 
 //If desired, sets the needed options to force emulation:
 if (FORCED_EMULATION_METHOD)
@@ -19,6 +21,7 @@ if (FORCED_EMULATION_METHOD)
 }
 
 var myREM = null; //It will store the CB_REM object.
+
 
 CB_init(main); //It will call the "main" function when ready.
 

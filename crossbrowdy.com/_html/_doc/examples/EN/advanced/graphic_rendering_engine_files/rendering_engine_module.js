@@ -26,7 +26,7 @@ CB_Modules.modules["RENDERING_ENGINE_MODULE"] =
 				CB_Modules.modules["RENDERING_ENGINE_MODULE"].neededFiles[CB_REM_PATH + "rendering_engine.js"] = { load: true, mandatory: true, absolutePath: true };
 			}
 			
-			if (CB_REM.DEBUG_MESSAGES) { CB_console("RENDERING_ENGINE_MODULE called"); }
+			if (CB_REM.DEBUG_MESSAGES) { CB_console("[CB_REM] RENDERING_ENGINE_MODULE called"); }
 			CB_Modules.setStatus("RENDERING_ENGINE_MODULE", CB_Modules.STATUSES.LOADED);
 		},
 
@@ -34,7 +34,7 @@ CB_Modules.modules["RENDERING_ENGINE_MODULE"] =
 	"onLoad" :
 		function(scriptPathGiven)
 		{
-			if (CB_REM.DEBUG_MESSAGES) { CB_console("RENDERING_ENGINE_MODULE loaded"); }
+			if (CB_REM.DEBUG_MESSAGES) { CB_console("[CB_REM] RENDERING_ENGINE_MODULE loaded"); }
 			
 			//Sets the module ready when CrossBase module is ready:
 			var checkCrossBaseReady =
@@ -59,7 +59,7 @@ CB_Modules.modules["RENDERING_ENGINE_MODULE"] =
 	"onReady" :
 		function(scriptPathGiven)
 		{
-			if (CB_REM.DEBUG_MESSAGES) { CB_console("RENDERING_ENGINE_MODULE ready"); }
+			if (CB_REM.DEBUG_MESSAGES) { CB_console("[CB_REM] RENDERING_ENGINE_MODULE ready"); }
 		},
 
 	//Needed files:
@@ -74,4 +74,4 @@ CB_Modules.modules["RENDERING_ENGINE_MODULE"] =
 };
 
 
-if (CB_REM.DEBUG_MESSAGES) { CB_console("rendering_engine_module.js (RENDERING_ENGINE_MODULE file) inserted in the document"); }
+if (CB_REM.DEBUG_MESSAGES) { CB_console("[CB_REM] rendering_engine_module.js (RENDERING_ENGINE_MODULE file) inserted in the document"); }

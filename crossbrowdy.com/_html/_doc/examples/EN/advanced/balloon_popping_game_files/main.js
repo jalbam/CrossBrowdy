@@ -3,7 +3,8 @@
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
-var CB_GEM_DEBUG_MESSAGES = true; //Defines whether to shows debug messages or not.
+//Defines whether to shows debug messages or not:
+var CB_GEM_DEBUG_MESSAGES = true;
 
 //Adds the game engine module to CrossBrowdy:
 var CB_GEM_MODULE_NEEDED_MODULES = {};
@@ -11,7 +12,7 @@ CB_GEM_MODULE_NEEDED_MODULES[CB_GEM_PATH + "game_engine_module.js"] = { load: tr
 CB_Modules.addNeededModule(CB_NAME, "GAME_ENGINE_MODULE", CB_GEM_MODULE_NEEDED_MODULES);
 
 
-CB_init(main); //It will call the "main" function when ready
+CB_init(main); //It will call the "main" function when ready.
 
 
 //This function will be called when CrossBrowdy is ready:

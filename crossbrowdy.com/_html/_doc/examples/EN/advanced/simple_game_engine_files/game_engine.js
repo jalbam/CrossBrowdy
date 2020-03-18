@@ -47,7 +47,7 @@ CB_GEM._init = function()
 			if (!keepAwakeEventExecuted)
 			{
 				keepAwakeEventExecuted = true;
-				CB_Screen.keepAwake(function() { CB_console("Keep awake set successfully!"); }, function() { CB_console("Keep awake could not be set successfully!"); });
+				CB_Screen.keepAwake(function() { CB_console("[CB_GEM] Keep awake set successfully!"); }, function() { CB_console("[CB_GEM] Keep awake could not be set successfully!"); });
 				CB_Events.remove(document, "click", keepAwakeEvent, true);
 				CB_Events.remove(document, "touchstart", keepAwakeEvent, true);
 			}
@@ -64,7 +64,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 	//If desired, overwrites the view port ('viewport' meta-tag):
 	if (CB_GEM.options.overwriteViewPort)
 	{
-		CB_console("Overwring/creating 'viewport' meta-tag...");
+		CB_console("[CB_GEM] Overwring/creating 'viewport' meta-tag...");
 		//Changes the viewport:
 		CB_Screen.setViewport
 		(
@@ -82,7 +82,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 	var canvasLoaded = 0;
 	var onLoadCanvas = function()
 	{
-		if (CB_GEM.DEBUG_MESSAGES) { CB_console("Canvas '" + this.getId() + "' loaded! Mode used: " + this.getMode()); }
+		if (CB_GEM.DEBUG_MESSAGES) { CB_console("[CB_GEM] Canvas '" + this.getId() + "' loaded! Mode used: " + this.getMode()); }
 
 		canvasLoaded++;
 
@@ -90,7 +90,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 		var canvasContext = this.getContext();
 		if (!canvasContext)
 		{
-			CB_console("ERROR: canvas context could not be obtained! Drawing cannot be performed.");
+			CB_console("[CB_GEM] ERROR: canvas context could not be obtained! Drawing cannot be performed.");
 			if (typeof(onError) === "function") { onError.call(CB_GEM, "No canvas context found"); }
 			return;
 		}
@@ -108,7 +108,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 			//If desired, disables the context menu for both canvases:
 			if (CB_GEM.options.contextMenuDisable)
 			{
-				CB_console("Disabling context menu for different items...");
+				CB_console("[CB_GEM] Disabling context menu for different items...");
 				CB_Elements.contextMenuDisable(); //Affects 'document' (whole document).
 				CB_Elements.contextMenuDisable(canvases[CB_GEM.options.canvasId].get());
 				CB_Elements.contextMenuDisable(canvases[CB_GEM.options.canvasBufferId].get());
@@ -211,7 +211,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 		CB_Screen.getWindowWidth(), //canvasWidth. Use 'CB_Screen.getWindowWidth()' for complete width. Default: CB_Canvas.WIDTH_DEFAULT.
 		CB_Screen.getWindowHeight(), //canvasHeight. Use 'CB_Screen.getWindowHeight()' for complete height. Default: CB_Canvas.HEIGHT_DEFAULT.
 		onLoadCanvas, //onLoad.
-		function(error) { CB_console("Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_GEM, error); } }, //onError.
+		function(error) { CB_console("[CB_GEM] Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_GEM, error); } }, //onError.
 		undefined, undefined, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD //Forces emulation method.
 	);
 	canvases[CB_GEM.options.canvasBufferId] = new CB_Canvas
@@ -221,7 +221,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 		CB_Screen.getWindowWidth(), //canvasWidth. Use 'CB_Screen.getWindowWidth()' for complete width. Default: CB_Canvas.WIDTH_DEFAULT.
 		CB_Screen.getWindowHeight(), //canvasHeight. Use 'CB_Screen.getWindowHeight()' for complete height. Default: CB_Canvas.HEIGHT_DEFAULT.
 		onLoadCanvas, //onLoad.
-		function(error) { CB_console("Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_GEM, error); } }, //onError.
+		function(error) { CB_console("[CB_GEM] Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_GEM, error); } }, //onError.
 		undefined, undefined, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD //Forces emulation method.
 	);
 }
@@ -318,7 +318,7 @@ CB_GEM.loopStart = function()
 
 	//Starts processing the sprites groups:
 	CB_GEM.stopped = false;
-	if (CB_GEM.DEBUG_MESSAGES) { CB_console("Starts processing graphic sprites scene ('CB_GraphicSpritesScene' object) constantly..."); }
+	if (CB_GEM.DEBUG_MESSAGES) { CB_console("[CB_GEM] Starts processing graphic sprites scene ('CB_GraphicSpritesScene' object) constantly..."); }
 	CB_GEM._processSpritesGroups(0);
 }
 
@@ -361,4 +361,4 @@ CB_GEM.setData = function(getDataObject, graphicSpritesSceneObject, avoidGraphic
 //TODO: A 'reset' method could be useful sometimes.
 
 
-if (CB_GEM.DEBUG_MESSAGES) { CB_console("game_engine.js inserted in the document"); }
+if (CB_GEM.DEBUG_MESSAGES) { CB_console("[CB_GEM] game_engine.js inserted in the document"); }

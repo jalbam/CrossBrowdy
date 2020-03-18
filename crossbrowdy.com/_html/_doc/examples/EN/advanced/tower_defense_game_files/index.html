@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- This file belongs to a CrossBrowdy.com example, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License. -->
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="canonical" href="https://crossbrowdy.com/examples/advanced/tower_defense_game/try" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://crossbrowdy.com/examples/advanced/tower_defense_game/try" />
+		<meta property="og:title" content="CrossBrowdy - Examples - Advanced: Tower defense game - Try" />
+		<meta property="og:site_name" content="CrossBrowdy" />
+		<meta property="og:image" content="https://crossbrowdy.com/img/snapshots/examples.advanced.tower_defense_game.try.EN.png" />
+		<meta property="og:image:type" content="image/png"/>
+		<meta property="og:image:width" content="800"/>
+		<meta property="og:image:height" content="600"/>
+		<meta property="article:author" content="Juan Alba Maldonado" />
+		<meta property="article:publisher" content="Juan Alba Maldonado" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:description" content="CrossBrowdy - Examples for the open-source JavaScript framework to create cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps"/>
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@CrossBrowdy" />
+		<meta name="twitter:creator" content="@jalbam1984" />
+		<meta name="twitter:title" content="CrossBrowdy - Examples - Advanced: Tower defense game - Try" />
+		<meta name="twitter:description" content="CrossBrowdy - Examples for the open-source JavaScript framework to create cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps" />
+		<meta name="twitter:image" content="https://crossbrowdy.com/img/snapshots/examples.advanced.tower_defense_game.try.EN.png" />
+		<meta name="twitter:url" content="https://crossbrowdy.com/examples/advanced/tower_defense_game/try" />
+		<title>Advanced: Tower defense game - Example</title>
+		<!-- Loads the needed CSS files: -->
+		<link rel="stylesheet" type="text/css" href="main.css" />
+		<!-- Loads FlashCanvas (Flash emulation) before CrossBrowdy. Needed also to use ExplorerCanvas (VML emulation) without problems: -->
+		<script src="../../../../../../CrossBrowdy/CrossBase/audiovisual/image/canvas/FlashCanvas/pro/bin/flashcanvas.js" type="text/javascript" language="javascript"></script><!-- FlashCanvas/ExplorerCanvas do not support lazy load. -->
+		<!-- Loads CrossBrowdy.js (main file): -->
+		<script src="../../../../../../CrossBrowdy/CrossBrowdy.js" type="text/javascript" language="javascript"></script><!-- "type" and "language" parameters for legacy clients. -->
+		<!-- Loads the other needed script files: -->
+		<script src="levels.js" type="text/javascript" language="javascript"></script><!-- File with the available levels. -->
+		<script src="Sound.js" type="text/javascript" language="javascript"></script><!-- File with the class to manage sound. -->
+		<script src="Visual.js" type="text/javascript" language="javascript"></script><!-- File with the class to manage visual things (screen, sprites, etc.). -->
+		<script src="Input.js" type="text/javascript" language="javascript"></script><!-- File with the class to manage input. -->
+		<script src="Game.js" type="text/javascript" language="javascript"></script><!-- File with the class to manage game logic. -->
+		<script src="main.js" type="text/javascript" language="javascript"></script><!-- File with the main logic. -->
+	</head>
+	<body>
+		<!-- Music loader/checker: -->
+		<div id="music_loader_checker">
+			<span id="music_progress"></span>
+			<span>
+				<p>
+					This example belongs to <a href="https://crossbrowdy.com" target="_blank">CrossBrowdy.com</a>, made by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado</a>. <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.
+				</p>
+			</span>
+			<button id="button_load_check_music">
+				Step 1:<br />
+				Load music
+			</button>
+			<div id="skip_music_loader" onClick="skipLoadingMusic();">[ Press here to skip music ]</div>
+		</div>
+		<div id="loading">Loading...</div>
+		<div id="debug_switch"><label for="debug_checkbox"><input type="checkbox" id="debug_checkbox" name="debug_checkbox" />Debug</label></div>
+		<canvas id="my_canvas">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
+		<canvas id="my_canvas_buffer">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
+		<button id="start_button" onClick="Game.start();">
+			<span style="display:block; margin-bottom:10px; color:#cc0088;">This example belongs to CrossBrowdy.com, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License.</span>
+			<span style="display:block; margin-bottom:10px; color:#ff0000;">
+				This game is for one player. You can use a gamepad, the keyboard, the mouse or a touch screen to control the game.
+			</span>
+			<span style="display:block; margin-top:10px;">Start game!</span>
+		</button>
+		<br />
+		<!-- The "CB_console" element will be used automatically in the case that the client does not support console: -->
+		<div id="CB_console" style="display:none; visibility:hidden; overflow:scroll;">
+			<span style="font-weight:bold;">Console:</span><br />
+		</div>
+		<div id="crossbrowdy_info"><a href="https://crossbrowdy.com/examples/advanced/tower_defense_game" target="_blank">CrossBrowdy.com example</a></div>
+	</body>
+</html>

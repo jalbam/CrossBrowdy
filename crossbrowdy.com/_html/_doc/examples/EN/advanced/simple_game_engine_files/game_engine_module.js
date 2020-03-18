@@ -41,7 +41,7 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 				CB_Modules.addNeededModule("GAME_ENGINE_MODULE", "RENDERING_ENGINE_MODULE", CB_REM_MODULE_NEEDED_MODULES);
 			}
 
-			if (CB_GEM.DEBUG_MESSAGES) { CB_console("GAME_ENGINE_MODULE called"); }
+			if (CB_GEM.DEBUG_MESSAGES) { CB_console("[CB_GEM] GAME_ENGINE_MODULE called"); }
 			CB_Modules.setStatus("GAME_ENGINE_MODULE", CB_Modules.STATUSES.LOADED);
 		},
 
@@ -49,7 +49,7 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 	"onLoad" :
 		function(scriptPathGiven)
 		{
-			if (CB_GEM.DEBUG_MESSAGES) { CB_console("GAME_ENGINE_MODULE loaded"); }
+			if (CB_GEM.DEBUG_MESSAGES) { CB_console("[CB_GEM] GAME_ENGINE_MODULE loaded"); }
 			
 			//Sets the module ready when CrossBase module is ready:
 			var checkRenderingEngineReady =
@@ -79,7 +79,7 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 	"onReady" :
 		function(scriptPathGiven)
 		{
-			if (CB_GEM.DEBUG_MESSAGES) { CB_console("GAME_ENGINE_MODULE ready"); }
+			if (CB_GEM.DEBUG_MESSAGES) { CB_console("[CB_GEM] GAME_ENGINE_MODULE ready"); }
 		},
 
 	//Needed files:
@@ -103,4 +103,4 @@ CB_Modules.modules["GAME_ENGINE_MODULE"] =
 };
 
 
-if (CB_GEM.DEBUG_MESSAGES) { CB_console("game_engine_module.js (GAME_ENGINE_MODULE file) inserted in the document"); }
+if (CB_GEM.DEBUG_MESSAGES) { CB_console("[CB_GEM] game_engine_module.js (GAME_ENGINE_MODULE file) inserted in the document"); }

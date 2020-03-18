@@ -3,15 +3,16 @@
 //Path to the graphic rendering engine module:
 var CB_GEM_PATH = CB_GEM_PATH || "../simple_game_engine_files/";
 
-var CB_GEM_DEBUG_MESSAGES = false; //Defines whether to shows debug messages or not.
-
+//Defines whether to shows debug messages or not:
+var CB_GEM_DEBUG_MESSAGES = false;
 
 //Adds the game engine module to CrossBrowdy:
 var CB_GEM_MODULE_NEEDED_MODULES = {};
 CB_GEM_MODULE_NEEDED_MODULES[CB_GEM_PATH + "game_engine_module.js"] = { load: true, mandatory: true, absolutePath: true };
 CB_Modules.addNeededModule(CB_NAME, "GAME_ENGINE_MODULE", CB_GEM_MODULE_NEEDED_MODULES);
 
-CB_init(main); //It will call the "main" function when ready
+
+CB_init(main); //It will call the "main" function when ready.
 
 
 //This function will be called when CrossBrowdy is ready:
@@ -249,12 +250,12 @@ function main()
 					elementsWidth:
 						function(alias, element, elementData, elementMapParent, elementLoopHeightDefault, x, y)
 						{
-							return ELEMENTS_WIDTH;
+							return _ELEMENTS_WIDTH;
 						},
 					elementsHeight:
 						function(alias, element, elementData, elementMapParent, elementLoopHeightDefault, x, y)
 						{
-							return ELEMENTS_HEIGHT;
+							return _ELEMENTS_HEIGHT;
 						}
 				},
 				sprites:
@@ -462,7 +463,7 @@ function gameStart(graphicSpritesSceneObject)
 		CB_GEM.data.soundEnabled = false; //If it fails, disables the sound.
 	}
 
-	CB_Device.Vibration.start(100); //Makes the device vibrate.
+	if (CB_GEM.data.vibrationEnabled) { CB_Device.Vibration.start(100); } //Makes the device vibrate.
 
 	//Enables the level selector:
 	var levelSelector = CB_Elements.id("level_selector");
@@ -543,7 +544,7 @@ function loadLevel(level, resetAllMovements)
 	updateInfo(CB_GEM.graphicSpritesSceneObject);
 	
 	//Plays the song corresponding to the level:
-	playMusic(songTitles[level % songTitles.length]);
+	playMusic(_songTitles[level % _songTitles.length]);
 }
 
 
@@ -574,8 +575,8 @@ function updateInfo(graphicSpritesSceneObject)
 
 
 //Resizes all visual elements according to the screen size:
-var ELEMENTS_WIDTH = 40; //It will be updated automatically according to the screen size.
-var ELEMENTS_HEIGHT = 40; //It will be updated automatically according to the screen size.
+var _ELEMENTS_WIDTH = 40; //It will be updated automatically according to the screen size.
+var _ELEMENTS_HEIGHT = 40; //It will be updated automatically according to the screen size.
 function resizeElements(graphicSpritesSceneObject)
 {
 	if (graphicSpritesSceneObject instanceof CB_GraphicSpritesScene)
@@ -584,16 +585,16 @@ function resizeElements(graphicSpritesSceneObject)
 		var mapCurrent = graphicSpritesSceneObject.getById("map_group").getById("map_current").src;
 		if (CB_isArray(mapCurrent))
 		{
-			ELEMENTS_HEIGHT = CB_Screen.getWindowHeight() / mapCurrent.length;
+			_ELEMENTS_HEIGHT = CB_Screen.getWindowHeight() / mapCurrent.length;
 			var maxWidthFound = 1;
 			for (var x = 0; x < mapCurrent.length; x++)
 			{
 				if (mapCurrent.length && mapCurrent[x].length > maxWidthFound) { maxWidthFound = mapCurrent[x].length; }
 			}
-			ELEMENTS_WIDTH = CB_Screen.getWindowWidth() / maxWidthFound;
-			ELEMENTS_WIDTH = ELEMENTS_HEIGHT = Math.min(ELEMENTS_WIDTH, ELEMENTS_HEIGHT);
-			graphicSpritesSceneObject.getById("map_group").getById("map_current").left = (CB_Screen.getWindowWidth() - ELEMENTS_WIDTH * maxWidthFound) / 2;
-			graphicSpritesSceneObject.getById("map_group").getById("map_current").top = (CB_Screen.getWindowHeight() - ELEMENTS_HEIGHT * mapCurrent.length) / 2;
+			_ELEMENTS_WIDTH = CB_Screen.getWindowWidth() / maxWidthFound;
+			_ELEMENTS_WIDTH = _ELEMENTS_HEIGHT = Math.min(_ELEMENTS_WIDTH, _ELEMENTS_HEIGHT);
+			graphicSpritesSceneObject.getById("map_group").getById("map_current").left = (CB_Screen.getWindowWidth() - _ELEMENTS_WIDTH * maxWidthFound) / 2;
+			graphicSpritesSceneObject.getById("map_group").getById("map_current").top = (CB_Screen.getWindowHeight() - _ELEMENTS_HEIGHT * mapCurrent.length) / 2;
 		}
 		
 		//Resizes the FPS and the information text:
@@ -1024,13 +1025,13 @@ function skipLoadingMusic()
 
 
 //Prepares sound effects:
-var sfx = null; //Global object to play the sounds.
-var prepareSoundFxExecuted = false;
+var _sfx = null; //Global object to play the sounds.
+var _prepareSoundFxExecuted = false;
 function prepareSoundFx(forceReload)
 {
-	if (!forceReload && prepareSoundFxExecuted) { return; }
+	if (!forceReload && _prepareSoundFxExecuted) { return; }
 
-	prepareSoundFxExecuted = true;
+	_prepareSoundFxExecuted = true;
 
 	CB_console("Preparing sound FX" + (forceReload ? " (forcing reload)" : "") + "...");
 	
@@ -1059,7 +1060,7 @@ function prepareSoundFx(forceReload)
 		};
 
 		//Loads the sound effects:
-		sfx = CB_AudioDetector.isAPISupported("WAAPI") ? jsfxObject.Live(library) : jsfxObject.Sounds(library); //Uses AudioContext (Web Audio API) if available.
+		_sfx = CB_AudioDetector.isAPISupported("WAAPI") ? jsfxObject.Live(library) : jsfxObject.Sounds(library); //Uses AudioContext (Web Audio API) if available.
 	}
 }
 
@@ -1068,29 +1069,29 @@ function prepareSoundFx(forceReload)
 function playSoundFx(id)
 {
 	if (!CB_GEM.data.soundEnabled) { return; }
-	else if (!sfx || typeof(sfx[id]) !== "function")
+	else if (!_sfx || typeof(_sfx[id]) !== "function")
 	{
 		CB_console("Sound FX '" + id + "' cannot be played! An user-driven event might be needed to be fired before being able to play sounds.");
 		prepareSoundFx(true); //Forces reloading sounds.
-		if (!sfx || typeof(sfx[id]) !== "function") { return; }
+		if (!_sfx || typeof(_sfx[id]) !== "function") { return; }
 	}
 
 	CB_console("Playing sound FX: " + id);
 
 	//Note: at least the first time, it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
-	sfx[id]();
+	_sfx[id]();
 }
 
 
 //Prepares background music:
-var audioFileSpritesPool = null; //Global 'CB_AudioFileSpritesPool' object to play the music.
-var songTitles = []; //Array to keep the title of all the loaded songs.
-var prepareMusicExecuted = false;
+var _audioFileSpritesPool = null; //Global 'CB_AudioFileSpritesPool' object to play the music.
+var _songTitles = []; //Array to keep the title of all the loaded songs.
+var _prepareMusicExecuted = false;
 function prepareMusic()
 {
 	if (!CB_GEM.data.musicEnabled) { return; }
-	else if (prepareMusicExecuted) { return; }
-	prepareMusicExecuted = true;
+	else if (_prepareMusicExecuted) { return; }
+	_prepareMusicExecuted = true;
 	
 	CB_console("Preparing music...");
 	
@@ -1107,69 +1108,69 @@ function prepareMusic()
 		{
 			"audio/mpeg" :
 			[
-				currentURL + "sound/black_lark-first_contact-compressed.mp3", //Absolute path.
-				"sound/black_lark-first_contact-compressed.mp3" //Relative path.
+				currentURL + "audio/black_lark-first_contact-compressed.mp3", //Absolute path.
+				"audio/black_lark-first_contact-compressed.mp3" //Relative path.
 			],
 			"audio/ogg" :
 			[
-				currentURL + "sound/black_lark-first_contact-compressed.ogg", //Absolute path.
-				"sound/black_lark-first_contact-compressed.ogg" //Relative path.
+				currentURL + "audio/black_lark-first_contact-compressed.ogg", //Absolute path.
+				"audio/black_lark-first_contact-compressed.ogg" //Relative path.
 			],
 			"audio/mp4" :
 			[
-				currentURL + "sound/black_lark-first_contact-compressed.m4a", //Absolute path.
-				"sound/black_lark-first_contact-compressed.m4a" //Relative path.
+				currentURL + "audio/black_lark-first_contact-compressed.m4a", //Absolute path.
+				"audio/black_lark-first_contact-compressed.m4a" //Relative path.
 			],
 			"audio/wav" :
 			[
-				currentURL + "sound/black_lark-first_contact-compressed.wav", //Absolute path.
-				"sound/black_lark-first_contact-compressed.wav" //Relative path.
+				currentURL + "audio/black_lark-first_contact-compressed.wav", //Absolute path.
+				"audio/black_lark-first_contact-compressed.wav" //Relative path.
 			]
 		},
 		"smokefishe-sorry_for_lying" :
 		{
 			"audio/mpeg" :
 			[
-				currentURL + "sound/smokefishe-sorry_for_lying-compressed.mp3", //Absolute path.
-				"sound/smokefishe-sorry_for_lying-compressed.mp3" //Relative path.
+				currentURL + "audio/smokefishe-sorry_for_lying-compressed.mp3", //Absolute path.
+				"audio/smokefishe-sorry_for_lying-compressed.mp3" //Relative path.
 			],
 			"audio/ogg" :
 			[
-				currentURL + "sound/smokefishe-sorry_for_lying-compressed.ogg", //Absolute path.
-				"sound/smokefishe-sorry_for_lying-compressed.ogg" //Relative path.
+				currentURL + "audio/smokefishe-sorry_for_lying-compressed.ogg", //Absolute path.
+				"audio/smokefishe-sorry_for_lying-compressed.ogg" //Relative path.
 			],
 			"audio/mp4" :
 			[
-				currentURL + "sound/smokefishe-sorry_for_lying-compressed.m4a", //Absolute path.
-				"sound/smokefishe-sorry_for_lying-compressed.m4a" //Relative path.
+				currentURL + "audio/smokefishe-sorry_for_lying-compressed.m4a", //Absolute path.
+				"audio/smokefishe-sorry_for_lying-compressed.m4a" //Relative path.
 			],
 			"audio/wav" :
 			[
-				currentURL + "sound/smokefishe-sorry_for_lying-compressed.wav", //Absolute path.
-				"sound/smokefishe-sorry_for_lying-compressed.wav" //Relative path.
+				currentURL + "audio/smokefishe-sorry_for_lying-compressed.wav", //Absolute path.
+				"audio/smokefishe-sorry_for_lying-compressed.wav" //Relative path.
 			]
 		},
 		"weary_eyes-invisible_hand" :
 		{
 			"audio/mpeg" :
 			[
-				currentURL + "sound/weary_eyes-invisible_hand-compressed.mp3", //Absolute path.
-				"sound/weary_eyes-invisible_hand-compressed.mp3" //Relative path.
+				currentURL + "audio/weary_eyes-invisible_hand-compressed.mp3", //Absolute path.
+				"audio/weary_eyes-invisible_hand-compressed.mp3" //Relative path.
 			],
 			"audio/ogg" :
 			[
-				currentURL + "sound/weary_eyes-invisible_hand-compressed.ogg", //Absolute path.
-				"sound/weary_eyes-invisible_hand-compressed.ogg" //Relative path.
+				currentURL + "audio/weary_eyes-invisible_hand-compressed.ogg", //Absolute path.
+				"audio/weary_eyes-invisible_hand-compressed.ogg" //Relative path.
 			],
 			"audio/mp4" :
 			[
-				currentURL + "sound/weary_eyes-invisible_hand-compressed.m4a", //Absolute path.
-				"sound/weary_eyes-invisible_hand-compressed.m4a" //Relative path.
+				currentURL + "audio/weary_eyes-invisible_hand-compressed.m4a", //Absolute path.
+				"audio/weary_eyes-invisible_hand-compressed.m4a" //Relative path.
 			],
 			"audio/wav" :
 			[
-				currentURL + "sound/weary_eyes-invisible_hand-compressed.wav", //Absolute path.
-				"sound/weary_eyes-invisible_hand-compressed.wav" //Relative path.
+				currentURL + "audio/weary_eyes-invisible_hand-compressed.wav", //Absolute path.
+				"audio/weary_eyes-invisible_hand-compressed.wav" //Relative path.
 			]
 		}
 	};
@@ -1220,7 +1221,7 @@ function prepareMusic()
 	var onCreateSpritesGroup = function(audioFileObjectsToCheck)
 	{
 		CB_console("[CB_AudioFileSprites] Audio file sprites object (CB_AudioFileSprites) with ID " + this.id + " (status: " + this.getStatusString() + ") created or expanding! CB_AudioFile objects that still need to be checked: " + audioFileObjectsToCheck);
-		if (CB_Arrays.indexOf(songTitles, this.id) === -1) { songTitles[songTitles.length] = this.id; } //Adds the song to the songs array (if it did not exist yet).
+		if (CB_Arrays.indexOf(_songTitles, this.id) === -1) { _songTitles[_songTitles.length] = this.id; } //Adds the song to the songs array (if it did not exist yet).
 		this.onLoad = null; //Prevents to execute this function again (otherwise, it could be executed again after the object grows automatically to create more 'CB_AudioFile' objects).
 	};
 
@@ -1239,7 +1240,7 @@ function prepareMusic()
 		CB_console("[CB_AudioFileSpritesPool] Audio file sprites pool object with ID " + this.id + " (status: " + this.getStatusString() + ") created! CB_AudioFile objects that still need to be checked: " + audioFileObjectsToCheck);
 		if (audioFileObjectsToCheck > 0)
 		{
-			CB_console("[CB_AudioFileSpritesPool] The 'audioFileSpritesPool.checkPlayingAll' method can be called now, to check all the CB_AudioFile objects.");
+			CB_console("[CB_AudioFileSpritesPool] The '_audioFileSpritesPool.checkPlayingAll' method can be called now, to check all the CB_AudioFile objects.");
 			CB_GEM.data.musicLoaded = true;
 			showMusicChecker(); //Shows the music checker.
 		}
@@ -1250,13 +1251,13 @@ function prepareMusic()
 	var audioFileSpritesPoolData =
 	{
 		//Identifier for the audio file sprites pool object:
-		id: "songs", //Optional. Will be stored in 'audioFileSpritesPool.id'.
+		id: "songs", //Optional. Will be stored in '_audioFileSpritesPool.id'.
 
 		//Sprites groups (each will create a CB_AudioFileSprites object internally):
 		"spritesGroups" :
 		{
 			//Sprites group "black_lark-first_contact" (it will be used as its ID) which will create a CB_AudioFileSprites object internally:
-			"black_lark-first_contact" : //This object has the same format that uses the 'audioFileSpritesPool.insertSpritesGroup' method (indeed, it is called internally).
+			"black_lark-first_contact" : //This object has the same format that uses the '_audioFileSpritesPool.insertSpritesGroup' method (indeed, it is called internally).
 			{
 				//Defines the same audio but in different audio files (providing different formats, paths and data URIs):
 				"URIs" : audioURIs["black_lark-first_contact"],
@@ -1265,14 +1266,14 @@ function prepareMusic()
 				"sprites" : audioSprites["black_lark-first_contact"],
 
 				//Sets a function to call when the audio file sprites object is created successfully:
-				onLoad: onCreateSpritesGroup, //Optional. Will be stored in 'audioFileSpritesPool.audioFileSprites["black_lark-first_contact"].onLoad'.
+				onLoad: onCreateSpritesGroup, //Optional. Will be stored in '_audioFileSpritesPool.audioFileSprites["black_lark-first_contact"].onLoad'.
 
 				//Sets a function to call when an error happens with the audio file sprites object:
-				onError: onErrorSpritesGroup //Optional. Will be stored in 'audioFileSpritesPool.audioFileSprites["black_lark-first_contact"].onError'.
+				onError: onErrorSpritesGroup //Optional. Will be stored in '_audioFileSpritesPool.audioFileSprites["black_lark-first_contact"].onError'.
 			},
 
 			//Sprites group "smokefishe-sorry_for_lying" (it will be used as its ID) which will create a CB_AudioFileSprites object internally:
-			"smokefishe-sorry_for_lying" : //This object has the same format that uses the 'audioFileSpritesPool.insertSpritesGroup' method (indeed, it is called internally).
+			"smokefishe-sorry_for_lying" : //This object has the same format that uses the '_audioFileSpritesPool.insertSpritesGroup' method (indeed, it is called internally).
 			{
 				//Defines the same audio but in different audio files (providing different formats, paths and data URIs):
 				"URIs" : audioURIs["smokefishe-sorry_for_lying"],
@@ -1281,14 +1282,14 @@ function prepareMusic()
 				"sprites" : audioSprites["smokefishe-sorry_for_lying"],
 
 				//Sets a function to call when the audio file sprites object is created successfully:
-				onLoad: onCreateSpritesGroup, //Optional. Will be stored in 'audioFileSpritesPool.audioFileSprites["smokefishe-sorry_for_lying"].onLoad'.
+				onLoad: onCreateSpritesGroup, //Optional. Will be stored in '_audioFileSpritesPool.audioFileSprites["smokefishe-sorry_for_lying"].onLoad'.
 
 				//Sets a function to call when an error happens with the audio file sprites object:
-				onError: onErrorSpritesGroup //Optional. Will be stored in 'audioFileSpritesPool.audioFileSprites["smokefishe-sorry_for_lying"].onError'.
+				onError: onErrorSpritesGroup //Optional. Will be stored in '_audioFileSpritesPool.audioFileSprites["smokefishe-sorry_for_lying"].onError'.
 			},
 			
 			//Sprites group "weary_eyes-invisible_hand" (it will be used as its ID) which will create a CB_AudioFileSprites object internally:
-			"weary_eyes-invisible_hand" : //This object has the same format that uses the 'audioFileSpritesPool.insertSpritesGroup' method (indeed, it is called internally).
+			"weary_eyes-invisible_hand" : //This object has the same format that uses the '_audioFileSpritesPool.insertSpritesGroup' method (indeed, it is called internally).
 			{
 				//Defines the same audio but in different audio files (providing different formats, paths and data URIs):
 				"URIs" : audioURIs["weary_eyes-invisible_hand"],
@@ -1297,42 +1298,42 @@ function prepareMusic()
 				"sprites" : audioSprites["weary_eyes-invisible_hand"],
 
 				//Sets a function to call when the audio file sprites object is created successfully:
-				onLoad: onCreateSpritesGroup, //Optional. Will be stored in 'audioFileSpritesPool.audioFileSprites["weary_eyes-invisible_hand"].onLoad'.
+				onLoad: onCreateSpritesGroup, //Optional. Will be stored in '_audioFileSpritesPool.audioFileSprites["weary_eyes-invisible_hand"].onLoad'.
 
 				//Sets a function to call when an error happens with the audio file sprites object:
-				onError: onErrorSpritesGroup //Optional. Will be stored in 'audioFileSpritesPool.audioFileSprites["weary_eyes-invisible_hand"].onError'.
+				onError: onErrorSpritesGroup //Optional. Will be stored in '_audioFileSpritesPool.audioFileSprites["weary_eyes-invisible_hand"].onError'.
 			}
 		},
 
 		/* General options for the audio file sprites pool object (can be overridden when they are specified in the options of a sprites group): */
 
 		//Defines whether we want to check all CB_AudioFile objects automatically or manually (we will need to call the 'checkPlayingAll' method):
-		checkManually: true, //Optional. Default: CB_AudioFileCache.checkManually_DEFAULT. Set to undefined or null to use the default one. Will be stored in 'audioFileSpritesPool.checkManually'.
+		checkManually: true, //Optional. Default: CB_AudioFileCache.checkManually_DEFAULT. Set to undefined or null to use the default one. Will be stored in '_audioFileSpritesPool.checkManually'.
 
 		//Sets a function to call when the audio file sprites pool object is created successfully:
-		onLoad: onCreate, //Optional but recommended. Will be stored in 'audioFileSpritesPool.onLoad'.
+		onLoad: onCreate, //Optional but recommended. Will be stored in '_audioFileSpritesPool.onLoad'.
 
 		//Sets a function to call when an error happens with the audio file sprites pool object:
-		onError: onError, //Optional but recommended. Will be stored in 'audioFileSpritesPool.onError'.
+		onError: onError, //Optional but recommended. Will be stored in '_audioFileSpritesPool.onError'.
 		
 		//As only one sound/sprite (a song) will be played at once, we do not need to cache automatically at all. We can save resources this way:
 		
 		//Minimum CB_AudioFile objects that will be needed internally:
-		minimumAudioFiles: 1, //Optional. Default: CB_AudioFileCache.minimumAudioFiles_DEFAULT. Set to undefined or null to use the default one. Will be stored in 'audioFileSpritesPool.minimumAudioFiles'.
+		minimumAudioFiles: 1, //Optional. Default: CB_AudioFileCache.minimumAudioFiles_DEFAULT. Set to undefined or null to use the default one. Will be stored in '_audioFileSpritesPool.minimumAudioFiles'.
 
 		//Maximum CB_AudioFile objects that will be created internally:
-		maximumAudioFiles: 1, //Optional. Default: CB_AudioFileCache.maximumAudioFiles_DEFAULT. Set to undefined to use the default one. Set to null to have no maximum. Will be stored in 'audioFileSpritesPool.maximumAudioFiles'.
+		maximumAudioFiles: 1, //Optional. Default: CB_AudioFileCache.maximumAudioFiles_DEFAULT. Set to undefined to use the default one. Set to null to have no maximum. Will be stored in '_audioFileSpritesPool.maximumAudioFiles'.
 
 		//Minimum free CB_AudioFile objects that will be needed internally. One CB_AudioFile object is free when it is not being played.
-		minimumAudioFilesFree: 0, //Optional. Default: parseInt(audioFileSpritesPool.minimumAudioFiles * 0.25 + 0.5). Set to undefined or null to use the default one. Will be stored in 'audioFileSpritesPool.minimumAudioFilesFree'.
+		minimumAudioFilesFree: 0, //Optional. Default: parseInt(_audioFileSpritesPool.minimumAudioFiles * 0.25 + 0.5). Set to undefined or null to use the default one. Will be stored in '_audioFileSpritesPool.minimumAudioFilesFree'.
 
 		//Defines the number of new CB_AudioFile objects to create automatically when they are needed:
-		newAudioFilesWhenNeeded: 0 //Optional. Default: Math.min(parseInt(audioFileSpritesPool.minimumAudioFiles * 0.1 + 0.5), 1). Set to undefined or null to use the default one. Will be stored in 'audioFileSpritesPool.newAudioFilesWhenNeeded'.
+		newAudioFilesWhenNeeded: 0 //Optional. Default: Math.min(parseInt(_audioFileSpritesPool.minimumAudioFiles * 0.1 + 0.5), 1). Set to undefined or null to use the default one. Will be stored in '_audioFileSpritesPool.newAudioFilesWhenNeeded'.
 	};
 
 	//Creates the audio file sprites pool object:
 	//NOTE: it is recommended to do it through a user-driven event (as "onClick", "onTouchStart", etc.) in order to maximize compatibility (as some clients could block sounds otherwise).
-	audioFileSpritesPool = new CB_AudioFileSpritesPool(audioFileSpritesPoolData);
+	_audioFileSpritesPool = new CB_AudioFileSpritesPool(audioFileSpritesPoolData);
 
 	//Checks the status constantly and shows the progress (optional):
 	var lastProgress = null, currentProgress = null;
@@ -1341,7 +1342,7 @@ function prepareMusic()
 	var checkLoading = function()
 	{
 		//Shows the progress (if there were any changes):
-		currentProgress = audioFileSpritesPool.getProgress();
+		currentProgress = _audioFileSpritesPool.getProgress();
 		if (currentProgress !== lastProgress)
 		{
 			CB_console("[CB_AudioFileSpritesPool] Progress: " + currentProgress);
@@ -1350,15 +1351,15 @@ function prepareMusic()
 		}
 
 		//Shows the status (if there were any changes):
-		//NOTE: it would also be possible to use the 'audioFileSpritesPool.getStatusString' method which returns a string with the current status.
-		currentStatus = audioFileSpritesPool.getStatus();
+		//NOTE: it would also be possible to use the '_audioFileSpritesPool.getStatusString' method which returns a string with the current status.
+		currentStatus = _audioFileSpritesPool.getStatus();
 		if (currentStatus !== lastStatus)
 		{
 			if (currentStatus === CB_AudioFileSpritesPool.UNLOADED) { CB_console("[CB_AudioFileSpritesPool] Unloaded"); }
 			else if (currentStatus === CB_AudioFileSpritesPool.ABORTED) { CB_console("[CB_AudioFileSpritesPool] Aborted!"); checkLoadingContinue = false; }
 			else if (currentStatus === CB_AudioFileSpritesPool.FAILED) { CB_console("[CB_AudioFileSpritesPool] Failed!"); checkLoadingContinue = false; }
 			else if (currentStatus === CB_AudioFileSpritesPool.LOADING) { CB_console("[CB_AudioFileSpritesPool] Loading..."); }
-			else if (currentStatus === CB_AudioFileSpritesPool.UNCHECKED) { CB_console("[CB_AudioFileSpritesPool] Unchecked! The 'audioFileSpritesPool.checkPlayingAll' method needs to be called."); }
+			else if (currentStatus === CB_AudioFileSpritesPool.UNCHECKED) { CB_console("[CB_AudioFileSpritesPool] Unchecked! The '_audioFileSpritesPool.checkPlayingAll' method needs to be called."); }
 			else if (currentStatus === CB_AudioFileSpritesPool.CHECKING) { CB_console("[CB_AudioFileSpritesPool] Checking..."); }
 			else if (currentStatus === CB_AudioFileSpritesPool.LOADED) { CB_console("[CB_AudioFileSpritesPool] Loaded! Now you can use the audio file sprites pool object freely."); checkLoadingContinue = false; }
 			lastStatus = currentStatus;
@@ -1371,12 +1372,12 @@ function prepareMusic()
 
 
 //Shows the music checker:
-var showMusicCheckerCalled = false; //To prevent showing the checker again.
+var _showMusicCheckerCalled = false; //To prevent showing the checker again.
 function showMusicChecker()
 {
 	if (!CB_GEM.data.musicEnabled) { return; }
-	else if (showMusicCheckerCalled) { return; }
-	showMusicCheckerCalled = true;
+	else if (_showMusicCheckerCalled) { return; }
+	_showMusicCheckerCalled = true;
 	CB_Elements.insertContentById("music_progress", ""); //Empties the progress shown.
 	CB_Elements.insertContentById("button_load_check_music", "Step 2:<br />Check music");
 	CB_Events.removeByName(CB_Elements.id("button_load_check_music"), "click"); //Removes the previous event handler from the button.
@@ -1389,13 +1390,13 @@ function showMusicChecker()
 function checkMusic()
 {
 	if (!CB_GEM.data.musicEnabled) { return; }
-	else if (!(audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be checked because 'audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
+	else if (!(_audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be checked because '_audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
 	
-	CB_console("[CB_AudioFileSpritesPool] Checking music (status: " + audioFileSpritesPool.getStatusString() + ")...");
+	CB_console("[CB_AudioFileSpritesPool] Checking music (status: " + _audioFileSpritesPool.getStatusString() + ")...");
 	CB_Elements.hideById("button_load_check_music"); //Hides the music checker button.
 	
 	//If the "checkManually" option was set to true, we need to check all the CB_AudioFile objects manually (by calling their 'checkPlaying' method):
-	audioFileSpritesPool.checkPlayingAll
+	_audioFileSpritesPool.checkPlayingAll
 	(
 		//callbackOk. Optional but recommended:
 		function(performedActions, uncheckedObjects)
@@ -1438,13 +1439,13 @@ function checkMusic()
 function playMusic(id)
 {
 	if (!CB_GEM.data.musicEnabled) { return; }
-	else if (!(audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be played because 'audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
+	else if (!(_audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be played because '_audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
 	
 	//Stops any possible song playing currently:
 	stopMusic();
 
 	//Gets the internal CB_AudioFileSprites object that belongs to the desired sprites group (gets the desired song):
-	var audioFileSpritesGroup = audioFileSpritesPool.getSpritesGroup(id); //Returns null if not found.
+	var audioFileSpritesGroup = _audioFileSpritesPool.getSpritesGroup(id); //Returns null if not found.
 
 	if (audioFileSpritesGroup !== null)
 	{
@@ -1457,10 +1458,10 @@ function playMusic(id)
 //Stops any song:
 function stopMusic()
 {
-	if (!(audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be stopped because 'audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
+	if (!(_audioFileSpritesPool instanceof CB_AudioFileSpritesPool)) { CB_console("[CB_AudioFileSpritesPool] Music cannot be stopped because 'audioFileSpritesPool' is not a 'CB_AudioFileSpritesPool' object!"); return; }
 	
 	//Stops any possible song playing currently:
-	audioFileSpritesPool.stopAll();
+	_audioFileSpritesPool.stopAll();
 }
 
 
