@@ -335,8 +335,10 @@ Sound.Music.prepare = function()
 		currentProgress = Sound.Music._audioFileSpritesPool.getProgress();
 		if (currentProgress !== lastProgress)
 		{
+			CB_Elements.showById("music_progress");
 			showMessage("[CB_AudioFileSpritesPool] Progress: " + currentProgress);
-			CB_Elements.insertContentById("music_progress", "Please, wait. Music loading/checking progress: " + CB_numberFormat(currentProgress, 2, true) + "%"); //Shows the music loading progress.
+			CB_Elements.insertContentById("music_progress_text", "Please, wait. Music loading/checking progress: " + CB_numberFormat(currentProgress, 2, true) + "%"); //Shows the music loading progress.
+			CB_Elements.id("music_progress_bar").style.width = currentProgress + "%";
 			lastProgress = currentProgress;
 		}
 
@@ -421,6 +423,8 @@ Sound.Music.check = function()
 //Plays the song which belongs to the given level:
 Sound.Music.playByLevel = function(level)
 {
+	if (!Game.data.musicEnabled) { return; }
+	showMessage("[CB_AudioFileSpritesPool] Trying to play music for level " + level + "...");
 	return Sound.Music.play(Sound.Music._songTitles[level % Sound.Music._songTitles.length]);
 }
 
@@ -439,9 +443,12 @@ Sound.Music.play = function(id)
 
 	if (audioFileSpritesGroup !== null)
 	{
+		showMessage("[CB_AudioFileSpritesPool] Trying to play whole sprite whose ID is '" + id + "'...");
+		
 		//Plays the sprite desired ("ALL" which corresponds to the whole song):
-		audioFileSpritesGroup.playSprite("ALL", true); //Also loops.
+		audioFileSpritesGroup.playSprite("ALL", true, undefined, undefined, undefined, function() { showMessage("[CB_AudioFileSpritesPool] Sprite whose ID is '" + id + "' started playing."); }); //Also loops.
 	}
+	else { showMessage("[CB_AudioFileSpritesPool] The 'audioFileSpritesGroup' for '" + id + "' is null. Music cannot be played."); }
 }
 
 

@@ -1449,9 +1449,12 @@ function playMusic(id)
 
 	if (audioFileSpritesGroup !== null)
 	{
+		CB_console("[CB_AudioFileSpritesPool] Trying to play whole sprite whose ID is '" + id + "'...");
+		
 		//Plays the sprite desired ("ALL" which corresponds to the whole song):
-		audioFileSpritesGroup.playSprite("ALL", true); //Also loops.
+		audioFileSpritesGroup.playSprite("ALL", true, undefined, undefined, undefined, function() { CB_console("[CB_AudioFileSpritesPool] Sprite whose ID is '" + id + "' started playing."); }); //Also loops.
 	}
+	else { CB_console("[CB_AudioFileSpritesPool] The 'audioFileSpritesGroup' for '" + id + "' is null. Music cannot be played."); }
 }
 
 

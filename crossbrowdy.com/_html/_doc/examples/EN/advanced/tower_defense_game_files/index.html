@@ -42,23 +42,25 @@
 	<body>
 		<!-- Music loader/checker: -->
 		<div id="music_loader_checker">
-			<span id="music_progress"></span>
-			<span>
-				<p>
-					This example belongs to <a href="https://crossbrowdy.com" target="_blank">CrossBrowdy.com</a>, made by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado</a>. <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.
-				</p>
+			<span id="music_progress">
+				<span id="music_progress_bar"></span>
+				<img id="music_progress_bar_mask" src="img/loading_bar_mask.gif" />
+				<span id="music_progress_text"></span>
 			</span>
-			<button id="button_load_check_music">
+			<p id="credits">
+				This example belongs to <a href="https://crossbrowdy.com" target="_blank">CrossBrowdy.com</a>, made by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado</a>. <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.
+			</p>
+			<button id="button_load_check_music" class="button_loader">
 				Step 1:<br />
 				Load music
 			</button>
-			<div id="skip_music_loader" onClick="skipLoadingMusic();">[ Press here to skip music ]</div>
+			<div id="skip_music_loader" onClick="Sound.Music.skipLoading();">[ Press here to skip music ]</div>
 		</div>
 		<div id="loading">Loading...</div>
 		<div id="debug_switch"><label for="debug_checkbox"><input type="checkbox" id="debug_checkbox" name="debug_checkbox" />Debug</label></div>
 		<canvas id="my_canvas">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
 		<canvas id="my_canvas_buffer">if you read this, canvas is not working</canvas><!-- Some emulation methods will require the canvas element created in HTML (not dynamically by JavaScript). -->
-		<button id="start_button" onClick="Game.start();">
+		<button id="start_button" class="button_loader" onClick="Game.start();">
 			<span style="display:block; margin-bottom:10px; color:#cc0088;">This example belongs to CrossBrowdy.com, made by Joan Alba Maldonado. Creative Commons Attribution 4.0 International License.</span>
 			<span style="display:block; margin-bottom:10px; color:#ff0000;">
 				This game is for one player. You can use a gamepad, the keyboard, the mouse or a touch screen to control the game.

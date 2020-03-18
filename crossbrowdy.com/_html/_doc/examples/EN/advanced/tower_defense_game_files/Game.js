@@ -46,7 +46,7 @@ Game.onLoopEnd = function(graphicSpritesSceneObject, CB_REM_dataObject, expected
 //Starts the game:
 Game.start = function(graphicSpritesSceneObject)
 {
-	if (CB_GEM.data.gameStarted) { return; }
+	if (Game.data.gameStarted) { return; }
 
 	graphicSpritesSceneObject = graphicSpritesSceneObject || CB_GEM.graphicSpritesSceneObject;
 	if (!graphicSpritesSceneObject) { return; }
@@ -66,10 +66,10 @@ Game.start = function(graphicSpritesSceneObject)
 	catch(E)
 	{
 		showMessage("Error preparing sounds or playing sound with 'start' ID: " + E);
-		CB_GEM.data.soundEnabled = false; //If it fails, disables the sound.
+		Game.data.soundEnabled = false; //If it fails, disables the sound.
 	}
 
-	if (CB_GEM.data.vibrationEnabled) { CB_Device.Vibration.start(100); } //Makes the device vibrate.
+	if (Game.data.vibrationEnabled) { CB_Device.Vibration.start(100); } //Makes the device vibrate.
 
 	//Enables the level selector:
 	var levelSelector = CB_Elements.id("level_selector");
@@ -79,14 +79,14 @@ Game.start = function(graphicSpritesSceneObject)
 	}
 
 	//Sets the game as started:
-	CB_GEM.data.gameStarted = true; //When set to true, starts the game automatically as the game loops detect it.
+	Game.data.gameStarted = true; //When set to true, starts the game automatically as the game loops detect it.
 }
 
 
 //Ends the game:
 Game.end = function(message)
 {
-	if (!CB_GEM.data.gameStarted) { return; }
+	if (!Game.data.gameStarted) { return; }
 
 	//Disables the level selector:
 	var levelSelector = CB_Elements.id("level_selector");
@@ -96,30 +96,129 @@ Game.end = function(message)
 	}
 		
 	message = CB_trim(message);
-	CB_GEM.data.gameStarted = false;
+	Game.data.gameStarted = false;
 	CB_Elements.insertContentById("start_button", (message !== "" ? message + "<br />" : "") + "Start game!")
 	CB_Elements.showById("start_button"); //Shows the start button again.
+}
+
+
+
+//Returns a new array filled with the given value:
+Game.Levels._getArrayFilled = function(value, start, end)
+{
+	start = start > 0 ? start : 0;
+	end = end > 0 ? end : 0;
+	if (start >= end) { return [ value ]; }
+	var array = new Array(end - start); //The array will grow later if needed.
+	for (var x = start; x <= end; x++)
+	{
+		array[x] = value;
+	}
+	return array;
+}
+
+
+//Fills the level array with unwalkable tiles the rows needed (to adapt it to the screen) and returns it:
+Game.Levels._loadDataRoundingFunction = null;
+Game.Levels._loadDataRows = function(levelData, maxWidthFound, fillOverflow)
+{
+	var levelHeight = levelData.length;
+	var rowsNeeded = Math.ceil((CB_Screen.getWindowHeight() / Visual._ELEMENTS_HEIGHT) - levelHeight);
+
+	if (rowsNeeded > 0)
+	{
+		if (fillOverflow) { Game.Levels._loadDataRoundingFunction = Math.ceil; }
+		else { Game.Levels._loadDataRoundingFunction = Math.floor; }
+		for (var x = 0; x < Game.Levels._loadDataRoundingFunction(rowsNeeded / 2); x++)
+		{
+			levelData.unshift(Game.Levels._getArrayFilled(" ", 0, maxWidthFound - 1));
+		}
+		for (; x >= 1; x--)
+		{
+			levelData[levelData.length] = Game.Levels._getArrayFilled(" ", 0, maxWidthFound - 1);
+		}
+	}
+	return levelData;
+}
+
+
+//Fills the level array with unwalkable tiles the columns needed (to adapt it to the screen) and returns it:
+Game.Levels._loadDataColumns = function(levelData, fillOverflow)
+{
+	if (fillOverflow) { Game.Levels._loadDataRoundingFunction = Math.ceil; }
+	else { Game.Levels._loadDataRoundingFunction = Math.floor; }
+
+	levelHeight = levelData.length;
+	var columnsNeeded = 0;
+	for (var x = 0; x < levelHeight; x++)
+	{
+		columnsNeeded = Math.ceil((CB_Screen.getWindowWidth() / Visual._ELEMENTS_WIDTH) - levelData[x].length);
+		
+		if (columnsNeeded > 0)
+		{
+			for (var y = 0; y < Game.Levels._loadDataRoundingFunction(columnsNeeded / 2); y++)
+			{
+				levelData[x].unshift(" ");
+			}
+			for (; y >= 1; y--)
+			{
+				levelData[x][levelData[x].length] = " ";
+			}
+		}
+	}
+	return levelData;
+}
+
+
+//Fills the level array with unwalkable tiles if needed (to adapt it to the screen) and returns it (using an internal cache when possible):
+Game.Levels._loadDataCache = [];
+Game.Levels._fillOverflowDefault = true;
+Game.Levels._loadData = function(level, avoidCache)
+{
+	//If it was not adapted and cached before, does it:
+	if (avoidCache || typeof(Game.Levels._loadDataCache[level]) === "undefined" || Game.Levels._loadDataCache[level] === null)
+	{
+		//Adapts the level to the screen filling the missing data with blank spaces:
+		var levelData = CB_Arrays.copy(Game.Levels.data[level]);
+		
+		var levelHeight = levelData.length;
+		var maxWidthFound = 1;
+		for (var x = 0; x < levelHeight; x++)
+		{
+			if (levelData.length && levelData[x].length > maxWidthFound) { maxWidthFound = levelData[x].length; }
+		}
+		
+		Visual._ELEMENTS_HEIGHT = CB_Screen.getWindowHeight() / levelHeight;
+		Visual._ELEMENTS_WIDTH = CB_Screen.getWindowWidth() / maxWidthFound;
+		Visual._ELEMENTS_WIDTH = Visual._ELEMENTS_HEIGHT = Math.min(Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT);
+
+		Game.Levels._loadDataRows(levelData, maxWidthFound, Game.Levels._fillOverflowDefault);
+		Game.Levels._loadDataColumns(levelData, Game.Levels._fillOverflowDefault);
+		
+		//Caches the level:
+		Game.Levels._loadDataCache[level] = levelData;
+	}
+	
+	return Game.Levels._loadDataCache[level];
 }
 
 
 //Loads the desired level:
 Game.Levels.load = function(level)
 {
-	if (!Game.data.gameStarted) { showMessage("Level cannot be loaded. Game did not start yet!"); return CB_GEM.data.level || 0; }
-	
 	//Sanitizes the level number:
 	level = level || 0;
 	if (level < 0) { level = 0; }
 	level %= Game.Levels.data.length; //When the number given is bigger than the levels, it will start again from the beginning.
 	
 	//Resets the data:
-	CB_GEM.data.level = level;
+	Game.data.level = level;
 	
 	//Loads the new map:
-	CB_GEM.graphicSpritesSceneObject.getById("map_group").getById("map_current").src = CB_Arrays.copy(Game.Levels.data[level]); //Using a copy of the array as this one will be modified by the game when elements move.
+	CB_GEM.graphicSpritesSceneObject.getById("map_group").getById("map_current").src = Game.Levels._loadData(level); //Using a copy of the array as this one could be modified to adapt it to the screen.
 	
 	//Updates all visual elements according to the screen size:
-	Visual.resizeElements(CB_GEM.graphicSpritesSceneObject);
+	Visual.resizeElements(CB_GEM.graphicSpritesSceneObject, true);
 
 	//Shows the information for the first time:
 	Visual.updateInfo(CB_GEM.graphicSpritesSceneObject);
@@ -134,8 +233,8 @@ Game.Levels.load = function(level)
 //Restarts a level:
 Game.Levels.restart = function()
 {
-	showMessage("Restarting level " + CB_GEM.data.level + "...");
-	return Game.Levels.load(CB_GEM.data.level);
+	showMessage("Restarting level " + Game.data.level + "...");
+	return Game.Levels.load(Game.data.level);
 }
 
 

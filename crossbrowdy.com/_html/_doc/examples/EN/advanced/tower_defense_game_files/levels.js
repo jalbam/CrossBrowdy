@@ -2,14 +2,29 @@
 
 /*
 	Symbols meaning:
-		" " (space)	=> Blank space.
-		"@"			=> Main character (player).
-		"#"			=> Walls.
-		"$"			=> Pieces to move.
-		"-"			=> Empty holes to put pieces in.
-		"+"			=> Holes with a piece inside.
-		"*"			=> Main character (player) above a hole.
+		" " (space)	=> Blank space. It will be filled randomly with non-walkable symbols (just decoration).
+		"@"			=> Destiny (there can only be one). Enemies will want to reach this target.
+		NOTE: Check symbols below ('_LEVELS_SYMBOLS' object) to see the rest.
 */
+
+
+var _LEVELS_SYMBOLS =
+{
+	//Symbols for walkable path:
+	//NOTE: the ones attached to the borders will allow enemies to appear from there.
+	"walkable":
+	[
+		"$",	//Soil.
+		"%"		//Water.
+	],
+	
+	//Symbols for non-walkable tiles (decoration):
+	"unwalkable":
+	[
+		"!",	//Soil.
+		"="		//Water.
+	],
+};
 
 
 //Levels array:
@@ -17,29 +32,46 @@ var _LEVELS =
 [
 	//Level 0:
 	[
-		"    #####          ".split(""),
-		"    #   #          ".split(""),
-		"    #$  #          ".split(""),
-		"  ###  $##         ".split(""),
-		"  #  $ $ #         ".split(""),
-		"### # ## #   ######".split(""),
-		"#   # ## #####  --#".split(""),
-		"# $  $          --#".split(""),
-		"##### ### #@##  --#".split(""),
-		"    #     #########".split(""),
-		"    #######        ".split("")
+		"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@".split("")
 	],
+
 
 	//Level 1:
 	[
-		"##########".split(""),
-		"####   # #".split(""),
-		"#- $ $-# #".split(""),
-		"#- *$ ## #".split(""),
-		"#$ $  $--#".split(""),
-		"#  #######".split("")
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"@".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split(""),
+		"$".split("")
 	],
-	
+
+
 	//Level 2:
 	[
 		"############  ".split(""),

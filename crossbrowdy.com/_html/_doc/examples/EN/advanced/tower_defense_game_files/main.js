@@ -20,6 +20,11 @@ function main()
 {
 	showMessage("CrossBrowdy and all needed modules loaded. Starting game...");
 	
+	//Makes some DOM element non-draggable, non-selectable, etc.:
+	makeElementSolidById("music_loader_checker");
+	makeElementSolidById("loading");
+	makeElementSolidById("debug_switch");
+	
 	Game.init(); //Initializes the Game class.
 	
 	//Defines needed data:
@@ -88,4 +93,25 @@ function main()
 function showMessage(message)
 {
 	return CB_console("[TOWER_DEFENSE_GAME] " + message);
+}
+
+
+//Makes a DOM element non-draggable, non-selectable, etc.:
+function makeElementSolid(element)
+{
+	if (element !== null)
+	{
+		element.style.draggable = false;
+		element.style.touchAction = "none";
+		CB_Elements.contextMenuDisable(element);
+		CB_Elements.preventSelection(element);
+	}
+	return element;
+}
+
+
+//Makes a DOM element non-draggable, non-selectable, etc. by its identifier:
+function makeElementSolidById(elementId)
+{
+	return makeElementSolid(CB_Elements.id(elementId));
 }

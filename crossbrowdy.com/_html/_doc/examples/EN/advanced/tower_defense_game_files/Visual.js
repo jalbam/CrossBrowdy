@@ -164,6 +164,10 @@ Visual.getSpritesGroupsData = function()
 						elementsData:
 						{
 							//Each property name is an alias which can be used in the map (in the "src" property).
+							" ": //Blank space. It will be filled randomly with non-walkable symbols (just decoration):
+							{
+								id: "stone_sprites"
+							},
 							"@": //Main character (player):
 							{
 								id: "player_sprites"
@@ -208,7 +212,7 @@ Visual.getSpritesGroupsData = function()
 						//'map_current' ('CB_GraphicSprites.SPRITE_OBJECT' object). Some missing or non-valid properties will be inherited from the sprites group:
 						{
 							id: "map_current", //Current map which will be displayed (it will be modified according to the position of the player and the other elements).
-							src: CB_Arrays.copy(Game.Levels.data[0]) //Using a copy of the array as this one will be modified by the game when elements move.
+							src: Game.Levels._loadData(0) //Using a copy of the array as this one will be modified by the game when elements move.
 						}
 					]
 				}
@@ -237,22 +241,21 @@ Visual.updateInfo = function(graphicSpritesSceneObject)
 //Resizes all visual elements according to the screen size:
 Visual._ELEMENTS_WIDTH = 40; //It will be updated automatically according to the screen size.
 Visual._ELEMENTS_HEIGHT = 40; //It will be updated automatically according to the screen size.
-Visual.resizeElements = function(graphicSpritesSceneObject)
+Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 {
+	//If desired, loads the map again (it will be filled with unwalkable tiles if needed):
+	if (!avoidFillingMap)
+	{
+		CB_GEM.graphicSpritesSceneObject.getById("map_group").getById("map_current").src = Game.Levels._loadData(Game.data.level, true); //Using a copy of the array as this one could be modified to adapt it to the screen.
+	}
+
 	if (graphicSpritesSceneObject instanceof CB_GraphicSpritesScene)
 	{
 		//Resizes the current map which is being displayed according to the new screen size:
 		var mapCurrent = graphicSpritesSceneObject.getById("map_group").getById("map_current").src;
 		if (CB_isArray(mapCurrent))
 		{
-			Visual._ELEMENTS_HEIGHT = CB_Screen.getWindowHeight() / mapCurrent.length;
-			var maxWidthFound = 1;
-			for (var x = 0; x < mapCurrent.length; x++)
-			{
-				if (mapCurrent.length && mapCurrent[x].length > maxWidthFound) { maxWidthFound = mapCurrent[x].length; }
-			}
-			Visual._ELEMENTS_WIDTH = CB_Screen.getWindowWidth() / maxWidthFound;
-			Visual._ELEMENTS_WIDTH = Visual._ELEMENTS_HEIGHT = Math.min(Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT);
+			var maxWidthFound = mapCurrent[0].length; //As the map was filled with unwalkable tiles already, all rows have the same width (same columns).
 			graphicSpritesSceneObject.getById("map_group").getById("map_current").left = (CB_Screen.getWindowWidth() - Visual._ELEMENTS_WIDTH * maxWidthFound) / 2;
 			graphicSpritesSceneObject.getById("map_group").getById("map_current").top = (CB_Screen.getWindowHeight() - Visual._ELEMENTS_HEIGHT * mapCurrent.length) / 2;
 		}
