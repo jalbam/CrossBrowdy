@@ -70,6 +70,6 @@ Input.manage = function(action)
 		}
 		
 		//TODO.
-		//var mapCurrent = CB_GEM.graphicSpritesSceneObject.getById("map_group").getById("map_current").src;
+		//var mapCurrent = CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src;
 	}
 }

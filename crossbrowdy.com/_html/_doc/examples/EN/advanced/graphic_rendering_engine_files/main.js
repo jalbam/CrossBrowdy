@@ -154,6 +154,7 @@ function createSpritesGroups()
 				* If it is a sprite, it will clean the space used by the previous sprite before drawing this sprite.
 				* If it is a sub-sprite, it will clean the space that will be used by this sub-sprite.
 				* If used in a 'CB_GraphicSprites' object, it will affect its current sprite being pointed.
+			14) You can set the 'parseIntLeft' and 'parseIntTop' properties to true in the 'data' object to use integer numbers internally for the position of the elements when drawing them. This can prevent some problems as for example tile maps with tiles separated in some screen resolutions.
 	*/
 	var spritesGroupsData =
 	{

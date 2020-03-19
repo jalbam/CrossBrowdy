@@ -13,6 +13,16 @@ CB_GEM.CB_CanvasObjectBufferContext = null; //It will store the context of the C
 //Sets the desired options:
 CB_GEM.options = CB_GEM.options || {};
 CB_GEM.options.REFRESH_RATE = CB_GEM.options.REFRESH_RATE || 16; //A refresh rate of 16 is about 60 FPS (Frames Per Second).
+CB_GEM.options.FPS_SPRITE_DATA = //The 'data' object used by the 'CB_GraphicSprites.SPRITE_OBJECT' object to display the FPS:
+	CB_GEM.options.FPS_SPRITE_DATA ||
+	{
+		fontSize: "12px",
+		fontFamily: "courier",
+		style: "#aa5522",
+		fontStyle: "normal",
+		fontVariant: "normal",
+		fontWeight: "bold"
+	};
 CB_GEM.options.canvasId = CB_GEM.options.canvasId || "my_canvas";
 CB_GEM.options.canvasBufferId = CB_GEM.options.canvasBufferId || "my_canvas_buffer";
 CB_GEM.options.contextMenuDisable = CB_GEM.options.contextMenuDisable === true || CB_GEM.options.contextMenuDisable === false ? CB_GEM.options.contextMenuDisable : true; //Disables the context menu (when pressing mouse's right button) by default.
@@ -249,15 +259,7 @@ CB_GEM._createSpritesGroups = function()
 					src: "FPS: Calculating...",
 					left: 0,
 					top: 0,
-					data:
-					{
-						fontSize: "12px",
-						fontFamily: "courier",
-						style: "#aa5522",
-						fontStyle: "normal",
-						fontVariant: "normal",
-						fontWeight: "bold"
-					}
+					data: CB_GEM.options.FPS_SPRITE_DATA
 				}
 			]
 		};

@@ -188,8 +188,8 @@ Game.Levels._loadData = function(level, avoidCache)
 			if (levelData.length && levelData[x].length > maxWidthFound) { maxWidthFound = levelData[x].length; }
 		}
 		
-		Visual._ELEMENTS_HEIGHT = CB_Screen.getWindowHeight() / levelHeight;
-		Visual._ELEMENTS_WIDTH = CB_Screen.getWindowWidth() / maxWidthFound;
+		Visual._ELEMENTS_HEIGHT = parseInt(CB_Screen.getWindowHeight() / levelHeight);
+		Visual._ELEMENTS_WIDTH = parseInt(CB_Screen.getWindowWidth() / maxWidthFound);
 		Visual._ELEMENTS_WIDTH = Visual._ELEMENTS_HEIGHT = Math.min(Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT);
 
 		Game.Levels._loadDataRows(levelData, maxWidthFound, Game.Levels._fillOverflowDefault);
@@ -215,7 +215,7 @@ Game.Levels.load = function(level)
 	Game.data.level = level;
 	
 	//Loads the new map:
-	CB_GEM.graphicSpritesSceneObject.getById("map_group").getById("map_current").src = Game.Levels._loadData(level); //Using a copy of the array as this one could be modified to adapt it to the screen.
+	CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src = Game.Levels._loadData(level); //Using a copy of the array as this one could be modified to adapt it to the screen.
 	
 	//Updates all visual elements according to the screen size:
 	Visual.resizeElements(CB_GEM.graphicSpritesSceneObject, true);

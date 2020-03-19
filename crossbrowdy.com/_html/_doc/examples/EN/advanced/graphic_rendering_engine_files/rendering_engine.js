@@ -52,8 +52,10 @@ CB_REM.prototype.onUpdatedFPS = function(callback)
 CB_REM._IMAGES_CACHE = {}; //It will keep the images cached (read-only).
 CB_REM.prototype.cacheImage = function(element, reload, onLoad)
 {
+	element.src = CB_trim(element.src);
+
 	//If we do not want to reload and the image is already in the internal cache, calls the 'onLoad' function (if any) and exits:
-	if (!reload && CB_REM._IMAGES_CACHE[element.src]) { if (typeof(onLoad) === "function") { onLoad(element, image); } return; }
+	if (element.src === "" || !reload && CB_REM._IMAGES_CACHE[element.src]) { if (typeof(onLoad) === "function") { onLoad(element, image); } return; }
 	
 	//Creates and loads the image from the element (sprite or sub-sprite):
 	var image = new Image();
@@ -489,6 +491,9 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 			if (parentLoop.top) { element._topRelative += parentLoop.top; }
 		}
 	}
+
+	if (element.data.parseIntLeft) { element._leftRelative = parseInt(element._leftRelative); }
+	if (element.data.parseIntTop) { element._topRelative = parseInt(element._topRelative); }
 
 	//If set, calls the 'beforeDrawing' callback (unless we are drawing a map as map elements will use this callback in their loop):
 	//if (!drawingMap && typeof(element.data.beforeDrawing) === "function")

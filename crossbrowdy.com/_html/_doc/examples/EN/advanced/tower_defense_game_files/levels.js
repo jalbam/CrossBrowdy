@@ -2,7 +2,7 @@
 
 /*
 	Symbols meaning:
-		" " (space)	=> Blank space. It will be filled randomly with non-walkable symbols (just decoration).
+		" " (space)	=> Blank space. It will be filled randomly with non-walkable and non-buildable symbols (just decoration).
 		"@"			=> Destiny (there can only be one). Enemies will want to reach this target.
 		NOTE: Check symbols below ('_LEVELS_SYMBOLS' object) to see the rest.
 */
@@ -18,12 +18,19 @@ var _LEVELS_SYMBOLS =
 		"%"		//Water.
 	],
 	
-	//Symbols for non-walkable tiles (decoration):
-	"unwalkable":
+	//Symbols for non-walkable and buildable tiles:
+	"unwalkable_buildable":
 	[
 		"!",	//Soil.
 		"="		//Water.
 	],
+	
+	//Symbols for non-walkable and non-buildable tiles (decoration):
+	"unwalkable_unbuildable":
+	[
+		"?",	//Soil.
+		"_"		//Water.
+	]
 };
 
 
