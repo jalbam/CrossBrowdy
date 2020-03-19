@@ -83,7 +83,7 @@ function main()
 					style: CB_GEM.data.PIXELS_COLOR_FIRST,
 					gradientLeftOffset: 0, //Used to create a "blink" effect.
 					beforeDrawingElement:
-						function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
+						function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element. The 'element' and 'mapElement' will be the same.
 						{
 							//If desired and possible, it will draw the pixel with a personalized style (for the current ROM):
 							CB_GEM.data._pixelsStyleTemp = CB_GEM.data._pixelsStyleTemp || {};

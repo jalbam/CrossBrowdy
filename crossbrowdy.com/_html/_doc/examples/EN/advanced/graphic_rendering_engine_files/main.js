@@ -154,7 +154,8 @@ function createSpritesGroups()
 				* If it is a sprite, it will clean the space used by the previous sprite before drawing this sprite.
 				* If it is a sub-sprite, it will clean the space that will be used by this sub-sprite.
 				* If used in a 'CB_GraphicSprites' object, it will affect its current sprite being pointed.
-			14) You can set the 'parseIntLeft' and 'parseIntTop' properties to true in the 'data' object to use integer numbers internally for the position of the elements when drawing them. This can prevent some problems as for example tile maps with tiles separated in some screen resolutions.
+			14) We can set the 'parseIntLeft' and 'parseIntTop' properties to true in the 'data' object to use integer numbers internally for the position of the elements when drawing them. This can prevent some problems as for example tile maps with tiles separated in some screen resolutions.
+			15) We can set the 'avoidClearingCanvas' property to true in the 'data' object of the 'spritesGroupsData' to avoid clearing the canvas each cycle.
 	*/
 	var spritesGroupsData =
 	{
@@ -226,7 +227,7 @@ function createSpritesGroups()
 												this._attributes.width = this.data._alternating ? 60 : 50;
 												this._attributes.height = this.data._alternating ? 90 : 80;
 											}
-											return this; //Same as 'element'. Must return the element to draw.
+											return this; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 										},
 									afterDrawing:
 										function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement, onDrawn) //Called after drawing the element.
@@ -397,7 +398,7 @@ function createSpritesGroups()
 						function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
 						{
 							element.data.rotation++;
-							return element;
+							return element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 						}
 				},
 				//Numeric array containing 'CB_GraphicSprites.SPRITE_OBJECT' objects with all the sprites that will be used:
@@ -819,11 +820,11 @@ function createSpritesGroups()
 				data:
 				{
 					beforeDrawingElement:
-						function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
+						function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element. The 'element' and 'mapElement' will be the same.
 						{
 							this.width = 30;
 							this.height = 20;
-							return this; //Same as 'element'. Must return the element to draw.
+							return this; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 						}
 				},
 				sprites:

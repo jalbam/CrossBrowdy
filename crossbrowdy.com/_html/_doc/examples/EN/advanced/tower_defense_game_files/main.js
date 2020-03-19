@@ -24,7 +24,8 @@ function main()
 	makeElementSolidById("music_loader_checker");
 	makeElementSolidById("loading");
 	makeElementSolidById("debug_switch");
-	
+	makeElementSolidById("start_button");
+
 	Game.init(); //Initializes the Game class.
 	
 	//Defines needed data:

@@ -29,7 +29,7 @@ Visual.getSpritesGroupsData = function()
 			id: "my_sprites_groups_1",
 			srcWidth: 512,
 			srcHeight: 512,
-			data: { loop: true, onlyUseInMap: false },
+			data: { loop: true, onlyUseInMap: false, avoidClearingCanvas: true },
 			
 			//Numeric array containing 'CB_GraphicSprites.SPRITES_OBJECT' objects with all the sprites groups that will be used (their "parent" property will be set to point the current 'CB_GraphicSpritesScene' object which contains them):
 			spritesGroups:
@@ -153,7 +153,22 @@ Visual.getSpritesGroupsData = function()
 							function(alias, element, elementData, elementMapParent, elementLoopHeightDefault, x, y)
 							{
 								return Visual._ELEMENTS_HEIGHT;
+							},
+						beforeDrawingElement:
+							function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
+							{
+								var skipDrawing = false;
+
+								if (!CB_isArray(Visual._drawnMapElements)) { Visual._drawnMapElements = []; }
+								if (!CB_isArray(Visual._drawnMapElements[y])) { Visual._drawnMapElements[y] = []; }
+								
+								//Defines whether to draw this element or skip drawing it:
+								if (y > 1 && Visual._drawnMapElements[y][x] === true) { skipDrawing = true; }
+								else { Visual._drawnMapElements[y][x] = true; }
+								
+								return skipDrawing ? null : element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 							}
+
 					},
 					sprites:
 					[
@@ -273,6 +288,9 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 	//Resizes the font of the start button:
 	var startButton = CB_Elements.id("start_button");
 	if (startButton !== null) { startButton.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px"; }
+	
+	//Clears the array to draw all the elements again:
+	Visual._drawnMapElements = [];
 }
 
 

@@ -157,8 +157,8 @@ CB_REM.prototype.renderGraphicScene = function(CB_GraphicSpritesSceneObject, dat
 	//Sets the text baseline at top:
 	data.CB_CanvasObjectBufferContext.textBaseline = "top"; //Needed for clearing previous text.
 
-	//Clears the canvas:
-	data.CB_CanvasObjectBuffer.clear(false);
+	//If desired, clears the canvas:
+	if (!CB_GraphicSpritesSceneObject.spritesGroups.data.avoidClearingCanvas) { data.CB_CanvasObjectBuffer.clear(false); }
 
 	//Perform an action (execute a function) for each 'CB_GraphicSprites' object (being able to introduce a delay between each call):
 	var that = this;
@@ -237,7 +237,7 @@ CB_REM.prototype.getCurrentSprite = function(CB_GraphicSpritesObject, returnValu
 	if (!sprite) { return returnValueOnFail; }
 	
 	if (sprite._timeDisappeared && sprite.data.timeResetAndEnableAfter !== null && sprite._timeDisappeared + sprite.data.timeResetAndEnableAfter < CB_Device.getTiming()) { sprite.setDisabled(false); sprite.setTime(); sprite._timeDisappeared = null; } //Resets the time property.
-	if (!sprite._timeDisappeared && sprite.data.duration !== null && sprite.getTimeElapsed() > sprite.data.duration) { sprite.setDisabled(true); sprite._timeDisappeared = CB_Device.getTiming(); this.clearElementSpace(sprite, canvasContext); } //Disables the sprite and clears it from the canvas..
+	if (!sprite._timeDisappeared && sprite.data.duration !== null && sprite.getTimeElapsed() > sprite.data.duration) { sprite.setDisabled(true); sprite._timeDisappeared = CB_Device.getTiming(); this.clearElementSpace(sprite, sprite, canvasContext); } //Disables the sprite and clears it from the canvas..
 	
 	var spritesLength = CB_GraphicSpritesObject.getSprites(false, []).length;
 	if (spritesLength > 0)
@@ -297,7 +297,7 @@ CB_REM.prototype.drawSprite = function(sprite, canvasContext, canvasBufferContex
 	
 	if (!sprite._timeDisappeared && sprite.data.duration !== null && sprite.getTimeElapsed() > sprite.data.duration)
 	{
-		this.clearElementSpace(sprite, canvasContext);
+		this.clearElementSpace(sprite, sprite, canvasContext);
 		return false;
 	} 
 
@@ -387,7 +387,7 @@ CB_REM.prototype.drawSubSprite = function(subSprite, canvasContext, canvasBuffer
 		//Disables the sub-sprite and exits:
 		subSprite.setDisabled(true);
 		subSprite._timeDisappeared = CB_Device.getTiming();
-		this.clearElementSpace(subSprite, canvasContext);
+		this.clearElementSpace(subSprite, subSprite, canvasContext);
 		return;
 	}
 
@@ -403,9 +403,13 @@ CB_REM.prototype.drawSubSprite = function(subSprite, canvasContext, canvasBuffer
 
 
 //Clears a desired part:
-CB_REM.prototype.clearElementSpace = function(element, canvasContext)
+CB_REM.prototype.clearElementSpace = function(element, elementAlternative, canvasContext)
 {
-	if (typeof(element) === "undefined" || element === null) { return; }
+	if (typeof(element) === "undefined" || element === null)
+	{
+		element = elementAlternative;
+		if (typeof(element) === "undefined" || element === null) { return; }
+	}
 	
 	//If the element is an image:
 	if (element.srcType === CB_GraphicSprites.SRC_TYPES.IMAGE) { canvasContext.clearRect(element._leftRelative, element._topRelative, element.width, element.height); }
@@ -420,7 +424,7 @@ CB_REM.prototype.clearElementSpace = function(element, canvasContext)
 	//...otherwise, if it is text:
 	else if (element.srcType === CB_GraphicSprites.SRC_TYPES.TEXT)
 	{
-		var lineHeight = parseFloat(element.data.fontSize) || element.height;
+		var lineHeight = (parseFloat(element.data.fontSize) || element.height);
 		var textLines = (element.src + "").split("\n");
 		var textTop = null;
 		for (var x = 0; x < textLines.length; x++)
@@ -435,11 +439,13 @@ CB_REM.prototype.clearElementSpace = function(element, canvasContext)
 //Clears a previous element:
 CB_REM.prototype.clearPreviousElement = function(element, canvasContext, useBuffer)
 {
-	if (useBuffer) { return; } //There is no need to clean previous things if we are using buffer.
+	if (useBuffer && false) { return; } //There is no need to clean previous things if we are using buffer.
 	if (typeof(element) === "undefined" || element === null) { return; }
 	else if (element._clearPreviousFirstPerformed) { return; }
-	this.clearElementSpace(typeof(element.getPrevious) === "function" && element.srcType !== CB_GraphicSprites.SRC_TYPES.BITMAP ? element.getPrevious() : element, canvasContext);
-	element._clearPreviousFirstPerformed = true;
+	
+	this.clearElementSpace(typeof(element.getPrevious) === "function" && element.srcType !== CB_GraphicSprites.SRC_TYPES.BITMAP ? element.getPrevious() : element, element, canvasContext);
+	
+	if (element._clearPreviousFirstPerformed === false) { element._clearPreviousFirstPerformed = true; }
 }
 
 
@@ -468,7 +474,7 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 	
 	//If not desired, it will not be drawn:
 	if (!drawingMap && element.data.onlyUseInMap) { return false; }
-
+	
 	//If desired, clears the space it will use before drawing it:
 	if (element.data.clearPreviousFirst) { this.clearPreviousElement(element, canvasContext, useBuffer); }
 
@@ -529,6 +535,7 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 		//Image:
 		case CB_GraphicSprites.SRC_TYPES.IMAGE:
 			if (!element.src) { return false; } //Exists if there is no source.
+
 			var image = CB_REM._IMAGES_CACHE[element.src];
 			if (CB_REM.IMAGES_CACHE_ENABLED && image)
 			{
@@ -750,7 +757,7 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 			var bitmapDataObject = CB_REM._BITMAP_ELEMENTS_CACHE[element.id];
 			bitmapDataObject.left = element.left;
 			bitmapDataObject.top = element.top;
-			var beforeDrawingElementCallback = typeof(element.data.beforeDrawingElement) === "function" ? element.data.beforeDrawingElement : function() {}; //Defining a callback always for performance purposes.
+			var beforeDrawingElementCallback = typeof(element.data.beforeDrawingElement) === "function" ? element.data.beforeDrawingElement : function(element) { return element; }; //Defining a callback always for performance purposes.
 			var x = 0;
 			var elementLeft = 0;
 			var elementTop = element._topRelative;
@@ -763,7 +770,7 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 				{
 					if (element.src[y][x] === true)
 					{
-						element = beforeDrawingElementCallback.call(element, element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, false, x, y, element.src[y][x]);
+						element = beforeDrawingElementCallback.call(element, element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element);
 						style = typeof(element.data.style) === "function" ? element.data.style.call(element, element, canvasContext, canvasBufferContext, useBuffer) : element.data.style;
 						if (element.data.stroke)
 						{
@@ -801,6 +808,7 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 				
 				var CB_GraphicSpritesSceneObjectCopy = CB_REM._MAP_ELEMENTS_CACHE[element.id].CB_GraphicSpritesSceneObject;
 				
+				var beforeDrawingElementCallback = typeof(element.data.beforeDrawingElement) === "function" ? element.data.beforeDrawingElement : function(element) { return element; }; //Defining a callback always for performance purposes.
 				var elementLoopData = null;
 				var elementIndexOrId = null;
 				var elementLoop = null;
@@ -880,7 +888,10 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 							elementLoop = elementLoop.spritesGroup.data.beforeDrawing.call(elementLoop, elementLoop, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element);
 							if (!elementLoop || typeof(elementLoop.isDisabled) !== "function" || elementLoop.isDisabled()) { continue; }
 						}
-
+						
+						elementLoop = beforeDrawingElementCallback.call(elementLoop, elementLoop, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element);
+						if (!elementLoop || typeof(elementLoop.isDisabled) !== "function" || elementLoop.isDisabled()) { continue; }
+						
 						this._onDrawMapElement = function() { CB_REM._elementDrawn(elementLoop, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element, undefined, true); }
 
 						//Draws the element:
