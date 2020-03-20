@@ -313,7 +313,7 @@ function main()
 	};
 	
 	//Modifies the default refresh rate for the game loop (it will affect the FPS):
-	CB_GEM.options.REFRESH_RATE = 33; //A refresh rate of 33 is about 30 FPS (Frames Per Second), which is good enough for this game.
+	CB_GEM.options.LOOP_REFRESH_RATE = 33; //A refresh rate of 33 is about 30 FPS (Frames Per Second) when the cycles per loop is set to 1, which is good enough for this game.
 	
 	//Starts the game engine module:
 	CB_GEM.begin

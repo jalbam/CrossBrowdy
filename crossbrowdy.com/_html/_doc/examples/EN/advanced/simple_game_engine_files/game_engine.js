@@ -12,7 +12,8 @@ CB_GEM.CB_CanvasObjectBufferContext = null; //It will store the context of the C
 
 //Sets the desired options:
 CB_GEM.options = CB_GEM.options || {};
-CB_GEM.options.REFRESH_RATE = CB_GEM.options.REFRESH_RATE || 16; //A refresh rate of 16 is about 60 FPS (Frames Per Second).
+CB_GEM.options.LOOP_REFRESH_RATE = CB_GEM.options.LOOP_REFRESH_RATE || 16; //A refresh rate of 16 is about 60 FPS (Frames Per Second) when the cycles per loop is set to 1.
+CB_GEM.options.RENDERING_CYCLES_PER_LOOP = CB_GEM.options.RENDERING_CYCLES_PER_LOOP || 1; //The number of rendering cycles per loop. It will affect the FPS.
 CB_GEM.options.FPS_SPRITE_DATA = //The 'data' object used by the 'CB_GraphicSprites.SPRITE_OBJECT' object to display the FPS:
 	CB_GEM.options.FPS_SPRITE_DATA ||
 	{
@@ -275,29 +276,32 @@ CB_GEM._processSpritesGroups = function(expectedCallingTime) //The "expectedCall
 {
 	if (CB_GEM.stopped) { return; }
 	
-	//Executes the 'onLoopStart' callback (if any):
-	var skipRendering = CB_GEM.onLoopStart.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
-	
-	if (skipRendering !== false)
+	for (var x = 0; x < CB_GEM.options.RENDERING_CYCLES_PER_LOOP; x++)
 	{
-		//Renders the scene:
-		CB_GEM.REM.renderGraphicScene
-		(
-			CB_GEM.graphicSpritesSceneObject, //graphicSpritesSceneObject. Mandatory. The 'CB_GraphicSpritesScene' object to render.
-			CB_GEM.REM_renderGraphicScene_data, //data.
-			CB_GEM.REM_renderGraphicScene_useBuffer, //useBuffer. Optional. Default: false. Defines whether to use canvas buffer.
-			true //alternateBuffer. Optional. Default: false. Defines whether to alternate visibility between canvas or not (if not, it will copy the buffer canvas content to the visible canvas always).
-		);
+		//Executes the 'onLoopStart' callback (if any):
+		var skipRendering = CB_GEM.onLoopStart.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
+		
+		if (skipRendering !== false)
+		{
+			//Renders the scene:
+			CB_GEM.REM.renderGraphicScene
+			(
+				CB_GEM.graphicSpritesSceneObject, //graphicSpritesSceneObject. Mandatory. The 'CB_GraphicSpritesScene' object to render.
+				CB_GEM.REM_renderGraphicScene_data, //data.
+				CB_GEM.REM_renderGraphicScene_useBuffer, //useBuffer. Optional. Default: false. Defines whether to use canvas buffer.
+				true //alternateBuffer. Optional. Default: false. Defines whether to alternate visibility between canvas or not (if not, it will copy the buffer canvas content to the visible canvas always).
+			);
 
-		//Executes the 'onLoopEnd' callback (if any):
-		CB_GEM.onLoopEnd.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
+			//Executes the 'onLoopEnd' callback (if any):
+			CB_GEM.onLoopEnd.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, expectedCallingTime);
+		}
 	}
 
 	//Calls itself again:
 	CB_GEM._processSpritesGroups_timer = CB_symmetricCall //Note: we could also use 'requestAnimationFrame'.
 	(
 		function(expectedCallingTime) { CB_GEM._processSpritesGroups(expectedCallingTime); },
-		CB_GEM.options.REFRESH_RATE,
+		CB_GEM.options.LOOP_REFRESH_RATE,
 		"_processSpritesGroupsTimerId"
 	);
 }

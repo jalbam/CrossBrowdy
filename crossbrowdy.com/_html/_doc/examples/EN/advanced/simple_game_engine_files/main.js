@@ -155,7 +155,7 @@ function main()
 	//Sets the desired options for the game engine module:
 	CB_GEM.options =
 	{
-		REFRESH_RATE: 16, //A refresh rate of 16 is about 60 FPS (Frames Per Second). Default: 16.
+		LOOP_REFRESH_RATE: 16, //A refresh rate of 16 is about 60 FPS (Frames Per Second) when the cycles per loop is set to 1. Default: 16.
 		CANVAS_FORCED_EMULATION_METHOD: undefined, //Forces a canvas emulation mode which can be 'SILVERLIGHT', 'FLASH', 'DHTML' or 'VML' (testing purposes). Use null or undefined to disable it. Default: undefined.
 		canvasId: "my_canvas", //Identifier for the canvas element. Default: 'my_canvas'.
 		canvasBufferId: "my_canvas_buffer" //Identifier for the buffer canvas element. Default: 'my_canvas_buffer'.

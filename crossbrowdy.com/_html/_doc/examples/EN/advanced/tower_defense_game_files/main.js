@@ -25,6 +25,9 @@ function main()
 	makeElementSolidById("loading");
 	makeElementSolidById("debug_switch");
 	makeElementSolidById("start_button");
+	makeElementSolidById("CB_console");
+	makeElementSolidById("crossbrowdy_info");
+	makeElementSolid(document.body); //CrossBrowdy will create the 'document.body' property for those clients which do not have it natively.
 
 	Game.init(); //Initializes the Game class.
 	
@@ -38,8 +41,9 @@ function main()
 	CB_GEM.onLoopStart = Game.onLoopStart; //When the game loop starts, before rendering the graphics (if it returns false, it will skip rendering in this loop).
 	CB_GEM.onLoopEnd = Game.onLoopEnd; //When the game loop ends, after rendering the graphics (not executed if the 'CB_GEM.onLoopStart' function returned false).
 	
-	//Modifies the default refresh rate for the game loop (it will affect the FPS):
-	CB_GEM.options.REFRESH_RATE = Visual.REFRESH_RATE;
+	//Modifies the default refresh rate for the game loop and the number of cycles per loop (it will affect the FPS):
+	CB_GEM.options.LOOP_REFRESH_RATE = Visual.LOOP_REFRESH_RATE;
+	CB_GEM.options.RENDERING_CYCLES_PER_LOOP = Visual.RENDERING_CYCLES_PER_LOOP;
 	
 	//Starts the game engine module:
 	CB_GEM.begin

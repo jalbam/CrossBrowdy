@@ -439,7 +439,7 @@ CB_REM.prototype.clearElementSpace = function(element, elementAlternative, canva
 //Clears a previous element:
 CB_REM.prototype.clearPreviousElement = function(element, canvasContext, useBuffer)
 {
-	if (useBuffer && false) { return; } //There is no need to clean previous things if we are using buffer.
+	if (useBuffer && typeof(element._clearPreviousFirstPerformed) !== "undefined") { return; } //There is no need to clean previous things if we are using buffer.
 	if (typeof(element) === "undefined" || element === null) { return; }
 	else if (element._clearPreviousFirstPerformed) { return; }
 	

@@ -2,7 +2,8 @@ var Visual = {}; //Class to manage visual things (screen, sprites, etc.).
 
 
 //Defines the default refresh rate for the game loop (it will affect the FPS):
-Visual.REFRESH_RATE = 1; //Minimum is 1, which is as fast as possible.
+Visual.LOOP_REFRESH_RATE = 1; //Minimum is 1, which is as fast as possible.
+Visual.RENDERING_CYCLES_PER_LOOP = 10; //Number of rendering cycles per loop (it will affect the FPS).
 
 
 //Sets the desired sprites scene data (can be modified dynamically):
@@ -44,7 +45,7 @@ Visual.getSpritesGroupsData = function()
 					{
 						fontSize: "16px",
 						fontFamily: "courier",
-						style: "#ff00ff",
+						style: "#ffaa00",
 						fontWeight: "bold"
 					},
 					sprites: [ { id: "info_sprite" } ]

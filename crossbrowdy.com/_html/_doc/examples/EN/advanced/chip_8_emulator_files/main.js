@@ -175,8 +175,9 @@ function main()
 		screenRendered = true; //When the loop ends, the screen must have been rendered.
 	};
 	
-	//Modifies the default refresh rate for the loop (it will affect the FPS but not the emulation cycle as it will be processed separately):
-	CB_GEM.options.REFRESH_RATE = 1;
+	//Modifies the default refresh rate for the loop and the number cycles per loop (it will affect the FPS but not the emulation cycle as it will be processed separately):
+	CB_GEM.options.LOOP_REFRESH_RATE = 1;
+	CB_GEM.options.RENDERING_CYCLES_PER_LOOP = 2;
 	
 	//Starts the engine module:
 	CB_GEM.begin
