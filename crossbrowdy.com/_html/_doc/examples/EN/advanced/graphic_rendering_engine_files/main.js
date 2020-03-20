@@ -90,8 +90,8 @@ function main()
 				undefined, //reload.
 				function(imagesLoaded) //onLoad.
 				{
-					//Starts clearing the FPS (Frames Per Second) counter each second:
-					myREM.startFPSCounter();
+					//Sets the current time as the start time to start counting the FPS (erased each second automatically):
+					myREM._startTimeFPS = CB_Device.getTiming();
 
 					//Show the FPS (Frames Per Second) every time there is a new value:
 					myREM.onUpdatedFPS(function(FPS) { graphicSpritesSceneObject.getById("fps_group").getById("fps").src = "FPS: " + FPS; });

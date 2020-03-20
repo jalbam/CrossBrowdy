@@ -153,13 +153,16 @@ function main()
 	};
 
 	//Sets the desired options for the game engine module:
-	CB_GEM.options =
-	{
-		LOOP_REFRESH_RATE: 16, //A refresh rate of 16 is about 60 FPS (Frames Per Second) when the cycles per loop is set to 1. Default: 16.
-		CANVAS_FORCED_EMULATION_METHOD: undefined, //Forces a canvas emulation mode which can be 'SILVERLIGHT', 'FLASH', 'DHTML' or 'VML' (testing purposes). Use null or undefined to disable it. Default: undefined.
-		canvasId: "my_canvas", //Identifier for the canvas element. Default: 'my_canvas'.
-		canvasBufferId: "my_canvas_buffer" //Identifier for the buffer canvas element. Default: 'my_canvas_buffer'.
-	};
+	CB_GEM.setOptions
+	(
+		{
+			LOOP_REFRESH_RATE: 16, //A refresh rate of 16 is about 60 FPS (Frames Per Second) when the cycles per loop is set to 1. Default: 16.
+			RENDERING_CYCLES_PER_LOOP: 1, //The number of rendering cycles per loop. It will affect the FPS.
+			CANVAS_FORCED_EMULATION_METHOD: undefined, //Forces a canvas emulation mode which can be 'SILVERLIGHT', 'FLASH', 'DHTML' or 'VML' (testing purposes). Use null or undefined to disable it. Default: undefined.
+			canvasId: "my_canvas", //Identifier for the canvas element. Default: 'my_canvas'.
+			canvasBufferId: "my_canvas_buffer" //Identifier for the buffer canvas element. Default: 'my_canvas_buffer'.
+		}
+	);
 	
 	//Defines the callbacks for the game loop:
 	CB_GEM.data = //Data stored in the game engine module (can be exported to save the game status):

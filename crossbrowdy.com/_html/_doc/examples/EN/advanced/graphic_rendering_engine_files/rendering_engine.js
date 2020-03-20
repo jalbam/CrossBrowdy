@@ -23,24 +23,6 @@ CB_REM.prototype._init = function()
 }
 
 
-//Stops counting the FPS:
-CB_REM.prototype.stopFPSCounter = function()
-{
-	clearTimeout(this._FPS_timeout);
-}
-
-
-//Clears the FPS (Frames Per Second) counter (called automatically):
-CB_REM.prototype.startFPSCounter = function()
-{
-	clearTimeout(this._FPS_timeout);
-	if (typeof(this._onUpdatedFPS) === "function") { this._onUpdatedFPS.call(this, this.FPS); }
-	this.FPS = 0;
-	var that = this;
-	this._FPS_timeout = setTimeout(function() { that.startFPSCounter.call(that); }, 1000);
-}
-
-
 //Sets a callback to run when FPS is refreshed (before clearing it):
 CB_REM.prototype.onUpdatedFPS = function(callback)
 {
@@ -219,7 +201,14 @@ CB_REM.prototype.renderGraphicScene = function(CB_GraphicSpritesSceneObject, dat
 		}
 	}
 	
-	this.FPS++; //Increments FPS counter (erased each second).
+	//Calculates the FPS (erased each second):
+	this.FPS++; //Increments FPS counter.
+	if (CB_Device.getTiming() >= this._startTimeFPS + 1000)
+	{
+		if (typeof(this._onUpdatedFPS) === "function") { this._onUpdatedFPS.call(this, this.FPS); }
+		this.FPS = 0;
+		this._startTimeFPS = CB_Device.getTiming();
+	}
 	
 	//Saves the last parameters used (they could have been modified from the given ones):
 	this.renderGraphicScene_lastCB_GraphicSpritesSceneObject = CB_GraphicSpritesSceneObject;
