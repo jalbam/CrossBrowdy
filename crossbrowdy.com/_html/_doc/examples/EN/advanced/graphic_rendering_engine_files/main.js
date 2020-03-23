@@ -144,18 +144,19 @@ function createSpritesGroups()
 			6) We can set 'onlyUseInMap' to true in the 'data' object to just draw that element when it is being drawn as a part of a map (a map is an element whose 'srcType' equals to 'CB_GraphicSprites.SRC_TYPES.MAP').
 			7) We can set 'loop' to true in the 'data' object to loop sprites infinitely instead of stopping at the last one.
 			8) We can set a number (which belongs to the index of a sprite) or a function returning a number in the 'pointerNext' property of the 'data' object to indicate the desired next sprite.
-			9) We can set 'positionAbsolute' to true in the 'data' object to do not have in mind the element's parent position to calculate the position of the element.
-			10) We can set 'hidden' to true in the 'data' object to skip that element so it will not be drawn.
-			11) To rotate an element, we can set the 'rotation' property in the 'data' object to rotate that element:
+			9) We can set a desired canvas filter (similar to CSS filters) in the 'filter' property of the 'data' object.
+			10) We can set 'positionAbsolute' to true in the 'data' object to do not have in mind the element's parent position to calculate the position of the element.
+			11) We can set 'hidden' to true in the 'data' object to skip that element so it will not be drawn.
+			12) To rotate an element, we can set the 'rotation' property in the 'data' object to rotate that element:
 				* If the 'rotationUseDegrees' property is set to true, the value set in 'rotation' will be considered degrees, otherwise it will be considered radians.
 				* To set the coordinates of the rotation axis (for rotation the canvas, internally), use the 'rotationX' and 'rotationY' properties. If any of them is not set, the rotation coordinate will be considered the center (horizontal or vertical) of the element.
-			12) Some properties in the 'data' object can be either a static value or a callback function (as for example the 'style' property).
-			13) The 'clearPreviousFirst' property in the 'data' object can be set to true to accomplish the following:
+			13) Some properties in the 'data' object can be either a static value or a callback function (as for example the 'style' property).
+			14) The 'clearPreviousFirst' property in the 'data' object can be set to true to accomplish the following:
 				* If it is a sprite, it will clean the space used by the previous sprite before drawing this sprite.
 				* If it is a sub-sprite, it will clean the space that will be used by this sub-sprite.
 				* If used in a 'CB_GraphicSprites' object, it will affect its current sprite being pointed.
-			14) We can set the 'parseIntLeft' and 'parseIntTop' properties to true in the 'data' object to use integer numbers internally for the position of the elements when drawing them. This can prevent some problems as for example tile maps with tiles separated in some screen resolutions.
-			15) We can set the 'avoidClearingCanvas' property to true in the 'data' object of the 'spritesGroupsData' to avoid clearing the canvas each cycle.
+			15) We can set the 'parseIntLeft' and 'parseIntTop' properties to true in the 'data' object to use integer numbers internally for the position of the elements when drawing them. This can prevent some problems as for example tile maps with tiles separated in some screen resolutions.
+			16) We can set the 'avoidClearingCanvas' property to true in the 'data' object of the 'spritesGroupsData' to avoid clearing the canvas each cycle.
 	*/
 	var spritesGroupsData =
 	{
@@ -588,6 +589,7 @@ function createSpritesGroups()
 								left: 210,
 								data:
 								{
+									filter: "sepia(1)", //Adds the desired filter.
 									style:
 									function(element, canvasContext, canvasBufferContext, userBuffer)
 									{

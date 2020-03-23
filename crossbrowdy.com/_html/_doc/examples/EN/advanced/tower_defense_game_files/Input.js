@@ -1,6 +1,38 @@
 var Input = {}; //Class to manage input.
 
 
+//It will store the column and row where the mouse is over:
+Input.mouseData =
+{
+	column: -1,
+	row: -1
+};
+
+
+//Initializes the class:
+Input.init = function()
+{
+	//Sets the mouse events:
+	CB_Mouse.onMove
+	(
+		function()
+		{
+			if (!Game.data.gameStarted) { return; }
+			
+			//Updates the row and column where the mouse is over:
+			Input.mouseData = Game.Levels.getSymbolPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
+			
+			//Sets the corresponding mouse cursor:
+			if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE) { CB_Mouse.setCSS("pointer"); }
+			else { CB_Mouse.setCSS(); }
+		}
+	);
+	
+	//Sets the touch events:
+	//TODO.
+}
+
+
 //Input management (some controllers can also fire keyboard events):
 Input._inputProcessedLastTime = 0;
 Input._ignoreInputMs = 150; //Number of milliseconds that the input will be ignored after the player has been moved (to avoid moving or processing the input too fast).
@@ -70,6 +102,6 @@ Input.manage = function(action)
 		}
 		
 		//TODO.
-		//var mapCurrent = CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src;
+		//var mapCurrent = Game.data.levelMap;
 	}
 }

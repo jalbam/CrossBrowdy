@@ -464,16 +464,6 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 	//If not desired, it will not be drawn:
 	if (!drawingMap && element.data.onlyUseInMap) { return false; }
 	
-	//If desired, clears the space it will use before drawing it:
-	if (element.data.clearPreviousFirst) { this.clearPreviousElement(element, canvasContext, useBuffer); }
-
-	//Gets the desired style (can be a function):
-	var style = typeof(element.data.style) === "function" ? element.data.style.call(element, element, canvasContext, canvasBufferContext, useBuffer) : element.data.style;
-	
-	//Applies the desired options:
-	canvasContext.globalCompositeOperation = element.data.globalCompositeOperation || "source-over";
-	canvasContext.globalAlpha = !isNaN(parseFloat(element.data.opacity)) ? parseFloat(element.data.opacity) : 1;
-
 	//Calculates and sets left and top position relative to the parent element(s):
 	element._leftRelative = element.left;
 	element._topRelative = element.top;
@@ -497,6 +487,20 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 		element = element.data.beforeDrawing.call(element, element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap);
 		if (!element || typeof(element.isDisabled) !== "function" || element.isDisabled()) { return false; }
 	}
+
+	//Gets the desired style (can be a function):
+	var style = typeof(element.data.style) === "function" ? element.data.style.call(element, element, canvasContext, canvasBufferContext, useBuffer) : element.data.style;
+
+	//If desired, clears the space it will use before drawing it:
+	if (element.data.clearPreviousFirst) { this.clearPreviousElement(element, canvasContext, useBuffer); }
+
+	//Applies the desired options:
+	canvasContext.globalCompositeOperation = element.data.globalCompositeOperation || "source-over";
+	canvasContext.globalAlpha = !isNaN(parseFloat(element.data.opacity)) ? parseFloat(element.data.opacity) : 1;
+
+	//If the element has a filter, applies it:
+	if (element.data.filter) { canvasContext.filter = element.data.filter; }
+	else { canvasContext.filter = "none"; } //No filter set (default).
 
 	//If we want to rotate the element, proceeds:
 	var rotated = false;

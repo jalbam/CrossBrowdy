@@ -13,14 +13,21 @@ Game.data =
 	musicLoaded: false,
 	musicChecked: false,
 	gameStarted: false,
-	level: 0
+	level: 0,
+	score: 0,
+	coins: 0,
+	vitality: 100
 };
 
 
 //Initializes the class:
 Game.init = function()
 {
+	//Gets the levels:
 	Game.Levels.data = _LEVELS;	
+	
+	//Initializes the 'Input' class:
+	Input.init();
 }
 
 
@@ -118,8 +125,8 @@ Game.Levels._getArrayFilled = function(value, start, end)
 }
 
 
-//Fills the level array with unwalkable tiles the rows needed (to adapt it to the screen) and returns it:
-Game.Levels._loadDataRoundingFunction = null;
+//Fills the level array with unwalkable and unbuildable tiles the rows needed (to adapt it to the screen) and returns it:
+Game.Levels._loadDataRowsRoundingFunction = null;
 Game.Levels._loadDataRows = function(levelData, maxWidthFound, fillOverflow)
 {
 	var levelHeight = levelData.length;
@@ -127,9 +134,9 @@ Game.Levels._loadDataRows = function(levelData, maxWidthFound, fillOverflow)
 
 	if (rowsNeeded > 0)
 	{
-		if (fillOverflow) { Game.Levels._loadDataRoundingFunction = Math.ceil; }
-		else { Game.Levels._loadDataRoundingFunction = Math.floor; }
-		for (var x = 0; x < Game.Levels._loadDataRoundingFunction(rowsNeeded / 2); x++)
+		if (fillOverflow) { Game.Levels._loadDataRowsRoundingFunction = Math.ceil; }
+		else { Game.Levels._loadDataRowsRoundingFunction = Math.floor; }
+		for (var x = 0; x < Game.Levels._loadDataRowsRoundingFunction(rowsNeeded / 2); x++)
 		{
 			levelData.unshift(Game.Levels._getArrayFilled(" ", 0, maxWidthFound - 1));
 		}
@@ -142,11 +149,12 @@ Game.Levels._loadDataRows = function(levelData, maxWidthFound, fillOverflow)
 }
 
 
-//Fills the level array with unwalkable tiles the columns needed (to adapt it to the screen) and returns it:
+//Fills the level array with unwalkable and unbuildable tiles the columns needed (to adapt it to the screen) and returns it:
+Game.Levels._loadDataColumnsRoundingFunction = null;
 Game.Levels._loadDataColumns = function(levelData, fillOverflow)
 {
-	if (fillOverflow) { Game.Levels._loadDataRoundingFunction = Math.ceil; }
-	else { Game.Levels._loadDataRoundingFunction = Math.floor; }
+	if (fillOverflow) { Game.Levels._loadDataColumnsRoundingFunction = Math.ceil; }
+	else { Game.Levels._loadDataColumnsRoundingFunction = Math.floor; }
 
 	levelHeight = levelData.length;
 	var columnsNeeded = 0;
@@ -156,13 +164,13 @@ Game.Levels._loadDataColumns = function(levelData, fillOverflow)
 		
 		if (columnsNeeded > 0)
 		{
-			for (var y = 0; y < Game.Levels._loadDataRoundingFunction(columnsNeeded / 2); y++)
+			for (var y = 0; y < Game.Levels._loadDataColumnsRoundingFunction(columnsNeeded / 2); y++)
 			{
-				levelData[x].unshift(" ");
+				levelData[x].unshift(levelData[x][0] || " "); //Extends the first tile or use an unwalkable and unbuildable tile otherwise.
 			}
 			for (; y >= 1; y--)
 			{
-				levelData[x][levelData[x].length] = " ";
+				levelData[x][levelData[x].length] = levelData[x][levelData[x].length - 1] || " "; //Extends the last tile or use an unwalkable and unbuildable tile otherwise.
 			}
 		}
 	}
@@ -170,9 +178,10 @@ Game.Levels._loadDataColumns = function(levelData, fillOverflow)
 }
 
 
-//Fills the level array with unwalkable tiles if needed (to adapt it to the screen) and returns it (using an internal cache when possible):
+//Fills the level array with unwalkable and unbuildable tiles if needed (to adapt it to the screen) and returns it (using an internal cache when possible):
 Game.Levels._loadDataCache = [];
-Game.Levels._fillOverflowDefault = true;
+Game.Levels._fillOverflowRowsDefault = true;
+Game.Levels._fillOverflowColumnsDefault = true;
 Game.Levels._loadData = function(level, avoidCache)
 {
 	//If it was not adapted and cached before, does it:
@@ -189,17 +198,26 @@ Game.Levels._loadData = function(level, avoidCache)
 		}
 		
 		Visual._ELEMENTS_HEIGHT = parseInt(CB_Screen.getWindowHeight() / levelHeight);
+		Visual._ELEMENTS_HEIGHT_MARGIN = (CB_Screen.getWindowHeight() / levelHeight) - Visual._ELEMENTS_HEIGHT;
 		Visual._ELEMENTS_WIDTH = parseInt(CB_Screen.getWindowWidth() / maxWidthFound);
+		Visual._ELEMENTS_WIDTH_MARGIN = (CB_Screen.getWindowWidth() / maxWidthFound) - Visual._ELEMENTS_WIDTH;
 		Visual._ELEMENTS_WIDTH = Visual._ELEMENTS_HEIGHT = Math.min(Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT);
 
-		Game.Levels._loadDataRows(levelData, maxWidthFound, Game.Levels._fillOverflowDefault);
-		Game.Levels._loadDataColumns(levelData, Game.Levels._fillOverflowDefault);
+		Game.Levels._loadDataRows(levelData, maxWidthFound, Game.Levels._fillOverflowRowsDefault);
+		Game.Levels._loadDataColumns(levelData, Game.Levels._fillOverflowColumnsDefault);
 		
 		//Caches the level:
 		Game.Levels._loadDataCache[level] = levelData;
 	}
 	
 	return Game.Levels._loadDataCache[level];
+}
+
+
+//Loads the desired map source for the current map:
+Game.Levels.loadSource = function(source)
+{
+	Game.data.levelMap = CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src = source;
 }
 
 
@@ -215,7 +233,7 @@ Game.Levels.load = function(level)
 	Game.data.level = level;
 	
 	//Loads the new map:
-	CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src = Game.Levels._loadData(level); //Using a copy of the array as this one could be modified to adapt it to the screen.
+	Game.Levels.loadSource(Game.Levels._loadData(level)); //Using a copy of the array as this one could be modified to adapt it to the screen.
 	
 	//Updates all visual elements according to the screen size:
 	Visual.resizeElements(CB_GEM.graphicSpritesSceneObject, true);
@@ -249,4 +267,64 @@ Game.Levels.loadPrevious = function()
 Game.Levels.loadNext = function()
 {
 	return Game.Levels.load(Game.data.level < Game.Levels.data.length -1 ? Game.data.level + 1 : Game.Levels.data.length - 1);
+}
+
+
+//Returns the map symbol which is in the given row and column from the given current (or current one if no one is given) or null if not possible:
+Game.Levels.getSymbolFromMap = function(column, row, mapArray)
+{
+	if (typeof(mapArray) === "undefined" || mapArray === null || !CB_isArray(mapArray))
+	{
+		mapArray = Game.data.levelMap;
+	}
+	
+	if (typeof(mapArray[row]) !== "undefined" && typeof(mapArray[row][column]) !== "undefined")
+	{
+		return Game.Levels.getTypeFromSymbol(Game.data.levelMap[row][column]);
+	}
+	
+	return null;
+}
+
+
+//Returns the type of the map symbol which is in the given row and column from the given current (or current one if no one is given) or null if not possible:
+Game.Levels.getSymbolTypeFromMap = function(column, row, mapArray)
+{
+	return Game.Levels.getSymbolFromMap(column, row, mapArray);
+}
+
+
+//Returns the type of the given map symbol:
+Game.Levels.SYMBOL_TYPES =
+{
+	//TODO: add the rest of the types.
+	"SOIL_UNWALKABLE_BUILDABLE": 0	
+};
+Game.Levels.getTypeFromSymbol = function(symbol)
+{
+	//TODO: add the rest of the types.
+	
+	if (symbol === "-") { return Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE; }
+	
+	return null;
+}
+
+
+//Returns the column and row of the map symbol which is in the given pixel coordinates:
+Game.Levels.getSymbolPositionFromCoordinates = function(x, y)
+{
+	//Looks through the current map:
+	for (var r = 0; r < Visual._drawnMapElements.length; r++)
+	{
+		for (var c = 0; c < Visual._drawnMapElements[r].length; c++)
+		{
+			//If the given coordinates are inside the current column and row (of the loop), return them:
+			if (CB_Collisions.isPointOverRectangle(x, y, Visual._drawnMapElements[r][c].elementData.x, Visual._drawnMapElements[r][c].elementData.y, Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT))
+			{
+				return { column: c, row: r };
+			}
+		}
+	}
+	
+	return { column: -1, row: -1 };
 }

@@ -21,7 +21,7 @@ var _LEVELS_SYMBOLS =
 	//Symbols for non-walkable and buildable tiles:
 	"unwalkable_buildable":
 	[
-		"!",	//Soil.
+		"-",	//Soil.
 		"="		//Water.
 	],
 	
@@ -39,7 +39,8 @@ var _LEVELS =
 [
 	//Level 0:
 	[
-		"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@".split("")
+		"  -$$$-$$$-$$$-   ".split(""),
+		"$$$$-$$$-$$$-$$$$@".split("")
 	],
 
 

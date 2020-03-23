@@ -3,7 +3,7 @@ var Visual = {}; //Class to manage visual things (screen, sprites, etc.).
 
 //Defines the default refresh rate for the game loop (it will affect the FPS):
 Visual.LOOP_REFRESH_RATE = 1; //Minimum is 1, which is as fast as possible.
-Visual.RENDERING_CYCLES_PER_LOOP = 30; //Number of rendering cycles per loop (it will affect the FPS).
+Visual.RENDERING_CYCLES_PER_LOOP = 10; //Number of rendering cycles per loop (it will affect the FPS).
 
 
 //Sets the desired sprites scene data (can be modified dynamically):
@@ -62,30 +62,6 @@ Visual.getSpritesGroupsData = function()
 					},
 					sprites:
 					[
-						//Walkable soil (enemy's path) sprites:
-						{
-							id: "path",
-							subSprites:
-							[
-								{
-									id: "path_1",
-									src: "img/path_1.gif"
-								}
-							]
-						},
-						
-						//Unwalkable and buildable soil sprites:
-						{
-							id: "soil_unwalkable_buildable",
-							subSprites:
-							[
-								{
-									id: "soil_unwalkable_buildable_1",
-									src: "img/soil_unwalkable_buildable_1.gif"
-								}
-							]
-						},
-						
 						//Unwalkable and unbuildable soil sprites:
 						{
 							id: "soil_unwalkable_unbuildable",
@@ -97,7 +73,31 @@ Visual.getSpritesGroupsData = function()
 								}
 							]
 						},
-						
+
+						//Unwalkable and buildable soil sprites:
+						{
+							id: "soil_unwalkable_buildable",
+							subSprites:
+							[
+								{
+									id: "soil_unwalkable_buildable_1",
+									src: "img/soil_unwalkable_buildable_1.gif"
+								}
+							]
+						},
+
+						//Walkable soil (enemy's path) sprites:
+						{
+							id: "path",
+							subSprites:
+							[
+								{
+									id: "path_1",
+									src: "img/path_1.gif"
+								}
+							]
+						},
+
 						//Destiny (enemies will want to reach this target) sprites:
 						{
 							id: "destiny",
@@ -129,6 +129,13 @@ Visual.getSpritesGroupsData = function()
 							{
 								id: "soil_unwalkable_unbuildable_1",
 								parentId: "soil_unwalkable_unbuildable"
+							},
+
+							//Unwalkable and buildable soil:
+							"-":
+							{
+								id: "soil_unwalkable_buildable_1",
+								parentId: "soil_unwalkable_buildable"
 							},
 							
 							//Walkable soil (enemy's path) sprites:
@@ -162,11 +169,24 @@ Visual.getSpritesGroupsData = function()
 
 								if (!CB_isArray(Visual._drawnMapElements)) { Visual._drawnMapElements = []; }
 								if (!CB_isArray(Visual._drawnMapElements[y])) { Visual._drawnMapElements[y] = []; }
+								if (!CB_isArray(Visual._drawnMapElements[y][x])) { Visual._drawnMapElements[y][x] = {}; }
+								
+								//If the element is unwalkable and buildable:
+								if (Game.Levels.getTypeFromSymbol(mapElement.src[y][x]) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
+								{
+									Visual._drawnMapElements[y][x].drawn = false;
+									if (Input.mouseData.column === x && Input.mouseData.row === y) { element.data.filter = "sepia(0.5)"; }
+									else { element.data.filter = "none"; }
+								}
 								
 								//Defines whether to draw this element or skip drawing it:
-								if (y > 1 && Visual._drawnMapElements[y][x] === true) { skipDrawing = true; }
-								else { Visual._drawnMapElements[y][x] = true; }
-								
+								if (y > 1 && Visual._drawnMapElements[y][x].drawn === true) { skipDrawing = true; }
+								else
+								{
+									Visual._drawnMapElements[y][x].drawn = true;
+									Visual._drawnMapElements[y][x].elementData = { x: element._attributes.left, y: element._attributes.top };
+								}
+						
 								return skipDrawing ? null : element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 							}
 
@@ -193,6 +213,9 @@ Visual.updateInfo = function(graphicSpritesSceneObject)
 {
 	graphicSpritesSceneObject.getById("info").get(0).src =
 		"Level: " + Game.data.level + "\n" +
+		"Coins: " + Game.data.coins + "\n" +
+		"Vitality: " + Game.data.vitality + "\n" +
+		"Score: " + Game.data.score + "\n" +
 		(!CB_Screen.isLandscape() ? "\n\nLandscape screen recommended!" : "") +
 		(
 			CB_GEM_DEBUG_MESSAGES ?
@@ -210,7 +233,7 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 	//If desired, loads the map again (it will be filled with unwalkable tiles if needed):
 	if (!avoidFillingMap)
 	{
-		CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src = Game.Levels._loadData(Game.data.level, true); //Using a copy of the array as this one could be modified to adapt it to the screen.
+		Game.Levels.loadSource(Game.Levels._loadData(Game.data.level, true)); //Using a copy of the array as this one could be modified to adapt it to the screen.
 	}
 
 	if (graphicSpritesSceneObject instanceof CB_GraphicSpritesScene)
@@ -290,8 +313,11 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 	var startButton = CB_Elements.id("start_button");
 	if (startButton !== null) { startButton.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px"; }
 	
-	//Clears the array to draw all the elements again:
+	//Clears the array to draw all the elements again and resets their data:
 	Visual._drawnMapElements = [];
+
+	//Fires the onMouseMove event "manually":
+	CB_Events.executeByName(document, "mousemove");
 }
 
 
