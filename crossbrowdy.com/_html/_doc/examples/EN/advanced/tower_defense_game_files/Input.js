@@ -17,19 +17,47 @@ Input.init = function()
 	(
 		function()
 		{
-			if (!Game.data.gameStarted) { return; }
+			if (!Game.data.gameStarted) { return; } //If the game did not start yet, just exits.
 			
 			//Updates the row and column where the mouse is over:
 			Input.mouseData = Game.Levels.getSymbolPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
+			if (Input.mouseData.column === -1 || Input.mouseData.row === -1) { return; }
 			
 			//Sets the corresponding mouse cursor:
 			if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE) { CB_Mouse.setCSS("pointer"); }
 			else { CB_Mouse.setCSS(); }
 		}
 	);
+	CB_Mouse.onClick
+	(
+		function()
+		{
+			if (!Game.data.gameStarted) { return; } //If the game did not start yet, just exits.
+			
+			//TODO: do not perform the action if the touch event was processed already.
+			
+			//Updates the row and column where the mouse is over:
+			Input.mouseData = Game.Levels.getSymbolPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
+			if (Input.mouseData.column === -1 || Input.mouseData.row === -1) { return; }
+			
+			//If we are clicking on an unwalkable and buildable area:
+			if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
+			{
+				//TODO: call onBuildableTouched()
+				alert("Clicked buildable soil");
+			}
+			//...otherwise, if we are clicking on a tower:
+			else if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row, true, "").substring(0, 6) === "TOWER_")
+			{
+				//TODO.
+				alert("Clicked tower");
+			}
+		}
+	);
 	
 	//Sets the touch events:
-	//TODO.
+	//TODO: only onTouchStart event is needed.
+	//TODO: do not perform the action if the mouse event was processed already.
 }
 
 

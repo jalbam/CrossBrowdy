@@ -109,6 +109,23 @@ Game.end = function(message)
 }
 
 
+//Defines the symbol types (performance and simplification purposes):
+Game.Levels.SYMBOL_TYPES =
+{
+	//TODO: add the rest of the types.
+	"SOIL_UNWALKABLE_UNBUILDABLE": 0,
+	"SOIL_UNWALKABLE_BUILDABLE": 1,
+	"SOIL_WALKABLE": 2,
+	"DESTINY": 3,
+	"TOWER_0": 4,
+	"TOWER_1": 5,
+	"TOWER_2": 6,
+	"TOWER_3": 7,
+	"TOWER_4": 8,
+	"TOWER_5": 9,
+	"TOWER_6": 10
+};
+
 
 //Returns a new array filled with the given value:
 Game.Levels._getArrayFilled = function(value, start, end)
@@ -157,18 +174,19 @@ Game.Levels._loadDataColumns = function(levelData, fillOverflow)
 	else { Game.Levels._loadDataColumnsRoundingFunction = Math.floor; }
 
 	levelHeight = levelData.length;
-	var columnsNeeded = 0;
+	var columnsNeededTotal = 0;
+	var columnsNeededToAdd = 0;
 	for (var x = 0; x < levelHeight; x++)
 	{
-		columnsNeeded = Math.ceil((CB_Screen.getWindowWidth() / Visual._ELEMENTS_WIDTH) - levelData[x].length);
-		
-		if (columnsNeeded > 0)
+		columnsNeededTotal = Math.ceil(CB_Screen.getWindowWidth() / Visual._ELEMENTS_WIDTH);
+		columnsNeededToAdd = columnsNeededTotal - levelData[x].length;
+		if (columnsNeededToAdd > 0)
 		{
-			for (var y = 0; y < Game.Levels._loadDataColumnsRoundingFunction(columnsNeeded / 2); y++)
+			for (var y = 0; y < Game.Levels._loadDataColumnsRoundingFunction(columnsNeededToAdd / 2); y++)
 			{
 				levelData[x].unshift(levelData[x][0] || " "); //Extends the first tile or use an unwalkable and unbuildable tile otherwise.
 			}
-			for (; y >= 1; y--)
+			for (; y > 1 || levelData[x].length < columnsNeededTotal; y--)
 			{
 				levelData[x][levelData[x].length] = levelData[x][levelData[x].length - 1] || " "; //Extends the last tile or use an unwalkable and unbuildable tile otherwise.
 			}
@@ -270,8 +288,8 @@ Game.Levels.loadNext = function()
 }
 
 
-//Returns the map symbol which is in the given row and column from the given current (or current one if no one is given) or null if not possible:
-Game.Levels.getSymbolFromMap = function(column, row, mapArray)
+//Returns the map symbol which is in the given row and column from the given current (or current one if no one is given) or the value of 'returnOnFail' if not possible:
+Game.Levels.getSymbolFromMap = function(column, row, asString, returnOnFail, mapArray)
 {
 	if (typeof(mapArray) === "undefined" || mapArray === null || !CB_isArray(mapArray))
 	{
@@ -280,33 +298,37 @@ Game.Levels.getSymbolFromMap = function(column, row, mapArray)
 	
 	if (typeof(mapArray[row]) !== "undefined" && typeof(mapArray[row][column]) !== "undefined")
 	{
-		return Game.Levels.getTypeFromSymbol(Game.data.levelMap[row][column]);
+		return Game.Levels.getTypeFromSymbol(Game.data.levelMap[row][column], asString, returnOnFail);
 	}
 	
 	return null;
 }
 
 
-//Returns the type of the map symbol which is in the given row and column from the given current (or current one if no one is given) or null if not possible:
-Game.Levels.getSymbolTypeFromMap = function(column, row, mapArray)
+//Returns the type of the map symbol which is in the given row and column from the given current (or current one if no one is given) or the value of 'returnOnFail' if not possible:
+Game.Levels.getSymbolTypeFromMap = function(column, row, asString, returnOnFail, mapArray)
 {
-	return Game.Levels.getSymbolFromMap(column, row, mapArray);
+	return Game.Levels.getSymbolFromMap(column, row, asString, returnOnFail, mapArray);
 }
 
 
-//Returns the type of the given map symbol:
-Game.Levels.SYMBOL_TYPES =
+//Returns the type of the given map symbol or the value of 'returnOnFail' if not possible:
+Game.Levels.getTypeFromSymbol = function(symbol, asString, returnOnFail)
 {
-	//TODO: add the rest of the types.
-	"SOIL_UNWALKABLE_BUILDABLE": 0	
-};
-Game.Levels.getTypeFromSymbol = function(symbol)
-{
-	//TODO: add the rest of the types.
-	
-	if (symbol === "-") { return Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE; }
-	
-	return null;
+	var type = null;
+	if (symbol === "-" || symbol === "=") { type = "SOIL_UNWALKABLE_BUILDABLE"; }
+	else if (symbol === "?" || symbol === "_") { type = "SOIL_UNWALKABLE_UNBUILDABLE"; }
+	else if (symbol === "$" || symbol === "%") { type = "SOIL_WALKABLE"; }
+	else if (symbol === "@") { type = "DESTINY"; }
+	else if (symbol.length === 3) //Tower built (symbol = ABC, where "A" is the unwalkable buildable soil symbol, "B" is the type of tower and "C" is its upgrade level):
+	{
+		if (typeof(Game.Levels.SYMBOL_TYPES["TOWER_" + symbol.charAt(1)]) !== "undefined") { type = "TOWER_" + symbol.charAt(1); }
+	}
+	if (type !== null && !asString)
+	{
+		type = Game.Levels.SYMBOL_TYPES[type];
+	}
+	return type === null ? returnOnFail : type;
 }
 
 
@@ -325,6 +347,5 @@ Game.Levels.getSymbolPositionFromCoordinates = function(x, y)
 			}
 		}
 	}
-	
 	return { column: -1, row: -1 };
 }

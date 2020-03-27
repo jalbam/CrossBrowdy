@@ -150,7 +150,16 @@ Visual.getSpritesGroupsData = function()
 							{
 								id: "destiny_1",
 								parentId: "destiny"
-							}
+							},
+							
+							//TODO: Add all towers and their upgrade levels (in all kinds of soil).
+							
+							//Tower type 0:
+							"-00": //Upgrade level 0.
+							{
+								id: "destiny_1",
+								parentId: "destiny"
+							},
 						},
 						elementsWidth:
 							function(alias, element, elementData, elementMapParent, elementLoopHeightDefault, x, y)
