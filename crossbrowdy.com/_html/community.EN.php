@@ -46,6 +46,12 @@
 		<header><h1 class="category_title">Get involved</h1></header>
 		<div class="category_text">
 			<p>
+				Here you can find a list of some known issues: <a href="https://github.com/jalbam/CrossBrowdy/blob/master/ISSUES.txt" target="_blank">ISSUES.txt</a>. Please, have in mind that you can contribute by adding new ones that you have discovered.
+			</p>
+			<p>
+				And here you can find a TO-DO list for future and possible features: <a href="https://github.com/jalbam/CrossBrowdy/blob/master/TODO.txt" target="_blank">TODO.txt</a>.
+			</p>
+			<p>
 				Feel free to contribute to the open-source CrossBrowdy project through GitHub:
 				<br />
 				<a href="https://github.com/jalbam/CrossBrowdy" target="_blank">https://github.com/jalbam/CrossBrowdy</a>

@@ -60,6 +60,17 @@
 	</section>
 
 	<section>
+		<a name="real_projects"></a>
+		<div class="category_text">
+			<header><h1 class="category_subtitle">Real projects</h1></header>
+			<p>
+				Have you created an app, game or anything else using CrossBrowdy? Please, take a loot at the <a href="about<?php echo $PHPExtension; ?>#may_i_add_my_creation_here" target="_blank" class="faq_link">May I add my creation here?</a>
+				question from the <a href="about<?php echo $PHPExtension; ?>" target="_blank">FAQ page</a>.
+			</p>
+		</div>
+	</section>
+
+	<section>
 		<a name="more"></a>
 		<div class="category_text">
 			<header><h1 class="category_subtitle">More</h1></header>

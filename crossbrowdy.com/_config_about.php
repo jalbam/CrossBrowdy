@@ -155,6 +155,21 @@
 					'
 				),
 
+			"what_is_the_future_of_the_project" =>
+				Array
+				(
+					"question" => "What is the future of the project?",
+					"answer" =>
+					'
+						<p>
+							The objective for CrossBrowdy is to continue improving current features and adding new ones.
+						</p>
+						<p>
+							Here you can find a TO-DO list for future and possible features: <a href="https://github.com/jalbam/CrossBrowdy/blob/master/TODO.txt" target="_blank">TODO.txt</a>.
+						</p>
+					'
+				),
+
 			"How to use it?" =>
 				Array
 				(
@@ -162,7 +177,7 @@
 					"answer" =>
 					'
 						<p>
-							Using CrossBrowdy should not difficult. To start learning how to use it, you can visit the <a href="guides' . $PHPExtension . '" target="_blank">' . $menuOptions[$language]["guides"] . '</a> section where you can find
+							Using CrossBrowdy should not be difficult. To start learning how to use it, you can visit the <a href="guides' . $PHPExtension . '" target="_blank">' . $menuOptions[$language]["guides"] . '</a> section where you can find
 							a <a href="guides' . $PHPExtension . '#basic_tutorial" target="_blank">a complete tutorial with many topics</a>, as well as <a href="guides' . $PHPExtension . '#examples" target="_blank">many live examples with their source code</a>
 							and <a href="guides' . $PHPExtension . '#more" target="_blank">more things</a>.
 						</p>
@@ -187,14 +202,17 @@
 					'
 				),
 
-			"where_can_i_find_the_credits_and_contact_the_authors" =>
+			"may_i_add_my_creation_here" =>
 				Array
 				(
-					"question" => "Where can I find the credits and contact the authors?",
+					"question" => "May I add my creation here?",
 					"answer" =>
 					'
 						<p>
-							CrossBrowdy project was created by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a>. It also uses some external libraries and &quot;third-party&quot; code. The name of these libraries and the name of the authors of these libraries and that other code can be found in the source code as well as in the splash screen (if it was no disabled) and in the <i>console</i> when CrossBrowdy is loading. As this information may vary with each version, it is not included here.
+							If you have created an app, game or any other thing with CrossBrowdy we might consider adding it to the official web site (<i>https://CrossBrowdy.com/</i>).
+						</p>
+						<p>
+							You can contact the author to inform about your creation. Take a look at <a href="about' . $PHPExtension . '#where_can_i_find_the_credits_and_contact_the_authors" class="faq_link">Where can I find the credits and contact the authors?</a>.
 						</p>
 					'
 				),
@@ -213,6 +231,9 @@
 						</p>
 						<p>
 							For present and future platforms, no restrictions should be present. If there were any, it should be fixed in future CrossBrowdy releases.
+						</p>
+						<p>
+							Here you can find a list of some known issues: <a href="https://github.com/jalbam/CrossBrowdy/blob/master/ISSUES.txt" target="_blank">ISSUES.txt</a>. Please, have in mind that you can contribute by adding new ones that you have discovered.
 						</p>
 					'
 				),
@@ -278,6 +299,18 @@
 						</p>
 						<p>
 							Do not forget the fact that CrossBrowdy is part of the open source community: let\'s take advantage of this!
+						</p>
+					'
+				),
+				
+			"where_can_i_find_the_credits_and_contact_the_authors" =>
+				Array
+				(
+					"question" => "Where can I find the credits and contact the authors?",
+					"answer" =>
+					'
+						<p>
+							CrossBrowdy project was created by <a href="https://joanalbamaldonado.com/" target="_blank">Joan Alba Maldonado (aka Juan Alba Maldonado)</a>. It also uses some external libraries and &quot;third-party&quot; code. The name of these libraries and the name of the authors of these libraries and that other code can be found in the source code as well as in the splash screen (if it was no disabled) and in the <i>console</i> when CrossBrowdy is loading. As this information may vary with each version, it is not included here.
 						</p>
 					'
 				)

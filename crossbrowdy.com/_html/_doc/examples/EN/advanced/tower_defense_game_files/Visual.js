@@ -159,7 +159,7 @@ Visual.getSpritesGroupsData = function()
 							{
 								id: "destiny_1",
 								parentId: "destiny"
-							},
+							}
 						},
 						elementsWidth:
 							function(alias, element, elementData, elementMapParent, elementLoopHeightDefault, x, y)
