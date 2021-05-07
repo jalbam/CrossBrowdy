@@ -424,7 +424,23 @@
 <dd>
     
     <div class="description">
-        <p>Two-dimensional object defined by the user with the desired options for CrossBrowdy and its modules. The options supported are the ones used by the <a href="CB_Configuration.html"><code>CB_Configuration</code></a> object.<br>    <br><br>    First-level indexes should belong to the module name (or to &quot;CrossBrowdy&quot;, for general options) and second-level indexes should belong to the option name.<br>    <br><br>    Example:<br>    <br><br>    {<br>        CrossBrowdy:<br>        {<br>            CB_console_ALLOW_ALERTS: false<br>        },<br>        CrossBase:<br>        {<br>            SLCANVAS_LOAD : true,<br>            FLASHCANVAS_LOAD : true<br>        }<br>    }</p>
+        <p>Two-dimensional object defined by the user with the desired options for CrossBrowdy and its modules. The options supported are the ones used by the <a href="CB_Configuration.html"><code>CB_Configuration</code></a> object.<br>
+<br><br>
+First-level indexes should belong to the module name (or to &quot;CrossBrowdy&quot;, for general options) and second-level indexes should belong to the option name.<br>
+<br><br>
+Example:<br>
+<br><br>
+{<br>
+CrossBrowdy:<br>
+{<br>
+CB_console_ALLOW_ALERTS: false<br>
+},<br>
+CrossBase:<br>
+{<br>
+SLCANVAS_LOAD : true,<br>
+FLASHCANVAS_LOAD : true<br>
+}<br>
+}</p>
     </div>
     
 
@@ -931,7 +947,9 @@
 
     
     <div class="description">
-        <p>Converts a given number which is already in a desired base into another chosen base.<br>    <br /><br>    Note: Uses <a href="global.html#CB_baseToInt"><code>CB_baseToInt</code></a> and <a href="global.html#CB_intToBase"><code>CB_intToBase</code></a> internally.</p>
+        <p>Converts a given number which is already in a desired base into another chosen base.<br>
+<br /><br>
+Note: Uses <a href="global.html#CB_baseToInt"><code>CB_baseToInt</code></a> and <a href="global.html#CB_intToBase"><code>CB_intToBase</code></a> internally.</p>
     </div>
     
 
@@ -1402,7 +1420,9 @@
 
     
     <div class="description">
-        <p>Converts a given number which is already in a desired base into an integer (decimal base).<br>    <br /><br>    Note: It can return wrong values when the value exceeds the maximum allowed by a number in the client's JavaScript engine. It can also depend on the &quot;baseSymbols&quot; used.</p>
+        <p>Converts a given number which is already in a desired base into an integer (decimal base).<br>
+<br /><br>
+Note: It can return wrong values when the value exceeds the maximum allowed by a number in the client's JavaScript engine. It can also depend on the &quot;baseSymbols&quot; used.</p>
     </div>
     
 
@@ -2011,7 +2031,11 @@
 
     
     <div class="description">
-        <p>Returns a combined array or object from two arrays or objects. Using the following rules:<br>    <br /><br>    If they both are arrays (numeric indexes), it will keep all elements (attaching the elements of the second array after the elements of the first one).<br>    <br /><br>    Otherwise, if either of them is not an array (it should be an associative array which is an object in JavaScript), it will merge the elements (overwritting those whose index is the same and keeping the ones from the second array/object):</p>
+        <p>Returns a combined array or object from two arrays or objects. Using the following rules:<br>
+<br /><br>
+If they both are arrays (numeric indexes), it will keep all elements (attaching the elements of the second array after the elements of the first one).<br>
+<br /><br>
+Otherwise, if either of them is not an array (it should be an associative array which is an object in JavaScript), it will merge the elements (overwritting those whose index is the same and keeping the ones from the second array/object):</p>
     </div>
     
 
@@ -2332,7 +2356,17 @@
 
     
     <div class="description">
-        <p>Tries to combine two given values guessing the best way to do it and returns their combination. Using the following rules:<br>    <br /><br>    If both values are either undefined or null, returns null.<br>    <br /><br>    Otherwise, if both values are boolean, returns the AND operation for the two of them (a &amp;&amp; b).<br>    <br /><br>    Otherwise, if either of the two is a string (not empty) and is not JSON valid, combines them as URL (GET) parameters using <a href="global.html#CB_combineURIParameters"><code>CB_combineURIParameters</code></a>.<br>    <br /><br>    Otherwise, if either of them is JSON valid, combines them as JSON using <a href="global.html#CB_combineJSON"><code>CB_combineJSON</code></a> (passing the received avoidDuplicatedValuesInArray value as a parameter).<br>    <br /><br>    Otherwise, combines them as arrays or objects using <a href="global.html#CB_combineArraysOrObjects"><code>CB_combineArraysOrObjects</code></a> (passing the received &quot;avoidDuplicatedValuesInArray&quot; value as a parameter).</p>
+        <p>Tries to combine two given values guessing the best way to do it and returns their combination. Using the following rules:<br>
+<br /><br>
+If both values are either undefined or null, returns null.<br>
+<br /><br>
+Otherwise, if both values are boolean, returns the AND operation for the two of them (a &amp;&amp; b).<br>
+<br /><br>
+Otherwise, if either of the two is a string (not empty) and is not JSON valid, combines them as URL (GET) parameters using <a href="global.html#CB_combineURIParameters"><code>CB_combineURIParameters</code></a>.<br>
+<br /><br>
+Otherwise, if either of them is JSON valid, combines them as JSON using <a href="global.html#CB_combineJSON"><code>CB_combineJSON</code></a> (passing the received avoidDuplicatedValuesInArray value as a parameter).<br>
+<br /><br>
+Otherwise, combines them as arrays or objects using <a href="global.html#CB_combineArraysOrObjects"><code>CB_combineArraysOrObjects</code></a> (passing the received &quot;avoidDuplicatedValuesInArray&quot; value as a parameter).</p>
     </div>
     
 
@@ -4406,7 +4440,9 @@
 
     
     <div class="description">
-        <p>Implementation of the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array.forEach</a> method for browsers that do not support it natively.<br>   <br><br>   Executes a function for each element of a given array.</p>
+        <p>Implementation of the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array.forEach</a> method for browsers that do not support it natively.<br>
+<br><br>
+Executes a function for each element of a given array.</p>
     </div>
     
 
@@ -6540,7 +6576,9 @@
 
     
     <div class="description">
-        <p>Implementation of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf">Array.indexOf</a> method for arrays in browsers that do not support it natively.<br>   <br><br>   Returns the first index of a given element that exists in an array (starting from a certain index if desired) or -1 if not found.</p>
+        <p>Implementation of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf">Array.indexOf</a> method for arrays in browsers that do not support it natively.<br>
+<br><br>
+Returns the first index of a given element that exists in an array (starting from a certain index if desired) or -1 if not found.</p>
     </div>
     
 
@@ -7459,7 +7497,9 @@
 
     
     <div class="description">
-        <p>Implementation of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray">Array.isArray</a> method for browsers that do not support it natively.<br>   <br><br>   Returns whether a given element is an array or not.</p>
+        <p>Implementation of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray">Array.isArray</a> method for browsers that do not support it natively.<br>
+<br><br>
+Returns whether a given element is an array or not.</p>
     </div>
     
 
@@ -7838,7 +7878,8 @@
 
     
     <div class="description">
-        <p>Tries to guess whether a given file path (absolute or relative) is a local address or not. It will be assumed as local if the path<br>   uses the &quot;file:&quot; protocol or the current script is running locally and the path does not use the &quot;http:&quot;, &quot;https:&quot; or &quot;ftp:&quot; protocols.</p>
+        <p>Tries to guess whether a given file path (absolute or relative) is a local address or not. It will be assumed as local if the path<br>
+uses the &quot;file:&quot; protocol or the current script is running locally and the path does not use the &quot;http:&quot;, &quot;https:&quot; or &quot;ftp:&quot; protocols.</p>
     </div>
     
 
@@ -8158,7 +8199,9 @@
 
     
     <div class="description">
-        <p>Implementation of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf">Array.lastIndexOf</a> method for browsers that do not support it natively.<br>   <br><br>   Returns the last index of a given element that exists in an array (starting from a certain index if desired) or -1 if not found.</p>
+        <p>Implementation of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf">Array.lastIndexOf</a> method for browsers that do not support it natively.<br>
+<br><br>
+Returns the last index of a given element that exists in an array (starting from a certain index if desired) or -1 if not found.</p>
     </div>
     
 
@@ -10260,7 +10303,9 @@
 
     
     <div class="description">
-        <p>Processes a given string as a template and returns it rendered (if possible) with the values of the given JSON object.<br>   Tries to use <a href="https://handlebarsjs.com/">Handlebars</a> as the first choice but if is is not available it will just replace all occurrences with<br>   vanilla JavaScript.</p>
+        <p>Processes a given string as a template and returns it rendered (if possible) with the values of the given JSON object.<br>
+Tries to use <a href="https://handlebarsjs.com/">Handlebars</a> as the first choice but if is is not available it will just replace all occurrences with<br>
+vanilla JavaScript.</p>
     </div>
     
 
@@ -13954,9 +13999,9 @@
 	</span>
 
 <span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
 	
-		on Mon Feb 3rd 2020
+		on Fri May 7th 2021
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

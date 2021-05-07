@@ -902,7 +902,11 @@
 
     
     <div class="description">
-        <p>Gets the battery object (<a href="https://developer.mozilla.org/docs/Web/API/BatteryManager">BatteryManager</a>) using the <a href="https://developer.mozilla.org/docs/Web/API/Battery_Status_API">Battery Status API</a> (or compatible one) if available or falling back to <a href="https://github.com/apache/cordova-plugin-battery-status">Apache Cordova's Battery Status plugin</a> emulating the object if possible or a fake object otherwise. It could be synchronous or asynchronous depending on the client.<br>       <br /><br>       When the <a href="https://developer.mozilla.org/docs/Web/API/Battery_Status_API">Battery Status API</a> (or compatible one) is not available, the generated object will always contain null values for the &quot;onchargingchange&quot;, &quot;onchargingtimechage&quot;, &quot;ondischargingtimechange&quot; and &quot;onlevelchange&quot; properties. The &quot;charging&quot; and &quot;level&quot; properties will be tried to be calculated by using <a href="https://github.com/apache/cordova-plugin-battery-status">Apache Cordova's Battery Status plugin</a> if possible.<br>       <br /><br>       The return will be synchronous only when <a href="https://developer.mozilla.org/docs/Web/API/Navigator/getBattery">getBattery</a> function is not available. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final battery object (real or fake).</p>
+        <p>Gets the battery object (<a href="https://developer.mozilla.org/docs/Web/API/BatteryManager">BatteryManager</a>) using the <a href="https://developer.mozilla.org/docs/Web/API/Battery_Status_API">Battery Status API</a> (or compatible one) if available or falling back to <a href="https://github.com/apache/cordova-plugin-battery-status">Apache Cordova's Battery Status plugin</a> emulating the object if possible or a fake object otherwise. It could be synchronous or asynchronous depending on the client.<br>
+<br /><br>
+When the <a href="https://developer.mozilla.org/docs/Web/API/Battery_Status_API">Battery Status API</a> (or compatible one) is not available, the generated object will always contain null values for the &quot;onchargingchange&quot;, &quot;onchargingtimechage&quot;, &quot;ondischargingtimechange&quot; and &quot;onlevelchange&quot; properties. The &quot;charging&quot; and &quot;level&quot; properties will be tried to be calculated by using <a href="https://github.com/apache/cordova-plugin-battery-status">Apache Cordova's Battery Status plugin</a> if possible.<br>
+<br /><br>
+The return will be synchronous only when <a href="https://developer.mozilla.org/docs/Web/API/Navigator/getBattery">getBattery</a> function is not available. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final battery object (real or fake).</p>
     </div>
     
 
@@ -1215,7 +1219,9 @@
 
     
     <div class="description">
-        <p>Returns the time (in seconds) that the battery needs to be completely charged. Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>       <br /><br>       The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
+        <p>Returns the time (in seconds) that the battery needs to be completely charged. Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>
+<br /><br>
+The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
     </div>
     
 
@@ -1426,7 +1432,9 @@
 
     
     <div class="description">
-        <p>Returns the time (in seconds) that the battery needs to be completely discharged (or when the device will shutdown, depending on the client). Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>       <br /><br>       The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
+        <p>Returns the time (in seconds) that the battery needs to be completely discharged (or when the device will shutdown, depending on the client). Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>
+<br /><br>
+The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
     </div>
     
 
@@ -1637,7 +1645,9 @@
 
     
     <div class="description">
-        <p>Returns tha current charging level of the battery. Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>       <br /><br>       The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
+        <p>Returns tha current charging level of the battery. Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>
+<br /><br>
+The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
     </div>
     
 
@@ -1848,7 +1858,9 @@
 
     
     <div class="description">
-        <p>Returns whether the battery is charging or not. Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>       <br /><br>       The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
+        <p>Returns whether the battery is charging or not. Using the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function internally. It could be synchronous or asynchronous depending on the client.<br>
+<br /><br>
+The return will be synchronous only sometimes (when it is asynchronous it will just return a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>), following the same rules as the <a href="CB_Device.Battery.html#.get"><code>CB_Device.Battery.get</code></a> function which is called internally. The best practice is to ignore the immediate return value and just trust the first parameter passed to the &quot;callbackOk&quot; function once it is called, since this one will be the final value that we want to get (real or fake).</p>
     </div>
     
 
@@ -3275,9 +3287,9 @@
 	</span>
 
 <span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
 	
-		on Mon Feb 3rd 2020
+		on Fri May 7th 2021
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

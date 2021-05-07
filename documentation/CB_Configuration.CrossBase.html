@@ -1385,7 +1385,8 @@
 <dd>
     
     <div class="description">
-        <p>Default value for maximum delay (in milliseconds) to wait for a sound to start playing or start next loop (if the time expires, the sound will never be played).<br>        Used by <a href="CB_AudioFile_API.WAAPI.html"><code>CB_AudioFile_API.WAAPI</code></a>, <a href="CB_AudioFile_API.AAPI.html"><code>CB_AudioFile_API.AAPI</code></a>, <a href="CB_AudioFile_API.SM2.html"><code>CB_AudioFile_API.SM2</code></a>, <a href="CB_AudioFile_API.ACMP.html"><code>CB_AudioFile_API.ACMP</code></a> and <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a>.</p>
+        <p>Default value for maximum delay (in milliseconds) to wait for a sound to start playing or start next loop (if the time expires, the sound will never be played).<br>
+Used by <a href="CB_AudioFile_API.WAAPI.html"><code>CB_AudioFile_API.WAAPI</code></a>, <a href="CB_AudioFile_API.AAPI.html"><code>CB_AudioFile_API.AAPI</code></a>, <a href="CB_AudioFile_API.SM2.html"><code>CB_AudioFile_API.SM2</code></a>, <a href="CB_AudioFile_API.ACMP.html"><code>CB_AudioFile_API.ACMP</code></a> and <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a>.</p>
     </div>
     
 
@@ -1473,7 +1474,8 @@
 <dd>
     
     <div class="description">
-        <p>Tells whether to mute or not the audio files when they load or are checking. Note: Audio cache does not work properly on BlackBerry PlayBook's default browser if the sounds are muted when load or are checking.<br>        Used by <a href="CB_AudioFile.html"><code>CB_AudioFile</code></a>, <a href="CB_AudioFile_API.WAAPI.html"><code>CB_AudioFile_API.WAAPI</code></a>, <a href="CB_AudioFile_API.AAPI.html"><code>CB_AudioFile_API.AAPI</code></a>, <a href="CB_AudioFile_API.SM2.html"><code>CB_AudioFile_API.SM2</code></a>, <a href="CB_AudioFile_API.ACMP.html"><code>CB_AudioFile_API.ACMP</code></a> and <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a>.</p>
+        <p>Tells whether to mute or not the audio files when they load or are checking. Note: Audio cache does not work properly on BlackBerry PlayBook's default browser if the sounds are muted when load or are checking.<br>
+Used by <a href="CB_AudioFile.html"><code>CB_AudioFile</code></a>, <a href="CB_AudioFile_API.WAAPI.html"><code>CB_AudioFile_API.WAAPI</code></a>, <a href="CB_AudioFile_API.AAPI.html"><code>CB_AudioFile_API.AAPI</code></a>, <a href="CB_AudioFile_API.SM2.html"><code>CB_AudioFile_API.SM2</code></a>, <a href="CB_AudioFile_API.ACMP.html"><code>CB_AudioFile_API.ACMP</code></a> and <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a>.</p>
     </div>
     
 
@@ -1906,7 +1908,9 @@
 <dd>
     
     <div class="description">
-        <p>Array with the default preferred audio APIs by order of preference. Used by <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a> and <a href="CB_AudioDetector.html"><code>CB_AudioDetector</code></a>.<br>        Possible audio APIs are &quot;WAAPI&quot; (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">HTML5 Web Audio API</a>), &quot;SM2&quot; (<a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a>), &quot;ACMP&quot; (<a href="https://github.com/apache/cordova-plugin-media">Apache Cordova Media Plugin</a>) or &quot;AAPI&quot; (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio">HTML5 Audio API</a>).<br>        Note: since Internet Explorer 9 works better with SM2 than with AAPI, if it is detected then the default value will be: [ &quot;WAAPI&quot;, &quot;SM2&quot;, &quot;ACMP&quot;, &quot;AAPI&quot; ]</p>
+        <p>Array with the default preferred audio APIs by order of preference. Used by <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a> and <a href="CB_AudioDetector.html"><code>CB_AudioDetector</code></a>.<br>
+Possible audio APIs are &quot;WAAPI&quot; (<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">HTML5 Web Audio API</a>), &quot;SM2&quot; (<a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a>), &quot;ACMP&quot; (<a href="https://github.com/apache/cordova-plugin-media">Apache Cordova Media Plugin</a>) or &quot;AAPI&quot; (<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio">HTML5 Audio API</a>).<br>
+Note: since Internet Explorer 9 works better with SM2 than with AAPI, if it is detected then the default value will be: [ &quot;WAAPI&quot;, &quot;SM2&quot;, &quot;ACMP&quot;, &quot;AAPI&quot; ]</p>
     </div>
     
 
@@ -1994,7 +1998,8 @@
 <dd>
     
     <div class="description">
-        <p>Array with the default preferred audio formats by order of preference. Used by <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a> and <a href="CB_AudioDetector.html"><code>CB_AudioDetector</code></a>.<br>        NOTE: some web clients do not support to specify codecs so it is better to also provide strings without codecs.</p>
+        <p>Array with the default preferred audio formats by order of preference. Used by <a href="CB_AudioFileCache.html"><code>CB_AudioFileCache</code></a> and <a href="CB_AudioDetector.html"><code>CB_AudioDetector</code></a>.<br>
+NOTE: some web clients do not support to specify codecs so it is better to also provide strings without codecs.</p>
     </div>
     
 
@@ -3286,7 +3291,10 @@
 <dd>
     
     <div class="description">
-        <p>URL for the proxy to prevent cross-domain issues through AJAX, used by <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function. Can be relative to the main script folder or not, depending on <a href="CB_Configuration.CrossBase.html#.CB_Net_XHR_PROXY_URL_RELATIVE"><code>CB_Configuration.CrossBase.CB_Net_XHR_PROXY_URL_RELATIVE</code></a>.<br>    <br /><br>    NOTE: Edit the &quot;CB_proxy.config.php&quot; file to configure the default proxy. Apart from configuring it, adding some security measures is highly recommended.<br>    Have in mind that, for safety reasons, the default proxy only allows to request the URLs defined in the &quot;$allowedURLs&quot; array in the &quot;CB_proxy.config.php&quot; file. Just edit it to allow other URLs.</p>
+        <p>URL for the proxy to prevent cross-domain issues through AJAX, used by <a href="CB_Net.XHR.html#.callProxy"><code>CB_Net.XHR.callProxy</code></a> function. Can be relative to the main script folder or not, depending on <a href="CB_Configuration.CrossBase.html#.CB_Net_XHR_PROXY_URL_RELATIVE"><code>CB_Configuration.CrossBase.CB_Net_XHR_PROXY_URL_RELATIVE</code></a>.<br>
+<br /><br>
+NOTE: Edit the &quot;CB_proxy.config.php&quot; file to configure the default proxy. Apart from configuring it, adding some security measures is highly recommended.<br>
+Have in mind that, for safety reasons, the default proxy only allows to request the URLs defined in the &quot;$allowedURLs&quot; array in the &quot;CB_proxy.config.php&quot; file. Just edit it to allow other URLs.</p>
     </div>
     
 
@@ -3726,7 +3734,8 @@
 <dd>
     
     <div class="description">
-        <p>Defines whether to try to load or not cordova.js (used by <a href="https://cordova.apache.org/">Apache Cordova</a>). It should not be loaded together with phonegap.js, normally.<br>    If set to true, the checker defined at <a href="CB_Configuration.CrossBase.html#.CORDOVAJS_LOAD_CHECKER"><code>CB_Configuration.CrossBase.CORDOVAJS_LOAD_CHECKER</code></a> will finally decide whether to load it or not.</p>
+        <p>Defines whether to try to load or not cordova.js (used by <a href="https://cordova.apache.org/">Apache Cordova</a>). It should not be loaded together with phonegap.js, normally.<br>
+If set to true, the checker defined at <a href="CB_Configuration.CrossBase.html#.CORDOVAJS_LOAD_CHECKER"><code>CB_Configuration.CrossBase.CORDOVAJS_LOAD_CHECKER</code></a> will finally decide whether to load it or not.</p>
     </div>
     
 
@@ -6113,7 +6122,8 @@
 <dd>
     
     <div class="description">
-        <p>Defines whether to try to load or not init-dev.js (used by <a href="https://en.wikipedia.org/wiki/Intel_XDK">Intel XDK</a>).<br>    If set to true, the checker defined at <a href="CB_Configuration.CrossBase.html#.INTELXDK_INITDEVJS_LOAD_CHECKER"><code>CB_Configuration.CrossBase.INTELXDK_INITDEVJS_LOAD_CHECKER</code></a> will finally decide whether to load it or not.</p>
+        <p>Defines whether to try to load or not init-dev.js (used by <a href="https://en.wikipedia.org/wiki/Intel_XDK">Intel XDK</a>).<br>
+If set to true, the checker defined at <a href="CB_Configuration.CrossBase.html#.INTELXDK_INITDEVJS_LOAD_CHECKER"><code>CB_Configuration.CrossBase.INTELXDK_INITDEVJS_LOAD_CHECKER</code></a> will finally decide whether to load it or not.</p>
     </div>
     
 
@@ -9176,7 +9186,7 @@
 <dd>
     
     <div class="description">
-        <p>Object with the required formats for <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a>. If the format is required and the web client doesn't support it, <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a> will use <a href="https://en.wikipedia.org/wiki/Adobe_Flash_Player">Flash</a>. More information: http://<a href="http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-audioformats">www.schillmania.com/projects/soundmanager2/doc/#soundmanager-audioformats</a></p>
+        <p>Object with the required formats for <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a>. If the format is required and the web client doesn't support it, <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a> will use <a href="https://en.wikipedia.org/wiki/Adobe_Flash_Player">Flash</a>. More information: http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-audioformats</p>
     </div>
     
 
@@ -9776,7 +9786,7 @@
 <dd>
     
     <div class="description">
-        <p>Directory that contains the SWF's for <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a>. The value of the &quot;scriptPathGiven&quot; parameter will be attached at the beginning automatically. Belongs to the &quot;url&quot; parameter of the library when <a href="http://%3Ca">soundManager.setup</a>">www.schillmania.com/projects/soundmanager2/doc/#soundmanager-setup}</a> function is called. More information: http://<a href="http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-url">www.schillmania.com/projects/soundmanager2/doc/#soundmanager-url</a></p>
+        <p>Directory that contains the SWF's for <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a>. The value of the &quot;scriptPathGiven&quot; parameter will be attached at the beginning automatically. Belongs to the &quot;url&quot; parameter of the library when <a href="http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-setup">soundManager.setup</a> function is called. More information: http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-url</p>
     </div>
     
 
@@ -9864,7 +9874,7 @@
 <dd>
     
     <div class="description">
-        <p>Milliseconds to wait after loading <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a> to define it as not supported if there is no response. Belongs to the &quot;flashLoadTimeout&quot; parameter of the library when <a href="http://%3Ca">soundManager.setup</a>">www.schillmania.com/projects/soundmanager2/doc/#soundmanager-setup}</a> function is called. More information: http://<a href="http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-flashloadtimeout">www.schillmania.com/projects/soundmanager2/doc/#soundmanager-flashloadtimeout</a></p>
+        <p>Milliseconds to wait after loading <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a> to define it as not supported if there is no response. Belongs to the &quot;flashLoadTimeout&quot; parameter of the library when <a href="http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-setup">soundManager.setup</a> function is called. More information: http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-flashloadtimeout</p>
     </div>
     
 
@@ -9945,7 +9955,7 @@
 <dd>
     
     <div class="description">
-        <p>Defines whether to use or not high performance mode in <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a> (may cause a flash object to be visible). Belongs to the &quot;useHighPerformance&quot; parameter of the library when <a href="http://%3Ca">soundManager.setup</a>">www.schillmania.com/projects/soundmanager2/doc/#soundmanager-setup}</a> function is called. More information: http://<a href="http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-highperformance">www.schillmania.com/projects/soundmanager2/doc/#soundmanager-highperformance</a></p>
+        <p>Defines whether to use or not high performance mode in <a href="http://schillmania.com/projects/soundmanager2/">SoundManager 2</a> (may cause a flash object to be visible). Belongs to the &quot;useHighPerformance&quot; parameter of the library when <a href="http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-setup">soundManager.setup</a> function is called. More information: http://www.schillmania.com/projects/soundmanager2/doc/#soundmanager-highperformance</p>
     </div>
     
 
@@ -13013,9 +13023,9 @@
 	</span>
 
 <span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
 	
-		on Mon Feb 3rd 2020
+		on Fri May 7th 2021
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

@@ -989,12 +989,32 @@ var CB_Screen = function() { return CB_Screen; };
 				//If there is any function compatible with Fullscreen API, we call it:
 				if (typeof(callFullScreen) !== "undefined" && callFullScreen)
 				{
-					if (Element.ALLOW_KEYBOARD_INPUT)
+					try
 					{
-						callFullScreen.call(element, Element.ALLOW_KEYBOARD_INPUT); //For Webkit.
-					}
-					else { callFullScreen.call(element); }
-					fullScreenApplied = true;
+						try { element.fullscreenEnabled = true; } catch (E) { }
+						if (Element.ALLOW_KEYBOARD_INPUT)
+						{
+							var promiseReturned = callFullScreen.call(element, Element.ALLOW_KEYBOARD_INPUT); //For Webkit.
+						}
+						else { var promiseReturned = callFullScreen.call(element); }
+						if (promiseReturned && typeof(promiseReturned.then) === "function")
+						{
+							promiseReturned.then
+							(
+								//Fullscreen request performed correctly:
+								function() { fullScreenApplied = true; },
+								//Fullscreen request failed:
+								function()
+								{
+									//As the full screen mode is still not applied, we try to reload the web in a new window (if allowed):
+									if (allowReload) { fullScreenApplied = CB_Screen._reloadContentNewFullScreenWindow(); }
+									else { fullScreenApplied = false; }
+								}
+							);
+							return;
+						}
+						else { fullScreenApplied = true; }
+					} catch(E) { fullScreenApplied = false; }
 				}
 				//..otherwise, we try to use ActiveX (if it's not already in full screen):
 				else if (typeof(window.ActiveXObject) !== "undefined")
@@ -1063,17 +1083,8 @@ var CB_Screen = function() { return CB_Screen; };
 //////////////////
 
 
-				//If the full screen mode is still not applied and we allow to reload web:
-				if (allowReload && !(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream || navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform))) //Checks whether it is not iOS.
-				{
-					var currentWindow = window.self;
-					currentWindow.opener = window.self;
-					var newWindow = window.open("" + window.location, "CB_fullScreenWindow", "type=fullWindow, fullscreen=yes, scrollbars=auto, toolbar=no, location=no, directories=no, status=no, menubar=no, resizable=no, channelmode=1");
-					//currentWindow.location.href = "about:blank";
-					newWindow.focus();
-					//currentWindow.close();
-					//newWindow.focus();
-				}
+				//As the full screen mode is still not applied, we try to reload the web in a new window (if allowed):
+				if (allowReload) { fullScreenApplied = CB_Screen._reloadContentNewFullScreenWindow(); }
 			}
 		}
 		//...otherwise, if we want normal screen mode (not full screen):
@@ -1165,7 +1176,16 @@ var CB_Screen = function() { return CB_Screen; };
 				//If there is any function compatible with Fullscreen API, we call it:
 				if (typeof(cancelFullScreen) !== "undefined" && cancelFullScreen)
 				{
-					cancelFullScreen.call(useDocumentBase ? documentBase : document);
+					try
+					{
+						var promiseReturned = cancelFullScreen.call(useDocumentBase ? documentBase : document);
+					} catch (E) {}
+
+					if (promiseReturned && typeof(promiseReturned.then) === "function")
+					{
+						promiseReturned.then(function() { }, function() { }); //Fails silently.
+						return;
+					}
 				}
 				//..otherwise, we try to use ActiveX (if it's not in full screen already):
 				else if (typeof(window.ActiveXObject) !== "undefined" && !CB_Screen.isFullScreen())
@@ -1186,6 +1206,34 @@ var CB_Screen = function() { return CB_Screen; };
 			}
 		}
 	}
+
+
+	//Loads the content on a new window trying to simulate full screen (useful for some legacy clients):
+	CB_Screen._reloadContentNewFullScreenWindow = function()
+	{
+		var fullScreenApplied = true;
+		
+		if (!(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream || navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform))) //Checks whether it is not iOS.
+		{
+			try
+			{
+				var currentWindow = window.self;
+				currentWindow.opener = window.self;
+				var newWindow = window.open("" + window.location, "CB_fullScreenWindow", "type=fullWindow, fullscreen=yes, scrollbars=auto, toolbar=no, location=no, directories=no, status=no, menubar=no, resizable=no, channelmode=1");
+				if (newWindow)
+				{
+					//currentWindow.location.href = "about:blank";
+					newWindow.focus();
+					//currentWindow.close();
+					//newWindow.focus();
+					fullScreenApplied = true;
+				}
+			} catch(E) { fullScreenApplied = false; }
+		}
+		
+		return fullScreenApplied;
+	}
+
 
 	/**
 	 * Tells whether we are in full screen mode or not. Uses the [Fullscreen API]{@link https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API} and fallbacks to other methods internally, including [NW.js (formerly node-webkit)]{@link https://nwjs.io/} and [Electron (Electron.js)]{@link https://electronjs.org/} ones, when not available.
