@@ -279,7 +279,7 @@
 			"Audio" => Array("music", "FX", "filters", "synth", "music composition", "processing", "files", "sprites", "cache", "pool", "speakers", "supported formats detection", "supported APIs detection"),
 			"Image" => Array("canvas", "viewport", "screens", "sprites", "scenes"),
 			"Others" => Array("modules", "JSON", "DOM elements", "arrays", "events", "data storage", "data compression", "base conversion", "template rendering", "lazy load", "collisions", "symmetric intervals"),
-			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "video", "MIDI", "VR", "leap motion", "GraphQL", "databases", "Touch Bar", "CSS Houdini", "physics", "AI", "many more")
+			"Future" => Array("speech recognition", "text to speech", "RTC", "webcam", "microphone", "video", "MIDI", "VR", "leap motion", "GraphQL", "databases", "Touch Bar", "CSS Houdini", "physics", "AI", "OpenXR", "WebGPU", "many more")
 		)
 	);
 	
