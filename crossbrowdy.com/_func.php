@@ -35,7 +35,7 @@
 				$value[$index] = $valueReal;
         
                 //If necessary (magic_quotes_gpc is enabled), removes the dashes:
-                if (get_magic_quotes_gpc()) { $value[$index] = stripslashes($valueReal); }
+                if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) { $value[$index] = stripslashes($valueReal); }
             }
         }
         //...otherwise, it is a normal variable:
@@ -46,7 +46,7 @@
 			if ($trim) { $value = trim($value); }
 
 			//If necessary (magic_quotes_gpc is enabled), removes the dashes:
-			if (get_magic_quotes_gpc()) { $value = stripslashes($value); }
+			if (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) { $value = stripslashes($value); }
 
 			//$value = str_replace("%27", "", $value);
 			//$value = str_replace("'", "", $value);

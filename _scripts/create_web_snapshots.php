@@ -16,13 +16,16 @@
 		"community",
 		"download"
 	);
+	
 	$snapshotsPath = "crossbrowdy.com/img/snapshots/";
-	$snapshotsCommand = '"c:\Program Files\Mozilla Firefox\firefox" -P headless-profile -headless --window-size=800,600 --screenshot ' . $snapshotsPath . '{screenshot_file} {url}';
+	//$snapshotsCommand = '"c:\Program Files\Mozilla Firefox\firefox" -P headless-profile -headless --window-size=800,600 --screenshot ' . $snapshotsPath . '{screenshot_file} {url}';
+	$snapshotsCommand = '"c:\Program Files\Google\Chrome\Application\chrome" --headless --disable-gpu --window-size=800,600 --hide-scrollbars --screenshot=' . getcwd() . '/' . $snapshotsPath . '{screenshot_file} {url}';
 
 	echo "Snapshot for README web site\n";
-	$commandLoop = str_replace("{url}", "https://crossbrowdy.tuxfamily.org/", str_replace("{screenshot_file}", "snapshot.png", str_replace($snapshotsPath, "README_website\\", $snapshotsCommand)));
+	$commandLoop = str_replace("{url}", "https://crossbrowdy.tuxfamily.org/", str_replace("{screenshot_file}", "snapshot.png", str_replace($snapshotsPath, "README_website\\img\\", $snapshotsCommand)));
 	echo "* Executing: " . $commandLoop . "\n";
-	echo shell_exec($commandLoop);
+	echo shell_exec($commandLoop); //pclose(popen($commandLoop, "r"));
+
 	echo "\n";
 	
 	function getGuideLinks($contentArray, $basicTurorialOrExamples)
