@@ -43,6 +43,10 @@
 		"type": "git",
 		"url": "git://github.com/jalbam/crossbrowdy.git"
 	},
+	"publishConfig":
+	{
+		"registry": "https://npm.pkg.github.com"
+	},
 	"files": [ "CrossBrowdy/", "documentation/" ],
 	"main": "CrossBrowdy/CrossBrowdy.js",
 	"ignore":
