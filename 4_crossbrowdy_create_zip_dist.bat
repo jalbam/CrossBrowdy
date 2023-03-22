@@ -143,10 +143,17 @@ setlocal
 endlocal
 
 
+REM Deletes previous dist zip file (if exists):
+IF EXIST "crossbrowdy.com\files\CrossBrowdy.dist.zip" (
+	echo.
+	echo Deleting previous zip file...
+	del crossbrowdy.com\files\CrossBrowdy.dist.zip
+)
+
+
 REM Copies the ZIP file to the web site folder:
 echo.
 echo Copying ZIP file to the web site folder...
-del crossbrowdy.com\files\CrossBrowdy.dist.zip
 copy dist\CrossBrowdy.dist.zip crossbrowdy.com\files\CrossBrowdy.dist.zip
 
 

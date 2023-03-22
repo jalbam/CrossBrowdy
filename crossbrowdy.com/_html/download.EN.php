@@ -93,13 +93,20 @@
 			</code></div>
 
 			<p>
+				Using <strong>pnpm</strong>:
+			</p>
+			<div class="shell_command_line"><code class="language-shell">
+				<strong>pnpm</strong> i crossbrowdy
+			</code></div>
+
+			<p>
 				Using <strong>Bower</strong>:
 			</p>
 			<div class="shell_command_line"><code class="language-shell">
 				<strong>bower</strong> install jalbam/crossbrowdy --save
 			</code></div>
 			<p>
-				Note: <a href="https://yarnpkg.com/en/package/crossbrowdy" target="_blank">Yarn</a>, <a href="https://www.npmjs.com/package/crossbrowdy" target="_blank">npm</a> and Bower will also download the <a href="api<?php echo $PHPExtension; ?>" target="_blank">API documentation</a>.
+				<strong>Note</strong>: <a href="https://yarnpkg.com/en/package/crossbrowdy" target="_blank">Yarn</a>, <a href="https://www.npmjs.com/package/crossbrowdy" target="_blank">npm</a>, pnpm and Bower will also download the <a href="api<?php echo $PHPExtension; ?>" target="_blank">API documentation</a>.
 			</p>
 		</section>
 

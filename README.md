@@ -37,12 +37,18 @@ npm i crossbrowdy
 ```
 
 
+## Using **pnpm**:
+```
+pnpm i crossbrowdy 
+```
+
+
 ## Using **Bower**:
 ```
 bower install jalbam/crossbrowdy --save 
 ```
 
-**Note**: [Yarn](https://yarnpkg.com/en/package/crossbrowdy "CrossBrowdy's Yarn package"), [npm](https://www.npmjs.com/package/crossbrowdy "CrossBrowdy's npm package") and Bower will also download the [API documentation](https://crossbrowdy.com/api/ "CrossBrowdy API documentation").
+**Note**: [Yarn](https://yarnpkg.com/en/package/crossbrowdy "CrossBrowdy's Yarn package"), [npm](https://www.npmjs.com/package/crossbrowdy "CrossBrowdy's npm package"), pnpm and Bower will also download the [API documentation](https://crossbrowdy.com/api/ "CrossBrowdy API documentation").
 
 
 # Hotlinking

@@ -44,7 +44,7 @@
 		"url": "git://github.com/jalbam/crossbrowdy.git"
 	},
 	"files": [ "CrossBrowdy/", "documentation/" ],
-	"main": [ "CrossBrowdy/CrossBrowdy.js" ],
+	"main": "CrossBrowdy/CrossBrowdy.js",
 	"ignore":
 	[
 		"documentation/node_modules/",

@@ -23,10 +23,16 @@ setlocal
 	del %~dp0TempZipScript.ps1
 endlocal
 
+REM Deletes previous dist zip file (if exists):
+IF EXIST "crossbrowdy.com\files\CrossBrowdy.zip" (
+	echo.
+	echo Deleting previous zip file...
+	del crossbrowdy.com\files\CrossBrowdy.zip
+)
+
 REM Copies the ZIP file to the web site folder:
 echo.
 echo Copying ZIP file to the web site folder...
-del crossbrowdy.com\files\CrossBrowdy.zip
 copy _zip_temp\CrossBrowdy.zip crossbrowdy.com\files\CrossBrowdy.zip
 
 echo Removing temp folder...
