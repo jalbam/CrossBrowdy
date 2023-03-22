@@ -1,6 +1,6 @@
 {
 	"name": "crossbrowdy",
-	"version": "0.99.96.31",
+	"version": "0.99.96.33",
 	"description": "A Multimedia JavaScript framework to create real cross-platform and hybrid game engines, games, emulators, multimedia libraries and apps.",
 	"keywords":
 	[
@@ -49,6 +49,7 @@
 	[
 		"documentation/node_modules/",
 		"crossbrowdy.com/",
+		"README_website/",
 		"dist/",
 		"tests/",
 		"*.bat",

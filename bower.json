@@ -53,6 +53,7 @@
 	[
 		"documentation/node_modules/",
 		"crossbrowdy.com/",
+		"README_website/",
 		"dist/",
 		"tests/",
 		"*.bat",
