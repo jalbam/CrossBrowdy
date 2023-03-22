@@ -45,7 +45,7 @@
 	},
 	"publishConfig":
 	{
-		"registry": "https://npm.pkg.github.com"
+		"@jalbam:registry": "https://npm.pkg.github.com"
 	},
 	"files": [ "CrossBrowdy/", "documentation/" ],
 	"main": "CrossBrowdy/CrossBrowdy.js",
