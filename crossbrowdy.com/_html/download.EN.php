@@ -177,7 +177,7 @@
 		<section>
 			<header><h3>Change Log</h3></header>
 			<p>
-				Coming soon
+				Read the <a href="https://github.com/jalbam/CrossBrowdy/blob/master/CHANGELOG.md" target="_blank">CHANGELOG.md</a> file on GitHub.
 			</p>
 		</section>
 		
