@@ -27,7 +27,7 @@ function main()
 		//General data:
 		soundEnabled: true, //Set to false to disable sound.
 		musicEnabled: true, //Set to false to disable music.
-		vibrationEnabled: true, //Set to false to disable sound.
+		vibrationEnabled: true, //Set to false to disable vibration.
 		musicLoaded: false,
 		musicChecked: false,
 		gameStarted: false,
@@ -324,9 +324,9 @@ function main()
 			//Sets the events to the toolbar and its icons:
 			var toolbarIconEvent = function()
 			{
-				if (this.id === "button_restart") { restartLevel("RESTART"); }
-				else if (this.id === "button_undo") { stepUndo("STEP_UNDO"); }
-				else if (this.id === "button_redo") { stepRedo("STEP_REDO"); }
+				if (this.id === "button_restart") { restartLevel(); }
+				else if (this.id === "button_undo") { stepUndo(); }
+				else if (this.id === "button_redo") { stepRedo(); }
 				else if (this.id === "button_fullscreen") { fullScreenToggle(); }
 			};
 			var toolbarIconsIDs = [ "button_undo", "button_redo", "button_restart", "button_fullscreen" ]; //Identifiers of the toolbar icons.
@@ -667,7 +667,7 @@ function resizeElements(graphicSpritesSceneObject)
 
 //Input management (some controllers can also fire keyboard events):
 var _inputProcessedLastTime = 0;
-var _playerIgnoreInputMs = 150; //Number of milliseconds that the input will be ignored after the player has been moved (to avoid moving or processing the input too fast).
+var _playerIgnoreInputMs = 180; //Number of milliseconds that the input will be ignored after the player has been moved (to avoid moving or processing the input too fast).
 function manageInput(action)
 {
 	//If not enough time has been elapsed since the last movement, exits (to avoid moving or processing the input too fast):
@@ -707,44 +707,44 @@ function manageInput(action)
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to go to the previous level, goes there:
-		else if (action === "PREVIOUS_LEVEL" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.O]) || CB_Controllers.isButtonDown(4) || CB_Controllers.isButtonDown(7))
+		else if (action === "PREVIOUS_LEVEL" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.O]) || CB_Controllers.isButtonDown(4) || CB_Controllers.isButtonDown(7)))
 		{
 			loadLevel(CB_GEM.data.level > 0 ? CB_GEM.data.level - 1 : 0);
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to go to the next level, goes there:
-		else if (action === "NEXT_LEVEL" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.P]) || CB_Controllers.isButtonDown(5) || CB_Controllers.isButtonDown(6))
+		else if (action === "NEXT_LEVEL" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.P]) || CB_Controllers.isButtonDown(5) || CB_Controllers.isButtonDown(6)))
 		{
 			loadLevel(CB_GEM.data.level < LEVELS.length -1 ? CB_GEM.data.level + 1 : LEVELS.length - 1); //It will not cycle (when reaches last level, will not go to the first one).
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to restart the level, restarts it:
-		else if (action === "RESTART" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.R, CB_Keyboard.keys.F9]) || CB_Controllers.isButtonDown(3))
+		else if (action === "RESTART" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.R, CB_Keyboard.keys.F9]) || CB_Controllers.isButtonDown(3)))
 		{
 			restartLevel();
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to undo a step, undoes it (if possible):
-		else if (action === "STEP_UNDO" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.Z, CB_Keyboard.keys.U, CB_Keyboard.keys.F2]) || CB_Controllers.isButtonDown(1))
+		else if (action === "STEP_UNDO" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.Z, CB_Keyboard.keys.U, CB_Keyboard.keys.F2]) || CB_Controllers.isButtonDown(1)))
 		{
 			stepUndo();
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to repeat a step, repeats it (if possible):
-		else if (action === "STEP_REDO" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.Y, CB_Keyboard.keys.N, CB_Keyboard.keys.F4]) || CB_Controllers.isButtonDown(2))
+		else if (action === "STEP_REDO" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.Y, CB_Keyboard.keys.N, CB_Keyboard.keys.F4]) || CB_Controllers.isButtonDown(2)))
 		{
 			stepRedo();
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to toggle full screen, we try it:
 		//NOTE: some browsers will fail to enable full screen mode if it is not requested through a user-driven event (as "onClick", "onTouchStart", etc.).
-		else if (action === "FULL_SCREEN_TOGGLE" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.F]) || CB_Controllers.isButtonDown(8))
+		else if (action === "FULL_SCREEN_TOGGLE" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.F]) || CB_Controllers.isButtonDown(8)))
 		{
 			fullScreenToggle();
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to focus the level selector, we do it:
-		else if (action === "FOCUS_LEVEL_SELECTOR" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.L, CB_Keyboard.keys.J, CB_Keyboard.keys.ENTER]) || CB_Controllers.isButtonDown(0))
+		else if (action === "FOCUS_LEVEL_SELECTOR" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.L, CB_Keyboard.keys.J, CB_Keyboard.keys.ENTER]) || CB_Controllers.isButtonDown(0)))
 		{
 			var levelSelector = CB_Elements.id("level_selector");
 			if (levelSelector !== null && typeof(levelSelector.focus) === "function")

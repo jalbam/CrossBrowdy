@@ -3,6 +3,7 @@
 //Properties:
 CB_REM.IMAGES_CACHE_ENABLED = true; //Determines whether to use images cache or not.
 CB_REM.BUFFER_RECOMMENDED = true; //Determines whether using buffer is recommended or not. This value will be calculated and changed automatically when the module initializes (as it is only recommended when native canvas is supported or for some emulation methods).
+CB_REM.DEFAULT_FILTER = "none"; //Determines the default canvas filter when no one is found (set to null or false to avoid using a default filter).
 CB_REM.prototype.FPS = 0; //Stores the FPS counter (cleared each second).
 CB_REM.prototype._FPS_timeout = null; //Timeout for each call to the 'CB_REM#_FPS_clear' method (which clears the FPS counter).
 CB_REM.prototype._onUpdatedFPS = null; //Callback to run when the FPS have been counted (each second).
@@ -500,7 +501,11 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 
 	//If the element has a filter, applies it:
 	if (element.data.filter) { canvasContext.filter = element.data.filter; }
-	else { canvasContext.filter = "none"; } //No filter set (default).
+	//...otherwise, uses the default filter (if set):
+	else if (CB_REM.DEFAULT_FILTER)
+	{
+		canvasContext.filter = CB_REM.DEFAULT_FILTER;
+	}
 
 	//If we want to rotate the element, proceeds:
 	var rotated = false;

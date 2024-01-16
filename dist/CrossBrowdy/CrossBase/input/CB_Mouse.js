@@ -58,12 +58,19 @@ var CB_Mouse = function() { return CB_Mouse; };
 			function(e)
 			{
 				e = CB_Mouse.normalizeEvent(e);
-				//Uses setCapture/releaseCapture to force IE and Firefox to release mouse buttons when dragging outside the web client window:
+				//Uses setPointerCapture/releasePointerCapture (setCapture/releaseCapture) to force IE and Firefox to release mouse buttons when dragging outside the web client window:
 				//if (typeof(document.body) !== "undefined" && typeof(document.body.setCapture) !== "undefined")
-				if (typeof(e.target) !== "undefined" && typeof(e.target.setCapture) !== "undefined")
+				if (typeof(e.target) !== "undefined")
 				{
-					//document.body.setCapture();
-					e.target.setCapture();
+					if (typeof(e.target.setPointerCapture) !== "undefined")
+					{
+						e.target.setPointerCapture(e.pointerId);
+					}
+					else if (typeof(e.target.setCapture) !== "undefined")
+					{
+						//document.body.setCapture();
+						e.target.setCapture();
+					}
 				}
 				CB_Mouse._updateButtonsDown(e, true);
 			},
@@ -80,12 +87,19 @@ var CB_Mouse = function() { return CB_Mouse; };
 			function(e)
 			{
 				e = CB_Mouse.normalizeEvent(e);
-				//Uses setCapture/releaseCapture to force IE and Firefox to release mouse buttons when dragging outside the web client window:
+				//Uses setPointerCapture/releasePointerCapture (setCapture/releaseCapture) to force IE and Firefox to release mouse buttons when dragging outside the web client window:
 				//if (typeof(document.body) !== "undefined" && typeof(document.body.releaseCapture) !== "undefined")
-				if (typeof(e.target) !== "undefined" && typeof(e.target.releaseCapture) !== "undefined")
+				if (typeof(e.target) !== "undefined")
 				{
-					//document.body.releaseCapture();
-					e.target.releaseCapture();
+					if (typeof(e.target.releasePointerCapture) !== "undefined")
+					{
+						e.target.releasePointerCapture(e.pointerId);
+					}
+					else if (typeof(e.target.releaseCapture) !== "undefined")
+					{
+						//document.body.releaseCapture();
+						e.target.releaseCapture();
+					}
 				}
 				CB_Mouse._updateButtonsDown(e, false);
 			},

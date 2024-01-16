@@ -7,9 +7,9 @@ Game.Levels = {}; //Class to manage game levels.
 Game.data =
 {
 	//General data:
-	soundEnabled: true, //Set to false to disable sound.
-	musicEnabled: true, //Set to false to disable music.
-	vibrationEnabled: true, //Set to false to disable sound.
+	soundEnabled: false, //Set to false to disable sound.
+	musicEnabled: false, //Set to false to disable music.
+	vibrationEnabled: true, //Set to false to disable vibration.
 	musicLoaded: false,
 	musicChecked: false,
 	gameStarted: false,
@@ -110,22 +110,20 @@ Game.end = function(message)
 
 
 //Defines the symbol types (performance and simplification purposes):
+Game.Levels.SYMBOL_TYPES_numberOfTowerTypes = 6;
 Game.Levels.SYMBOL_TYPES =
 {
 	//TODO: add the rest of the types.
-	"SOIL_UNWALKABLE_UNBUILDABLE": 0,
-	"SOIL_UNWALKABLE_BUILDABLE": 1,
-	"SOIL_WALKABLE": 2,
-	"DESTINY": 3,
-	"TOWER_0": 4,
-	"TOWER_1": 5,
-	"TOWER_2": 6,
-	"TOWER_3": 7,
-	"TOWER_4": 8,
-	"TOWER_5": 9,
-	"TOWER_6": 10
+	"SOIL_UNWALKABLE_UNBUILDABLE": " ",
+	"SOIL_UNWALKABLE_BUILDABLE": "-",
+	"SOIL_WALKABLE": "$",
+	"DESTINY": "@",
+	"TOWER": "!"
 };
-
+for (var x = 0; x < Game.Levels.SYMBOL_TYPES_numberOfTowerTypes; x++)
+{
+	Game.Levels.SYMBOL_TYPES["TOWER_" + x] = Game.Levels.SYMBOL_TYPES.TOWER + x;
+}
 
 //Returns a new array filled with the given value:
 Game.Levels._getArrayFilled = function(value, start, end)
@@ -166,7 +164,7 @@ Game.Levels._loadDataRows = function(levelData, maxWidthFound, fillOverflow)
 }
 
 
-//Fills the level array with unwalkable and unbuildable tiles the columns needed (to adapt it to the screen) and returns it:
+//Fills the level array with same (if not destiny) or unwalkable and unbuildable tiles the columns needed (to adapt it to the screen) and returns it:
 Game.Levels._loadDataColumnsRoundingFunction = null;
 Game.Levels._loadDataColumns = function(levelData, fillOverflow)
 {
@@ -184,19 +182,47 @@ Game.Levels._loadDataColumns = function(levelData, fillOverflow)
 		{
 			for (var y = 0; y < Game.Levels._loadDataColumnsRoundingFunction(columnsNeededToAdd / 2); y++)
 			{
-				levelData[x].unshift(levelData[x][0] || " "); //Extends the first tile or use an unwalkable and unbuildable tile otherwise.
+				//Extends the first tile if it is not a destiny or use an unwalkable and unbuildable tile otherwise:
+				if (levelData[x][0] === Game.Levels.SYMBOL_TYPES.DESTINY) { levelData[x].unshift(" "); }
+				else { levelData[x].unshift(levelData[x][0] || " "); }
 			}
 			for (; y > 1 || levelData[x].length < columnsNeededTotal; y--)
 			{
-				levelData[x][levelData[x].length] = levelData[x][levelData[x].length - 1] || " "; //Extends the last tile or use an unwalkable and unbuildable tile otherwise.
+				//Extends the last tile if it is not a destiny or use an unwalkable and unbuildable tile otherwise.
+				if (levelData[x][levelData[x].length - 1] === Game.Levels.SYMBOL_TYPES.DESTINY) { levelData[x][levelData[x].length] = " "; }
+				else { levelData[x][levelData[x].length] = levelData[x][levelData[x].length - 1] || " "; }
 			}
 		}
 	}
 	return levelData;
 }
 
+//Fills the level data with default tiles when not defined and returns it:
+Game.Levels._loadDataSetDefault = function(levelData)
+{
+	for (var r = 0; r < levelData.length; r++)
+	{
+		for (var c = 0; c < levelData[r].length; c++)
+		{
+			if (levelData[r][c].length === 1)
+			{
+				if (levelData[r][c] === Game.Levels.SYMBOL_TYPES.DESTINY)
+				{
+					levelData[r][c] = levelData[r][c] + Game.Levels.SYMBOL_TYPES.SOIL_WALKABLE + "0";
+				}
+				else if (levelData[r][c] === Game.Levels.SYMBOL_TYPES.TOWER)
+				{
+					levelData[r][c] = levelData[r][c] + "0" + Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE + "0_0";
+				}
+				else { levelData[r][c] = levelData[r][c] + "0"; }
+			}
+		}
+	}
 
-//Fills the level array with unwalkable and unbuildable tiles if needed (to adapt it to the screen) and returns it (using an internal cache when possible):
+	return levelData;
+}
+
+//Prepares level data and returns it (using an internal cache when possible):
 Game.Levels._loadDataCache = [];
 Game.Levels._fillOverflowRowsDefault = true;
 Game.Levels._fillOverflowColumnsDefault = true;
@@ -215,14 +241,14 @@ Game.Levels._loadData = function(level, avoidCache)
 			if (levelData.length && levelData[x].length > maxWidthFound) { maxWidthFound = levelData[x].length; }
 		}
 		
-		Visual._ELEMENTS_HEIGHT = parseInt(CB_Screen.getWindowHeight() / levelHeight);
-		Visual._ELEMENTS_HEIGHT_MARGIN = (CB_Screen.getWindowHeight() / levelHeight) - Visual._ELEMENTS_HEIGHT;
-		Visual._ELEMENTS_WIDTH = parseInt(CB_Screen.getWindowWidth() / maxWidthFound);
-		Visual._ELEMENTS_WIDTH_MARGIN = (CB_Screen.getWindowWidth() / maxWidthFound) - Visual._ELEMENTS_WIDTH;
+		Visual._ELEMENTS_HEIGHT = Math.ceil(CB_Screen.getWindowHeight() / levelHeight);
+		Visual._ELEMENTS_WIDTH = Math.ceil(CB_Screen.getWindowWidth() / maxWidthFound);
 		Visual._ELEMENTS_WIDTH = Visual._ELEMENTS_HEIGHT = Math.min(Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT);
 
 		Game.Levels._loadDataRows(levelData, maxWidthFound, Game.Levels._fillOverflowRowsDefault);
 		Game.Levels._loadDataColumns(levelData, Game.Levels._fillOverflowColumnsDefault);
+		
+		Game.Levels._loadDataSetDefault(levelData);
 		
 		//Caches the level:
 		Game.Levels._loadDataCache[level] = levelData;
@@ -316,11 +342,14 @@ Game.Levels.getSymbolTypeFromMap = function(column, row, asString, returnOnFail,
 Game.Levels.getTypeFromSymbol = function(symbol, asString, returnOnFail)
 {
 	var type = null;
-	if (symbol === "-" || symbol === "=") { type = "SOIL_UNWALKABLE_BUILDABLE"; }
-	else if (symbol === "?" || symbol === "_") { type = "SOIL_UNWALKABLE_UNBUILDABLE"; }
-	else if (symbol === "$" || symbol === "%") { type = "SOIL_WALKABLE"; }
-	else if (symbol === "@") { type = "DESTINY"; }
-	else if (symbol.length === 3) //Tower built (symbol = ABC, where "A" is the unwalkable buildable soil symbol, "B" is the type of tower and "C" is its upgrade level):
+
+	var firstCharacter = symbol.charAt(0);
+	
+	if (firstCharacter === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE) { type = "SOIL_UNWALKABLE_BUILDABLE"; }
+	else if (firstCharacter === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE) { type = "SOIL_UNWALKABLE_UNBUILDABLE"; }
+	else if (firstCharacter === Game.Levels.SYMBOL_TYPES.SOIL_WALKABLE) { type = "SOIL_WALKABLE"; }
+	else if (firstCharacter === Game.Levels.SYMBOL_TYPES.DESTINY) { type = "DESTINY"; }
+	else if (firstCharacter === Game.Levels.SYMBOL_TYPES.TOWER) //Tower built (symbol = ABC, where "A" is the unwalkable buildable soil symbol, "B" is the type of tower and "C" is its upgrade level):
 	{
 		if (typeof(Game.Levels.SYMBOL_TYPES["TOWER_" + symbol.charAt(1)]) !== "undefined") { type = "TOWER_" + symbol.charAt(1); }
 	}
@@ -340,10 +369,13 @@ Game.Levels.getSymbolPositionFromCoordinates = function(x, y)
 	{
 		for (var c = 0; c < Visual._drawnMapElements[r].length; c++)
 		{
-			//If the given coordinates are inside the current column and row (of the loop), return them:
-			if (CB_Collisions.isPointOverRectangle(x, y, Visual._drawnMapElements[r][c].elementData.x, Visual._drawnMapElements[r][c].elementData.y, Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT))
+			if (typeof(Visual._drawnMapElements[r][c]) !== "undefined")
 			{
-				return { column: c, row: r };
+				//If the given coordinates are inside the current column and row (of the loop), return them:
+				if (CB_Collisions.isPointOverRectangle(x, y, Visual._drawnMapElements[r][c].elementData.x, Visual._drawnMapElements[r][c].elementData.y, Visual._ELEMENTS_WIDTH, Visual._ELEMENTS_HEIGHT))
+				{
+					return { column: c, row: r };
+				}
 			}
 		}
 	}

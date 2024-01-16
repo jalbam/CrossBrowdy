@@ -495,6 +495,7 @@ function updateInfo(graphicSpritesSceneObject)
 	graphicSpritesSceneObject.getById("info").get(0).src =
 		"Level: " + CB_GEM.data.level + "\n" +
 		"Score: " + CB_GEM.data.player1.goals + " - " + CB_GEM.data.player2.goals + "\n" +
+		"Pointer: x = " + pointerCoordinates.x + ", y = " + pointerCoordinates.y + "\n" +
 		(!CB_Screen.isLandscape() ? "\nLandscape screen recommended!" : "") +
 		(
 			updateInfoDebug ?

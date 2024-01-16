@@ -53,6 +53,8 @@ function main()
 		{
 			FPSSprites.setDisabled(false); //Set to true to hide FPS counter.
 	
+			CB_REM.DEFAULT_FILTER = null; //No default canvas filter when no one is found.
+	
 			Visual.resizeElements(graphicSpritesSceneObject); //Updates all visual elements according to the screen size.
 
 			Visual.updateInfo(graphicSpritesSceneObject); //Shows the information for the first time.

@@ -13,18 +13,25 @@ Input.mouseData =
 Input.init = function()
 {
 	//Sets the mouse events:
+	CB_Mouse._onBeforeEvents = function() //Performed before each mouse event. Returns 'true' to continue the event or 'false' otherwise.
+	{
+		if (!Game.data.gameStarted) { return false; } //If the game did not start yet, just exits.
+		
+		//Updates the row and column where the mouse is over:
+		Input.mouseData = Game.Levels.getSymbolPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
+		if (Input.mouseData.column === -1 || Input.mouseData.row === -1) { return false; }		
+		
+		return true;
+	};
 	CB_Mouse.onMove
 	(
 		function()
 		{
-			if (!Game.data.gameStarted) { return; } //If the game did not start yet, just exits.
-			
-			//Updates the row and column where the mouse is over:
-			Input.mouseData = Game.Levels.getSymbolPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
-			if (Input.mouseData.column === -1 || Input.mouseData.row === -1) { return; }
+			if (!CB_Mouse._onBeforeEvents()) { return; }
 			
 			//Sets the corresponding mouse cursor:
-			if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE) { CB_Mouse.setCSS("pointer"); }
+			var symbolTypePointed = Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row);
+			if (symbolTypePointed === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE || symbolTypePointed.indexOf(Game.Levels.SYMBOL_TYPES.TOWER) !== -1) { CB_Mouse.setCSS("pointer"); }
 			else { CB_Mouse.setCSS(); }
 		}
 	);
@@ -32,13 +39,9 @@ Input.init = function()
 	(
 		function()
 		{
-			if (!Game.data.gameStarted) { return; } //If the game did not start yet, just exits.
-			
 			//TODO: do not perform the action if the touch event was processed already.
 			
-			//Updates the row and column where the mouse is over:
-			Input.mouseData = Game.Levels.getSymbolPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
-			if (Input.mouseData.column === -1 || Input.mouseData.row === -1) { return; }
+			if (!CB_Mouse._onBeforeEvents()) { return; }
 			
 			//If we are clicking on an unwalkable and buildable area:
 			if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
@@ -63,7 +66,7 @@ Input.init = function()
 
 //Input management (some controllers can also fire keyboard events):
 Input._inputProcessedLastTime = 0;
-Input._ignoreInputMs = 150; //Number of milliseconds that the input will be ignored after the player has been moved (to avoid moving or processing the input too fast).
+Input._ignoreInputMs = 180; //Number of milliseconds that the input will be ignored after the player has been moved (to avoid moving or processing the input too fast).
 Input.manage = function(action)
 {
 	//If not enough time has been elapsed since the last movement, exits (to avoid moving or processing the input too fast):
@@ -89,7 +92,6 @@ Input.manage = function(action)
 	{
 		var actionPerformed = false;
 		
-		
 		//After pressing the ESC key or a specific gamepad button, ends the game:
 		if (action === "ABORT" || CB_Keyboard.isKeyDown(CB_Keyboard.keys.ESC) || CB_Controllers.isButtonDown(9))
 		{
@@ -97,26 +99,26 @@ Input.manage = function(action)
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to go to the previous level, goes there:
-		else if (action === "PREVIOUS_LEVEL" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.O]) || CB_Controllers.isButtonDown(4) || CB_Controllers.isButtonDown(7))
+		else if (action === "PREVIOUS_LEVEL" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.O]) || CB_Controllers.isButtonDown(4) || CB_Controllers.isButtonDown(7)))
 		{
 			Game.Levels.loadPrevious();
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to go to the next level, goes there:
-		else if (action === "NEXT_LEVEL" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.P]) || CB_Controllers.isButtonDown(5) || CB_Controllers.isButtonDown(6))
+		else if (action === "NEXT_LEVEL" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.P]) || CB_Controllers.isButtonDown(5) || CB_Controllers.isButtonDown(6)))
 		{
 			Game.Levels.loadNext(); //It will not cycle (when reaches last level, will not go to the first one).
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to restart the level, restarts it:
-		else if (action === "RESTART" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.R, CB_Keyboard.keys.F9]) || CB_Controllers.isButtonDown(3))
+		else if (action === "RESTART" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.R, CB_Keyboard.keys.F9]) || CB_Controllers.isButtonDown(3)))
 		{
 			Game.Levels.restart();
 			actionPerformed = true;
 		}
 		//...otherwise, if we want to toggle full screen, we try it:
 		//NOTE: some browsers will fail to enable full screen mode if it is not requested through a user-driven event (as "onClick", "onTouchStart", etc.).
-		else if (action === "FULL_SCREEN_TOGGLE" || typeof(action) === "undefined" && CB_Keyboard.isKeyDown([CB_Keyboard.keys.F]) || CB_Controllers.isButtonDown(8))
+		else if (action === "FULL_SCREEN_TOGGLE" || typeof(action) === "undefined" && (CB_Keyboard.isKeyDown([CB_Keyboard.keys.F]) || CB_Controllers.isButtonDown(8)))
 		{
 			Visual.fullScreenToggle();
 			actionPerformed = true;

@@ -26,8 +26,8 @@ Visual.getSpritesGroupsData = function()
 		//Sprites groups data:
 		Visual._spritesGroupsData =
 		{
-			//'my_sprites_groups_1' ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object). Some missing or non-valid properties will get a default value:
-			id: "my_sprites_groups_1",
+			//'towers_defense_game_sprites_groups' ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object). Some missing or non-valid properties will get a default value:
+			id: "towers_defense_game_sprites_groups",
 			srcWidth: 512,
 			srcHeight: 512,
 			data: { loop: true, onlyUseInMap: false, avoidClearingCanvas: true },
@@ -68,8 +68,8 @@ Visual.getSpritesGroupsData = function()
 							subSprites:
 							[
 								{
-									id: "soil_unwalkable_unbuildable_1",
-									src: "img/soil_unwalkable_unbuildable_1.gif"
+									id: "soil_unwalkable_unbuildable_0",
+									src: "img/soil_unwalkable_unbuildable_0.gif"
 								}
 							]
 						},
@@ -80,8 +80,8 @@ Visual.getSpritesGroupsData = function()
 							subSprites:
 							[
 								{
-									id: "soil_unwalkable_buildable_1",
-									src: "img/soil_unwalkable_buildable_1.gif"
+									id: "soil_unwalkable_buildable_0",
+									src: "img/soil_unwalkable_buildable_0.gif"
 								}
 							]
 						},
@@ -92,8 +92,8 @@ Visual.getSpritesGroupsData = function()
 							subSprites:
 							[
 								{
-									id: "path_1",
-									src: "img/path_1.gif"
+									id: "path_0",
+									src: "img/path_0.gif"
 								}
 							]
 						},
@@ -104,12 +104,43 @@ Visual.getSpritesGroupsData = function()
 							subSprites:
 							[
 								{
-									id: "destiny_1",
-									src: "img/destiny_1.gif"
+									id: "destiny_0",
+									src: "img/destiny_0.gif"
 								}
 							]
 						}
-
+					]
+				},
+				
+				//Towers sprites:
+				{
+					id: "towers_sprites",
+					data:
+					{
+						onlyUseInMap: true,
+						parseIntTop: true,
+						parseIntLeft: true
+					},
+					sprites:
+					[
+						//Tower #0 sprites:
+						// TO DO: Add subSprits for each upgrade level. AND REMEMBER SOIL TYPE.
+						{
+							id: "tower_0",
+							subSprites:
+							[
+								{
+									id: "soil_unwalkable_buildable_0",
+									src: "img/soil_unwalkable_buildable_0.gif",
+									disabled: false
+								},
+								{
+									id: "tower_0_level_0",
+									src: "img/tower_0_level_0.gif",
+									disabled: false
+								}		
+							]
+						}
 					]
 				},
 				
@@ -119,47 +150,70 @@ Visual.getSpritesGroupsData = function()
 					srcType: CB_GraphicSprites.SRC_TYPES.MAP,
 					data:
 					{
+						elementsDataParsePropertyNames: true,
+						
 						//References sprites or sub-sprites by their index or identifier. Define a "parentId" (parent identifier of the 'CB_GraphicSprites' object or of the 'CB_GraphicSprites.SPRITE_OBJECT' object) to improve performance.
 						elementsData:
 						{
 							//Each property name is an alias which can be used in the map (in the "src" property).
 							
-							//Blank space (it will be filled randomly with non-walkable and non-buildable symbols, just decoration):
-							" ":
+							//Unwalkable and non-buildable (just decoration):
+							"{{SOIL_UNWALKABLE_UNBUILDABLE}}0":
+							{
+								id: "soil_unwalkable_unbuildable_0",
+								parentId: "soil_unwalkable_unbuildable"
+							},
+							"{{SOIL_UNWALKABLE_UNBUILDABLE}}1":
 							{
 								id: "soil_unwalkable_unbuildable_1",
 								parentId: "soil_unwalkable_unbuildable"
 							},
 
-							//Unwalkable and buildable soil:
-							"-":
+							//Unwalkable and buildable soils:
+							"{{SOIL_UNWALKABLE_BUILDABLE}}0":
+							{
+								id: "soil_unwalkable_buildable_0",
+								parentId: "soil_unwalkable_buildable",
+								clickable: true
+							},
+							"{{SOIL_UNWALKABLE_BUILDABLE}}1":
 							{
 								id: "soil_unwalkable_buildable_1",
 								parentId: "soil_unwalkable_buildable"
 							},
 							
-							//Walkable soil (enemy's path) sprites:
-							"$":
+							//Walkable soils (enemy's paths) sprites:
+							"{{SOIL_WALKABLE}}0":
+							{
+								id: "path_0",
+								parentId: "path"
+							},
+							"{{SOIL_WALKABLE}}1":
 							{
 								id: "path_1",
 								parentId: "path"
 							},
 							
-							//Destiny (there can only be one). Enemies will want to reach this target:
-							"@":
+							//Destiny (there can only be one per map). Enemies will want to reach this target:
+							"{{DESTINY}}{{SOIL_WALKABLE}}0":
+							{
+								id: "destiny_0",
+								parentId: "destiny"
+							},
+							"{{DESTINY}}{{SOIL_WALKABLE}}1":
 							{
 								id: "destiny_1",
 								parentId: "destiny"
 							},
+
+							//Tower type 0:
+							"{{TOWER_0}}{{SOIL_UNWALKABLE_BUILDABLE}}0_0": //Upgrade level 0 (no upgrades).
+							{
+								id: "tower_0",
+								clickable: true
+							}
 							
 							//TODO: Add all towers and their upgrade levels (in all kinds of soil).
-							
-							//Tower type 0:
-							"-00": //Upgrade level 0.
-							{
-								id: "destiny_1",
-								parentId: "destiny"
-							}
 						},
 						elementsWidth:
 							function(alias, element, elementData, elementMapParent, elementLoopHeightDefault, x, y)
@@ -178,13 +232,28 @@ Visual.getSpritesGroupsData = function()
 
 								if (!CB_isArray(Visual._drawnMapElements)) { Visual._drawnMapElements = []; }
 								if (!CB_isArray(Visual._drawnMapElements[y])) { Visual._drawnMapElements[y] = []; }
-								if (!CB_isArray(Visual._drawnMapElements[y][x])) { Visual._drawnMapElements[y][x] = {}; }
+								if (typeof(Visual._drawnMapElements[y][x]) === "undefined") { Visual._drawnMapElements[y][x] = {}; }
 								
 								//If the element is unwalkable and buildable:
 								if (Game.Levels.getTypeFromSymbol(mapElement.src[y][x]) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
 								{
 									Visual._drawnMapElements[y][x].drawn = false;
-									if (Input.mouseData.column === x && Input.mouseData.row === y) { element.data.filter = "sepia(0.5)"; }
+								}
+								else if (Game.Levels.getTypeFromSymbol(mapElement.src[y][x]).indexOf(Game.Levels.SYMBOL_TYPES.TOWER) !== -1)
+								{
+									Visual._drawnMapElements[y][x].drawn = false;
+									
+									// TO DO: Enable desired soil and disable undesired towers/towers levels.
+									/////////////element.getById("soil_unwalkable_buildable_0").setDisabled(true);
+									//////////element.getById("tower_0_level_0").setDisabled(false);
+								}
+								
+								if (mapElement.data.elementsData[mapElement.src[y][x]].clickable)
+								{
+									if (Input.mouseData.column === x && Input.mouseData.row === y)
+									{
+										element.data.filter = "sepia(0.5)";
+									}
 									else { element.data.filter = "none"; }
 								}
 								
@@ -195,7 +264,7 @@ Visual.getSpritesGroupsData = function()
 									Visual._drawnMapElements[y][x].drawn = true;
 									Visual._drawnMapElements[y][x].elementData = { x: element._attributes.left, y: element._attributes.top };
 								}
-						
+
 								return skipDrawing ? null : element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 							}
 
@@ -211,6 +280,20 @@ Visual.getSpritesGroupsData = function()
 				}
 			]
 		};
+	}
+	
+	//Parses elementsData property names when required:
+	for (var x = 0; x < Visual._spritesGroupsData.spritesGroups.length; x++)
+	{
+		if (typeof(Visual._spritesGroupsData.spritesGroups[x].data) !== "undefined" && Visual._spritesGroupsData.spritesGroups[x].data.elementsDataParsePropertyNames)
+		{
+			for (var propertyName in Visual._spritesGroupsData.spritesGroups[x].data.elementsData)
+			{
+				var propertyNameParsed = CB_renderString(propertyName, Game.Levels.SYMBOL_TYPES, true);
+				Visual._spritesGroupsData.spritesGroups[x].data.elementsData[propertyNameParsed] = CB_copyObject(Visual._spritesGroupsData.spritesGroups[x].data.elementsData[propertyName]);
+				delete Visual._spritesGroupsData.spritesGroups[x].data.elementsData[propertyName];
+			}
+		}
 	}
 	
 	return Visual._spritesGroupsData;
@@ -235,8 +318,10 @@ Visual.updateInfo = function(graphicSpritesSceneObject)
 
 
 //Resizes all visual elements according to the screen size:
-Visual._ELEMENTS_WIDTH = 40; //It will be updated automatically according to the screen size.
-Visual._ELEMENTS_HEIGHT = 40; //It will be updated automatically according to the screen size.
+Visual._ELEMENTS_WIDTH_DEFAULT = 40; //Default element's width.
+Visual._ELEMENTS_HEIGHT_DEFAULT = 40; //Default element's height.
+Visual._ELEMENTS_WIDTH = Visual._ELEMENTS_WIDTH_DEFAULT; //It will be updated automatically according to the screen size.
+Visual._ELEMENTS_HEIGHT = Visual._ELEMENTS_HEIGHT_DEFAULT; //It will be updated automatically according to the screen size.
 Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 {
 	//If desired, loads the map again (it will be filled with unwalkable tiles if needed):

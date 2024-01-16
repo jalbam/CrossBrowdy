@@ -9,6 +9,8 @@ Sound.FX._sfx = null; //Global object to play the sounds.
 Sound.FX._prepareExecuted = false;
 Sound.FX.prepare = function(forceReload)
 {
+	if (!Game.data.soundEnabled) { return; }
+
 	if (!forceReload && Sound.FX._prepareExecuted) { return; }
 
 	Sound.FX._prepareExecuted = true;

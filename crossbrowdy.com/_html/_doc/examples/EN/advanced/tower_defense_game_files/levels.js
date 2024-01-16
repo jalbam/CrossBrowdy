@@ -12,24 +12,24 @@ var _LEVELS_SYMBOLS =
 {
 	//Symbols for walkable path:
 	//NOTE: the ones attached to the borders will allow enemies to appear from there.
-	"walkable":
+	"{Game.Levels.SYMBOL_TYPES.SOIL_WALKABLE}":
 	[
-		"$",	//Soil.
-		"%"		//Water.
+		"0",	//Soil (default).
+		"1"		//Water.
 	],
 	
 	//Symbols for non-walkable and buildable tiles:
-	"unwalkable_buildable":
+	"{Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE}":
 	[
-		"-",	//Soil.
-		"="		//Water.
+		"0",	//Soil (default).
+		"1"		//Water.
 	],
 	
 	//Symbols for non-walkable and non-buildable tiles (decoration):
-	"unwalkable_unbuildable":
+	"{Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE}":
 	[
-		"?",	//Soil.
-		"_"		//Water.
+		"0",	//Soil (default).
+		"1"		//Water.
 	]
 };
 
@@ -39,7 +39,7 @@ var _LEVELS =
 [
 	//Level 0:
 	[
-		"  -$$$-$$$-$$$-   ".split(""),
+		"  -$$$-!$$-$$$-   ".split(""),
 		"$$$$-$$$-$$$-$$$$@".split("")
 	],
 
