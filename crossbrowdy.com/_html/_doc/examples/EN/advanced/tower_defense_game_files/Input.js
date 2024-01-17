@@ -18,7 +18,7 @@ Input.init = function()
 		if (!Game.data.gameStarted) { return false; } //If the game did not start yet, just exits.
 		
 		//Updates the row and column where the mouse is over:
-		Input.mouseData = Game.Levels.getSymbolPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
+		Input.mouseData = Game.Levels.getSymbolsPositionFromCoordinates(CB_Mouse.getX(), CB_Mouse.getY());
 		if (Input.mouseData.column === -1 || Input.mouseData.row === -1) { return false; }		
 		
 		return true;
@@ -30,7 +30,7 @@ Input.init = function()
 			if (!CB_Mouse._onBeforeEvents()) { return; }
 			
 			//Sets the corresponding mouse cursor:
-			var symbolTypePointed = Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row);
+			var symbolTypePointed = Game.Levels.getSymbolsTypeFromMap(Input.mouseData.column, Input.mouseData.row);
 			if (symbolTypePointed === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE || symbolTypePointed.indexOf(Game.Levels.SYMBOL_TYPES.TOWER) !== -1) { CB_Mouse.setCSS("pointer"); }
 			else { CB_Mouse.setCSS(); }
 		}
@@ -44,13 +44,13 @@ Input.init = function()
 			if (!CB_Mouse._onBeforeEvents()) { return; }
 			
 			//If we are clicking on an unwalkable and buildable area:
-			if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
+			if (Game.Levels.getSymbolsTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
 			{
 				//TODO: call onBuildableTouched()
 				alert("Clicked buildable soil");
 			}
 			//...otherwise, if we are clicking on a tower:
-			else if (Game.Levels.getSymbolTypeFromMap(Input.mouseData.column, Input.mouseData.row, true, "").substring(0, 6) === "TOWER_")
+			else if (Game.Levels.getSymbolsTypeFromMap(Input.mouseData.column, Input.mouseData.row) === Game.Levels.SYMBOL_TYPES.TOWER)
 			{
 				//TODO.
 				alert("Clicked tower");
@@ -78,7 +78,8 @@ Input.manage = function(action)
 		//If return, space or a button (button 1, 2 or 3) or axis from any gamepad is pressed, starts the game:
 		if (CB_Keyboard.isKeyDown(CB_Keyboard.keys.ENTER) || CB_Keyboard.isKeyDown(CB_Keyboard.keys.SPACEBAR) || CB_Controllers.isButtonDown([1, 2, 3]) || CB_Controllers.getAxesDown().length > 0 || CB_Controllers.getAxesDown("", -1).length > 0)
 		{
-			if (!Game.data.musicEnabled || Game.data.musicLoaded && Game.data.musicChecked) { Game.start(CB_GEM.graphicSpritesSceneObject); }
+			if (Game.data.levelSucceeded) { Game.start(CB_GEM.graphicSpritesSceneObject); }
+			else if (!Game.data.musicEnabled || Game.data.musicLoaded && Game.data.musicChecked) { Game.start(CB_GEM.graphicSpritesSceneObject); }
 			else if (Game.data.musicLoaded) { Sound.Music.check(); }
 			else { Sound.Music.prepare(); }
 			

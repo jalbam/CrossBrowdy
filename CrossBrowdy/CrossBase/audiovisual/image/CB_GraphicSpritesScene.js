@@ -466,7 +466,7 @@ CB_GraphicSpritesScene.prototype.insertSpritesGroup = CB_GraphicSpritesScene.pro
 }
 
 
-//Returns the position that an element (subsprites group, sprite or sub-sprite) should have in a given array, having in mind that they are sorted by by z-index in that array (ascending order):
+//Returns the position that an element (subsprites group, sprite or sub-sprite) should have in a given array, having in mind that they are sorted by z-index in that array (ascending order):
 CB_GraphicSpritesScene._choosePositionByZIndex = function(array, element)
 {
 	if (array && element)
@@ -653,7 +653,7 @@ CB_GraphicSpritesScene.prototype.setPropertyCascade = function(propertyName, val
 
 
 /**
- * Gets a new copy of this object with the same attributes (all sub-objects will be a copy, they will not the same reference).
+ * Gets a new copy of this object with the same attributes (all sub-objects will be a copy, they will not use the same reference).
  *  @function
  *  @param {boolean} [avoidCopyingPointers=false] - If set to true, it will not copy the {@link CB_GraphicSprites#pointer} property of each {@link CB_GraphicSprites} object.
  *  @param {boolean} [avoidCopyingTimes=false] - If set to true, it will not copy neither the {@link CB_GraphicSprites#time} property of each {@link CB_GraphicSprites} object nor the "time" property of each of their sprites ({@link CB_GraphicSprites.SPRITE_OBJECT} objects).

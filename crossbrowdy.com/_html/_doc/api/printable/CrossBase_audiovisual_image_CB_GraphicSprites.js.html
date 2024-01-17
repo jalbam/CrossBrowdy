@@ -204,7 +204,8 @@
  *  @property {function} insertSubSprites - Read-only property which is a method that inserts the given sub-sprites ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} objects) in the sprite, adding them to the "subSprites" property (calls {@link CB_GraphicSprites#insertSubSprites} internally and returns its returning value). With only one parameter which belongs to the "subSprites" parameter of the {@link CB_GraphicSprites#insertSubSprites} method.
  *  @property {function} remove - Read-only property which is a method that removes an internal sub-sprite ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} object) by its index (position in the "subSprites" array) from the sprite, removing it from the "subSprites" property (calls {@link CB_GraphicSprites#removeSubSprite} internally and returns its returning value). With only one parameter which belongs to the "index" parameter of the {@link CB_GraphicSprites#removeSubSprite} method.
  *  @property {function} removeById - Read-only property which is a method that removes an internal sub-sprite ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} object) by its identifier from the sprite, removing it from the "subSprites" property (calls {@link CB_GraphicSprites#removeSubSpriteById} internally and returns its returning value). With only one parameter which belongs to the "id" parameter of the {@link CB_GraphicSprites#removeSubSpriteById} method.
- *  @property {function} insert - Read-only property which is a method that inserts a given sub-sprite ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} object) in the sprite, adding it to the "subSprites" property (calls {@link CB_GraphicSprites#insertSubSprite} internally and returns its returning value). With only one parameter which belongs to the "subSprite" parameter of the {@link CB_GraphicSprites#insertSubSprite} method.
+ *  @property {function} insertSubSprite - Read-only property which is a method that inserts a given sub-sprite ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} object) in the sprite, adding it to the "subSprites" property (calls {@link CB_GraphicSprites#insertSubSprite} internally and returns its returning value). With only one parameter which belongs to the "subSprite" parameter of the {@link CB_GraphicSprites#insertSubSprite} method.
+ *  @property {function} insert - Alias for the "insertSubSprite" method.
  *  @property {function} getAll - Read-only property which is a method that returns all the internal sub-sprites ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} objects) in the sprite, getting them from the "subSprites" property (calls {@link CB_GraphicSprites#getAll} internally and returns its returning value). With two parameters ("orderedByZIndex" and "returnValueOnFail") which belong to the parameters with the same name of the {@link CB_GraphicSprites#getAll} method.
  *  @property {function} getSubSprites - Alias for the "getAll" method.
  *  @property {function} get - Read-only property which is a method that returns a sub-sprite ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} object) by its index (position in the "subSprites" array) from the sprite, getting it from the "subSprites" property (calls {@link CB_GraphicSprites#getSubSprite} internally and returns its returning value). With two parameters ("index" and "returnValueOnFail") which belong to the parameters with the same name of the {@link CB_GraphicSprites#getSubSprite} method.
@@ -796,7 +797,7 @@ CB_GraphicSprites.prototype.insertSprite = CB_GraphicSprites.prototype.insert = 
 	sprite.insertSubSprites = function(subSprites) { return CB_GraphicSprites.prototype.insertSubSprites.call(this.container, subSprites, sprite); }
 	sprite.remove = function(index) { return CB_GraphicSprites.prototype.removeSubSprite.call(this.container, index, sprite); }
 	sprite.removeById = function(id) { return CB_GraphicSprites.prototype.removeSubSpriteById.call(this.container, id, sprite); }
-	sprite.insert = function(subSprite) { return CB_GraphicSprites.prototype.insertSubSprite.call(this.container, subSprite, sprite); }
+	sprite.insert = sprite.insertSubSprite = function(subSprite) { return CB_GraphicSprites.prototype.insertSubSprite.call(this.container, subSprite, sprite); }
 	sprite.getAll = sprite.getSubSprites = function(orderedByZIndex, returnValueOnFail) { return CB_GraphicSprites.prototype.getSubSprites.call(this.container, sprite, orderedByZIndex, returnValueOnFail); }
 	sprite.get = function(index, returnValueOnFail) { return CB_GraphicSprites.prototype.getSubSprite.call(this.container, index, sprite, returnValueOnFail); }
 	sprite.getById = function(id, returnValueOnFail) { return CB_GraphicSprites.prototype.getSubSpriteById.call(this.container, id, sprite, returnValueOnFail); }
@@ -874,7 +875,7 @@ CB_GraphicSprites.prototype.removeSubSprites = CB_GraphicSprites.prototype.remov
 /**
  * Adds the given sub-sprites to the desired sprite. Calls the {@link CB_GraphicSprites#insertSubSprite} and {@link CB_GraphicSprites#updateSubSpritesByZIndex} methods internally.
  *  @function
- *  @param {array} subSprites - Numeric array with the desired sub-sprites ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} objects). They will be stored inside the given sprite.
+ *  @param {array} subSprites - Numeric array with the desired sub-sprites ({@link CB_GraphicSprites.SUBSPRITE_OBJECT} objects). They will be stored inside the given sprite. If a value which is not an array is provided, it will be tried to be processed internally as the first and unique value of an array.
  *  @param {CB_GraphicSprites.SPRITE_OBJECT} [sprite=CB_GraphicSprites#getCurrent()] - Object with the desired sprite. If not provided, it will use the {@link CB_GraphicSprites.SPRITE_OBJECT} object which the pointer (set in the {@link CB_GraphicSprites#pointer} property) is currently pointing to (using the returning value of the {@link CB_GraphicSprites#getCurrent} method internally).
  *  @returns {array} Returns an array with the {@link CB_GraphicSprites.SUBSPRITE_OBJECT} objects which have been inserted (they could have been modified/sanitized from the given one and some missing properties or those which were wrong could have been inherited).
  */
@@ -882,7 +883,8 @@ CB_GraphicSprites.prototype.insertSubSprites = function(subSprites, sprite)
 {
 	//Sets the properties (sanitizing them):
 	sprite = sprite || this.getCurrent();
-	subSprites = CB_isArray(subSprites) ? subSprites : [];
+	if (subSprites === null || typeof(subSprites) !== "object") { subSprites = []; }
+	subSprites = CB_isArray(subSprites) ? subSprites : [ subSprites ];
 	
 	//Inserts the given sub-sprites, one by one:
 	var subSpritesInserted = [];
@@ -1834,7 +1836,7 @@ CB_GraphicSprites.prototype.setPropertyCascade = function(propertyName, value, o
 
 
 /**
- * Gets a new copy of this object with the same attributes (all sub-objects will be a copy, they will not the same reference).
+ * Gets a new copy of this object with the same attributes (all sub-objects will be a copy, they will not use the same reference).
  *  @function
  *  @param {boolean} [avoidCopyingPointer=false] - If set to true, it will not copy the {@link CB_GraphicSprites#pointer} property of the object.
  *  @param {boolean} [avoidCopyingTimes=false] - If set to true, it will not copy neither the {@link CB_GraphicSprites#time} property property of the object nor the "time" property of each of its sprites ({@link CB_GraphicSprites.SPRITE_OBJECT} objects).
@@ -1873,7 +1875,7 @@ CB_GraphicSprites.prototype.getCopy = function(avoidCopyingPointer, avoidCopying
 			(
 				function(subSprite, subSpriteIndex)
 				{
-					CB_GraphicSprites._copyNeededProperties(sprite.get(index).get(subSpriteIndex), subSprite) //Copies the needed properties from the original element.
+					CB_GraphicSprites._copyNeededProperties(newCopy.get(index).get(subSpriteIndex), subSprite) //Copies the needed properties from the original element.
 					
 					//If desired, sets the same times:
 					if (!avoidCopyingTimes) { sprite.get(subSpriteIndex).time = this.time; }
@@ -2126,7 +2128,7 @@ CB_GraphicSprites.filterProperties = function(element, propertiesToKeepObject)
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a>
 	
-		on Tue Jan 16th 2024
+		on Wed Jan 17th 2024
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

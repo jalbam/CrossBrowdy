@@ -58,7 +58,8 @@ Visual.getSpritesGroupsData = function()
 					{
 						onlyUseInMap: true,
 						parseIntTop: true,
-						parseIntLeft: true
+						parseIntLeft: true,
+						filter: "none"
 					},
 					sprites:
 					[
@@ -108,6 +109,18 @@ Visual.getSpritesGroupsData = function()
 									src: "img/destiny_0.gif"
 								}
 							]
+						},
+						
+						//Origin (enemies will appear in any of them) sprites:
+						{
+							id: "origin",
+							subSprites:
+							[
+								{
+									id: "origin",
+									src: "img/origin_0.gif"
+								}
+							]
 						}
 					]
 				},
@@ -139,6 +152,50 @@ Visual.getSpritesGroupsData = function()
 									src: "img/tower_0_level_0.gif",
 									disabled: false
 								}		
+							]
+						}
+					]
+				},
+
+				//Enemy type #0 sprites:
+				{
+					id: "enemy_0_sprites_group",
+					zIndex: 2,
+					srcWidth: 38,
+					srcHeight: 36,
+					sprites:
+					[
+						{
+							id: "enemy_0_sprites",
+							subSprites:
+							[
+								{
+									id: "enemy_0_subsprites",
+									src: "img/enemy_0_sprites.gif",
+									disabled: true
+								}
+							]
+						}
+					]
+				},
+
+				//Enemy type #1 sprites:
+				{
+					id: "enemy_1_sprites_group",
+					zIndex: 2,
+					srcWidth: 38,
+					srcHeight: 36,
+					sprites:
+					[
+						{
+							id: "enemy_1_sprites",
+							subSprites:
+							[
+								{
+									id: "enemy_1_subsprites",
+									src: "img/enemy_1_sprites.gif",
+									disabled: true
+								}
 							]
 						}
 					]
@@ -186,7 +243,7 @@ Visual.getSpritesGroupsData = function()
 							"{{SOIL_WALKABLE}}0":
 							{
 								id: "path_0",
-								parentId: "path"
+								parentId: "path",
 							},
 							"{{SOIL_WALKABLE}}1":
 							{
@@ -204,6 +261,18 @@ Visual.getSpritesGroupsData = function()
 							{
 								id: "destiny_1",
 								parentId: "destiny"
+							},
+
+							//Origin (there can be many per map). Enemies could appear in any of them:
+							"{{ORIGIN}}{{SOIL_WALKABLE}}0":
+							{
+								id: "origin_0",
+								parentId: "origin"
+							},
+							"{{ORIGIN}}{{SOIL_WALKABLE}}1":
+							{
+								id: "origin_1",
+								parentId: "origin"
 							},
 
 							//Tower type 0:
@@ -235,14 +304,11 @@ Visual.getSpritesGroupsData = function()
 								if (typeof(Visual._drawnMapElements[y][x]) === "undefined") { Visual._drawnMapElements[y][x] = {}; }
 								
 								//If the element is unwalkable and buildable:
-								if (Game.Levels.getTypeFromSymbol(mapElement.src[y][x]) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
+								if (Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
 								{
-									Visual._drawnMapElements[y][x].drawn = false;
 								}
-								else if (Game.Levels.getTypeFromSymbol(mapElement.src[y][x]).indexOf(Game.Levels.SYMBOL_TYPES.TOWER) !== -1)
+								else if (Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) === Game.Levels.SYMBOL_TYPES.TOWER)
 								{
-									Visual._drawnMapElements[y][x].drawn = false;
-									
 									// TO DO: Enable desired soil and disable undesired towers/towers levels.
 									/////////////element.getById("soil_unwalkable_buildable_0").setDisabled(true);
 									//////////element.getById("tower_0_level_0").setDisabled(false);
@@ -254,7 +320,11 @@ Visual.getSpritesGroupsData = function()
 									{
 										element.data.filter = "sepia(0.5)";
 									}
-									else { element.data.filter = "none"; }
+									else
+									{
+										element.data.filter = "none";
+									}
+									Visual._drawnMapElements[y][x].drawn = false;
 								}
 								
 								//Defines whether to draw this element or skip drawing it:
@@ -264,6 +334,20 @@ Visual.getSpritesGroupsData = function()
 									Visual._drawnMapElements[y][x].drawn = true;
 									Visual._drawnMapElements[y][x].elementData = { x: element._attributes.left, y: element._attributes.top };
 								}
+
+								/*if
+								(
+									Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE
+									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE
+									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.SOIL_WALKABLE
+									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.DESTINY
+									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.TOWER
+								)
+								{
+									CB_console("AYYY");
+								}*/
+								///if (mapElement.src[y][x].indexOf("@") !== -1) { CB_console(mapElement.src[y][x]); }
+								
 
 								return skipDrawing ? null : element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 							}
@@ -296,6 +380,7 @@ Visual.getSpritesGroupsData = function()
 		}
 	}
 	
+	
 	return Visual._spritesGroupsData;
 }
 
@@ -304,10 +389,13 @@ Visual.getSpritesGroupsData = function()
 Visual.updateInfo = function(graphicSpritesSceneObject)
 {
 	graphicSpritesSceneObject.getById("info").get(0).src =
-		"Level: " + Game.data.level + "\n" +
+		"Level: " + (Game.data.level + 1) + "\n" +
 		"Coins: " + Game.data.coins + "\n" +
 		"Vitality: " + Game.data.vitality + "\n" +
 		"Score: " + Game.data.score + "\n" +
+		"Wave: " + (Game.data.levelEnemyWave + 1) + "/" + Game.Levels.data[Game.data.level].enemyWaves.length + "\n" +
+		"* Enemies of this wave (pointer): " + Game.data.levelEnemyWaveLastEnemyPointer + "/" + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies.length + "\n" +
+		"* Enemies alive: " + Game.getEnemiesAlive().length + "\n" +
 		(!CB_Screen.isLandscape() ? "\n\nLandscape screen recommended!" : "") +
 		(
 			CB_GEM_DEBUG_MESSAGES ?
@@ -332,13 +420,13 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 
 	if (graphicSpritesSceneObject instanceof CB_GraphicSpritesScene)
 	{
-		//Resizes the current map which is being displayed according to the new screen size:
-		var mapCurrent = graphicSpritesSceneObject.getById("map").getById("current").src;
-		if (CB_isArray(mapCurrent))
+		//Locates the current map which is being displayed according to the new screen size:
+		var mapCurrent = graphicSpritesSceneObject.getById("map").getById("current");
+		if (CB_isArray(mapCurrent.src))
 		{
-			var maxWidthFound = mapCurrent[0].length; //As the map was filled with unwalkable tiles already, all rows have the same width (same columns).
-			graphicSpritesSceneObject.getById("map").getById("current").left = (CB_Screen.getWindowWidth() - Visual._ELEMENTS_WIDTH * maxWidthFound) / 2;
-			graphicSpritesSceneObject.getById("map").getById("current").top = (CB_Screen.getWindowHeight() - Visual._ELEMENTS_HEIGHT * mapCurrent.length) / 2;
+			var maxWidthFound = mapCurrent.src[0].length; //As the map was filled with unwalkable tiles already, all rows have the same width (same columns).
+			mapCurrent.left = (CB_Screen.getWindowWidth() - Visual._ELEMENTS_WIDTH * maxWidthFound) / 2;
+			mapCurrent.top = (CB_Screen.getWindowHeight() - Visual._ELEMENTS_HEIGHT * mapCurrent.src.length) / 2;
 		}
 		
 		//Resizes the FPS and the information text:
@@ -406,6 +494,10 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 	//Resizes the font of the start button:
 	var startButton = CB_Elements.id("start_button");
 	if (startButton !== null) { startButton.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px"; }
+
+	//Updates enemies position:
+	CB_Arrays.forEach(Game.data.enemies, function(enemy) { enemy._spritesUpdateCoordinates(); });
+	//TO DO: update towers position too.
 	
 	//Clears the array to draw all the elements again and resets their data:
 	Visual._drawnMapElements = [];

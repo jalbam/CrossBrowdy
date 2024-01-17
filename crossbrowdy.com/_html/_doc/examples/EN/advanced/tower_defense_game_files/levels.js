@@ -38,253 +38,93 @@ var _LEVELS_SYMBOLS =
 var _LEVELS =
 [
 	//Level 0:
-	[
-		"  -$$$-!$$-$$$-   ".split(""),
-		"$$$$-$$$-$$$-$$$$@".split("")
-	],
-
-
-	//Level 1:
-	[
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"@".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split(""),
-		"$".split("")
-	],
-
-
-	//Level 2:
-	[
-		"############  ".split(""),
-		"#--  #     ###".split(""),
-		"#--  # $  $  #".split(""),
-		"#--  #$####  #".split(""),
-		"#--    @ ##  #".split(""),
-		"#--  # #  $ ##".split(""),
-		"###### ##$ $ #".split(""),
-		"  # $  $ $ $ #".split(""),
-		"  #    #     #".split(""),
-		"  ############".split("")
-	],
-	
-	//Level 3:
-	[
-		"##   #   #  ##".split(""),
-		"#            #".split(""),
-		"##### $@$ ####".split(""),
-		"-   ##$$$##  -".split(""),
-		"#        #   #".split(""),
-		"--   #      --".split(""),
-		"--  ##$$$ # --".split(""),
-		"##### $ $ ####".split(""),
-		"##            ".split(""),
-		"###   #  #  ##".split("")
-	],
-	
-	//Level 4:
-	[
-		"        ######## ".split(""),
-		"        #     @# ".split(""),
-		"        # $#$ ## ".split(""),
-		"        # $  $#  ".split(""),
-		"        ##$ $ #  ".split(""),
-		"######### $ # ###".split(""),
-		"#----  ## $  $  #".split(""),
-		"##---    $  $   #".split(""),
-		"#----  ##########".split(""),
-		"########         ".split("")
-	],
-	
-	//Level 5:
-	[
-		"# # # #     # # #".split(""),
-		"   $      #      ".split(""),
-		"#        $  -   #".split(""),
-		" $ $ $ $  #$ # $ ".split(""),
-		" # # # # #-      ".split(""),
-		"  -   -   $# #-#-".split(""),
-		"# $ $  #$#- $ $ $".split(""),
-		" - -  -       -  ".split(""),
-		"   #$#$#  $      ".split(""),
-		"#- - -  #-#-#-#*#".split("")
-	],
-	
-	//Level 6:
-	[
-		"           ########".split(""),
-		"           #  ----#".split(""),
-		"############  ----#".split(""),
-		"#    #  $ $   ----#".split(""),
-		"# $$$#$  $ #  ----#".split(""),
-		"#  $     $ #  ----#".split(""),
-		"# $$ #$ $ $########".split(""),
-		"#  $ #     #       ".split(""),
-		"## #########       ".split(""),
-		"#    #    ##       ".split(""),
-		"#     $   ##       ".split(""),
-		"#  $$#$$  @#       ".split(""),
-		"#    #    ##       ".split(""),
-		"###########        ".split("")
-	],
-	
-	//Level 7:
-	[
-		"#  ####  #### #### ".split(""),
-		"####--####--###--##".split(""),
-		"*                  ".split(""),
-		"#  #  #  #  # #  ##".split(""),
-		"#  #  #  #  # #   #".split(""),
-		"#     #          ##".split(""),
-		"#  #   #  #  #$$$ #".split(""),
-		"#     $     #  #  #".split(""),
-		"##### $   ###  #  #".split(""),
-		"#    $$$ $  #  $$$#".split(""),
-		"##  # #  #  #  #  #".split(""),
-		"      #  #     #   ".split(""),
-		" ####-####--####--#".split(""),
-		"##  ###  ####  ####".split("")
-	],
-	
-	//Level 8:
-	[
-		"        #####    ".split(""),
-		"        #   #####".split(""),
-		"        # #$##  #".split(""),
-		"        #     $ #".split(""),
-		"######### ###   #".split(""),
-		"#----  ## $  $###".split(""),
-		"#----    $ $$ ## ".split(""),
-		"#----  ##$  $ @# ".split(""),
-		"#########  $  ## ".split(""),
-		"        # $ $  # ".split(""),
-		"        ### ## # ".split(""),
-		"          #    # ".split(""),
-		"          ###### ".split("")
-	],
-	
-	//Level 9:
-	[
-		"################ ".split(""),
-		" * #-            ".split(""),
-		"  ##$#########   ".split(""),
-		"#             # #".split(""),
-		"#  # #######  # #".split(""),
-		"# $       - $ #$#".split(""),
-		"# #  ###### # # #".split(""),
-		"# # #  $ -  #   #".split(""),
-		"###  # ####$  # #".split(""),
-		"# #           # #".split(""),
-		"#  ##########-#  ".split(""),
-		"#--         $-$  ".split(""),
-		" ############### ".split("")
-	],
-		
-	//Level 10:
-	[
-		"######  ### ".split(""),
-		"#--  # ##@##".split(""),
-		"#--  ###   #".split(""),
-		"#--     $$ #".split(""),
-		"#--  # # $ #".split(""),
-		"#--### # $ #".split(""),
-		"#### $ #$  #".split(""),
-		"   #  $# $ #".split(""),
-		"   # $  $  #".split(""),
-		"   #  ##   #".split(""),
-		"   #########".split("")
-	],
-		
-	//Level 11:
-	[
-		"    #     ##".split(""),
-		" -- #$#$ #  ".split(""),
-		" #    #@ #- ".split(""),
-		" # - $$$ # #".split(""),
-		"  #    -#-$ ".split(""),
-		"  $  #  #-$ ".split(""),
-		"   ## - ##$ ".split(""),
-		"  # $  $ #  ".split(""),
-		"  #-    -# $".split(""),
-		"  #######   ".split(""),
-		"--       $ -".split("")
-	],
-		
-	//Level 12:
-	[
-		"       ##### ".split(""),
-		" #######   ##".split(""),
-		"## # @## $$ #".split(""),
-		"#    $      #".split(""),
-		"#  $  ###   #".split(""),
-		"### #####$###".split(""),
-		"# $  ### --# ".split(""),
-		"# $ $ $ ---# ".split(""),
-		"#    ###---# ".split(""),
-		"# $$ # #---# ".split(""),
-		"#  ### ##### ".split(""),
-		"####         ".split("")
-	],
-		
-	//Level 13:
-	[
-		"#   #   # ###".split(""),
-		" # # # # #   ".split(""),
-		"- #  -#- -#  ".split(""),
-		"$ # $ # $ #  ".split(""),
-		" #  -$   #-- ".split(""),
-		" $-  $* $ $++".split(""),
-		"   $- #$     ".split(""),
-		" # #   $ # $ ".split(""),
-		"  #-$$# $ #--".split(""),
-		"  #   #  -#$ ".split(""),
-		" # #-# #-##  ".split(""),
-		"#   #   #  ##".split("")
-	],
-		
-	//Level 14:
-	[
-		"  ####          ".split(""),
-		"  #  ###########".split(""),
-		"  #    $   $ $ #".split(""),
-		"  # $# $ #  $  #".split(""),
-		"  #  $ $  #    #".split(""),
-		"### $# #  #### #".split(""),
-		"#@#$ $ $  ##   #".split(""),
-		"#    $ #$#   # #".split(""),
-		"#   $    $ $ $ #".split(""),
-		"#####  #########".split(""),
-		"  #      #      ".split(""),
-		"  #      #      ".split(""),
-		"  #------#      ".split(""),
-		"  #------#      ".split(""),
-		"  #------#      ".split(""),
-		"  ########      ".split("")
-	]
+	{
+		//Map:
+		map:
+		[
+			"       *          ".split(""),
+			"       $-  -   ---".split(""),
+			"      -$$$ $$$$$$*".split(""),
+			"  -$$$!$-$-$- -$--".split(""),
+			"*$$$-$$$-$$$- -$$@".split(""),
+			"    -$-        -- ".split(""),
+			"     *            ".split("")
+		],
+		//Enemy waves:
+		enemyWaves:
+		[
+			//Wave 0:
+			{
+				timeBetweenEnemies: 10000, //Time for the next enemy to appear after previous one (milliseconds).
+				timeFromLastEnemyToNextWave: 5000, //Time to wait until next wave (milliseconds).
+				enemies: //Enemies, each array value is an object with the enemy type and its level (set to null a property to use default one):
+				[
+					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 }
+				]
+			},
+			//Wave 1:
+			{
+				timeBetweenEnemies: 8000, //Time for the next enemy to appear after previous one (milliseconds).
+				timeFromLastEnemyToNextWave: 4000, //Time to wait until next wave (milliseconds).
+				enemies:
+				[
+					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 }
+				]
+			},
+			//Wave 2:
+			{
+				timeBetweenEnemies: 6000, //Time for the next enemy to appear after previous one (milliseconds).
+				timeFromLastEnemyToNextWave: 3000, //Time to wait until next wave (milliseconds).
+				enemies:
+				[
+					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
+					{ type: 1, level: 0 }, { type: 1, level: 0 }, { type: 1, level: 0 }
+				]
+			},
+			//Wave 3:
+			{
+				timeBetweenEnemies: 4000, //Time for the next enemy to appear after previous one (milliseconds).
+				timeFromLastEnemyToNextWave: 2000, //Time to wait until next wave (milliseconds).
+				enemies:
+				[
+					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
+					{ type: 1, level: 0 }, { type: 1, level: 0 }, { type: 1, level: 0 },
+					{ type: 1, level: 1 }, { type: 1, level: 1 }, { type: 1, level: 1 }
+				]
+			},
+			//Wave 4:
+			{
+				timeBetweenEnemies: 2000, //Time for the next enemy to appear after previous one (milliseconds).
+				timeFromLastEnemyToNextWave: 1000, //Time to wait until next wave (milliseconds).
+				enemies:
+				[
+					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
+					{ type: 0, level: 2 }, { type: 0, level: 2 }, { type: 0, level: 2 },
+					{ type: 1, level: 0 }, { type: 1, level: 0 }, { type: 1, level: 0 },
+					{ type: 1, level: 1 }, { type: 1, level: 1 }, { type: 1, level: 1 },
+					{ type: 1, level: 2 }, { type: 1, level: 2 }, { type: 1, level: 2 }
+				]
+			},
+			//Wave 5:
+			{
+				timeBetweenEnemies: 1000, //Time for the next enemy to appear after previous one (milliseconds).
+				timeFromLastEnemyToNextWave: 0, //Time to wait until next wave (milliseconds). Last wave does not needed!
+				enemies:
+				[
+					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
+					{ type: 0, level: 2 }, { type: 0, level: 2 }, { type: 0, level: 2 },
+					{ type: 0, level: 3 }, { type: 0, level: 3 }, { type: 0, level: 3 },
+					{ type: 1, level: 0 }, { type: 1, level: 0 }, { type: 1, level: 0 },
+					{ type: 1, level: 1 }, { type: 1, level: 1 }, { type: 1, level: 1 },
+					{ type: 1, level: 2 }, { type: 1, level: 2 }, { type: 1, level: 2 },
+					{ type: 1, level: 3 }, { type: 1, level: 3 }, { type: 1, level: 3 }
+				]
+			}
+		]
+	}
 ];

@@ -526,7 +526,7 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 		rotated = true;
 	}
 
-	//If the element is an image:
+	//Proceeds according the element type:
 	var drawn = true; //Defines whether the element was finally drawn or not.
 	switch (element.srcType)
 	{
