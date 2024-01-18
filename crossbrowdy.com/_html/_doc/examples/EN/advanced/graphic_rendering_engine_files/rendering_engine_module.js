@@ -4,6 +4,8 @@
 var CB_REM = function() { if (this === window || !(this instanceof CB_REM)) { return new CB_REM(); } return this._init(); }; //Rendering Engine Module main object and constructor.
 CB_REM_PATH = CB_this.CB_REM_PATH || ""; //Path to the graphic rendering engine module.
 CB_REM.DEBUG_MESSAGES = !!CB_this.CB_REM_DEBUG_MESSAGES; //Sets whether to show debug messages or not.
+CB_REM.prototype.CB_CanvasObject = null; //It will store the main 'CB_Canvas' object.
+CB_REM.prototype.CB_CanvasObjectBuffer = null; //It will store the 'CB_Canvas' object used as buffer.
 
 
 //Module basic configuration:

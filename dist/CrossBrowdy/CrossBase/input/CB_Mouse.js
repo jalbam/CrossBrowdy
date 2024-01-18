@@ -62,7 +62,7 @@ var CB_Mouse = function() { return CB_Mouse; };
 				//if (typeof(document.body) !== "undefined" && typeof(document.body.setCapture) !== "undefined")
 				if (typeof(e.target) !== "undefined")
 				{
-					if (typeof(e.target.setPointerCapture) !== "undefined")
+					if (typeof(e.target.setPointerCapture) !== "undefined" && typeof(e.pointerId) !== "undefined" && e.pointerId !== null)
 					{
 						e.target.setPointerCapture(e.pointerId);
 					}
@@ -91,7 +91,7 @@ var CB_Mouse = function() { return CB_Mouse; };
 				//if (typeof(document.body) !== "undefined" && typeof(document.body.releaseCapture) !== "undefined")
 				if (typeof(e.target) !== "undefined")
 				{
-					if (typeof(e.target.releasePointerCapture) !== "undefined")
+					if (typeof(e.target.releasePointerCapture) !== "undefined" && typeof(e.pointerId) !== "undefined" && e.pointerId !== null)
 					{
 						e.target.releasePointerCapture(e.pointerId);
 					}

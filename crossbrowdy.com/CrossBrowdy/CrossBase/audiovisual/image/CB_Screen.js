@@ -1692,6 +1692,7 @@ var CB_Screen = function() { return CB_Screen; };
 	{
 		if (typeof(screen) !== "undefined")
 		{
+			if (window.screen && window.screen.orientation && typeof(window.screen.orientation.lock) === "function") { return window.screen.orientation; }
 			var orientationObject = screen.orientation || screen.mozOrientation
 										|| screen.webkitOrientation || screen.oOrientation || screen.msOrientation
 										|| screen.khtmlOrientation || null;

@@ -20,6 +20,7 @@ if (FORCED_EMULATION_METHOD)
 	else if (FORCED_EMULATION_METHOD === "VML") { CB_OPTIONS.CrossBase.EXCANVAS_LOAD = CB_OPTIONS.CrossBase.CANVAS_TEXT_LOAD = true; }
 }
 
+
 var myREM = null; //It will store the CB_REM object.
 
 
@@ -47,29 +48,21 @@ function main()
 		//If both canvas (normal and buffer) have been created, proceeds with the rendering:
 		if (canvasLoaded >= 2)
 		{
+			//Stores both canvases and their contexts:
+			myREM.CB_CanvasObject = canvases["my_canvas"];
+			myREM.CB_CanvasObjectBuffer = canvases["my_canvas_buffer"];
+			
 			//When the screen changes its size or its orientation, both canvases will be re-adapted:
 			var onResizeOrChangeOrientationTimeout = null;
 			var onResizeOrChangeOrientation = function()
 			{
 				clearTimeout(onResizeOrChangeOrientationTimeout);
-				onResizeOrChangeOrientationTimeout = setTimeout //NOTE: needs a delay as some clients on iOS update the screen size information in two or more steps (last step is the correct value).
-				(
-					function()
-					{
-						//Resizes the canvas:
-						canvases["my_canvas"].setWidth(CB_Screen.getWindowWidth());
-						canvases["my_canvas"].setHeight(CB_Screen.getWindowHeight());
-						canvases["my_canvas"].clear(); canvases["my_canvas"].disableAntiAliasing();
-						
-						//Resizes the buffer canvas:
-						canvases["my_canvas_buffer"].setWidth(CB_Screen.getWindowWidth());
-						canvases["my_canvas_buffer"].setHeight(CB_Screen.getWindowHeight());
-						canvases["my_canvas_buffer"].clear();
-						canvases["my_canvas_buffer"].disableAntiAliasing();
-					}
-				);
+				onResizeOrChangeOrientationTimeout = setTimeout(resizeCanvasesToScreenSize, 100); //NOTE: needs a delay as some clients on iOS update the screen size information in two or more steps (last step is the correct value).
 			};
 			CB_Screen.onResize(onResizeOrChangeOrientation);
+			
+			//Resizes the canvases (Firefox Android fix):
+			onResizeOrChangeOrientation();
 
 			//Clears both canvas:
 			canvases["my_canvas"].clear();
@@ -83,7 +76,6 @@ function main()
 			var graphicSpritesSceneObject = createSpritesGroups();
 
 			//Caches all needed images (performance purposes) and starts rendering sprites groups when all are loaded:
-			myREM = new CB_REM();
 			myREM.cacheImages
 			(
 				graphicSpritesSceneObject, //CB_GraphicSpritesSceneObject.
@@ -104,6 +96,9 @@ function main()
 			);
 		}
 	};
+	
+	//Creates the CB_REM object:
+	myREM = new CB_REM();
 	
 	//Creates the canvases:
 	var canvases = {};
@@ -127,6 +122,23 @@ function main()
 		function(error) { CB_console("Canvas object problem! Error: " + error); }, //onError.
 		undefined, undefined, !!FORCED_EMULATION_METHOD, !!FORCED_EMULATION_METHOD //Forces emulation method.
 	);
+}
+
+
+//Resizes both canvases (main and buffer one) to adapt them to the screen size:
+function resizeCanvasesToScreenSize()
+{
+	//Resizes the canvas:
+	myREM.CB_CanvasObject.setWidth(CB_Screen.getWindowWidth());
+	myREM.CB_CanvasObject.setHeight(CB_Screen.getWindowHeight());
+	myREM.CB_CanvasObject.clear();
+	myREM.CB_CanvasObject.disableAntiAliasing();
+	
+	//Resizes the buffer canvas:
+	myREM.CB_CanvasObjectBuffer.setWidth(CB_Screen.getWindowWidth());
+	myREM.CB_CanvasObjectBuffer.setHeight(CB_Screen.getWindowHeight());
+	myREM.CB_CanvasObjectBuffer.clear();
+	myREM.CB_CanvasObjectBuffer.disableAntiAliasing();
 }
 
 

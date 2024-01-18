@@ -901,7 +901,10 @@ CB_Canvas.prototype.disableAntiAliasing = function(performTranslate)
 	context.webkitImageSmoothingEnabled = false;
 	context.mozImageSmoothingEnabled = false;
 	context.imageSmoothingEnabled = false;
-	
+
+	//Firefox Android fix (strange one):
+	this.canvas.width = this.canvas.width;
+
 	return true;
 }
 
@@ -928,6 +931,3 @@ CB_Canvas.prototype._context_drawEllipse = function drawEllipse(x, y, w, h) //NO
 	//this.closePath(); // not used correctly, see comments (use to close off open path)
 	//this.stroke();
 };
-
-//CB_CanvasFileLoaded = true; //This file has been loaded.
-//CB_filesNeeded["screen/canvas/CB_Canvas.js"] = true; //This file has been loaded.

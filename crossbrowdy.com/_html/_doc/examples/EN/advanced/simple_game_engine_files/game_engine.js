@@ -105,7 +105,7 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 			"no" //'shrinkToFit'. Optional.
 		);
 	}
-	
+
 	//Function to execute when a canvas is created:
 	var canvasLoaded = 0;
 	var onLoadCanvas = function()
@@ -148,38 +148,24 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 				document.body.style.zoom = 1; //Disables zoom under some circumstances for some web clients.
 				document.body.style.touchAction = document.body.style.msTouchAction = "none"; //Prevents default touch actions for some web clients.
 			}
+
+			//Stores both canvases and their contexts:
+			CB_GEM.CB_CanvasObject = canvases[CB_GEM.options.canvasId];
+			CB_GEM.CB_CanvasObjectContext = CB_GEM.CB_CanvasObject.getContext();
+			CB_GEM.CB_CanvasObjectBuffer = canvases[CB_GEM.options.canvasBufferId];
+			CB_GEM.CB_CanvasObjectBufferContext = CB_GEM.CB_CanvasObjectBuffer.getContext();
 			
 			//When the screen changes its size or its orientation, both canvases will be re-adapted:
 			var onResizeOrChangeOrientationTimeout = null;
 			var onResizeOrChangeOrientation = function()
 			{
 				clearTimeout(onResizeOrChangeOrientationTimeout);
-				onResizeOrChangeOrientationTimeout = setTimeout //NOTE: needs a delay as some clients on iOS update the screen size information in two or more steps (last step is the correct value).
-				(
-					function()
-					{
-						//Resizes the canvas:
-						canvases[CB_GEM.options.canvasId].setWidth(CB_Screen.getWindowWidth());
-						canvases[CB_GEM.options.canvasId].setHeight(CB_Screen.getWindowHeight());
-						canvases[CB_GEM.options.canvasId].clear();
-						canvases[CB_GEM.options.canvasId].disableAntiAliasing();
-						
-						//Resizes the buffer canvas:
-						canvases[CB_GEM.options.canvasBufferId].setWidth(CB_Screen.getWindowWidth());
-						canvases[CB_GEM.options.canvasBufferId].setHeight(CB_Screen.getWindowHeight());
-						canvases[CB_GEM.options.canvasBufferId].clear();
-						canvases[CB_GEM.options.canvasBufferId].disableAntiAliasing();
-						
-						//Calls the 'onResize' event set, if any:
-						if (typeof(CB_GEM.onResize) === "function")
-						{
-							CB_GEM.onResize.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, canvases[CB_GEM.options.canvasId], canvases[CB_GEM.options.canvasBufferId]);
-						}
-					},
-					100
-				);
+				onResizeOrChangeOrientationTimeout = setTimeout(CB_GEM.resizeCanvasesToScreenSize, 100); //NOTE: needs a delay as some clients on iOS update the screen size information in two or more steps (last step is the correct value).
 			};
-			CB_Screen.onResize.call(CB_GEM, onResizeOrChangeOrientation);
+			CB_Screen.onResize(onResizeOrChangeOrientation);
+			
+			//Resizes the canvases (Firefox Android fix):
+			onResizeOrChangeOrientation();
 
 			//Clears both canvas:
 			canvases[CB_GEM.options.canvasId].clear();
@@ -217,12 +203,6 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 					if (typeof(CB_GEM.onLoopStart) !== "function") { CB_GEM.onLoopStart = function() {}; }
 					if (typeof(CB_GEM.onLoopEnd) !== "function") { CB_GEM.onLoopEnd = function() {}; }
 
-					//Stores the canvases and the contexts:
-					CB_GEM.CB_CanvasObject = canvases[CB_GEM.options.canvasId];
-					CB_GEM.CB_CanvasObjectContext = canvases[CB_GEM.options.canvasId].getContext();
-					CB_GEM.CB_CanvasObjectBuffer = canvases[CB_GEM.options.canvasBufferId];
-					CB_GEM.CB_CanvasObjectBufferContext = canvases[CB_GEM.options.canvasBufferId].getContext();
-					
 					//If we do not want to avoid starting the game loop, starts it:
 					if (!avoidLoopStart) { CB_GEM.loopStart(); }
 				}
@@ -252,6 +232,31 @@ CB_GEM.begin = function(onStart, onError, avoidLoopStart)
 		function(error) { CB_console("[CB_GEM] Canvas object problem! Error: " + error); if (typeof(onError) === "function") { onError.call(CB_GEM, error); } }, //onError.
 		undefined, undefined, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD, !!CB_GEM.options.CANVAS_FORCED_EMULATION_METHOD //Forces emulation method.
 	);
+}
+
+
+//Resizes both canvases (main and buffer one) to adapt them to the screen size:
+CB_GEM.resizeCanvasesToScreenSize = function(avoidCallingOnResize, addedPixels)
+{
+	addedPixels = addedPixels || 0;
+	
+	//Resizes the canvas:
+	CB_GEM.CB_CanvasObject.setWidth(CB_Screen.getWindowWidth() + addedPixels);
+	CB_GEM.CB_CanvasObject.setHeight(CB_Screen.getWindowHeight());
+	CB_GEM.CB_CanvasObject.clear();
+	CB_GEM.CB_CanvasObject.disableAntiAliasing();
+	
+	//Resizes the buffer canvas:
+	CB_GEM.CB_CanvasObjectBuffer.setWidth(CB_Screen.getWindowWidth() + addedPixels);
+	CB_GEM.CB_CanvasObjectBuffer.setHeight(CB_Screen.getWindowHeight());
+	CB_GEM.CB_CanvasObjectBuffer.clear();
+	CB_GEM.CB_CanvasObjectBuffer.disableAntiAliasing();
+	
+	//Calls the 'onResize' event set, if any:
+	if (!avoidCallingOnResize && typeof(CB_GEM.onResize) === "function")
+	{
+		CB_GEM.onResize.call(CB_GEM, CB_GEM.graphicSpritesSceneObject, CB_GEM.REM_renderGraphicScene_data, CB_GEM.CB_CanvasObject, CB_GEM.CB_CanvasObjectBuffer);
+	}
 }
 
 
