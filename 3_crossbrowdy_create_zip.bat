@@ -1,18 +1,20 @@
 @echo off
 
+set tempDir=_zip_temp
+set sourceDir=%tempDir%\CrossBrowdy\
+set zipFile=%tempDir%\CrossBrowdy.zip
+
 echo Copying the API documentation files to the temp folder...
-robocopy /e documentation _zip_temp\CrossBrowdy\documentation\ /xd node_modules
+robocopy /e documentation %sourceDir%documentation\ /xd node_modules
 echo.
 echo Copying CrossBrowdy files...
-robocopy /e CrossBrowdy _zip_temp\CrossBrowdy\CrossBrowdy\
+robocopy /e CrossBrowdy %sourceDir%CrossBrowdy\
+
 
 REM Compresses all generating a ZIP file (source: cam029 @ https://superuser.com/a/1151380):
 echo.
 echo Compressing all and generating ZIP file...
 setlocal
-	set sourceDir=_zip_temp\CrossBrowdy\
-	set zipFile=_zip_temp\CrossBrowdy.zip
-
 	REM Create PowerShell script:
 	echo Write-Output 'Custom PowerShell profile in effect!'    > %~dp0TempZipScript.ps1
 	echo Add-Type -A System.IO.Compression.FileSystem           >> %~dp0TempZipScript.ps1
@@ -23,19 +25,31 @@ setlocal
 	del %~dp0TempZipScript.ps1
 endlocal
 
-REM Deletes previous dist zip file (if exists):
-IF EXIST "crossbrowdy.com\files\CrossBrowdy.zip" (
+
+REM Detects current CrossBrowdy version:
+echo Detecting CrossBrowdy version...
+for /F "tokens=* USEBACKQ" %%F in (`call php _scripts/detect_version.php`) do (set CB_VERSION=%%F)
+echo Version detected: "%CB_VERSION%"
+
+
+REM Deletes previous zip files (if they exist):
+if exist "crossbrowdy.com\files\CrossBrowdy.zip" (
 	echo.
-	echo Deleting previous zip file...
+	echo Deleting previous zip file without version...
 	del crossbrowdy.com\files\CrossBrowdy.zip
+)
+if exist "crossbrowdy.com\files\CrossBrowdy_%CB_VERSION%.zip" (
+	echo.
+	echo Deleting previous zip file with version...
+	del crossbrowdy.com\files\CrossBrowdy_%CB_VERSION%.zip
 )
 
 REM Copies the ZIP file to the web site folder:
 echo.
 echo Copying ZIP file to the web site folder...
-copy _zip_temp\CrossBrowdy.zip crossbrowdy.com\files\CrossBrowdy.zip
+copy %zipfile% crossbrowdy.com\files\CrossBrowdy_%CB_VERSION%.zip
 
 echo Removing temp folder...
-rmdir /s /q _zip_temp
+rmdir /s /q %tempDir%
 
 pause
