@@ -117,7 +117,7 @@ Visual.getSpritesGroupsData = function()
 							subSprites:
 							[
 								{
-									id: "origin",
+									id: "origin_0",
 									src: "img/origin_0.gif"
 								}
 							]
@@ -334,20 +334,6 @@ Visual.getSpritesGroupsData = function()
 									Visual._drawnMapElements[y][x].drawn = true;
 									Visual._drawnMapElements[y][x].elementData = { x: element._attributes.left, y: element._attributes.top };
 								}
-
-								/*if
-								(
-									Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE
-									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE
-									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.SOIL_WALKABLE
-									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.DESTINY
-									&& Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) !== Game.Levels.SYMBOL_TYPES.TOWER
-								)
-								{
-									CB_console("AYYY");
-								}*/
-								///if (mapElement.src[y][x].indexOf("@") !== -1) { CB_console(mapElement.src[y][x]); }
-								
 
 								return skipDrawing ? null : element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 							}

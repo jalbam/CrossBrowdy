@@ -24,6 +24,7 @@ Game.data =
 	vitality: 100,
 	enemies: [],
 	towers: [],
+	_godMode: true,
 	levelMap: null //Array with the current map.
 };
 
@@ -51,7 +52,7 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 	if (!Game.data.gameStarted) { return; }
 
 	//If vitality is empty, ends the game:
-	if (Game.data.vitality <= 0) { Game.end("Game over!"); return; }
+	if (!Game.data._godMode && Game.data.vitality <= 0) { Game.end("Game over!"); return; }
 
 	//Determines whether the level has been passed successfully or not:
 	var levelPassed = false;
@@ -80,7 +81,7 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 	else if (Game.getEnemiesAlive().length === 0)
 	{
 		//If there are still enemy waves to come (it is not the last one):
-		if (Game.data.levelEnemyWave < Game.Levels.data[Game.data.level].enemyWaves.length)
+		if (Game.data.levelEnemyWave < Game.Levels.data[Game.data.level].enemyWaves.length && Game.data.levelEnemyWaveLastEnemyPointer < Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies.length)
 		{
 			//If the time for the next wave (if any) has been reached:
 			if (CB_Device.getTiming() >= Game.data.levelEnemyWaveStartedTs + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].timeFromLastEnemyToNextWave)
@@ -133,6 +134,13 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 	{
 		Game.data.levelSucceeded = true; 
 		Game.end("Congratulations! You survived successfully");
+	}
+	
+	
+	//Perform steps for each enemy:
+	for (var x = 0; x < Game.data.enemies.length; x++)
+	{
+		Game.data.enemies[x].loopStep();
 	}
 };
 
@@ -499,6 +507,8 @@ Game.Levels.getTypeFromSymbols = function(symbol, mindTowerType, asString, retur
 {
 	var type = null;
 
+	symbol = symbol || "";
+
 	var firstCharacter = symbol.charAt(0);
 	
 	if (firstCharacter === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE) { type = "SOIL_UNWALKABLE_BUILDABLE"; }
@@ -554,6 +564,197 @@ Game.Levels.getRealScreenTop = function(y)
 {
 	y = y || 0;
 	return (y + Game.Levels.addedRowsAndColumns.rows.top) * Visual._ELEMENTS_HEIGHT + CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").top;
+}
+
+
+//Returns the coordinates of the destiny of a given map (assumes there is only one):
+Game.Levels._findDestinyOnMapCache = {};
+Game.Levels._findDestinyOnMap = function(level)
+{
+	level = level || Game.data.level;
+	
+	if (typeof(Game.Levels._findDestinyOnMapCache[level]) !== "undefined")
+	{
+		return Game.Levels._findDestinyOnMapCache[level];
+	}
+	
+	var map = Game.Levels.data[level].map;
+	for (var r = 0; r < map.length; r++)
+	{
+		for (var c = 0; c < map[r].length; c++)
+		{
+			if (Game.Levels.getTypeFromSymbols(map[r][c]) === Game.Levels.SYMBOL_TYPES.DESTINY)
+			{
+				Game.Levels._findDestinyOnMapCache[level] = { x: c, y: r };
+				return Game.Levels._findDestinyOnMapCache[level];
+			}
+		}
+	}
+	return null;
+}
+
+
+//Tells whether a given map symbol is walkable/destiny or not:
+Game.Levels._isWalkableOrDestiny = function(symbol)
+{
+	return Game.Levels.getTypeFromSymbols(symbol) === Game.Levels.SYMBOL_TYPES.SOIL_WALKABLE || Game.Levels.getTypeFromSymbols(symbol) === Game.Levels.SYMBOL_TYPES.DESTINY;
+}
+
+
+//Returns the best path for a given origin and destiny in the desired map:
+Game.Levels._calculatePathPointsToDestinyDirections = [ "up", "down", "left", "right" ];
+Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX, destinyY, map, steps, stepsCounter, directionPrevious, stepsPrevious)
+{
+	stepsCounter = stepsCounter || 0;
+	steps = steps || { stepsCounter: 0 };
+
+	steps.x = originX;
+	steps.y = originY;
+
+	steps.stepsCounter += stepsCounter;
+
+	steps.pathPoints = stepsPrevious && CB_isArray(stepsPrevious.pathPoints) ? CB_Arrays.copy(stepsPrevious.pathPoints) : [];
+	steps.pathPoints[steps.pathPoints.length] = { x: originX, y: originY, direction: directionPrevious || null };
+
+	//If destiny is found:
+	if (originX === destinyX && originY === destinyY)
+	{
+		steps.destiny = true;
+		steps.stepsCounterTotal = steps.stepsCounter;
+		return steps;
+	}
+
+	var mapCopy = null;
+
+	var destinyFound = false;
+
+	//Going up:
+	if (originY > 0)
+	{
+		if (Game.Levels._isWalkableOrDestiny(map[originY - 1][originX]))
+		{
+			mapCopy = CB_Arrays.copy(map);
+			mapCopy[originY - 1][originX] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
+			steps["up"] = Game.Levels._calculatePathPointsToDestiny(originX, originY - 1, destinyX, destinyY, mapCopy, steps["up"], stepsCounter + 1, "up", steps);
+			if (steps["up"] === null) { delete steps["up"]; }
+			else
+			{
+				steps.stepsCounterTotal = steps["up"].stepsCounterTotal;
+				steps.pathPointsTotal = steps["up"].pathPointsTotal || steps["up"].pathPoints;
+			}
+		}
+	}
+
+	//Going down:
+	if (originY < map.length - 1)
+	{
+		if (Game.Levels._isWalkableOrDestiny(map[originY + 1][originX]))
+		{
+			mapCopy = CB_Arrays.copy(map);
+			mapCopy[originY + 1][originX] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
+			steps["down"] = Game.Levels._calculatePathPointsToDestiny(originX, originY + 1, destinyX, destinyY, mapCopy, steps["down"], stepsCounter + 1, "down", steps);
+			if (steps["down"] === null) { delete steps["down"]; }
+			else
+			{
+				steps.stepsCounterTotal = steps["down"].stepsCounterTotal;
+				steps.pathPointsTotal = steps["down"].pathPointsTotal || steps["down"].pathPoints;
+			}
+		}
+	}
+
+	//Going to the left side:
+	if (originX > 0)
+	{
+		if (Game.Levels._isWalkableOrDestiny(map[originY][originX - 1]))
+		{
+			mapCopy = CB_Arrays.copy(map);
+			mapCopy[originY][originX - 1] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
+			steps["left"] = Game.Levels._calculatePathPointsToDestiny(originX - 1, originY, destinyX, destinyY, mapCopy, steps["left"], stepsCounter + 1, "left", steps);
+			if (steps["left"] === null) { delete steps["left"]; }
+			else
+			{
+				steps.stepsCounterTotal = steps["left"].stepsCounterTotal;
+				steps.pathPointsTotal = steps["left"].pathPointsTotal || steps["left"].pathPoints;
+			}
+		}
+	}
+
+	//Going to the right side:
+	if (originX < map[originY].length - 1)
+	{
+		if (Game.Levels._isWalkableOrDestiny(map[originY][originX + 1]))
+		{
+			mapCopy = CB_Arrays.copy(map);
+			mapCopy[originY][originX + 1] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
+			steps["right"] = Game.Levels._calculatePathPointsToDestiny(originX + 1, originY, destinyX, destinyY, mapCopy, steps["right"], stepsCounter + 1, "right", steps);
+			if (steps["right"] === null) { delete steps["right"]; }
+			else
+			{
+				steps.stepsCounterTotal = steps["right"].stepsCounterTotal;
+				steps.pathPointsTotal = steps["right"].pathPointsTotal || steps["right"].pathPoints;
+			}
+		}
+	}
+
+	//A dead end was found (no destiny could be reached and cannot perform more movements):
+	if (!steps["up"] && !steps["down"] && !steps["left"] && !steps["right"])
+	{
+		return null;
+	}
+	else
+	{
+		//Removes longest paths:
+		var directionLoop = null;
+		var stepsCounterTotalMin = null;
+		var stepsCounterTotalMinDirection = null;
+		for (var x = 0; x < Game.Levels._calculatePathPointsToDestinyDirections.length; x++)
+		{
+			directionLoop = Game.Levels._calculatePathPointsToDestinyDirections[x];
+			if (!steps[directionLoop]) { continue; }
+			else if (stepsCounterTotalMin === null || steps[directionLoop].stepsCounterTotal <= stepsCounterTotalMin)
+			{
+				if (stepsCounterTotalMinDirection !== null) { delete steps[stepsCounterTotalMinDirection]; }
+				stepsCounterTotalMinDirection = directionLoop;
+				stepsCounterTotalMin = steps[directionLoop].stepsCounterTotal;
+			}
+			else { delete steps[directionLoop];	}
+		}
+		
+		//If more than one path remains, means they cost the same steps:
+		var pathsRemain = 0;
+		for (var x = 0; x < Game.Levels._calculatePathPointsToDestinyDirections.length; x++)
+		{
+			directionLoop = Game.Levels._calculatePathPointsToDestinyDirections[x];
+			if (steps[directionLoop]) { pathsRemain++; }
+		}
+		if (pathsRemain > 1)
+		{
+			//If there is a path following the same direction, we will choose it and remove the rest:
+			if (directionPrevious && steps[directionPrevious])
+			{
+				for (var x = 0; x < Game.Levels._calculatePathPointsToDestinyDirections.length; x++)
+				{
+					directionLoop = Game.Levels._calculatePathPointsToDestinyDirections[x];
+					if (directionLoop === directionPrevious) { continue; }
+					else if (!steps[directionLoop]) { continue; }
+					else { delete steps[directionLoop]; }
+				}
+			}
+			//...otherwise, we remove all except one:
+			else
+			{
+				for (var x = 0; x < Game.Levels._calculatePathPointsToDestinyDirections.length && pathsRemain > 1; x++)
+				{
+					directionLoop = Game.Levels._calculatePathPointsToDestinyDirections[x];
+					if (!steps[directionLoop]) { continue; }
+					else { delete steps[directionLoop]; }
+					pathsRemain--;
+				}
+			}
+		}
+	}
+
+	return steps;
 }
 
 
