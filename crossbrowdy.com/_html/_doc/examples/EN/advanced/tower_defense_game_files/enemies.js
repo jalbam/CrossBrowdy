@@ -16,8 +16,9 @@ Enemy.prototype.level = 0; //Enemy level (0 is the first one).
 Enemy.prototype.position = { x: 0, y: 0, xScreen: 0, yScreen: 0 }; //Enemy position.
 Enemy.prototype.rotation = 0; //Enemy rotation (they rotate to follow their path).
 Enemy.prototype.vitality = 100; //Enemy vitality (100 maximum).
-Enemy.prototype.levelSpeed = [ 1, 1.5, 2 ]; //Enemy speed (1 is normal speed), separated by level.
-Enemy.prototype.levelDamage = [ 1, 2, 3 ]; //Enemy damage to user's vitality when it reaches the objective, separated by level.
+Enemy.prototype.levelSpeed = [ 1, 1.5, 2, 3 ]; //Enemy speed (1 is normal speed), separated by level.
+Enemy.prototype.levelDamage = [ 1, 2, 3, 5 ]; //Enemy damage to user's vitality when it reaches the objective, separated by level.
+Enemy.prototype._levelMax = 3; //Maximum enemy leveal which can be reached. It will be re-calculated in the constructor automatically.
 Enemy.prototype.isWalking = false; //Determines whether the enemy is currently walking through its path.
 Enemy.prototype.isRotating = false; //Determines whether the enemy is currently rotating to follow its path.
 Enemy.prototype.isDead = false; //Determines whether the enemy is dead or not.
@@ -35,9 +36,17 @@ Enemy.prototype._init = function(type, level, x, y, map)
 	//Sets the given parameters or fallback to the default ones:
 	this.id = Enemy._idCounter++;
 	this.type = type || this.type;
-	this.level = level || this.level;
 	this.position.x = x || this.position.x;
 	this.position.y = y || this.position.y;
+	this.level = level || this.level;
+	if (this.level > this._levelMax) { this.level = this._levelMax; }
+	this._levelMax = this._levelMax || Math.min(this.levelSpeed.length, this.levelDamage.length) - 1;
+	if (this._levelMax < 0)
+	{
+		CB_console("ERROR: Maximum level for the enemy is a negative number!");
+		this.isDead = true;
+		return this;
+	}
 
 	CB_console("Creating enemy #" + this.id + " of type " + this.type + " with level " + this.level + "...");
 	
@@ -94,7 +103,7 @@ Enemy.prototype._getSprites = function(returnOnFail)
 			}
 		}
 	}
-
+	
 	if (spritesGroup === null) { CB_console("No sprites object could be found!"); return returnOnFail; }
 	else if (sprite === null) { CB_console("No sprite object could be found!"); return returnOnFail; }
 	else if (subSprite === null) { CB_console("No subSprite object could be found!"); return returnOnFail; }
@@ -136,7 +145,6 @@ Enemy.prototype._spritesDisable = function(returnOnFail)
 }
 
 
-
 //Updates the coordinates for the subSprite:
 Enemy.prototype._spritesUpdateCoordinates = function(x, y, sprites, returnOnFail)
 {
@@ -147,6 +155,9 @@ Enemy.prototype._spritesUpdateCoordinates = function(x, y, sprites, returnOnFail
 	
 	sprites.subSprite.left = Game.Levels.getRealScreenLeft(x);
 	sprites.subSprite.top = Game.Levels.getRealScreenTop(y);
+	sprites.subSprite.disabled = false;
+
+	CB_console("Updating coordinates for #" + (this.id) + " => " + sprites.subSprite.id);
 
 	return sprites;
 }
@@ -178,7 +189,6 @@ Enemy._findStartingPoint = function(map)
 }
 
 
-
 //Calcultes and returns the path which will be followed to reach its destiny:
 Enemy._getPathPointsToDestinyCache = {};
 Enemy._getPathPointsToDestiny = function(x, y, map)
@@ -187,7 +197,7 @@ Enemy._getPathPointsToDestiny = function(x, y, map)
 
 	x = x || 0;
 	y = y || 0;
-	map = map || Game.Levels.data[Game.data.level].map;
+	map = map || Game.Levels.data[levelCurrent].map;
 
 	var cacheIndex = levelCurrent + "_" + x + "_" + y;
 
@@ -216,7 +226,7 @@ Enemy._getPathPointsToDestiny = function(x, y, map)
 	}
 	
 	//Calculates the path points from origin to the destiny:
-	var pathPointsToDestiny = Game.Levels._calculatePathPointsToDestiny(x, y, destinyCoordinates.x, destinyCoordinates.y, map);
+	var pathPointsToDestiny = Game.Levels._calculatePathPointsToDestiny(x, y, destinyCoordinates.x, destinyCoordinates.y, map, levelCurrent);
 	if (pathPointsToDestiny === null)
 	{
 		CB_console("No path to the destiny could be found on the given map! Cannot calculate path for the enemy.");
@@ -276,8 +286,20 @@ Enemy.prototype._isObjectiveReached = function()
 
 
 //Walks trough its way:
+Enemy.prototype._walkLastTime = null;
 Enemy.prototype._walk = function(pathX, pathY)
 {
+	//Having into account the enemy speed, does not walk if it still should not move:
+	// TO DO.
+	if (this._walkLastTime && this.levelSpeed[this.level] > 0)
+	{
+		//this._walkLastTime = CB_Device.getTiming()
+		if (this._walkLastTime + (1000 / this.levelSpeed[this.level]) > CB_Device.getTiming())
+		{
+			return false;
+		}
+	}
+	
 	this.isWalking = true;
 	
 	if (this._needsRotateToFollow(pathX, pathY))
@@ -299,8 +321,6 @@ Enemy.prototype._walk = function(pathX, pathY)
 	
 	//TO DO: use screen coordinates (xScreen/yScreen) instead of map ones.
 	
-	//TO DO: Have in mind the speed (according to the enemy level).
-	
 	if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "up")
 	{
 		this.position.y--;
@@ -318,9 +338,14 @@ Enemy.prototype._walk = function(pathX, pathY)
 		this.position.x++;
 	}
 
+	//Stores the time when it has moved:
+	this._walkLastTime = CB_Device.getTiming();
+
 	
 	//Updates the sprite with the new position:
 	this._spritesUpdateCoordinates(this.position.x, this.position.y);
+	
+	return true;
 }
 
 

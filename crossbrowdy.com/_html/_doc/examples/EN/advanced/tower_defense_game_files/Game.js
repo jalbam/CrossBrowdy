@@ -603,8 +603,36 @@ Game.Levels._isWalkableOrDestiny = function(symbol)
 
 //Returns the best path for a given origin and destiny in the desired map:
 Game.Levels._calculatePathPointsToDestinyDirections = [ "up", "down", "left", "right" ];
-Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX, destinyY, map, steps, stepsCounter, directionPrevious, stepsPrevious)
+Game.Levels._calculatePathPointsToDestinyCache = [];
+Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX, destinyY, map, level, avoidCache, steps, stepsCounter, directionPrevious, stepsPrevious)
 {
+	level = (typeof(level) !== "undefined" && level !== null && !isNaN(level)) ? level : Game.data.level;
+
+	if (!avoidCache)
+	{
+		if (typeof(Game.Levels._calculatePathPointsToDestinyCache[level]) !== "undefined")
+		{
+			if (typeof(Game.Levels._calculatePathPointsToDestinyCache[level][destinyX + "," + destinyY]) !== "undefined")
+			{
+				if (typeof(Game.Levels._calculatePathPointsToDestinyCache[level][destinyX + "," + destinyY][originX + "," + originY]) !== "undefined")
+				{
+					return Game.Levels._calculatePathPointsToDestinyCache[level][destinyX + "," + destinyY][originX + "," + originY];
+				}
+			}
+		}
+	}
+
+	if (typeof(Game.Levels._calculatePathPointsToDestinyCache[level]) === "undefined")
+	{
+		Game.Levels._calculatePathPointsToDestinyCache[level] = [];
+	}
+	if (typeof(Game.Levels._calculatePathPointsToDestinyCache[level][destinyX + "," + destinyY]) === "undefined")
+	{
+		Game.Levels._calculatePathPointsToDestinyCache[level][destinyX + "," + destinyY] = {};
+	}
+
+	map = map || Game.Levels.data[level].map;
+	
 	stepsCounter = stepsCounter || 0;
 	steps = steps || { stepsCounter: 0 };
 
@@ -621,6 +649,8 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 	{
 		steps.destiny = true;
 		steps.stepsCounterTotal = steps.stepsCounter;
+		//Stores the returning value into the cache:
+		Game.Levels._calculatePathPointsToDestinyCache[level][destinyX + "," + destinyY][originX + "," + originY] = steps;
 		return steps;
 	}
 
@@ -635,13 +665,8 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 		{
 			mapCopy = CB_Arrays.copy(map);
 			mapCopy[originY - 1][originX] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
-			steps["up"] = Game.Levels._calculatePathPointsToDestiny(originX, originY - 1, destinyX, destinyY, mapCopy, steps["up"], stepsCounter + 1, "up", steps);
+			steps["up"] = Game.Levels._calculatePathPointsToDestiny(originX, originY - 1, destinyX, destinyY, mapCopy, level, true, steps["up"], stepsCounter + 1, "up", steps);
 			if (steps["up"] === null) { delete steps["up"]; }
-			else
-			{
-				steps.stepsCounterTotal = steps["up"].stepsCounterTotal;
-				steps.pathPointsTotal = steps["up"].pathPointsTotal || steps["up"].pathPoints;
-			}
 		}
 	}
 
@@ -652,13 +677,8 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 		{
 			mapCopy = CB_Arrays.copy(map);
 			mapCopy[originY + 1][originX] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
-			steps["down"] = Game.Levels._calculatePathPointsToDestiny(originX, originY + 1, destinyX, destinyY, mapCopy, steps["down"], stepsCounter + 1, "down", steps);
+			steps["down"] = Game.Levels._calculatePathPointsToDestiny(originX, originY + 1, destinyX, destinyY, mapCopy, level, true, steps["down"], stepsCounter + 1, "down", steps);
 			if (steps["down"] === null) { delete steps["down"]; }
-			else
-			{
-				steps.stepsCounterTotal = steps["down"].stepsCounterTotal;
-				steps.pathPointsTotal = steps["down"].pathPointsTotal || steps["down"].pathPoints;
-			}
 		}
 	}
 
@@ -669,13 +689,8 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 		{
 			mapCopy = CB_Arrays.copy(map);
 			mapCopy[originY][originX - 1] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
-			steps["left"] = Game.Levels._calculatePathPointsToDestiny(originX - 1, originY, destinyX, destinyY, mapCopy, steps["left"], stepsCounter + 1, "left", steps);
+			steps["left"] = Game.Levels._calculatePathPointsToDestiny(originX - 1, originY, destinyX, destinyY, mapCopy, level, true, steps["left"], stepsCounter + 1, "left", steps);
 			if (steps["left"] === null) { delete steps["left"]; }
-			else
-			{
-				steps.stepsCounterTotal = steps["left"].stepsCounterTotal;
-				steps.pathPointsTotal = steps["left"].pathPointsTotal || steps["left"].pathPoints;
-			}
 		}
 	}
 
@@ -686,38 +701,33 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 		{
 			mapCopy = CB_Arrays.copy(map);
 			mapCopy[originY][originX + 1] = Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_UNBUILDABLE; //Avoid repeating same step.
-			steps["right"] = Game.Levels._calculatePathPointsToDestiny(originX + 1, originY, destinyX, destinyY, mapCopy, steps["right"], stepsCounter + 1, "right", steps);
+			steps["right"] = Game.Levels._calculatePathPointsToDestiny(originX + 1, originY, destinyX, destinyY, mapCopy, level, true, steps["right"], stepsCounter + 1, "right", steps);
 			if (steps["right"] === null) { delete steps["right"]; }
-			else
-			{
-				steps.stepsCounterTotal = steps["right"].stepsCounterTotal;
-				steps.pathPointsTotal = steps["right"].pathPointsTotal || steps["right"].pathPoints;
-			}
 		}
 	}
 
 	//A dead end was found (no destiny could be reached and cannot perform more movements):
 	if (!steps["up"] && !steps["down"] && !steps["left"] && !steps["right"])
 	{
-		return null;
+		steps = null;
 	}
 	else
 	{
 		//Removes longest paths:
 		var directionLoop = null;
 		var stepsCounterTotalMin = null;
-		var stepsCounterTotalMinDirection = null;
+		var directionKept = null;
 		for (var x = 0; x < Game.Levels._calculatePathPointsToDestinyDirections.length; x++)
 		{
 			directionLoop = Game.Levels._calculatePathPointsToDestinyDirections[x];
 			if (!steps[directionLoop]) { continue; }
-			else if (stepsCounterTotalMin === null || steps[directionLoop].stepsCounterTotal <= stepsCounterTotalMin)
+			else if (stepsCounterTotalMin === null || steps[directionLoop].stepsCounterTotal < stepsCounterTotalMin)
 			{
-				if (stepsCounterTotalMinDirection !== null) { delete steps[stepsCounterTotalMinDirection]; }
-				stepsCounterTotalMinDirection = directionLoop;
+				if (directionKept !== null) { delete steps[directionKept]; }
+				directionKept = directionLoop;
 				stepsCounterTotalMin = steps[directionLoop].stepsCounterTotal;
 			}
-			else { delete steps[directionLoop];	}
+			else if (steps[directionLoop].stepsCounterTotal > stepsCounterTotalMin) { delete steps[directionLoop];	}
 		}
 		
 		//If more than one path remains, means they cost the same steps:
@@ -735,7 +745,7 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 				for (var x = 0; x < Game.Levels._calculatePathPointsToDestinyDirections.length; x++)
 				{
 					directionLoop = Game.Levels._calculatePathPointsToDestinyDirections[x];
-					if (directionLoop === directionPrevious) { continue; }
+					if (directionLoop === directionPrevious) { directionKept = directionLoop; continue; }
 					else if (!steps[directionLoop]) { continue; }
 					else { delete steps[directionLoop]; }
 				}
@@ -748,12 +758,22 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 					directionLoop = Game.Levels._calculatePathPointsToDestinyDirections[x];
 					if (!steps[directionLoop]) { continue; }
 					else { delete steps[directionLoop]; }
+					directionKept = directionLoop;
 					pathsRemain--;
 				}
 			}
 		}
+		
+		if (directionKept)
+		{
+			steps.stepsCounterTotal = steps[directionKept].stepsCounterTotal;
+			steps.pathPointsTotal = steps[directionKept].pathPointsTotal || steps[directionKept].pathPoints;
+		}
 	}
 
+	//Stores the returning value into the cache:
+	Game.Levels._calculatePathPointsToDestinyCache[level][destinyX + "," + destinyY][originX + "," + originY] = steps;
+	
 	return steps;
 }
 

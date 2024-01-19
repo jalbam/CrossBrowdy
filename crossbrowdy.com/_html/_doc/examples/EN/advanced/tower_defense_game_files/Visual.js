@@ -314,18 +314,15 @@ Visual.getSpritesGroupsData = function()
 									//////////element.getById("tower_0_level_0").setDisabled(false);
 								}
 								
-								if (mapElement.data.elementsData[mapElement.src[y][x]].clickable)
+								if (Input.mouseData.column === x && Input.mouseData.row === y)
 								{
-									if (Input.mouseData.column === x && Input.mouseData.row === y)
-									{
-										element.data.filter = "sepia(0.5)";
-									}
-									else
-									{
-										element.data.filter = "none";
-									}
-									Visual._drawnMapElements[y][x].drawn = false;
+									element.data.filter = mapElement.data.elementsData[mapElement.src[y][x]].clickable ? "sepia(0.5)" : "sepia(0.2)";
 								}
+								else
+								{
+									element.data.filter = "none";
+								}
+								Visual._drawnMapElements[y][x].drawn = false;
 								
 								//Defines whether to draw this element or skip drawing it:
 								if (y > 1 && Visual._drawnMapElements[y][x].drawn === true) { skipDrawing = true; }
