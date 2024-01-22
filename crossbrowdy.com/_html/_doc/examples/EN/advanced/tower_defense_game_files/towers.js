@@ -35,7 +35,7 @@ Tower.prototype._init = function(x, y, type)
 	this.y = y || this.y;
 	this.type = type || this.type;
 	
-	CB_console("Creating tower #" + this.id + " of type " + this.type + " on (" + this.x + ", " + this.y + ")...");
+	logMessage("Creating tower #" + this.id + " of type " + this.type + " on (" + this.x + ", " + this.y + ")...");
 	
 	return this;
 }

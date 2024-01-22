@@ -377,8 +377,7 @@ Visual.updateInfo = function(graphicSpritesSceneObject)
 		"Vitality: " + Game.data.vitality + "\n" +
 		"Score: " + Game.data.score + "\n" +
 		"Wave: " + (Game.data.levelEnemyWave + 1) + "/" + Game.Levels.data[Game.data.level].enemyWaves.length + "\n" +
-		"* Enemies of this wave (pointer): " + Game.data.levelEnemyWaveLastEnemyPointer + "/" + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies.length + "\n" +
-		"* Enemies alive: " + Game.getEnemiesAlive().length + "\n" +
+		"* Enemies of this wave: " + Game.data.enemies.length + "/" + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies.length + " (" + Game.getEnemiesAlive().length + " alive)\n" +
 		(!CB_Screen.isLandscape() ? "\n\nLandscape screen recommended!" : "") +
 		(
 			CB_GEM_DEBUG_MESSAGES ?

@@ -55,6 +55,7 @@ Input.init = function()
 				//TODO.
 				alert("Clicked tower");
 			}
+			else { alert(CB_Mouse.getX() + ", " + CB_Mouse.getY() + ": " + Game.Levels.getMapLeft(CB_Mouse.getX()) + ", " + Game.Levels.getMapTop(CB_Mouse.getY())); }
 		}
 	);
 	

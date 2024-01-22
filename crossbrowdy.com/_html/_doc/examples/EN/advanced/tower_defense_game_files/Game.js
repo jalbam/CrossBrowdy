@@ -16,7 +16,7 @@ Game.data =
 	levelSucceeded: false,
 	level: 0,
 	levelEnemyWave: 0,
-	levelEnemyWaveStartedTs: null,
+	levelEnemyWaveEndedTs: null,
 	levelEnemyWaveLastEnemyPointer: 0,
 	levelEnemyWaveLastEnemyCreatedTs: null,
 	score: 0,
@@ -60,12 +60,11 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 	//Determines whether to start a new enemy wave:
 	var createNewEnemy = false;
 
-	//If there was no enemy wave yet, it will be the first one:
-	if (Game.data.levelEnemyWaveStartedTs === null)
+	//If there was no enemy yet, it will be the first wave:
+	if (Game.data.levelEnemyWaveLastEnemyCreatedTs === null)
 	{
-		CB_console("First wave of the level!");
-		Game.data.levelEnemyWave = 0;
-		Game.data.levelEnemyWaveLastEnemyPointer = 0;
+		logMessage("First wave of the level!");
+		Game.data.enemies = [];
 		createNewEnemy = true;
 	}
 	//...otherwise, if there are still enemies to appear for the current wave:
@@ -74,19 +73,36 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 		//If the time to wait for next enemy has been reached, creates next enemy:
 		if (CB_Device.getTiming() >= Game.data.levelEnemyWaveLastEnemyCreatedTs + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].timeBetweenEnemies)
 		{
+			logMessage("New enemy can be created for the current wave");
 			createNewEnemy = true;
 		}
 	}
-	//...otherwise, if there are no more enemies left:
+	//...otherwise, if there are no more enemies to release:
 	else if (Game.getEnemiesAlive().length === 0)
 	{
 		//If there are still enemy waves to come (it is not the last one):
-		if (Game.data.levelEnemyWave < Game.Levels.data[Game.data.level].enemyWaves.length && Game.data.levelEnemyWaveLastEnemyPointer < Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies.length)
+		if (Game.data.levelEnemyWave + 1 < Game.Levels.data[Game.data.level].enemyWaves.length)
 		{
-			//If the time for the next wave (if any) has been reached:
-			if (CB_Device.getTiming() >= Game.data.levelEnemyWaveStartedTs + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].timeFromLastEnemyToNextWave)
+			//If the time to wait for the next wave has been reached, starts a new wave:
+			if (Game.data.levelEnemyWaveEndedTs !== null && CB_Device.getTiming() >= Game.data.levelEnemyWaveEndedTs + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].timeFromLastEnemyToNextWave)
 			{
+				logMessage("The time for next wave has been reached. Starting new wave #" + (Game.data.levelEnemyWave) + "...");
+				Game.data.levelEnemyWaveEndedTs = null;
+				Game.data.enemies = [];
+			
+				//Manage pointers:
+				Game.data.levelEnemyWaveLastEnemyPointer = 0;
+				Game.data.levelEnemyWave++;
+				
 				createNewEnemy = true;
+			}
+			//...otherwise, the current wave has ended so we store the time (if not done yet):
+			else if (Game.data.levelEnemyWaveEndedTs === null)
+			{
+				logMessage("Wave #" + Game.data.levelEnemyWave + " ended");
+				//Stores the time when the current wave has been ended:
+				Game.data.levelEnemyWaveEndedTs = CB_Device.getTiming();
+				
 			}
 		}
 		//...otherwise, the level has been successfully finished:
@@ -99,18 +115,6 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 	//If a new enemy is needed, creates it:
 	if (createNewEnemy)
 	{
-		//Stores the time when the current enemy has been created:
-		Game.data.levelEnemyWaveLastEnemyCreatedTs = CB_Device.getTiming();
-		
-		//If this is the first enemy, it means the waves just started:
-		if (Game.data.levelEnemyWaveLastEnemyPointer === 0)
-		{
-			//Stores the time when the current wave has been started:
-			Game.data.levelEnemyWaveStartedTs = CB_Device.getTiming();
-			
-			CB_console("Starting new wave #" + (Game.data.levelEnemyWave) + "...");
-		}
-
 		//Creates the new enemy:
 		Game.data.enemies[Game.data.enemies.length] =
 			new Enemy
@@ -118,25 +122,19 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 				Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies[Game.data.levelEnemyWaveLastEnemyPointer].type,
 				Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies[Game.data.levelEnemyWaveLastEnemyPointer].level
 			);
+
+		//Stores the time when the current enemy has been created:
+		Game.data.levelEnemyWaveLastEnemyCreatedTs = CB_Device.getTiming();
 		
-		//Manage pointers:
+		//Increases the enemy pointer for the current wave:
 		Game.data.levelEnemyWaveLastEnemyPointer++;
-		if (Game.data.levelEnemyWaveLastEnemyPointer >= Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies.length)
-		{
-			if (Game.data.levelEnemyWave < Game.Levels.data[Game.data.level].enemyWaves.length - 1)
-			{
-				Game.data.levelEnemyWaveLastEnemyPointer = 0;
-				Game.data.levelEnemyWave++;
-			}
-		}
 	}
 	else if (levelPassed)
 	{
 		Game.data.levelSucceeded = true; 
 		Game.end("Congratulations! You survived successfully");
 	}
-	
-	
+
 	//Perform steps for each enemy:
 	for (var x = 0; x < Game.data.enemies.length; x++)
 	{
@@ -179,7 +177,7 @@ Game.start = function(graphicSpritesSceneObject)
 		}
 		catch(E)
 		{
-			showMessage("Error preparing sounds or playing sound with 'start' ID: " + E);
+			logMessage("Error preparing sounds or playing sound with 'start' ID: " + E);
 			Game.data.soundEnabled = false; //If it fails, disables the sound.
 		}
 
@@ -240,6 +238,7 @@ for (var x = 0; x < Game.Levels.SYMBOL_TYPES_numberOfTowerTypes; x++)
 {
 	Game.Levels.SYMBOL_TYPES["TOWER_" + x] = Game.Levels.SYMBOL_TYPES.TOWER + x;
 }
+
 
 //Returns a new array filled with the given value:
 Game.Levels._getArrayFilled = function(value, start, end)
@@ -431,15 +430,18 @@ Game.Levels.load = function(level)
 	level %= Game.Levels.data.length; //When the number given is bigger than the levels, it will start again from the beginning.
 	
 	//Resets the data:
+	Game.data.vitality = 100;
+	Game.data.coins = 0;
 	Game.data.level = level;
 	Game.data.levelEnemyWave = 0;
-	Game.data.levelEnemyWaveStartedTs = null;
+	Game.data.levelEnemyWaveEndedTs = null;
 	Game.data.levelEnemyWaveLastEnemyPointer = 0;
 	Game.data.levelEnemyWaveLastEnemyCreatedTs = null;
 	Game.data.enemies = [];
 	Game.data.towers = [];
 	Game.data.levelSucceeded = false;
-	
+	if (level === 0) { Game.data.score = 0; }
+
 	//Loads the new map:
 	Game.Levels.loadSource(Game.Levels._loadData(level)); //Using a copy of the array as this one could be modified to adapt it to the screen.
 	
@@ -459,7 +461,7 @@ Game.Levels.load = function(level)
 //Restarts a level:
 Game.Levels.restart = function()
 {
-	showMessage("Restarting level " + Game.data.level + "...");
+	logMessage("Restarting level " + Game.data.level + "...");
 	return Game.Levels.load(Game.data.level);
 }
 
@@ -559,12 +561,29 @@ Game.Levels.getRealScreenLeft = function(x)
 }
 
 
-//Returns the real screen horizontal coordinates for a given coordinates on the original map:
+//Returns the real screen vertical coordinates for a given coordinates on the original map:
 Game.Levels.getRealScreenTop = function(y)
 {
 	y = y || 0;
 	return (y + Game.Levels.addedRowsAndColumns.rows.top) * Visual._ELEMENTS_HEIGHT + CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").top;
 }
+
+
+//Returns the horizontal coordinates for a given coordinates on the screen:
+Game.Levels.getMapLeft = function(x)
+{
+	x = x || 0;
+	return Math.floor((x - CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").left - Game.Levels.addedRowsAndColumns.columns.left * Visual._ELEMENTS_WIDTH) / Visual._ELEMENTS_WIDTH);
+}
+
+
+//Returns the vertical coordinates for a given coordinates on the screen:
+Game.Levels.getMapTop = function(y)
+{
+	y = y || 0;
+	return Math.floor((y - CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").top - Game.Levels.addedRowsAndColumns.rows.top * Visual._ELEMENTS_HEIGHT) / Visual._ELEMENTS_HEIGHT);
+}
+
 
 
 //Returns the coordinates of the destiny of a given map (assumes there is only one):

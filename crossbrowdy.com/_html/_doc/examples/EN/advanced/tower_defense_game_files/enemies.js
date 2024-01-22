@@ -15,19 +15,16 @@ Enemy.prototype.type = 0; //Enemy type (0 by default).
 Enemy.prototype.level = 0; //Enemy level (0 is the first one).
 Enemy.prototype.position = { x: 0, y: 0, xScreen: 0, yScreen: 0 }; //Enemy position.
 Enemy.prototype.rotation = 0; //Enemy rotation (they rotate to follow their path).
-Enemy.prototype.vitality = 100; //Enemy vitality (100 maximum).
-Enemy.prototype.levelSpeed = [ 1, 1.5, 2, 3 ]; //Enemy speed (1 is normal speed), separated by level.
+Enemy.prototype.levelVitality = [ 100, 150, 300, 600 ]; //Enemy vitality, separated by level.
+Enemy.prototype.levelSpeed = [ 1, 2, 4, 8 ]; //Enemy speed (1 is normal speed), separated by level.
 Enemy.prototype.levelDamage = [ 1, 2, 3, 5 ]; //Enemy damage to user's vitality when it reaches the objective, separated by level.
-Enemy.prototype._levelMax = 3; //Maximum enemy leveal which can be reached. It will be re-calculated in the constructor automatically.
+Enemy.prototype._levelMax = null; //Maximum enemy leveal which can be reached. It will be re-calculated in the constructor automatically.
+Enemy.prototype.vitality = null; //Enemy vitality. It will be re-calculated in the constructor automatically.
 Enemy.prototype.isWalking = false; //Determines whether the enemy is currently walking through its path.
 Enemy.prototype.isRotating = false; //Determines whether the enemy is currently rotating to follow its path.
 Enemy.prototype.isDead = false; //Determines whether the enemy is dead or not.
 Enemy.prototype.succeeded = false; //Determines whether the enemy succeeded to reach the objective or not.
-Enemy.prototype._pathCurrent = //Keeps the current path to be followed:
-{
-	points: [], //Format: [ { x: 0, y: 0}, { x: 10, y: 10 }, ... ]
-	pathPointer: 0
-};
+Enemy.prototype._pathCurrent = null; //Keeps the current path to be followed:
 
 
 //Internal constructor:
@@ -36,24 +33,26 @@ Enemy.prototype._init = function(type, level, x, y, map)
 	//Sets the given parameters or fallback to the default ones:
 	this.id = Enemy._idCounter++;
 	this.type = type || this.type;
-	this.position.x = x || this.position.x;
-	this.position.y = y || this.position.y;
+	this.position.x = typeof(x) !== "undefined" && x !== null ? x : this.position.x || 0;
+	this.position.y = typeof(y) !== "undefined" && y !== null ? y : this.position.y || 0;
 	this.level = level || this.level;
-	if (this.level > this._levelMax) { this.level = this._levelMax; }
-	this._levelMax = this._levelMax || Math.min(this.levelSpeed.length, this.levelDamage.length) - 1;
+	this._levelMax = this._levelMax || Math.min(this.levelVitality, this.levelSpeed.length, this.levelDamage.length) - 1;
 	if (this._levelMax < 0)
 	{
-		CB_console("ERROR: Maximum level for the enemy is a negative number!");
+		logMessage("ERROR: Maximum level for the enemy is a negative number!");
 		this.isDead = true;
 		return this;
 	}
+	if (this.level > this._levelMax) { this.level = this._levelMax; }
+	this.vitality = this.levelVitality[this.level];
 
-	CB_console("Creating enemy #" + this.id + " of type " + this.type + " with level " + this.level + "...");
+	logMessage("Creating enemy #" + this.id + " of type " + this.type + " with level " + this.level + "...");
 	
 	//If no coordinates were given, finds the starting point and locates the enemy there to start its way:
 	if (typeof(x) === "undefined" || typeof(y) === "undefined") { this.position = Enemy._findStartingPoint(map); }
 	
 	//Calculates the path which will be followed to reach the destiny:
+	this._pathCurrent = {};
 	this._pathCurrentCalculate(this.position.x, this.position.y, map);
 	this._pathCurrent.pathPointer = 0; //Resets the path pointer.
 	
@@ -61,11 +60,11 @@ Enemy.prototype._init = function(type, level, x, y, map)
 	
 	if (!spritesLoaded)
 	{
-		CB_console("* Failed to load sprites for this enemy.");
+		logMessage("* Failed to load sprites for this enemy.");
 	}
 	else
 	{
-		CB_console("* Enemy set at position (" + this.position.x + ", " + this.position.y + ")");
+		logMessage("* Enemy set at position (" + this.position.x + ", " + this.position.y + ")");
 	}
 	
 	return this;
@@ -104,9 +103,9 @@ Enemy.prototype._getSprites = function(returnOnFail)
 		}
 	}
 	
-	if (spritesGroup === null) { CB_console("No sprites object could be found!"); return returnOnFail; }
-	else if (sprite === null) { CB_console("No sprite object could be found!"); return returnOnFail; }
-	else if (subSprite === null) { CB_console("No subSprite object could be found!"); return returnOnFail; }
+	if (spritesGroup === null) { logMessage("No sprites object could be found!"); return returnOnFail; }
+	else if (sprite === null) { logMessage("No sprite object could be found!"); return returnOnFail; }
+	else if (subSprite === null) { logMessage("No subSprite object could be found!"); return returnOnFail; }
 
 	return { spritesGroup: spritesGroup, sprite: sprite, subSprite: subSprite };
 }
@@ -146,18 +145,15 @@ Enemy.prototype._spritesDisable = function(returnOnFail)
 
 
 //Updates the coordinates for the subSprite:
-Enemy.prototype._spritesUpdateCoordinates = function(x, y, sprites, returnOnFail)
+Enemy.prototype._spritesUpdateCoordinates = function(x, y, sprites, returnOnFail, screenCoordinates)
 {
-	x = x || this.position.x;
-	y = y || this.position.y;
+	x = typeof(x) !== "undefined" && x !== null ? x : this.position.x || 0;
+	y = typeof(y) !== "undefined" && y !== null ? y : this.position.y || 0;
 	sprites = sprites || this._getSprites(null);
 	if (sprites === null) { return returnOnFail; }
 	
-	sprites.subSprite.left = Game.Levels.getRealScreenLeft(x);
-	sprites.subSprite.top = Game.Levels.getRealScreenTop(y);
-	sprites.subSprite.disabled = false;
-
-	CB_console("Updating coordinates for #" + (this.id) + " => " + sprites.subSprite.id);
+	this.position.xScreen = sprites.subSprite.left = screenCoordinates ? x : Game.Levels.getRealScreenLeft(x);
+	this.position.yScreen = sprites.subSprite.top = screenCoordinates ? y : Game.Levels.getRealScreenTop(y);
 
 	return sprites;
 }
@@ -177,14 +173,14 @@ Enemy._findStartingPoint = function(map)
 		{
 			if (Game.Levels.getTypeFromSymbols(map[r][c]) === Game.Levels.SYMBOL_TYPES.ORIGIN)
 			{
-				startingPointsFound[startingPointsFound.length] = { x: c, y: r };
+				startingPointsFound[startingPointsFound.length] = { x: c, y: r, xScreen: Game.Levels.getRealScreenLeft(c), yScreen: Game.Levels.getRealScreenTop(r) };
 			}
 		}
 	}	
 	
 	//If could not be found, uses (0, 0) coordinates by default:
-	if (startingPointsFound.length === 0) { startingPointsFound[0] = { x: 0, y: 0 }; }
-
+	if (startingPointsFound.length === 0) { startingPointsFound[0] = { x: 0, y: 0, xScreen: Game.Levels.getRealScreenLeft(0), yScreen: Game.Levels.getRealScreenTop(0) }; }
+	
 	return startingPointsFound[Math.floor(Math.random() * startingPointsFound.length)];
 }
 
@@ -221,7 +217,7 @@ Enemy._getPathPointsToDestiny = function(x, y, map)
 	}
 	else
 	{
-		CB_console("No destiny could be found on the given map! Cannot calculate path for the enemy.");
+		logMessage("No destiny could be found on the given map! Cannot calculate path for the enemy.");
 		return [];
 	}
 	
@@ -229,7 +225,7 @@ Enemy._getPathPointsToDestiny = function(x, y, map)
 	var pathPointsToDestiny = Game.Levels._calculatePathPointsToDestiny(x, y, destinyCoordinates.x, destinyCoordinates.y, map, levelCurrent);
 	if (pathPointsToDestiny === null)
 	{
-		CB_console("No path to the destiny could be found on the given map! Cannot calculate path for the enemy.");
+		logMessage("No path to the destiny could be found on the given map! Cannot calculate path for the enemy.");
 		return [];
 	}
 	
@@ -242,8 +238,8 @@ Enemy._getPathPointsToDestiny = function(x, y, map)
 //Calcultes and returns the path which will be followed to reach its destiny:
 Enemy.prototype._pathCurrentCalculate = function(x, y, map, level)
 {
-	x = x || this.position.x || 0;
-	y = y || this.position.y || 0;
+	x = typeof(x) !== "undefined" && x !== null ? x : this.position.x || 0;
+	y = typeof(y) !== "undefined" && y !== null ? y : this.position.y || 0;
 	map = map || Game.Levels.data[Game.data.level].map;
 
 	this._pathCurrent.points = Enemy._getPathPointsToDestiny(x, y, map);
@@ -265,7 +261,7 @@ Enemy.prototype.loopStep = function()
 	//...otherwise, if the objective has been reached:
 	if (this._isObjectiveReached())
 	{
-		CB_console("Enemy #" + this.id + " reached destiny!");
+		logMessage("Enemy #" + this.id + " reached destiny!");
 		Game.data.vitality -= this.levelDamage[this.level];
 		this.succeeded = true;
 		this.die();
@@ -290,14 +286,20 @@ Enemy.prototype._walkLastTime = null;
 Enemy.prototype._walk = function(pathX, pathY)
 {
 	//Having into account the enemy speed, does not walk if it still should not move:
-	// TO DO.
 	if (this._walkLastTime && this.levelSpeed[this.level] > 0)
 	{
 		//this._walkLastTime = CB_Device.getTiming()
-		if (this._walkLastTime + (1000 / this.levelSpeed[this.level]) > CB_Device.getTiming())
+		if (this._walkLastTime + (100 / this.levelSpeed[this.level]) > CB_Device.getTiming())
 		{
 			return false;
 		}
+	}
+
+	//If reached the current point, follows to the next one (if any):
+	if (this.position.x === this._pathCurrent.points[this._pathCurrent.pathPointer].x && this.position.y === this._pathCurrent.points[this._pathCurrent.pathPointer].y)
+	{
+		if (this._pathCurrent.pathPointer < this._pathCurrent.points.length - 1) { this._pathCurrent.pathPointer++; }
+		else { return false; } //Last path point (destiny) reached.
 	}
 	
 	this.isWalking = true;
@@ -311,39 +313,44 @@ Enemy.prototype._walk = function(pathX, pathY)
 		this.isRotating = false;
 	}
 	
-	//If reached the current point, follows to the next one (if any):
-	if (this.position.x === this._pathCurrent.points[this._pathCurrent.pathPointer].x && this.position.y === this._pathCurrent.points[this._pathCurrent.pathPointer].y)
-	{
-		if (this._pathCurrent.pathPointer < this._pathCurrent.points.length - 1) { this._pathCurrent.pathPointer++; }
-	}
-	
-	//TO DO: stop moving once the desired coordinates have been reached.
-	
-	//TO DO: use screen coordinates (xScreen/yScreen) instead of map ones.
-	
 	if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "up")
 	{
-		this.position.y--;
+		//this.position.y--;
+		this.position.yScreen--;
+		this.position.y = Game.Levels.getMapTop(this.position.yScreen) + 1;
 	}
 	else if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "down")
 	{
-		this.position.y++;
+		//this.position.y++;
+		this.position.yScreen++;
+		this.position.y = Game.Levels.getMapTop(this.position.yScreen);
 	}
 	else if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "left")
 	{
-		this.position.x--;
+		//this.position.x--;
+		this.position.xScreen--;
+		this.position.x = Game.Levels.getMapLeft(this.position.xScreen) + 1;
 	}
 	else if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "right")
 	{
-		this.position.x++;
+		//this.position.x++;
+		this.position.xScreen++;
+		this.position.x = Game.Levels.getMapLeft(this.position.xScreen);
+	}
+	else
+	{
+		logMessage("No direction found to be followed by enemy " + this.id);
+		return;
 	}
 
 	//Stores the time when it has moved:
 	this._walkLastTime = CB_Device.getTiming();
 
-	
 	//Updates the sprite with the new position:
-	this._spritesUpdateCoordinates(this.position.x, this.position.y);
+	//this._spritesUpdateCoordinates(this.position.x, this.position.y);
+	//this._spritesUpdateCoordinates(this.position.x, this.position.y, null, null, true);
+	//CB_console("Enemy #" + this.id + " walking to (" +  this.position.xScreen + ", " + this.position.yScreen + ") (on map: " + this.position.x + ", " + this.position.y + ")");
+	this._spritesUpdateCoordinates(this.position.xScreen, this.position.yScreen, null, null, true);
 	
 	return true;
 }
@@ -368,7 +375,7 @@ Enemy.prototype._needsRotateToFollow = function(pathX, pathY)
 //Makes the enemy to die:
 Enemy.prototype.die = function()
 {
-	CB_console("Enemy #" + this.id + " died!");
+	logMessage("Enemy #" + this.id + " died!" + (this.succeeded ? " (reached destiny)" : " (no destiny reached)"));
 	this.isDead = true;
 	this._spritesDisable();	
 }

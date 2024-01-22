@@ -44,10 +44,10 @@ var _LEVELS =
 		[
 			"       *          ".split(""),
 			"       $-  -   ---".split(""),
-			"      -$$$ $$$$$$*".split(""),
-			"  -$$$!$-$-$- -$--".split(""),
+			"      -$$$ *$$$$$*".split(""),
+			"  -$$$-$-$-$- -$-!".split(""),
 			"*$$$-$$$-$$$- -$$@".split(""),
-			"    -$-$$$$$$$$$-- ".split(""),
+			"    -$-$$$ $$$$$--".split(""),
 			"     *            ".split("")
 		],
 		//Enemy waves:
@@ -102,27 +102,45 @@ var _LEVELS =
 				enemies:
 				[
 					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
-					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
-					{ type: 0, level: 2 }, { type: 0, level: 2 }, { type: 0, level: 2 },
 					{ type: 1, level: 0 }, { type: 1, level: 0 }, { type: 1, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
 					{ type: 1, level: 1 }, { type: 1, level: 1 }, { type: 1, level: 1 },
+					{ type: 0, level: 2 }, { type: 0, level: 2 }, { type: 0, level: 2 },
 					{ type: 1, level: 2 }, { type: 1, level: 2 }, { type: 1, level: 2 }
 				]
 			},
 			//Wave 5:
 			{
 				timeBetweenEnemies: 1000, //Time for the next enemy to appear after previous one (milliseconds).
+				timeFromLastEnemyToNextWave: 500, //Time to wait until next wave (milliseconds).
+				enemies:
+				[
+					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
+					{ type: 1, level: 0 }, { type: 1, level: 0 }, { type: 1, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
+					{ type: 1, level: 1 }, { type: 1, level: 1 }, { type: 1, level: 1 },
+					{ type: 0, level: 2 }, { type: 0, level: 2 }, { type: 0, level: 2 },
+					{ type: 1, level: 2 }, { type: 1, level: 2 }, { type: 1, level: 2 },
+					{ type: 0, level: 3 }, { type: 0, level: 3 }, { type: 0, level: 3 },
+					{ type: 1, level: 3 }, { type: 1, level: 3 }, { type: 1, level: 3 }
+				]
+			},
+			//Wave 6:
+			{
+				timeBetweenEnemies: 500, //Time for the next enemy to appear after previous one (milliseconds).
 				timeFromLastEnemyToNextWave: 0, //Time to wait until next wave (milliseconds). Last wave does not needed!
 				enemies:
 				[
 					{ type: 0, level: 0 }, { type: 0, level: 0 }, { type: 0, level: 0 },
-					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
-					{ type: 0, level: 2 }, { type: 0, level: 2 }, { type: 0, level: 2 },
-					{ type: 0, level: 3 }, { type: 0, level: 3 }, { type: 0, level: 3 },
 					{ type: 1, level: 0 }, { type: 1, level: 0 }, { type: 1, level: 0 },
+					{ type: 0, level: 1 }, { type: 0, level: 1 }, { type: 0, level: 1 },
 					{ type: 1, level: 1 }, { type: 1, level: 1 }, { type: 1, level: 1 },
+					{ type: 0, level: 2 }, { type: 0, level: 2 }, { type: 0, level: 2 },
 					{ type: 1, level: 2 }, { type: 1, level: 2 }, { type: 1, level: 2 },
-					{ type: 1, level: 3 }, { type: 1, level: 3 }, { type: 1, level: 3 }
+					{ type: 0, level: 3 }, { type: 0, level: 3 }, { type: 0, level: 3 },
+					{ type: 1, level: 3 }, { type: 1, level: 3 }, { type: 1, level: 3 },
+					{ type: 0, level: 4 }, { type: 0, level: 4 }, { type: 0, level: 4 },
+					{ type: 1, level: 4 }, { type: 1, level: 4 }, { type: 1, level: 4 }
 				]
 			}
 		]

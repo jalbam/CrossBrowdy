@@ -18,7 +18,7 @@ CB_init(main); //It will call the "main" function when ready.
 //This function will be called when CrossBrowdy is ready:
 function main()
 {
-	showMessage("CrossBrowdy and all needed modules loaded. Starting game...");
+	logMessage("CrossBrowdy and all needed modules loaded. Starting game...");
 	
 	//Makes some DOM element non-draggable, non-selectable, etc.:
 	makeElementSolidById("music_loader_checker");
@@ -91,13 +91,13 @@ function main()
 		},
 		
 		//onError:
-		function(error) { showMessage("Error: " + error); }
+		function(error) { logMessage("Error: " + error); }
 	);
 }
 
 
-//Shows a message in the console:
-function showMessage(message)
+//Places a message in the console:
+function logMessage(message)
 {
 	return CB_console("[TOWER_DEFENSE_GAME] " + message);
 }
