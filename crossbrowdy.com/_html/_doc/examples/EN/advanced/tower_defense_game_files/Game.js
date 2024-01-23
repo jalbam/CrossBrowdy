@@ -86,7 +86,6 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 			//If the time to wait for the next wave has been reached, starts a new wave:
 			if (Game.data.levelEnemyWaveEndedTs !== null && CB_Device.getTiming() >= Game.data.levelEnemyWaveEndedTs + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].timeFromLastEnemyToNextWave)
 			{
-				logMessage("The time for next wave has been reached. Starting new wave #" + (Game.data.levelEnemyWave) + "...");
 				Game.data.levelEnemyWaveEndedTs = null;
 				Game.data.enemies = [];
 			
@@ -95,6 +94,8 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 				Game.data.levelEnemyWave++;
 				
 				createNewEnemy = true;
+				
+				logMessage("The time for next wave has been reached. Starting new wave #" + (Game.data.levelEnemyWave) + "...");
 			}
 			//...otherwise, the current wave has ended so we store the time (if not done yet):
 			else if (Game.data.levelEnemyWaveEndedTs === null)
@@ -132,7 +133,8 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 	else if (levelPassed)
 	{
 		Game.data.levelSucceeded = true; 
-		Game.end("Congratulations! You survived successfully");
+		Game.data.score += Game.data.vitality >= 100 ? 1000 : 500;
+		Game.end("Congratulations! You survived successfully" + (Game.data.vitality >= 100 ? " (undamaged!!!)" : ""));
 	}
 
 	//Perform steps for each enemy:
@@ -217,7 +219,9 @@ Game.end = function(message)
 		
 	message = CB_trim(message);
 	Game.data.gameStarted = false;
-	CB_Elements.insertContentById("start_button", (message !== "" ? message + "<br />" : "") + (Game.data.levelSucceeded ? "Continue playing" : "Start game!"))
+	var buttonText = "Start game!";
+	if (Game.data.levelSucceeded) { buttonText = (Game.data.level >= Game.Levels.data.length - 1) ? "All levels passed!<br />Restart game" : "Continue playing"; }
+	CB_Elements.insertContentById("start_button", (message !== "" ? message + "<br />" : "") + buttonText)
 	CB_Elements.showById("start_button"); //Shows the start button again.
 }
 
@@ -391,8 +395,8 @@ Game.Levels._loadData = function(level, avoidCache)
 							(
 								function (subSprite)
 								{
-									subSprite.width = Visual._ELEMENTS_WIDTH;
-									subSprite.height = Visual._ELEMENTS_HEIGHT;
+									subSprite.width = subSprite.id.indexOf("vitality") !== -1 && subSprite.data._enemyObject ? subSprite.data._enemyObject.vitality / subSprite.data._enemyObject.levelVitality[subSprite.data._enemyObject.level] * Visual._ELEMENTS_WIDTH : Visual._ELEMENTS_WIDTH;
+									subSprite.height = subSprite.id.indexOf("vitality") !== -1 ? Visual._ELEMENTS_HEIGHT / 15 : Visual._ELEMENTS_HEIGHT;
 								}
 							);
 						}

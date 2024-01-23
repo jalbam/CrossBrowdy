@@ -24,6 +24,28 @@ Visual.getSpritesGroupsData = function()
 		};
 		
 		//Sprites groups data:
+		Visual._spritesGroupsDataBeforeDrawingSprite =
+			function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
+			{
+				if (!element.data._spriteDuration) { element.data._spriteDuration = 500 / (element.data._enemyObject.level + 1); }
+				if (element.data._beforeDrawingLastTS === null || CB_Device.getTiming() - element.data._beforeDrawingLastTS >= element.data._spriteDuration)
+				{
+					element.srcLeft += element.data._spriteWidth;
+					element.srcLeft %= element.data._spriteWidthTotal;
+					element.data._beforeDrawingLastTS = CB_Device.getTiming();
+				}
+
+				canvasContext.filter = "hue-rotate(" + (element.data._enemyObject.level * 60) + "deg)";
+
+				return element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
+			};
+		Visual._spritesGroupsDataBeforeDrawingSpriteVitality =
+			function(element)
+			{
+				element.width = element.data._enemyObject.vitality / element.data._enemyObject.levelVitality[element.data._enemyObject.level] * Visual._ELEMENTS_WIDTH;
+				return element;
+			};
+
 		Visual._spritesGroupsData =
 		{
 			//'towers_defense_game_sprites_groups' ('CB_GraphicSpritesScene.SPRITES_GROUPS_OBJECT' object). Some missing or non-valid properties will get a default value:
@@ -40,13 +62,14 @@ Visual.getSpritesGroupsData = function()
 					id: "info",
 					srcType: CB_GraphicSprites.SRC_TYPES.TEXT,
 					top: 15,
-					zIndex: 3,
+					zIndex: 4,
 					data:
 					{
 						fontSize: "16px",
 						fontFamily: "courier",
 						style: "#ffaa00",
-						fontWeight: "bold"
+						fontWeight: "bold",
+						filter: "none"
 					},
 					sprites: [ { id: "info_sprite" } ]
 				},
@@ -95,7 +118,7 @@ Visual.getSpritesGroupsData = function()
 								{
 									id: "path_0",
 									src: "img/path_0.gif"
-								}
+								}								
 							]
 						},
 
@@ -172,7 +195,31 @@ Visual.getSpritesGroupsData = function()
 								{
 									id: "enemy_0_subsprites",
 									src: "img/enemy_0_sprites.gif",
-									disabled: true
+									disabled: true,
+									data:
+									{
+										rotationUseDegrees: true,
+										rotation: 0,
+										_beforeDrawingLastTS: null,
+										_spriteWidth: 38,
+										_spriteWidthTotal: 152,
+										_spriteDuration: null, //It will change according to enemy level.
+										_enemyObject: null,
+										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSprite
+									}
+								},
+								{
+									id: "enemy_0_subsprites_vitality",
+									srcType: CB_GraphicSprites.SRC_TYPES.RECTANGLE,
+									disabled: true,
+									zIndex: 3,
+									data:
+									{
+										style: "#00aa00",
+										opacity: 0.6,
+										_enemyObject: null,
+										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSpriteVitality
+									}
 								}
 							]
 						}
@@ -194,7 +241,30 @@ Visual.getSpritesGroupsData = function()
 								{
 									id: "enemy_1_subsprites",
 									src: "img/enemy_1_sprites.gif",
-									disabled: true
+									disabled: true,
+									data:
+									{
+										rotationUseDegrees: true,
+										rotation: 0,
+										_beforeDrawingLastTS: null,
+										_spriteWidth: 38,
+										_spriteWidthTotal: 152,
+										_spriteDuration: null, //It will change according to enemy level.
+										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSprite
+									}
+								},
+								{
+									id: "enemy_0_subsprites_vitality",
+									srcType: CB_GraphicSprites.SRC_TYPES.RECTANGLE,
+									disabled: true,
+									zIndex: 3,
+									data:
+									{
+										style: "#00aa00",
+										opacity: 0.6,
+										_enemyObject: null,
+										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSpriteVitality
+									}
 								}
 							]
 						}
@@ -374,8 +444,8 @@ Visual.updateInfo = function(graphicSpritesSceneObject)
 	graphicSpritesSceneObject.getById("info").get(0).src =
 		"Level: " + (Game.data.level + 1) + "\n" +
 		"Coins: " + Game.data.coins + "\n" +
-		"Vitality: " + Game.data.vitality + "\n" +
 		"Score: " + Game.data.score + "\n" +
+		"Vitality: " + Game.data.vitality + "\n" +
 		"Wave: " + (Game.data.levelEnemyWave + 1) + "/" + Game.Levels.data[Game.data.level].enemyWaves.length + "\n" +
 		"* Enemies of this wave: " + Game.data.enemies.length + "/" + Game.Levels.data[Game.data.level].enemyWaves[Game.data.levelEnemyWave].enemies.length + " (" + Game.getEnemiesAlive().length + " alive)\n" +
 		(!CB_Screen.isLandscape() ? "\n\nLandscape screen recommended!" : "") +
@@ -493,17 +563,17 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 //NOTE: some browsers will fail to enable full screen mode if it is not requested through a user-driven event (as "onClick", "onTouchStart", etc.).
 Visual.fullScreenToggle = function()
 {
-	showMessage("Toggling full screen mode...");
+	logMessage("Toggling full screen mode...");
 	//If it is using full screen mode already, disables it:
 	if (CB_Screen.isFullScreen())
 	{
-		showMessage("Full screen mode detected. Trying to restore normal mode...");
+		logMessage("Full screen mode detected. Trying to restore normal mode...");
 		CB_Screen.setFullScreen(false); //Uses the Fullscreen API and fallbacks to other methods internally, including NW.js, Electron ones, when not available.
 	}
 	//...otherwise, requests full screen mode:
 	else
 	{
-		showMessage("Normal mode detected. Trying to enable full screen mode...");
+		logMessage("Normal mode detected. Trying to enable full screen mode...");
 		CB_Screen.setFullScreen(true, undefined, true); //Allows reloading into another (bigger) window (for legacy clients).
 	}
 }
