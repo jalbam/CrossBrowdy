@@ -27,7 +27,11 @@ Visual.getSpritesGroupsData = function()
 		Visual._spritesGroupsDataBeforeDrawingSprite =
 			function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
 			{
-				if (!element.data._spriteDuration) { element.data._spriteDuration = 500 / (element.data._enemyObject.level + 1); }
+				//if (!element.data || !element.data._entityObject) { return element; }
+				var level = element.data._entityObject && element.data._entityObject.level ? element.data._entityObject.level : 0;
+				if (!element.data._spriteDuration) { element.data._spriteDuration = 500 / (level + 1); }
+				canvasContext.filter = "hue-rotate(" + (level * 60) + "deg)";
+
 				if (element.data._beforeDrawingLastTS === null || CB_Device.getTiming() - element.data._beforeDrawingLastTS >= element.data._spriteDuration)
 				{
 					element.srcLeft += element.data._spriteWidth;
@@ -35,16 +39,46 @@ Visual.getSpritesGroupsData = function()
 					element.data._beforeDrawingLastTS = CB_Device.getTiming();
 				}
 
-				canvasContext.filter = "hue-rotate(" + (element.data._enemyObject.level * 60) + "deg)";
+				element.width = Visual._ELEMENTS_WIDTH;
+				element.height = Visual._ELEMENTS_HEIGHT;
 
 				return element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
 			};
 		Visual._spritesGroupsDataBeforeDrawingSpriteVitality =
-			function(element)
+			function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
 			{
-				element.width = element.data._enemyObject.vitality / element.data._enemyObject.levelVitality[element.data._enemyObject.level] * Visual._ELEMENTS_WIDTH;
+				if (!element.data || !element.data._entityObject) { return null; }
+				element.width = element.data._entityObject.vitality / element.data._entityObject.levelVitality[element.data._entityObject.level] * Visual._ELEMENTS_WIDTH;
+				element.height = Visual._ELEMENTS_HEIGHT / 15;
 				return element;
 			};
+			
+		Visual._spritesGroupsDataBeforeDrawingSpriteTowerBackground =
+			function(element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, drawingMap, x, y, mapElement) //Called before drawing the element.
+			{
+				//if (!element.data || !element.data._entityObject) { return null; }
+				element.width = Visual._ELEMENTS_HEIGHT;
+				element.height = Visual._ELEMENTS_HEIGHT;
+		
+				//TO DO: detect background type and change its image:
+				
+				
+				//element.width = element.data._entityObject.vitality / element.data._entityObject.levelVitality[element.data._entityObject.level] * Visual._ELEMENTS_WIDTH;
+				return element;
+			};
+
+		Visual._subSpritesTowerRadiusSeen =
+		{
+			id: "tower_subsprites_radius_seen",
+			zIndex: 3,
+			srcType: CB_GraphicSprites.SRC_TYPES.CIRCLE,
+			data:
+			{
+				radius: 200,
+				style: "#00aa00",
+				opacity: 0.5
+			}
+		};
 
 		Visual._spritesGroupsData =
 		{
@@ -62,7 +96,7 @@ Visual.getSpritesGroupsData = function()
 					id: "info",
 					srcType: CB_GraphicSprites.SRC_TYPES.TEXT,
 					top: 15,
-					zIndex: 4,
+					zIndex: 10,
 					data:
 					{
 						fontSize: "16px",
@@ -130,6 +164,10 @@ Visual.getSpritesGroupsData = function()
 								{
 									id: "destiny_0",
 									src: "img/destiny_0.gif"
+								},
+								{
+									id: "destiny_1",
+									src: "img/destiny_1.gif"
 								}
 							]
 						},
@@ -142,39 +180,72 @@ Visual.getSpritesGroupsData = function()
 								{
 									id: "origin_0",
 									src: "img/origin_0.gif"
+								},
+								{
+									id: "origin_1",
+									src: "img/origin_1.gif"
 								}
 							]
 						}
 					]
 				},
 				
-				//Towers sprites:
+				//Tower type #0 sprites:
 				{
-					id: "towers_sprites",
-					data:
-					{
-						onlyUseInMap: true,
-						parseIntTop: true,
-						parseIntLeft: true
-					},
+					id: "tower_0_sprites_group",
+					zIndex: 2,
+					srcWidth: 38,
+					srcHeight: 36,
+					data: { onlyUseInMap: true },
 					sprites:
 					[
-						//Tower #0 sprites:
-						// TO DO: Add subSprits for each upgrade level. AND REMEMBER SOIL TYPE.
 						{
-							id: "tower_0",
+							id: "tower_0_sprites",
 							subSprites:
 							[
 								{
-									id: "soil_unwalkable_buildable_0",
-									src: "img/soil_unwalkable_buildable_0.gif",
-									disabled: false
+									id: "tower_0_subsprites",
+									src: "img/tower_0_sprites.gif",
+									zIndex: 4,
+									disabled: true,
+									data:
+									{
+										rotationUseDegrees: true,
+										rotation: 0,
+										_beforeDrawingLastTS: null,
+										_spriteWidth: 38,
+										_spriteWidthTotal: 152,
+										_spriteDuration: null, //It will change according to tower level.
+										_entityObject: null,
+										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSprite
+									}
 								},
 								{
-									id: "tower_0_level_0",
-									src: "img/tower_0_level_0.gif",
-									disabled: false
-								}		
+									id: "tower_0_subsprites_vitality",
+									srcType: CB_GraphicSprites.SRC_TYPES.RECTANGLE,
+									disabled: true,
+									zIndex: 5,
+									data:
+									{
+										style: "#00aa00",
+										opacity: 0.6,
+										filter: "none",
+										_entityObject: null,
+										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSpriteVitality
+									}
+								},
+								{
+									id: "tower_0_subsprites_background",
+									srcWidth: 512,
+									srcHeight: 512,
+									src: "img/soil_unwalkable_unbuildable_0.gif",
+									disabled: true,
+									data:
+									{
+										_entityObject: null,
+										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSpriteTowerBackground
+									}
+								}
 							]
 						}
 					]
@@ -204,7 +275,7 @@ Visual.getSpritesGroupsData = function()
 										_spriteWidth: 38,
 										_spriteWidthTotal: 152,
 										_spriteDuration: null, //It will change according to enemy level.
-										_enemyObject: null,
+										_entityObject: null,
 										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSprite
 									}
 								},
@@ -217,7 +288,8 @@ Visual.getSpritesGroupsData = function()
 									{
 										style: "#00aa00",
 										opacity: 0.6,
-										_enemyObject: null,
+										filter: "none",
+										_entityObject: null,
 										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSpriteVitality
 									}
 								}
@@ -254,7 +326,7 @@ Visual.getSpritesGroupsData = function()
 									}
 								},
 								{
-									id: "enemy_0_subsprites_vitality",
+									id: "enemy_1_subsprites_vitality",
 									srcType: CB_GraphicSprites.SRC_TYPES.RECTANGLE,
 									disabled: true,
 									zIndex: 3,
@@ -262,7 +334,8 @@ Visual.getSpritesGroupsData = function()
 									{
 										style: "#00aa00",
 										opacity: 0.6,
-										_enemyObject: null,
+										filter: "none",
+										_entityObject: null,
 										beforeDrawing: Visual._spritesGroupsDataBeforeDrawingSpriteVitality
 									}
 								}
@@ -277,12 +350,12 @@ Visual.getSpritesGroupsData = function()
 					srcType: CB_GraphicSprites.SRC_TYPES.MAP,
 					data:
 					{
-						elementsDataParsePropertyNames: true,
+						elementsDataParsePropertyNames: true, //Defines whether to parse or not wildcards in property names.
 						
 						//References sprites or sub-sprites by their index or identifier. Define a "parentId" (parent identifier of the 'CB_GraphicSprites' object or of the 'CB_GraphicSprites.SPRITE_OBJECT' object) to improve performance.
 						elementsData:
 						{
-							//Each property name is an alias which can be used in the map (in the "src" property).
+							//Each property name is an alias which can be used in the map (in the "src" property). Wildcards will be parsed later intarnally.
 							
 							//Unwalkable and non-buildable (just decoration):
 							"{{SOIL_UNWALKABLE_UNBUILDABLE}}0":
@@ -348,7 +421,8 @@ Visual.getSpritesGroupsData = function()
 							//Tower type 0:
 							"{{TOWER_0}}{{SOIL_UNWALKABLE_BUILDABLE}}0_0": //Upgrade level 0 (no upgrades).
 							{
-								id: "tower_0",
+								id: "tower_0_sprites",
+								parentId: "tower_0_sprites_group",
 								clickable: true
 							}
 							
@@ -371,35 +445,70 @@ Visual.getSpritesGroupsData = function()
 
 								if (!CB_isArray(Visual._drawnMapElements)) { Visual._drawnMapElements = []; }
 								if (!CB_isArray(Visual._drawnMapElements[y])) { Visual._drawnMapElements[y] = []; }
-								if (typeof(Visual._drawnMapElements[y][x]) === "undefined") { Visual._drawnMapElements[y][x] = {}; }
-								
+								if (!Visual._drawnMapElements[y][x]) { Visual._drawnMapElements[y][x] = {}; }
+
+								//Visual._drawnMapElements[y][x].elementData = { x: null, y: null };
+
 								//If the element is unwalkable and buildable:
 								if (Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) === Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE)
 								{
+									Visual._drawnMapElements[y][x].drawn = false; //Forces redraw.
 								}
 								else if (Game.Levels.getTypeFromSymbols(mapElement.src[y][x]) === Game.Levels.SYMBOL_TYPES.TOWER)
 								{
+									element.data._entityObject = Game.findTowerByPosition(x, y);
+									element.disabled = false;
+									element.forEach
+									(
+										function (subSprite)
+										{
+											if (subSprite.disabled)
+											{
+												subSprite.disabled = false;
+												subSprite.data._entityObject = element.data._entityObject;
+											}
+										}
+									);
+
+									//TO DO: mind tower type (or not):
+									//TO DO: center circle!!!
+									var towerSeenCircle = CB_copyObject(Visual._subSpritesTowerRadiusSeen);
+									towerSeenCircle.id += element.data._entityObject.id;
+									towerSeenCircle.disabled = false;
+									towerSeenCircle.data.style = "#00aa00";
+									towerSeenCircle.top = element.top + Visual._ELEMENTS_WIDTH / 2 - CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").top;
+									towerSeenCircle.left = element.left + Visual._ELEMENTS_HEIGHT / 2 - CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").left;
+									towerSeenCircle.data.radius = element.data._entityObject.getRadiusSeen(true);
+									mapElement.insertSubSprites( [ towerSeenCircle ] );
+
 									// TO DO: Enable desired soil and disable undesired towers/towers levels.
-									/////////////element.getById("soil_unwalkable_buildable_0").setDisabled(true);
+									//element.getById("soil_unwalkable_buildable_0").setDisabled(true);
 									//////////element.getById("tower_0_level_0").setDisabled(false);
+									Visual._drawnMapElements[y][x].drawn = false; //Forces redraw.
+									//return null;
+								}
+								else
+								{
+									Visual._drawnMapElements[y][x].drawn = false; //Forces redraw.
 								}
 								
 								if (Input.mouseData.column === x && Input.mouseData.row === y)
 								{
-									element.data.filter = mapElement.data.elementsData[mapElement.src[y][x]].clickable ? "sepia(0.5)" : "sepia(0.2)";
+									element.data.filter = mapElement.data.elementsData[mapElement.src[y][x]].clickable ? "sepia(0.5)" : "none";
 								}
 								else
 								{
 									element.data.filter = "none";
 								}
-								Visual._drawnMapElements[y][x].drawn = false;
-								
+
 								//Defines whether to draw this element or skip drawing it:
 								if (y > 1 && Visual._drawnMapElements[y][x].drawn === true) { skipDrawing = true; }
 								else
 								{
 									Visual._drawnMapElements[y][x].drawn = true;
-									Visual._drawnMapElements[y][x].elementData = { x: element._attributes.left, y: element._attributes.top };
+									Visual._drawnMapElements[y][x].elementData = { x: element._attributes.left, y: element._attributes.top, symbol: mapElement.src[y][x] }
+									//Visual._drawnMapElements[y][x].elementData.x = element._attributes.left;
+									//Visual._drawnMapElements[y][x].elementData.y = element._attributes.top;
 								}
 
 								return skipDrawing ? null : element; //Same as 'element'. Must return the element to draw. Return null to skip drawing it.
@@ -411,7 +520,8 @@ Visual.getSpritesGroupsData = function()
 						//Maps (current level) with string aliases:
 						{
 							id: "current", //Current map which will be displayed.
-							src: Game.Levels._loadData(0) //Using a copy of the array as this one could be modified to adapt it to the screen.
+							src: null, //Will be using a copy of the array as this one could be modified to adapt it to the screen.
+							subSprites: []
 						}
 					]
 				}
@@ -419,7 +529,7 @@ Visual.getSpritesGroupsData = function()
 		};
 	}
 	
-	//Parses elementsData property names when required:
+	//Parses elementsData property names (wildcards) when required:
 	for (var x = 0; x < Visual._spritesGroupsData.spritesGroups.length; x++)
 	{
 		if (typeof(Visual._spritesGroupsData.spritesGroups[x].data) !== "undefined" && Visual._spritesGroupsData.spritesGroups[x].data.elementsDataParsePropertyNames)
@@ -462,12 +572,18 @@ Visual._ELEMENTS_WIDTH_DEFAULT = 40; //Default element's width.
 Visual._ELEMENTS_HEIGHT_DEFAULT = 40; //Default element's height.
 Visual._ELEMENTS_WIDTH = Visual._ELEMENTS_WIDTH_DEFAULT; //It will be updated automatically according to the screen size.
 Visual._ELEMENTS_HEIGHT = Visual._ELEMENTS_HEIGHT_DEFAULT; //It will be updated automatically according to the screen size.
-Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
+Visual._ELEMENTS_WIDTH_PREVIOUS = Visual._ELEMENTS_WIDTH; //Stores the previous value of Visual._ELEMENTS_WIDTH. Updates after finishing resize.
+Visual._ELEMENTS_HEIGHT_PREVIOUS = Visual._ELEMENTS_HEIGHT_PREVIOUS; //Stores the previous value of Visual._ELEMENTS_HEIGHT. Updates after finishing resize.
+Visual._mapCurrentLeft = 0;
+Visual._mapCurrentTop = 0;
+Visual._mapCurrentLeftPrevious = 0;
+Visual._mapCurrentTopPrevious = 0;
+Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap, currentLevel)
 {
 	//If desired, loads the map again (it will be filled with unwalkable tiles if needed):
 	if (!avoidFillingMap)
 	{
-		Game.Levels.loadSource(Game.Levels._loadData(Game.data.level, true)); //Using a copy of the array as this one could be modified to adapt it to the screen.
+		Game.Levels.loadSource(Game.Levels._loadData(Game.data.level, true, currentLevel)); //Using a copy of the array as this one could be modified to adapt it to the screen.
 	}
 
 	if (graphicSpritesSceneObject instanceof CB_GraphicSpritesScene)
@@ -477,8 +593,10 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 		if (CB_isArray(mapCurrent.src))
 		{
 			var maxWidthFound = mapCurrent.src[0].length; //As the map was filled with unwalkable tiles already, all rows have the same width (same columns).
-			mapCurrent.left = (CB_Screen.getWindowWidth() - Visual._ELEMENTS_WIDTH * maxWidthFound) / 2;
-			mapCurrent.top = (CB_Screen.getWindowHeight() - Visual._ELEMENTS_HEIGHT * mapCurrent.src.length) / 2;
+			Visual._mapCurrentLeftPrevious = mapCurrent.left;
+			Visual._mapCurrentTopPrevious = mapCurrent.top;
+			Visual._mapCurrentLeft = mapCurrent.left = (CB_Screen.getWindowWidth() - Visual._ELEMENTS_WIDTH * maxWidthFound) / 2;
+			Visual._mapCurrentTop = mapCurrent.top = (CB_Screen.getWindowHeight() - Visual._ELEMENTS_HEIGHT * mapCurrent.src.length) / 2;
 		}
 		
 		//Resizes the FPS and the information text:
@@ -547,15 +665,52 @@ Visual.resizeElements = function(graphicSpritesSceneObject, avoidFillingMap)
 	var startButton = CB_Elements.id("start_button");
 	if (startButton !== null) { startButton.style.fontSize = parseInt(toolbarIconWidthAndHeight) / 4 + "px"; }
 
-	//Updates enemies position:
-	CB_Arrays.forEach(Game.data.enemies, function(enemy) { enemy._spritesUpdateCoordinates(); });
-	//TO DO: update towers position too.
+	//Updates entities position:
+	Enemy.walkPixelsUpdated = false;
+	CB_Arrays.forEach(Game.data.enemies, function(enemy) { enemy._spritesUpdateCoordinates(null, null, null, null, null, true); });
+	//CB_Arrays.forEach(Game.data.towers, function(tower) { tower._spritesUpdateCoordinates(null, null, null, null, null, true); });
+
+	//Resize entities:
+	Visual.resizeEntities(graphicSpritesSceneObject);
 	
 	//Clears the array to draw all the elements again and resets their data:
 	Visual._drawnMapElements = [];
 
 	//Fires the onMouseMove event "manually":
 	CB_Events.executeByName(document, "mousemove");
+	
+	//Stores the previous width and size (for the next resize process):
+	Visual._ELEMENTS_WIDTH_PREVIOUS = Visual._ELEMENTS_WIDTH;
+	Visual._ELEMENTS_HEIGHT_PREVIOUS = Visual._ELEMENTS_HEIGHT;
+}
+
+
+//Resizes entities (enemies and towers) according to the screen:
+Visual.resizeEntities = function(graphicSpritesSceneObject)
+{
+	if (!graphicSpritesSceneObject) { return; }
+
+	graphicSpritesSceneObject.forEach
+	(
+		function(spritesGroup)
+		{
+			if (spritesGroup.id.indexOf("enemy_") === -1 && spritesGroup.id.indexOf("tower_") === -1) { return; }
+			spritesGroup.forEach
+			(
+				function(sprite)
+				{
+					sprite.forEach
+					(
+						function (subSprite)
+						{
+							subSprite.width = subSprite.id.indexOf("vitality") !== -1 && subSprite.data._entityObject ? subSprite.data._entityObject.vitality / subSprite.data._entityObject.levelVitality[subSprite.data._entityObject.level] * Visual._ELEMENTS_WIDTH : Visual._ELEMENTS_WIDTH;
+							subSprite.height = subSprite.id.indexOf("vitality") !== -1 ? Visual._ELEMENTS_HEIGHT / 15 : Visual._ELEMENTS_HEIGHT;
+						}
+					);
+				}
+			);
+		}
+	);
 }
 
 

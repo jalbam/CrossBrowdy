@@ -769,6 +769,7 @@ CB_REM.prototype.drawElement = function(element, canvasContext, canvasBufferCont
 					if (element.src[y][x] === true)
 					{
 						element = beforeDrawingElementCallback.call(element, element, canvasContext, canvasBufferContext, useBuffer, CB_GraphicSpritesSceneObject, true, x, y, element);
+						if (!element || !element.data) { continue; }
 						style = typeof(element.data.style) === "function" ? element.data.style.call(element, element, canvasContext, canvasBufferContext, useBuffer) : element.data.style;
 						if (element.data.stroke)
 						{

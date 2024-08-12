@@ -142,6 +142,12 @@ Game.onLoopStart = function(graphicSpritesSceneObject, CB_REM_dataObject, expect
 	{
 		Game.data.enemies[x].loopStep();
 	}
+	
+	//Perform steps for each tower:
+	for (var x = 0; x < Game.data.towers.length; x++)
+	{
+		Game.data.towers[x].loopStep();
+	}
 };
 
 
@@ -261,12 +267,13 @@ Game.Levels._getArrayFilled = function(value, start, end)
 
 //Fills the level array with unwalkable and unbuildable tiles the rows needed (to adapt it to the screen) and returns it:
 Game.Levels._loadDataRowsRoundingFunction = null;
-Game.Levels.addedRowsAndColumns = { rows: { top: 0, bottom: 0 }, columns: { left: 0, right: 0 } };
+Game.Levels.addedRowsAndColumns = { rows: { top: 0, bottom: 0 }, columns: { left: 0, right: 0 }, rowsPrevious: { top: 0, bottom: 0 }, columnsPrevious: { left: 0, right: 0 } };
 Game.Levels._loadDataRows = function(levelData, maxWidthFound, fillOverflow)
 {
 	var levelHeight = levelData.length;
 	var rowsNeeded = Math.ceil((CB_Screen.getWindowHeight() / Visual._ELEMENTS_HEIGHT) - levelHeight);
 
+	Game.Levels.addedRowsAndColumns.rowsPrevious = CB_copyObject(Game.Levels.addedRowsAndColumns.rows);
 	Game.Levels.addedRowsAndColumns.rows.top = Game.Levels.addedRowsAndColumns.rows.bottom = 0;
 
 	if (rowsNeeded > 0)
@@ -295,6 +302,7 @@ Game.Levels._loadDataColumns = function(levelData, fillOverflow)
 	if (fillOverflow) { Game.Levels._loadDataColumnsRoundingFunction = Math.ceil; }
 	else { Game.Levels._loadDataColumnsRoundingFunction = Math.floor; }
 
+	Game.Levels.addedRowsAndColumns.columnsPrevious = CB_copyObject(Game.Levels.addedRowsAndColumns.columns);
 	Game.Levels.addedRowsAndColumns.columns.left = Game.Levels.addedRowsAndColumns.columns.right = 0;
 
 	levelHeight = levelData.length;
@@ -360,13 +368,16 @@ Game.Levels._loadDataSetDefault = function(levelData)
 Game.Levels._loadDataCache = [];
 Game.Levels._fillOverflowRowsDefault = true;
 Game.Levels._fillOverflowColumnsDefault = true;
-Game.Levels._loadData = function(level, avoidCache)
+Game.Levels._loadData = function(level, avoidCache, currentLevel)
 {
 	//If it was not adapted and cached before, does it:
-	if (avoidCache || typeof(Game.Levels._loadDataCache[level]) === "undefined" || Game.Levels._loadDataCache[level] === null)
+	if (avoidCache || typeof(Game.Levels._loadDataCache[level]) === "undefined" || Game.Levels._loadDataCache[level] === null || currentLevel)
 	{
+		//TO DO: When resizing, the map is not showing correclty and enemies are misplaced!!!
+		
 		//Adapts the level to the screen filling the missing data with blank spaces:
-		var levelData = CB_Arrays.copy(Game.Levels.data[level].map);
+		var levelData = CB_Arrays.copy(currentLevel && CB_isArray(Game.data.levelMapNotResized) ? Game.data.levelMapNotResized : Game.Levels.data[level].map);
+		//var levelData = CB_Arrays.copy(Game.data.levelMapNotResized);
 		
 		var levelHeight = levelData.length;
 		var maxWidthFound = 1;
@@ -382,35 +393,33 @@ Game.Levels._loadData = function(level, avoidCache)
 		
 		if (typeof(CB_GEM) !== "undefined" && CB_GEM.graphicSpritesSceneObject)
 		{
-			CB_GEM.graphicSpritesSceneObject.forEach
-			(
-				function(spritesGroup)
-				{
-					if (spritesGroup.id.indexOf("enemy_") === -1) { return; } //TO DO: also affect tower sprites.
-					spritesGroup.forEach
-					(
-						function(sprite)
-						{
-							sprite.forEach
-							(
-								function (subSprite)
-								{
-									subSprite.width = subSprite.id.indexOf("vitality") !== -1 && subSprite.data._enemyObject ? subSprite.data._enemyObject.vitality / subSprite.data._enemyObject.levelVitality[subSprite.data._enemyObject.level] * Visual._ELEMENTS_WIDTH : Visual._ELEMENTS_WIDTH;
-									subSprite.height = subSprite.id.indexOf("vitality") !== -1 ? Visual._ELEMENTS_HEIGHT / 15 : Visual._ELEMENTS_HEIGHT;
-								}
-							);
-						}
-					);
-				}
-			);
+			Visual.resizeEntities(CB_GEM.graphicSpritesSceneObject);
 		}
-
+	
+		//Fills map columns and rows if needed:
 		Game.Levels._loadDataRows(levelData, maxWidthFound, Game.Levels._fillOverflowRowsDefault);
 		Game.Levels._loadDataColumns(levelData, Game.Levels._fillOverflowColumnsDefault);
 		
+		//Fills the tiles with default values when not set:
 		Game.Levels._loadDataSetDefault(levelData);
+
+		//If we are not re-loading current level (it is a different one):
+		if (!currentLevel)		
+		{
+			//Stores its original without resizing:
+			Game.data.levelMapNotResized = Game.Levels._loadDataSetDefault(CB_Arrays.copy(Game.Levels.data[Game.data.level].map)); //Also fills tiles with default values when not set.
+			
+			//Loads the map source:
+			Game.Levels.loadSource(levelData);
+			
+			//Spawn map towers (if there is any in the beginning):
+			Game.Levels.loadTowers();
+		}
 		
-		//Caches the level:
+		//Loads map source in the current map:
+		Game.Levels.loadSource(levelData);
+
+		//Stores the level map into the cache:
 		Game.Levels._loadDataCache[level] = levelData;
 	}
 	
@@ -421,7 +430,29 @@ Game.Levels._loadData = function(level, avoidCache)
 //Loads the desired map source for the current map:
 Game.Levels.loadSource = function(source)
 {
-	Game.data.levelMap = CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src = source;
+	Game.data.levelMap = source;
+	if (CB_GEM.graphicSpritesSceneObject)
+	{
+		CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src = source;
+	}
+}
+
+
+//Loads the towers that the map may have in the beginning:
+Game.Levels.loadTowers = function()
+{
+	Game.data.towers = [];
+	var map = Game.data.levelMap;
+	for (var r = 0; r < map.length; r++)
+	{
+		for (var c = 0; c < map[r].length; c++)
+		{
+			if (Game.Levels.getTypeFromSymbols(map[r][c]) === Game.Levels.SYMBOL_TYPES.TOWER)
+			{
+				Game.createTower(c - Game.Levels.addedRowsAndColumns.columns.left, r - Game.Levels.addedRowsAndColumns.rows.top, map[r][c][1], map[r][c][5]);
+			}
+		}
+	}
 }
 
 
@@ -442,12 +473,12 @@ Game.Levels.load = function(level)
 	Game.data.levelEnemyWaveLastEnemyPointer = 0;
 	Game.data.levelEnemyWaveLastEnemyCreatedTs = null;
 	Game.data.enemies = [];
-	Game.data.towers = [];
+
 	Game.data.levelSucceeded = false;
 	if (level === 0) { Game.data.score = 0; }
 
 	//Loads the new map:
-	Game.Levels.loadSource(Game.Levels._loadData(level)); //Using a copy of the array as this one could be modified to adapt it to the screen.
+	Game.Levels._loadData(level); //Using a copy of the array as this one could be modified to adapt it to the screen.
 	
 	//Updates all visual elements according to the screen size:
 	Visual.resizeElements(CB_GEM.graphicSpritesSceneObject, true);
@@ -558,18 +589,32 @@ Game.Levels.getSymbolsPositionFromCoordinates = function(x, y)
 
 
 //Returns the real screen horizontal coordinates for a given coordinates on the original map:
-Game.Levels.getRealScreenLeft = function(x)
+Game.Levels.getRealScreenLeft = function(x, previous)
 {
 	x = x || 0;
-	return (x + Game.Levels.addedRowsAndColumns.columns.left) * Visual._ELEMENTS_WIDTH + CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").left;
+	if (previous)
+	{
+		return (x + Game.Levels.addedRowsAndColumns.columnsPrevious.left) * Visual._ELEMENTS_WIDTH_PREVIOUS + Visual._mapCurrentLeftPrevious;
+	}
+	else
+	{
+		return (x + Game.Levels.addedRowsAndColumns.columns.left) * Visual._ELEMENTS_WIDTH + (Visual._mapCurrentLeft || CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").left);
+	}
 }
 
 
 //Returns the real screen vertical coordinates for a given coordinates on the original map:
-Game.Levels.getRealScreenTop = function(y)
+Game.Levels.getRealScreenTop = function(y, previous)
 {
 	y = y || 0;
-	return (y + Game.Levels.addedRowsAndColumns.rows.top) * Visual._ELEMENTS_HEIGHT + CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").top;
+	if (previous)
+	{
+		return (y + Game.Levels.addedRowsAndColumns.rowsPrevious.top) * Visual._ELEMENTS_HEIGHT_PREVIOUS + Visual._mapCurrentTopPrevious;
+	}
+	else
+	{
+		return (y + Game.Levels.addedRowsAndColumns.rows.top) * Visual._ELEMENTS_HEIGHT + (Visual._mapCurrentTop || CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").top);
+	}
 }
 
 
@@ -587,7 +632,6 @@ Game.Levels.getMapTop = function(y)
 	y = y || 0;
 	return Math.floor((y - CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").top - Game.Levels.addedRowsAndColumns.rows.top * Visual._ELEMENTS_HEIGHT) / Visual._ELEMENTS_HEIGHT);
 }
-
 
 
 //Returns the coordinates of the destiny of a given map (assumes there is only one):
@@ -631,6 +675,7 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 {
 	level = (typeof(level) !== "undefined" && level !== null && !isNaN(level)) ? level : Game.data.level;
 
+	//Uses the cache if exists and we do not want to avoid it:
 	if (!avoidCache)
 	{
 		if (typeof(Game.Levels._calculatePathPointsToDestinyCache[level]) !== "undefined")
@@ -645,6 +690,7 @@ Game.Levels._calculatePathPointsToDestiny = function(originX, originY, destinyX,
 		}
 	}
 
+	//Initializes the cache:
 	if (typeof(Game.Levels._calculatePathPointsToDestinyCache[level]) === "undefined")
 	{
 		Game.Levels._calculatePathPointsToDestinyCache[level] = [];
@@ -813,3 +859,55 @@ Game.getEnemiesAlive = function()
 	
 	return enemiesAlive;
 }
+
+
+//Fins and returns the tower which is located in the given position in the map (if any):
+Game.findTowerByPosition = function(x, y)
+{
+	for (var z = 0; z < Game.data.towers.length; z++)
+	{
+		if (Game.data.towers[z] && Game.data.towers[z].position.x === x - Game.Levels.addedRowsAndColumns.columns.left && Game.data.towers[z].position.y === y - Game.Levels.addedRowsAndColumns.rows.top)
+		{
+			return Game.data.towers[z];
+		}
+		
+	}
+	return null;
+}
+
+
+//Creates the desired tower on the given coordinates:
+Game.createTower = function(column, row, type, level, soilType, updateMap)
+{
+	type = type || 0;
+	level = level || 0;
+	soilType = soilType || 0;
+	
+	//Creates the tower:
+	Game.data.towers[Game.data.towers.length] = new Tower(column, row, type, level);
+	
+	//If desired, updates the current map:
+	if (updateMap)
+	{
+		Game.data.levelMapNotResized[row][column] = Game.data.levelMap[row + Game.Levels.addedRowsAndColumns.rows.top][column + Game.Levels.addedRowsAndColumns.columns.left] = Game.Levels.SYMBOL_TYPES["TOWER_" + type] + Game.Levels.SYMBOL_TYPES.SOIL_UNWALKABLE_BUILDABLE + soilType + "_" + level;
+		CB_GEM.graphicSpritesSceneObject.getById("map").getById("current").src = Game.data.levelMap;
+		Game.Levels.loadSource(Game.data.levelMap);
+	}
+	
+	return Game.data.towers[Game.data.towers.length - 1];
+}
+
+
+//Called when a buildable soil has been clicked/touched:
+Game.onBuildableTouched = function(column, row)
+{
+	return Game.createTower(column - Game.Levels.addedRowsAndColumns.columns.left, row - Game.Levels.addedRowsAndColumns.rows.top, 0, 0, 0, true); // TO DO: Choose type, level and soil type.
+}
+
+
+//Called when a tower already built has been clicked/touched:
+Game.onTowerTouched = function(column, row)
+{
+	
+}
+

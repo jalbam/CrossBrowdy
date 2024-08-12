@@ -11,6 +11,11 @@ var Enemy = function(type, level, x, y, map)
 
 //Properties:
 Enemy._idCounter = 0; //Internal counter to manage an unique internal ID for each enemy.
+Enemy._typeEntities = { "TOWER": 0, "ENEMY" : 1 }; //Entity types.
+Enemy.walkPixels = 1; //It will be updated if needed, according to the screen size.
+Enemy.walkPixelsUpdated = false; //Marks whether the 'Enemy.walkPixels' property was updated or not.
+Enemy.prototype.id = null; //Identifier. It will be calculated automatically internally.
+Enemy.prototype.typeEntity = Tower._typeEntities.ENEMY; //Entity type, according to the "Enemy._typeEntities" object.
 Enemy.prototype.type = 0; //Enemy type (0 by default).
 Enemy.prototype.level = 0; //Enemy level (0 is the first one).
 Enemy.prototype.position = { x: 0, y: 0, xScreen: 0, yScreen: 0 }; //Enemy position.
@@ -18,7 +23,7 @@ Enemy.prototype.rotation = 0; //Enemy rotation (they rotate to follow their path
 Enemy.prototype.levelVitality = [ 100, 150, 300, 600, 1200 ]; //Enemy vitality, separated by level.
 Enemy.prototype.levelSpeed = [ 1, 2, 4, 8, 16 ]; //Enemy speed (1 is normal speed), separated by level.
 Enemy.prototype.levelDamage = [ 1, 2, 3, 5, 8 ]; //Enemy damage to user's vitality when it reaches the objective, separated by level.
-Enemy.prototype._levelMax = null; //Maximum enemy leveal which can be reached. It will be calculated in the constructor automatically.
+Enemy.prototype._levelMax = null; //Maximum enemy level which can be reached. It will be calculated in the constructor automatically.
 Enemy.prototype.vitality = null; //Enemy vitality. It will be calculated in the constructor automatically.
 Enemy.prototype.isWalking = false; //Determines whether the enemy is currently walking through its path.
 Enemy.prototype.isRotating = false; //Determines whether the enemy is currently rotating to follow its path.
@@ -33,6 +38,7 @@ Enemy.prototype._init = function(type, level, x, y, map)
 	//Sets the given parameters or fallback to the default ones:
 	this.id = Enemy._idCounter++;
 	this.type = type || this.type;
+	this.position = {};
 	this.position.x = typeof(x) !== "undefined" && x !== null ? x : this.position.x || 0;
 	this.position.y = typeof(y) !== "undefined" && y !== null ? y : this.position.y || 0;
 	this.level = level || this.level;
@@ -43,7 +49,7 @@ Enemy.prototype._init = function(type, level, x, y, map)
 		this.isDead = true;
 		return this;
 	}
-	if (this.level > this._levelMax) { this.level = this._levelMax; }
+	else if (this.level > this._levelMax) { this.level = this._levelMax; }
 	this.vitality = this.levelVitality[this.level];
 
 	logMessage("Creating enemy #" + this.id + " of type " + this.type + " with level " + this.level + "...");
@@ -56,8 +62,8 @@ Enemy.prototype._init = function(type, level, x, y, map)
 	this._pathCurrentCalculate(this.position.x, this.position.y, map);
 	this._pathCurrent.pathPointer = 0; //Resets the path pointer.
 	
+	//Loads its sprites:
 	var spritesLoaded = this._spritesLoad(null);
-	
 	if (!spritesLoaded)
 	{
 		logMessage("* Failed to load sprites for this enemy.");
@@ -71,7 +77,7 @@ Enemy.prototype._init = function(type, level, x, y, map)
 }
 
 
-//Returns the sprites involved with the tower:
+//Returns the sprites involved with the enemy:
 Enemy.prototype._getSprites = function(returnOnFail)
 {
 	var spritesGroup = CB_GEM.graphicSpritesSceneObject.getById("enemy_" + this.type + "_sprites_group", null);
@@ -131,13 +137,13 @@ Enemy.prototype._spritesLoad = function(returnOnFail)
 	sprites.subSprite = CB_copyObject(sprites.subSprite);
 	sprites.subSprite.id += "_" + this.id;
 	sprites.subSprite.disabled = false;
-	sprites.subSprite.data._enemyObject = sprites.subSpriteVitality.data._enemyObject = this;
+	sprites.subSprite.data._entityObject = sprites.subSpriteVitality.data._entityObject = this;
 	
 	sprites.subSpriteVitality = CB_copyObject(sprites.subSpriteVitality);
 	sprites.subSpriteVitality.id += "_" + this.id;
 	sprites.subSpriteVitality.disabled = false;
 	
-	this._spritesUpdateCoordinates(this.position.x, this.position.y, sprites, null);
+	this._spritesUpdateCoordinates(this.position.x, this.position.y, sprites, null, true);
 	
 	sprites.sprite.insertSubSprite(sprites.subSprite); //It also updates the internal "subSpritesByZIndex" array.
 	sprites.sprite.insertSubSprite(sprites.subSpriteVitality); //It also updates the internal "subSpritesByZIndex" array.
@@ -167,21 +173,42 @@ Enemy.prototype._spritesDisable = function(returnOnFail)
 
 
 //Updates the coordinates for the subSprite:
-Enemy.prototype._spritesUpdateCoordinates = function(x, y, sprites, returnOnFail, screenCoordinates)
+Enemy.prototype._spritesUpdateCoordinates = function(x, y, sprites, returnOnFail, mapCoordinates, screenResized)
 {
 	x = typeof(x) !== "undefined" && x !== null ? x : this.position.x || 0;
 	y = typeof(y) !== "undefined" && y !== null ? y : this.position.y || 0;
 	sprites = sprites || this._getSprites(null);
 	if (sprites === null) { return returnOnFail; }
 	
-	this.position.xScreen = sprites.subSprite.left = sprites.subSpriteVitality.left = screenCoordinates ? x : Game.Levels.getRealScreenLeft(x);
-	this.position.yScreen = sprites.subSprite.top = screenCoordinates ? y : Game.Levels.getRealScreenTop(y);
-	sprites.subSpriteVitality.top = sprites.subSprite.top + sprites.subSpriteVitality.height;
+	var advancedHorizontally = 0;
+	var advancedVertically = 0;
+	
+	//It the screen was resized:
+	if (screenResized)
+	{
+		//Calculates how much the enemy advanced (from the beginning of the current tile) according the new screen size:
+		mapCoordinates = true; //We will use screen coordinates.
+		advancedHorizontally = (this.position.xScreen - Game.Levels.getRealScreenLeft(x, true)) / Visual._ELEMENTS_WIDTH_PREVIOUS * Visual._ELEMENTS_WIDTH;
+		advancedVertically = (this.position.yScreen - Game.Levels.getRealScreenTop(y, true)) / Visual._ELEMENTS_HEIGHT_PREVIOUS * Visual._ELEMENTS_HEIGHT;
+
+		if (!Enemy.walkPixelsUpdated)
+		{
+			//Adapts walking pixels depending on screen size:
+			Enemy.walkPixels = Math.abs(Math.min(Visual._ELEMENTS_WIDTH_PREVIOUS, Visual._ELEMENTS_HEIGHT_PREVIOUS) / 100);
+			if (Enemy.walkPixels === 0) { Enemy.walkPixels = 1; }
+			Enemy.walkPixelsUpdated = true;
+		}
+	}
+	
+	this.position.xScreen = sprites.subSprite.left = sprites.subSpriteVitality.left = !mapCoordinates ? x : (Game.Levels.getRealScreenLeft(x) + advancedHorizontally);
+	this.position.yScreen = sprites.subSprite.top = !mapCoordinates ? y : (Game.Levels.getRealScreenTop(y) + advancedVertically);
+	sprites.subSpriteVitality.top = sprites.subSprite.top + sprites.subSprite.height - sprites.subSpriteVitality.height;
 
 	return sprites;
 }
 
 
+//Rotates the sprite according to the given direction:
 Enemy.prototype._spritesRotate = function(direction, sprites)
 {
 	sprites = sprites || this._getSprites(null);
@@ -243,10 +270,12 @@ Enemy._getPathPointsToDestiny = function(x, y, map)
 
 	var cacheIndex = levelCurrent + "_" + x + "_" + y;
 
+	//Uses the cache if it exists:
 	if (typeof(Enemy._getPathPointsToDestinyCache[cacheIndex]) !== "undefined")
 	{
 		return Enemy._getPathPointsToDestinyCache[cacheIndex].pointsToDestiny;
 	}
+	//...otherwise, initializes the cache:
 	else
 	{
 		Enemy._getPathPointsToDestinyCache[cacheIndex] = {};
@@ -354,25 +383,25 @@ Enemy.prototype._walk = function(pathX, pathY)
 	if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "up")
 	{
 		//this.position.y--;
-		this.position.yScreen--;
+		this.position.yScreen -= Enemy.walkPixels;
 		this.position.y = Game.Levels.getMapTop(this.position.yScreen) + 1;
 	}
 	else if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "down")
 	{
 		//this.position.y++;
-		this.position.yScreen++;
+		this.position.yScreen += Enemy.walkPixels;
 		this.position.y = Game.Levels.getMapTop(this.position.yScreen);
 	}
 	else if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "left")
 	{
 		//this.position.x--;
-		this.position.xScreen--;
+		this.position.xScreen -= Enemy.walkPixels;
 		this.position.x = Game.Levels.getMapLeft(this.position.xScreen) + 1;
 	}
 	else if (this._pathCurrent.points[this._pathCurrent.pathPointer].direction === "right")
 	{
 		//this.position.x++;
-		this.position.xScreen++;
+		this.position.xScreen += Enemy.walkPixels;
 		this.position.x = Game.Levels.getMapLeft(this.position.xScreen);
 	}
 	else
@@ -385,7 +414,7 @@ Enemy.prototype._walk = function(pathX, pathY)
 	//this._spritesUpdateCoordinates(this.position.x, this.position.y);
 	//this._spritesUpdateCoordinates(this.position.x, this.position.y, null, null, true);
 	//CB_console("Enemy #" + this.id + " walking to (" +  this.position.xScreen + ", " + this.position.yScreen + ") (on map: " + this.position.x + ", " + this.position.y + ")");
-	var sprites = this._spritesUpdateCoordinates(this.position.xScreen, this.position.yScreen, null, null, true);
+	var sprites = this._spritesUpdateCoordinates(this.position.xScreen, this.position.yScreen, null, false);
 
 	//Rotates the sprite if needed:
 	this._spritesRotate(this._pathCurrent.points[this._pathCurrent.pathPointer].direction, sprites);

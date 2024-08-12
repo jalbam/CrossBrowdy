@@ -22,7 +22,7 @@ var CB_NAME = "CrossBrowdy";
  *	@constant
  *  @type {string}
  */
-var CB_VERSION = "0.99.96.36";
+var CB_VERSION = "0.99.96.37";
 
 /**
  * Keeps the CrossBrowdy "this" context.

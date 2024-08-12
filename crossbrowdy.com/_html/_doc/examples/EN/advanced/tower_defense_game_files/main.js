@@ -55,14 +55,14 @@ function main()
 	
 			CB_REM.DEFAULT_FILTER = null; //No default canvas filter when no one is found.
 	
+			//Game.Levels.loadSource(0);
 			Visual.resizeElements(graphicSpritesSceneObject); //Updates all visual elements according to the screen size.
-
 			Visual.updateInfo(graphicSpritesSceneObject); //Shows the information for the first time.
 	
 			//Updates all when the screen is resized or changes its orientation:
 			CB_GEM.onResize = function(graphicSpritesSceneObject, CB_REM_dataObject, CB_CanvasObject, CB_CanvasObjectBuffer)
 			{
-				Visual.resizeElements(graphicSpritesSceneObject);
+				Visual.resizeElements(graphicSpritesSceneObject, false, true);
 				Visual.updateInfo(graphicSpritesSceneObject);
 			};
 			

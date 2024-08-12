@@ -1824,7 +1824,7 @@ CB_GraphicSprites._copyNeededPropertiesData =
 };
 CB_GraphicSprites._copyNeededProperties = function(element, elementOriginal)
 {
-	if (!element.type || element.type !== elementOriginal.type) { return; }
+	if (!element || !element.type || element.type !== elementOriginal.type) { return; }
 	if (!CB_isArray(CB_GraphicSprites._copyNeededPropertiesData[element.type])) { return; }
 	
 	for (var x = CB_GraphicSprites._copyNeededPropertiesData[element.type].length; x >= 0; x--)
